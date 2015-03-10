@@ -1,16 +1,21 @@
 # Taller-75.42
-Grupo de taller 1er 2015.Marcos Riarte,Pepe Rodriguez
+Grupo de taller UBA-1er 2015.Marcos Riarte,Pepe Rodriguez
 
-2-Vamos a trabajar usando un repositorio comun .. no se si tuvieron alguna experiencia en 
-esto ...si no les paso a contar
+Pasos para crea un repositorio comun en eclipse
 
 a-Tener instalado eclipse o Spring.
 https://eclipse.org/downloads/packages/eclipse-ide-cc-developers/lunasr2
-Versiones para windows o linux
-https://www.youtube.com/watch?v=6WFSEPDS2KI  como instalarlo en linux
 
-b- Descargar subersion  e instalarlo mirando este link
-http://www.elclubdelprogramador.com/2011/08/07/ide-configurar-eclipse-para-acceder-a-repositorios-svn/
+Versiones para windows o linux (preferencia linux ya que al trabajar en c++ es mucho mas facil y rapido)
+windows nescesita instalar el MinGw,minsys,configurarlos y demas.
+
+Instalar el eclipse en ubuntu
+http://www.taringa.net/post/linux/17236518/Como-instalar-Eclipse-en-Ubuntu.html
+(el ejemplo tambien sirve para ubuntu)
+
+
+b-Intalar eGib en el eclipse 
+http://www.nosinmiubuntu.com/como-instalar-egit-en-eclipse-y/
 
 c-en lugar de la direccion que da en el instructivos "c:local host..etc"colocar esta 
 direccion que es la de nuestro respositorio
