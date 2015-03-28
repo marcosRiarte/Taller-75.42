@@ -1,0 +1,85 @@
+{
+        "escenario": 
+        {
+                "alto_px": 600,
+                "ancho_px": 1024,
+                "alto_un": 600,
+                "ancho_un": 1024,
+                "imagen_fondo": "img/fondo1.png",
+                "personaje": 
+                {
+                        "x": 760,
+                        "y": -170
+                },
+
+                "objetos": 
+                [
+                        {
+                                "tipo": "circulo",
+                                "x": 100,
+                                "y": -100,
+                                "diametro": 50,
+                                "color": "#0000FF",
+                                "rot": 0,
+                                "masa": 100,
+                                "estatico": false
+                        },
+                        {
+                                "tipo": "poligonoo",
+                                "x": 100,
+                                "y": -200,
+                                "lados": 3,
+                                "escala":0,
+                                "color": "#FFJ0FF",
+                                "rot": 50,
+                                "masa": 10,
+                                "estatico": false
+                        },
+                        {
+                                "tipo": "rectangulo",
+                                "x": 300,
+                                "y": -550,
+                                "ancho": 192,
+                                "alto": 20,
+                                "color": "J00FF00",
+                                "rot": 0,
+                                "masa": 500000,
+                                "estatico": true
+                        },
+                        {
+                                "tipo": "rectangulo",
+                                "x": 200,
+                                "y": -550,
+                                "ancho": 192,
+                                "alto": 20,
+                                "color": "#00FFF0",
+                                "rot": 0,
+                                "masa": 500000,
+                                "estatico": true
+                        },
+                        {
+                                "tipo": "rectangulo",
+                                "x": 704,
+                                "y": -260,
+                                "ancho": 200,
+                                "alto": 20,
+                                "color": "#0FF000",
+                                "rot": 0,
+                                "masa": 500000,
+                                "estatico": true
+                        },
+                        {
+                                "tipo": "paralelogramo",
+                                "x": 500,
+                                "y": -404,
+                                "base": 350,
+                                "altura": 20,
+                                "color": "#0FF000",
+                                "rot": 55,
+                                "masa": 0,
+                                "alfa": 25,
+                                "estatico": true
+                        }
+                ]
+        }
+}
