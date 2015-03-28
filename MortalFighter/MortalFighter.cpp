@@ -2,41 +2,12 @@
 //
 
 #include "stdafx.h"
-
+#include "Parser.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 
-	/*************************************************************/
-	/* Parte jsoncpp											 */
-	/*************************************************************/
-	Json::Value raiz;
-	Json::Reader reader(Json::Features::strictMode());
-
-	std::string nombreArchivo("prueba.json");
-
-	std::ifstream prueba(nombreArchivo, std::ifstream::binary);
-
-	//chequea que exista el archivo y se pudo abrir
-	if (!prueba.is_open())
-		return 1;
-
-	bool parseoExitoso = reader.parse(prueba, raiz, true);
-
-	if (!parseoExitoso) {
-		std::string mensaje = "Fallo el parseo, se carga json por defecto" + reader.getFormattedErrorMessages();
-		const char * c = mensaje.c_str();
-		std::ifstream prueba("pruebaDefecto.json", std::ifstream::binary);
-		bool parseoExitoso = reader.parse(prueba, raiz, true);
-	}
-
-	Json::Value un_Escenario;
-	un_Escenario = raiz["escenario"];
-	std::string imagen_fondo(un_Escenario.get("imagen_fondo", "hello.bmp").asString());
-
-	std::cout << imagen_fondo << std::endl;
-
-	prueba.close();
+	Parser("prueba.json");
 
 
 	/*************************************************************/
