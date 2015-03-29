@@ -71,6 +71,9 @@
     <ClInclude Include="include\json\json.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="Vista.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -92,6 +95,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Escenario.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vista.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
