@@ -55,7 +55,7 @@
       <AdditionalIncludeDirectories>./include;./include/SDL;./include/json;./</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>./lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2_image.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>

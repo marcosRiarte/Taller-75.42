@@ -4,15 +4,15 @@
 #include "stdafx.h"
 #include "Parser.h"
 #include "Vista.h"
+#include <windows.h>
 
-
-int _tmain(int argc, _TCHAR* argv[])
+int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
 
 	std::string nombreArchivo("prueba.json");
 	Parser::getInstancia().parsear(nombreArchivo);
 
-	//Vista* unaVista = new Vista(&Parser::getInstancia());
+	Vista* unaVista = new Vista(&Parser::getInstancia());
 
 	// Prueba Parser, imprimir ancho de escenario
 	std::ostringstream entradaCadena;
