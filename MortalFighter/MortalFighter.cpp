@@ -9,9 +9,16 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 
-	Parser* unParser = new Parser("prueba.json");
-	Vista* unaVista = new Vista(unParser);
+	std::string nombreArchivo("prueba.json");
+	Parser::getInstancia().parsear(nombreArchivo);
 
+	//Vista* unaVista = new Vista(&Parser::getInstancia());
+
+	// Prueba Parser, imprimir ancho de escenario
+	std::ostringstream entradaCadena;
+	entradaCadena << Parser::getInstancia().getEscenario().getAncho();
+	std::string ancho(entradaCadena.str());
+	std::cout << "Ancho de Escenario: " << ancho << std::endl;
 
 	return 0;
 }
