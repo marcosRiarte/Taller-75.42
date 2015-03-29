@@ -12,6 +12,8 @@ public:
 	bool parsear(std::string nombreDelArchivo);
 
 	Escenario& getEscenario() const;
+	Ventana& getVentana() const;
+	Personaje& getPersonaje() const;
 
 	static void FreeInstancia();
 

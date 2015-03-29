@@ -14,6 +14,18 @@ float Escenario::getAncho() const
 	return ancho;
 }
 
+float Escenario::getAlto() const
+{
+	return alto;
+
+}
+
+float Escenario::getYPiso() const
+{
+	return yPiso;
+
+}
+
 Escenario::~Escenario()
 {
 }

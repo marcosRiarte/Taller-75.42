@@ -12,7 +12,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	std::string nombreArchivo("prueba.json");
 	Parser::getInstancia().parsear(nombreArchivo);
 
-	Vista* unaVista = new Vista(&Parser::getInstancia());
+	Vista* unaVista = new Vista();
 
 	// Prueba Parser, imprimir ancho de escenario
 	std::ostringstream entradaCadena;

@@ -9,6 +9,20 @@ Ventana::Ventana(int unAnchoPx, int unAltoPx, float unAncho)
 	ancho = unAncho;
 }
 
+int Ventana::getAnchoPx() const
+{
+	return anchoPx;
+}
+
+int Ventana::getAltoPx() const
+{
+	return altoPx;
+}
+
+float Ventana::getAncho() const
+{
+	return ancho;
+}
 
 Ventana::~Ventana()
 {

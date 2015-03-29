@@ -78,6 +78,16 @@ Escenario& Parser::getEscenario() const
 	return *unEscenario;
 }
 
+Ventana& Parser::getVentana() const
+{
+	return *unaVentana;
+}
+
+Personaje& Parser::getPersonaje() const
+{
+	return *unPersonaje;
+}
+
 Parser::~Parser()
 {
 }

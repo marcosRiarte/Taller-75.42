@@ -5,7 +5,7 @@
 class Vista
 {
 public:
-	Vista(Parser* unParser);
+	Vista();
 	~Vista();
 };
 
