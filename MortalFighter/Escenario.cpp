@@ -9,6 +9,10 @@ Escenario::Escenario(float anchoEscenario, float altoEscenario, float yPisoEscen
 	yPiso = yPisoEscenario;
 }
 
+float Escenario::getAncho() const
+{
+	return ancho;
+}
 
 Escenario::~Escenario()
 {

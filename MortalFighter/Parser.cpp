@@ -2,9 +2,20 @@
 #include "Parser.h"
 
 
-Parser::Parser(std::string nombreDelArchivo)
-{
+Parser &Parser::getInstancia() {
 
+	static Parser instancia;
+	// Se garantiza que será destruido.
+	// Se instancia en el primer uso.
+	return instancia;
+
+}
+
+Parser::Parser() { }
+
+
+bool Parser::parsear(std::string nombreDelArchivo)
+{	
 	Json::Value raiz;
 
 	//Se coloca al lector de Json en modo estricto para que loguee todos los mensajes de errores sintácticos
@@ -14,7 +25,7 @@ Parser::Parser(std::string nombreDelArchivo)
 
 	//chequea que exista el archivo y se pudo abrir
 	if (!prueba.is_open())
-		return;
+		return false;
 
 	bool parseoExitoso = lector.parse(prueba, raiz, true);
 
@@ -59,8 +70,13 @@ Parser::Parser(std::string nombreDelArchivo)
 
 	unPersonaje = new Personaje(ancho, alto, zIndex, sprites);
 
+	return true;
 }
 
+Escenario& Parser::getEscenario() const
+{
+	return *unEscenario;
+}
 
 Parser::~Parser()
 {
