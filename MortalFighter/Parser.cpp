@@ -3,19 +3,19 @@
 
 
 Parser &Parser::getInstancia() {
-	
-		static Parser instancia;
-		// Se garantiza que será destruido.
-		// Se instancia en el primer uso.
-		return instancia;
+
+	static Parser instancia;
+	// Se garantiza que será destruido.
+	// Se instancia en el primer uso.
+	return instancia;
 
 }
 
 Parser::Parser() { }
 
-bool Parser::parsear(std::string nombreDelArchivo)
-{
 
+bool Parser::parsear(std::string nombreDelArchivo)
+{	
 	Json::Value raiz;
 
 	//Se coloca al lector de Json en modo estricto para que loguee todos los mensajes de errores sintácticos

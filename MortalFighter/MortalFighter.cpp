@@ -17,7 +17,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	// Prueba Parser, imprimir ancho de escenario
 	std::ostringstream entradaCadena;
 	entradaCadena << Parser::getInstancia().getEscenario().getAncho();
-	std::string ancho(entradaCadena.str());
+	std::string ancho(entradaCadena.str());	
 	std::cout << "Ancho de Escenario: " << ancho << std::endl;
 
 	return 0;

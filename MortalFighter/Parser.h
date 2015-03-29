@@ -10,19 +10,20 @@ public:
 	static Parser& getInstancia(std::string nombreDelArchivo);
 	static Parser& getInstancia();
 	bool parsear(std::string nombreDelArchivo);
+
 	Escenario& getEscenario() const;
 
 	static void FreeInstancia();
 
 private:
 	//Constructor privado
-	Parser(std::string nombreDelArchivo);
+	Parser(std::string nombreDelArchivo);	
 
 	std::vector<Capa*> Capas;
 	Personaje* unPersonaje;
 	Ventana* unaVentana;
 	Escenario* unEscenario;
-
+	
 	explicit Parser();
 	
 	virtual ~Parser();
