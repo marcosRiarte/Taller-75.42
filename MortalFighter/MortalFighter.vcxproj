@@ -52,13 +52,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./include/SDL;./include/json;./</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include;./include/SDL;./include/json;./</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>./lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;jsoncpp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -79,11 +79,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="lib\LICENSE.jpeg.txt" />
+    <Text Include="lib\LICENSE.png.txt" />
+    <Text Include="lib\LICENSE.tiff.txt" />
+    <Text Include="lib\LICENSE.webp.txt" />
+    <Text Include="lib\LICENSE.zlib.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Capa.h" />
     <ClInclude Include="Escenario.h" />
+    <ClInclude Include="include\json\json.h" />
+    <ClInclude Include="include\SDL\SDL.h" />
+    <ClInclude Include="include\SDL_image.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Personaje.h" />
     <ClInclude Include="stdafx.h" />
@@ -103,13 +111,24 @@
     <ClCompile Include="Ventana.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="hello.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="jsoncpp.dll" />
+    <None Include="lib\libjpeg-9.dll" />
+    <None Include="lib\libpng16-16.dll" />
+    <None Include="lib\libtiff-5.dll" />
+    <None Include="lib\libwebp-4.dll" />
+    <None Include="lib\zlib1.dll" />
     <None Include="prueba.json" />
     <None Include="pruebaDefecto.json" />
     <None Include="SDL2.dll" />
+    <None Include="SDL2_image.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\SDL2main.lib" />
+    <Library Include="lib\SDL2test.lib" />
+    <Library Include="lib\SDL2_image.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="The_Pit_II_2.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

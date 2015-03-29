@@ -13,11 +13,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	/*************************************************************/
 	/* Parte SDL												 */
 	/*************************************************************/
-
+	
 	if (SDL_Init(SDL_INIT_VIDEO) != 0){
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
 		return 1;
 	}
+	IMG_Init(IMG_INIT_PNG);
 
 	SDL_Window *win = SDL_CreateWindow("Hello World!", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
 	if (win == nullptr){
@@ -34,18 +35,18 @@ int _tmain(int argc, _TCHAR* argv[])
 		return 1;
 	}
 
-	std::string imagePath = "hello.bmp";
-	SDL_Surface *bmp = SDL_LoadBMP(imagePath.c_str());
-	if (bmp == nullptr){
+	std::string imagePath = "The_Pit_II_2.png";
+	SDL_Surface *png = IMG_Load(imagePath.c_str());
+	if (png == nullptr){
 		SDL_DestroyRenderer(ren);
 		SDL_DestroyWindow(win);
-		std::cout << "SDL_LoadBMP Error: " << SDL_GetError() << std::endl;
+		std::cout << "IMG_Load Error: " << SDL_GetError() << std::endl;
 		SDL_Quit();
 		return 1;
 	}
 
-	SDL_Texture *tex = SDL_CreateTextureFromSurface(ren, bmp);
-	SDL_FreeSurface(bmp);
+	SDL_Texture *tex = SDL_CreateTextureFromSurface(ren, png);
+	SDL_FreeSurface(png);
 	if (tex == nullptr){
 		SDL_DestroyRenderer(ren);
 		SDL_DestroyWindow(win);
@@ -64,6 +65,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	SDL_DestroyRenderer(ren);
 	SDL_DestroyWindow(win);
 
+	IMG_Quit();
 	SDL_Quit();
 
 

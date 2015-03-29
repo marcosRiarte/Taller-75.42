@@ -13,9 +13,32 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{c9ff865e-9a2d-4033-a1f0-7d5476ef1d83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{793b8bc4-1f94-4c82-9285-93d8013bf43a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <Text Include="lib\LICENSE.jpeg.txt">
+      <Filter>lib</Filter>
+    </Text>
+    <Text Include="lib\LICENSE.png.txt">
+      <Filter>lib</Filter>
+    </Text>
+    <Text Include="lib\LICENSE.tiff.txt">
+      <Filter>lib</Filter>
+    </Text>
+    <Text Include="lib\LICENSE.webp.txt">
+      <Filter>lib</Filter>
+    </Text>
+    <Text Include="lib\LICENSE.zlib.txt">
+      <Filter>lib</Filter>
+    </Text>
+    <Text Include="ReadMe.txt">
+      <Filter>lib</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -38,6 +61,15 @@
     </ClInclude>
     <ClInclude Include="Escenario.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL_image.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json\json.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -64,14 +96,51 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="hello.bmp">
+    <None Include="jsoncpp.dll">
+      <Filter>lib</Filter>
+    </None>
+    <None Include="lib\libjpeg-9.dll">
+      <Filter>lib</Filter>
+    </None>
+    <None Include="lib\libpng16-16.dll">
+      <Filter>lib</Filter>
+    </None>
+    <None Include="lib\libtiff-5.dll">
+      <Filter>lib</Filter>
+    </None>
+    <None Include="lib\libwebp-4.dll">
+      <Filter>lib</Filter>
+    </None>
+    <None Include="SDL2.dll">
+      <Filter>lib</Filter>
+    </None>
+    <None Include="SDL2_image.dll">
+      <Filter>lib</Filter>
+    </None>
+    <None Include="lib\zlib1.dll">
+      <Filter>lib</Filter>
+    </None>
+    <None Include="pruebaDefecto.json">
       <Filter>Resource Files</Filter>
-    </Image>
+    </None>
+    <None Include="prueba.json">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="jsoncpp.dll" />
-    <None Include="prueba.json" />
-    <None Include="pruebaDefecto.json" />
-    <None Include="SDL2.dll" />
+    <Library Include="lib\SDL2_image.lib">
+      <Filter>lib</Filter>
+    </Library>
+    <Library Include="lib\SDL2main.lib">
+      <Filter>lib</Filter>
+    </Library>
+    <Library Include="lib\SDL2test.lib">
+      <Filter>lib</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="The_Pit_II_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
