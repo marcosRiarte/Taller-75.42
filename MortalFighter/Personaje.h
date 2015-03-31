@@ -7,11 +7,14 @@ public:
 	float getAlto() const;
 	int getZIndex() const;
 	std::string getSprites() const;
+	std::pair<int, int> getPosicionPx() const;
+	void setPosicionUn(float x, float y);
 	~Personaje();
 private:
 	float ancho;
 	float alto;
 	int zIndex;
 	std::string sprites;
+	std::pair<float, float> posicionUn;
 };
 

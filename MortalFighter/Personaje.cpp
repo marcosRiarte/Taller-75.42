@@ -30,6 +30,17 @@ std::string Personaje::getSprites() const
 	return sprites;
 }
 
+std::pair<int, int> Personaje::getPosicionPx() const
+{
+	return posicionUn;
+}
+
+void Personaje::setPosicionUn(float x, float y)
+{
+	posicionUn = std::make_pair(x, y);
+}
+
+
 Personaje::~Personaje()
 {
 }
