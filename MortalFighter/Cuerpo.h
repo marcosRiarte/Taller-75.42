@@ -1,10 +1,26 @@
 #pragma once
 #include "Vector2D.h"
 
+struct defCuerpo
+{
+	// constructor con valores por defecto
+	defCuerpo()
+	{
+		nombre = "Scorpion";
+		posicion.Set(0.0f, 0.0f);
+		velocidad.Set(0.0f, 0.0f);		
+		masa = 1.0f;
+	}
+
+	std::string nombre;
+	vector2D posicion, velocidad;
+	float masa;
+};
+
 class Cuerpo
 {
 public:
-	Cuerpo();
+	Cuerpo(const  defCuerpo* unaDefCuerpo);
 
 	inline const vector2D& getPosicion() const
 	{
@@ -41,10 +57,8 @@ public:
 		return masa;
 	}
 
-	inline const vector2D& getFuerzas() const
-	{
-		return fuerzas;
-	}
+	// Devuelve true si está en contacto con el piso o false en caso contrario
+	bool estaEnPiso();
 
 	// Aplica un impulso lineal al cuerpo. Modifica inmediatamente la velocidad
 	// El impulso sería en unidades de N.s o Kg.m/s
@@ -56,6 +70,6 @@ public:
 
 private:
 	std::string nombre;
-	vector2D posicion, velocidad, fuerzas;
+	vector2D posicion, velocidad;
 	float masa;
 };
