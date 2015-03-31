@@ -6,8 +6,7 @@
 
 class Parser
 {
-public:
-	static Parser& getInstancia(std::string nombreDelArchivo);
+public:	
 	static Parser& getInstancia();
 	bool parsear(std::string nombreDelArchivo);
 
@@ -19,14 +18,14 @@ public:
 
 private:
 	//Constructor privado
-	Parser(std::string nombreDelArchivo);	
+	explicit Parser();
 
 	std::vector<Capa*> Capas;
 	Personaje* unPersonaje;
 	Ventana* unaVentana;
 	Escenario* unEscenario;
 	
-	explicit Parser();
+
 	
 	virtual ~Parser();
 
