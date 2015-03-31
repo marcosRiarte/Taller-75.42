@@ -39,6 +39,19 @@ struct vector2D
 		x *= a; y *= a;
 	}	
 
+	///Multiplicar por un escalar.
+	vector2D operator * (float a)
+	{
+		vector2D vectorNuevo = vector2D(x*a, y*a);
+		return vectorNuevo;
+	}
+
+	///Dividir por un escalar.
+	void operator /= (float a)
+	{
+		if (a != 0)
+			x /= a; y /= a;
+	}
 
 	/// Longitud al cuadrado
 	float cuadrado() const

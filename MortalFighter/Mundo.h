@@ -5,7 +5,10 @@ class Mundo
 {
 public:
 	Mundo();
+	void Paso(float difTiempo);
+	void Resolver(float difTiempo, Cuerpo &unCuerpo);
+
 private:
-	float gravedad;
+	vector2D gravedad;
 	std::vector<Cuerpo> Cuerpos;
 };
