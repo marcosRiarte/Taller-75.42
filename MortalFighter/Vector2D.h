@@ -39,6 +39,7 @@ struct vector2D
 		x *= a; y *= a;
 	}	
 
+
 	/// Longitud al cuadrado
 	float cuadrado() const
 	{
