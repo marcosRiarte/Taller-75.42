@@ -57,7 +57,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	for (size_t i = 0; i < capas.size(); i++) {
 		std::string fondo(capas[i].get("imagen_fondo", "fondo1.png").asString());
 		float anchoCapas(capas[i].get("ancho", 500).asFloat());
-		Capas->push_back(new Capa(fondo, anchoCapas));
+		Capas.push_back(new Capa(fondo, anchoCapas));
 	}
 
 	Json::Value personaje;
@@ -87,9 +87,9 @@ Personaje& Parser::getPersonaje() const
 	return *unPersonaje;
 }
 
-std::vector<Capa*>& Parser::getCapas() const
+std::vector<Capa*> Parser::getCapas() const
 {
-	return *Capas;
+	return Capas;
 
 }
 

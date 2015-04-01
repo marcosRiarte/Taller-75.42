@@ -6,7 +6,6 @@ class Vista
 {
 public:
 	Vista();
-	~Vista();
 private:
 	SDL_Window* ventana;
 	SDL_Renderer* renderer;

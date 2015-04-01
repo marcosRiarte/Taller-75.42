@@ -13,7 +13,7 @@ public:
 	Escenario& getEscenario() const;
 	Ventana& getVentana() const;
 	Personaje& getPersonaje() const;
-	std::vector<Capa*>& getCapas() const;
+	std::vector<Capa*> getCapas() const;
 
 	static void FreeInstancia();
 
@@ -21,7 +21,7 @@ private:
 	//Constructor privado
 	explicit Parser();
 
-	std::vector<Capa*>* Capas;
+	std::vector<Capa*> Capas;
 	Personaje* unPersonaje;
 	Ventana* unaVentana;
 	Escenario* unEscenario;

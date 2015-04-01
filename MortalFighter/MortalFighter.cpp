@@ -14,11 +14,11 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	Parser::getInstancia().parsear(nombreArchivo);
 	vector2D vecGravedad(0.0f, GRAVEDAD_Y);
 
+
 	Vista* unaVista = new Vista();
 	Mundo* unMundo = new Mundo(vecGravedad);
 	unMundo->agregarCuerpo(Cuerpo(&defCuerpo()));
-
-
+	
 	// Prueba Parser, imprimir ancho de escenario
 	std::ostringstream entradaCadena;
 	entradaCadena << Parser::getInstancia().getEscenario().getAncho();
