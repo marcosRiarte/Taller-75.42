@@ -88,6 +88,12 @@ Personaje& Parser::getPersonaje() const
 	return *unPersonaje;
 }
 
+std::vector<Capa*>& Parser::getCapas() const
+{
+	return *Capas;
+
+}
+
 Parser::~Parser()
 {
 }
