@@ -7,11 +7,24 @@ Mundo::Mundo()
 
 }
 
+Mundo::Mundo(const vector2D& valorGravedad)
+{
+	gravedad = valorGravedad;
+	Cuerpos = std::vector<Cuerpo>();
+}
+
+void Mundo::agregarCuerpo(Cuerpo &unCuerpo)
+{
+	Cuerpos.push_back(unCuerpo);
+}
+
 void Mundo::Paso(float difTiempo)
 {
 	for (unsigned int i = 0; i < Cuerpos.size(); i++)
+	{
 		Resolver(difTiempo, Cuerpos.at(i));
-
+		Cuerpos.at(i).notificarObservadores();
+	}		
 }
 
 void Mundo::Resolver(float difTiempo, Cuerpo &unCuerpo)

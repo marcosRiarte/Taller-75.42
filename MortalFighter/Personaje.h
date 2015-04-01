@@ -1,4 +1,6 @@
 #pragma once
+
+
 class Personaje
 {
 public:
@@ -9,7 +11,9 @@ public:
 	std::string getSprites() const;
 	std::pair<int, int> getPosicionPx() const;
 	void setPosicionUn(float x, float y);
+	void actualizar(float xNuevo, float yNuevo);
 	~Personaje();
+
 private:
 	float ancho;
 	float alto;

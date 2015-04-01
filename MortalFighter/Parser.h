@@ -1,8 +1,8 @@
 #pragma once
 #include "Capa.h"
-#include "Personaje.h"
 #include "Ventana.h"
 #include "Escenario.h"
+#include "Personaje.h"
 
 class Parser
 {
@@ -31,6 +31,6 @@ private:
 
 
 	Parser(Parser const&) = delete;
-	void operator=(Parser const&) = delete;
+	void operator =(Parser const&) = delete;
 
 };

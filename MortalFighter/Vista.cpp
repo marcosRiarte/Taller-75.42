@@ -33,14 +33,13 @@ Vista::Vista()
 	}
 
 	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, tex, NULL, NULL);
-	SDL_RenderPresent(ren);
+	SDL_RenderPresent(renderer);
 
 	SDL_Delay(2000);
 
-	SDL_DestroyTexture(tex);
-	SDL_DestroyRenderer(ren);
-	SDL_DestroyWindow(win);
+	//SDL_DestroyTexture(tex);
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(ventana);
 
 	IMG_Quit();
 	SDL_Quit();

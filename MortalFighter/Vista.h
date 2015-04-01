@@ -1,6 +1,6 @@
 #pragma once
-
-#include "Parser.h"
+#include "stdafx.h"
+#include "ManejadorULogicas.h"
 
 class Vista
 {
@@ -12,5 +12,6 @@ private:
 	SDL_Renderer* renderer;
 	std::string rutaImagen;
 	std::vector<SDL_Texture*> capasDeTextura;
+	ManejadorULogicas manejadorULog;
 };
 

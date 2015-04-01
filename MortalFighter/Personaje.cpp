@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Personaje.h"
-
+#include "Parser.h"
+#include "ManejadorULogicas.h"
 
 Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string spritesPersonaje)
 {
@@ -8,6 +9,7 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	alto = altoPersonaje;
 	zIndex = zIndexPersonaje;
 	sprites = spritesPersonaje;
+	posicionUn = std::make_pair(0.0f,0.0f);
 }
 
 float Personaje::getAncho() const
@@ -31,13 +33,22 @@ std::string Personaje::getSprites() const
 }
 
 std::pair<int, int> Personaje::getPosicionPx() const
-{
-	return posicionUn;
+{	
+	ManejadorULogicas manejador;
+	float yPiso = Parser::getInstancia().getEscenario().getYPiso();
+
+	return manejador.obtenerPosicionPx(posicionUn.first, posicionUn.second + yPiso);
 }
 
 void Personaje::setPosicionUn(float x, float y)
 {
-	posicionUn = std::make_pair(x, y);
+	posicionUn.first = x;
+	posicionUn.second = y;
+}
+
+void Personaje::actualizar(float xNuevo, float yNuevo)
+{
+	setPosicionUn(xNuevo, yNuevo);
 }
 
 

@@ -17,3 +17,13 @@ bool Cuerpo::estaEnPiso()
 
 	return true;
 }
+
+void Cuerpo::recibeObservador(Personaje* unObservador)
+{
+	observador = unObservador;
+}
+
+void Cuerpo::notificarObservadores()
+{
+	observador->actualizar(posicion.x, posicion.y);
+}

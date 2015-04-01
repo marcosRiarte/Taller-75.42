@@ -53,6 +53,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>./include;./include/SDL;./include/json;./</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>stdafx.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -93,6 +94,7 @@
     <ClInclude Include="include\json\json.h" />
     <ClInclude Include="include\SDL\SDL.h" />
     <ClInclude Include="include\SDL_image.h" />
+    <ClInclude Include="ManejadorULogicas.h" />
     <ClInclude Include="Mundo.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Personaje.h" />

@@ -1,5 +1,6 @@
 #pragma once
 #include "Vector2D.h"
+#include "Personaje.h"
 
 struct defCuerpo
 {
@@ -68,8 +69,14 @@ public:
 		velocidad += impulso;
 	}
 
+	//observer extremadamente simplificado, mejorar
+	void recibeObservador(Personaje* unObservador);
+
+	void notificarObservadores();
+
 private:
 	std::string nombre;
 	vector2D posicion, velocidad;
 	float masa;
+	Personaje* observador;	
 };
