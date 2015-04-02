@@ -8,6 +8,7 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	ancho = anchoPersonaje;
 	alto = altoPersonaje;
 	zIndex = zIndexPersonaje;
+	energy = 100;
 	sprites = spritesPersonaje;
 }
 
