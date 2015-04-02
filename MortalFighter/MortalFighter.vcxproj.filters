@@ -166,5 +166,8 @@
     <Image Include="The_Pit_II_2.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="trans.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
