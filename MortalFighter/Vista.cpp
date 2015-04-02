@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Vista.h"
 
-
 Vista::Vista()
 {
 	/*
@@ -28,7 +27,8 @@ Vista::Vista()
 				SDL_Quit();
 				return;
 			}
-			
+
+			SDL_RenderClear(renderer);
 			for (size_t i = 0; i < Parser::getInstancia().getCapas().size(); i++) {
 			std::string imgFondo(Parser::getInstancia().getCapas().at(i)->getImagenFondo());
 			SDL_Surface *png = IMG_Load(imgFondo.c_str());
@@ -50,10 +50,9 @@ Vista::Vista()
 				SDL_Quit();
 				return;
 			}
-			SDL_RenderClear(renderer);
+			
 			SDL_RenderCopy(renderer, tex, NULL, NULL);
 			}
-		
 
 
 		SDL_RenderPresent(renderer);
