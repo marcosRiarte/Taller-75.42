@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Capa.h" />
+    <ClInclude Include="Controlador.h" />
     <ClInclude Include="Cuerpo.h" />
     <ClInclude Include="Escenario.h" />
     <ClInclude Include="include\json\json.h" />
@@ -106,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Capa.cpp" />
+    <ClCompile Include="Controlador.cpp" />
     <ClCompile Include="Cuerpo.cpp" />
     <ClCompile Include="Escenario.cpp" />
     <ClCompile Include="MortalFighter.cpp" />

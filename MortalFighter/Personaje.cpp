@@ -9,7 +9,6 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	alto = altoPersonaje;
 	zIndex = zIndexPersonaje;
 	sprites = spritesPersonaje;
-	posicionUn = std::make_pair(0.0f,0.0f);
 }
 
 float Personaje::getAncho() const
@@ -42,8 +41,7 @@ std::pair<int, int> Personaje::getPosicionPx() const
 
 void Personaje::setPosicionUn(float x, float y)
 {
-	posicionUn.first = x;
-	posicionUn.second = y;
+	auto posicionUn = std::make_pair(x, y);
 }
 
 void Personaje::actualizar(float xNuevo, float yNuevo)

@@ -18,7 +18,7 @@ void Mundo::agregarCuerpo(Cuerpo &unCuerpo)
 	Cuerpos.push_back(unCuerpo);
 }
 
-void Mundo::Paso(float difTiempo)
+void Mundo::Paso(float difTiempo, Controlador::MOV_TIPO movimiento)
 {
 	for (unsigned int i = 0; i < Cuerpos.size(); i++)
 	{
