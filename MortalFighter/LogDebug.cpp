@@ -5,7 +5,6 @@ LogDebug* LogDebug::unicaInstancia = nullptr;
 
 LogDebug::LogDebug(){
 
-	inicializarLog();
 	tipoDeLog = "DEBUG";
 
 }
@@ -24,7 +23,8 @@ LogDebug* LogDebug::obtenerUnicaInstancia(){
 
 LogDebug::~LogDebug(){
 
-	destruirLog();
+	delete &pathDelArchivo;
+	delete &tipoDeLog;
 	delete unicaInstancia;
 
 }

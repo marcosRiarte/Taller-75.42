@@ -1,18 +1,24 @@
 #pragma once
 #include <string>
-#include "FechayHora.h"
 
 class Log {
 
 	protected:
-		std::string pathDelArchivo;
-		FechayHora* fechaYhoraActual;
-		std::string tipoDeLog;
+		static std::string pathDelArchivo;
+
+		void logearMensaje(std::string unMensaje);
 		
 	public:
-		void logear(std::string mensaje);
-		void inicializarLog();
-		void destruirLog();
+		enum ModoDeLog{ MODO_DEBUG, MODO_WARNING, MODO_ERROR };
+
+		Log();
+		void setModoDeLog(ModoDeLog unModoDeLog);
+		void logearMensajeEnModo(std::string unMensaje, ModoDeLog unModoDeLog);
 		~Log();
+
+	private:
+		std::string toString(ModoDeLog unModoDeLog);
+
+		ModoDeLog modoActual;
 
 };

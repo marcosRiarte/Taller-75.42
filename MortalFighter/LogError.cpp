@@ -6,7 +6,6 @@ LogError* LogError::unicaInstancia = nullptr;
 
 LogError::LogError(){
 
-	inicializarLog();
 	tipoDeLog = "ERROR";
 
 }
@@ -25,7 +24,8 @@ LogError* LogError::obtenerUnicaInstancia(){
 
 LogError::~LogError(){
 
-	destruirLog();
+	delete &pathDelArchivo;
+	delete &tipoDeLog;
 	delete unicaInstancia;
 
 }

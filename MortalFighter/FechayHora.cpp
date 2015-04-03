@@ -1,7 +1,21 @@
 #include "stdafx.h"
 #include "FechayHora.h"
 
+FechayHora* FechayHora::unicaInstancia = nullptr;
+
+
 FechayHora::FechayHora(){}
+
+
+FechayHora* FechayHora::obtenerUnicaInstancia(){
+
+	if (unicaInstancia == nullptr){
+		unicaInstancia = new FechayHora();
+	}
+
+	return unicaInstancia;
+
+}
 
 
 const std::string FechayHora::obtenerFechayHoraActual(){

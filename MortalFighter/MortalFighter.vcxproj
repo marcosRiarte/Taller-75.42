@@ -92,9 +92,11 @@
     <ClInclude Include="Controlador.h" />
     <ClInclude Include="Cuerpo.h" />
     <ClInclude Include="Escenario.h" />
+    <ClInclude Include="FechayHora.h" />
     <ClInclude Include="include\json\json.h" />
     <ClInclude Include="include\SDL\SDL.h" />
     <ClInclude Include="include\SDL_image.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="ManejadorULogicas.h" />
     <ClInclude Include="Mundo.h" />
     <ClInclude Include="Parser.h" />
@@ -110,6 +112,8 @@
     <ClCompile Include="Controlador.cpp" />
     <ClCompile Include="Cuerpo.cpp" />
     <ClCompile Include="Escenario.cpp" />
+    <ClCompile Include="FechayHora.cpp" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="MortalFighter.cpp" />
     <ClCompile Include="Mundo.cpp" />
     <ClCompile Include="Parser.cpp" />

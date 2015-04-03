@@ -5,9 +5,14 @@
 
 class FechayHora {
 
-public:
-	FechayHora();
-	const std::string obtenerFechayHoraActual();
-	~FechayHora();
+	private:
+		static FechayHora* unicaInstancia;
+
+		FechayHora();
+
+	public:
+		static FechayHora* obtenerUnicaInstancia();
+		const std::string obtenerFechayHoraActual();
+		~FechayHora();
 
 };

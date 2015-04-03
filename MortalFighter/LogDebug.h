@@ -10,6 +10,7 @@ class LogDebug : public Log {
 	private:
 		static LogDebug* unicaInstancia;
 
+
 		LogDebug();
 
 };

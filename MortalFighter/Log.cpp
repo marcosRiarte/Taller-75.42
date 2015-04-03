@@ -1,37 +1,68 @@
 #include "stdafx.h"
 #include "Log.h"
 #include <fstream>
+#include "FechayHora.h"
 
-void Log::inicializarLog() {
+ std::string Log::pathDelArchivo = "log.txt";
 
-	pathDelArchivo = "log.txt";
-	fechaYhoraActual = new FechayHora();
+
+ Log::Log(){
+ 
+	 modoActual = MODO_DEBUG;
+
+	 //ABRO EL ARCHIVO. SI NO EXISTE LO CREO.
+	 std::ofstream archivoLog(pathDelArchivo, std::ios::out | std::ios::app);
+	 if (archivoLog.is_open()){
+		 archivoLog << "---------------------------------------------------------------------------------" << "\n" <<"\n";
+		 archivoLog.close();
+	 }
+
+ }
+
+
+ void Log::setModoDeLog(ModoDeLog unModoDeLog){
+
+	 modoActual = unModoDeLog;
+
+ }
+
+
+ void Log::logearMensajeEnModo(std::string unMensaje, ModoDeLog unModoDeLog){
+
+	 if (unModoDeLog >= modoActual){
+		 //ABRO EL ARCHIVO. SI NO EXISTE LO CREO.
+		 std::ofstream archivoLog(pathDelArchivo, std::ios::out | std::ios::app);
+
+		 if (archivoLog.is_open()){
+			 archivoLog << FechayHora::obtenerUnicaInstancia()->obtenerFechayHoraActual() << " [" << toString(unModoDeLog) << "] " << unMensaje << "\n";
+			 archivoLog.close();
+		 }
+
+	 }
 
 }
 
 
-void Log::logear(std::string mensaje){
+ std::string Log::toString(ModoDeLog unModoDeLog){
+	 
+	 switch (unModoDeLog)
+	 {
+		 case MODO_DEBUG: return "DEBUG";
+		 case MODO_WARNING: return "WARNING";
+		 case MODO_ERROR: return "ERROR";
+		 default: return "????";
+	 }
 
-	std::ofstream archivoLog(pathDelArchivo, std::ios::out | std::ios::app);
-	if (archivoLog.is_open()){
-		archivoLog << fechaYhoraActual->obtenerFechayHoraActual() << " [" << tipoDeLog << "] " << mensaje << "\n";
-		archivoLog.close();
-	}
-
-}
-
-
-void Log::destruirLog(){
-
-	delete fechaYhoraActual;
-	delete &pathDelArchivo;
-	delete &tipoDeLog;
-
-}
+ }
 
 
 Log::~Log(){
 
-	destruirLog();
+	//ABRO EL ARCHIVO. SI NO EXISTE LO CREO.
+	std::ofstream archivoLog(pathDelArchivo, std::ios::out | std::ios::app);
+	if (archivoLog.is_open()){
+		archivoLog << "\n";
+		archivoLog.close();
+	}
 
 }

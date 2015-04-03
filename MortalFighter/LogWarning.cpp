@@ -6,7 +6,6 @@ LogWarning* LogWarning::unicaInstancia = nullptr;
 
 LogWarning::LogWarning(){
 
-	inicializarLog();
 	tipoDeLog = "WARNING";
 
 }
@@ -25,7 +24,8 @@ LogWarning* LogWarning::obtenerUnicaInstancia(){
 
 LogWarning::~LogWarning(){
 
-	destruirLog();
+	delete &pathDelArchivo;
+	delete &tipoDeLog;
 	delete unicaInstancia;
 
 }
