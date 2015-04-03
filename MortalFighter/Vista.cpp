@@ -30,7 +30,7 @@ Vista::Vista()
 			}
 
 			SDL_RenderClear(renderer);
-			for (size_t i = 0; i < Parser::getInstancia().getCapas().size(); i++) {
+		for (size_t i = 0; i < Parser::getInstancia().getCapas().size(); i++) {
 			std::string imgFondo(Parser::getInstancia().getCapas().at(i)->getImagenFondo());
 			SDL_Surface *png = IMG_Load(imgFondo.c_str());
 
@@ -53,21 +53,24 @@ Vista::Vista()
 			}
 			
 			SDL_RenderCopy(renderer, tex, NULL, NULL);
-			}
+			SDL_DestroyTexture(tex);
+		}
 
 
 		SDL_RenderPresent(renderer);
 	
-		/*
-		//SDL_DestroyTexture(tex);
-		SDL_DestroyRenderer(renderer);
-		SDL_DestroyWindow(ventana);
 
-		IMG_Quit();
-		SDL_Quit();
-		*/
 	}
 
 void Vista::actualizar(Controlador::MOV_TIPO movimiento){
 	
+}
+
+Vista::~Vista()
+{
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(ventana);
+
+	IMG_Quit();
+	SDL_Quit();
 }

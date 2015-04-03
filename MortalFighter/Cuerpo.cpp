@@ -18,6 +18,11 @@ bool Cuerpo::estaEnPiso()
 	return true;
 }
 
+void Cuerpo::moverDerecha()
+{
+	posicion.x += 10.0f;
+}
+
 void Cuerpo::recibeObservador(Personaje* unObservador)
 {
 	observador = unObservador;

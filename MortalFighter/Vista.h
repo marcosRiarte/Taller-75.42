@@ -8,6 +8,7 @@ class Vista
 public:
 	Vista();
 	void actualizar(Controlador::MOV_TIPO movimiento);
+	~Vista();
 private:
 	SDL_Window* ventana;
 	SDL_Renderer* renderer;

@@ -5,10 +5,12 @@
 #include "Parser.h"
 #include "Vista.h"
 #include "Mundo.h"
-#include <windows.h>
+//#include <windows.h>
 #include "Controlador.h"
 
-int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+
+//int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+int _tmain(int argc, _TCHAR* argv[])
 {
 
 	std::string nombreArchivo("prueba.json");
@@ -21,16 +23,24 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	//Parte de creación inicial.
 	Vista* unaVista = new Vista();
 	Mundo* unMundo = new Mundo(vecGravedad);
-	unMundo->agregarCuerpo(Cuerpo(&defCuerpo()));
+	Cuerpo *unCuerpo = new Cuerpo(&defCuerpo());
+	unMundo->agregarCuerpo(unCuerpo);
 	
 	//Gameloop
 	while (true) {
-		unMundo->Paso(0.001f, Controlador::cambiar());
+		unMundo->Paso(0.001f, Controlador::cambiar());		
 
 		unaVista->actualizar(Controlador::cambiar());
+
+		std::cout << unCuerpo->getPosicion().x << std::endl;
 		
-		SDL_Delay(100);
-		break;
+		std::cout << "hola" << std::endl;
+		SDL_Delay(20);
+
+		
+		if (Controlador::cambiar() == Controlador::CERRAR)
+			break;		
+			
 	}
 
 	return 0;

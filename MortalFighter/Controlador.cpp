@@ -12,20 +12,26 @@ Controlador::MOV_TIPO Controlador::cambiar(){
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 
 	if (event.key.keysym.sym == SDLK_LEFT){
-		return MOV_TIPO::IZQ;
+		return IZQ;
 	}
 	if (event.key.keysym.sym == SDLK_RIGHT){
-		return MOV_TIPO::DER;
+		return DER;
 	}
 	if (event.key.keysym.sym == SDLK_UP){
-		return MOV_TIPO::ARRIBA;
+		return ARRIBA;
 	}
 	if ((state[SDL_SCANCODE_LEFT]) && (event.key.keysym.sym == SDLK_UP)){
-		return MOV_TIPO::SALTOIZQ;
+		return SALTOIZQ;
 	}
 	if ((state[SDL_SCANCODE_RIGHT]) && (event.key.keysym.sym == SDLK_UP)){
-		return MOV_TIPO::SALTODER;
+		return SALTODER;
 	}
+
+	if (event.key.keysym.sym == SDLK_q){
+		return CERRAR;
+	}
+
+	//TODO: Hacer la salida
 }
 
 Controlador::~Controlador()

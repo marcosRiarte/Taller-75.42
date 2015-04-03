@@ -74,6 +74,8 @@ public:
 
 	void notificarObservadores();
 
+	void moverDerecha();
+
 private:
 	std::string nombre;
 	vector2D posicion, velocidad;
