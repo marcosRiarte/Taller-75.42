@@ -18,6 +18,7 @@ private:
 	float ancho;
 	float alto;
 	int zIndex;
+	int energy;
 	std::string sprites;
 	std::pair<float, float> posicionUn;
 };
