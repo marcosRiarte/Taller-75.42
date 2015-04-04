@@ -35,12 +35,12 @@ public:
 
 	void sumarPosicion(const vector2D& unaPosicion)
 	{
-
 		posicion += unaPosicion;
 		// Que no se mueva debajo del piso, mejorar a condicion piso generica
 		if (estaEnPiso() && unaPosicion.y < yPiso) {
 			posicion.y = yPiso;
 			velocidad.x = 0.0f;
+			velocidad.y = 0.0f;
 		}
 	}
 
