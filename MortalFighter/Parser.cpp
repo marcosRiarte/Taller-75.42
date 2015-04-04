@@ -37,8 +37,8 @@ bool Parser::parsear(std::string nombreDelArchivo)
 
 	Json::Value ventana;
 	ventana = raiz["ventana"];
-	int anchoPxVentana(ventana.get("anchoPx",800).asInt());
-	int altoPxVentana(ventana.get("altoPx", 600).asInt());
+	int anchoPxVentana(ventana.get("anchopx",800).asInt());
+	int altoPxVentana(ventana.get("altopx", 600).asInt());
 	float anchoVentana(ventana.get("ancho", 500).asFloat());
 
 	unaVentana = new Ventana(anchoPxVentana, altoPxVentana, anchoVentana);
@@ -47,7 +47,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	escenario = raiz["escenario"];
 	float anchoEscenario(escenario.get("ancho", 1000.5).asFloat());
 	float altoEscenario(escenario.get("alto", 150).asFloat());
-	float yPisoEscenario(escenario.get("y­piso", 20).asFloat());
+	float yPisoEscenario(escenario.get("ypiso", 20).asFloat());
 
 	unEscenario = new Escenario(anchoEscenario, altoEscenario, yPisoEscenario);
 
@@ -64,7 +64,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	personaje = raiz["personaje"];
 	float ancho(personaje.get("ancho", 20).asFloat());
 	float alto(personaje.get("alto", 35).asFloat());
-	int zIndex(personaje.get("­z­index", 1).asInt());
+	int zIndex(personaje.get("zindex", 1).asInt());
 	std::string sprites(personaje.get("sprites", "SpriteSheet.png").asString());
 
 	unPersonaje = new Personaje(ancho, alto, zIndex, sprites);

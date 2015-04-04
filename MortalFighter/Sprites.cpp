@@ -10,6 +10,7 @@ void determinarClips()
 }
 int seleccionarClips()
 {
+	return 1;
 }
 void dibujarClip(){
 }

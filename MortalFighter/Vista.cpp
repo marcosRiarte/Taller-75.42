@@ -93,7 +93,7 @@ void Vista::actualizar(){
 	SDL_RenderClear(renderer);
 	
 	//Se cargan las capas anteriores al personaje
-	for (int i = 0; i < Parser::getInstancia().getPersonaje().getZIndex()+1; i++)
+	for (int i = 0; i <= Parser::getInstancia().getPersonaje().getZIndex(); i++)
 	{
 		SDL_RenderCopy(renderer, capasDeTextura.at(i), &camara, NULL);
 	}
@@ -102,7 +102,8 @@ void Vista::actualizar(){
 	SDL_RenderCopy(renderer, imgPersonaje, NULL, &personaje);
 
 	//Se cargan las capas posteriores al personaje
-	for (int i = Parser::getInstancia().getPersonaje().getZIndex(); i <capasDeTextura.size(); i++)
+	if ((Parser::getInstancia().getPersonaje().getZIndex() + 1)<capasDeTextura.size())
+	for (int i = Parser::getInstancia().getPersonaje().getZIndex()+1; i <capasDeTextura.size(); i++)
 	{
 		SDL_RenderCopy(renderer, capasDeTextura.at(i), &camara, NULL);
 	}
