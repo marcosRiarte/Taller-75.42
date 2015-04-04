@@ -57,22 +57,24 @@ void Vista::actualizar(){
 	int xPjPx = Parser::getInstancia().getPersonaje().getPosicionPx().first;
 	int yPjPx = Parser::getInstancia().getPersonaje().getPosicionPx().second;
 
-	camara = { 0, 0, anchoPjPx, altoPjPx };
+	camara = { 0, 0, anchoVentanaPx, altoVentanaPx };
 
 	int anchoEscenario = manejadorULog.darLongPixels(Parser::getInstancia().getEscenario().getAncho());
 	int altoEscenario = manejadorULog.darLongPixels(Parser::getInstancia().getEscenario().getAlto());
 
 	//Personaje Centrado
 	camara.x = (xPjPx + (anchoPjPx / 2)) - anchoVentanaPx / 2;
-	camara.y = (yPjPx + (altoPjPx / 2)) - altoVentanaPx / 2;
+	//camara.y = (yPjPx + (altoPjPx / 2)) - altoVentanaPx / 2;
 
 	//Mantener la camara en los limites
 	if (camara.x < 0) {
 		camara.x = 0;
 	}
+	/*
 	if (camara.y < 0) {
 		camara.y = 0;
 	}
+	*/
 	if (camara.x > anchoEscenario - camara.w) {
 		camara.x = anchoEscenario - camara.w;
 	}
