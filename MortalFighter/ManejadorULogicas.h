@@ -25,5 +25,10 @@ struct ManejadorULogicas
 		return std::make_pair((int)trunc(xLog * relacion), yPx);
 	}
 
+	int darLongPixels(float uLogicas)
+	{
+		return uLogicas*relacion;
+	}
+
 	float relacion;
 };

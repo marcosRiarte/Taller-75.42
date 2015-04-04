@@ -6,16 +6,16 @@ Controlador::Controlador()
 {
 }
 
-Controlador::MOV_TIPO Controlador::cambiar(){
+MOV_TIPO Controlador::cambiar(){
 	SDL_Event event;
 	SDL_PollEvent(&event);
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
-
-	if (event.key.keysym.sym == SDLK_LEFT){
-		return IZQ;
-	}
+	
 	if (event.key.keysym.sym == SDLK_RIGHT){
 		return DER;
+	}
+	if (event.key.keysym.sym == SDLK_LEFT){
+		return IZQ;
 	}
 	if (event.key.keysym.sym == SDLK_UP){
 		return ARRIBA;

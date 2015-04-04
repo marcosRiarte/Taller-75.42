@@ -35,14 +35,16 @@ std::string Personaje::getSprites() const
 std::pair<int, int> Personaje::getPosicionPx() const
 {	
 	ManejadorULogicas manejador;
-	float yPiso = Parser::getInstancia().getEscenario().getYPiso();
+	float yPiso = Parser::getInstancia().getEscenario().getYPiso() + alto/2;
+	//hardcode piso, corregir
+	yPiso += 25;
 
 	return manejador.obtenerPosicionPx(posicionUn.first, posicionUn.second + yPiso);
 }
 
 void Personaje::setPosicionUn(float x, float y)
 {
-	auto posicionUn = std::make_pair(x, y);
+	posicionUn = std::make_pair(x, y);
 }
 
 void Personaje::actualizar(float xNuevo, float yNuevo)

@@ -23,23 +23,21 @@ int _tmain(int argc, _TCHAR* argv[])
 	//Parte de creación inicial.
 	Vista* unaVista = new Vista();
 	Mundo* unMundo = new Mundo(vecGravedad);
-	Cuerpo *unCuerpo = new Cuerpo(&defCuerpo());
+	Cuerpo *unCuerpo = new Cuerpo(defCuerpo());
 	unMundo->agregarCuerpo(unCuerpo);
 	
 	//Gameloop
 	while (true) {
-		unMundo->Paso(0.001f, Controlador::cambiar());		
+		MOV_TIPO movimiento = Controlador::cambiar();
+		if (movimiento == CERRAR)
+			break;
 
-		unaVista->actualizar(Controlador::cambiar());
+		unMundo->Paso(0.35f, movimiento);
 
-		std::cout << unCuerpo->getPosicion().x << std::endl;
+		unaVista->actualizar();
+						
 		
-		std::cout << "hola" << std::endl;
-		SDL_Delay(20);
-
-		
-		if (Controlador::cambiar() == Controlador::CERRAR)
-			break;		
+		SDL_Delay(30);
 			
 	}
 

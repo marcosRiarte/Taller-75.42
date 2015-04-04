@@ -20,9 +20,9 @@
         }
     ],
     "personaje": {
-        "ancho": 20,
-        "alto": 35,
+        "ancho": 36,
+        "alto": 54,
         "z­index": 1,
-        "sprites": "SpriteSheet.png"
+        "sprites": "scorpion1.png"
     }
 }

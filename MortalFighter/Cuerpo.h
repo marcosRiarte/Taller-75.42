@@ -8,9 +8,9 @@ struct defCuerpo
 	defCuerpo()
 	{
 		nombre = "Scorpion";
-		posicion.Set(0.0f, 0.0f);
-		velocidad.Set(0.0f, 0.0f);		
-		masa = 1.0f;
+		posicion = vector2D(0.0f, 0.0f);
+		velocidad = vector2D(0.0f, 0.0f);		
+		masa = 15.0f;
 	}
 
 	std::string nombre;
@@ -21,7 +21,7 @@ struct defCuerpo
 class Cuerpo
 {
 public:
-	Cuerpo(const  defCuerpo* unaDefCuerpo);
+	Cuerpo(const  defCuerpo unaDefCuerpo);
 
 	inline const vector2D& getPosicion() const
 	{
@@ -35,7 +35,12 @@ public:
 
 	void sumarPosicion(const vector2D& unaPosicion)
 	{
+		
 		posicion += unaPosicion;
+		// Que no se mueva debajo del piso, mejorar a condicion piso generica
+		if (estaEnPiso() && unaPosicion.y < 0.0f) {
+			posicion.y = 0.0f;
+		}
 	}
 
 	inline const vector2D& getVelocidad() const
@@ -50,8 +55,9 @@ public:
 
 	void sumarVelocidad(const vector2D& unaVelocidad)
 	{
-		velocidad += unaVelocidad;
+		velocidad += unaVelocidad;		
 	}
+
 
 	inline float getMasa() const
 	{
@@ -75,6 +81,7 @@ public:
 	void notificarObservadores();
 
 	void moverDerecha();
+	void moverIzquierda();
 
 private:
 	std::string nombre;

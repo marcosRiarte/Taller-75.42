@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Cuerpo.h"
 
-Cuerpo::Cuerpo(const defCuerpo* unaDefCuerpo)
+Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo)
 {
-	nombre = unaDefCuerpo->nombre;
-	posicion = unaDefCuerpo->posicion;
-	velocidad = unaDefCuerpo->velocidad;	
-	masa = unaDefCuerpo->masa;
+	nombre = unaDefCuerpo.nombre;
+	posicion = unaDefCuerpo.posicion;
+	velocidad = unaDefCuerpo.velocidad;	
+	masa = unaDefCuerpo.masa;
 
 }
 
@@ -21,6 +21,11 @@ bool Cuerpo::estaEnPiso()
 void Cuerpo::moverDerecha()
 {
 	posicion.x += 10.0f;
+}
+
+void Cuerpo::moverIzquierda()
+{
+	posicion.x -= 10.0f;
 }
 
 void Cuerpo::recibeObservador(Personaje* unObservador)

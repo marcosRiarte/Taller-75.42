@@ -12,7 +12,7 @@ public:
 	std::pair<int, int> getPosicionPx() const;
 	void setPosicionUn(float x, float y);
 
-	void actualizar(float xNuevo, float yNuevo);
+	virtual void actualizar(float xNuevo, float yNuevo);
 	enum ESTADO { QUIETODER, QUIETOIZQ, DER, IZQ, ARRIBA, ABAJO, SALTOIZQ, SALTODER};
 
 	~Personaje();
