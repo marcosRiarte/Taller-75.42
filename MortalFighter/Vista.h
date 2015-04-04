@@ -1,6 +1,5 @@
 #pragma once
 #include "stdafx.h"
-#include "ManejadorULogicas.h"
 #include "Controlador.h"
 #include <list>
 

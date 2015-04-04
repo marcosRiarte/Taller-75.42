@@ -36,8 +36,7 @@ std::pair<int, int> Personaje::getPosicionPx() const
 {	
 	ManejadorULogicas manejador;
 	float yPiso = Parser::getInstancia().getEscenario().getYPiso() + alto/2;
-	//hardcode piso, corregir
-	yPiso += 25;
+	
 
 	return manejador.obtenerPosicionPx(posicionUn.first, posicionUn.second + yPiso);
 }

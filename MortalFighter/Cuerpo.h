@@ -1,6 +1,6 @@
 #pragma once
-#include "Vector2D.h"
 #include "Personaje.h"
+#include "Mundo.h"
 
 struct defCuerpo
 {
@@ -9,7 +9,7 @@ struct defCuerpo
 	{
 		nombre = "Scorpion";
 		posicion = vector2D(0.0f, 0.0f);
-		velocidad = vector2D(0.0f, 0.0f);		
+		velocidad = vector2D(0.0f, 0.0f);
 		masa = 15.0f;
 	}
 
@@ -35,11 +35,12 @@ public:
 
 	void sumarPosicion(const vector2D& unaPosicion)
 	{
-		
+
 		posicion += unaPosicion;
 		// Que no se mueva debajo del piso, mejorar a condicion piso generica
-		if (estaEnPiso() && unaPosicion.y < 0.0f) {
-			posicion.y = 0.0f;
+		if (estaEnPiso() && unaPosicion.y < yPiso) {
+			posicion.y = yPiso;
+			velocidad.x = 0.0f;
 		}
 	}
 
@@ -55,7 +56,7 @@ public:
 
 	void sumarVelocidad(const vector2D& unaVelocidad)
 	{
-		velocidad += unaVelocidad;		
+		velocidad += unaVelocidad;
 	}
 
 
@@ -80,12 +81,12 @@ public:
 
 	void notificarObservadores();
 
-	void moverDerecha();
-	void moverIzquierda();
+	void mover(float unaDistancia);
 
 private:
 	std::string nombre;
 	vector2D posicion, velocidad;
 	float masa;
-	Personaje* observador;	
+	Personaje* observador;
+	float yPiso;
 };

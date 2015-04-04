@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Mundo.h"
-#include "Cuerpo.h"
 #include "Parser.h"
 
 Mundo::Mundo()
@@ -10,6 +9,7 @@ Mundo::Mundo()
 
 Mundo::Mundo(const vector2D& valorGravedad)
 {
+	yPiso = Parser::getInstancia().getEscenario().getYPiso();
 	gravedad = valorGravedad;
 	Cuerpos = std::vector<Cuerpo*>();
 }
@@ -25,8 +25,8 @@ void Mundo::Paso(float difTiempo, MOV_TIPO movimiento)
 	for (unsigned int i = 0; i < Cuerpos.size(); i++)
 	{
 		Cuerpos.at(i)->notificarObservadores();
-		Resolver(difTiempo, Cuerpos.at(i), movimiento);		
-	}		
+		Resolver(difTiempo, Cuerpos.at(i), movimiento);
+	}
 }
 
 void Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento)
@@ -36,19 +36,30 @@ void Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento)
 	if (!unCuerpo->estaEnPiso())
 		unCuerpo->sumarVelocidad(gravedad * difTiempo);
 
-	if (movimiento == IZQ)
-		unCuerpo->moverIzquierda();
-	
 	//TODO: chequear bordes piso,etc
 	if (movimiento == DER)
-		unCuerpo->moverDerecha();	
-	
+		unCuerpo->mover(DISTANCIA);
+
+	if (movimiento == IZQ)
+		unCuerpo->mover(-DISTANCIA);
+
 	if (movimiento == ARRIBA && unCuerpo->estaEnPiso())
-		unCuerpo->aplicarImpulso(vector2D(0.0f, 400.0f));
+		unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
+
+	if (movimiento == SALTODER && unCuerpo->estaEnPiso())
+		unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
+
+	if (movimiento == SALTOIZQ && unCuerpo->estaEnPiso())
+		unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
 
 	vector2D unaVelocidad = unCuerpo->getVelocidad();
 
 	/// integra posicion	
 	unCuerpo->sumarPosicion(unaVelocidad * difTiempo);
+}
+
+float Mundo::getYPiso() const
+{
+	return yPiso;
 }
 

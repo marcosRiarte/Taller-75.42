@@ -5,28 +5,25 @@ Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo)
 {
 	nombre = unaDefCuerpo.nombre;
 	posicion = unaDefCuerpo.posicion;
-	velocidad = unaDefCuerpo.velocidad;	
+	velocidad = unaDefCuerpo.velocidad;
 	masa = unaDefCuerpo.masa;
-
+	yPiso = Parser::getInstancia().getEscenario().getYPiso();
+	posicion.y = yPiso;
 }
 
 bool Cuerpo::estaEnPiso()
 {
-	if (posicion.y > 0.0f )
+	if (posicion.y > yPiso)
 		return false;
 
 	return true;
 }
 
-void Cuerpo::moverDerecha()
+void Cuerpo::mover(float unaDistancia)
 {
-	posicion.x += 10.0f;
+	posicion.x += unaDistancia;
 }
 
-void Cuerpo::moverIzquierda()
-{
-	posicion.x -= 10.0f;
-}
 
 void Cuerpo::recibeObservador(Personaje* unObservador)
 {
