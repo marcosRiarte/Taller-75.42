@@ -41,34 +41,67 @@ Vista::Vista()
 
 
 void Vista::actualizar(){
-	SDL_RenderClear(renderer);
-
-	std::list<SDL_Texture*>::iterator it;
-	for (it = capasDeTextura.begin(); it != capasDeTextura.end(); ++it)
-	{
-		SDL_RenderCopy(renderer, *it, NULL, NULL);
-	}
 
 	//Revisar todo, poner sprites...
 	std::string dirImgPersonaje = Parser::getInstancia().getPersonaje().getSprites();
 	SDL_Texture *imgPersonaje = IMG_LoadTexture(renderer, dirImgPersonaje.c_str());
 	
-	SDL_Rect rect1;
-	rect1.x = Parser::getInstancia().getPersonaje().getPosicionPx().first;
-	rect1.y = Parser::getInstancia().getPersonaje().getPosicionPx().second;
-	float anchoPersonaje = Parser::getInstancia().getPersonaje().getAncho();
-	float altoPersonaje = Parser::getInstancia().getPersonaje().getAlto();
-	rect1.w = manejadorULog.darLongPixels(anchoPersonaje);
-	rect1.h = manejadorULog.darLongPixels(altoPersonaje);
+	SDL_Rect camara;
 
+	//Parametros de la ventana
+	int anchoVentanaPx = Parser::getInstancia().getVentana().getAnchoPx();
+	int altoVentanaPx = Parser::getInstancia().getVentana().getAltoPx();
 
-	SDL_RenderCopy(renderer, imgPersonaje, NULL, &rect1);
-	
-	
-	SDL_RenderPresent(renderer);
+	int anchoPjPx = manejadorULog.darLongPixels(Parser::getInstancia().getPersonaje().getAncho());
+	int altoPjPx = manejadorULog.darLongPixels(Parser::getInstancia().getPersonaje().getAlto());
+	int xPjPx = Parser::getInstancia().getPersonaje().getPosicionPx().first;
+	int yPjPx = Parser::getInstancia().getPersonaje().getPosicionPx().second;
 
+	camara = { 0, 0, anchoPjPx, altoPjPx };
+
+	int anchoEscenario = manejadorULog.darLongPixels(Parser::getInstancia().getEscenario().getAncho());
+	int altoEscenario = manejadorULog.darLongPixels(Parser::getInstancia().getEscenario().getAlto());
+
+	//Personaje Centrado
+	camara.x = (xPjPx + (anchoPjPx / 2)) - anchoVentanaPx / 2;
+	camara.y = (yPjPx + (altoPjPx / 2)) - altoVentanaPx / 2;
+
+	//Mantener la camara en los limites
+	if (camara.x < 0) {
+		camara.x = 0;
+	}
+	if (camara.y < 0) {
+		camara.y = 0;
+	}
+	if (camara.x > anchoEscenario - camara.w) {
+		camara.x = anchoEscenario - camara.w;
+	}
+	if (camara.y > altoEscenario - camara.h) {
+		camara.y = altoEscenario - camara.h;
+	}
+
+	SDL_Rect personaje;
+	personaje.x = xPjPx - camara.x;
+	personaje.y = yPjPx - camara.y;
+	personaje.w = anchoPjPx;
+	personaje.h = altoPjPx;
+
+	//Se limpia la pantalla
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
 	
+	//Se cargan las capas
+	std::list<SDL_Texture*>::iterator it;
+	for (it = capasDeTextura.begin(); it != capasDeTextura.end(); ++it)
+	{
+		SDL_RenderCopy(renderer, *it, &camara, NULL);
+	}
+	
+	//Se carga el personaje
+	SDL_RenderCopy(renderer, imgPersonaje, NULL, &personaje);
+
+	//Se actualiza la pantalla
+	SDL_RenderPresent(renderer);
 }
 
 Vista::~Vista()
