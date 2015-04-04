@@ -34,7 +34,7 @@ Vista::Vista()
 
 			capasDeTextura.push_back(tex);
 
-			actualizar();			
+			//actualizar();			
 		}
 
 }
@@ -90,15 +90,20 @@ void Vista::actualizar(){
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 	SDL_RenderClear(renderer);
 	
-	//Se cargan las capas
-	std::list<SDL_Texture*>::iterator it;
-	for (it = capasDeTextura.begin(); it != capasDeTextura.end(); ++it)
+	//Se cargan las capas anteriores al personaje
+	for (int i = 0; i < Parser::getInstancia().getPersonaje().getZIndex()+1; i++)
 	{
-		SDL_RenderCopy(renderer, *it, &camara, NULL);
+		SDL_RenderCopy(renderer, capasDeTextura.at(i), &camara, NULL);
 	}
 	
 	//Se carga el personaje
 	SDL_RenderCopy(renderer, imgPersonaje, NULL, &personaje);
+
+	//Se cargan las capas posteriores al personaje
+	for (int i = Parser::getInstancia().getPersonaje().getZIndex(); i <capasDeTextura.size(); i++)
+	{
+		SDL_RenderCopy(renderer, capasDeTextura.at(i), &camara, NULL);
+	}
 
 	//Se actualiza la pantalla
 	SDL_RenderPresent(renderer);

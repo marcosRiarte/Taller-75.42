@@ -14,7 +14,7 @@ private:
 	SDL_Window* ventana;
 	SDL_Renderer* renderer;
 	std::string rutaImagen;
-	std::list<SDL_Texture*> capasDeTextura;
+	std::vector<SDL_Texture*> capasDeTextura;
 	ManejadorULogicas manejadorULog;
 };
 

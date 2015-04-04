@@ -22,7 +22,7 @@ float Personaje::getAlto() const
 	return alto;
 }
 
-int Personaje::getZIndex() const
+int Personaje::getZIndex() 
 {
 	return zIndex;
 }
