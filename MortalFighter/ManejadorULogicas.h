@@ -1,7 +1,6 @@
 #pragma once
 #include "stdafx.h"
 #include "Parser.h"
-#define MAX_COORD_X 1000.0f
 
 struct ManejadorULogicas
 {
