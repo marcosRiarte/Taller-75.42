@@ -30,10 +30,18 @@ MOV_TIPO Controlador::cambiar(){
 			return DER;
 		case SDLK_LEFT:
 			return IZQ;
-
+		case SDL_QUIT:
+				return CERRAR;
 		default:
 			return QUIETO;
 		}
+	}
+
+	if (state[SDL_SCANCODE_LEFT]){
+		return IZQ;
+	}
+	if (state[SDL_SCANCODE_RIGHT]){
+		return DER;
 	}
 
 	return QUIETO;

@@ -56,7 +56,7 @@ void Vista::actualizar(MOV_TIPO movimiento){
 	//Revisar todo, poner sprites...
 	std::string dirImgPersonaje = Parser::getInstancia().getPersonaje().getSprites();
 	SDL_Texture *imgPersonaje = IMG_LoadTexture(renderer, dirImgPersonaje.c_str());
-	
+
 	SDL_Rect camara;
 
 	//Parametros de la ventana
@@ -76,13 +76,13 @@ void Vista::actualizar(MOV_TIPO movimiento){
 
 	if (camara.x < 0) {
 		camara.x = 0;
-	}	
+	}
 	/*if (camara.y > 0) {
 	camara.y = 0;
-	}*/		
+	}*/
 
 	bool llegoAlBorde = false;
-	if (xPjPx + anchoPjPx/2  >  anchoVentanaPx )
+	if (xPjPx + anchoPjPx / 2 > anchoVentanaPx)
 		llegoAlBorde = true;
 
 	SDL_Rect personaje;
