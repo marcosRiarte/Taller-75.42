@@ -11,6 +11,7 @@ public:
 	std::string getSprites() const;
 	std::pair<int, int> getPosicionPx() const;
 	void setPosicionUn(float x, float y);
+	std::pair<float, float> getPosicionUn() const;
 
 	virtual void actualizar(float xNuevo, float yNuevo);
 	enum ESTADO { QUIETODER, QUIETOIZQ, DER, IZQ, ARRIBA, ABAJO, SALTOIZQ, SALTODER};

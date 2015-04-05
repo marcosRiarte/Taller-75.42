@@ -36,9 +36,14 @@ std::pair<int, int> Personaje::getPosicionPx() const
 {	
 	ManejadorULogicas manejador;
 	float yPiso = Parser::getInstancia().getEscenario().getYPiso() + alto/2;
-	
 
-	return manejador.obtenerPosicionPx(posicionUn.first, posicionUn.second + yPiso);
+	return manejador.obtenerPosicionPx(posicionUn.first, posicionUn.second + yPiso); 
+}
+
+
+std::pair<float, float> Personaje::getPosicionUn() const
+{
+	return posicionUn;
 }
 
 void Personaje::setPosicionUn(float x, float y)

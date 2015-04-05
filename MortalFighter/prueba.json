@@ -12,7 +12,7 @@
     "capas": [
         {
             "imagen_fondo": "The_Pit_II_2.png",
-            "ancho": 500
+            "ancho": 200
         },
         {
             "imagen_fondo": "trans.png",
