@@ -23,7 +23,7 @@ Vista::Vista()
 			}
 
 			
-			anchoCapaMasLarga = 0;
+			anchoCapaMasLarga = Parser::getInstancia().getEscenario().getAncho();
 
 		for (size_t i = 0; i < Parser::getInstancia().getCapas().size(); i++) 
 		{
@@ -38,14 +38,14 @@ Vista::Vista()
 
 			Parser::getInstancia().getCapas().at(i)->setTexturaSDL(tex);
 
-			
+			/*
 			// busco máximo ancho de capa
 			float anchoCapaActual = Parser::getInstancia().getCapas().at(i)->getAncho();
 			if (anchoCapaActual > anchoCapaMasLarga)
 				anchoCapaMasLarga = anchoCapaActual;
 
 			//actualizar();		
-			
+			*/
 		}
 
 }
