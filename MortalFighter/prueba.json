@@ -22,7 +22,7 @@
     "personaje": {
         "ancho": 36,
         "alto": 54,
-        "zindex": 0,
+        "zindex": 1,
         "sprites": "scorpion1.png"
     }
 }

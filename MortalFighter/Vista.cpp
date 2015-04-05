@@ -22,7 +22,9 @@ Vista::Vista()
 				return;
 			}
 
-		anchoCapaMasLarga = 0;
+			
+			anchoCapaMasLarga = 0;
+
 		for (size_t i = 0; i < Parser::getInstancia().getCapas().size(); i++) 
 		{
 			std::string imgFondo(Parser::getInstancia().getCapas().at(i)->getImagenFondo());
@@ -36,12 +38,14 @@ Vista::Vista()
 
 			Parser::getInstancia().getCapas().at(i)->setTexturaSDL(tex);
 
+			
 			// busco máximo ancho de capa
 			float anchoCapaActual = Parser::getInstancia().getCapas().at(i)->getAncho();
 			if (anchoCapaActual > anchoCapaMasLarga)
 				anchoCapaMasLarga = anchoCapaActual;
 
-			//actualizar();			
+			//actualizar();		
+			
 		}
 
 }
@@ -87,6 +91,7 @@ void Vista::actualizar(MOV_TIPO movimiento){
 	personaje.w = anchoPjPx;
 	personaje.h = altoPjPx;
 
+	
 	if (llegoAlBorde)
 	{
 		//if (movimiento == DER || movimiento == QUIETO)
