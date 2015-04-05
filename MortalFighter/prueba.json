@@ -1,13 +1,13 @@
 {
     "ventana": {
-        "anchopx": -10,
-        "altopx": -5,
-        "ancho": 0
+        "anchopx": 800,
+        "altopx": 600,
+        "ancho": 200
     },
     "escenario": {
-        "ancho": 1000.5,
-        "alto": 150,
-        "ypiso": 22
+        "ancho": -5,
+        "alto": -5,
+        "ypiso": -5
     },
     "capas": [
         {

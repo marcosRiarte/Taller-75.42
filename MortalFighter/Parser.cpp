@@ -48,7 +48,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	float anchoEscenario(escenario.get("ancho", 1000.5).asFloat());
 	float altoEscenario(escenario.get("alto", 150).asFloat());
 	float yPisoEscenario(escenario.get("ypiso", 20).asFloat());
-
+	Validador::ValidarEscenario(&anchoEscenario, &altoEscenario, &yPisoEscenario);
 	unEscenario = new Escenario(anchoEscenario, altoEscenario, yPisoEscenario);
 
 	Json::Value capas;
@@ -66,6 +66,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	float alto(personaje.get("alto", 35).asFloat());
 	int zIndex(personaje.get("zindex", 1).asInt());
 	std::string sprites(personaje.get("sprites", "SpriteSheet.png").asString());
+	
 
 	unPersonaje = new Personaje(ancho, alto, zIndex, sprites);
 
