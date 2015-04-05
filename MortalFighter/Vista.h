@@ -13,8 +13,7 @@ private:
 	SDL_Window* ventana;
 	SDL_Renderer* renderer;
 	std::string rutaImagen;
-	//std::vector<Capa*> capasDeTextura;
-	float anchoCapaMasLarga;
+	//std::vector<Capa*> capasDeTextura;	
 	ManejadorULogicas manejadorULog;
 };
 

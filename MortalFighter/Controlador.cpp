@@ -37,13 +37,6 @@ MOV_TIPO Controlador::cambiar(){
 		}
 	}
 
-	if (state[SDL_SCANCODE_LEFT]){
-		return IZQ;
-	}
-	if (state[SDL_SCANCODE_RIGHT]){
-		return DER;
-	}
-
 	return QUIETO;
 	//TODO: Hacer la salida
 }

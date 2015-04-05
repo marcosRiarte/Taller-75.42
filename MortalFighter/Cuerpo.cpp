@@ -21,7 +21,7 @@ bool Cuerpo::estaEnPiso()
 
 bool Cuerpo::estaEnBorde()
 {
-	if (posicion.x < MAX_COORD_X)
+	if (posicion.x < Parser::getInstancia().getEscenario().getAncho())
 		return false;
 
 	return true;
@@ -39,7 +39,7 @@ void Cuerpo::sumarPosicion(const vector2D& unaPosicion)
 
 	// que no se mueva más allá del borde
 	if (estaEnBorde())
-		posicion.x = MAX_COORD_X;
+		posicion.x = Parser::getInstancia().getEscenario().getAncho();
 	// que no se mueva menos del cero
 	if (posicion.x <= 0)
 		posicion.x = 0;
