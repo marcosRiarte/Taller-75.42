@@ -62,6 +62,7 @@ void Vista::actualizar(MOV_TIPO movimiento){
 	//Parametros de la ventana
 	int anchoVentanaPx = Parser::getInstancia().getVentana().getAnchoPx();
 	int altoVentanaPx = Parser::getInstancia().getVentana().getAltoPx();
+	float anchoVentana = Parser::getInstancia().getVentana().getAncho();
 
 	int anchoPjPx = manejadorULog.darLongPixels(Parser::getInstancia().getPersonaje().getAncho());
 	int altoPjPx = manejadorULog.darLongPixels(Parser::getInstancia().getPersonaje().getAlto());
@@ -71,8 +72,10 @@ void Vista::actualizar(MOV_TIPO movimiento){
 
 	camara = { 0, 0, anchoVentanaPx, altoVentanaPx };
 
-	int anchoEscenario = manejadorULog.darLongPixels(Parser::getInstancia().getEscenario().getAncho());
-	int altoEscenario = manejadorULog.darLongPixels(Parser::getInstancia().getEscenario().getAlto());
+	float anchoEscenario = Parser::getInstancia().getEscenario().getAncho();
+
+	int anchoEscenarioPx = manejadorULog.darLongPixels(Parser::getInstancia().getEscenario().getAncho());
+	int altoEscenarioPx = manejadorULog.darLongPixels(Parser::getInstancia().getEscenario().getAlto());
 
 	if (camara.x < 0) {
 		camara.x = 0;
@@ -112,7 +115,7 @@ void Vista::actualizar(MOV_TIPO movimiento){
 		camara.w = manejadorULog.darLongPixels(Parser::getInstancia().getCapas().at(i)->getAncho());
 		// Si el personaje está en el borde Desplazo capa dependiendo del ancho
 		if (llegoAlBorde)
-			camara.x = (anchoVentanaPx - xPjPx)*(camara.w / manejadorULog.darLongPixels(anchoCapaMasLarga));
+			camara.x = manejadorULog.darLongPixels((anchoVentana - xPjUn)*(Parser::getInstancia().getCapas().at(i)->getAncho() / anchoEscenario));
 		
 		SDL_RenderCopy(renderer, Parser::getInstancia().getCapas().at(i)->getTexturaSDL(), NULL, &camara);
 	}
@@ -128,7 +131,7 @@ void Vista::actualizar(MOV_TIPO movimiento){
 		camara.w = manejadorULog.darLongPixels(Parser::getInstancia().getCapas().at(i)->getAncho());
 		// Si el personaje está en el borde Desplazo capa dependiendo del ancho
 		if (llegoAlBorde)
-			camara.x = (anchoVentanaPx - xPjPx)*(camara.w / manejadorULog.darLongPixels(anchoCapaMasLarga));
+			camara.x = manejadorULog.darLongPixels((anchoVentana - xPjUn)*(Parser::getInstancia().getCapas().at(i)->getAncho() / anchoEscenario));
 		SDL_RenderCopy(renderer, Parser::getInstancia().getCapas().at(i)->getTexturaSDL(), NULL, &camara);
 	}
 

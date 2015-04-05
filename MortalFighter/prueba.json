@@ -18,11 +18,12 @@
             "imagen_fondo": "trans.png",
             "ancho": 1000.5
         }
+
     ],
     "personaje": {
         "ancho": 36,
         "alto": 54,
-        "zindex": 1,
+        "zindex": 0,
         "sprites": "scorpion1.png"
     }
 }
