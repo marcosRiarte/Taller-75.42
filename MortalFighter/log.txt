@@ -1,0 +1,10 @@
+---------------------------------------------------------------------------------
+
+2015-04-05.20:13:34 [WARNING] ancho de Ventana fuera de rango, se toma ancho Px ventana por defecto
+
+---------------------------------------------------------------------------------
+
+2015-04-05.20:14:22 [WARNING] ancho de Ventana fuera de rango, se toma ancho Px ventana por defecto
+2015-04-05.20:14:22 [WARNING] alto de Ventana fuera de rango, se toma alto Px ventana por defecto
+2015-04-05.20:14:22 [WARNING] anchoUn de Ventana fuera de rango, se toma ancho en unidades por defecto
+

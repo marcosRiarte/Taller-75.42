@@ -55,6 +55,15 @@
 
  }
 
+ Log& Log::getInstancia() {
+
+	 static Log instancia;
+	 // Se garantiza que será destruido.
+	 // Se instancia en el primer uso.
+	 return instancia;
+
+ }
+
 
 Log::~Log(){
 

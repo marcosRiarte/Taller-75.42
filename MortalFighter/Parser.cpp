@@ -1,6 +1,5 @@
 #include "Parser.h"
 
-
 Parser& Parser::getInstancia() {
 
 	static Parser instancia;
@@ -30,7 +29,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 
 	if (!parseoExitoso) {
 		std::string mensaje = "Fallo el parseo, se carga json por defecto" + lector.getFormattedErrorMessages();
-		const char * c = mensaje.c_str();
+		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
 		std::ifstream prueba("pruebaDefecto.json", std::ifstream::binary);
 		bool parseoExitoso = lector.parse(prueba, raiz, true);
 	}
@@ -40,6 +39,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	int anchoPxVentana(ventana.get("anchopx",800).asInt());
 	int altoPxVentana(ventana.get("altopx", 600).asInt());
 	float anchoVentana(ventana.get("ancho", 500).asFloat());
+	Validador::ValidarVentana(&anchoPxVentana, &altoPxVentana, &anchoVentana);
 
 	unaVentana = new Ventana(anchoPxVentana, altoPxVentana, anchoVentana);
 

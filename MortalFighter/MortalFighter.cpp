@@ -12,7 +12,6 @@
 //int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 int _tmain(int argc, _TCHAR* argv[])
 {
-
 	std::string nombreArchivo("prueba.json");
 	Parser::getInstancia().parsear(nombreArchivo);
 	vector2D vecGravedad(0.0f, GRAVEDAD_Y);

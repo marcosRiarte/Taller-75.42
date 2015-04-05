@@ -1,28 +1,29 @@
 {
     "ventana": {
-        "ancho­px": 800,
-        "alto­px": 600,
+        "anchopx": 800,
+        "altopx": 600,
         "ancho": 200
     },
     "escenario": {
         "ancho": 1000.5,
         "alto": 150,
-        "y­piso": 20
+        "ypiso": 22
     },
     "capas": [
         {
-            "imagen_fondo": "fondo1.png",
-            "ancho": 500
+            "imagen_fondo": "The_Pit_II_2.png",
+            "ancho": 200
         },
         {
-            "imagen_fondo": "fondo2.png",
+            "imagen_fondo": "trans.png",
             "ancho": 1000.5
         }
+
     ],
     "personaje": {
-        "ancho": 20,
-        "alto": 35,
-        "z­index": 1,
-        "sprites": "SpriteSheet.png"
+        "ancho": 36,
+        "alto": 54,
+        "zindex": 1,
+        "sprites": "scorpion1.png"
     }
 }
