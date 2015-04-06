@@ -29,6 +29,7 @@ struct ManejadorULogicas
 	{
 		return uLogicas*relacion;
 	}
+		
 
 	float relacion;
 };

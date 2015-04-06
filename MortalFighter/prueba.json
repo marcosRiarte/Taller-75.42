@@ -1,28 +1,29 @@
 {
     "ventana": {
-        "ancho­px": 800,
-        "alto­px": 600,
+        "anchopx": 800,
+        "altopx": 600,
         "ancho": 200
     },
     "escenario": {
         "ancho": 1000.5,
         "alto": 150,
-        "y­piso": 22
+        "ypiso": 22
     },
     "capas": [
         {
             "imagen_fondo": "The_Pit_II_2.png",
-            "ancho": 500
+            "ancho": 200
         },
         {
             "imagen_fondo": "trans.png",
             "ancho": 1000.5
         }
+
     ],
     "personaje": {
-        "ancho": 36,
-        "alto": 54,
-        "z­index": 0,
+        "ancho": 23.5,
+        "alto": 49,
+        "zindex": 1,
         "sprites": "scorpion1.png"
     }
 }

@@ -85,6 +85,7 @@
     <Text Include="lib\LICENSE.tiff.txt" />
     <Text Include="lib\LICENSE.webp.txt" />
     <Text Include="lib\LICENSE.zlib.txt" />
+    <Text Include="log.txt" />
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>

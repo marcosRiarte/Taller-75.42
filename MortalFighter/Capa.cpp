@@ -18,6 +18,16 @@ float Capa::getAncho(){
 	return ancho;
 }
 
+void Capa::setTexturaSDL(SDL_Texture* unaTexturaSDL)
+{
+	texturaSDL = unaTexturaSDL;
+}
+
+SDL_Texture* Capa::getTexturaSDL()
+{
+	return texturaSDL;
+}
+
 Capa::~Capa()
 {
 }

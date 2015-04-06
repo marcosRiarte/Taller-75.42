@@ -37,10 +37,10 @@ void Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento)
 		unCuerpo->sumarVelocidad(gravedad * difTiempo);
 
 	//TODO: chequear bordes piso,etc
-	if (movimiento == DER)
+	if (movimiento == DER && unCuerpo->estaEnPiso())
 		unCuerpo->mover(DISTANCIA);
 
-	if (movimiento == IZQ)
+	if (movimiento == IZQ && unCuerpo->estaEnPiso())
 		unCuerpo->mover(-DISTANCIA);
 
 	if (movimiento == ARRIBA && unCuerpo->estaEnPiso())

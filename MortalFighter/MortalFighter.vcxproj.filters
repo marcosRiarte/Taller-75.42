@@ -39,6 +39,7 @@
     <Text Include="ReadMe.txt">
       <Filter>lib</Filter>
     </Text>
+    <Text Include="log.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

@@ -7,13 +7,14 @@ class Vista
 {
 public:
 	Vista();
-	void actualizar(MOV_TIPO);
+	void actualizar(MOV_TIPO movimiento);
 	~Vista();
 private:
 	SDL_Window* ventana;
 	SDL_Renderer* renderer;
 	std::string rutaImagen;
-	std::vector<SDL_Texture*> capasDeTextura;
+	//std::vector<Capa*> capasDeTextura;
+	float camaraXLog;
 	ManejadorULogicas manejadorULog;
 };
 

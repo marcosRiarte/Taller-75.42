@@ -1,6 +1,5 @@
 #include "Parser.h"
 
-
 Parser& Parser::getInstancia() {
 
 	static Parser instancia;
@@ -30,16 +29,17 @@ bool Parser::parsear(std::string nombreDelArchivo)
 
 	if (!parseoExitoso) {
 		std::string mensaje = "Fallo el parseo, se carga json por defecto" + lector.getFormattedErrorMessages();
-		const char * c = mensaje.c_str();
+		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
 		std::ifstream prueba("pruebaDefecto.json", std::ifstream::binary);
 		bool parseoExitoso = lector.parse(prueba, raiz, true);
 	}
 
 	Json::Value ventana;
 	ventana = raiz["ventana"];
-	int anchoPxVentana(ventana.get("anchoPx",800).asInt());
-	int altoPxVentana(ventana.get("altoPx", 600).asInt());
+	int anchoPxVentana(ventana.get("anchopx",800).asInt());
+	int altoPxVentana(ventana.get("altopx", 600).asInt());
 	float anchoVentana(ventana.get("ancho", 500).asFloat());
+	//Validador::ValidarVentana(&anchoPxVentana, &altoPxVentana, &anchoVentana);
 
 	unaVentana = new Ventana(anchoPxVentana, altoPxVentana, anchoVentana);
 
@@ -47,8 +47,8 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	escenario = raiz["escenario"];
 	float anchoEscenario(escenario.get("ancho", 1000.5).asFloat());
 	float altoEscenario(escenario.get("alto", 150).asFloat());
-	float yPisoEscenario(escenario.get("y­piso", 20).asFloat());
-
+	float yPisoEscenario(escenario.get("ypiso", 20).asFloat());
+	//Validador::ValidarEscenario(&anchoEscenario, &altoEscenario, &yPisoEscenario);
 	unEscenario = new Escenario(anchoEscenario, altoEscenario, yPisoEscenario);
 
 	Json::Value capas;
@@ -64,8 +64,9 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	personaje = raiz["personaje"];
 	float ancho(personaje.get("ancho", 20).asFloat());
 	float alto(personaje.get("alto", 35).asFloat());
-	int zIndex(personaje.get("­z­index", 1).asInt());
+	int zIndex(personaje.get("zindex", 1).asInt());
 	std::string sprites(personaje.get("sprites", "SpriteSheet.png").asString());
+	
 
 	unPersonaje = new Personaje(ancho, alto, zIndex, sprites);
 

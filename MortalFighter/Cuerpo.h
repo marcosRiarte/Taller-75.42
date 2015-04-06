@@ -33,16 +33,7 @@ public:
 		posicion = unaPosicion;
 	}
 
-	void sumarPosicion(const vector2D& unaPosicion)
-	{
-
-		posicion += unaPosicion;
-		// Que no se mueva debajo del piso, mejorar a condicion piso generica
-		if (estaEnPiso() && unaPosicion.y < yPiso) {
-			posicion.y = yPiso;
-			velocidad.x = 0.0f;
-		}
-	}
+	void sumarPosicion(const vector2D& unaPosicion);
 
 	inline const vector2D& getVelocidad() const
 	{
@@ -67,6 +58,10 @@ public:
 
 	// Devuelve true si está en contacto con el piso o false en caso contrario
 	bool estaEnPiso();
+
+	// Devuelve true si está en borde derecho o false en caso contrario
+	// borde izquierdo se toma cero siempre
+	bool estaEnBorde();
 
 	// Aplica un impulso lineal al cuerpo. Modifica inmediatamente la velocidad
 	// El impulso sería en unidades de N.s o Kg.m/s

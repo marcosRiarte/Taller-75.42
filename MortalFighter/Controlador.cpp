@@ -30,7 +30,8 @@ MOV_TIPO Controlador::cambiar(){
 			return DER;
 		case SDLK_LEFT:
 			return IZQ;
-
+		case SDL_QUIT:
+				return CERRAR;
 		default:
 			return QUIETO;  //Quieto a la izquierda
 		}
