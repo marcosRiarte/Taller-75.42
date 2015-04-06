@@ -45,7 +45,7 @@ void Vista::actualizar(MOV_TIPO movimiento){
 
 	// poner sprites...
 	std::string dirImgPersonaje = Parser::getInstancia().getPersonaje().getSprites();
-	SDL_Texture *imgPersonaje = IMG_LoadTexture(renderer, dirImgPersonaje.c_str());	
+	SDL_Texture *imgPersonaje = IMG_LoadTexture(renderer, dirImgPersonaje.c_str());
 
 	// Parametros de la ventana
 	int anchoVentanaPx = Parser::getInstancia().getVentana().getAnchoPx();
@@ -55,29 +55,31 @@ void Vista::actualizar(MOV_TIPO movimiento){
 	// Parametros del personaje
 	int anchoPjPx = manejadorULog.darLongPixels(Parser::getInstancia().getPersonaje().getAncho());
 	int anchoPj = Parser::getInstancia().getPersonaje().getAncho();
-	int altoPjPx = manejadorULog.darLongPixels(Parser::getInstancia().getPersonaje().getAlto());	
+	int altoPjPx = manejadorULog.darLongPixels(Parser::getInstancia().getPersonaje().getAlto());
 	float xPjUn = Parser::getInstancia().getPersonaje().getPosicionUn().first;
+	int xPjPx = Parser::getInstancia().getPersonaje().getPosicionPx().first;
 	int yPjPx = Parser::getInstancia().getPersonaje().getPosicionPx().second;
 
 	SDL_Rect camara;
 	camara = { 0, 0, anchoVentanaPx, altoVentanaPx };
 
-	float anchoEscenario = Parser::getInstancia().getEscenario().getAncho();	
-	
+	float anchoEscenario = Parser::getInstancia().getEscenario().getAncho();
+
 	//Se limpia la pantalla
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-	SDL_RenderClear(renderer);	
+	SDL_RenderClear(renderer);
 
 	// condicion de borde
 	if ((xPjUn + anchoPj > anchoVentana - camaraXLog) && (movimiento == DER || movimiento == QUIETO))
-		camaraXLog -= anchoPj/2;
-	if ((xPjUn < -camaraXLog) && movimiento == IZQ)
-		camaraXLog += anchoPj/2;
+		camaraXLog -= DISTANCIA;
+	if ((xPjUn < -camaraXLog) && (movimiento == IZQ ))
+		camaraXLog += DISTANCIA;
 
 	// Posicion x del personaje dentro de la camara
 	float xLogPjEnCamara = xPjUn + camaraXLog;
 	SDL_Rect personaje;
-	personaje.x = manejadorULog.darLongPixels(xLogPjEnCamara);
+
+	personaje.x=manejadorULog.darLongPixels(xLogPjEnCamara);
 	personaje.y = yPjPx;
 	personaje.w = anchoPjPx;
 	personaje.h = altoPjPx;
