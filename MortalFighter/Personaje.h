@@ -15,7 +15,7 @@ public:
 	void setEstado(enum ESTADO nuevoEstado);
 	virtual void actualizar(float xNuevo, float yNuevo);
 	enum ESTADO { QUIETODER, QUIETOIZQ, DER, IZQ, ARRIBA, ABAJO, SALTOIZQ, SALTODER};
-
+	std::pair<float, float> Personaje::getPosicionUn()const;
 	~Personaje();
 
 private:

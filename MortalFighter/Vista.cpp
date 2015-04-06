@@ -44,7 +44,7 @@ Vista::Vista()
 void Vista::actualizar(MOV_TIPO movimiento){
 
 	// poner sprites...
-	std::string dirImgPersonaje = Parser::getInstancia().getPersonaje().getSprites();
+	std::string dirImgPersonaje = Parser::getInstancia().getPersonaje().getSprites().getPath();
 	SDL_Texture *imgPersonaje = IMG_LoadTexture(renderer, dirImgPersonaje.c_str());
 
 	// Parametros de la ventana

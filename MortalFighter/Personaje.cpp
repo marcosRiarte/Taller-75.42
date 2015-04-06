@@ -43,7 +43,7 @@ std::pair<int, int> Personaje::getPosicionPx() const
 }
 
 
-std::pair<float, float> Personaje::getPosicionUn() const
+std::pair<float, float> Personaje::getPosicionUn()const
 {
 	return posicionUn;
 }
