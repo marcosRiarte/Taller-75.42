@@ -4,7 +4,7 @@
 #include "Escenario.h"
 #include "Personaje.h"
 #include "Log.h"
-#include "Validador.h"
+//#include "Validador.h"
 
 class Parser
 {

@@ -99,9 +99,6 @@
     <ClInclude Include="Sprites.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Validador.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -144,9 +141,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sprites.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Validador.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

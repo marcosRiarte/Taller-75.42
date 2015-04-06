@@ -5,9 +5,9 @@
         "ancho": 200
     },
     "escenario": {
-        "ancho": -5,
-        "alto": -5,
-        "ypiso": -5
+        "ancho": 1000.5,
+        "alto": 150,
+        "ypiso": 22
     },
     "capas": [
         {
@@ -23,7 +23,7 @@
     "personaje": {
         "ancho": 36,
         "alto": 54,
-        "zindex": 0,
+        "zindex": 1,
         "sprites": "scorpion1.png"
     }
 }
