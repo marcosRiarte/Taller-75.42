@@ -2,6 +2,8 @@
 #include "Personaje.h"
 #include "Parser.h"
 #include "ManejadorULogicas.h"
+#include "Sprites.h"
+
 
 Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string spritesPersonaje)
 {
@@ -9,7 +11,7 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	alto = altoPersonaje;
 	zIndex = zIndexPersonaje;
 	energy = 100;
-	sprites = spritesPersonaje;
+	Sprites sprites = Sprites(spritesPersonaje); //Creo la clase sprites con el path del personaje
 }
 
 float Personaje::getAncho() const
@@ -27,7 +29,7 @@ int Personaje::getZIndex()
 	return zIndex;
 }
 
-std::string Personaje::getSprites() const
+ Sprites Personaje::getSprites() 
 {
 	return sprites;
 }

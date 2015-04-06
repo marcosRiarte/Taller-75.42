@@ -34,7 +34,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		unMundo->Paso(0.35f, movimiento);
 
-		unaVista->actualizar();
+		unaVista->actualizar(movimiento);
 						
 		
 		SDL_Delay(30);

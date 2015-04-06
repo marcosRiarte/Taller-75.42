@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Sprites.h"
 
 class Personaje
 {
@@ -8,10 +8,11 @@ public:
 	float getAncho() const;
 	float getAlto() const;
 	int getZIndex() ;
-	std::string getSprites() const;
+	Sprites getSprites();
 	std::pair<int, int> getPosicionPx() const;
 	void setPosicionUn(float x, float y);
-
+	enum ESTADO getEstado();
+	void setEstado(enum ESTADO nuevoEstado);
 	virtual void actualizar(float xNuevo, float yNuevo);
 	enum ESTADO { QUIETODER, QUIETOIZQ, DER, IZQ, ARRIBA, ABAJO, SALTOIZQ, SALTODER};
 
@@ -22,7 +23,7 @@ private:
 	float alto;
 	int zIndex;
 	int energy;
-	std::string sprites;
+	Sprites sprites;
 	std::pair<float, float> posicionUn;
 	ESTADO elEstado;
 };

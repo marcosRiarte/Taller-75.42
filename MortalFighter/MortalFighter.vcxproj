@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\Barra_Energia.png" />
+    <Image Include="..\..\..\..\Downloads\SpriteSheet.gif.gif" />
     <Image Include="The_Pit_II_2.png" />
     <Image Include="trans.png" />
   </ItemGroup>

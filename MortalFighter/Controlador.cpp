@@ -32,7 +32,7 @@ MOV_TIPO Controlador::cambiar(){
 			return IZQ;
 
 		default:
-			return QUIETO;
+			return QUIETO;  //Quieto a la izquierda
 		}
 	}
 

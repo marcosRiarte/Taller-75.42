@@ -196,5 +196,8 @@
     <Image Include="..\..\..\..\Downloads\Barra_Energia.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\..\..\..\Downloads\SpriteSheet.gif.gif">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

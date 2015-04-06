@@ -40,10 +40,10 @@ Vista::Vista()
 }
 
 
-void Vista::actualizar(){
+void Vista::actualizar(MOV_TIPO movimiento){
 
 	//Revisar todo, poner sprites...
-	std::string dirImgPersonaje = Parser::getInstancia().getPersonaje().getSprites();
+	std::string dirImgPersonaje = Parser::getInstancia().getPersonaje().getSprites().getPath();
 	SDL_Texture *imgPersonaje = IMG_LoadTexture(renderer, dirImgPersonaje.c_str());
 	
 	SDL_Rect camara;
