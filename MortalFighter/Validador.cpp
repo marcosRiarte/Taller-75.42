@@ -58,7 +58,7 @@ void Validador::ValidarEscenario(float *anchoEscenario, float *altoEscenario, fl
 	}
 }
 
-void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::string* sprites){
+void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::string* orientacion, std::string* sprites){
 	if (!(*ancho > 0)) {
 		std::string mensaje = "ancho del Personaje fuera de rango, se toma ancho por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
@@ -73,6 +73,11 @@ void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::st
 		std::string mensaje = "zindex del Personaje fuera de rango, se toma zindex por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*zindex = 1;
+	}
+	if ((*orientacion != "DER") && (*orientacion != "IZQ")) {
+		std::string mensaje = "orientacion invalida, se toma orientacion derecha";
+		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+		*orientacion = "DER";
 	}
 	if (!(*sprites == "")) {
 		std::string mensaje = "string de sprites vacio, se toma sprites por defecto";

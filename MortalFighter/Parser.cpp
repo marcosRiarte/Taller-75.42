@@ -68,9 +68,10 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	float alto(personaje.get("alto", 35).asFloat());
 	int zIndex(personaje.get("zindex", 1).asInt());
 	std::string sprites(personaje.get("sprites", "SpriteSheet.png").asString());
-
-	Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &sprites);
-	unPersonaje = new Personaje(ancho, alto, zIndex, sprites);
+	std::string orientacion(personaje.get("orientacion", "DER").asString());
+	
+	Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites);
+	unPersonaje = new Personaje(ancho, alto, zIndex, orientacion, sprites);
 
 	return true;
 }

@@ -5,13 +5,15 @@
 #include "Sprites.h"
 
 
-Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string spritesPersonaje)
+Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesPersonaje)
 {
 	ancho = anchoPersonaje;
 	alto = altoPersonaje;
 	zIndex = zIndexPersonaje;
+	orientacion = unaorientacion;
 	energy = 100;
 	sprites= spritesPersonaje;
+
 }
 
 float Personaje::getAncho() const

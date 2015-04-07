@@ -9,7 +9,7 @@ class Personaje
 {
 public:
 	
-	Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string spritesPersonaje);
+	Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string orientacion, std::string spritesPersonaje);
 	float getAncho() const;
 	float getAlto() const;
 	int getZIndex() ;
@@ -28,6 +28,7 @@ private:
 	float alto;
 	int zIndex;
 	int energy;
+	std::string orientacion;
 	std::string sprites;
 	std::pair<float, float> posicionUn;
 	float deltaX;

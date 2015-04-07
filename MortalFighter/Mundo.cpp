@@ -37,7 +37,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento)
 		unCuerpo->sumarVelocidad(gravedad * difTiempo);
 	
 	if (movimiento == DER && unCuerpo->estaEnPiso()) {
-		unCuerpo->mover(DISTANCIA);
+		unCuerpo->mover(DISTANCIA);	
 		nuevoEstado = DER_DER;
 	}
 

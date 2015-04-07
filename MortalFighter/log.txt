@@ -18,3 +18,16 @@
 
 2015-04-07.18:26:44 [WARNING] string de sprites vacio, se toma sprites por defecto
 
+---------------------------------------------------------------------------------
+
+2015-04-07.18:27:29 [WARNING] string de sprites vacio, se toma sprites por defecto
+---------------------------------------------------------------------------------
+
+2015-04-07.18:28:34 [WARNING] string de sprites vacio, se toma sprites por defecto
+---------------------------------------------------------------------------------
+
+2015-04-07.18:30:14 [WARNING] string de sprites vacio, se toma sprites por defecto
+
+---------------------------------------------------------------------------------
+
+2015-04-07.18:43:14 [WARNING] string de sprites vacio, se toma sprites por defecto

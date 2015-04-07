@@ -21,9 +21,10 @@
 
     ],
     "personaje": {
-        "ancho": 36,
-        "alto": 54,
+        "ancho": 23.5,
+        "alto": 49,
         "zindex": 1,
-        "sprites": "scorpion1.png"
+        "orientancion": "Der",
+        "sprites": "mario2.png"
     }
 }
