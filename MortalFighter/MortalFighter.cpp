@@ -12,31 +12,34 @@
 //int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 int _tmain(int argc, _TCHAR* argv[])
 {
-	std::string nombreArchivo("prueba.json");
-	Parser::getInstancia().parsear(nombreArchivo);
-	vector2D vecGravedad(0.0f, GRAVEDAD_Y);
+	MOV_TIPO movimiento = RECARGAR;
+	while (movimiento == RECARGAR){
+		std::string nombreArchivo("prueba.json");
+		Parser::getInstancia().parsear(nombreArchivo);
+		vector2D vecGravedad(0.0f, GRAVEDAD_Y);
 
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
-		const char* msg = ((std::string)"Error iniciando SDL: ").append(SDL_GetError()).c_str();
-	}
-	//Parte de creación inicial.
-	Vista* unaVista = new Vista();
-	Mundo* unMundo = new Mundo(vecGravedad);
-	Cuerpo *unCuerpo = new Cuerpo(defCuerpo());
-	unMundo->agregarCuerpo(unCuerpo);
-	
-	//Gameloop
-	while (true) {
-		MOV_TIPO movimiento = Controlador::cambiar();
-		if (movimiento == CERRAR)
-			break;
+		if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
+			const char* msg = ((std::string)"Error iniciando SDL: ").append(SDL_GetError()).c_str();
+		}
+		//Parte de creación inicial.
+		Vista* unaVista = new Vista();
+		Mundo* unMundo = new Mundo(vecGravedad);
+		Cuerpo *unCuerpo = new Cuerpo(defCuerpo());
+		unMundo->agregarCuerpo(unCuerpo);
 
-		unMundo->Paso(0.35f, movimiento);
+		//Gameloop
+		while (true) {
+			movimiento = Controlador::cambiar();
+			if ((movimiento == CERRAR) || (movimiento == RECARGAR))
+				break;
 
-		unaVista->actualizar(movimiento, Parser::getInstancia().getPersonaje().getEstado()); //Nescesita pasarle el personaje y su estado
-		
-		SDL_Delay(30);
-			
+			unMundo->Paso(0.35f, movimiento);
+
+			unaVista->actualizar(movimiento, Parser::getInstancia().getPersonaje().getEstado()); //Nescesita pasarle el personaje y su estado
+
+			SDL_Delay(30);
+
+		}
 	}
 
 	return 0;

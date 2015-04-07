@@ -38,7 +38,10 @@ MOV_TIPO Controlador::cambiar(){
 			return IZQ;
 		case SDL_QUIT:
 				return CERRAR;
+		case SDLK_r:
+			return RECARGAR;
 		}
+
 	}
 
 	//TODA ESTA MIERDA QUE SIGUE ES LA QUE HACE QUE EL PERSONAJE SE MUEVA RAPIDO CUANDO DEJAS APRETADA ALGUNA TECLA.
