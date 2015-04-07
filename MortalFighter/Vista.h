@@ -7,7 +7,7 @@ class Vista
 {
 public:
 	Vista();
-	void actualizar();
+	void actualizar(MOV_TIPO, enum ESTADO);
 	~Vista();
 private:
 	SDL_Window* ventana;

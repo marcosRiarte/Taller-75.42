@@ -33,7 +33,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		unMundo->Paso(0.35f, movimiento);
 
-		unaVista->actualizar();
+		unaVista->actualizar(movimiento, Personaje.getEstado()); //Nescesita pasarle el personaje y su estado
 		
 		SDL_Delay(30);
 			
