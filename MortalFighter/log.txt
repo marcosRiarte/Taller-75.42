@@ -31,3 +31,13 @@
 ---------------------------------------------------------------------------------
 
 2015-04-07.18:43:14 [WARNING] string de sprites vacio, se toma sprites por defecto
+---------------------------------------------------------------------------------
+
+2015-04-07.18:55:51 [WARNING] string de sprites vacio, se toma sprites por defecto
+---------------------------------------------------------------------------------
+
+2015-04-07.18:56:11 [WARNING] zindex del Personaje fuera de rango, se toma zindex por defecto
+2015-04-07.18:56:11 [WARNING] string de sprites vacio, se toma sprites por defecto
+---------------------------------------------------------------------------------
+
+2015-04-07.18:57:45 [WARNING] string de sprites vacio, se toma sprites por defecto

@@ -69,7 +69,7 @@ void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::st
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*alto = 49;
 	}
-	if (!(*zindex > 0)) {
+	if (!(*zindex >= 0)) {
 		std::string mensaje = "zindex del Personaje fuera de rango, se toma zindex por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*zindex = 1;
