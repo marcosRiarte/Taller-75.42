@@ -38,6 +38,14 @@ Vista::Vista()
 
 		// inicializo la camara en cero
 		camaraXLog = 0.0f;
+
+		//Creo el número de cuadros en 0,
+		numeroDeCuadro = 0;
+		//y la lista de cuadros puntero a null
+		listaDeCuadros = nullptr;
+
+		//Se cargan los sprites
+		elSprite = new Sprite();
 }
 
 
@@ -48,16 +56,24 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	Ventana ventanaVista = Parser::getInstancia().getVentana();
 	std::vector<Capa*> capasVista = Parser::getInstancia().getCapas();
 
-	// poner sprites...
-	std::string dirImgPersonaje = personajeVista.getSprites().getPath();
-	SDL_Texture *imgPersonaje = IMG_LoadTexture(renderer, dirImgPersonaje.c_str());
+	//Dirección de la imagen de Sprites
+	std::string dirImgPersonaje = personajeVista.getSprite();
 
-	// Parametros de la ventana
+	//Carga la imagen desde la ruta especificada
+	SDL_Surface* Superficie = IMG_Load(dirImgPersonaje.c_str());
+
+	//Seteo del color
+	SDL_SetColorKey(Superficie, SDL_TRUE, SDL_MapRGB(Superficie->format, 0, 0xFF, 0xFF));
+
+	//Creación de la textura sobre la superficie
+	SDL_Texture* texturaSprite = SDL_CreateTextureFromSurface(renderer, Superficie);
+
+	//Parametros de la ventana
 	int anchoVentanaPx = ventanaVista.getAnchoPx();
 	int altoVentanaPx = ventanaVista.getAltoPx();
 	float anchoVentana = ventanaVista.getAncho();
 
-	// Parametros del personaje
+	//Parametros del personaje
 	int anchoPjPx = manejadorULog.darLongPixels(personajeVista.getAncho());
 	int anchoPj = personajeVista.getAncho();
 	int altoPjPx = manejadorULog.darLongPixels(personajeVista.getAlto());
@@ -98,9 +114,19 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 		SDL_RenderCopy(renderer, capasVista.at(i)->getTexturaSDL(), NULL, &camara);
 	}
 	
-	//Se carga el personaje
-	SDL_RenderCopy(renderer, imgPersonaje, NULL, &personaje);
+	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
+	listaDeCuadros = elSprite->listaDeCuadros(estadoPersonaje);
 
+	//Renderizar el sprite
+	SDL_Rect* cuadroActual = listaDeCuadros->at(numeroDeCuadro / (2*listaDeCuadros->size()));
+
+	//Se carga el personaje
+	if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ARRIBA_IZQ) || (estadoPersonaje == ESTADO::DER_IZQ) || (estadoPersonaje == ESTADO::IZQ_IZQ) || (estadoPersonaje == ESTADO::QUIETOIZQ) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
+	SDL_RenderCopyEx(renderer, texturaSprite, cuadroActual, &personaje,0,NULL,SDL_FLIP_HORIZONTAL);
+	}
+	else{
+		SDL_RenderCopy(renderer, texturaSprite, cuadroActual, &personaje);
+	}
 
 	//Se cargan las capas posteriores al personaje
 	if ((personajeVista.getZIndex() + 1) < capasVista.size())
@@ -115,6 +141,33 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 
 	//Se actualiza la pantalla
 	SDL_RenderPresent(renderer);
+
+	if ((estadoPersonaje == ESTADO::QUIETODER) || (estadoPersonaje == ESTADO::QUIETOIZQ))
+		numeroDeCuadro=0;
+
+	if ((estadoPersonaje == ESTADO::DER_DER) || (estadoPersonaje == ESTADO::DER_IZQ) || (estadoPersonaje == ESTADO::IZQ_DER) || (estadoPersonaje == ESTADO::IZQ_IZQ)){
+		/*
+		//Siguiente cuadro
+		++numeroDeCuadro;
+		//Ciclado de la animación
+		if (numeroDeCuadro / 24 >= 24) {
+		*/
+		numeroDeCuadro = 0;
+		//}
+	}
+	if ((estadoPersonaje == ESTADO::ARRIBA_IZQ) || (estadoPersonaje == ESTADO::ARRIBA_DER) || (estadoPersonaje == ESTADO::SALTODER_DER) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_DER) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
+		/*//Siguiente cuadro
+		++numeroDeCuadro;
+		//Ciclado de la animación
+		if (numeroDeCuadro / 6 >= 6) {
+		*/
+			numeroDeCuadro = 0;
+		//}
+	}
+
+	if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ABAJO_DER))
+		numeroDeCuadro = 0;
+
 }
 
 Vista::~Vista()

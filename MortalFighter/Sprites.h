@@ -1,18 +1,16 @@
 #pragma once
-class Sprites
-{
-public:
-	Sprites();
-	Sprites(std::string);
+#include <vector>
+#include <string>
+#include "Personaje.h"
 
-	void determinarClips();
-	int seleccionarClips(enum MOV_TIPO);//Devuelve el numero de clip segun las teclas pulsadas
-	void dibujarClip();//Va a la vista
-	std::string Sprites::getPath();
-	void setPath(std::string nuevoPath);	
-	~Sprites();
-
+class Sprite{
 private:
-	std::string path;
-};
+	std::vector<SDL_Rect*>* CayendoDer;
+	std::vector<SDL_Rect*>* SaltandoDer;
+	std::vector<SDL_Rect*>* CaminandoDer;
+	std::vector<SDL_Rect*>* QuietoDer;
 
+public:
+	Sprite();
+	std::vector<SDL_Rect*>* listaDeCuadros(ESTADO unEstado);
+};

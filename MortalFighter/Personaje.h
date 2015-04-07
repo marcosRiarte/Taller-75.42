@@ -1,5 +1,4 @@
 #pragma once
-#include "Sprites.h"
 
 enum ESTADO {
 	QUIETODER, QUIETOIZQ, DER_DER, DER_IZQ, IZQ_DER, IZQ_IZQ, ARRIBA_DER, ARRIBA_IZQ,
@@ -14,7 +13,7 @@ public:
 	float getAncho() const;
 	float getAlto() const;
 	int getZIndex() ;
-	Sprites& getSprites() const;
+	std::string getSprite() const;
 	std::pair<int, int> getPosicionPx() const;
 	void setPosicionUn(float x, float y);
 	ESTADO getEstado() const;
@@ -29,7 +28,7 @@ private:
 	float alto;
 	int zIndex;
 	int energy;
-	Sprites* sprites;
+	std::string sprites;
 	std::pair<float, float> posicionUn;
 	float deltaX;
 	ESTADO estadoActual;
