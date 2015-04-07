@@ -9,8 +9,8 @@ Sprites::Sprites(std::string spritesPersonaje)
 //TODO corregir
 void Sprites:: determinarClips()
 {
-	int iW = 100, iH = 100;
-	int x = SCREEN_WIDTH / 2 - iW / 2;
+	/* int iW = 100, iH = 100;  //Dimensiones del clip
+	int x = SCREEN_WIDTH / 2 - iW / 2;  //Se dibujar sobre las posiciones  centrales del clip
 	int y = SCREEN_HEIGHT / 2 - iH / 2;
 
 	//Setup the clips for our image
@@ -19,7 +19,7 @@ void Sprites:: determinarClips()
 		clips[i].x = i / 2 * iW;
 		clips[i].y = i % 2 * iH;
 		clips[i].w = iW;
-		clips[i].h = iH;
+		clips[i].h = iH;*/
 }
 
 int Sprites::seleccionarClips(MOV_TIPO movimiento)
@@ -47,7 +47,7 @@ int Sprites::seleccionarClips(MOV_TIPO movimiento)
 				useClip = 5;
 				break;
 			case CERRAR:
-				quit = true;
+				useClip = 6;       //quit = true;
 				break;
 			default:
 				break;
@@ -57,10 +57,10 @@ int Sprites::seleccionarClips(MOV_TIPO movimiento)
 	
 //TODO REVISAR 
 void Sprites:: dibujarClip()
-{
+{ /*
 	SDL_RenderClear(renderer);
 	renderTexture(image, renderer, x, y, &clips[useClip]);
-	SDL_RenderPresent(renderer);
+	SDL_RenderPresent(renderer);*/
 }
 void Sprites ::setPath (std::string nuevoPath)
 {
