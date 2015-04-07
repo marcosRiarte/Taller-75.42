@@ -46,6 +46,22 @@ Vista::Vista()
 
 		//Se cargan los sprites
 		elSprite = new Sprite();
+
+
+
+		//Dirección de la imagen de Sprites
+		dirImgPersonaje = Parser::getInstancia().getPersonaje().getSprite();
+
+		//Carga la imagen desde la ruta especificada
+		Superficie = IMG_Load(dirImgPersonaje.c_str());
+
+		//Seteo del color
+		SDL_SetColorKey(Superficie, SDL_TRUE, SDL_MapRGB(Superficie->format, 0, 0xFF, 0xFF));
+
+
+		//Creación de la textura sobre la superficie
+		texturaSprite = SDL_CreateTextureFromSurface(renderer, Superficie);
+
 }
 
 
@@ -54,19 +70,7 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	// referencias más utilizadas al actualizar la vista
 	Personaje personajeVista = Parser::getInstancia().getPersonaje();
 	Ventana ventanaVista = Parser::getInstancia().getVentana();
-	std::vector<Capa*> capasVista = Parser::getInstancia().getCapas();
-
-	//Dirección de la imagen de Sprites
-	std::string dirImgPersonaje = personajeVista.getSprite();
-
-	//Carga la imagen desde la ruta especificada
-	SDL_Surface* Superficie = IMG_Load(dirImgPersonaje.c_str());
-
-	//Seteo del color
-	SDL_SetColorKey(Superficie, SDL_TRUE, SDL_MapRGB(Superficie->format, 0, 0xFF, 0xFF));
-
-	//Creación de la textura sobre la superficie
-	SDL_Texture* texturaSprite = SDL_CreateTextureFromSurface(renderer, Superficie);
+	capasVista = Parser::getInstancia().getCapas();
 
 	//Parametros de la ventana
 	int anchoVentanaPx = ventanaVista.getAnchoPx();

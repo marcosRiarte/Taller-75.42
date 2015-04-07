@@ -15,6 +15,11 @@ private:
 	SDL_Window* ventana;
 	SDL_Renderer* renderer;
 	std::string rutaImagen;
+	SDL_Surface* Superficie;
+	SDL_Texture* texturaSprite;
+	std::string dirImgPersonaje;
+
+	std::vector<Capa*> capasVista;
 	int numeroDeCuadro;
 	std::vector<SDL_Rect*>* listaDeCuadros;
 	//std::vector<Capa*> capasDeTextura;
