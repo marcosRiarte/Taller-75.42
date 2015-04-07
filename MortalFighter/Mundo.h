@@ -16,7 +16,7 @@ public:
 	Mundo(const vector2D& valorGravedad);
 	void agregarCuerpo(Cuerpo *unCuerpo);
 	void Paso(float difTiempo, MOV_TIPO movimiento);
-	void Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento);
+	ESTADO Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento);
 	float getYPiso() const;
 
 

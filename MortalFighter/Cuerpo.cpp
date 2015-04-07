@@ -56,7 +56,7 @@ void Cuerpo::recibeObservador(Personaje* unObservador)
 	observador = unObservador;
 }
 
-void Cuerpo::notificarObservadores()
+void Cuerpo::notificarObservadores(ESTADO nuevoEstado)
 {
-	observador->actualizar(posicion.x, posicion.y);
+	observador->actualizar(posicion.x, posicion.y, nuevoEstado);
 }

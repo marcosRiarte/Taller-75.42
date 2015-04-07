@@ -11,7 +11,7 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	alto = altoPersonaje;
 	zIndex = zIndexPersonaje;
 	energy = 100;
-	Sprites sprites = Sprites(spritesPersonaje); //Creo la clase sprites con el path del personaje
+	sprites = new Sprites(spritesPersonaje); //Creo la clase sprites con el path del personaje
 }
 
 float Personaje::getAncho() const
@@ -29,9 +29,9 @@ int Personaje::getZIndex()
 	return zIndex;
 }
 
- Sprites Personaje::getSprites() 
+ Sprites& Personaje::getSprites() const
 {
-	return sprites;
+	return *sprites;
 }
 
 std::pair<int, int> Personaje::getPosicionPx() const
@@ -53,9 +53,20 @@ void Personaje::setPosicionUn(float x, float y)
 	posicionUn = std::make_pair(x, y);
 }
 
-void Personaje::actualizar(float xNuevo, float yNuevo)
+ESTADO Personaje::getEstado() const
+{
+	return estadoActual;
+}
+
+void Personaje::setEstado(ESTADO nuevoEstado)
+{
+	estadoActual = nuevoEstado;
+}
+
+void Personaje::actualizar(float xNuevo, float yNuevo, ESTADO nuevoEstado)
 {
 	setPosicionUn(xNuevo, yNuevo);
+	setEstado(nuevoEstado);
 }
 
 

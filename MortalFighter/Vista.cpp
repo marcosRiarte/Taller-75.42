@@ -41,7 +41,7 @@ Vista::Vista()
 }
 
 
-void Vista::actualizar(MOV_TIPO movimiento, enum ESTADO estadoPersonaje){
+void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 
 	// poner sprites...
 	std::string dirImgPersonaje = Parser::getInstancia().getPersonaje().getSprites().getPath();

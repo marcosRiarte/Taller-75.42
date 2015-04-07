@@ -24,38 +24,54 @@ void Mundo::Paso(float difTiempo, MOV_TIPO movimiento)
 {
 	for (unsigned int i = 0; i < Cuerpos.size(); i++)
 	{
-		Cuerpos.at(i)->notificarObservadores();
-		Resolver(difTiempo, Cuerpos.at(i), movimiento);
+		Cuerpos.at(i)->notificarObservadores(Resolver(difTiempo, Cuerpos.at(i), movimiento));
 	}
 }
 
-void Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento)
+ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento)
 {
+	ESTADO nuevoEstado = QUIETODER;
 	/// integra velocidad, para salto, 
 	// si no está en el piso siente la gravedad
 	if (!unCuerpo->estaEnPiso())
 		unCuerpo->sumarVelocidad(gravedad * difTiempo);
-
-	//TODO: chequear bordes piso,etc
-	if (movimiento == DER && unCuerpo->estaEnPiso())
+	
+	if (movimiento == DER && unCuerpo->estaEnPiso()) {
 		unCuerpo->mover(DISTANCIA);
+		nuevoEstado = DER_DER;
+	}
 
-	if (movimiento == IZQ && unCuerpo->estaEnPiso())
+	if (movimiento == IZQ && unCuerpo->estaEnPiso()){
 		unCuerpo->mover(-DISTANCIA);
+		nuevoEstado = IZQ_DER;
+	}
 
-	if (movimiento == ARRIBA && unCuerpo->estaEnPiso())
+	if (movimiento == ARRIBA && unCuerpo->estaEnPiso()){
 		unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
+		nuevoEstado = ARRIBA_DER;
+	}
 
-	if (movimiento == SALTODER && unCuerpo->estaEnPiso())
+	if (movimiento == SALTODER && unCuerpo->estaEnPiso()){
 		unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
+		nuevoEstado = SALTODER_DER;
+	}
 
-	if (movimiento == SALTOIZQ && unCuerpo->estaEnPiso())
+	if (movimiento == SALTOIZQ && unCuerpo->estaEnPiso()){
 		unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
+		nuevoEstado = SALTOIZQ_DER;
+	}
+
+	//TODO: falta esta parte...
+	// si el oponente está a izq voltear estados, abusando del enum
+	//if (oponenteAIzq())
+	//	nuevoEstado += 1;
 
 	vector2D unaVelocidad = unCuerpo->getVelocidad();
 
 	/// integra posicion	
 	unCuerpo->sumarPosicion(unaVelocidad * difTiempo);
+
+	return nuevoEstado;
 }
 
 float Mundo::getYPiso() const
