@@ -39,7 +39,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	int anchoPxVentana(ventana.get("anchopx",800).asInt());
 	int altoPxVentana(ventana.get("altopx", 600).asInt());
 	float anchoVentana(ventana.get("ancho", 500).asFloat());
-	//Validador::ValidarVentana(&anchoPxVentana, &altoPxVentana, &anchoVentana);
+	Validador::ValidarVentana(&anchoPxVentana, &altoPxVentana, &anchoVentana);
 
 	unaVentana = new Ventana(anchoPxVentana, altoPxVentana, anchoVentana);
 
@@ -48,7 +48,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	float anchoEscenario(escenario.get("ancho", 1000.5).asFloat());
 	float altoEscenario(escenario.get("alto", 150).asFloat());
 	float yPisoEscenario(escenario.get("ypiso", 20).asFloat());
-	//Validador::ValidarEscenario(&anchoEscenario, &altoEscenario, &yPisoEscenario);
+	Validador::ValidarEscenario(&anchoEscenario, &altoEscenario, &yPisoEscenario);
 	unEscenario = new Escenario(anchoEscenario, altoEscenario, yPisoEscenario);
 
 	Json::Value capas;
