@@ -131,7 +131,7 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	else{
 		SDL_RenderCopy(renderer, texturaSprite, cuadroActual, &personaje);
 	}
-
+	
 	//Se cargan las capas posteriores al personaje
 	if ((personajeVista.getZIndex() + 1) < capasVista.size())
 		for (int i = personajeVista.getZIndex() + 1; i < capasVista.size(); i++)

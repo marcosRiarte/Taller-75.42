@@ -5,7 +5,7 @@ class Validador
 {
 public:
 	static void ValidarVentana(int* anchoPxVentana, int* altoPxVentana, float* anchoVentana);
-	static void ValidarCapas(std::vector<Capa*>* Capas);
+	static void ValidarCapas(float* anchoCapas);
 	static void ValidarEscenario(float *anchoEscenario, float *altoEscenario, float* yPisoEscenario);
-	static void ValidarPersonaje(float *ancho, float* alto, float* zindex, std::string* sprites);
+	static void ValidarPersonaje(float *ancho, float* alto, int* zindex, std::string* sprites);
 };

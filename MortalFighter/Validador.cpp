@@ -31,8 +31,13 @@ void Validador::ValidarVentana(int* anchoPxVentana, int* altoPxVentana, float* a
 	}
 }
 
-void Validador::ValidarCapas(std::vector<Capa*>* Capas){
-
+void Validador::ValidarCapas(float *anchoCapa){
+	if (!(*anchoCapa > 0)){
+		std::string mensaje = "ancho de Capa fuera de rango, se toma ancho por defecto";
+		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+		*anchoCapa = 500;
+	}
+		
 }
 
 void Validador::ValidarEscenario(float *anchoEscenario, float *altoEscenario, float* yPisoEscenario){
@@ -53,6 +58,25 @@ void Validador::ValidarEscenario(float *anchoEscenario, float *altoEscenario, fl
 	}
 }
 
-void Validador::ValidarPersonaje(float *ancho, float* alto, float* zindex, std::string* sprites){
-
+void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::string* sprites){
+	if (!(*ancho > 0)) {
+		std::string mensaje = "ancho del Personaje fuera de rango, se toma ancho por defecto";
+		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+		*ancho = 23.5;
+	}
+	if (!(*alto > 0)) {
+		std::string mensaje = "alto del Personaje fuera de rango, se toma alto por defecto";
+		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+		*alto = 49;
+	}
+	if (!(*zindex > 0)) {
+		std::string mensaje = "zindex del Personaje fuera de rango, se toma zindex por defecto";
+		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+		*zindex = 1;
+	}
+	if (!(*sprites == "")) {
+		std::string mensaje = "string de sprites vacio, se toma sprites por defecto";
+		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+		*sprites = "mario2.png";
+	}
 }

@@ -14,3 +14,7 @@
 2015-04-05.20:28:16 [WARNING] alto del Escenario fuera de rango, se toma alto por defecto
 2015-04-05.20:28:16 [WARNING] yPiso del Escenario fuera de rango, se yPiso por defecto
 
+---------------------------------------------------------------------------------
+
+2015-04-07.18:26:44 [WARNING] string de sprites vacio, se toma sprites por defecto
+
