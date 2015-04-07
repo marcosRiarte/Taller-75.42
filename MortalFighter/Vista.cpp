@@ -43,22 +43,27 @@ Vista::Vista()
 
 void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 
+	// referencias más utilizadas al actualizar la vista
+	Personaje personajeVista = Parser::getInstancia().getPersonaje();
+	Ventana ventanaVista = Parser::getInstancia().getVentana();
+	std::vector<Capa*> capasVista = Parser::getInstancia().getCapas();
+
 	// poner sprites...
-	std::string dirImgPersonaje = Parser::getInstancia().getPersonaje().getSprites().getPath();
+	std::string dirImgPersonaje = personajeVista.getSprites().getPath();
 	SDL_Texture *imgPersonaje = IMG_LoadTexture(renderer, dirImgPersonaje.c_str());
 
 	// Parametros de la ventana
-	int anchoVentanaPx = Parser::getInstancia().getVentana().getAnchoPx();
-	int altoVentanaPx = Parser::getInstancia().getVentana().getAltoPx();
-	float anchoVentana = Parser::getInstancia().getVentana().getAncho();
+	int anchoVentanaPx = ventanaVista.getAnchoPx();
+	int altoVentanaPx = ventanaVista.getAltoPx();
+	float anchoVentana = ventanaVista.getAncho();
 
 	// Parametros del personaje
-	int anchoPjPx = manejadorULog.darLongPixels(Parser::getInstancia().getPersonaje().getAncho());
-	int anchoPj = Parser::getInstancia().getPersonaje().getAncho();
-	int altoPjPx = manejadorULog.darLongPixels(Parser::getInstancia().getPersonaje().getAlto());
-	float xPjUn = Parser::getInstancia().getPersonaje().getPosicionUn().first;
-	int xPjPx = Parser::getInstancia().getPersonaje().getPosicionPx().first;
-	int yPjPx = Parser::getInstancia().getPersonaje().getPosicionPx().second;
+	int anchoPjPx = manejadorULog.darLongPixels(personajeVista.getAncho());
+	int anchoPj = personajeVista.getAncho();
+	int altoPjPx = manejadorULog.darLongPixels(personajeVista.getAlto());
+	float xPjUn = personajeVista.getPosicionUn().first;
+	int xPjPx = personajeVista.getPosicionPx().first;
+	int yPjPx = personajeVista.getPosicionPx().second;
 
 	SDL_Rect camara;
 	camara = { 0, 0, anchoVentanaPx, altoVentanaPx };
@@ -70,10 +75,8 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	SDL_RenderClear(renderer);
 
 	// condicion de borde
-	if ((xPjUn + anchoPj > anchoVentana - camaraXLog) && (movimiento == DER || movimiento == QUIETO))
-		camaraXLog -= DISTANCIA;
-	if ((xPjUn < -camaraXLog) && (movimiento == IZQ ))
-		camaraXLog += DISTANCIA;
+	if ((xPjUn + anchoPj > anchoVentana - camaraXLog) || (xPjUn < -camaraXLog))
+		camaraXLog += personajeVista.getDeltaX();
 
 	// Posicion x del personaje dentro de la camara
 	float xLogPjEnCamara = xPjUn + camaraXLog;
@@ -85,14 +88,14 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	personaje.h = altoPjPx;
 	
 	//Se cargan las capas anteriores al personaje
-	for (int i = 0; i <= Parser::getInstancia().getPersonaje().getZIndex(); i++)
+	for (int i = 0; i <= personajeVista.getZIndex(); i++)
 	{
-		float anchoCapa = Parser::getInstancia().getCapas().at(i)->getAncho();
+		float anchoCapa = capasVista.at(i)->getAncho();
 		camara.w = manejadorULog.darLongPixels(anchoCapa);
 		// donde toma la camara a la capa parametrizado con el ancho del escenario	
 		camara.x = manejadorULog.darLongPixels((camaraXLog)*(anchoCapa - anchoVentana) / anchoEscenario);
 		
-		SDL_RenderCopy(renderer, Parser::getInstancia().getCapas().at(i)->getTexturaSDL(), NULL, &camara);
+		SDL_RenderCopy(renderer, capasVista.at(i)->getTexturaSDL(), NULL, &camara);
 	}
 	
 	//Se carga el personaje
@@ -100,14 +103,14 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 
 
 	//Se cargan las capas posteriores al personaje
-	if ((Parser::getInstancia().getPersonaje().getZIndex() + 1) < Parser::getInstancia().getCapas().size())
-		for (int i = Parser::getInstancia().getPersonaje().getZIndex() + 1; i < Parser::getInstancia().getCapas().size(); i++)
+	if ((personajeVista.getZIndex() + 1) < capasVista.size())
+		for (int i = personajeVista.getZIndex() + 1; i < capasVista.size(); i++)
 	{
-		float anchoCapa = Parser::getInstancia().getCapas().at(i)->getAncho();
+		float anchoCapa = capasVista.at(i)->getAncho();
 		camara.w = manejadorULog.darLongPixels(anchoCapa);
 		// donde toma la camara a la capa parametrizado con el ancho del escenario
 		camara.x = manejadorULog.darLongPixels((camaraXLog)*(anchoCapa - anchoVentana) / anchoEscenario);
-		SDL_RenderCopy(renderer, Parser::getInstancia().getCapas().at(i)->getTexturaSDL(), NULL, &camara);
+		SDL_RenderCopy(renderer, capasVista.at(i)->getTexturaSDL(), NULL, &camara);
 	}
 
 	//Se actualiza la pantalla

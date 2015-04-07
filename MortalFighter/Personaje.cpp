@@ -53,6 +53,11 @@ void Personaje::setPosicionUn(float x, float y)
 	posicionUn = std::make_pair(x, y);
 }
 
+float Personaje::getDeltaX() const
+{
+	return deltaX;
+}
+
 ESTADO Personaje::getEstado() const
 {
 	return estadoActual;
@@ -65,6 +70,7 @@ void Personaje::setEstado(ESTADO nuevoEstado)
 
 void Personaje::actualizar(float xNuevo, float yNuevo, ESTADO nuevoEstado)
 {
+	deltaX = posicionUn.first - xNuevo;
 	setPosicionUn(xNuevo, yNuevo);
 	setEstado(nuevoEstado);
 }

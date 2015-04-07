@@ -19,6 +19,7 @@ public:
 	void setPosicionUn(float x, float y);
 	ESTADO getEstado() const;
 	void setEstado(ESTADO nuevoEstado);
+	float getDeltaX() const;
 	virtual void actualizar(float xNuevo, float yNuevo, ESTADO);	
 	std::pair<float, float> Personaje::getPosicionUn()const;
 	~Personaje();
@@ -30,6 +31,7 @@ private:
 	int energy;
 	Sprites* sprites;
 	std::pair<float, float> posicionUn;
+	float deltaX;
 	ESTADO estadoActual;
 };
 
