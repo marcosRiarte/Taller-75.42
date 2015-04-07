@@ -13,6 +13,7 @@ public:
 	float getAncho() const;
 	float getAlto() const;
 	int getZIndex() ;
+	std::string getOrientacion() const;
 	std::string getSprite() const;
 	std::pair<int, int> getPosicionPx() const;
 	void setPosicionUn(float x, float y);
