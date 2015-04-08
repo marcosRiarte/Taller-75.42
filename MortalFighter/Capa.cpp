@@ -30,4 +30,5 @@ SDL_Texture* Capa::getTexturaSDL()
 
 Capa::~Capa()
 {
+	SDL_DestroyTexture(texturaSDL);
 }
