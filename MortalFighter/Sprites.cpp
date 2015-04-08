@@ -45,3 +45,16 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 	if ((unEstado == ESTADO::QUIETODER) || (unEstado == ESTADO::QUIETOIZQ)) { return QuietoDer; }
 	return QuietoDer;
 }
+
+Sprite::~Sprite()
+{
+	delete CayendoDer;
+	delete SaltandoDer;
+	delete CaminandoDer;
+	delete QuietoDer;
+	
+}
+
+
+	
+
