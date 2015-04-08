@@ -36,29 +36,34 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento)
 	if (!unCuerpo->estaEnPiso())
 		unCuerpo->sumarVelocidad(gravedad * difTiempo);
 	
-	if (movimiento == DER && unCuerpo->estaEnPiso()) {
-		unCuerpo->mover(DISTANCIA);	
+	if (movimiento == DER) {
 		nuevoEstado = DER_DER;
+		if (unCuerpo->estaEnPiso())
+			unCuerpo->mover(DISTANCIA);			
 	}
 
-	if (movimiento == IZQ && unCuerpo->estaEnPiso()){
-		unCuerpo->mover(-DISTANCIA);
+	if (movimiento == IZQ){
 		nuevoEstado = IZQ_DER;
+		if (unCuerpo->estaEnPiso())
+			unCuerpo->mover(-DISTANCIA);		
 	}
 
-	if (movimiento == ARRIBA && unCuerpo->estaEnPiso()){
-		unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
+	if (movimiento == ARRIBA){	
 		nuevoEstado = ARRIBA_DER;
+		if (unCuerpo->estaEnPiso())
+			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));		
 	}
 
-	if (movimiento == SALTODER && unCuerpo->estaEnPiso()){
-		unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
+	if (movimiento == SALTODER){
 		nuevoEstado = SALTODER_DER;
+		if (unCuerpo->estaEnPiso())
+			unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));		
 	}
 
-	if (movimiento == SALTOIZQ && unCuerpo->estaEnPiso()){
-		unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
+	if (movimiento == SALTOIZQ){
 		nuevoEstado = SALTOIZQ_DER;
+		if (unCuerpo->estaEnPiso())
+			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));		
 	}
 
 	//TODO: falta esta parte...

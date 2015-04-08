@@ -542,3 +542,21 @@
 2015-04-08.11:08:15 [DEBUG] Se cargaron valores del personaje correctamente
 2015-04-08.11:08:15 [WARNING] string de sprites vacio, se toma sprites por defecto
 
+---------------------------------------------------------------------------------
+
+2015-04-08.11:11:46 [DEBUG] Parseo del archivo json correcto
+2015-04-08.11:11:46 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-08.11:11:46 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-08.11:11:46 [DEBUG] Se cargaron capas correctamente
+2015-04-08.11:11:46 [DEBUG] Se cargaron valores del personaje correctamente
+2015-04-08.11:11:46 [WARNING] string de sprites vacio, se toma sprites por defecto
+
+---------------------------------------------------------------------------------
+
+2015-04-08.11:43:07 [DEBUG] Parseo del archivo json correcto
+2015-04-08.11:43:07 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-08.11:43:07 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-08.11:43:07 [DEBUG] Se cargaron capas correctamente
+2015-04-08.11:43:07 [DEBUG] Se cargaron valores del personaje correctamente
+2015-04-08.11:43:07 [WARNING] string de sprites vacio, se toma sprites por defecto
+
