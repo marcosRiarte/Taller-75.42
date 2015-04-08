@@ -6,6 +6,23 @@
 #include "Log.h"
 #include "Validador.h"
 
+#define ANCHO_PX_VENTANA 800
+#define ALTO_PX_VENTANA 600
+#define ANCHO_VENTANA 500.0f
+
+#define ANCHO_ESCENARIO 1000.5f
+#define ALTO_ESCENARIO 150.0f
+#define Y_PISO_ESCENARIO 20.0f
+
+#define ANCHO_CAPA 500.0f
+
+#define ANCHO_PERSONAJE 20.0f
+#define ALTO_PERSONAJE 30.0f
+#define ZINDEX 1
+#define ORIENTACION_PERSONAJE "DER"
+#define SPRITE_DEFAULT "SpriteSheet.png"
+#define FONDO_DEFAULT "fondo1.png"
+
 class Parser
 {
 public:	
