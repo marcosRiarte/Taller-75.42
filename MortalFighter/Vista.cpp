@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Vista.h"
 #include "Mundo.h"
+#include "Log.h"
 
 Vista::Vista()
 {	
@@ -9,7 +10,10 @@ Vista::Vista()
 	IMG_Init(IMG_INIT_PNG);
 		ventana = SDL_CreateWindow("Mortal Fighter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Parser::getInstancia().getVentana().getAnchoPx(), Parser::getInstancia().getVentana().getAltoPx(), SDL_WINDOW_SHOWN);
 		if (ventana == nullptr){
-			std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
+			std::string mensaje = "SDL_CreateWindow Error: ";
+			const char* elError = SDL_GetError();
+			mensaje += elError;
+			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
 			SDL_Quit();
 			return;
 		}
@@ -17,7 +21,10 @@ Vista::Vista()
 		renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
 			if (renderer == nullptr){
 				SDL_DestroyWindow(ventana);
-				std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
+				std::string mensaje = "SDL_CreateRenderer Error: ";
+				const char* elError = SDL_GetError();
+				mensaje += elError;
+				Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
 				SDL_Quit();
 				return;
 			}			
@@ -29,7 +36,10 @@ Vista::Vista()
 			SDL_Texture *tex = IMG_LoadTexture(renderer, imgFondo.c_str());
 
 			if (tex == nullptr){				
-				std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;					
+				std::string mensaje = "SDL_CreateTextureFromSurface Error: ";
+				const char* elError = SDL_GetError();
+				mensaje += elError;
+				Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
 				return;
 			}
 
