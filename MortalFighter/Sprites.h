@@ -13,4 +13,5 @@ private:
 public:
 	Sprite();
 	std::vector<SDL_Rect*>* listaDeCuadros(ESTADO unEstado);
+	~Sprite();
 };
