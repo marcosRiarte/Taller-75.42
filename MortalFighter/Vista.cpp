@@ -66,7 +66,7 @@ Vista::Vista()
 		Superficie = IMG_Load(dirImgPersonaje.c_str());
 
 		//Seteo del color
-		SDL_SetColorKey(Superficie, SDL_TRUE, SDL_MapRGB(Superficie->format, 0, 0xFF, 0xFF));
+		//SDL_SetColorKey(Superficie, SDL_TRUE, SDL_MapRGB(Superficie->format, 0, 0xFF, 0xFF));
 
 
 		//Creación de la textura sobre la superficie
@@ -89,7 +89,7 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 
 	//Parametros del personaje
 	int anchoPjPx = manejadorULog.darLongPixels(personajeVista.getAncho());
-	int anchoPj = personajeVista.getAncho();
+	float anchoPj = personajeVista.getAncho();
 	int altoPjPx = manejadorULog.darLongPixels(personajeVista.getAlto());
 	float xPjUn = personajeVista.getPosicionUn().first;
 	int xPjPx = personajeVista.getPosicionPx().first;
@@ -144,8 +144,8 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	}
 
 	//Se cargan las capas posteriores al personaje
-	if ((personajeVista.getZIndex() + 1) < capasVista.size())
-		for (int i = personajeVista.getZIndex() + 1; i < capasVista.size(); i++)
+	if ((personajeVista.getZIndex() + 1) < (int)capasVista.size())
+		for (int i = personajeVista.getZIndex() + 1; i < (int)capasVista.size(); i++)
 		{
 			float anchoCapa = capasVista.at(i)->getAncho();
 			camara.w = manejadorULog.darLongPixels(anchoCapa);

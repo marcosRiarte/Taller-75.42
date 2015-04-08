@@ -52,10 +52,10 @@ MOV_TIPO Controlador::cambiar(){
 		return IZQ;
 	}
 
-	if (state[SDL_SCANCODE_UP]){
+	/*if (state[SDL_SCANCODE_UP]){
 		if ((state[SDL_SCANCODE_RIGHT]) || (state[SDL_SCANCODE_LEFT]) || (state[SDL_SCANCODE_DOWN])) return QUIETO;
 		return ARRIBA;
-	}
+	}*/
 
 	if (state[SDL_SCANCODE_DOWN]){
 		if ((state[SDL_SCANCODE_RIGHT]) || (state[SDL_SCANCODE_LEFT])) return ABAJO;

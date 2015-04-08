@@ -27,7 +27,7 @@ struct ManejadorULogicas
 
 	int darLongPixels(float uLogicas)
 	{
-		return uLogicas*relacion;
+		return (int)trunc(uLogicas*relacion);
 	}
 		
 
