@@ -31,18 +31,21 @@ Sprite::Sprite(){
 	this->CaminandoDer->push_back(crearCuadro(657, 333, 50, 81));
 
 	//salto
-	this->SaltandoDer->push_back(crearCuadro(21, 249, 64, 64));
-	this->SaltandoDer->push_back(crearCuadro(109, 228, 58, 86));
+	this->SaltandoDer->push_back(crearCuadro(19, 247, 68, 68));
 
 	//caida del salto
-	this->CayendoDer->push_back(crearCuadro(109, 228, 58, 86));
+	this->CayendoDer->push_back(crearCuadro(107, 226, 62, 90));
 }
 
 std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
-	if ((unEstado == ESTADO::IZQ_IZQ) || (unEstado == ESTADO::DER_DER) || (unEstado == ESTADO::DER_IZQ) || (unEstado == ESTADO::IZQ_DER)){ return CaminandoDer; }
-	if ((unEstado == ESTADO::ARRIBA_IZQ) || (unEstado == ESTADO::ARRIBA_DER) || (unEstado == ESTADO::SALTODER_DER) || (unEstado == ESTADO::SALTODER_IZQ) || (unEstado == ESTADO::SALTOIZQ_DER) || (unEstado == ESTADO::SALTOIZQ_IZQ)){ return SaltandoDer; }
-	if ((unEstado == ESTADO::ABAJO_IZQ) || (unEstado == ESTADO::ABAJO_DER)){ return CayendoDer; }
-	if ((unEstado == ESTADO::QUIETODER) || (unEstado == ESTADO::QUIETOIZQ)) { return QuietoDer; }
+	if ((unEstado == ESTADO::IZQ_IZQ) || (unEstado == ESTADO::DER_DER) || (unEstado == ESTADO::DER_IZQ) || (unEstado == ESTADO::IZQ_DER)){ 
+		return CaminandoDer; }
+	if ((unEstado == ESTADO::ARRIBA_IZQ) || (unEstado == ESTADO::ARRIBA_DER) || (unEstado == ESTADO::SALTODER_DER) || (unEstado == ESTADO::SALTODER_IZQ) || (unEstado == ESTADO::SALTOIZQ_DER) || (unEstado == ESTADO::SALTOIZQ_IZQ)){
+		return SaltandoDer; }
+	if ((unEstado == ESTADO::ABAJO_IZQ) || (unEstado == ESTADO::ABAJO_DER)){
+		return CayendoDer; }
+	if ((unEstado == ESTADO::QUIETODER) || (unEstado == ESTADO::QUIETOIZQ)) { 
+		return QuietoDer; }
 	return QuietoDer;
 }
 
