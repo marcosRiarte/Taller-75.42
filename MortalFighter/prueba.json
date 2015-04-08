@@ -21,8 +21,8 @@
 
     ],
     "personaje": {
-        "ancho": 29,
-        "alto": 45,
+        "ancho": 40,
+        "alto": 60,
         "zindex": 1,
         "orientacion": "DER",
         "sprites": "goro.png"

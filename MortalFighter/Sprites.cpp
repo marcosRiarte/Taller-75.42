@@ -66,7 +66,6 @@ Sprite::~Sprite()
 	delete SaltandoDer;
 	delete CaminandoDer;
 	delete QuietoDer;
-	
 }
 
 

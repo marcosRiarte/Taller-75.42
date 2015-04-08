@@ -132,9 +132,6 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	listaDeCuadros = elSprite->listaDeCuadros(estadoPersonaje);
 	numeroDeCuadro++;
 
-	if ((estadoPersonaje == ESTADO::QUIETODER) || (estadoPersonaje == ESTADO::QUIETOIZQ))
-		numeroDeCuadro = 0;
-
 	if ((numeroDeCuadro / (listaDeCuadros->size()))> (listaDeCuadros->size() - 1))
 		numeroDeCuadro = 0;
 
