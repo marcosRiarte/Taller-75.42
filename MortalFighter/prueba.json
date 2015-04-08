@@ -25,6 +25,6 @@
         "alto": 45,
         "zindex": 1,
         "orientacion": "DER",
-        "sprites": "mario2.png"
+        "sprites": "goro.png"
     }
 }

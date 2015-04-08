@@ -18,23 +18,34 @@ Sprite::Sprite(){
 	this->QuietoDer = new std::vector<SDL_Rect*>();
 
 	//Quieto
-	this->QuietoDer->push_back(crearCuadro(32, 28, 56, 81));
+	this->QuietoDer->push_back(crearCuadro(20, 21, 60, 117));
+	this->QuietoDer->push_back(crearCuadro(90, 21, 71, 117));
+	this->QuietoDer->push_back(crearCuadro(173, 20, 73, 118));
+	this->QuietoDer->push_back(crearCuadro(257, 21, 75, 117));
+	this->QuietoDer->push_back(crearCuadro(344, 21, 66, 117));
+	this->QuietoDer->push_back(crearCuadro(423, 22, 62, 116));
+	this->QuietoDer->push_back(crearCuadro(497, 23, 61, 115));
 
 	//caminar
-	this->CaminandoDer->push_back(crearCuadro(18, 336, 63, 81));
-	this->CaminandoDer->push_back(crearCuadro(113, 333, 65, 83));
-	this->CaminandoDer->push_back(crearCuadro(211, 331, 59, 82));
-	this->CaminandoDer->push_back(crearCuadro(311, 330, 45, 83));
-	this->CaminandoDer->push_back(crearCuadro(386, 329, 57, 85));
-	this->CaminandoDer->push_back(crearCuadro(473, 327, 64, 85));
-	this->CaminandoDer->push_back(crearCuadro(571, 329, 57, 83));
-	this->CaminandoDer->push_back(crearCuadro(657, 333, 50, 81));
+	this->CaminandoDer->push_back(crearCuadro(20, 159, 59, 117));
+	this->CaminandoDer->push_back(crearCuadro(90, 159, 57, 117));
+	this->CaminandoDer->push_back(crearCuadro(158, 158, 54, 118));
+	this->CaminandoDer->push_back(crearCuadro(224, 159, 62, 117));
+	this->CaminandoDer->push_back(crearCuadro(298, 160, 64, 116));
+	this->CaminandoDer->push_back(crearCuadro(375, 157, 58, 119));
+	this->CaminandoDer->push_back(crearCuadro(446, 156, 58, 120));
+	this->CaminandoDer->push_back(crearCuadro(515, 158, 61, 118));
+	this->CaminandoDer->push_back(crearCuadro(587, 162, 65, 114));
 
 	//salto
-	this->SaltandoDer->push_back(crearCuadro(19, 247, 68, 68));
+	this->SaltandoDer->push_back(crearCuadro(708, 161, 68, 115));
 
 	//caida del salto
-	this->CayendoDer->push_back(crearCuadro(107, 226, 62, 90));
+	this->CayendoDer->push_back(crearCuadro(708, 161, 68, 115));
+	this->CayendoDer->push_back(crearCuadro(788, 150, 67, 126));
+	this->CayendoDer->push_back(crearCuadro(866, 170, 64, 106));
+	this->CayendoDer->push_back(crearCuadro(941, 179, 62, 97));
+	this->CayendoDer->push_back(crearCuadro(1014, 188, 64, 88));
 }
 
 std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){

@@ -212,5 +212,8 @@
     <Image Include="mario2.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="goro.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

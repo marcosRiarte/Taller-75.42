@@ -150,6 +150,7 @@
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\Barra_Energia.png" />
     <Image Include="..\..\..\..\Downloads\SpriteSheet.gif.gif" />
+    <Image Include="goro.png" />
     <Image Include="mario.png" />
     <Image Include="mario2.png" />
     <Image Include="The_Pit_II_2.png" />

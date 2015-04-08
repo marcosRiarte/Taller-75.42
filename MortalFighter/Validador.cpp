@@ -79,7 +79,7 @@ void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::st
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*orientacion = "DER";
 	}
-	if (!(*sprites == "")) {
+	if ((*sprites == "")) {
 		std::string mensaje = "string de sprites vacio, se toma sprites por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*sprites = "mario2.png";
