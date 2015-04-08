@@ -130,34 +130,10 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
 	listaDeCuadros = elSprite->listaDeCuadros(estadoPersonaje);
+	numeroDeCuadro++;
 
 	if ((estadoPersonaje == ESTADO::QUIETODER) || (estadoPersonaje == ESTADO::QUIETOIZQ))
 		numeroDeCuadro = 0;
-
-	if ((estadoPersonaje == ESTADO::DER_DER) || (estadoPersonaje == ESTADO::DER_IZQ) || (estadoPersonaje == ESTADO::IZQ_DER) || (estadoPersonaje == ESTADO::IZQ_IZQ)){
-
-		//Siguiente cuadro
-		++numeroDeCuadro;
-		std::cout << numeroDeCuadro << std::endl;
-		//Ciclado de la animación
-		if (numeroDeCuadro / (listaDeCuadros->size()) >= (listaDeCuadros->size())) {
-
-			numeroDeCuadro = 0;
-		}
-
-		if ((estadoPersonaje == ESTADO::ARRIBA_IZQ) || (estadoPersonaje == ESTADO::ARRIBA_DER) || (estadoPersonaje == ESTADO::SALTODER_DER) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_DER) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
-			//Siguiente cuadro
-			++numeroDeCuadro;
-			//Ciclado de la animación
-			if (numeroDeCuadro / (listaDeCuadros->size()) >= (listaDeCuadros->size())) {
-
-				numeroDeCuadro = 0;
-			}
-		}
-
-		if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ABAJO_DER))
-			numeroDeCuadro = 0;
-	}
 
 	if ((numeroDeCuadro / (listaDeCuadros->size()))> (listaDeCuadros->size() - 1))
 		numeroDeCuadro = 0;
