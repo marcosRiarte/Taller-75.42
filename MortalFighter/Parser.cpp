@@ -168,4 +168,10 @@ std::vector<Capa*> Parser::getCapas() const
 
 Parser::~Parser()
 {
+	delete unaVentana;
+	delete  unEscenario;
+	delete unPersonaje;
+	for (size_t i = 0; i < Capas.size(); i++) {
+		delete Capas.at(i);
+	}
 }

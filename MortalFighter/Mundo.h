@@ -19,7 +19,6 @@ public:
 	ESTADO Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento);
 	float getYPiso() const;
 
-
 private:
 	vector2D gravedad;
 	float yPiso;

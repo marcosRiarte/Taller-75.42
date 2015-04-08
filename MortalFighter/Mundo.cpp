@@ -82,4 +82,3 @@ float Mundo::getYPiso() const
 {
 	return yPiso;
 }
-
