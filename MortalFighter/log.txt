@@ -41,3 +41,18 @@
 ---------------------------------------------------------------------------------
 
 2015-04-07.18:57:45 [WARNING] string de sprites vacio, se toma sprites por defecto
+---------------------------------------------------------------------------------
+
+2015-04-07.19:49:20 [WARNING] string de sprites vacio, se toma sprites por defecto
+2015-04-07.19:50:56 [WARNING] string de sprites vacio, se toma sprites por defecto
+
+---------------------------------------------------------------------------------
+
+2015-04-07.19:52:30 [WARNING] string de sprites vacio, se toma sprites por defecto
+2015-04-07.19:52:38 [WARNING] string de sprites vacio, se toma sprites por defecto
+
+---------------------------------------------------------------------------------
+
+2015-04-07.19:53:45 [WARNING] string de sprites vacio, se toma sprites por defecto
+2015-04-07.19:53:52 [WARNING] string de sprites vacio, se toma sprites por defecto
+
