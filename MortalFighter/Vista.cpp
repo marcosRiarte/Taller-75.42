@@ -140,7 +140,7 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 		++numeroDeCuadro;
 		std::cout << numeroDeCuadro << std::endl;
 		//Ciclado de la animación
-		if (numeroDeCuadro / 8 >= 8) {
+		if (numeroDeCuadro / (listaDeCuadros->size()) >= (listaDeCuadros->size())) {
 
 			numeroDeCuadro = 0;
 		}
@@ -149,7 +149,7 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 			//Siguiente cuadro
 			++numeroDeCuadro;
 			//Ciclado de la animación
-			if (numeroDeCuadro / 2 >= 2) {
+			if (numeroDeCuadro / (listaDeCuadros->size()) >= (listaDeCuadros->size())) {
 
 				numeroDeCuadro = 0;
 			}
@@ -159,8 +159,12 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 			numeroDeCuadro = 0;
 	}
 
+	if ((numeroDeCuadro / (listaDeCuadros->size()))> (listaDeCuadros->size() - 1))
+		numeroDeCuadro = 0;
+
 	//Renderizar el sprite
 		SDL_Rect* cuadroActual = listaDeCuadros->at(numeroDeCuadro / (listaDeCuadros->size()));
+		
 
 		//Se carga el personaje
 		if (("IZQ" == Parser::getInstancia().getPersonaje().getOrientacion())){

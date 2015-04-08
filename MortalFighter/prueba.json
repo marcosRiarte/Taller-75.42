@@ -24,7 +24,7 @@
         "ancho": 29,
         "alto": 45,
         "zindex": 1,
-        "orientacion": "IZQ",
+        "orientacion": "DER",
         "sprites": "mario2.png"
     }
 }
