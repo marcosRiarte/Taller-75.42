@@ -40,7 +40,13 @@ int _tmain(int argc, _TCHAR* argv[])
 			SDL_Delay(30);
 
 		}
+		delete unaVista;
+		delete unMundo;
+		delete unCuerpo;
+		SDL_Quit();
 	}
+
+
 
 	return 0;
 }
