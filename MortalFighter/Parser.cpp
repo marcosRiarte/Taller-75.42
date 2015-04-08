@@ -135,8 +135,8 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		ancho = (personaje.get("ancho", 20).asFloat());
 		alto = (personaje.get("alto", 35).asFloat());
 		zIndex = (personaje.get("zindex", 1).asInt());
-		std::string sprites(personaje.get("sprites", SPRITE_DEFAULT).asString());
-		std::string orientacion(personaje.get("orientacion", ORIENTACION_PERSONAJE).asString());
+		sprites = (personaje.get("sprites", SPRITE_DEFAULT).asString());
+		orientacion = (personaje.get("orientacion", ORIENTACION_PERSONAJE).asString());
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje correctamente", Log::MODO_DEBUG);
 	}
 	Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites);
