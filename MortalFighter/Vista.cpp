@@ -131,17 +131,44 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
 	listaDeCuadros = elSprite->listaDeCuadros(estadoPersonaje);
 
-	//Renderizar el sprite
-	SDL_Rect* cuadroActual = listaDeCuadros->at(numeroDeCuadro / (listaDeCuadros->size()));
-	std::cout << (numeroDeCuadro / (listaDeCuadros->size())) << std::endl;
+	if ((estadoPersonaje == ESTADO::QUIETODER) || (estadoPersonaje == ESTADO::QUIETOIZQ))
+		numeroDeCuadro = 0;
 
-	//Se carga el personaje
-	if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ARRIBA_IZQ) || (estadoPersonaje == ESTADO::DER_IZQ) || (estadoPersonaje == ESTADO::IZQ_IZQ) || (estadoPersonaje == ESTADO::QUIETOIZQ) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
+	if ((estadoPersonaje == ESTADO::DER_DER) || (estadoPersonaje == ESTADO::DER_IZQ) || (estadoPersonaje == ESTADO::IZQ_DER) || (estadoPersonaje == ESTADO::IZQ_IZQ)){
+
+		//Siguiente cuadro
+		++numeroDeCuadro;
+		std::cout << numeroDeCuadro << std::endl;
+		//Ciclado de la animación
+		if (numeroDeCuadro / 8 >= 8) {
+
+			numeroDeCuadro = 0;
+		}
+
+		if ((estadoPersonaje == ESTADO::ARRIBA_IZQ) || (estadoPersonaje == ESTADO::ARRIBA_DER) || (estadoPersonaje == ESTADO::SALTODER_DER) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_DER) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
+			//Siguiente cuadro
+			++numeroDeCuadro;
+			//Ciclado de la animación
+			if (numeroDeCuadro / 2 >= 2) {
+
+				numeroDeCuadro = 0;
+			}
+		}
+
+		if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ABAJO_DER))
+			numeroDeCuadro = 0;
+	}
+
+	//Renderizar el sprite
+		SDL_Rect* cuadroActual = listaDeCuadros->at(numeroDeCuadro / (listaDeCuadros->size()));
+
+		//Se carga el personaje
+		if (("IZQ" == Parser::getInstancia().getPersonaje().getOrientacion())){
 		SDL_RenderCopyEx(renderer, texturaSprite, cuadroActual, &personaje, 0, NULL, SDL_FLIP_HORIZONTAL);
-	}
-	else{
+		}
+		else{
 		SDL_RenderCopy(renderer, texturaSprite, cuadroActual, &personaje);
-	}
+		}
 
 	//Se cargan las capas posteriores al personaje
 	if ((personajeVista.getZIndex() + 1) < (int)capasVista.size())
@@ -157,34 +184,7 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	//Se actualiza la pantalla
 	SDL_RenderPresent(renderer);
 
-	if ((estadoPersonaje == ESTADO::QUIETODER) || (estadoPersonaje == ESTADO::QUIETOIZQ))
-		numeroDeCuadro = 0;
 
-	if ((estadoPersonaje == ESTADO::DER_DER) || (estadoPersonaje == ESTADO::DER_IZQ) || (estadoPersonaje == ESTADO::IZQ_DER) || (estadoPersonaje == ESTADO::IZQ_IZQ)){
-		/*
-		//Siguiente cuadro
-		++numeroDeCuadro;
-		std::cout << numeroDeCuadro << std::endl;
-		//Ciclado de la animación
-		if (numeroDeCuadro / 8 >= 8) {
-		*/
-			numeroDeCuadro = 0;
-		//}
-
-		if ((estadoPersonaje == ESTADO::ARRIBA_IZQ) || (estadoPersonaje == ESTADO::ARRIBA_DER) || (estadoPersonaje == ESTADO::SALTODER_DER) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_DER) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
-			/*//Siguiente cuadro
-			++numeroDeCuadro;
-			//Ciclado de la animación
-			if (numeroDeCuadro / 6 >= 6) {
-			*/
-			numeroDeCuadro = 0;
-			//}
-		}
-
-		if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ABAJO_DER))
-			numeroDeCuadro = 0;
-
-	}
 }
 
 Vista::~Vista()
