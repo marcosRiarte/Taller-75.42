@@ -6,7 +6,6 @@ Parser& Parser::getInstancia() {
 	// Se garantiza que será destruido.
 	// Se instancia en el primer uso.
 	return instancia;
-
 }
 
 Parser::Parser() { }
@@ -166,12 +165,17 @@ std::vector<Capa*> Parser::getCapas() const
 
 }
 
+void Parser::FreeInstancia()
+{
+	delete getInstancia().unaVentana;
+	delete  getInstancia().unEscenario;
+	delete getInstancia().unPersonaje;
+	for (size_t i = 0; i < getInstancia().Capas.size(); i++) {
+		delete getInstancia().Capas.at(i);		
+	}
+	getInstancia().Capas.clear();
+}
+
 Parser::~Parser()
 {
-	delete unaVentana;
-	delete  unEscenario;
-	delete unPersonaje;
-	for (size_t i = 0; i < Capas.size(); i++) {
-		delete Capas.at(i);
-	}
 }

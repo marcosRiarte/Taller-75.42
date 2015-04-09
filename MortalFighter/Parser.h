@@ -36,20 +36,17 @@ public:
 
 	static void FreeInstancia();
 
-private:
+private:	
 	//Constructor privado
 	explicit Parser();
-
+	
 	std::vector<Capa*> Capas;
 	Personaje* unPersonaje;
 	Ventana* unaVentana;
 	Escenario* unEscenario;
 
-	
 	virtual ~Parser();
 
-
 	Parser(Parser const&) = delete;
-	void operator =(Parser const&) = delete;
-
+	void operator =(Parser const&) = delete;	
 };

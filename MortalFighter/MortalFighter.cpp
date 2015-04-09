@@ -11,7 +11,7 @@
 
 //int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 int _tmain(int argc, _TCHAR* argv[])
-{
+{	
 	MOV_TIPO movimiento = RECARGAR;
 	while (movimiento == RECARGAR){
 		std::string nombreArchivo("prueba.json");
@@ -43,6 +43,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		delete unaVista;
 		delete unMundo;
 		delete unCuerpo;
+		Parser::FreeInstancia();
 		SDL_Quit();
 	}
 
