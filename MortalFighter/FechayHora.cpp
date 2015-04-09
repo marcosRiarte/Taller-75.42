@@ -32,6 +32,11 @@ const std::string FechayHora::obtenerFechayHoraActual(){
 }
 
 FechayHora::~FechayHora()
+{	
+}
+
+void FechayHora::borrarUnicaInstacia()
 {
 	delete unicaInstancia;
+	unicaInstancia = NULL;
 }

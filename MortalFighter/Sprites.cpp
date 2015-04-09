@@ -62,9 +62,24 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 
 Sprite::~Sprite()
 {
+	for (size_t i = 0; i < CayendoDer->size(); i++) 
+		delete CayendoDer->at(i);
+	CayendoDer->clear();
 	delete CayendoDer;
+
+	for (size_t i = 0; i < SaltandoDer->size(); i++)
+		delete SaltandoDer->at(i);
+	SaltandoDer->clear();
 	delete SaltandoDer;
+
+	for (size_t i = 0; i < CaminandoDer->size(); i++)
+		delete CaminandoDer->at(i);
+	CaminandoDer->clear();
 	delete CaminandoDer;
+
+	for (size_t i = 0; i < QuietoDer->size(); i++)
+		delete QuietoDer->at(i);
+	QuietoDer->clear();
 	delete QuietoDer;
 }
 

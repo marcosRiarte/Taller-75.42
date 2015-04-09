@@ -73,5 +73,6 @@ Log::~Log(){
 		archivoLog << "\n";
 		archivoLog.close();
 	}
+	FechayHora::obtenerUnicaInstancia()->borrarUnicaInstacia();
 
 }

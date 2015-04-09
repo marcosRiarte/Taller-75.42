@@ -9,10 +9,11 @@ class FechayHora {
 		static FechayHora* unicaInstancia;
 
 		FechayHora();
+		~FechayHora();
 
 	public:
 		static FechayHora* obtenerUnicaInstancia();
 		const std::string obtenerFechayHoraActual();
-		~FechayHora();
+		void borrarUnicaInstacia();
 
 };

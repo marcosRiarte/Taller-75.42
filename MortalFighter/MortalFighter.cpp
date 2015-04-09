@@ -44,7 +44,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		delete unMundo;
 		delete unCuerpo;
 		Parser::FreeInstancia();
+		
 		SDL_Quit();
+		
 	}
 
 

@@ -171,6 +171,7 @@ Vista::~Vista()
 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(ventana);
+	delete elSprite;
 
 	IMG_Quit();
 	SDL_Quit();
