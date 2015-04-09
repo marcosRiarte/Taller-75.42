@@ -132,11 +132,11 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	listaDeCuadros = elSprite->listaDeCuadros(estadoPersonaje);
 	numeroDeCuadro++;
 
-	if ((numeroDeCuadro / (listaDeCuadros->size()))> (listaDeCuadros->size() - 1))
+	if ((4 * numeroDeCuadro / (listaDeCuadros->size()))> (listaDeCuadros->size() - 1))
 		numeroDeCuadro = 0;
 
 	//Renderizar el sprite
-		SDL_Rect* cuadroActual = listaDeCuadros->at(numeroDeCuadro / (listaDeCuadros->size()));
+		SDL_Rect* cuadroActual = listaDeCuadros->at(4*numeroDeCuadro / (listaDeCuadros->size()));
 		
 
 		//Se carga el personaje

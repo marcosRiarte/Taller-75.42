@@ -18,13 +18,20 @@ Sprite::Sprite(){
 	this->QuietoDer = new std::vector<SDL_Rect*>();
 
 	//Quieto
-	this->QuietoDer->push_back(crearCuadro(20, 21, 60, 117));
-	this->QuietoDer->push_back(crearCuadro(90, 21, 71, 117));
-	this->QuietoDer->push_back(crearCuadro(173, 20, 73, 118));
-	this->QuietoDer->push_back(crearCuadro(257, 21, 75, 117));
-	this->QuietoDer->push_back(crearCuadro(344, 21, 66, 117));
-	this->QuietoDer->push_back(crearCuadro(423, 22, 62, 116));
-	this->QuietoDer->push_back(crearCuadro(497, 23, 61, 115));
+	this->QuietoDer->push_back(crearCuadro(7, 20, 78, 117));
+	this->QuietoDer->push_back(crearCuadro(7, 20, 78, 117));
+	this->QuietoDer->push_back(crearCuadro(85, 20, 78, 117));
+	this->QuietoDer->push_back(crearCuadro(85, 20, 78, 117));
+	this->QuietoDer->push_back(crearCuadro(164, 20, 78, 117));
+	this->QuietoDer->push_back(crearCuadro(164, 20, 78, 117));
+	this->QuietoDer->push_back(crearCuadro(244, 20, 78, 117));
+	this->QuietoDer->push_back(crearCuadro(244, 20, 78, 117));
+	this->QuietoDer->push_back(crearCuadro(323, 20, 78, 117));
+	this->QuietoDer->push_back(crearCuadro(323, 20, 78, 117));
+	this->QuietoDer->push_back(crearCuadro(401, 20, 78, 117));
+	this->QuietoDer->push_back(crearCuadro(401, 20, 78, 117));
+	this->QuietoDer->push_back(crearCuadro(479, 20, 78, 117));
+	this->QuietoDer->push_back(crearCuadro(479, 20, 78, 117));
 
 	//caminar
 	this->CaminandoDer->push_back(crearCuadro(20, 159, 59, 117));

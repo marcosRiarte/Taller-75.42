@@ -8,7 +8,6 @@
 //#include <windows.h>
 #include "Controlador.h"
 
-
 //int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 int _tmain(int argc, _TCHAR* argv[])
 {	
@@ -37,7 +36,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 			unaVista->actualizar(movimiento, Parser::getInstancia().getPersonaje().getEstado()); //Nescesita pasarle el personaje y su estado
 
-			SDL_Delay(30);
+			SDL_Delay(10);
 
 		}
 		delete unaVista;
