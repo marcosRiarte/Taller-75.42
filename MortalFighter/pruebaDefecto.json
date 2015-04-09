@@ -1,0 +1,30 @@
+{
+    "ventana": {
+        "anchopx": 800,
+        "altopx": 600,
+        "ancho": 200
+    },
+    "escenario": {
+        "ancho": 1000.5,
+        "alto": 150,
+        "ypiso": 22
+    },
+    "capas": [
+        {
+            "imagen_fondo": "The_Pit_II_2.png",
+            "ancho": 200
+        },
+        {
+            "imagen_fondo": "trans.png",
+            "ancho": 1000.5
+        }
+
+    ],
+    "personaje": {
+        "ancho": 23.5,
+        "alto": 49,
+        "zindex": 1,
+        "orientancion": "DER",
+        "sprites": "mario2.png"
+    }
+}
