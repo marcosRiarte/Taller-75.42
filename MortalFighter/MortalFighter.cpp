@@ -36,7 +36,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 			unaVista->actualizar(movimiento, Parser::getInstancia().getPersonaje().getEstado()); //Nescesita pasarle el personaje y su estado
 
-			SDL_Delay(10);
+			SDL_Delay(0);
 
 		}
 		delete unaVista;

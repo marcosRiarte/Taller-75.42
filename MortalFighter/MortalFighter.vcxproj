@@ -149,6 +149,7 @@
     <Library Include="lib\SDL2_image.lib" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\..\..\sprites\salto22.png" />
     <Image Include="..\..\..\..\Downloads\Barra_Energia.png" />
     <Image Include="..\..\..\..\Downloads\SpriteSheet.gif.gif" />
     <Image Include="goro.png" />
