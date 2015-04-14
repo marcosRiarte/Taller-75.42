@@ -2,11 +2,11 @@
 #include "Capa.h"
 
 
-Capa::Capa(std::string unaImagenFondo, float unAncho)
+Capa::Capa(std::string unaImagenFondo, float unAncho, int zIndexCapa)
 {
 	imagenFondo = unaImagenFondo;
 	ancho = unAncho;
-
+	zIndex = zIndexCapa;
 }
 
 std::string Capa::getImagenFondo(){
@@ -16,6 +16,10 @@ std::string Capa::getImagenFondo(){
 
 float Capa::getAncho(){
 	return ancho;
+}
+
+int Capa::getZIndex(){
+	return zIndex;
 }
 
 void Capa::setTexturaSDL(SDL_Texture* unaTexturaSDL)

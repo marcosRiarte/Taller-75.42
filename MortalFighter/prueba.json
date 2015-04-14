@@ -24,7 +24,7 @@
         },
         {
             "imagen_fondo": "fondo1/p_2.png",
-            "ancho": 500
+            "ancho": 500            
         },
         {
             "imagen_fondo": "fondo1/p_1.png",
@@ -34,7 +34,7 @@
     "personaje": {
         "ancho": 50,
         "alto": 70,
-        "zindex": 4,
+        "zindex": 1,
         "orientacion": "DER",
         "sprites": "firstpart.png",
 		"CaminarParaAdelante": "CaminarParaAdelante",
