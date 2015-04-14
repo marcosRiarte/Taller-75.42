@@ -203,19 +203,31 @@
     <Image Include="..\..\..\..\Downloads\Barra_Energia.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\..\..\..\Downloads\SpriteSheet.gif.gif">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="mario.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="mario2.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="goro.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\..\..\..\..\..\sprites\salto22.png">
+    <Image Include="columnas.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="escenario2sincol.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="escenariogoro.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="firstpart.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="fondoet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="luna.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ring.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

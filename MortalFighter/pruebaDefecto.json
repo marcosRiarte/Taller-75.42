@@ -26,5 +26,10 @@
         "zindex": 1,
         "orientancion": "DER",
         "sprites": "mario2.png"
+		"CaminarParaAdelante": "CaminarParaAdelante",
+		"CaminarParaAtras": "CaminarParaAtras",
+		"Quieto": "Quieto",
+		"Salto": "Salto",
+		"SaltoDiagonal" : "SaltoDiagonal"
     }
 }

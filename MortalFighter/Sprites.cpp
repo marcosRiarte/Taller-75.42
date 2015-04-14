@@ -18,81 +18,55 @@ Sprite::Sprite(){
 	this->QuietoDer = new std::vector<SDL_Rect*>();
 
 	//Quieto
-	//this->QuietoDer->push_back(crearCuadro(7, 7, 57, 118));
-	//this->QuietoDer->push_back(crearCuadro(9, 7, 57, 118));
-	//this->QuietoDer->push_back(crearCuadro(71, 7, 57, 118));
-	//this->QuietoDer->push_back(crearCuadro(134, 7, 57, 118));
-	//this->QuietoDer->push_back(crearCuadro(194, 7, 57, 118));
-	//this->QuietoDer->push_back(crearCuadro(194, 7, 57, 118));
-	//this->QuietoDer->push_back(crearCuadro(254, 7, 57, 118));
-	//this->QuietoDer->push_back(crearCuadro(314, 7, 57, 118));
-	//this->QuietoDer->push_back(crearCuadro(372, 7, 57, 118));
-	//this->QuietoDer->push_back(crearCuadro(434, 7, 57, 118));
-	//this->QuietoDer->push_back(crearCuadro(495, 7, 57, 118));
-	//this->QuietoDer->push_back(crearCuadro(560, 7, 57, 118));
-	//this->QuietoDer->push_back(crearCuadro(625, 7, 57, 118));
-	//this->QuietoDer->push_back(crearCuadro(625, 7, 57, 118));
-	this->QuietoDer->push_back(crearCuadro(0, 1, 202, 368));
+	this->QuietoDer->push_back(crearCuadro(0, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(77, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(154, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(231, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(308, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(385, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(462, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(539, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(616, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(693, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(770, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(847, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(924, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(1001, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(1078, 0, 77, 132));
+	this->QuietoDer->push_back(crearCuadro(1155, 0, 77, 132));
 	
-	this->QuietoDer->push_back(crearCuadro(404, 1, 202, 368));
+	
 
-	this->QuietoDer->push_back(crearCuadro(808, 1, 202, 368));
-
-	this->QuietoDer->push_back(crearCuadro(1212, 1, 202, 368));
-
-	this->QuietoDer->push_back(crearCuadro(1616, 1, 202, 368));
-
-	this->QuietoDer->push_back(crearCuadro(2020, 1, 202, 368));
-
-	this->QuietoDer->push_back(crearCuadro(2424, 1, 202, 368));
-
-	this->QuietoDer->push_back(crearCuadro(2828, 1, 202, 368));
-
-	this->QuietoDer->push_back(crearCuadro(3232, 1, 202, 368));
-
-	this->QuietoDer->push_back(crearCuadro(3636, 1, 202, 368));
-
-
-	this->QuietoDer->push_back(crearCuadro(4040, 1, 202, 368));
-
-	this->QuietoDer->push_back(crearCuadro(4444, 1, 202, 368));
-
-	this->QuietoDer->push_back(crearCuadro(4848, 1, 202, 368));
-
-	this->QuietoDer->push_back(crearCuadro(5252, 1, 202, 368));
-
-	this->QuietoDer->push_back(crearCuadro(5656, 1, 202, 368));
-
-
-	this->QuietoDer->push_back(crearCuadro(6060, 1, 202, 368));
-
-	this->QuietoDer->push_back(crearCuadro(6464, 1, 202, 368));
-
-	this->QuietoDer->push_back(crearCuadro(6868, 1, 202, 368));
-	this->QuietoDer->push_back(crearCuadro(7070, 1, 202, 368));
+	
 
 	//caminar
-	this->CaminandoDer->push_back(crearCuadro(20, 159, 59, 117));
-	this->CaminandoDer->push_back(crearCuadro(90, 159, 57, 117));
-	this->CaminandoDer->push_back(crearCuadro(158, 158, 54, 118));
-	this->CaminandoDer->push_back(crearCuadro(224, 159, 62, 117));
-	this->CaminandoDer->push_back(crearCuadro(298, 160, 64, 116));
-	this->CaminandoDer->push_back(crearCuadro(375, 157, 58, 119));
-	this->CaminandoDer->push_back(crearCuadro(446, 156, 58, 120));
-	this->CaminandoDer->push_back(crearCuadro(515, 158, 61, 118));
-	this->CaminandoDer->push_back(crearCuadro(587, 162, 65, 114));
+	this->CaminandoDer->push_back(crearCuadro(0, 268, 77, 132));
+	this->CaminandoDer->push_back(crearCuadro(78, 268, 77, 132));
+	this->CaminandoDer->push_back(crearCuadro(156, 268, 77, 132));
+	this->CaminandoDer->push_back(crearCuadro(234, 268, 77, 132));
+	this->CaminandoDer->push_back(crearCuadro(312, 268, 77, 132));
+	this->CaminandoDer->push_back(crearCuadro(390, 268, 77, 132));
+	this->CaminandoDer->push_back(crearCuadro(468, 268, 77, 132));
+	this->CaminandoDer->push_back(crearCuadro(546, 268, 77, 132));
+
 
 	//salto
-	this->SaltandoDer->push_back(crearCuadro(6, 2, 42, 115));
+	this->SaltandoDer->push_back(crearCuadro(0, 400, 77, 132));
 	
-
+	
+	//xjose... esto anda para el.... tengo que repetir cuadros para que la animacion quede bien
+	//ademas si tocas la gravedad te altera la reproducion de los sprites y los vuelve a joder
 	//caida del salto
-	this->CayendoDer->push_back(crearCuadro(61, 2, 53, 115));
-	this->CayendoDer->push_back(crearCuadro(125, 2, 88, 115));
-	this->CayendoDer->push_back(crearCuadro(231, 2, 46, 115));
-	this->CayendoDer->push_back(crearCuadro(293, 2, 70, 115));
-	this->CayendoDer->push_back(crearCuadro(377, 2, 84, 115));
-	this->CayendoDer->push_back(crearCuadro(474, 2, 53, 115));
+	this->CayendoDer->push_back(crearCuadro(78, 400, 77, 132));
+	this->CayendoDer->push_back(crearCuadro(78, 400, 77, 132));
+	this->CayendoDer->push_back(crearCuadro(78, 400, 77, 132));
+	this->CayendoDer->push_back(crearCuadro(78, 400, 77, 132));
+	this->CayendoDer->push_back(crearCuadro(78, 400, 77, 132));
+	this->CayendoDer->push_back(crearCuadro(78, 400, 77, 132));
+	this->CayendoDer->push_back(crearCuadro(78, 400, 77, 132));
+	this->CayendoDer->push_back(crearCuadro(156, 400, 77, 132));
+	this->CayendoDer->push_back(crearCuadro(156, 400, 77, 132));
+	
 }
 
 std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){

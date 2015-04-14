@@ -11,20 +11,39 @@
     },
     "capas": [
         {
-            "imagen_fondo": "fondoet.png",
+            "imagen_fondo": "luna.png",
             "ancho": 200
         },
-        {
-            "imagen_fondo": "escenario.png",
+		
+		{
+             "imagen_fondo": "columnas.png",
+            "ancho": 700.5
+        },
+		{
+             "imagen_fondo": "ring.png",
+            "ancho": 600.5
+        },
+		{
+             "imagen_fondo": "escenariogoro.png",
+            "ancho": 700.5
+        },
+		{
+           "imagen_fondo": "escenario2sincol.png",
             "ancho": 800.5
+			
         }
 
     ],
     "personaje": {
-        "ancho": 40,
-        "alto": 60,
-        "zindex": 1,
+        "ancho": 50,
+        "alto": 70,
+        "zindex": 4,
         "orientacion": "DER",
-        "sprites": "corp.png"
+        "sprites": "firstpart.png",
+		"CaminarParaAdelante": "CaminarParaAdelante",
+		"CaminarParaAtras": "CaminarParaAtras",
+		"Quieto": "Quieto",
+		"Salto": "Salto",
+		"SaltoDiagonal" : "SaltoDiagonal"
     }
 }
