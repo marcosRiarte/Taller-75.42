@@ -22,7 +22,12 @@
 #define ORIENTACION_PERSONAJE "DER"
 #define SPRITE_DEFAULT "SpriteSheet.png"
 #define FONDO_DEFAULT "fondo1.png"
-
+//Xjose 3 defino las constantes nuevas
+#define CAMINARPARAADELANTE_DEFAULT "CaminarParaAdelante"
+#define CAMINARPARAATRAS_DEFAULT "CaminarParaAtras"
+#define QUIETO_DEFAULT "Quieto"
+#define SALTO_DEFAULT "Salto"
+#define SALTODIAGONAL_DEFAULT "altoDiagonal"
 class Parser
 {
 public:	

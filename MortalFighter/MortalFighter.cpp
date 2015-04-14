@@ -1,6 +1,14 @@
 // MortalFighter.cpp : Defines the entry point for the console application.
 //
 
+//*****************************/
+//* BORRAR COMENTARIOS
+//* XJOSE
+//* Xjose
+//* xjose
+//*SON 3 TIPOS
+//****************************/
+
 #include "stdafx.h"
 #include "Parser.h"
 #include "Vista.h"

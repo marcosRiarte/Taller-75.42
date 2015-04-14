@@ -120,6 +120,13 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	int zIndex;
 	std::string orientacion;
 	std::string sprites;
+	//Xjose 1 agrego los string
+	std::string CaminarParaAdelante;
+	std::string CaminarParaAtras;
+	std::string Quieto;
+	std::string Salto;
+	std::string SaltoDiagonal;
+
 
 	if (!personaje){
 		Log::getInstancia().logearMensajeEnModo("Fallo el parseo del personaje", Log::MODO_WARNING);
@@ -128,6 +135,13 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		zIndex = ZINDEX;
 		orientacion = ORIENTACION_PERSONAJE;
 		sprites = SPRITE_DEFAULT;
+		//xjose 2 agrego los default y tengo que definir los define....
+		CaminarParaAdelante = CAMINARPARAADELANTE_DEFAULT;
+		CaminarParaAtras = CAMINARPARAATRAS_DEFAULT;
+		Quieto = QUIETO_DEFAULT;
+		Salto = SALTO_DEFAULT;
+		SaltoDiagonal = SALTODIAGONAL_DEFAULT;
+		//XJOSE HAY QUE REVISAR SI ESTE LOG TIENE QUE LOGUEAR ESPECIFICAMENTE QUE FALLO???
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje por defecto", Log::MODO_WARNING);
 	}
 	else{
@@ -136,10 +150,19 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		zIndex = (personaje.get("zindex", 1).asInt());
 		sprites = (personaje.get("sprites", SPRITE_DEFAULT).asString());
 		orientacion = (personaje.get("orientacion", ORIENTACION_PERSONAJE).asString());
+		//Xjose 4 obtengo los datos y los asigno
+		CaminarParaAdelante = (personaje.get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).asString());
+		CaminarParaAtras = (personaje.get("CaminarParaAtras", CAMINARPARAATRAS_DEFAULT).asString());
+		Quieto = (personaje.get("Quieto", QUIETO_DEFAULT).asString());
+		Salto = (personaje.get("Salto", SALTO_DEFAULT).asString());
+		SaltoDiagonal = (personaje.get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).asString());
+		//XJOSE HAY QUE REVISAR SI ESTE LOG TIENE QUE LOGUEAR ESPECIFICAMENTE QUE FALLO???
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje correctamente", Log::MODO_DEBUG);
 	}
-	Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites);
-	unPersonaje = new Personaje(ancho, alto, zIndex, orientacion, sprites);
+	//XJOSE 5 METO LOS DATOS EN EL VALIDADOR, 6 MODIFICAR FIRMA VALIDADOR, 7 MODIFICAR VALIDADOR
+	Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites, &CaminarParaAdelante, &CaminarParaAtras, &Quieto, &Salto, &SaltoDiagonal);
+	//XJOSE8 MODIFICAR ATRIBUTOS Y CONSTRUCTORES DE PERSONAJE Y LOS DESTRUCTORES
+	unPersonaje = new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal);
 
 	return true;
 }

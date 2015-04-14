@@ -4,8 +4,9 @@
 #include "ManejadorULogicas.h"
 #include "Sprites.h"
 
+//xjose 9 modifico la clase .... hay unas cosas raras.... QuietoPersonaje???.....
 
-Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesPersonaje)
+Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje)
 {
 	ancho = anchoPersonaje;
 	alto = altoPersonaje;
@@ -13,7 +14,11 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	orientacion = unaorientacion;
 	energy = 100;
 	sprites= spritesPersonaje;
-
+	caminaradelante = CaminarParaAdelante;
+	caminaratras = CaminarParaAtras;
+	quieto = QuietoPersonaje;
+	salto = SaltoPersonaje;
+	saltodiagonal = SaltoDiagonalPersonaje;
 }
 
 float Personaje::getAncho() const
@@ -36,6 +41,35 @@ std::string Personaje::getSprite() const
 	return sprites;
 }
 
+//xjose agrego los famosos metodos......
+
+std::string Personaje::getCaminarParaAdelante() const
+{
+	return caminaradelante;
+}
+
+std::string Personaje:: getCaminarParaAtras() const
+{
+	return caminaratras;
+}
+
+std::string Personaje::getQuieto() const
+{
+	return quieto;
+}
+
+std::string Personaje::getSalto() const
+{
+	return salto;
+}
+
+std::string Personaje::getSaltoDiagonal() const
+{
+	return saltodiagonal;
+}
+
+
+//***************************************
 std::string Personaje::getOrientacion() const
 {
 	return orientacion;
