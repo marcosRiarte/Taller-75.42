@@ -126,7 +126,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	std::string Quieto;
 	std::string Salto;
 	std::string SaltoDiagonal;
-
+	std::string Caida;
 
 	if (!personaje){
 		Log::getInstancia().logearMensajeEnModo("Fallo el parseo del personaje", Log::MODO_WARNING);
@@ -141,6 +141,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Quieto = QUIETO_DEFAULT;
 		Salto = SALTO_DEFAULT;
 		SaltoDiagonal = SALTODIAGONAL_DEFAULT;
+		Caida = CAIDA_DEFAULT;
 		//XJOSE HAY QUE REVISAR SI ESTE LOG TIENE QUE LOGUEAR ESPECIFICAMENTE QUE FALLO???
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje por defecto", Log::MODO_WARNING);
 	}
@@ -156,13 +157,14 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Quieto = (personaje.get("Quieto", QUIETO_DEFAULT).asString());
 		Salto = (personaje.get("Salto", SALTO_DEFAULT).asString());
 		SaltoDiagonal = (personaje.get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).asString());
+		Caida = (personaje.get("Caida", CAIDA_DEFAULT).asString());
 		//XJOSE HAY QUE REVISAR SI ESTE LOG TIENE QUE LOGUEAR ESPECIFICAMENTE QUE FALLO???
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje correctamente", Log::MODO_DEBUG);
 	}
 	//XJOSE 5 METO LOS DATOS EN EL VALIDADOR, 6 MODIFICAR FIRMA VALIDADOR, 7 MODIFICAR VALIDADOR
-	Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites, &CaminarParaAdelante, &CaminarParaAtras, &Quieto, &Salto, &SaltoDiagonal);
+	Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites, &CaminarParaAdelante, &CaminarParaAtras, &Quieto, &Salto, &SaltoDiagonal, &Caida);
 	//XJOSE8 MODIFICAR ATRIBUTOS Y CONSTRUCTORES DE PERSONAJE Y LOS DESTRUCTORES
-	unPersonaje = new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal);
+	unPersonaje = new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal, Caida);
 
 	return true;
 }

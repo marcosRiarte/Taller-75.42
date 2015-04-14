@@ -6,19 +6,20 @@
 
 //xjose 9 modifico la clase .... hay unas cosas raras.... QuietoPersonaje???.....
 
-Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje)
+Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje, std::string CaidaPersonaje)
 {
 	ancho = anchoPersonaje;
 	alto = altoPersonaje;
 	zIndex = zIndexPersonaje;
 	orientacion = unaorientacion;
 	energy = 100;
-	sprites= spritesPersonaje;
+	sprites = spritesPersonaje;
 	caminaradelante = CaminarParaAdelante;
 	caminaratras = CaminarParaAtras;
 	quieto = QuietoPersonaje;
 	salto = SaltoPersonaje;
 	saltodiagonal = SaltoDiagonalPersonaje;
+	caida = CaidaPersonaje;
 }
 
 float Personaje::getAncho() const
@@ -66,6 +67,11 @@ std::string Personaje::getSalto() const
 std::string Personaje::getSaltoDiagonal() const
 {
 	return saltodiagonal;
+}
+
+std::string Personaje::getCaida() const
+{
+	return caida;
 }
 
 

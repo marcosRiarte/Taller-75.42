@@ -7,29 +7,44 @@
     "escenario": {
         "ancho": 1000.5,
         "alto": 150,
-        "ypiso": 22
+        "ypiso": 20
     },
     "capas": [
         {
-            "imagen_fondo": "The_Pit_II_2.png",
+            "imagen_fondo": "luna.png",
             "ancho": 200
         },
-        {
-            "imagen_fondo": "trans.png",
-            "ancho": 1000.5
+		
+		{
+             "imagen_fondo": "columnas.png",
+            "ancho": 700.5
+        },
+		{
+             "imagen_fondo": "ring.png",
+            "ancho": 600.5
+        },
+		{
+             "imagen_fondo": "escenariogoro.png",
+            "ancho": 700.5
+        },
+		{
+           "imagen_fondo": "escenario2sincol.png",
+            "ancho": 800.5
+			
         }
 
     ],
     "personaje": {
-        "ancho": 23.5,
-        "alto": 49,
-        "zindex": 1,
-        "orientancion": "DER",
-        "sprites": "mario2.png"
+        "ancho": 50,
+        "alto": 70,
+        "zindex": 4,
+        "orientacion": "DER",
+        "sprites": "firstpart.png",
 		"CaminarParaAdelante": "CaminarParaAdelante",
 		"CaminarParaAtras": "CaminarParaAtras",
 		"Quieto": "Quieto",
 		"Salto": "Salto",
-		"SaltoDiagonal" : "SaltoDiagonal"
+        "SaltoDiagonal": "SaltoDiagonal",
+        "Caida": "Caida"
     }
 }

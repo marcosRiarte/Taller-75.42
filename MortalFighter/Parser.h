@@ -27,7 +27,8 @@
 #define CAMINARPARAATRAS_DEFAULT "CaminarParaAtras"
 #define QUIETO_DEFAULT "Quieto"
 #define SALTO_DEFAULT "Salto"
-#define SALTODIAGONAL_DEFAULT "altoDiagonal"
+#define SALTODIAGONAL_DEFAULT "SaltoDiagonal"
+#define CAIDA_DEFAULT "Caida"
 class Parser
 {
 public:	

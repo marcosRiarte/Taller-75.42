@@ -9,7 +9,7 @@ class Personaje
 {
 public:
 	//xjose 8 modifico la firma
-	Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string orientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string Quieto, std::string Salto, std::string SaltoDiagonal);
+	Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string orientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string Quieto, std::string Salto, std::string SaltoDiagonal, std::string Caida);
 	float getAncho() const;
 	float getAlto() const;
 	int getZIndex() ;
@@ -21,6 +21,7 @@ public:
 	std::string getQuieto() const;
 	std::string getSalto() const;
 	std::string getSaltoDiagonal() const;
+	std::string getCaida() const;
 	std::pair<int, int> getPosicionPx() const;
 	void setPosicionUn(float x, float y);
 	ESTADO getEstado() const;
@@ -45,7 +46,7 @@ private:
 	std::string quieto;
 	std::string salto;
 	std::string saltodiagonal;
-
+	std::string caida;
 	std::pair<float, float> posicionUn;
 	float deltaX;
 	ESTADO estadoActual;

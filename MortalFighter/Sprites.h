@@ -5,13 +5,15 @@
 
 class Sprite{
 private:
-	std::vector<SDL_Rect*>* CayendoDer;
-	std::vector<SDL_Rect*>* SaltandoDer;
-	std::vector<SDL_Rect*>* CaminandoDer;
-	std::vector<SDL_Rect*>* QuietoDer;
+	std::vector<SDL_Rect*>* Caida;
+	std::vector<SDL_Rect*>* Salto;
+	std::vector<SDL_Rect*>* CaminandoParaAdelante;
+	std::vector<SDL_Rect*>* CaminandoParaAtras;
+	std::vector<SDL_Rect*>* SaltoDiagonal;
+	std::vector<SDL_Rect*>* Quieto;
 
 public:
 	Sprite();
-	std::vector<SDL_Rect*>* listaDeCuadros(ESTADO unEstado);
+	std::vector<SDL_Rect*>* listaDeCuadros(std::string unEstado);
 	~Sprite();
 };

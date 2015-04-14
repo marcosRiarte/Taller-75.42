@@ -131,8 +131,30 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 		SDL_RenderCopy(renderer, capasVista.at(i)->getTexturaSDL(), NULL, &camara);
 	}
 
+	std::string estadoDelPersonaje;
+	if ((estadoPersonaje == ESTADO::IZQ_IZQ) || (estadoPersonaje == ESTADO::DER_DER)){
+		estadoDelPersonaje = personajeVista.getCaminarParaAdelante();
+	}
+	if ((estadoPersonaje == ESTADO::DER_IZQ) || (estadoPersonaje == ESTADO::IZQ_DER)){
+		estadoDelPersonaje = personajeVista.getCaminarParaAtras();
+	}
+
+	if ((estadoPersonaje == ESTADO::SALTODER_DER) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_DER) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
+		estadoDelPersonaje = personajeVista.getSaltoDiagonal();
+	}
+	if ((estadoPersonaje == ESTADO::ARRIBA_IZQ) || (estadoPersonaje == ESTADO::ARRIBA_DER)){
+		estadoDelPersonaje = personajeVista.getSalto();
+	}
+
+	if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ABAJO_DER)){
+		estadoDelPersonaje = personajeVista.getCaida();
+	}
+	if ((estadoPersonaje == ESTADO::QUIETODER) || (estadoPersonaje == ESTADO::QUIETOIZQ)) {
+		estadoDelPersonaje = personajeVista.getQuieto();
+	}
+
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
-	listaDeCuadros = elSprite->listaDeCuadros(estadoPersonaje);
+	listaDeCuadros = elSprite->listaDeCuadros(estadoDelPersonaje);
 	numeroDeCuadro++;
 
 	if ((4 * numeroDeCuadro / (listaDeCuadros->size()))> (listaDeCuadros->size() - 1))
