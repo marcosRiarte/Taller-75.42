@@ -14,25 +14,22 @@
             "imagen_fondo": "luna.png",
             "ancho": 200
         },
-		
 		{
-             "imagen_fondo": "columnas.png",
+            "imagen_fondo": "columnas.png",
             "ancho": 700.5
         },
 		{
-             "imagen_fondo": "ring.png",
+            "imagen_fondo": "ring.png",
             "ancho": 600.5
         },
 		{
-             "imagen_fondo": "escenariogoro.png",
+            "imagen_fondo": "escenariogoro.png",
             "ancho": 700.5
         },
 		{
-           "imagen_fondo": "escenario2sincol.png",
+            "imagen_fondo": "escenario2sincol.png",
             "ancho": 800.5
-			
-        }
-
+		}
     ],
     "personaje": {
         "ancho": 50,

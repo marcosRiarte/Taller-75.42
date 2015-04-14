@@ -30,30 +30,6 @@
             "imagen_fondo": "fondo1/p_1.png",
             "ancho": 1212
         }
-    /*"capas": [
-        {
-            "imagen_fondo": "luna.png",
-            "ancho": 200
-        },
-		
-		{
-             "imagen_fondo": "columnas.png",
-            "ancho": 700.5
-        },
-		{
-             "imagen_fondo": "ring.png",
-            "ancho": 600.5
-        },
-		{
-             "imagen_fondo": "escenariogoro.png",
-            "ancho": 700.5
-        },
-		{
-           "imagen_fondo": "escenario2sincol.png",
-            "ancho": 800.5
-			
-        }*/
-
     ],
     "personaje": {
         "ancho": 50,
