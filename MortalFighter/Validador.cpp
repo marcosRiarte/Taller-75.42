@@ -30,15 +30,38 @@ void Validador::ValidarVentana(int* anchoPxVentana, int* altoPxVentana, float* a
 		*anchoVentana = 200;
 	}
 }
+//xjose 1000 1001 agrego el parametro fondo para validad que exista
 
-void Validador::ValidarCapas(float *anchoCapa){
+void Validador::ValidarCapas(float *anchoCapa, std::string *fondo){
 	if (!(*anchoCapa > 0)){
 		std::string mensaje = "ancho de Capa fuera de rango, se toma ancho por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*anchoCapa = 500;
 	}
-		
+	//xjose 1001 WARNING WARNING WARNIG..... Recodificar mas elegante
+	
+	//  intento abrir el archivo, si el puntero devuelto es NULL NO EXISTE EL ARCHIVO  
+	const char * archivofondo = fondo->c_str(); //casteo
+	FILE * pFile; 
+	fopen_s(&pFile, archivofondo, "r");
+
+	if (pFile != NULL) //si me devolvio puntero existe, cerralo!!!!!
+	{
+		fclose(pFile);
+	}
+	else // el archivo no existe!
+	{
+		std::string mensaje = "No existe la capa, se usa capa por defecto";
+	    Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+		//xjose1000 esto esta muy mal harcodeado tiene que decirmelo una constante en un #define cual es la defecto
+		//xjose 1000 HARDCODEO HARCODEO WARNING WARNING ESTA MAL!!!!!!!!!!!!!! CAMBIAR LUNA POR UN DEFINE
+		*fondo = FONDO_DEFAULT;
+	}
+	
 }
+
+		
+
 
 void Validador::ValidarEscenario(float *anchoEscenario, float *altoEscenario, float* yPisoEscenario){
 	if (!(*anchoEscenario > 0)) {
