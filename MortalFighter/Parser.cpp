@@ -98,15 +98,18 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Log::getInstancia().logearMensajeEnModo("Fallo el parseo de las capas", Log::MODO_WARNING);
 		fondo = FONDO_DEFAULT;
 		anchoCapas = ANCHO_CAPA;
-		Validador::ValidarCapas(&anchoCapas);
+		//xjose 1000 modifico el validador agregando 1 argumento
+		Validador::ValidarCapas(&anchoCapas, &fondo);
 		Capas.push_back(new Capa(fondo, anchoCapas));
 		Log::getInstancia().logearMensajeEnModo("Se cargaron capas por defecto", Log::MODO_WARNING);
 	}
 	else{
 		for (size_t i = 0; i < capas.size(); i++) {
+			//xjose 1001 aca si pusiste asdlkaslkd.png te lo toma, hay que validar
 			std::string fondo(capas[i].get("imagen_fondo", FONDO_DEFAULT).asString());
 			anchoCapas = (capas[i].get("ancho", ANCHO_CAPA).asFloat());
-			Validador::ValidarCapas(&anchoCapas);
+			//Xjose 1000 valido que exista el archivo de capas
+			Validador::ValidarCapas(&anchoCapas, &fondo);
 			Capas.push_back(new Capa(fondo, anchoCapas));
 		}
 		Log::getInstancia().logearMensajeEnModo("Se cargaron capas correctamente", Log::MODO_DEBUG);

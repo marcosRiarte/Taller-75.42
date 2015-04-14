@@ -699,3 +699,215 @@
 2015-04-14.16:48:05 [DEBUG] Se cargaron capas correctamente
 2015-04-14.16:48:05 [DEBUG] Se cargaron valores del personaje correctamente
 
+---------------------------------------------------------------------------------
+
+2015-04-14.16:49:06 [DEBUG] Parseo del archivo json correcto
+2015-04-14.16:49:06 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.16:49:06 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.16:49:06 [DEBUG] Se cargaron capas correctamente
+2015-04-14.16:49:06 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.16:49:17 [WARNING] Fallo el parseo, se carga json por defecto* Line 1, Column 1
+  Syntax error: value, object or array expected.
+* Line 1, Column 1
+  A valid JSON document must be either an array or an object value.
+
+2015-04-14.16:49:17 [DEBUG] Parseo del archivo json por defecto correcto
+2015-04-14.16:49:17 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.16:49:17 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.16:49:17 [DEBUG] Se cargaron capas correctamente
+2015-04-14.16:49:17 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.16:50:24 [DEBUG] Parseo del archivo json correcto
+2015-04-14.16:50:24 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.16:50:24 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.16:50:24 [DEBUG] Se cargaron capas correctamente
+2015-04-14.16:50:24 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.16:50:40 [WARNING] Fallo el parseo, se carga json por defecto* Line 1, Column 1
+  Syntax error: value, object or array expected.
+* Line 1, Column 1
+  A valid JSON document must be either an array or an object value.
+
+2015-04-14.16:50:40 [DEBUG] Parseo del archivo json por defecto correcto
+2015-04-14.16:50:40 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.16:50:40 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.16:50:40 [DEBUG] Se cargaron capas correctamente
+2015-04-14.16:50:40 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.17:25:41 [DEBUG] Parseo del archivo json correcto
+2015-04-14.17:25:41 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.17:25:41 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.17:25:41 [DEBUG] Se cargaron capas correctamente
+2015-04-14.17:25:41 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.17:25:56 [DEBUG] Parseo del archivo json correcto
+2015-04-14.17:25:56 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.17:25:56 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.17:25:56 [DEBUG] Se cargaron capas correctamente
+2015-04-14.17:25:56 [DEBUG] Se cargaron valores del personaje correctamente
+2015-04-14.17:25:57 [ERROR] SDL_CreateTextureFromSurface Error: Couldn't open fondo1/p_bg66.png
+---------------------------------------------------------------------------------
+
+2015-04-14.18:44:04 [DEBUG] Parseo del archivo json correcto
+2015-04-14.18:44:04 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.18:44:04 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.18:44:04 [DEBUG] Se cargaron capas correctamente
+2015-04-14.18:44:04 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.18:56:01 [DEBUG] Parseo del archivo json correcto
+2015-04-14.18:56:01 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.18:56:01 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.18:56:01 [DEBUG] Se cargaron capas correctamente
+2015-04-14.18:56:01 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.19:00:14 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:00:14 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:00:14 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:00:14 [DEBUG] Se cargaron capas correctamente
+2015-04-14.19:00:14 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.19:01:02 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:01:02 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:01:02 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:01:02 [DEBUG] Se cargaron capas correctamente
+2015-04-14.19:01:02 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.19:22:56 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:22:56 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:22:56 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:22:56 [DEBUG] Se cargaron capas correctamente
+2015-04-14.19:22:56 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.19:24:59 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:24:59 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:24:59 [DEBUG] Se cargaron valores del escenario correctamente
+---------------------------------------------------------------------------------
+
+2015-04-14.19:26:51 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:26:51 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:26:51 [DEBUG] Se cargaron valores del escenario correctamente
+---------------------------------------------------------------------------------
+
+2015-04-14.19:29:34 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:29:34 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:29:34 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:29:52 [WARNING] No existe la capa, se toma ancho por defecto
+---------------------------------------------------------------------------------
+
+2015-04-14.19:33:17 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:33:17 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:33:17 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:33:28 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:33:28 [DEBUG] Se cargaron capas correctamente
+2015-04-14.19:33:28 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.19:33:40 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:33:40 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:33:40 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:33:40 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:33:40 [DEBUG] Se cargaron capas correctamente
+2015-04-14.19:33:40 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.19:34:03 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:34:03 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:34:03 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:34:03 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:34:03 [DEBUG] Se cargaron capas correctamente
+2015-04-14.19:34:03 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.19:34:20 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:34:20 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:34:20 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:34:20 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:34:20 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:34:20 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:34:20 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:34:20 [DEBUG] Se cargaron capas correctamente
+2015-04-14.19:34:20 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.19:35:22 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:35:22 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:35:22 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:35:22 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:35:22 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:35:22 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:35:22 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:35:22 [DEBUG] Se cargaron capas correctamente
+2015-04-14.19:35:22 [DEBUG] Se cargaron valores del personaje correctamente
+2015-04-14.19:35:22 [ERROR] SDL_CreateTextureFromSurface Error: Couldn't open fondo1.png
+---------------------------------------------------------------------------------
+
+2015-04-14.19:36:49 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:36:49 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:36:49 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:36:49 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:36:49 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:36:49 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:36:49 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:36:49 [DEBUG] Se cargaron capas correctamente
+2015-04-14.19:36:49 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.19:37:04 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:37:04 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:37:04 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:37:04 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:37:04 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:37:04 [DEBUG] Se cargaron capas correctamente
+2015-04-14.19:37:04 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.19:37:32 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:37:32 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:37:32 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:37:32 [DEBUG] Se cargaron capas correctamente
+2015-04-14.19:37:32 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.19:37:53 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:37:53 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:37:53 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:37:53 [WARNING] No existe la capa, se toma ancho por defecto
+2015-04-14.19:37:53 [DEBUG] Se cargaron capas correctamente
+2015-04-14.19:37:53 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.19:38:15 [DEBUG] Parseo del archivo json correcto
+2015-04-14.19:38:15 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.19:38:15 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.19:38:15 [DEBUG] Se cargaron capas correctamente
+2015-04-14.19:38:15 [DEBUG] Se cargaron valores del personaje correctamente
+
