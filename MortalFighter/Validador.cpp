@@ -51,16 +51,14 @@ void Validador::ValidarCapas(float *anchoCapa, std::string *fondo){
 	}
 	else // el archivo no existe!
 	{
-		std::string mensaje = "No existe la capa, se toma ancho por defecto";
+		std::string mensaje = "No existe la capa, se usa capa por defecto";
 	    Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		//xjose1000 esto esta muy mal harcodeado tiene que decirmelo una constante en un #define cual es la defecto
 		//xjose 1000 HARDCODEO HARCODEO WARNING WARNING ESTA MAL!!!!!!!!!!!!!! CAMBIAR LUNA POR UN DEFINE
 		*fondo = FONDO_DEFAULT;
 	}
-		
 	
-
-	}
+}
 
 		
 
