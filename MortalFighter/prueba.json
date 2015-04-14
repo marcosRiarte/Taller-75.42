@@ -11,6 +11,27 @@
     },
     "capas": [
         {
+            "imagen_fondo": "fondo1/p_bg.png",
+            "ancho": 200
+        },
+        {
+            "imagen_fondo": "fondo1/p_4.png",
+            "ancho": 260
+        },
+        {
+            "imagen_fondo": "fondo1/p_3.png",
+            "ancho": 395
+        },
+        {
+            "imagen_fondo": "fondo1/p_2.png",
+            "ancho": 500
+        },
+        {
+            "imagen_fondo": "fondo1/p_1.png",
+            "ancho": 606
+        }
+    /*"capas": [
+        {
             "imagen_fondo": "luna.png",
             "ancho": 200
         },
@@ -31,7 +52,7 @@
            "imagen_fondo": "escenario2sincol.png",
             "ancho": 800.5
 			
-        }
+        }*/
 
     ],
     "personaje": {

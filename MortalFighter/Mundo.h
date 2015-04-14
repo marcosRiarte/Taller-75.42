@@ -2,9 +2,9 @@
 #include "Controlador.h"
 #include "Cuerpo.h"
 #include "Escenario.h"
-#define SALTO_Y 400.0f
+#define SALTO_Y 480.0f
 #define SALTO_X 100.0f
-#define GRAVEDAD_Y -10.0f
+#define GRAVEDAD_Y -9.8f
 #define DISTANCIA 2.0f
 
 class Cuerpo;
