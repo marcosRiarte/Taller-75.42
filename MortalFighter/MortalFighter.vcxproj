@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="ima\bkg\default_bkg.png" />
+    <Image Include="ima\bkg\default_capa.png" />
     <Image Include="ima\bkg\default_p1.png" />
     <Image Include="ima\bkg\default_p2.png" />
     <Image Include="ima\bkg\default_p3.png" />

@@ -229,5 +229,8 @@
     <Image Include="ima\sprites\player1.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="ima\bkg\default_capa.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
