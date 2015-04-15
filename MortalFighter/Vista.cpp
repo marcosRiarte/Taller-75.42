@@ -123,7 +123,7 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	//Se cargan las capas anteriores al personaje
 	for (int i = 0; i < capasVista.size(); i++)
 	{
-		if (capasVista.at(i)->getZIndex() < personajeVista.getZIndex()) {
+		if (capasVista.at(i)->getZIndex() <= personajeVista.getZIndex()) {
 			float anchoCapa = capasVista.at(i)->getAncho();
 			camara.w = manejadorULog.darLongPixels(anchoCapa);
 			// donde toma la camara a la capa parametrizado con el ancho del escenario	
