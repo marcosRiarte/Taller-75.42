@@ -96,7 +96,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	float anchoCapas;
 	std::string fondo;
 
-	if (!capas){
+	if (!capas || capas.size() == 0){
 		Log::getInstancia().logearMensajeEnModo("Fallo el parseo de las capas", Log::MODO_WARNING);
 		fondo = FONDO_DEFAULT;
 		anchoCapas = ANCHO_CAPA;
@@ -110,7 +110,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 			//xjose 1001 aca si pusiste asdlkaslkd.png te lo toma, hay que validar
 			std::string fondo(capas[i].get("imagen_fondo", FONDO_DEFAULT).asString());
 			anchoCapas = (capas[i].get("ancho", ANCHO_CAPA).asFloat());
-			int zIndexCapa = (capas[i].get("zindex", 0).asInt());			
+			int zIndexCapa = (capas[i].get("zindex", ZINDEX_CAPA).asInt());
 			//Xjose 1000 valido que exista el archivo de capas
 			Validador::ValidarCapas(&anchoCapas, &fondo);
 			Capas.push_back(new Capa(fondo, anchoCapas, zIndexCapa));
@@ -153,9 +153,9 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		
 	}
 	else{
-		ancho = (personaje.get("ancho", 20).asFloat());
-		alto = (personaje.get("alto", 35).asFloat());
-		zIndex = (personaje.get("zindex", 1).asInt());
+		ancho = (personaje.get("ancho", ANCHO_PERSONAJE).asFloat());
+		alto = (personaje.get("alto", ALTO_PERSONAJE).asFloat());
+		zIndex = (personaje.get("zindex", ZINDEX).asInt());
 		sprites = (personaje.get("sprites", SPRITE_DEFAULT).asString());
 		orientacion = (personaje.get("orientacion", ORIENTACION_PERSONAJE).asString());
 		//Xjose 4 obtengo los datos y los asigno
