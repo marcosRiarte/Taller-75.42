@@ -16,6 +16,26 @@ MOV_TIPO Controlador::cambiar(){
 
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 
+	if (state[SDL_SCANCODE_RIGHT]){
+		if (state[SDL_SCANCODE_LEFT]) return QUIETO;
+		return DER;
+	}
+
+	if (state[SDL_SCANCODE_LEFT]){
+		if (state[SDL_SCANCODE_RIGHT]) return QUIETO;
+		return IZQ;
+	}
+
+	if (state[SDL_SCANCODE_LEFT]){
+		return IZQ;
+	}
+
+	if (state[SDL_SCANCODE_DOWN]){
+		if ((state[SDL_SCANCODE_RIGHT]) || (state[SDL_SCANCODE_LEFT])) return ABAJO;
+		if (state[SDL_SCANCODE_UP]) return ARRIBA;
+		return ABAJO;
+	}
+
 	switch (event.type)
 	{
 	case SDL_KEYDOWN:
@@ -41,26 +61,7 @@ MOV_TIPO Controlador::cambiar(){
 			return RECARGAR;
 		}
 	}
-
-	if (state[SDL_SCANCODE_RIGHT]){
-		if (state[SDL_SCANCODE_LEFT]) return QUIETO;
-		return DER;
-	}
-
-	if (state[SDL_SCANCODE_LEFT]){
-		if (state[SDL_SCANCODE_RIGHT]) return QUIETO;
-		return IZQ;
-	}
-
-	if (state[SDL_SCANCODE_LEFT]){
-		return IZQ;
-	}
-
-	if (state[SDL_SCANCODE_DOWN]){
-		if ((state[SDL_SCANCODE_RIGHT]) || (state[SDL_SCANCODE_LEFT])) return ABAJO;
-		if (state[SDL_SCANCODE_UP]) return ARRIBA;
-		return ABAJO;
-	}
+	
 
 	return QUIETO;
 }
