@@ -625,3 +625,19 @@
 2015-04-15.10:34:59 [DEBUG] Se cargaron capas correctamente
 2015-04-15.10:34:59 [DEBUG] Se cargaron valores del personaje correctamente
 
+---------------------------------------------------------------------------------
+
+2015-04-15.10:50:54 [DEBUG] Parseo del archivo json correcto
+2015-04-15.10:50:54 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-15.10:50:54 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-15.10:50:54 [DEBUG] Se cargaron capas correctamente
+2015-04-15.10:50:54 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-15.10:54:55 [DEBUG] Parseo del archivo json correcto
+2015-04-15.10:54:55 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-15.10:54:55 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-15.10:54:55 [DEBUG] Se cargaron capas correctamente
+2015-04-15.10:54:55 [DEBUG] Se cargaron valores del personaje correctamente
+

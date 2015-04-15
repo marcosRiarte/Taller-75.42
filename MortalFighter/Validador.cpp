@@ -15,19 +15,19 @@ void Validador::ValidarVentana(int* anchoPxVentana, int* altoPxVentana, float* a
 	if (!((*anchoPxVentana > 0) && (*anchoPxVentana < horizontal))) {
 		std::string mensaje = "ancho de Ventana fuera de rango, se toma ancho Px ventana por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*anchoPxVentana = 800;
+		*anchoPxVentana = ANCHO_PX_VENTANA;
 	}
 
 	if (!((*altoPxVentana > 0) && (*altoPxVentana < vertical))) {
 		std::string mensaje = "alto de Ventana fuera de rango, se toma alto Px ventana por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*altoPxVentana = 600;
+		*altoPxVentana = ALTO_PX_VENTANA;
 	}
 
 	if (!(*anchoVentana > 0)) {
 		std::string mensaje = "anchoUn de Ventana fuera de rango, se toma ancho en unidades por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*anchoVentana = 200;
+		*anchoVentana = ANCHO_VENTANA;
 	}
 }
 //xjose 1000 1001 agrego el parametro fondo para validad que exista
@@ -36,7 +36,7 @@ void Validador::ValidarCapas(float *anchoCapa, std::string *fondo){
 	if (!(*anchoCapa > 0)){
 		std::string mensaje = "ancho de Capa fuera de rango, se toma ancho por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*anchoCapa = 500;
+		*anchoCapa = ANCHO_CAPA;
 	}
 	//xjose 1001 WARNING WARNING WARNIG..... Recodificar mas elegante
 	
@@ -67,17 +67,17 @@ void Validador::ValidarEscenario(float *anchoEscenario, float *altoEscenario, fl
 	if (!(*anchoEscenario > 0)) {
 		std::string mensaje = "ancho del Escenario fuera de rango, se toma ancho por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*anchoEscenario = 1000.5;
+		*anchoEscenario = ANCHO_ESCENARIO;
 	}
 	if (!(*altoEscenario > 0)) {
 		std::string mensaje = "alto del Escenario fuera de rango, se toma alto por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*anchoEscenario = 150;
+		*altoEscenario = ALTO_ESCENARIO;
 	}
 	if (!((*yPisoEscenario > 0) && (*yPisoEscenario < *altoEscenario))) {
 		std::string mensaje = "yPiso del Escenario fuera de rango, se yPiso por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*yPisoEscenario = 20;
+		*yPisoEscenario = Y_PISO_ESCENARIO;
 	}
 }
 
@@ -86,22 +86,22 @@ void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::st
 	if (!(*ancho > 0)) {
 		std::string mensaje = "ancho del Personaje fuera de rango, se toma ancho por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*ancho = 23.5;
+		*ancho = ANCHO_PERSONAJE;
 	}
 	if (!(*alto > 0)) {
 		std::string mensaje = "alto del Personaje fuera de rango, se toma alto por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*alto = 49;
+		*alto = ALTO_PERSONAJE;
 	}
 	if (!(*zindex >= 0)) {
 		std::string mensaje = "zindex del Personaje fuera de rango, se toma zindex por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*zindex = 1;
+		*zindex = ZINDEX;
 	}
 	if ((*orientacion != "DER") && (*orientacion != "IZQ")) {
 		std::string mensaje = "orientacion invalida, se toma orientacion derecha";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*orientacion = "DER";
+		*orientacion = ORIENTACION_PERSONAJE;
 	}
 	if ((*sprites == "")) {
 		std::string mensaje = "string de sprites vacio, se toma sprites por defecto";
@@ -113,36 +113,36 @@ void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::st
 		std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		//Xjose mmmm si harcodeo aca para que use el #define CAMINARPARAADELANTE_DEFAULT ??????????
-		*CaminarParaAdelante = "CaminarParaAdelante";
+		*CaminarParaAdelante = CAMINARPARAADELANTE_DEFAULT;
 	}
 	if ((*CaminarParaAtras != "CaminarParaAdelante") && (*CaminarParaAtras != "CaminarParaAtras") && (*CaminarParaAtras != "Quieto") && (*CaminarParaAtras != "Salto") && (*CaminarParaAtras != "SaltoDiagonal") && (*CaminarParaAtras != "Caida")) {
 		std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		//Xjose mmmm si harcodeo aca para que use el #define CAMINARPARAADELANTE_DEFAULT ??????????
-		*CaminarParaAtras = "CaminarParaAtras";
+		*CaminarParaAtras = CAMINARPARAATRAS_DEFAULT;
 	}
 	if ((*Quieto != "CaminarParaAdelante") && (*Quieto != "CaminarParaAtras") && (*Quieto != "Quieto") && (*Quieto != "Salto") && (*Quieto != "SaltoDiagonal") && (*Quieto != "Caida")) {
 		std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		//Xjose mmmm si harcodeo aca para que use el #define CAMINARPARAADELANTE_DEFAULT ??????????
-		*Quieto = "Quieto";
+		*Quieto = QUIETO_DEFAULT;
 	}
 	if ((*Salto != "CaminarParaAdelante") && (*Salto != "CaminarParaAtras") && (*Salto != "Quieto") && (*Salto != "Salto") && (*Salto != "SaltoDiagonal") && (*Salto != "Caida")) {
 		std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		//Xjose mmmm si harcodeo aca para que use el #define CAMINARPARAADELANTE_DEFAULT ??????????
-		*Salto = "Salto";
+		*Salto = SALTO_DEFAULT;
 	}
 	if ((*SaltoDiagonal != "CaminarParaAdelante") && (*SaltoDiagonal != "CaminarParaAtras") && (*SaltoDiagonal != "Quieto") && (*SaltoDiagonal != "Salto") && (*SaltoDiagonal != "SaltoDiagonal") && (*SaltoDiagonal != "Caida")) {
 		std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		//Xjose mmmm si harcodeo aca para que use el #define CAMINARPARAADELANTE_DEFAULT ??????????
-		*SaltoDiagonal = "SaltoDiagonal"; 
+		*SaltoDiagonal = SALTODIAGONAL_DEFAULT;
 	}
 	if ((*Caida != "CaminarParaAdelante") && (*Caida != "CaminarParaAtras") && (*Caida != "Quieto") && (*Caida != "Salto") && (*Caida != "SaltoDiagonal") && (*Caida != "Caida")) {
 		std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		//Xjose mmmm si harcodeo aca para que use el #define CAMINARPARAADELANTE_DEFAULT ??????????
-		*Caida = "Caida";
+		*Caida = CAIDA_DEFAULT;
 	}
 }
