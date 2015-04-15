@@ -46,8 +46,9 @@ Vista::Vista()
 			Parser::getInstancia().getCapas().at(i)->setTexturaSDL(tex);			
 		}
 
-		// inicializo la camara en cero
-		camaraXLog = 0.0f;
+		// inicializo la camara en el centro del escenario
+		camaraXLog = -Parser::getInstancia().getPersonaje().getPosicionUn().first 
+			+ Parser::getInstancia().getVentana().getAncho()/2;
 
 		//Creo el número de cuadros en 0,
 		numeroDeCuadro = 0;

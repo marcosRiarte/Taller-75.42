@@ -7,6 +7,7 @@ Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo)
 	posicion = unaDefCuerpo.posicion;
 	velocidad = unaDefCuerpo.velocidad;
 	masa = unaDefCuerpo.masa;
+	posicion.x = Parser::getInstancia().getEscenario().getAncho() / 2;
 	yPiso = Parser::getInstancia().getEscenario().getYPiso();
 	posicion.y = yPiso;
 }
