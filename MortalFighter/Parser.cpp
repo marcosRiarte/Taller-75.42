@@ -96,7 +96,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	float anchoCapas;
 	std::string fondo;
 
-	if (!capas){
+	if (!capas || capas.size() == 0){
 		Log::getInstancia().logearMensajeEnModo("Fallo el parseo de las capas", Log::MODO_WARNING);
 		fondo = FONDO_DEFAULT;
 		anchoCapas = ANCHO_CAPA;
