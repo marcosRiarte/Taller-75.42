@@ -20,8 +20,8 @@
 #define ALTO_PERSONAJE 30.0f
 #define ZINDEX 1
 #define ORIENTACION_PERSONAJE "DER"
-#define SPRITE_DEFAULT "personajedefault.png"
-#define FONDO_DEFAULT "fondoet.png"
+#define SPRITE_DEFAULT "ima/sprites/player_default.png"
+#define FONDO_DEFAULT "ima/bkg/default_bkg.png"
 //Xjose 3 defino las constantes nuevas
 #define CAMINARPARAADELANTE_DEFAULT "CaminarParaAdelante"
 #define CAMINARPARAATRAS_DEFAULT "CaminarParaAtras"

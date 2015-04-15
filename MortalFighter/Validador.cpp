@@ -103,8 +103,18 @@ void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::st
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*orientacion = ORIENTACION_PERSONAJE;
 	}
-	if ((*sprites == "")) {
-		std::string mensaje = "string de sprites vacio, se toma sprites por defecto";
+
+	const char * archivoPersonaje = sprites->c_str(); //casteo
+	FILE * pFile;
+	fopen_s(&pFile, archivoPersonaje, "r");
+
+	if (pFile != NULL) //si me devolvio puntero existe, cerralo!!!!!
+	{
+		fclose(pFile);
+	}
+	else // el archivo no existe!
+	{
+		std::string mensaje = "sprites no existentes, se toman sprites por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*sprites = SPRITE_DEFAULT;
 	}

@@ -60,11 +60,12 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		anchoPxVentana = (ventana.get("anchopx", ANCHO_PX_VENTANA).asInt());
 		altoPxVentana = (ventana.get("altopx", ALTO_PX_VENTANA).asInt());
 		anchoVentana = (ventana.get("ancho", ANCHO_VENTANA).asFloat());
-		Log::getInstancia().logearMensajeEnModo("Se cargaron valores de la ventana correctamente", Log::MODO_DEBUG);
+		
 	}
 
 	Validador::ValidarVentana(&anchoPxVentana, &altoPxVentana, &anchoVentana);
 	unaVentana = new Ventana(anchoPxVentana, altoPxVentana, anchoVentana);
+	Log::getInstancia().logearMensajeEnModo("Se cargaron valores de la ventana correctamente", Log::MODO_DEBUG);
 
 	Json::Value escenario;
 	escenario = raiz["escenario"];
@@ -83,11 +84,12 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		anchoEscenario = (escenario.get("ancho", ANCHO_ESCENARIO).asFloat());
 		altoEscenario = (escenario.get("alto", ALTO_ESCENARIO).asFloat());
 		yPisoEscenario = (escenario.get("ypiso", Y_PISO_ESCENARIO).asFloat());
-		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario correctamente", Log::MODO_DEBUG);
+		
 	}
 
 	Validador::ValidarEscenario(&anchoEscenario, &altoEscenario, &yPisoEscenario);
 	unEscenario = new Escenario(anchoEscenario, altoEscenario, yPisoEscenario);
+	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario correctamente", Log::MODO_DEBUG);
 
 	Json::Value capas;
 	capas = raiz["capas"];
@@ -146,8 +148,9 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Salto = SALTO_DEFAULT;
 		SaltoDiagonal = SALTODIAGONAL_DEFAULT;
 		Caida = CAIDA_DEFAULT;
-		//XJOSE HAY QUE REVISAR SI ESTE LOG TIENE QUE LOGUEAR ESPECIFICAMENTE QUE FALLO???
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje por defecto", Log::MODO_WARNING);
+		//XJOSE HAY QUE REVISAR SI ESTE LOG TIENE QUE LOGUEAR ESPECIFICAMENTE QUE FALLO???
+		
 	}
 	else{
 		ancho = (personaje.get("ancho", 20).asFloat());
@@ -163,13 +166,12 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		SaltoDiagonal = (personaje.get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).asString());
 		Caida = (personaje.get("Caida", CAIDA_DEFAULT).asString());
 		//XJOSE HAY QUE REVISAR SI ESTE LOG TIENE QUE LOGUEAR ESPECIFICAMENTE QUE FALLO???
-		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje correctamente", Log::MODO_DEBUG);
 	}
 	//XJOSE 5 METO LOS DATOS EN EL VALIDADOR, 6 MODIFICAR FIRMA VALIDADOR, 7 MODIFICAR VALIDADOR
 	Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites, &CaminarParaAdelante, &CaminarParaAtras, &Quieto, &Salto, &SaltoDiagonal, &Caida);
 	//XJOSE8 MODIFICAR ATRIBUTOS Y CONSTRUCTORES DE PERSONAJE Y LOS DESTRUCTORES
 	unPersonaje = new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal, Caida);
-
+	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje correctamente", Log::MODO_DEBUG);
 	return true;
 }
 
