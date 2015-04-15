@@ -100,18 +100,18 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Log::getInstancia().logearMensajeEnModo("Fallo el parseo de las capas", Log::MODO_WARNING);
 		fondo = FONDO_DEFAULT;
 		anchoCapas = ANCHO_CAPA;
-		//xjose 1000 modifico el validador agregando 1 argumento
+		
 		Validador::ValidarCapas(&anchoCapas, &fondo);
 		Capas.push_back(new Capa(fondo, anchoCapas, 0));
 		Log::getInstancia().logearMensajeEnModo("Se cargaron capas por defecto", Log::MODO_WARNING);
 	}
 	else{
 		for (size_t i = 0; i < capas.size(); i++) {
-			//xjose 1001 aca si pusiste asdlkaslkd.png te lo toma, hay que validar
+			
 			std::string fondo(capas[i].get("imagen_fondo", FONDO_DEFAULT).asString());
 			anchoCapas = (capas[i].get("ancho", ANCHO_CAPA).asFloat());
 			int zIndexCapa = (capas[i].get("zindex", ZINDEX_CAPA).asInt());
-			//Xjose 1000 valido que exista el archivo de capas
+			
 			Validador::ValidarCapas(&anchoCapas, &fondo);
 			Capas.push_back(new Capa(fondo, anchoCapas, zIndexCapa));
 		}
@@ -126,7 +126,6 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	int zIndex;
 	std::string orientacion;
 	std::string sprites;
-	//Xjose 1 agrego los string
 	std::string CaminarParaAdelante;
 	std::string CaminarParaAtras;
 	std::string Quieto;
@@ -141,7 +140,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		zIndex = ZINDEX;
 		orientacion = ORIENTACION_PERSONAJE;
 		sprites = SPRITE_DEFAULT;
-		//xjose 2 agrego los default y tengo que definir los define....
+		
 		CaminarParaAdelante = CAMINARPARAADELANTE_DEFAULT;
 		CaminarParaAtras = CAMINARPARAATRAS_DEFAULT;
 		Quieto = QUIETO_DEFAULT;
@@ -149,7 +148,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		SaltoDiagonal = SALTODIAGONAL_DEFAULT;
 		Caida = CAIDA_DEFAULT;
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje por defecto", Log::MODO_WARNING);
-		//XJOSE HAY QUE REVISAR SI ESTE LOG TIENE QUE LOGUEAR ESPECIFICAMENTE QUE FALLO???
+		
 		
 	}
 	else{
@@ -158,18 +157,18 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		zIndex = (personaje.get("zindex", ZINDEX).asInt());
 		sprites = (personaje.get("sprites", SPRITE_DEFAULT).asString());
 		orientacion = (personaje.get("orientacion", ORIENTACION_PERSONAJE).asString());
-		//Xjose 4 obtengo los datos y los asigno
+		
 		CaminarParaAdelante = (personaje.get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).asString());
 		CaminarParaAtras = (personaje.get("CaminarParaAtras", CAMINARPARAATRAS_DEFAULT).asString());
 		Quieto = (personaje.get("Quieto", QUIETO_DEFAULT).asString());
 		Salto = (personaje.get("Salto", SALTO_DEFAULT).asString());
 		SaltoDiagonal = (personaje.get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).asString());
 		Caida = (personaje.get("Caida", CAIDA_DEFAULT).asString());
-		//XJOSE HAY QUE REVISAR SI ESTE LOG TIENE QUE LOGUEAR ESPECIFICAMENTE QUE FALLO???
+		
 	}
-	//XJOSE 5 METO LOS DATOS EN EL VALIDADOR, 6 MODIFICAR FIRMA VALIDADOR, 7 MODIFICAR VALIDADOR
+	
 	Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites, &CaminarParaAdelante, &CaminarParaAtras, &Quieto, &Salto, &SaltoDiagonal, &Caida);
-	//XJOSE8 MODIFICAR ATRIBUTOS Y CONSTRUCTORES DE PERSONAJE Y LOS DESTRUCTORES
+	
 	unPersonaje = new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal, Caida);
 	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje correctamente", Log::MODO_DEBUG);
 	return true;

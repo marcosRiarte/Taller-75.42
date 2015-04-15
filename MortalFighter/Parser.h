@@ -23,7 +23,6 @@
 #define ORIENTACION_PERSONAJE "DER"
 #define SPRITE_DEFAULT "ima/sprites/player_default.png"
 #define FONDO_DEFAULT "ima/bkg/default_capa.png" // al ser varias capas la idea esa usar esta por que va a permitir que se vean el resto de las que si estan
-//Xjose 3 defino las constantes nuevas
 #define CAMINARPARAADELANTE_DEFAULT "CaminarParaAdelante"
 #define CAMINARPARAATRAS_DEFAULT "CaminarParaAtras"
 #define QUIETO_DEFAULT "Quieto"

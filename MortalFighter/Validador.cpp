@@ -30,7 +30,6 @@ void Validador::ValidarVentana(int* anchoPxVentana, int* altoPxVentana, float* a
 		*anchoVentana = ANCHO_VENTANA;
 	}
 }
-//xjose 1000 1001 agrego el parametro fondo para validad que exista
 
 void Validador::ValidarCapas(float *anchoCapa, std::string *fondo){
 	if (!(*anchoCapa > 0)){
@@ -38,7 +37,7 @@ void Validador::ValidarCapas(float *anchoCapa, std::string *fondo){
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*anchoCapa = ANCHO_CAPA;
 	}
-	//xjose 1001 WARNING WARNING WARNIG..... Recodificar mas elegante
+	
 	
 	//  intento abrir el archivo, si el puntero devuelto es NULL NO EXISTE EL ARCHIVO  
 	const char * archivofondo = fondo->c_str(); //casteo
@@ -53,8 +52,7 @@ void Validador::ValidarCapas(float *anchoCapa, std::string *fondo){
 	{
 		std::string mensaje = "No existe la capa, se usa capa por defecto";
 	    Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		//xjose1000 esto esta muy mal harcodeado tiene que decirmelo una constante en un #define cual es la defecto
-		//xjose 1000 HARDCODEO HARCODEO WARNING WARNING ESTA MAL!!!!!!!!!!!!!! CAMBIAR LUNA POR UN DEFINE
+		
 		*fondo = FONDO_DEFAULT;
 	}
 	
@@ -81,7 +79,7 @@ void Validador::ValidarEscenario(float *anchoEscenario, float *altoEscenario, fl
 	}
 }
 
-//Xjose aca el validador, en caso de fallar esta poniendole un dato valido... esto no se hacia en otra parte ya?? en la parte de parser??? revisar
+
 void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::string* orientacion, std::string* sprites, std::string* CaminarParaAdelante, std::string* CaminarParaAtras, std::string* Quieto, std::string* Salto, std::string* SaltoDiagonal, std::string* Caida){
 	if (!(*ancho > 0)) {
 		std::string mensaje = "ancho del Personaje fuera de rango, se toma ancho por defecto";
@@ -118,41 +116,41 @@ void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::st
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*sprites = SPRITE_DEFAULT;
 	}
-	//Xjose 7 modifico validador... uff!!!!! OK si me pongo en hincha p.... tendria que cambiar el orden de los && seguen sea
+	
 	if ((*CaminarParaAdelante != "CaminarParaAdelante") && (*CaminarParaAdelante != "CaminarParaAtras") && (*CaminarParaAdelante != "Quieto") && (*CaminarParaAdelante != "Salto") && (*CaminarParaAdelante != "SaltoDiagonal") && (*CaminarParaAdelante != "Caida")) {
 		std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		//Xjose mmmm si harcodeo aca para que use el #define CAMINARPARAADELANTE_DEFAULT ??????????
+		
 		*CaminarParaAdelante = CAMINARPARAADELANTE_DEFAULT;
 	}
 	if ((*CaminarParaAtras != "CaminarParaAdelante") && (*CaminarParaAtras != "CaminarParaAtras") && (*CaminarParaAtras != "Quieto") && (*CaminarParaAtras != "Salto") && (*CaminarParaAtras != "SaltoDiagonal") && (*CaminarParaAtras != "Caida")) {
 		std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		//Xjose mmmm si harcodeo aca para que use el #define CAMINARPARAADELANTE_DEFAULT ??????????
+		
 		*CaminarParaAtras = CAMINARPARAATRAS_DEFAULT;
 	}
 	if ((*Quieto != "CaminarParaAdelante") && (*Quieto != "CaminarParaAtras") && (*Quieto != "Quieto") && (*Quieto != "Salto") && (*Quieto != "SaltoDiagonal") && (*Quieto != "Caida")) {
 		std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		//Xjose mmmm si harcodeo aca para que use el #define CAMINARPARAADELANTE_DEFAULT ??????????
+		
 		*Quieto = QUIETO_DEFAULT;
 	}
 	if ((*Salto != "CaminarParaAdelante") && (*Salto != "CaminarParaAtras") && (*Salto != "Quieto") && (*Salto != "Salto") && (*Salto != "SaltoDiagonal") && (*Salto != "Caida")) {
 		std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		//Xjose mmmm si harcodeo aca para que use el #define CAMINARPARAADELANTE_DEFAULT ??????????
+		
 		*Salto = SALTO_DEFAULT;
 	}
 	if ((*SaltoDiagonal != "CaminarParaAdelante") && (*SaltoDiagonal != "CaminarParaAtras") && (*SaltoDiagonal != "Quieto") && (*SaltoDiagonal != "Salto") && (*SaltoDiagonal != "SaltoDiagonal") && (*SaltoDiagonal != "Caida")) {
 		std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		//Xjose mmmm si harcodeo aca para que use el #define CAMINARPARAADELANTE_DEFAULT ??????????
+		
 		*SaltoDiagonal = SALTODIAGONAL_DEFAULT;
 	}
 	if ((*Caida != "CaminarParaAdelante") && (*Caida != "CaminarParaAtras") && (*Caida != "Quieto") && (*Caida != "Salto") && (*Caida != "SaltoDiagonal") && (*Caida != "Caida")) {
 		std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		//Xjose mmmm si harcodeo aca para que use el #define CAMINARPARAADELANTE_DEFAULT ??????????
+		
 		*Caida = CAIDA_DEFAULT;
 	}
 }
