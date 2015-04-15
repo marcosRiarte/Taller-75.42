@@ -38,35 +38,46 @@ Sprite::Sprite(){
 	this->Quieto->push_back(crearCuadro(1155, 0, 77, 132));
 	
 	//Caminar para Adelante
-	this->CaminandoParaAdelante->push_back(crearCuadro(0, 268, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(78, 268, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(156, 268, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(234, 268, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(312, 268, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(390, 268, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(468, 268, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(546, 268, 77, 132));
+	this->CaminandoParaAdelante->push_back(crearCuadro(0, 136, 77, 132));
+	this->CaminandoParaAdelante->push_back(crearCuadro(0, 136, 77, 132));
+	this->CaminandoParaAdelante->push_back(crearCuadro(78, 136, 77, 132));
+	this->CaminandoParaAdelante->push_back(crearCuadro(156, 136, 77, 132));
+	this->CaminandoParaAdelante->push_back(crearCuadro(234, 136, 77, 132));
+	this->CaminandoParaAdelante->push_back(crearCuadro(234, 136, 77, 132));
+	this->CaminandoParaAdelante->push_back(crearCuadro(312, 136, 77, 132));
+	this->CaminandoParaAdelante->push_back(crearCuadro(390, 136, 77, 132));
+	this->CaminandoParaAdelante->push_back(crearCuadro(468, 136, 77, 132));
+	this->CaminandoParaAdelante->push_back(crearCuadro(468, 136, 77, 132));
+	this->CaminandoParaAdelante->push_back(crearCuadro(546, 136, 77, 132));
+
 
 	//Caminar para Atrás
-	this->CaminandoParaAtras->push_back(crearCuadro(0, 136, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(78, 136, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(78, 136, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(156, 136, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(234, 136, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(234, 136, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(312, 136, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(390, 136, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(390, 136, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(468, 136, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(546, 136, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(546, 136, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(0, 268, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(78, 268, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(78, 268, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(156, 268, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(234, 268, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(234, 268, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(312, 268, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(390, 268, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(390, 268, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(468, 268, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(546, 268, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(546, 268, 77, 132));
 
 
 	//Salto
 	this->Salto->push_back(crearCuadro(0, 400, 77, 132));
 	this->Salto->push_back(crearCuadro(0, 400, 77, 132));
 	this->Salto->push_back(crearCuadro(0, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(0, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
 	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
 	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
 	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
@@ -77,6 +88,8 @@ Sprite::Sprite(){
 	this->Salto->push_back(crearCuadro(156, 400, 77, 132));
 
 	//Salto Diagonal
+	this->SaltoDiagonal->push_back(crearCuadro(0, 534, 77, 132));
+	// 1 giro
 	this->SaltoDiagonal->push_back(crearCuadro(77, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(154, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(231, 534, 77, 132));
@@ -84,30 +97,19 @@ Sprite::Sprite(){
 	this->SaltoDiagonal->push_back(crearCuadro(385, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(462, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(539, 534, 77, 132));
+	//2do giro
+	this->SaltoDiagonal->push_back(crearCuadro(77, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(154, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(231, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(308, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(385, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(462, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(539, 534, 77, 132));
+	//
 	this->SaltoDiagonal->push_back(crearCuadro(0, 534, 77, 132));
-
-	//this->SaltoDiagonal->push_back(crearCuadro(0, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(0, 534, 77, 132));
 	
-	//xjose... esto anda para el.... tengo que repetir cuadros para que la animacion quede bien
-	//ademas si tocas la gravedad te altera la reproducion de los sprites y los vuelve a joder
-	//caida del salto
-	//caida del salto
-	/*
-	this->Caida->push_back(crearCuadro(78, 400, 77, 132));
-	this->Caida->push_back(crearCuadro(78, 400, 77, 132));
-	this->Caida->push_back(crearCuadro(78, 400, 77, 132));
-	this->Caida->push_back(crearCuadro(78, 400, 77, 132));
-	this->Caida->push_back(crearCuadro(78, 400, 77, 132));
-	this->Caida->push_back(crearCuadro(78, 400, 77, 132));
-	this->Caida->push_back(crearCuadro(78, 400, 77, 132));
-	this->Caida->push_back(crearCuadro(156, 400, 77, 132));
-	this->Caida->push_back(crearCuadro(156, 400, 77, 132));
-	*/
-	//xjose necesitamos 2 caidas.... 
-	
-	
-	
+		
 }
 
 std::vector<SDL_Rect*>* Sprite::listaDeCuadros(std::string unEstado){
