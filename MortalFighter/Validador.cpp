@@ -106,7 +106,7 @@ void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::st
 	if ((*sprites == "")) {
 		std::string mensaje = "string de sprites vacio, se toma sprites por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*sprites = "mario2.png";
+		*sprites = SPRITE_DEFAULT;
 	}
 	//Xjose 7 modifico validador... uff!!!!! OK si me pongo en hincha p.... tendria que cambiar el orden de los && seguen sea
 	if ((*CaminarParaAdelante != "CaminarParaAdelante") && (*CaminarParaAdelante != "CaminarParaAtras") && (*CaminarParaAdelante != "Quieto") && (*CaminarParaAdelante != "Salto") && (*CaminarParaAdelante != "SaltoDiagonal") && (*CaminarParaAdelante != "Caida")) {

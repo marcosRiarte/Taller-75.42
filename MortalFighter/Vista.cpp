@@ -148,9 +148,9 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 		estadoDelPersonaje = personajeVista.getSalto();
 	}
 
-	if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ABAJO_DER)){
+	/*if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ABAJO_DER)){
 		estadoDelPersonaje = personajeVista.getCaida();
-	}
+	}*/
 	if ((estadoPersonaje == ESTADO::QUIETODER) || (estadoPersonaje == ESTADO::QUIETOIZQ)) {
 		estadoDelPersonaje = personajeVista.getQuieto();
 	}

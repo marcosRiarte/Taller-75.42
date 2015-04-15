@@ -45,8 +45,13 @@ MOV_TIPO Controlador::cambiar(){
 	//SI NO SIRVE SE COMENTA Y CHAU.
 	//PERO DE ESTA FORMA SI TENES PULSADA ALGUNA TECLA DESPUES DE SALTAR POR EJEMPLO SE SIGUE MOVIENDO.
 	if (state[SDL_SCANCODE_RIGHT]){
-		if (state[SDL_SCANCODE_LEFT]) return IZQ;
+		if (state[SDL_SCANCODE_LEFT]) return QUIETO;
 		return DER;
+	}
+
+	if (state[SDL_SCANCODE_LEFT]){
+		if (state[SDL_SCANCODE_RIGHT]) return QUIETO;
+		return IZQ;
 	}
 
 	if (state[SDL_SCANCODE_LEFT]){

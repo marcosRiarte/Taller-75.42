@@ -108,7 +108,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 			//xjose 1001 aca si pusiste asdlkaslkd.png te lo toma, hay que validar
 			std::string fondo(capas[i].get("imagen_fondo", FONDO_DEFAULT).asString());
 			anchoCapas = (capas[i].get("ancho", ANCHO_CAPA).asFloat());
-			int zIndexCapa = (capas[i].get("zindex", 0).asInt());
+			int zIndexCapa = (capas[i].get("zindex", 0).asInt());			
 			//Xjose 1000 valido que exista el archivo de capas
 			Validador::ValidarCapas(&anchoCapas, &fondo);
 			Capas.push_back(new Capa(fondo, anchoCapas, zIndexCapa));

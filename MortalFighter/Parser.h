@@ -20,7 +20,7 @@
 #define ALTO_PERSONAJE 30.0f
 #define ZINDEX 1
 #define ORIENTACION_PERSONAJE "DER"
-#define SPRITE_DEFAULT "SpriteSheet.png"
+#define SPRITE_DEFAULT "personajedefault.png"
 #define FONDO_DEFAULT "fondoet.png"
 //Xjose 3 defino las constantes nuevas
 #define CAMINARPARAADELANTE_DEFAULT "CaminarParaAdelante"

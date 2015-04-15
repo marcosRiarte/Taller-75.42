@@ -35,8 +35,13 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento)
 	// si no está en el piso siente la gravedad
 
 	if (!unCuerpo->estaEnPiso()){
-		unCuerpo->sumarVelocidad(gravedad * difTiempo);
-		nuevoEstado = ABAJO_DER;
+		if (unCuerpo->getVelocidad().x == 0)
+			nuevoEstado = ARRIBA_DER;
+		else if (unCuerpo->getVelocidad().x > 0)
+			nuevoEstado = SALTODER_DER;
+		else 
+			nuevoEstado = SALTOIZQ_DER;
+		unCuerpo->sumarVelocidad(gravedad * difTiempo);		
 	}
 	else{
 

@@ -50,21 +50,44 @@ Sprite::Sprite(){
 	//Caminar para Atrás
 	this->CaminandoParaAtras->push_back(crearCuadro(0, 136, 77, 132));
 	this->CaminandoParaAtras->push_back(crearCuadro(78, 136, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(78, 136, 77, 132));
 	this->CaminandoParaAtras->push_back(crearCuadro(156, 136, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(234, 136, 77, 132));
 	this->CaminandoParaAtras->push_back(crearCuadro(234, 136, 77, 132));
 	this->CaminandoParaAtras->push_back(crearCuadro(312, 136, 77, 132));
 	this->CaminandoParaAtras->push_back(crearCuadro(390, 136, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(390, 136, 77, 132));
 	this->CaminandoParaAtras->push_back(crearCuadro(468, 136, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(546, 136, 77, 132));
 	this->CaminandoParaAtras->push_back(crearCuadro(546, 136, 77, 132));
 
 
 	//Salto
 	this->Salto->push_back(crearCuadro(0, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(0, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(0, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(0, 400, 77, 132));
 	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(156, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(156, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(156, 400, 77, 132));
 	this->Salto->push_back(crearCuadro(156, 400, 77, 132));
 
 	//Salto Diagonal
+	this->SaltoDiagonal->push_back(crearCuadro(77, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(154, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(231, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(308, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(385, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(462, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(539, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(539, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(0, 534, 77, 132));
+
+	//this->SaltoDiagonal->push_back(crearCuadro(0, 534, 77, 132));
 	
 	//xjose... esto anda para el.... tengo que repetir cuadros para que la animacion quede bien
 	//ademas si tocas la gravedad te altera la reproducion de los sprites y los vuelve a joder
@@ -82,15 +105,8 @@ Sprite::Sprite(){
 	this->Caida->push_back(crearCuadro(156, 400, 77, 132));
 	*/
 	//xjose necesitamos 2 caidas.... 
-	this->Caida->push_back(crearCuadro(77, 534, 77, 132));
-	this->Caida->push_back(crearCuadro(154, 534, 77, 132));
-	this->Caida->push_back(crearCuadro(231, 534, 77, 132));
-	this->Caida->push_back(crearCuadro(308, 534, 77, 132));
-	this->Caida->push_back(crearCuadro(385, 534, 77, 132));
-	this->Caida->push_back(crearCuadro(462, 534, 77, 132));
-		this->Caida->push_back(crearCuadro(539, 534, 77, 132));
-		this->Caida->push_back(crearCuadro(539, 534, 77, 132));
-	this->Caida->push_back(crearCuadro(0, 534, 77, 132));
+	
+	
 	
 }
 
