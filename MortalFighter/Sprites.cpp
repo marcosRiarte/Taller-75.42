@@ -67,9 +67,6 @@ Sprite::Sprite(){
 
 
 	//Salto
-	this->Salto->push_back(crearCuadro(0, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(0, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(0, 400, 77, 132));
 	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
 	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
 	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
@@ -82,32 +79,24 @@ Sprite::Sprite(){
 	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
 	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
 	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(156, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(156, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(156, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(156, 400, 77, 132));
+	
 
 	//Salto Diagonal
-	this->SaltoDiagonal->push_back(crearCuadro(0, 534, 77, 132));
-	// 1 giro
+	this->SaltoDiagonal->push_back(crearCuadro(77, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(77, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(154, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(231, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(308, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(385, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(462, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(539, 534, 77, 132));
-	//2do giro
-	this->SaltoDiagonal->push_back(crearCuadro(77, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(154, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(231, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(231, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(308, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(308, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(385, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(385, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(462, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(462, 534, 77, 132));
 	this->SaltoDiagonal->push_back(crearCuadro(539, 534, 77, 132));
-	//
-	this->SaltoDiagonal->push_back(crearCuadro(0, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(0, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(539, 534, 77, 132));
+	
 	
 		
 }
