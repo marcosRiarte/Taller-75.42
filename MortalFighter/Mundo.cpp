@@ -46,7 +46,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento)
 		}
 		if (movimiento == IZQ){
 			nuevoEstado = IZQ_DER;
-			unCuerpo->mover(-DISTANCIA);
+			unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
 		}
 
 		if (movimiento == ARRIBA){

@@ -40,7 +40,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			if ((movimiento == CERRAR) || (movimiento == RECARGAR))
 				break;
 
-			unMundo->Paso(0.35f, movimiento);
+			unMundo->Paso(0.13f, movimiento);
 
 			unaVista->actualizar(movimiento, Parser::getInstancia().getPersonaje().getEstado()); //Nescesita pasarle el personaje y su estado
 
