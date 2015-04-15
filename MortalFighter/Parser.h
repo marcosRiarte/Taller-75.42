@@ -8,17 +8,18 @@
 
 #define ANCHO_PX_VENTANA 800
 #define ALTO_PX_VENTANA 600
-#define ANCHO_VENTANA 500.0f
+#define ANCHO_VENTANA 200.0f
 
 #define ANCHO_ESCENARIO 1000.5f
 #define ALTO_ESCENARIO 150.0f
 #define Y_PISO_ESCENARIO 20.0f
 
 #define ANCHO_CAPA 500.0f
+#define ZINDEX_CAPA 0
 
-#define ANCHO_PERSONAJE 20.0f
-#define ALTO_PERSONAJE 30.0f
-#define ZINDEX 1
+#define ANCHO_PERSONAJE 50.0f
+#define ALTO_PERSONAJE 70.0f
+#define ZINDEX 4
 #define ORIENTACION_PERSONAJE "DER"
 #define SPRITE_DEFAULT "ima/sprites/player_default.png"
 #define FONDO_DEFAULT "ima/bkg/default_capa.png" // al ser varias capas la idea esa usar esta por que va a permitir que se vean el resto de las que si estan
