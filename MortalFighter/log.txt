@@ -30,3 +30,73 @@
 2015-04-14.23:17:23 [DEBUG] Se cargaron capas correctamente
 2015-04-14.23:17:23 [DEBUG] Se cargaron valores del personaje correctamente
 
+---------------------------------------------------------------------------------
+
+2015-04-14.23:18:34 [DEBUG] Parseo del archivo json correcto
+2015-04-14.23:18:34 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.23:18:34 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.23:18:34 [DEBUG] Se cargaron capas correctamente
+2015-04-14.23:18:34 [DEBUG] Se cargaron valores del personaje correctamente
+---------------------------------------------------------------------------------
+
+2015-04-14.23:19:05 [DEBUG] Parseo del archivo json correcto
+2015-04-14.23:19:05 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.23:19:05 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.23:19:05 [DEBUG] Se cargaron capas correctamente
+2015-04-14.23:19:05 [DEBUG] Se cargaron valores del personaje correctamente
+---------------------------------------------------------------------------------
+
+2015-04-14.23:20:48 [DEBUG] Parseo del archivo json correcto
+2015-04-14.23:20:48 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.23:20:48 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.23:20:48 [DEBUG] Se cargaron capas correctamente
+2015-04-14.23:20:48 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.23:21:41 [DEBUG] Parseo del archivo json correcto
+2015-04-14.23:21:41 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.23:21:41 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.23:21:41 [DEBUG] Se cargaron capas correctamente
+2015-04-14.23:21:41 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.23:22:01 [DEBUG] Parseo del archivo json correcto
+2015-04-14.23:22:01 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.23:22:01 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.23:22:01 [DEBUG] Se cargaron capas correctamente
+2015-04-14.23:22:01 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.23:22:16 [DEBUG] Parseo del archivo json correcto
+2015-04-14.23:22:16 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.23:22:16 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.23:22:16 [DEBUG] Se cargaron capas correctamente
+2015-04-14.23:22:16 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.23:22:34 [DEBUG] Parseo del archivo json correcto
+2015-04-14.23:22:34 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.23:22:34 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.23:22:34 [DEBUG] Se cargaron capas correctamente
+2015-04-14.23:22:34 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.23:23:14 [DEBUG] Parseo del archivo json correcto
+2015-04-14.23:23:14 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.23:23:14 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.23:23:14 [DEBUG] Se cargaron capas correctamente
+2015-04-14.23:23:14 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-14.23:24:15 [DEBUG] Parseo del archivo json correcto
+2015-04-14.23:24:15 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-14.23:24:15 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-14.23:24:15 [DEBUG] Se cargaron capas correctamente
+2015-04-14.23:24:15 [DEBUG] Se cargaron valores del personaje correctamente
+

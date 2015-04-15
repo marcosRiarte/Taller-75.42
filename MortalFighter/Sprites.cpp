@@ -88,9 +88,9 @@ Sprite::Sprite(){
 	this->Caida->push_back(crearCuadro(308, 534, 77, 132));
 	this->Caida->push_back(crearCuadro(385, 534, 77, 132));
 	this->Caida->push_back(crearCuadro(462, 534, 77, 132));
-	this->Caida->push_back(crearCuadro(78, 534, 77, 132));
-	this->Caida->push_back(crearCuadro(539, 534, 77, 132));
-	this->Caida->push_back(crearCuadro(616, 534, 77, 132));
+		this->Caida->push_back(crearCuadro(539, 534, 77, 132));
+		this->Caida->push_back(crearCuadro(539, 534, 77, 132));
+	this->Caida->push_back(crearCuadro(0, 534, 77, 132));
 	
 }
 
