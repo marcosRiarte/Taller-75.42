@@ -194,43 +194,40 @@
     </Library>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="The_Pit_II_2.png">
+    <Image Include="ima\bkg\p_3.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="trans.png">
+    <Image Include="ima\bkg\p_4.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\..\..\..\Downloads\Barra_Energia.png">
+    <Image Include="ima\bkg\p_bkg.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="mario2.png">
+    <Image Include="ima\bkg\default_bkg.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="goro.png">
+    <Image Include="ima\bkg\default_p1.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="columnas.png">
+    <Image Include="ima\bkg\default_p2.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="escenario2sincol.png">
+    <Image Include="ima\bkg\default_p3.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="escenariogoro.png">
+    <Image Include="ima\bkg\default_p4.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="firstpart.png">
+    <Image Include="ima\bkg\p_1.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="fondoet.png">
+    <Image Include="ima\bkg\p_2.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="luna.png">
+    <Image Include="ima\sprites\player_default.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="ring.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="personajedefault.png">
+    <Image Include="ima\sprites\player1.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

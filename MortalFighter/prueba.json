@@ -11,7 +11,7 @@
     },
     "capas": [
         {
-            "imagen_fondo": "ima/bkg/p_bg.png",
+            "imagen_fondo": "ima/bkg/p_bkg.png",
             "ancho": 200
         },
         {

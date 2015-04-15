@@ -518,3 +518,110 @@
 2015-04-15.10:01:23 [DEBUG] Se cargaron capas correctamente
 2015-04-15.10:01:23 [DEBUG] Se cargaron valores del personaje correctamente
 
+---------------------------------------------------------------------------------
+
+2015-04-15.10:16:36 [DEBUG] Parseo del archivo json correcto
+2015-04-15.10:16:36 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-15.10:16:36 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-15.10:16:36 [DEBUG] Se cargaron capas correctamente
+2015-04-15.10:16:36 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-15.10:16:46 [WARNING] Fallo el parseo, se carga json por defecto* Line 1, Column 1
+  Syntax error: value, object or array expected.
+* Line 1, Column 1
+  A valid JSON document must be either an array or an object value.
+
+2015-04-15.10:16:46 [DEBUG] Parseo del archivo json por defecto correcto
+2015-04-15.10:16:46 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-15.10:16:46 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-15.10:16:46 [DEBUG] Se cargaron capas correctamente
+2015-04-15.10:16:46 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-15.10:20:33 [DEBUG] Parseo del archivo json correcto
+2015-04-15.10:20:33 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-15.10:20:33 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-15.10:20:33 [DEBUG] Se cargaron capas correctamente
+2015-04-15.10:20:33 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-15.10:20:42 [WARNING] Fallo el parseo, se carga json por defecto* Line 1, Column 1
+  Syntax error: value, object or array expected.
+* Line 1, Column 1
+  A valid JSON document must be either an array or an object value.
+
+2015-04-15.10:20:42 [DEBUG] Parseo del archivo json por defecto correcto
+2015-04-15.10:20:42 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-15.10:20:42 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-15.10:20:42 [DEBUG] Se cargaron capas correctamente
+2015-04-15.10:20:42 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-15.10:24:40 [WARNING] Fallo el parseo, se carga json por defecto* Line 1, Column 1
+  Syntax error: value, object or array expected.
+* Line 1, Column 1
+  A valid JSON document must be either an array or an object value.
+
+2015-04-15.10:24:40 [DEBUG] Parseo del archivo json por defecto correcto
+2015-04-15.10:24:40 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-15.10:24:40 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-15.10:24:40 [DEBUG] Se cargaron capas correctamente
+2015-04-15.10:24:40 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-15.10:29:26 [WARNING] Fallo el parseo, se carga json por defecto* Line 1, Column 1
+  Syntax error: value, object or array expected.
+* Line 1, Column 1
+  A valid JSON document must be either an array or an object value.
+
+2015-04-15.10:29:26 [DEBUG] Parseo del archivo json por defecto correcto
+2015-04-15.10:29:26 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-15.10:29:26 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-15.10:29:26 [DEBUG] Se cargaron capas correctamente
+2015-04-15.10:29:26 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-15.10:30:45 [WARNING] Fallo el parseo, se carga json por defecto* Line 1, Column 1
+  Syntax error: value, object or array expected.
+* Line 1, Column 1
+  A valid JSON document must be either an array or an object value.
+
+2015-04-15.10:30:45 [DEBUG] Parseo del archivo json por defecto correcto
+2015-04-15.10:30:45 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-15.10:30:45 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-15.10:30:45 [DEBUG] Se cargaron capas correctamente
+2015-04-15.10:30:45 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-15.10:34:30 [WARNING] Fallo el parseo, se carga json por defecto* Line 1, Column 1
+  Syntax error: value, object or array expected.
+* Line 1, Column 1
+  A valid JSON document must be either an array or an object value.
+
+2015-04-15.10:34:30 [DEBUG] Parseo del archivo json por defecto correcto
+2015-04-15.10:34:30 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-15.10:34:30 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-15.10:34:30 [DEBUG] Se cargaron capas correctamente
+2015-04-15.10:34:30 [DEBUG] Se cargaron valores del personaje correctamente
+
+---------------------------------------------------------------------------------
+
+2015-04-15.10:34:59 [WARNING] Fallo el parseo, se carga json por defecto* Line 1, Column 1
+  Syntax error: value, object or array expected.
+* Line 1, Column 1
+  A valid JSON document must be either an array or an object value.
+
+2015-04-15.10:34:59 [DEBUG] Parseo del archivo json por defecto correcto
+2015-04-15.10:34:59 [DEBUG] Se cargaron valores de la ventana correctamente
+2015-04-15.10:34:59 [DEBUG] Se cargaron valores del escenario correctamente
+2015-04-15.10:34:59 [DEBUG] Se cargaron capas correctamente
+2015-04-15.10:34:59 [DEBUG] Se cargaron valores del personaje correctamente
+
