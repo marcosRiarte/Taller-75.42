@@ -20,82 +20,82 @@ Sprite::Sprite(){
 	this->Quieto = new std::vector<SDL_Rect*>();
 
 	//Quieto
-	this->Quieto->push_back(crearCuadro(0, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(77, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(154, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(231, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(308, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(385, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(462, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(539, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(616, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(693, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(770, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(847, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(924, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(1001, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(1078, 0, 77, 132));
-	this->Quieto->push_back(crearCuadro(1155, 0, 77, 132));
+	this->Quieto->push_back(crearCuadro(0, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(154, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(308, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(462, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(616, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(770, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(924, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(1078, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(1232, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(1386, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(1540, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(1694, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(1848, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(2002, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(2156, 0, 154, 264));
+	this->Quieto->push_back(crearCuadro(2310, 0, 154, 264));
 	
 	//Caminar para Adelante
-	this->CaminandoParaAdelante->push_back(crearCuadro(0, 136, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(0, 136, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(78, 136, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(156, 136, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(234, 136, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(234, 136, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(312, 136, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(390, 136, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(468, 136, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(468, 136, 77, 132));
-	this->CaminandoParaAdelante->push_back(crearCuadro(546, 136, 77, 132));
+	this->CaminandoParaAdelante->push_back(crearCuadro(0, 272, 154, 264));
+	this->CaminandoParaAdelante->push_back(crearCuadro(0, 272, 154, 264));
+	this->CaminandoParaAdelante->push_back(crearCuadro(156, 272, 154, 264));
+	this->CaminandoParaAdelante->push_back(crearCuadro(312, 272, 154, 264));
+	this->CaminandoParaAdelante->push_back(crearCuadro(468, 272, 154, 264));
+	this->CaminandoParaAdelante->push_back(crearCuadro(468, 272, 154, 264));
+	this->CaminandoParaAdelante->push_back(crearCuadro(624, 272, 154, 264));
+	this->CaminandoParaAdelante->push_back(crearCuadro(780, 272, 154, 264));
+	this->CaminandoParaAdelante->push_back(crearCuadro(936, 272, 154, 264));
+	this->CaminandoParaAdelante->push_back(crearCuadro(936, 272, 154, 264));
+	this->CaminandoParaAdelante->push_back(crearCuadro(1092, 272, 154, 264));
 
 
 	//Caminar para Atrás
-	this->CaminandoParaAtras->push_back(crearCuadro(0, 268, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(78, 268, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(78, 268, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(156, 268, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(234, 268, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(234, 268, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(312, 268, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(390, 268, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(390, 268, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(468, 268, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(546, 268, 77, 132));
-	this->CaminandoParaAtras->push_back(crearCuadro(546, 268, 77, 132));
+	this->CaminandoParaAtras->push_back(crearCuadro(0, 536, 154, 264));
+	this->CaminandoParaAtras->push_back(crearCuadro(156, 536, 154, 264));
+	this->CaminandoParaAtras->push_back(crearCuadro(156, 536, 154, 264));
+	this->CaminandoParaAtras->push_back(crearCuadro(312, 536, 154, 264));
+	this->CaminandoParaAtras->push_back(crearCuadro(468, 536, 154, 264));
+	this->CaminandoParaAtras->push_back(crearCuadro(468, 536, 154, 264));
+	this->CaminandoParaAtras->push_back(crearCuadro(624, 536, 154, 264));
+	this->CaminandoParaAtras->push_back(crearCuadro(780, 536, 154, 264));
+	this->CaminandoParaAtras->push_back(crearCuadro(780, 536, 154, 264));
+	this->CaminandoParaAtras->push_back(crearCuadro(936, 536, 154, 264));
+	this->CaminandoParaAtras->push_back(crearCuadro(1092, 536, 154, 264));
+	this->CaminandoParaAtras->push_back(crearCuadro(1092, 536, 154, 264));
 
 
 	//Salto
-	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
-	this->Salto->push_back(crearCuadro(78, 400, 77, 132));
+	this->Salto->push_back(crearCuadro(156, 800, 154, 264));
+	this->Salto->push_back(crearCuadro(156, 800, 154, 264));
+	this->Salto->push_back(crearCuadro(156, 800, 154, 264));
+	this->Salto->push_back(crearCuadro(156, 800, 154, 264));
+	this->Salto->push_back(crearCuadro(156, 800, 154, 264));
+	this->Salto->push_back(crearCuadro(156, 800, 154, 264));
+	this->Salto->push_back(crearCuadro(156, 800, 154, 264));
+	this->Salto->push_back(crearCuadro(156, 800, 154, 264));
+	this->Salto->push_back(crearCuadro(156, 800, 154, 264));
+	this->Salto->push_back(crearCuadro(156, 800, 154, 264));
+	this->Salto->push_back(crearCuadro(156, 800, 154, 264));
+	this->Salto->push_back(crearCuadro(156, 800, 154, 264));
 	
 
 	//Salto Diagonal
-	this->SaltoDiagonal->push_back(crearCuadro(77, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(77, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(154, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(154, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(231, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(231, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(308, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(308, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(385, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(385, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(462, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(462, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(539, 534, 77, 132));
-	this->SaltoDiagonal->push_back(crearCuadro(539, 534, 77, 132));
+	this->SaltoDiagonal->push_back(crearCuadro(154, 1068, 154, 264));
+	this->SaltoDiagonal->push_back(crearCuadro(154, 1068, 154, 264));
+	this->SaltoDiagonal->push_back(crearCuadro(308, 1068, 154, 264));
+	this->SaltoDiagonal->push_back(crearCuadro(308, 1068, 154, 264));
+	this->SaltoDiagonal->push_back(crearCuadro(462, 1068, 154, 264));
+	this->SaltoDiagonal->push_back(crearCuadro(462, 1068, 154, 264));
+	this->SaltoDiagonal->push_back(crearCuadro(616, 1068, 154, 264));
+	this->SaltoDiagonal->push_back(crearCuadro(616, 1068, 154, 264));
+	this->SaltoDiagonal->push_back(crearCuadro(770, 1068, 154, 264));
+	this->SaltoDiagonal->push_back(crearCuadro(770, 1068, 154, 264));
+	this->SaltoDiagonal->push_back(crearCuadro(924, 1068, 154, 264));
+	this->SaltoDiagonal->push_back(crearCuadro(924, 1068, 154, 264));
+	this->SaltoDiagonal->push_back(crearCuadro(1078, 1068, 154, 264));
+	this->SaltoDiagonal->push_back(crearCuadro(1078, 1068, 154, 264));
 	
 	
 		
