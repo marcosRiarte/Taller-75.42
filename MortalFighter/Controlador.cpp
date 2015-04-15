@@ -9,6 +9,11 @@ Controlador::Controlador()
 MOV_TIPO Controlador::cambiar(){
 	SDL_Event event;
 	SDL_PollEvent(&event);
+
+	if (event.type == SDL_QUIT) {
+		return CERRAR;
+	}
+
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 
 	switch (event.type)
@@ -35,12 +40,8 @@ MOV_TIPO Controlador::cambiar(){
 		case SDLK_r:
 			return RECARGAR;
 		}
-
-	case SDL_QUIT:
-		return CERRAR;
 	}
 
-	
 	if (state[SDL_SCANCODE_RIGHT]){
 		if (state[SDL_SCANCODE_LEFT]) return QUIETO;
 		return DER;
@@ -55,19 +56,13 @@ MOV_TIPO Controlador::cambiar(){
 		return IZQ;
 	}
 
-	/*if (state[SDL_SCANCODE_UP]){
-		if ((state[SDL_SCANCODE_RIGHT]) || (state[SDL_SCANCODE_LEFT]) || (state[SDL_SCANCODE_DOWN])) return QUIETO;
-		return ARRIBA;
-	}*/
-
 	if (state[SDL_SCANCODE_DOWN]){
 		if ((state[SDL_SCANCODE_RIGHT]) || (state[SDL_SCANCODE_LEFT])) return ABAJO;
 		if (state[SDL_SCANCODE_UP]) return ARRIBA;
 		return ABAJO;
 	}
-			
+
 	return QUIETO;
-	//TODO: Hacer la salida
 }
 
 Controlador::~Controlador()
