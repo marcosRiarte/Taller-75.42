@@ -158,6 +158,7 @@
     <Image Include="goro.png" />
     <Image Include="luna.png" />
     <Image Include="mario2.png" />
+    <Image Include="personajedefault.png" />
     <Image Include="ring.png" />
     <Image Include="The_Pit_II_2.png" />
     <Image Include="trans.png" />
