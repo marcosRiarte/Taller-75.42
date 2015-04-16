@@ -8,7 +8,7 @@ Vista::Vista()
 	// Se inicia SDL_image
 
 	IMG_Init(IMG_INIT_PNG);
-		ventana = SDL_CreateWindow("Mortal Fighter", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Parser::getInstancia().getVentana().getAnchoPx(), Parser::getInstancia().getVentana().getAltoPx(), SDL_WINDOW_SHOWN);
+	ventana = SDL_CreateWindow(TITULO_VENTANA, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Parser::getInstancia().getVentana().getAnchoPx(), Parser::getInstancia().getVentana().getAltoPx(), SDL_WINDOW_SHOWN);
 		if (ventana == nullptr){
 			std::string mensaje = "SDL_CreateWindow Error: ";
 			const char* elError = SDL_GetError();

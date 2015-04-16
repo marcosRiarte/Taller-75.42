@@ -4,6 +4,8 @@
 #include <list>
 #include "Sprites.h"
 
+#define TITULO_VENTANA "MortalFither"
+
 class Vista
 {
 public:
