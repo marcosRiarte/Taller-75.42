@@ -62,38 +62,22 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores de la ventana por defecto", Log::MODO_WARNING);
 	}
 	else{
-		if (ventana.get("anchopx", ANCHO_PX_VENTANA).isNumeric()) 
-			try {
-				anchoPxVentana = (ventana.get("anchopx", ANCHO_PX_VENTANA).asInt());
-			} catch (...) {
-				anchoPxVentana = ANCHO_PX_VENTANA;
-				Log::getInstancia().logearMensajeEnModo("Se carga anchopx de la ventana por defecto", Log::MODO_WARNING);
-			}
+		if (ventana.get("anchopx", ANCHO_PX_VENTANA).isNumeric() && ventana.get("anchopx", ANCHO_PX_VENTANA) < INT_MAX)			
+				anchoPxVentana = (ventana.get("anchopx", ANCHO_PX_VENTANA).asInt());			
 		else {
 			anchoPxVentana = ANCHO_PX_VENTANA;
 			Log::getInstancia().logearMensajeEnModo("Se carga anchopx de la ventana por defecto", Log::MODO_WARNING);
 		}
 
-		if (ventana.get("altopx", ALTO_PX_VENTANA).isNumeric())
-			try {
-				altoPxVentana = (ventana.get("altopx", ALTO_PX_VENTANA).asInt());
-			} catch (...) {
-				altoPxVentana = ALTO_PX_VENTANA;
-				Log::getInstancia().logearMensajeEnModo("Se carga altopx de la ventana por defecto", Log::MODO_WARNING);
-			}
+		if (ventana.get("altopx", ALTO_PX_VENTANA).isNumeric() && ventana.get("altopx", ALTO_PX_VENTANA) < INT_MAX)
+			altoPxVentana = (ventana.get("altopx", ALTO_PX_VENTANA).asInt());			
 		else {
 			altoPxVentana = ALTO_PX_VENTANA;
 			Log::getInstancia().logearMensajeEnModo("Se carga altopx de la ventana por defecto", Log::MODO_WARNING);
 		}
 
-		if (ventana.get("ancho", ANCHO_VENTANA).isNumeric())
-			try {
-				anchoVentana = (ventana.get("ancho", ANCHO_VENTANA).asFloat());
-			}
-			catch (...) {
-				anchoVentana = ANCHO_VENTANA;
-				Log::getInstancia().logearMensajeEnModo("Se carga ancho de la ventana por defecto", Log::MODO_WARNING);
-			}
+		if (ventana.get("ancho", ANCHO_VENTANA).isNumeric() && ventana.get("ancho", ANCHO_VENTANA) < INT_MAX)			
+				anchoVentana = (ventana.get("ancho", ANCHO_VENTANA).asFloat());			
 		else {
 			anchoVentana = ANCHO_VENTANA;
 			Log::getInstancia().logearMensajeEnModo("Se carga ancho de la ventana por defecto", Log::MODO_WARNING);
@@ -119,40 +103,22 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario por defecto", Log::MODO_WARNING);
 	}
 	else{
-		if (escenario.get("ancho", ANCHO_ESCENARIO).isNumeric())
-			try {
-				anchoEscenario = (escenario.get("ancho", ANCHO_ESCENARIO).asFloat());
-				}
-			catch (...) {
-				anchoEscenario = ANCHO_ESCENARIO;
-				Log::getInstancia().logearMensajeEnModo("Se carga ancho del escenario por defecto", Log::MODO_WARNING);
-			}
+		if (escenario.get("ancho", ANCHO_ESCENARIO).isNumeric() && escenario.get("ancho", ANCHO_ESCENARIO) < INT_MAX)			
+				anchoEscenario = (escenario.get("ancho", ANCHO_ESCENARIO).asFloat());				
 		else {
 			anchoEscenario = ANCHO_ESCENARIO;
 			Log::getInstancia().logearMensajeEnModo("Se carga ancho del escenario por defecto", Log::MODO_WARNING);
 		}
 
-		if (escenario.get("alto", ALTO_ESCENARIO).isNumeric())
-			try {
-				altoEscenario = (escenario.get("alto", ALTO_ESCENARIO).asFloat());
-			}
-			catch (...) {
-				altoEscenario = ALTO_ESCENARIO;
-				Log::getInstancia().logearMensajeEnModo("Se carga alto del escenario por defecto", Log::MODO_WARNING);
-			}
+		if (escenario.get("alto", ALTO_ESCENARIO).isNumeric() && escenario.get("alto", ALTO_ESCENARIO) < INT_MAX)			
+				altoEscenario = (escenario.get("alto", ALTO_ESCENARIO).asFloat());			
 		else {
 			altoEscenario = ALTO_ESCENARIO;
 			Log::getInstancia().logearMensajeEnModo("Se carga alto del escenario por defecto", Log::MODO_WARNING);
 		}
 
-		if (escenario.get("ypiso", Y_PISO_ESCENARIO).isNumeric())
-			try {
-				yPisoEscenario = (escenario.get("ypiso", Y_PISO_ESCENARIO).asFloat());
-			}
-			catch (...) {
-				yPisoEscenario = Y_PISO_ESCENARIO;
-				Log::getInstancia().logearMensajeEnModo("Se carga piso del escenario por defecto", Log::MODO_WARNING);
-			}
+		if (escenario.get("ypiso", Y_PISO_ESCENARIO).isNumeric() && escenario.get("ypiso", Y_PISO_ESCENARIO) < INT_MAX)
+				yPisoEscenario = (escenario.get("ypiso", Y_PISO_ESCENARIO).asFloat());			
 		else {
 			yPisoEscenario = Y_PISO_ESCENARIO;
 			Log::getInstancia().logearMensajeEnModo("Se carga piso del escenario por defecto", Log::MODO_WARNING);
@@ -187,27 +153,16 @@ bool Parser::parsear(std::string nombreDelArchivo)
 			else
 				Log::getInstancia().logearMensajeEnModo("Se carga capa por defecto", Log::MODO_WARNING);
 
-			if (capas[i].get("ancho", ANCHO_CAPA).isNumeric())
-				try {
-					anchoCapas = (capas[i].get("ancho", ANCHO_CAPA).asFloat());
-				}
-				catch (...) {
-					anchoCapas = ANCHO_CAPA;
-					Log::getInstancia().logearMensajeEnModo("Se carga ancho de capa por defecto", Log::MODO_WARNING);
-				}
+			if (capas[i].get("ancho", ANCHO_CAPA).isNumeric() && capas[i].get("ancho", ANCHO_CAPA) < INT_MAX)				
+					anchoCapas = (capas[i].get("ancho", ANCHO_CAPA).asFloat());				
 			else {
 				anchoCapas = ANCHO_CAPA;
 				Log::getInstancia().logearMensajeEnModo("Se carga ancho de capa por defecto", Log::MODO_WARNING);
 			}
 
 			int zIndexCapa = ZINDEX_CAPA;
-			if (capas[i].get("zindex", ZINDEX_CAPA).isNumeric())
-				try {
-					zIndexCapa = (capas[i].get("zindex", ZINDEX_CAPA).asInt());
-				}
-				catch (...) {
-					Log::getInstancia().logearMensajeEnModo("Se carga z-index de capa por defecto", Log::MODO_WARNING);
-				}
+			if (capas[i].get("zindex", ZINDEX_CAPA).isNumeric() && capas[i].get("zindex", ZINDEX_CAPA) < INT_MAX)
+					zIndexCapa = (capas[i].get("zindex", ZINDEX_CAPA).asInt());				
 			else
 				Log::getInstancia().logearMensajeEnModo("Se carga z-index de capa por defecto", Log::MODO_WARNING);
 									
@@ -250,40 +205,22 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		
 	}
 	else{
-		if (personaje.get("ancho", ANCHO_PERSONAJE).isNumeric())
-			try {
-				ancho = (personaje.get("ancho", ANCHO_PERSONAJE).asFloat());
-			}
-			catch (...) {
-				ancho = ANCHO_PERSONAJE;
-				Log::getInstancia().logearMensajeEnModo("Se carga ancho del personaje por defecto", Log::MODO_WARNING);
-			}
+		if (personaje.get("ancho", ANCHO_PERSONAJE).isNumeric() && personaje.get("ancho", ANCHO_PERSONAJE) < INT_MAX)
+				ancho = (personaje.get("ancho", ANCHO_PERSONAJE).asFloat());			
 		else {
 			ancho = ANCHO_PERSONAJE;
 			Log::getInstancia().logearMensajeEnModo("Se carga ancho del personaje por defecto", Log::MODO_WARNING);
 		}
 
-		if (personaje.get("alto", ALTO_PERSONAJE).isNumeric())
-			try {
+		if (personaje.get("alto", ALTO_PERSONAJE).isNumeric() && personaje.get("alto", ALTO_PERSONAJE) < INT_MAX)
 				alto = (personaje.get("alto", ALTO_PERSONAJE).asFloat());
-			}
-			catch (...) {
-				alto = ALTO_PERSONAJE;
-				Log::getInstancia().logearMensajeEnModo("Se carga alto del personaje por defecto", Log::MODO_WARNING);
-			}
 		else {
 			alto = ALTO_PERSONAJE;
 			Log::getInstancia().logearMensajeEnModo("Se carga alto del personaje por defecto", Log::MODO_WARNING);
 		}
 
-		if (personaje.get("zindex", ZINDEX).isNumeric())
-			try {
-				zIndex = (personaje.get("zindex", ZINDEX).asInt());
-			}
-			catch (...) {
-				zIndex = ZINDEX;
-				Log::getInstancia().logearMensajeEnModo("Se carga z-index del personaje por defecto", Log::MODO_WARNING);
-			}
+		if (personaje.get("zindex", ZINDEX).isNumeric() && personaje.get("zindex", ZINDEX) < INT_MAX)
+				zIndex = (personaje.get("zindex", ZINDEX).asInt());			
 		else {
 			zIndex = ZINDEX;
 			Log::getInstancia().logearMensajeEnModo("Se carga z-index del personaje por defecto", Log::MODO_WARNING);
