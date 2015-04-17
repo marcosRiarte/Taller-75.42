@@ -84,7 +84,7 @@ std::string Personaje::getOrientacion() const
 std::pair<int, int> Personaje::getPosicionPx() const
 {	
 	ManejadorULogicas manejador;
-	float yPiso = Parser::getInstancia().getEscenario().getYPiso() + alto/2;
+	float yPiso = Parser::getInstancia().getEscenario().getYPiso() - ALTO_PERSONAJE + alto +ALTO_PERSONAJE/2;
 
 	return manejador.obtenerPosicionPx(posicionUn.first, posicionUn.second + yPiso); 
 }

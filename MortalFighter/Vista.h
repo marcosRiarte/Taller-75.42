@@ -4,7 +4,8 @@
 #include <list>
 #include "Sprites.h"
 
-#define TITULO_VENTANA "MortalFither"
+#define TITULO_VENTANA "Mortal Figther"
+#define ICONO "ima/MF_icono.png"
 
 class Vista
 {

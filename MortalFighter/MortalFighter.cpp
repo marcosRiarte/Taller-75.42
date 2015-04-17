@@ -5,7 +5,7 @@
 #include "Parser.h"
 #include "Vista.h"
 #include "Mundo.h"
-#include <windows.h>
+//#include <windows.h>
 #include "Controlador.h"
 #include "MortalFigther.h"
 
