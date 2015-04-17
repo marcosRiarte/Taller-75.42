@@ -81,12 +81,12 @@ void Validador::ValidarEscenario(float *anchoEscenario, float *altoEscenario, fl
 
 
 void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::string* orientacion, std::string* sprites, std::string* CaminarParaAdelante, std::string* CaminarParaAtras, std::string* Quieto, std::string* Salto, std::string* SaltoDiagonal, std::string* Caida){
-	if (!(*ancho > 0)) {
+	if (!(*ancho > 0) || *ancho > MAX_ANCHO_PERSONAJE) {
 		std::string mensaje = "ancho del Personaje fuera de rango, se toma ancho por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*ancho = ANCHO_PERSONAJE;
 	}
-	if (!(*alto > 0)) {
+	if (!(*alto > 0) || *alto > MAX_ALTO_PERSONAJE) {
 		std::string mensaje = "alto del Personaje fuera de rango, se toma alto por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*alto = ALTO_PERSONAJE;

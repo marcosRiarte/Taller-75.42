@@ -57,17 +57,42 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores de la ventana por defecto", Log::MODO_WARNING);
 	}
 	else{
-		if (ventana.get("anchopx", ANCHO_PX_VENTANA).isNumeric())
-			anchoPxVentana = (ventana.get("anchopx", ANCHO_PX_VENTANA).asInt());
-		else anchoPxVentana = ANCHO_PX_VENTANA;
+		if (ventana.get("anchopx", ANCHO_PX_VENTANA).isNumeric()) 
+			try {
+				anchoPxVentana = (ventana.get("anchopx", ANCHO_PX_VENTANA).asInt());
+			} catch (...) {
+				anchoPxVentana = ANCHO_PX_VENTANA;
+				Log::getInstancia().logearMensajeEnModo("Se carga anchopx de la ventana por defecto", Log::MODO_WARNING);
+			}
+		else {
+			anchoPxVentana = ANCHO_PX_VENTANA;
+			Log::getInstancia().logearMensajeEnModo("Se carga anchopx de la ventana por defecto", Log::MODO_WARNING);
+		}
 
 		if (ventana.get("altopx", ALTO_PX_VENTANA).isNumeric())
-			altoPxVentana = (ventana.get("altopx", ALTO_PX_VENTANA).asInt());
-		else altoPxVentana = ALTO_PX_VENTANA;
+			try {
+				altoPxVentana = (ventana.get("altopx", ALTO_PX_VENTANA).asInt());
+			} catch (...) {
+				altoPxVentana = ALTO_PX_VENTANA;
+				Log::getInstancia().logearMensajeEnModo("Se carga altopx de la ventana por defecto", Log::MODO_WARNING);
+			}
+		else {
+			altoPxVentana = ALTO_PX_VENTANA;
+			Log::getInstancia().logearMensajeEnModo("Se carga altopx de la ventana por defecto", Log::MODO_WARNING);
+		}
 
 		if (ventana.get("ancho", ANCHO_VENTANA).isNumeric())
-			anchoVentana = (ventana.get("ancho", ANCHO_VENTANA).asFloat());
-		else anchoVentana = ANCHO_VENTANA;
+			try {
+				anchoVentana = (ventana.get("ancho", ANCHO_VENTANA).asFloat());
+			}
+			catch (...) {
+				anchoVentana = ANCHO_VENTANA;
+				Log::getInstancia().logearMensajeEnModo("Se carga ancho de la ventana por defecto", Log::MODO_WARNING);
+			}
+		else {
+			anchoVentana = ANCHO_VENTANA;
+			Log::getInstancia().logearMensajeEnModo("Se carga ancho de la ventana por defecto", Log::MODO_WARNING);
+		}
 		
 	}
 
@@ -90,16 +115,43 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	}
 	else{
 		if (escenario.get("ancho", ANCHO_ESCENARIO).isNumeric())
-			anchoEscenario = (escenario.get("ancho", ANCHO_ESCENARIO).asFloat());
-		else anchoEscenario = ANCHO_ESCENARIO;
+			try {
+				anchoEscenario = (escenario.get("ancho", ANCHO_ESCENARIO).asFloat());
+				}
+			catch (...) {
+				anchoEscenario = ANCHO_ESCENARIO;
+				Log::getInstancia().logearMensajeEnModo("Se carga ancho del escenario por defecto", Log::MODO_WARNING);
+			}
+		else {
+			anchoEscenario = ANCHO_ESCENARIO;
+			Log::getInstancia().logearMensajeEnModo("Se carga ancho del escenario por defecto", Log::MODO_WARNING);
+		}
 
 		if (escenario.get("alto", ALTO_ESCENARIO).isNumeric())
-			altoEscenario = (escenario.get("alto", ALTO_ESCENARIO).asFloat());
-		else altoEscenario = ALTO_ESCENARIO;
+			try {
+				altoEscenario = (escenario.get("alto", ALTO_ESCENARIO).asFloat());
+			}
+			catch (...) {
+				altoEscenario = ALTO_ESCENARIO;
+				Log::getInstancia().logearMensajeEnModo("Se carga alto del escenario por defecto", Log::MODO_WARNING);
+			}
+		else {
+			altoEscenario = ALTO_ESCENARIO;
+			Log::getInstancia().logearMensajeEnModo("Se carga alto del escenario por defecto", Log::MODO_WARNING);
+		}
 
 		if (escenario.get("ypiso", Y_PISO_ESCENARIO).isNumeric())
-			yPisoEscenario = (escenario.get("ypiso", Y_PISO_ESCENARIO).asFloat());
-		else yPisoEscenario = Y_PISO_ESCENARIO;
+			try {
+				yPisoEscenario = (escenario.get("ypiso", Y_PISO_ESCENARIO).asFloat());
+			}
+			catch (...) {
+				yPisoEscenario = Y_PISO_ESCENARIO;
+				Log::getInstancia().logearMensajeEnModo("Se carga piso del escenario por defecto", Log::MODO_WARNING);
+			}
+		else {
+			yPisoEscenario = Y_PISO_ESCENARIO;
+			Log::getInstancia().logearMensajeEnModo("Se carga piso del escenario por defecto", Log::MODO_WARNING);
+		}
 		
 	}
 
@@ -126,15 +178,33 @@ bool Parser::parsear(std::string nombreDelArchivo)
 			
 			std::string fondo(FONDO_DEFAULT);
 			if (capas[i].get("imagen_fondo", FONDO_DEFAULT).isString())
-				fondo = (capas[i].get("imagen_fondo", FONDO_DEFAULT).asString());			
+				fondo = (capas[i].get("imagen_fondo", FONDO_DEFAULT).asString());
+			else
+				Log::getInstancia().logearMensajeEnModo("Se carga capa por defecto", Log::MODO_WARNING);
 
 			if (capas[i].get("ancho", ANCHO_CAPA).isNumeric())
-				anchoCapas = (capas[i].get("ancho", ANCHO_CAPA).asFloat());
-			else anchoCapas = ANCHO_CAPA;
+				try {
+					anchoCapas = (capas[i].get("ancho", ANCHO_CAPA).asFloat());
+				}
+				catch (...) {
+					anchoCapas = ANCHO_CAPA;
+					Log::getInstancia().logearMensajeEnModo("Se carga ancho de capa por defecto", Log::MODO_WARNING);
+				}
+			else {
+				anchoCapas = ANCHO_CAPA;
+				Log::getInstancia().logearMensajeEnModo("Se carga ancho de capa por defecto", Log::MODO_WARNING);
+			}
 
 			int zIndexCapa = ZINDEX_CAPA;
 			if (capas[i].get("zindex", ZINDEX_CAPA).isNumeric())
-				zIndexCapa = (capas[i].get("zindex", ZINDEX_CAPA).asInt());			
+				try {
+					zIndexCapa = (capas[i].get("zindex", ZINDEX_CAPA).asInt());
+				}
+				catch (...) {
+					Log::getInstancia().logearMensajeEnModo("Se carga z-index de capa por defecto", Log::MODO_WARNING);
+				}
+			else
+				Log::getInstancia().logearMensajeEnModo("Se carga z-index de capa por defecto", Log::MODO_WARNING);
 									
 			Validador::ValidarCapas(&anchoCapas, &fondo);
 			Capas.push_back(new Capa(fondo, anchoCapas, zIndexCapa));
@@ -176,48 +246,99 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	}
 	else{
 		if (personaje.get("ancho", ANCHO_PERSONAJE).isNumeric())
-			ancho = (personaje.get("ancho", ANCHO_PERSONAJE).asFloat());
-		else ancho = ANCHO_PERSONAJE;
+			try {
+				ancho = (personaje.get("ancho", ANCHO_PERSONAJE).asFloat());
+			}
+			catch (...) {
+				ancho = ANCHO_PERSONAJE;
+				Log::getInstancia().logearMensajeEnModo("Se carga ancho del personaje por defecto", Log::MODO_WARNING);
+			}
+		else {
+			ancho = ANCHO_PERSONAJE;
+			Log::getInstancia().logearMensajeEnModo("Se carga ancho del personaje por defecto", Log::MODO_WARNING);
+		}
 
 		if (personaje.get("alto", ALTO_PERSONAJE).isNumeric())
-			alto = (personaje.get("alto", ALTO_PERSONAJE).asFloat());
-		else alto = ALTO_PERSONAJE;
+			try {
+				alto = (personaje.get("alto", ALTO_PERSONAJE).asFloat());
+			}
+			catch (...) {
+				alto = ALTO_PERSONAJE;
+				Log::getInstancia().logearMensajeEnModo("Se carga alto del personaje por defecto", Log::MODO_WARNING);
+			}
+		else {
+			alto = ALTO_PERSONAJE;
+			Log::getInstancia().logearMensajeEnModo("Se carga alto del personaje por defecto", Log::MODO_WARNING);
+		}
 
 		if (personaje.get("zindex", ZINDEX).isNumeric())
-			zIndex = (personaje.get("zindex", ZINDEX).asInt());
-		else zIndex = ZINDEX;
+			try {
+				zIndex = (personaje.get("zindex", ZINDEX).asInt());
+			}
+			catch (...) {
+				zIndex = ZINDEX;
+				Log::getInstancia().logearMensajeEnModo("Se carga z-index del personaje por defecto", Log::MODO_WARNING);
+			}
+		else {
+			zIndex = ZINDEX;
+			Log::getInstancia().logearMensajeEnModo("Se carga z-index del personaje por defecto", Log::MODO_WARNING);
+		}
 
 		if (personaje.get("sprites", SPRITE_DEFAULT).isString())
 			sprites = (personaje.get("sprites", SPRITE_DEFAULT).asString());
-		else sprites = SPRITE_DEFAULT;
+		else {
+			sprites = SPRITE_DEFAULT;
+			Log::getInstancia().logearMensajeEnModo("Se carga sprite del personaje por defecto", Log::MODO_WARNING);
+		}
 
 		if (personaje.get("orientacion", ORIENTACION_PERSONAJE).isString())
 			orientacion = (personaje.get("orientacion", ORIENTACION_PERSONAJE).asString());
-		else orientacion = ORIENTACION_PERSONAJE;
+		else {
+			orientacion = ORIENTACION_PERSONAJE;
+			Log::getInstancia().logearMensajeEnModo("Se carga orientación del personaje por defecto", Log::MODO_WARNING);
+		}
 		
 		if (personaje.get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).isString())
 			CaminarParaAdelante = (personaje.get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).asString());
-		else CaminarParaAdelante = CAMINARPARAADELANTE_DEFAULT;
+		else {
+			CaminarParaAdelante = CAMINARPARAADELANTE_DEFAULT;
+			Log::getInstancia().logearMensajeEnModo("Se carga sprite CaminarParaAdelante del personaje por defecto", Log::MODO_WARNING);
+		}
 
 		if (personaje.get("CaminarParaAtras", CAMINARPARAATRAS_DEFAULT).isString())
 			CaminarParaAtras = (personaje.get("CaminarParaAtras", CAMINARPARAATRAS_DEFAULT).asString());
-		else CaminarParaAtras = CAMINARPARAATRAS_DEFAULT;
+		else {
+			CaminarParaAtras = CAMINARPARAATRAS_DEFAULT;
+			Log::getInstancia().logearMensajeEnModo("Se carga sprite CaminarParaAtras del personaje por defecto", Log::MODO_WARNING);
+		}
 
 		if (personaje.get("Quieto", QUIETO_DEFAULT).isString())
 			Quieto = (personaje.get("Quieto", QUIETO_DEFAULT).asString());
-		else Quieto = QUIETO_DEFAULT;
+		else {
+			Quieto = QUIETO_DEFAULT;
+			Log::getInstancia().logearMensajeEnModo("Se carga sprite Quieto del personaje por defecto", Log::MODO_WARNING);
+		}
 
 		if (personaje.get("Salto", SALTO_DEFAULT).isString())
 			Salto = (personaje.get("Salto", SALTO_DEFAULT).asString());
-		else Salto = SALTO_DEFAULT;
+		else {
+			Salto = SALTO_DEFAULT;
+			Log::getInstancia().logearMensajeEnModo("Se carga sprite Salto del personaje por defecto", Log::MODO_WARNING);
+		}
 
 		if (personaje.get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).isString())
 			SaltoDiagonal = (personaje.get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).asString());
-		else SaltoDiagonal = SALTODIAGONAL_DEFAULT;
+		else {
+			SaltoDiagonal = SALTODIAGONAL_DEFAULT;
+			Log::getInstancia().logearMensajeEnModo("Se carga sprite SaltoDiagonal del personaje por defecto", Log::MODO_WARNING);
+		}
 
 		if (personaje.get("Caida", CAIDA_DEFAULT).isString())
 			Caida = (personaje.get("Caida", CAIDA_DEFAULT).asString());
-		else Caida = CAIDA_DEFAULT;
+		else {
+			Caida = CAIDA_DEFAULT;
+			Log::getInstancia().logearMensajeEnModo("Se carga sprite Caida del personaje por defecto", Log::MODO_WARNING);
+		}
 		
 	}
 	

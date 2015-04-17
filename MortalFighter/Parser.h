@@ -18,7 +18,10 @@
 #define ZINDEX_CAPA 0
 
 #define ANCHO_PERSONAJE 50.0f
+#define MAX_ANCHO_PERSONAJE 1000.0f
 #define ALTO_PERSONAJE 70.0f
+#define MAX_ALTO_PERSONAJE 1000.0f
+
 #define ZINDEX 4
 #define ORIENTACION_PERSONAJE "DER"
 #define SPRITE_DEFAULT "ima/sprites/player_default.png"
