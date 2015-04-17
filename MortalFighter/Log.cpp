@@ -3,6 +3,15 @@
 #include <fstream>
 #include "FechayHora.h"
 
+//------------------------------------------------------
+// con este define saco los log por pantalla
+#define DEBUGENVENTANA
+
+#ifdef DEBUGENVENTANA
+using namespace std;
+#endif
+//---------------------------------------------------
+
  std::string Log::pathDelArchivo = "log.txt";
 
 
@@ -13,7 +22,15 @@
 	 //ABRO EL ARCHIVO. SI NO EXISTE LO CREO.
 	 std::ofstream archivoLog(pathDelArchivo, std::ios::out | std::ios::app);
 	 if (archivoLog.is_open()){
-		 archivoLog << "---------------------------------------------------------------------------------" << "\n" <<"\n";
+
+		#ifndef DEBUGENVENTANA
+			archivoLog << "---------------------------------------------------------------------------------" << "\n" <<"\n";
+		#endif
+		 //si esta definido lo imprimo por pantalla
+		#ifdef DEBUGENVENTANA
+			 cout << "---------------------------------------------------------------------------------" << "\n" << "\n";
+		#endif
+		 
 		 archivoLog.close();
 	 }
 
@@ -34,7 +51,16 @@
 		 std::ofstream archivoLog(pathDelArchivo, std::ios::out | std::ios::app);
 
 		 if (archivoLog.is_open()){
+
+			 
+			#ifndef DEBUGENVENTANA
 			 archivoLog << FechayHora::obtenerUnicaInstancia()->obtenerFechayHoraActual() << " [" << toString(unModoDeLog) << "] " << unMensaje << "\n";
+			 #endif
+			//si esta definido lo imprimo por pantalla
+			#ifdef DEBUGENVENTANA
+			 cout << FechayHora::obtenerUnicaInstancia()->obtenerFechayHoraActual()  << " [" << toString(unModoDeLog) << "] " << unMensaje << "\n";
+		 	#endif
+
 			 archivoLog.close();
 		 }
 

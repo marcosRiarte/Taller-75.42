@@ -8,8 +8,8 @@
 #include <windows.h>
 #include "Controlador.h"
 
-//int _tmain(int argc, _TCHAR* argv[])
-int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+//int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+int _tmain(int argc, _TCHAR* argv[])
 {	
 	MOV_TIPO movimiento = RECARGAR;
 	while (movimiento == RECARGAR){
