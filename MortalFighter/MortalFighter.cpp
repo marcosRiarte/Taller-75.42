@@ -32,6 +32,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
 			const char* msg = ((std::string)"Error iniciando SDL: ").append(SDL_GetError()).c_str();
+			//WARNING WARNING WARNING!!! ACA NO VA UN RETURN 1 ???
 		}
 		//Parte de creación inicial.
 		Vista* unaVista = new Vista();

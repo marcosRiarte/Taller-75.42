@@ -37,11 +37,11 @@
         "zindex": 1,
         "orientacion": "DER",
         "sprites": "ima/sprites/player1.png",
-		"CaminarParaAdelante": "CaminarParaAdelante",
-		"CaminarParaAtras": "CaminarParaAtras",
+		"CaminarParaAdelante": "SaltoDiagonal",
+		"CaminarParaAtras": "SaltoDiagonal",
 		"Quieto": "Quieto",
 		"Salto": "Salto",
-        "SaltoDiagonal": "SaltoDiagonal",
+        "SaltoDiagonal": "CaminarParaAtras",
         "Caida": "Caida"
     }
 }
