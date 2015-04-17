@@ -5,11 +5,11 @@
 #include "Parser.h"
 #include "Vista.h"
 #include "Mundo.h"
-//#include <windows.h>
+#include <windows.h>
 #include "Controlador.h"
 
-//int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
-int _tmain(int argc, _TCHAR* argv[])
+//int _tmain(int argc, _TCHAR* argv[])
+int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {	
 	MOV_TIPO movimiento = RECARGAR;
 	while (movimiento == RECARGAR){

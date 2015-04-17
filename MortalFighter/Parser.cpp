@@ -57,9 +57,17 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores de la ventana por defecto", Log::MODO_WARNING);
 	}
 	else{
-		anchoPxVentana = (ventana.get("anchopx", ANCHO_PX_VENTANA).asInt());
-		altoPxVentana = (ventana.get("altopx", ALTO_PX_VENTANA).asInt());
-		anchoVentana = (ventana.get("ancho", ANCHO_VENTANA).asFloat());
+		if (ventana.get("anchopx", ANCHO_PX_VENTANA).isNumeric())
+			anchoPxVentana = (ventana.get("anchopx", ANCHO_PX_VENTANA).asInt());
+		else anchoPxVentana = ANCHO_PX_VENTANA;
+
+		if (ventana.get("altopx", ALTO_PX_VENTANA).isNumeric())
+			altoPxVentana = (ventana.get("altopx", ALTO_PX_VENTANA).asInt());
+		else altoPxVentana = ALTO_PX_VENTANA;
+
+		if (ventana.get("ancho", ANCHO_VENTANA).isNumeric())
+			anchoVentana = (ventana.get("ancho", ANCHO_VENTANA).asFloat());
+		else anchoVentana = ANCHO_VENTANA;
 		
 	}
 
@@ -81,9 +89,17 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario por defecto", Log::MODO_WARNING);
 	}
 	else{
-		anchoEscenario = (escenario.get("ancho", ANCHO_ESCENARIO).asFloat());
-		altoEscenario = (escenario.get("alto", ALTO_ESCENARIO).asFloat());
-		yPisoEscenario = (escenario.get("ypiso", Y_PISO_ESCENARIO).asFloat());
+		if (escenario.get("ancho", ANCHO_ESCENARIO).isNumeric())
+			anchoEscenario = (escenario.get("ancho", ANCHO_ESCENARIO).asFloat());
+		else anchoEscenario = ANCHO_ESCENARIO;
+
+		if (escenario.get("alto", ALTO_ESCENARIO).isNumeric())
+			altoEscenario = (escenario.get("alto", ALTO_ESCENARIO).asFloat());
+		else altoEscenario = ALTO_ESCENARIO;
+
+		if (escenario.get("ypiso", Y_PISO_ESCENARIO).isNumeric())
+			yPisoEscenario = (escenario.get("ypiso", Y_PISO_ESCENARIO).asFloat());
+		else yPisoEscenario = Y_PISO_ESCENARIO;
 		
 	}
 
@@ -108,10 +124,18 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	else{
 		for (size_t i = 0; i < capas.size(); i++) {
 			
-			std::string fondo(capas[i].get("imagen_fondo", FONDO_DEFAULT).asString());
-			anchoCapas = (capas[i].get("ancho", ANCHO_CAPA).asFloat());
-			int zIndexCapa = (capas[i].get("zindex", ZINDEX_CAPA).asInt());
-			
+			std::string fondo(FONDO_DEFAULT);
+			if (capas[i].get("imagen_fondo", FONDO_DEFAULT).isString())
+				fondo = (capas[i].get("imagen_fondo", FONDO_DEFAULT).asString());			
+
+			if (capas[i].get("ancho", ANCHO_CAPA).isNumeric())
+				anchoCapas = (capas[i].get("ancho", ANCHO_CAPA).asFloat());
+			else anchoCapas = ANCHO_CAPA;
+
+			int zIndexCapa = ZINDEX_CAPA;
+			if (capas[i].get("zindex", ZINDEX_CAPA).isNumeric())
+				zIndexCapa = (capas[i].get("zindex", ZINDEX_CAPA).asInt());			
+									
 			Validador::ValidarCapas(&anchoCapas, &fondo);
 			Capas.push_back(new Capa(fondo, anchoCapas, zIndexCapa));
 		}
@@ -149,21 +173,51 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Caida = CAIDA_DEFAULT;
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje por defecto", Log::MODO_WARNING);
 		
-		
 	}
 	else{
-		ancho = (personaje.get("ancho", ANCHO_PERSONAJE).asFloat());
-		alto = (personaje.get("alto", ALTO_PERSONAJE).asFloat());
-		zIndex = (personaje.get("zindex", ZINDEX).asInt());
-		sprites = (personaje.get("sprites", SPRITE_DEFAULT).asString());
-		orientacion = (personaje.get("orientacion", ORIENTACION_PERSONAJE).asString());
+		if (personaje.get("ancho", ANCHO_PERSONAJE).isNumeric())
+			ancho = (personaje.get("ancho", ANCHO_PERSONAJE).asFloat());
+		else ancho = ANCHO_PERSONAJE;
+
+		if (personaje.get("alto", ALTO_PERSONAJE).isNumeric())
+			alto = (personaje.get("alto", ALTO_PERSONAJE).asFloat());
+		else alto = ALTO_PERSONAJE;
+
+		if (personaje.get("zindex", ZINDEX).isNumeric())
+			zIndex = (personaje.get("zindex", ZINDEX).asInt());
+		else zIndex = ZINDEX;
+
+		if (personaje.get("sprites", SPRITE_DEFAULT).isString())
+			sprites = (personaje.get("sprites", SPRITE_DEFAULT).asString());
+		else sprites = SPRITE_DEFAULT;
+
+		if (personaje.get("orientacion", ORIENTACION_PERSONAJE).isString())
+			orientacion = (personaje.get("orientacion", ORIENTACION_PERSONAJE).asString());
+		else orientacion = ORIENTACION_PERSONAJE;
 		
-		CaminarParaAdelante = (personaje.get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).asString());
-		CaminarParaAtras = (personaje.get("CaminarParaAtras", CAMINARPARAATRAS_DEFAULT).asString());
-		Quieto = (personaje.get("Quieto", QUIETO_DEFAULT).asString());
-		Salto = (personaje.get("Salto", SALTO_DEFAULT).asString());
-		SaltoDiagonal = (personaje.get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).asString());
-		Caida = (personaje.get("Caida", CAIDA_DEFAULT).asString());
+		if (personaje.get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).isString())
+			CaminarParaAdelante = (personaje.get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).asString());
+		else CaminarParaAdelante = CAMINARPARAADELANTE_DEFAULT;
+
+		if (personaje.get("CaminarParaAtras", CAMINARPARAATRAS_DEFAULT).isString())
+			CaminarParaAtras = (personaje.get("CaminarParaAtras", CAMINARPARAATRAS_DEFAULT).asString());
+		else CaminarParaAtras = CAMINARPARAATRAS_DEFAULT;
+
+		if (personaje.get("Quieto", QUIETO_DEFAULT).isString())
+			Quieto = (personaje.get("Quieto", QUIETO_DEFAULT).asString());
+		else Quieto = QUIETO_DEFAULT;
+
+		if (personaje.get("Salto", SALTO_DEFAULT).isString())
+			Salto = (personaje.get("Salto", SALTO_DEFAULT).asString());
+		else Salto = SALTO_DEFAULT;
+
+		if (personaje.get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).isString())
+			SaltoDiagonal = (personaje.get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).asString());
+		else SaltoDiagonal = SALTODIAGONAL_DEFAULT;
+
+		if (personaje.get("Caida", CAIDA_DEFAULT).isString())
+			Caida = (personaje.get("Caida", CAIDA_DEFAULT).asString());
+		else Caida = CAIDA_DEFAULT;
 		
 	}
 	
