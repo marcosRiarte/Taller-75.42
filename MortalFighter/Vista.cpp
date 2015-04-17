@@ -95,7 +95,7 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	//Parametros del personaje
 	int anchoPjPx = manejadorULog.darLongPixels(personajeVista.getAncho());
 	float anchoPj = personajeVista.getAncho();
-	int altoPjPx = manejadorULog.darLongPixels(personajeVista.getAlto());
+	int altoPjPx = manejadorULog.darLongPixels(personajeVista.getAlto(), altoVentanaPx, Parser::getInstancia().getEscenario().getAlto());
 	float xPjUn = personajeVista.getPosicionUn().first;	
 	int xPjPx = personajeVista.getPosicionPx().first;
 	int yPjPx = personajeVista.getPosicionPx().second;
