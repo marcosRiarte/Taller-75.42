@@ -16,28 +16,33 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	Json::Value raiz;
 	//Se coloca al lector de Json en modo estricto para que loguee todos los mensajes de errores sintácticos
 	Json::Reader lector(Json::Features::strictMode());
-
 	std::ifstream prueba(nombreDelArchivo, std::ifstream::binary);
 
-	//chequea que exista el archivo y se pudo abrir
+	bool parseoExitoso;
+
+	//chequea que exista el archivo prueba.json y se pudeda abrir
 	if (!prueba.is_open()){
-		Log::getInstancia().logearMensajeEnModo("No se pudo abrir el archivo", Log::MODO_WARNING);
-		return false;
+		Log::getInstancia().logearMensajeEnModo("  [BAD] No se pudo abrir el json de prueba o no existe", Log::MODO_WARNING);
+		parseoExitoso = false;
+	}
+	else //el archivo existe, lo parseo
+	{
+		parseoExitoso = lector.parse(prueba, raiz, true);
 	}
 
-	bool parseoExitoso = lector.parse(prueba, raiz, true);
+	
 
 	if (!parseoExitoso) {
-		std::string mensaje = "Fallo el parseo, se carga json por defecto" + lector.getFormattedErrorMessages();
+		std::string mensaje = "  [BAD]  Fallo el parseo, se carga json por defecto" + lector.getFormattedErrorMessages();
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		std::ifstream prueba("pruebaDefecto.json", std::ifstream::binary);
+		std::ifstream prueba(PRUEBA_JSON_DEFECTO, std::ifstream::binary);
 		if (!prueba.is_open()){
-			Log::getInstancia().logearMensajeEnModo("No se pudo abrir el archivo por defecto, se cerrara el programa...", Log::MODO_ERROR);
+			Log::getInstancia().logearMensajeEnModo("  [BAD] No se pudo abrir el json por defecto, se cerrara el programa...", Log::MODO_ERROR);
 			return false;
 		}
 		bool parseoExitoso = lector.parse(prueba, raiz, true);
 		if (!parseoExitoso) {
-			Log::getInstancia().logearMensajeEnModo("Fallo el parseo del json por defecto, se cerrara el programa...", Log::MODO_ERROR);
+			Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo del json por defecto, se cerrara el programa...", Log::MODO_ERROR);
 			return false;
 		}
 		Log::getInstancia().logearMensajeEnModo("Parseo del archivo json por defecto correcto", Log::MODO_DEBUG);
@@ -50,7 +55,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	float anchoVentana;
 
 	if (!ventana){
-		Log::getInstancia().logearMensajeEnModo("Fallo el parseo de la ventana", Log::MODO_WARNING);
+		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo de la ventana", Log::MODO_WARNING);
 		anchoPxVentana = ANCHO_PX_VENTANA;
 		altoPxVentana = ALTO_PX_VENTANA;
 		anchoVentana = ANCHO_VENTANA;
@@ -107,7 +112,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	float yPisoEscenario;
 
 	if (!escenario){
-		Log::getInstancia().logearMensajeEnModo("Fallo el parseo del escenario", Log::MODO_WARNING);
+		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo del escenario", Log::MODO_WARNING);
 		anchoEscenario = ANCHO_ESCENARIO;
 		altoEscenario = ALTO_ESCENARIO;
 		yPisoEscenario = Y_PISO_ESCENARIO;
@@ -165,7 +170,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	std::string fondo;
 
 	if (!capas || capas.size() == 0){
-		Log::getInstancia().logearMensajeEnModo("Fallo el parseo de las capas", Log::MODO_WARNING);
+		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo de las capas", Log::MODO_WARNING);
 		fondo = FONDO_DEFAULT;
 		anchoCapas = ANCHO_CAPA;
 		
@@ -228,7 +233,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	std::string Caida;
 
 	if (!personaje){
-		Log::getInstancia().logearMensajeEnModo("Fallo el parseo del personaje", Log::MODO_WARNING);
+		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo del personaje", Log::MODO_WARNING);
 		ancho = ANCHO_PERSONAJE;
 		alto = ALTO_PERSONAJE;
 		zIndex = ZINDEX;

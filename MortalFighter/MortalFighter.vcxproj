@@ -99,6 +99,7 @@
     <ClInclude Include="include\SDL_image.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="ManejadorULogicas.h" />
+    <ClInclude Include="MortalFigther.h" />
     <ClInclude Include="Mundo.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Personaje.h" />

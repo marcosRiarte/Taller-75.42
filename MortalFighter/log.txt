@@ -1,9 +1,1 @@
 
----------------------------------------------------------------------------------
-
-2015-04-17.02:21:00 [DEBUG] Parseo del archivo json correcto
-2015-04-17.02:21:00 [DEBUG] Se cargaron valores de la ventana correctamente
-2015-04-17.02:21:00 [DEBUG] Se cargaron valores del escenario correctamente
-2015-04-17.02:21:00 [DEBUG] Se cargaron capas correctamente
-2015-04-17.02:21:00 [DEBUG] Se cargaron valores del personaje correctamente
-

@@ -7,14 +7,27 @@
 #include "Mundo.h"
 #include <windows.h>
 #include "Controlador.h"
+#include "MortalFigther.h"
+
+
+
 
 //int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 int _tmain(int argc, _TCHAR* argv[])
 {	
+
+	#ifdef DEBUGENVENTANA
+			cout << "Esta activado el modo DEBUG EN VENTANA, se registra solo por consola" << "\n";
+	#endif
+
+
 	MOV_TIPO movimiento = RECARGAR;
 	while (movimiento == RECARGAR){
-		std::string nombreArchivo("prueba.json");
-		Parser::getInstancia().parsear(nombreArchivo);
+		std::string nombreArchivo(PRUEBA_JSON);
+		bool ParseoExitoso= Parser::getInstancia().parsear(nombreArchivo);
+		
+		if (!ParseoExitoso) return 1; //si el json por defecto fallo, el programa termina
+
 		vector2D vecGravedad(0.0f, GRAVEDAD_Y);
 
 		if (SDL_Init(SDL_INIT_EVERYTHING) != 0){

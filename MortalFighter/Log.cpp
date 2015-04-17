@@ -2,15 +2,10 @@
 #include "Log.h"
 #include <fstream>
 #include "FechayHora.h"
+#include "MortalFigther.h"
 
-//------------------------------------------------------
-// con este define saco los log por pantalla
-#define DEBUGENVENTANA
 
-#ifdef DEBUGENVENTANA
-using namespace std;
-#endif
-//---------------------------------------------------
+
 
  std::string Log::pathDelArchivo = "log.txt";
 
@@ -28,7 +23,7 @@ using namespace std;
 		#endif
 		 //si esta definido lo imprimo por pantalla
 		#ifdef DEBUGENVENTANA
-			 cout << "---------------------------------------------------------------------------------" << "\n" << "\n";
+			 cout << "---------------------------------------------------------------------------" << "\n" << "\n";
 		#endif
 		 
 		 archivoLog.close();
