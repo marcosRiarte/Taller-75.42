@@ -1,9 +1,8 @@
 {
     "ventana": {
-	"altopxsss": 600,
-        "anchopxssssssssssssss": 800,
-         
-        "anchopx": 800
+        "anchopx": 800,
+        "altopx": 600,
+        "ancho": 200
     },
     "escenario": {
         "ancho": 1000.5,
@@ -12,23 +11,23 @@
     },
     "capas": [
         {
-            "imagen_fondo": "ima/bkg/p_bkg.png",
+            "imagen_fondo": "ima/bkg/t_bkg.png",
             "ancho": 200
         },
         {
-            "imagen_fondo": "ima/bkg/p_4.png",
+            "imagen_fondo": "ima/bkg/t_4.png",
             "ancho": 260
         },
         {
-            "imagen_fondo": "ima/bkg/p_3.png",
+            "imagen_fondo": "ima/bkg/t_3.png",
             "ancho": 395
         },
         {
-            "imagen_fondo": "ima/bkg/p_2.png",
+            "imagen_fondo": "ima/bkg/t_2.png",
             "ancho": 500            
         },
         {
-            "imagen_fondo": "ima/bkg/p_1.png",
+            "imagen_fondo": "ima/bkg/t_1.png",
             "ancho": 1212
         }
     ],
@@ -38,11 +37,11 @@
         "zindex": 0,
         "orientacion": "DER",
         "sprites": "ima/sprites/player1.png",
-		"CaminarParaAdelante": "SaltoDiagonal",
-		"CaminarParaAtras": "SaltoDiagonal",
+		"CaminarParaAdelante": "CaminarParaAdelante",
+		"CaminarParaAtras": "CaminarParaAtras",
 		"Quieto": "Quieto",
 		"Salto": "Salto",
-        "SaltoDiagonal": "CaminarParaAtras",
+        "SaltoDiagonal": "SaltoDiagonal",
         "Caida": "Caida"
     }
 }

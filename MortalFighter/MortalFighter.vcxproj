@@ -160,6 +160,11 @@
     <Image Include="ima\bkg\p_3.png" />
     <Image Include="ima\bkg\p_4.png" />
     <Image Include="ima\bkg\p_bkg.png" />
+    <Image Include="ima\bkg\t_1.png" />
+    <Image Include="ima\bkg\t_2.png" />
+    <Image Include="ima\bkg\t_3.png" />
+    <Image Include="ima\bkg\t_4.png" />
+    <Image Include="ima\bkg\t_bkg.png" />
     <Image Include="ima\sprites\player1.png" />
     <Image Include="ima\sprites\player_default.png" />
   </ItemGroup>

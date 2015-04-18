@@ -235,5 +235,20 @@
     <Image Include="ima\bkg\default_capa.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="ima\bkg\t_bkg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ima\bkg\t_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ima\bkg\t_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ima\bkg\t_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ima\bkg\t_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
