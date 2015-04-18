@@ -103,21 +103,21 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario por defecto", Log::MODO_WARNING);
 	}
 	else{
-		if (escenario.get("ancho", ANCHO_ESCENARIO).isNumeric() && escenario.get("ancho", ANCHO_ESCENARIO) < INT_MAX)			
+		if (escenario.get("ancho", ANCHO_ESCENARIO).isNumeric() && escenario.get("ancho", ANCHO_ESCENARIO) < MAX_ANCHO_ESCENARIO)
 				anchoEscenario = (escenario.get("ancho", ANCHO_ESCENARIO).asFloat());				
 		else {
 			anchoEscenario = ANCHO_ESCENARIO;
 			Log::getInstancia().logearMensajeEnModo("Se carga ancho del escenario por defecto", Log::MODO_WARNING);
 		}
 
-		if (escenario.get("alto", ALTO_ESCENARIO).isNumeric() && escenario.get("alto", ALTO_ESCENARIO) < INT_MAX)			
+		if (escenario.get("alto", ALTO_ESCENARIO).isNumeric() && escenario.get("alto", ALTO_ESCENARIO) < MAX_ALTO_ESCENARIO)
 				altoEscenario = (escenario.get("alto", ALTO_ESCENARIO).asFloat());			
 		else {
 			altoEscenario = ALTO_ESCENARIO;
 			Log::getInstancia().logearMensajeEnModo("Se carga alto del escenario por defecto", Log::MODO_WARNING);
 		}
 
-		if (escenario.get("ypiso", Y_PISO_ESCENARIO).isNumeric() && escenario.get("ypiso", Y_PISO_ESCENARIO) < INT_MAX)
+		if (escenario.get("ypiso", Y_PISO_ESCENARIO).isNumeric() && escenario.get("ypiso", Y_PISO_ESCENARIO) < MAX_ALTO_ESCENARIO)
 				yPisoEscenario = (escenario.get("ypiso", Y_PISO_ESCENARIO).asFloat());			
 		else {
 			yPisoEscenario = Y_PISO_ESCENARIO;
@@ -153,7 +153,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 			else
 				Log::getInstancia().logearMensajeEnModo("Se carga capa por defecto", Log::MODO_WARNING);
 
-			if (capas[i].get("ancho", ANCHO_CAPA).isNumeric() && capas[i].get("ancho", ANCHO_CAPA) < INT_MAX)				
+			if (capas[i].get("ancho", ANCHO_CAPA).isNumeric() && capas[i].get("ancho", ANCHO_CAPA) < MAX_ANCHO_ESCENARIO)
 					anchoCapas = (capas[i].get("ancho", ANCHO_CAPA).asFloat());				
 			else {
 				anchoCapas = ANCHO_CAPA;
@@ -205,14 +205,14 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		
 	}
 	else{
-		if (personaje.get("ancho", ANCHO_PERSONAJE).isNumeric() && personaje.get("ancho", ANCHO_PERSONAJE) < INT_MAX)
+		if (personaje.get("ancho", ANCHO_PERSONAJE).isNumeric() && personaje.get("ancho", ANCHO_PERSONAJE) < MAX_ANCHO_ESCENARIO)
 				ancho = (personaje.get("ancho", ANCHO_PERSONAJE).asFloat());			
 		else {
 			ancho = ANCHO_PERSONAJE;
 			Log::getInstancia().logearMensajeEnModo("Se carga ancho del personaje por defecto", Log::MODO_WARNING);
 		}
 
-		if (personaje.get("alto", ALTO_PERSONAJE).isNumeric() && personaje.get("alto", ALTO_PERSONAJE) < INT_MAX)
+		if (personaje.get("alto", ALTO_PERSONAJE).isNumeric() && personaje.get("alto", ALTO_PERSONAJE) < MAX_ALTO_ESCENARIO)
 				alto = (personaje.get("alto", ALTO_PERSONAJE).asFloat());
 		else {
 			alto = ALTO_PERSONAJE;
