@@ -27,7 +27,7 @@
 #define ALTO_PERSONAJE 70.0f
 #define MAX_ALTO_PERSONAJE 1000.0f
 
-#define ZINDEX 4
+#define ZINDEX 1
 #define ORIENTACION_PERSONAJE "DER"
 #define SPRITE_DEFAULT "ima/sprites/player_default.png"
 #define FONDO_DEFAULT "ima/bkg/default_capa.png" // al ser varias capas la idea esa usar esta por que va a permitir que se vean el resto de las que si estan

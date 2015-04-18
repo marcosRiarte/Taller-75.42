@@ -90,12 +90,7 @@ void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::st
 		std::string mensaje = "alto del Personaje fuera de rango, se toma alto por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*alto = ALTO_PERSONAJE;
-	}
-	if (!(*zindex >= 0)) {
-		std::string mensaje = "zindex del Personaje fuera de rango, se toma zindex por defecto";
-		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*zindex = ZINDEX;
-	}
+	}	
 	if ((*orientacion != "DER") && (*orientacion != "IZQ")) {
 		std::string mensaje = "orientacion invalida, se toma orientacion derecha";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
