@@ -77,6 +77,10 @@ Vista::Vista()
 		//Creación de la textura sobre la superficie
 		texturaSprite = SDL_CreateTextureFromSurface(renderer, Superficie);
 
+		capasVista = Parser::getInstancia().getCapas();
+		//Ordeno las capas por su zindex para ser dibujadas
+		OrdenarCapas();
+
 }
 
 
@@ -84,8 +88,7 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 
 	// referencias más utilizadas al actualizar la vista
 	Personaje personajeVista = Parser::getInstancia().getPersonaje();
-	Ventana ventanaVista = Parser::getInstancia().getVentana();
-	capasVista = Parser::getInstancia().getCapas();
+	Ventana ventanaVista = Parser::getInstancia().getVentana();	
 
 	//Parametros de la ventana
 	int anchoVentanaPx = ventanaVista.getAnchoPx();
@@ -123,10 +126,7 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	personaje.x = manejadorULog.darLongPixels(xLogPjEnCamara);
 	personaje.y = yPjPx;
 	personaje.w = anchoPjPx;
-	personaje.h = altoPjPx;
-
-	//Ordeno las capas por su zindex para ser dibujadas
-	OrdenarCapas();
+	personaje.h = altoPjPx;	
 
 	//Se cargan las capas anteriores al personaje
 	for (size_t i = 0; i < capasVista.size(); i++)
