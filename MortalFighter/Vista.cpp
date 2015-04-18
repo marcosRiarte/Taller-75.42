@@ -125,15 +125,18 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	personaje.w = anchoPjPx;
 	personaje.h = altoPjPx;
 
+	//Ordeno las capas por su zindex para ser dibujadas
+	OrdenarCapas();
+
 	//Se cargan las capas anteriores al personaje
-	for (int i = 0; i < capasVista.size(); i++)
+	for (size_t i = 0; i < capasVista.size(); i++)
 	{
 		if (capasVista.at(i)->getZIndex() <= personajeVista.getZIndex()) {
 			float anchoCapa = capasVista.at(i)->getAncho();
 			camara.w = manejadorULog.darLongPixels(anchoCapa);
 			// donde toma la camara a la capa parametrizado con el ancho del escenario	
 			camara.x = manejadorULog.darLongPixels((camaraXLog)*(anchoCapa - anchoVentana) / (anchoEscenario - anchoVentana));
-
+			
 			SDL_RenderCopy(renderer, capasVista.at(i)->getTexturaSDL(), NULL, &camara);
 		}
 	}
@@ -180,7 +183,7 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 		}
 
 	//Se cargan las capas posteriores al personaje
-		for (int i = 0; i < capasVista.size(); i++)
+		for (size_t i = 0; i < capasVista.size(); i++)
 		{
 			if (capasVista.at(i)->getZIndex() > personajeVista.getZIndex()) {
 				float anchoCapa = capasVista.at(i)->getAncho();
@@ -195,6 +198,20 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	SDL_RenderPresent(renderer);
 
 
+}
+
+void Vista::OrdenarCapas()
+{
+	for (size_t i = 0; i < capasVista.size() - 1; i++) {
+		int minimo = i;
+		for (size_t j = i + 1; j < capasVista.size(); j++){
+			if (capasVista[j]->getZIndex() < capasVista[minimo]->getZIndex() )
+				minimo = j;
+		}
+		Capa* capaAux = capasVista[i];
+		capasVista[i] = capasVista[minimo];
+		capasVista[minimo] = capaAux;
+	}
 }
 
 Vista::~Vista()

@@ -28,5 +28,7 @@ private:
 	//std::vector<Capa*> capasDeTextura;
 	float camaraXLog;
 	ManejadorULogicas manejadorULog;
+	
+	void OrdenarCapas();
 };
 
