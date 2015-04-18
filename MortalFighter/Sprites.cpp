@@ -118,7 +118,7 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(std::string unEstado){
 		return SaltoDiagonal;
 	}
 	
-	return Caida;
+	return Quieto;
 }
 
 Sprite::~Sprite()

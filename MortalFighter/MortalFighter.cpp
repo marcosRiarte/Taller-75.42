@@ -8,7 +8,7 @@
 //#include <windows.h>
 #include "Controlador.h"
 #include "MortalFigther.h"
-
+#include "Timer.h"
 
 
 
@@ -34,24 +34,56 @@ int _tmain(int argc, _TCHAR* argv[])
 			const char* msg = ((std::string)"Error iniciando SDL: ").append(SDL_GetError()).c_str();
 			//WARNING WARNING WARNING!!! ACA NO VA UN RETURN 1 ???
 		}
+
 		//Parte de creación inicial.
 		Vista* unaVista = new Vista();
 		Mundo* unMundo = new Mundo(vecGravedad);
 		Cuerpo *unCuerpo = new Cuerpo(defCuerpo());
 		unMundo->agregarCuerpo(unCuerpo);
 
+		//Timer de cuadros por segundo
+		Timer fpsTimer;
+		//Timer del corte de cuadros por segundo
+		Timer capTimer;
+
+		//Contador de cuadros
+		int conteoDeCuadros = 0;
+		fpsTimer.start();
+
 		//Gameloop
 		while (true) {
 			movimiento = Controlador::cambiar();
+
+			//Se inicializa el Timer de corte
+			capTimer.start();
+
+
+			//Calcula y corrije cuadros por segundo
+			float avgFPS = conteoDeCuadros / (fpsTimer.getTicks() / 1000.f);
+			if (avgFPS > 2000000)
+			{
+				avgFPS = 0;
+			}
+
+			//Se actualiza la pantalla
+			unaVista->actualizar(movimiento, Parser::getInstancia().getPersonaje().getEstado());
+
 			if ((movimiento == CERRAR) || (movimiento == RECARGAR))
 				break;
 
 			unMundo->Paso(0.13f, movimiento);
 
-			unaVista->actualizar(movimiento, Parser::getInstancia().getPersonaje().getEstado()); //Nescesita pasarle el personaje y su estado
 
-			SDL_Delay(10);
+			++conteoDeCuadros;
 
+
+			//Si el cuadro finalizó antes
+			int frameTicks = capTimer.getTicks();
+			if (frameTicks < MSxCUADRO)
+			{
+				//Se espera el tiempo que queda
+				SDL_Delay(MSxCUADRO - frameTicks);
+			}
 		}
 		delete unaVista;
 		delete unMundo;

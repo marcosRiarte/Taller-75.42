@@ -13,6 +13,9 @@
 #define ALTO_PX_VENTANA 600
 #define ANCHO_VENTANA 200.0f
 
+#define FPS 60.0f
+const float MSxCUADRO = 1000.0f / FPS;
+
 #define ANCHO_ESCENARIO 1000.5f
 #define MAX_ANCHO_ESCENARIO 4000.0f
 #define ALTO_ESCENARIO 150.0f
@@ -37,6 +40,7 @@
 #define SALTO_DEFAULT "Salto"
 #define SALTODIAGONAL_DEFAULT "SaltoDiagonal"
 #define CAIDA_DEFAULT "Caida"
+
 class Parser
 {
 public:	
