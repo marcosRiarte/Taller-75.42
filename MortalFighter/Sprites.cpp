@@ -17,6 +17,7 @@ Sprite::Sprite(){
 	this->CaminandoParaAdelante = new std::vector<SDL_Rect*>();
 	this->CaminandoParaAtras = new std::vector<SDL_Rect*>();
 	this->SaltoDiagonal = new std::vector<SDL_Rect*>();
+	this->SaltoDiagonalIzq = new std::vector<SDL_Rect*>();
 	this->Quieto = new std::vector<SDL_Rect*>();
 
 	//Quieto
@@ -98,7 +99,8 @@ Sprite::Sprite(){
 	this->SaltoDiagonal->push_back(crearCuadro(1078, 1068, 154, 264));
 	
 	
-		
+	*SaltoDiagonalIzq = *SaltoDiagonal;
+	std::reverse(SaltoDiagonalIzq->begin(), SaltoDiagonalIzq->end());
 }
 
 std::vector<SDL_Rect*>* Sprite::listaDeCuadros(std::string unEstado){
@@ -117,7 +119,12 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(std::string unEstado){
 	if (unEstado == "SaltoDiagonal"){
 		return SaltoDiagonal;
 	}
-	
+
+	if (unEstado == "SaltoDiagonalIzq"){
+		
+		return SaltoDiagonalIzq;
+	}
+
 	return Quieto;
 }
 

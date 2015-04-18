@@ -149,9 +149,14 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 		estadoDelPersonaje = personajeVista.getCaminarParaAtras();
 	}
 
-	if ((estadoPersonaje == ESTADO::SALTODER_DER) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_DER) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
+	if ((estadoPersonaje == ESTADO::SALTODER_DER) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
 		estadoDelPersonaje = personajeVista.getSaltoDiagonal();
 	}
+
+	if (estadoPersonaje == ESTADO::SALTOIZQ_DER){
+		estadoDelPersonaje = "SaltoDiagonalIzq";
+	}
+
 	if ((estadoPersonaje == ESTADO::ARRIBA_IZQ) || (estadoPersonaje == ESTADO::ARRIBA_DER)){
 		estadoDelPersonaje = personajeVista.getSalto();
 	}

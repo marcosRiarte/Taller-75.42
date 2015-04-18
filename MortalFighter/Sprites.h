@@ -10,6 +10,7 @@ private:
 	std::vector<SDL_Rect*>* CaminandoParaAdelante;
 	std::vector<SDL_Rect*>* CaminandoParaAtras;
 	std::vector<SDL_Rect*>* SaltoDiagonal;
+	std::vector<SDL_Rect*>* SaltoDiagonalIzq;
 	std::vector<SDL_Rect*>* Quieto;
 
 public:
