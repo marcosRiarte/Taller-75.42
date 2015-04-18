@@ -142,19 +142,33 @@ void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
 	}
 
 	std::string estadoDelPersonaje;
+
 	if ((estadoPersonaje == ESTADO::IZQ_IZQ) || (estadoPersonaje == ESTADO::DER_DER)){
+		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
 		estadoDelPersonaje = personajeVista.getCaminarParaAdelante();
+		else
+			estadoDelPersonaje = personajeVista.getCaminarParaAtras();
 	}
+
 	if ((estadoPersonaje == ESTADO::DER_IZQ) || (estadoPersonaje == ESTADO::IZQ_DER)){
-		estadoDelPersonaje = personajeVista.getCaminarParaAtras();
+		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
+			estadoDelPersonaje = personajeVista.getCaminarParaAtras();
+		else
+			estadoDelPersonaje = personajeVista.getCaminarParaAdelante();
 	}
 
 	if ((estadoPersonaje == ESTADO::SALTODER_DER) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
+		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
 		estadoDelPersonaje = personajeVista.getSaltoDiagonal();
+		else
+			estadoDelPersonaje = "SaltoDiagonalIzq";
 	}
 
 	if (estadoPersonaje == ESTADO::SALTOIZQ_DER){
+		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
 		estadoDelPersonaje = "SaltoDiagonalIzq";
+		else
+			estadoDelPersonaje = personajeVista.getSaltoDiagonal();
 	}
 
 	if ((estadoPersonaje == ESTADO::ARRIBA_IZQ) || (estadoPersonaje == ESTADO::ARRIBA_DER)){
