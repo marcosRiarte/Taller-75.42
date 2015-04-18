@@ -62,21 +62,22 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores de la ventana por defecto", Log::MODO_WARNING);
 	}
 	else{
-		if (ventana.get("anchopx", ANCHO_PX_VENTANA).isNumeric() && ventana.get("anchopx", ANCHO_PX_VENTANA) < INT_MAX)			
+		//3 comprobaciones, que exista el campo, que sea un numero y que no exceda el maximo
+		if (ventana.isMember("anchopx") && ventana.get("anchopx", ANCHO_PX_VENTANA).isNumeric() && ventana.get("anchopx", ANCHO_PX_VENTANA) < INT_MAX)
 				anchoPxVentana = (ventana.get("anchopx", ANCHO_PX_VENTANA).asInt());			
 		else {
 			anchoPxVentana = ANCHO_PX_VENTANA;
 			Log::getInstancia().logearMensajeEnModo("Se carga anchopx de la ventana por defecto", Log::MODO_WARNING);
 		}
 
-		if (ventana.get("altopx", ALTO_PX_VENTANA).isNumeric() && ventana.get("altopx", ALTO_PX_VENTANA) < INT_MAX)
+		if (ventana.isMember("altopx") && ventana.get("altopx", ALTO_PX_VENTANA).isNumeric() && ventana.get("altopx", ALTO_PX_VENTANA) < INT_MAX)
 			altoPxVentana = (ventana.get("altopx", ALTO_PX_VENTANA).asInt());			
 		else {
 			altoPxVentana = ALTO_PX_VENTANA;
 			Log::getInstancia().logearMensajeEnModo("Se carga altopx de la ventana por defecto", Log::MODO_WARNING);
 		}
 
-		if (ventana.get("ancho", ANCHO_VENTANA).isNumeric() && ventana.get("ancho", ANCHO_VENTANA) < INT_MAX)			
+		if (ventana.isMember("ancho") && ventana.get("ancho", ANCHO_VENTANA).isNumeric() && ventana.get("ancho", ANCHO_VENTANA) < INT_MAX)
 				anchoVentana = (ventana.get("ancho", ANCHO_VENTANA).asFloat());			
 		else {
 			anchoVentana = ANCHO_VENTANA;
@@ -103,21 +104,21 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario por defecto", Log::MODO_WARNING);
 	}
 	else{
-		if (escenario.get("ancho", ANCHO_ESCENARIO).isNumeric() && escenario.get("ancho", ANCHO_ESCENARIO) < MAX_ANCHO_ESCENARIO)
+		if (escenario.isMember("ancho") && escenario.get("ancho", ANCHO_ESCENARIO).isNumeric() && escenario.get("ancho", ANCHO_ESCENARIO) < MAX_ANCHO_ESCENARIO)
 				anchoEscenario = (escenario.get("ancho", ANCHO_ESCENARIO).asFloat());				
 		else {
 			anchoEscenario = ANCHO_ESCENARIO;
 			Log::getInstancia().logearMensajeEnModo("Se carga ancho del escenario por defecto", Log::MODO_WARNING);
 		}
 
-		if (escenario.get("alto", ALTO_ESCENARIO).isNumeric() && escenario.get("alto", ALTO_ESCENARIO) < MAX_ALTO_ESCENARIO)
+		if (escenario.isMember("alto") && escenario.get("alto", ALTO_ESCENARIO).isNumeric() && escenario.get("alto", ALTO_ESCENARIO) < MAX_ALTO_ESCENARIO)
 				altoEscenario = (escenario.get("alto", ALTO_ESCENARIO).asFloat());			
 		else {
 			altoEscenario = ALTO_ESCENARIO;
 			Log::getInstancia().logearMensajeEnModo("Se carga alto del escenario por defecto", Log::MODO_WARNING);
 		}
 
-		if (escenario.get("ypiso", Y_PISO_ESCENARIO).isNumeric() && escenario.get("ypiso", Y_PISO_ESCENARIO) < MAX_ALTO_ESCENARIO)
+		if (escenario.isMember("ypiso") && escenario.get("ypiso", Y_PISO_ESCENARIO).isNumeric() && escenario.get("ypiso", Y_PISO_ESCENARIO) < MAX_ALTO_ESCENARIO)
 				yPisoEscenario = (escenario.get("ypiso", Y_PISO_ESCENARIO).asFloat());			
 		else {
 			yPisoEscenario = Y_PISO_ESCENARIO;
@@ -144,7 +145,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Capas.push_back(new Capa(fondo, anchoCapas, 0));
 		Log::getInstancia().logearMensajeEnModo("Se cargaron capas por defecto", Log::MODO_WARNING);
 	}
-	else{
+	else{//xjose TODO falta validad si existen los campos en esta parte...... escenario.isMember("ancho") && ......
 		for (size_t i = 0; i < capas.size(); i++) {
 			
 			std::string fondo(FONDO_DEFAULT);

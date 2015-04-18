@@ -1,8 +1,9 @@
 {
     "ventana": {
-        "anchopx": 800,
-        "altopx": 600,
-        "ancho": 200
+	"altopxsss": 600,
+        "anchopxssssssssssssss": 800,
+         
+        "anchopx": 800
     },
     "escenario": {
         "ancho": 1000.5,
@@ -34,7 +35,7 @@
     "personaje": {
         "ancho": 40,
         "alto": 73,
-        "zindex": 1,
+        "zindex": 0,
         "orientacion": "DER",
         "sprites": "ima/sprites/player1.png",
 		"CaminarParaAdelante": "SaltoDiagonal",
