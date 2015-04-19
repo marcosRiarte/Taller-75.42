@@ -13,7 +13,7 @@ int Controlador::cambiar(std::vector<MOV_TIPO>* movimientos){
 	SDL_PollEvent(&event);
 
 	if (event.type == SDL_QUIT) {
-		return CERRAR;
+		return FIN;
 	}
 
 	const Uint8 *state = SDL_GetKeyboardState(NULL);

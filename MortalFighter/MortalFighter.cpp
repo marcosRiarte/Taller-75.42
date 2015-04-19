@@ -75,9 +75,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 			//Se actualiza la pantalla
 			unaVista->actualizar(Parser::getInstancia().getPersonaje().getEstado());
-
-			
-
 			unMundo->Paso(0.13f, &movimientos);
 
 
