@@ -49,10 +49,10 @@ int _tmain(int argc, _TCHAR* argv[])
 		int conteoDeCuadros = 0;
 		fpsTimer.start();
 
+		std::vector<MOV_TIPO> movimientos = std::vector<MOV_TIPO>();
+
 		//Gameloop
 		while (true) {
-			std::vector<MOV_TIPO> movimientos = std::vector<MOV_TIPO>();
-
 			int estado = Controlador::cambiar(&movimientos);
 			if (estado == REINICIAR){
 				break;
