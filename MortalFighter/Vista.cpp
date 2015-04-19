@@ -84,7 +84,7 @@ Vista::Vista()
 }
 
 
-void Vista::actualizar(MOV_TIPO movimiento, ESTADO estadoPersonaje){
+void Vista::actualizar(ESTADO estadoPersonaje){
 
 	// referencias más utilizadas al actualizar la vista
 	Personaje personajeVista = Parser::getInstancia().getPersonaje();

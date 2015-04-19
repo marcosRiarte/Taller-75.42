@@ -90,10 +90,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Capa.h" />
+    <ClInclude Include="Constantes.h" />
     <ClInclude Include="Controlador.h" />
     <ClInclude Include="Cuerpo.h" />
     <ClInclude Include="Escenario.h" />
     <ClInclude Include="FechayHora.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="include\json\json.h" />
     <ClInclude Include="include\SDL\SDL.h" />
     <ClInclude Include="include\SDL_image.h" />

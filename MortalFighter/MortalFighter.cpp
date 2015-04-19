@@ -11,7 +11,6 @@
 #include "Timer.h"
 
 
-
 //int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 int _tmain(int argc, _TCHAR* argv[])
 {	
@@ -21,8 +20,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	#endif
 
 
-	MOV_TIPO movimiento = RECARGAR;
-	while (movimiento == RECARGAR){
+	int accion = REINICIAR;
+	while (accion == REINICIAR){
 		std::string nombreArchivo(PRUEBA_JSON);
 		bool ParseoExitoso= Parser::getInstancia().parsear(nombreArchivo);
 		
@@ -52,7 +51,16 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		//Gameloop
 		while (true) {
-			movimiento = Controlador::cambiar();
+			std::vector<MOV_TIPO> movimientos = std::vector<MOV_TIPO>();
+
+			int estado = Controlador::cambiar(&movimientos);
+			if (estado == REINICIAR){
+				break;
+			}
+			else if (estado == FIN){
+				accion = FIN;
+				break;
+			};
 
 			//Se inicializa el Timer de corte
 			capTimer.start();
@@ -66,12 +74,11 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 
 			//Se actualiza la pantalla
-			unaVista->actualizar(movimiento, Parser::getInstancia().getPersonaje().getEstado());
+			unaVista->actualizar(Parser::getInstancia().getPersonaje().getEstado());
 
-			if ((movimiento == CERRAR) || (movimiento == RECARGAR))
-				break;
+			
 
-			unMundo->Paso(0.13f, movimiento);
+			unMundo->Paso(0.13f, &movimientos);
 
 
 			++conteoDeCuadros;

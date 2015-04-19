@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "Controlador.h"
 
-
 Controlador::Controlador()
 {
 }
 
-MOV_TIPO Controlador::cambiar(){
+int Controlador::cambiar(std::vector<MOV_TIPO>* movimientos){
+
+	movimientos->clear();
+
 	SDL_Event event;
 	SDL_PollEvent(&event);
 
@@ -22,47 +24,66 @@ MOV_TIPO Controlador::cambiar(){
 		switch (event.key.keysym.sym)
 		{
 		case SDLK_ESCAPE:
-			return CERRAR;
+			return FIN;
 		case SDLK_UP:
-			if ((state[SDL_SCANCODE_RIGHT]))
-				return SALTODER;
-			if ((state[SDL_SCANCODE_LEFT]))
-				return SALTOIZQ;
-			return ARRIBA;
+			if (state[SDL_SCANCODE_RIGHT]){
+				movimientos->push_back(SALTODER);
+				return CONTINUAR;
+			}
+			if (state[SDL_SCANCODE_LEFT]){
+				movimientos->push_back(SALTOIZQ);
+			return CONTINUAR;
+			}
+			movimientos->push_back(ARRIBA);
+			return CONTINUAR;
 		case SDLK_DOWN:
-			if (state[SDL_SCANCODE_UP]) return ARRIBA;
-			return ABAJO;
+			if (state[SDL_SCANCODE_UP])
+			movimientos->push_back(ARRIBA);
+			movimientos->push_back(ABAJO);
+			return CONTINUAR;
 		case SDLK_RIGHT:
-			if (state[SDL_SCANCODE_LEFT]) return IZQ;
-			return DER;
+			if (state[SDL_SCANCODE_LEFT])
+			movimientos->push_back(IZQ);
+			movimientos->push_back(DER);
+			return CONTINUAR;
 		case SDLK_LEFT:
-			return IZQ;
+			movimientos->push_back(IZQ);
+			return CONTINUAR;
 		case SDLK_r:
-			return RECARGAR;
+			return REINICIAR;
 		}
 	}
 
 	if (state[SDL_SCANCODE_RIGHT]){
-		if (state[SDL_SCANCODE_LEFT]) return QUIETO;
-		return DER;
+		if (state[SDL_SCANCODE_LEFT])
+			movimientos->push_back(QUIETO);
+		movimientos->push_back(DER);
+		return CONTINUAR;
 	}
 
 	if (state[SDL_SCANCODE_LEFT]){
-		if (state[SDL_SCANCODE_RIGHT]) return QUIETO;
-		return IZQ;
+		if (state[SDL_SCANCODE_RIGHT]) 
+			movimientos->push_back(QUIETO);
+		movimientos->push_back(IZQ);
+		return CONTINUAR;
 	}
 
 	if (state[SDL_SCANCODE_LEFT]){
-		return IZQ;
+		movimientos->push_back(IZQ);
+		return CONTINUAR;
 	}
 
 	if (state[SDL_SCANCODE_DOWN]){
-		if ((state[SDL_SCANCODE_RIGHT]) || (state[SDL_SCANCODE_LEFT])) return ABAJO;
-		if (state[SDL_SCANCODE_UP]) return ARRIBA;
-		return ABAJO;
+		if ((state[SDL_SCANCODE_RIGHT]) || (state[SDL_SCANCODE_LEFT]))
+			movimientos->push_back(ABAJO);
+		return CONTINUAR;
+		if (state[SDL_SCANCODE_UP]) 
+			movimientos->push_back(ARRIBA);
+			movimientos->push_back(ABAJO);
+		return CONTINUAR;
 	}
-
-	return QUIETO;
+	movimientos->push_back(QUIETO);
+	return CONTINUAR;
 }
 
 Controlador::~Controlador()

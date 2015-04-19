@@ -11,7 +11,7 @@ class Vista
 {
 public:
 	Vista();
-	void actualizar(MOV_TIPO, ESTADO);
+	void actualizar(ESTADO);
 	~Vista();
 private:
 	Sprite* elSprite;

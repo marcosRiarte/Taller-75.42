@@ -20,15 +20,15 @@ void Mundo::agregarCuerpo(Cuerpo *unCuerpo)
 	unCuerpo->recibeObservador(&Parser::getInstancia().getPersonaje());
 }
 
-void Mundo::Paso(float difTiempo, MOV_TIPO movimiento)
+void Mundo::Paso(float difTiempo, std::vector<MOV_TIPO>* movimientos)
 {
 	for (unsigned int i = 0; i < Cuerpos.size(); i++)
 	{
-		Cuerpos.at(i)->notificarObservadores(Resolver(difTiempo, Cuerpos.at(i), movimiento));
+		Cuerpos.at(i)->notificarObservadores(Resolver(difTiempo, Cuerpos.at(i), movimientos));
 	}
 }
 
-ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento)
+ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, std::vector<MOV_TIPO>* movimientos)
 {
 	ESTADO nuevoEstado = QUIETODER;
 	/// integra velocidad, para salto, 
@@ -45,26 +45,26 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, MOV_TIPO movimiento)
 	}
 	else{
 
-		if (movimiento == DER) {
+		if (movimientos->at(0) == DER) {
 			nuevoEstado = DER_DER;
 			unCuerpo->mover(DISTANCIA);
 		}
-		if (movimiento == IZQ){
+		if (movimientos->at(0) == IZQ){
 			nuevoEstado = IZQ_DER;
 			unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
 		}
 
-		if (movimiento == ARRIBA){
+		if (movimientos->at(0) == ARRIBA){
 			nuevoEstado = ARRIBA_DER;
 			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
 		}
 
-		if (movimiento == SALTODER){
+		if (movimientos->at(0) == SALTODER){
 			nuevoEstado = SALTODER_DER;
 			unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
 		}
 
-		if (movimiento == SALTOIZQ){
+		if (movimientos->at(0) == SALTOIZQ){
 			nuevoEstado = SALTOIZQ_DER;
 			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
 
