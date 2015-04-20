@@ -146,7 +146,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		Mix_FreeChunk(sonido);
 
 		// Cerrar SDL_mixer
-		atexit(Mix_CloseAudio);
+		Mix_CloseAudio();
 
 		SDL_Quit();
 		
