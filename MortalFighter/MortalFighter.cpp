@@ -52,47 +52,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		int conteoDeCuadros = 0;
 		fpsTimer.start();
 
-		std::vector<MOV_TIPO> movimientos = std::vector<MOV_TIPO>();
-
-
-
-		/*********************************************************************/
-		/*       Sonido - SDL_mixer                                          */
-		/*********************************************************************/
-		// Se inicializa la librería SDL_Mixer
-		if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, \
-			MIX_DEFAULT_CHANNELS, 4096) < 0) {
-			cerr << "Error iniciando SDL_mixer: " << endl;
-			exit(1);
-		}
-
-		// Se carga un sonido
-		Mix_Chunk *sonido;
-
-		sonido = Mix_LoadWAV("./son/the_who.wav");
-
-		if (sonido == NULL) {
-
-			cerr << "Falla al cargar el sonido" << endl;
-			exit(1);
-
-		}
-
-		// volumen de reproducción
-		int volumen = 100;
-
-		Mix_VolumeChunk(sonido, volumen);
-
-		// Se establece 2 canales
-		Mix_AllocateChannels(2);
-
-		// Se reproduce el sonido en el canal 1
-		// 0 para reproducir una sola vez 
-		// o -1 para reproducir loop infinito
-		Mix_PlayChannel(1, sonido, 0);
-
-		/**************************************************************************/
-		/**************************************************************************/
+		std::vector<MOV_TIPO> movimientos = std::vector<MOV_TIPO>();	
 		
 
 		/***************************************************************************/
@@ -140,13 +100,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		delete unaVista;
 		delete unMundo;
 		delete unCuerpo;
-		Parser::FreeInstancia();
-		
-		// Eliminar el sonido y liberar memoria
-		Mix_FreeChunk(sonido);
-
-		// Cerrar SDL_mixer
-		Mix_CloseAudio();
+		Parser::FreeInstancia();	
 
 		SDL_Quit();
 		
