@@ -96,7 +96,7 @@ void Vista::actualizar(ESTADO estadoPersonaje){
 	int altoVentanaPx = ventanaVista.getAltoPx();
 
 	//Parametros del personaje	
-	float xPjUn = personajeVista.getPosicionUn().first;
+	xPjUn = personajeVista.getPosicionUn().first;
 	float anchoPj = personajeVista.getAncho();
 
 	float anchoEscenario = Parser::getInstancia().getEscenario().getAncho();
@@ -114,7 +114,7 @@ void Vista::actualizar(ESTADO estadoPersonaje){
 
 	
 	// Dibuja las capas y el personaje
-	Dibujar(&capasVista, &personajeVista, camaraXLog, estadoPersonaje);
+	Dibujar(&personajeVista, estadoPersonaje);
 
 
 	//Se actualiza la pantalla
@@ -183,7 +183,7 @@ std::string Vista::GetEstadoDelPersonaje(ESTADO estadoPersonaje, Personaje* pers
 	return estadoDelPersonaje;
 }
 
-void Vista::Dibujar(std::vector<Capa*> *capasVista, Personaje* personajeVista, float camaraXLog, ESTADO estadoPersonaje)
+void Vista::Dibujar(Personaje* personajeVista, ESTADO estadoPersonaje)
 {
 	Ventana ventanaVista = Parser::getInstancia().getVentana();
 	float anchoVentana = ventanaVista.getAncho();	
@@ -191,57 +191,56 @@ void Vista::Dibujar(std::vector<Capa*> *capasVista, Personaje* personajeVista, f
 	int altoVentanaPx = ventanaVista.getAltoPx();
 	float anchoEscenario = Parser::getInstancia().getEscenario().getAncho();
 
-	DibujarCapasAnteriores(capasVista, personajeVista, camaraXLog, anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
+	DibujarCapasAnteriores(personajeVista, anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
 
-	DibujarPersonaje(capasVista, personajeVista, estadoPersonaje, camaraXLog);
+	DibujarPersonaje(personajeVista, estadoPersonaje);
 
-	DibujarCapasPosteriores(capasVista, personajeVista, camaraXLog, anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
+	DibujarCapasPosteriores(personajeVista, anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
 	
 }
 
-void Vista::DibujarCapasAnteriores(std::vector<Capa*> *capasVista, Personaje* personajeVista, float camaraXLog, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
+void Vista::DibujarCapasAnteriores(Personaje* personajeVista, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
 {
 	SDL_Rect camara;
 	camara = { 0, 0, anchoVentanaPx, altoVentanaPx };
 	//Se cargan las capas anteriores al personaje
-	for (size_t i = 0; i < capasVista->size(); i++)
+	for (size_t i = 0; i < capasVista.size(); i++)
 	{
-		if (capasVista->at(i)->getZIndex() <= personajeVista->getZIndex()) {
-			float anchoCapa = capasVista->at(i)->getAncho();
+		if (capasVista.at(i)->getZIndex() <= personajeVista->getZIndex()) {
+			float anchoCapa = capasVista.at(i)->getAncho();
 			camara.w = manejadorULog.darLongPixels(anchoCapa);
 			// donde toma la camara a la capa parametrizado con el ancho del escenario	
 			camara.x = manejadorULog.darLongPixels((camaraXLog)*(anchoCapa - anchoVentana) / (anchoEscenario - anchoVentana));
 
-			SDL_RenderCopy(renderer, capasVista->at(i)->getTexturaSDL(), NULL, &camara);
+			SDL_RenderCopy(renderer, capasVista.at(i)->getTexturaSDL(), NULL, &camara);
 		}
 	}
 }
 
-void Vista::DibujarCapasPosteriores(std::vector<Capa*> *capasVista, Personaje* personajeVista, float camaraXLog, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
+void Vista::DibujarCapasPosteriores(Personaje* personajeVista, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
 {
 	SDL_Rect camara;
 	camara = { 0, 0, anchoVentanaPx, altoVentanaPx };
 	//Se cargan las capas posteriores al personaje
-	for (size_t i = 0; i < capasVista->size(); i++)
+	for (size_t i = 0; i < capasVista.size(); i++)
 	{
-		if (capasVista->at(i)->getZIndex() > personajeVista->getZIndex()) {
-			float anchoCapa = capasVista->at(i)->getAncho();
+		if (capasVista.at(i)->getZIndex() > personajeVista->getZIndex()) {
+			float anchoCapa = capasVista.at(i)->getAncho();
 			camara.w = manejadorULog.darLongPixels(anchoCapa);
 			// donde toma la camara a la capa parametrizado con el ancho del escenario
 			camara.x = manejadorULog.darLongPixels((camaraXLog)*(anchoCapa - anchoVentana) / (anchoEscenario - anchoVentana));
-			SDL_RenderCopy(renderer, capasVista->at(i)->getTexturaSDL(), NULL, &camara);
+			SDL_RenderCopy(renderer, capasVista.at(i)->getTexturaSDL(), NULL, &camara);
 		}
 	}
 }
 
-void Vista::DibujarPersonaje(std::vector<Capa*> *capasVista, Personaje* personajeVista, ESTADO estadoPersonaje, float camaraXLog)
+void Vista::DibujarPersonaje(Personaje* personajeVista, ESTADO estadoPersonaje)
 {
 	//Parametros del personaje
 	int anchoPjPx = manejadorULog.darLongPixels(personajeVista->getAncho());
 	int altoPjPx = manejadorULog.darLongPixels(personajeVista->getAlto(), Parser::getInstancia().getVentana().getAltoPx(), Parser::getInstancia().getEscenario().getAlto());
 	int xPjPx = personajeVista->getPosicionPx().first;
-	int yPjPx = personajeVista->getPosicionPx().second;
-	float xPjUn = personajeVista->getPosicionUn().first;
+	int yPjPx = personajeVista->getPosicionPx().second;	
 	float anchoPj = personajeVista->getAncho();
 
 	// Posicion x del personaje dentro de la camara

@@ -27,13 +27,14 @@ private:
 	std::vector<SDL_Rect*>* listaDeCuadros;
 	//std::vector<Capa*> capasDeTextura;
 	float camaraXLog;
+	float xPjUn;
 	ManejadorULogicas manejadorULog;
 	
 	void OrdenarCapas();
 	std::string GetEstadoDelPersonaje(ESTADO , Personaje* );
-	void Dibujar(std::vector<Capa*> *, Personaje*, float, ESTADO);
-	void DibujarCapasAnteriores(std::vector<Capa*> * capas, Personaje* personaje, float camaraXLog, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
-	void DibujarCapasPosteriores(std::vector<Capa*> *capas, Personaje* personaje, float camaraXLog, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
-	void DibujarPersonaje(std::vector<Capa*> *capas, Personaje* personaje, ESTADO, float camaraXLog);
+	void Dibujar( Personaje*, ESTADO);
+	void DibujarCapasAnteriores(Personaje* personaje, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
+	void DibujarCapasPosteriores(Personaje* personaje, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
+	void DibujarPersonaje(Personaje* personaje, ESTADO estadoPersonaje);
 };
 
