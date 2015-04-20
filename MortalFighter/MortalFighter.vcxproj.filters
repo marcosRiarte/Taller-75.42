@@ -39,6 +39,9 @@
     <Text Include="ReadMe.txt">
       <Filter>lib</Filter>
     </Text>
+    <Text Include="E:\Datos\LISTAdeFALLAS.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -195,6 +198,9 @@
     <None Include="prueba.json">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\..\..\..\Documents\Mortal Kombat misc\mortal64.mid">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\SDL2_image.lib">
@@ -262,5 +268,28 @@
     <Image Include="ima\bkg\t_4.png">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\liuwins.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\LiuFire.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\LiuWin1.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\LiuDie2.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\Liuwada.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\Liuhua2.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\Liuhua1.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
   </ItemGroup>
 </Project>

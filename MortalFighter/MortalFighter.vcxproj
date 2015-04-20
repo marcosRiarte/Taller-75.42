@@ -81,6 +81,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="E:\Datos\LISTAdeFALLAS.txt" />
     <Text Include="lib\LICENSE.jpeg.txt" />
     <Text Include="lib\LICENSE.png.txt" />
     <Text Include="lib\LICENSE.tiff.txt" />
@@ -136,6 +137,7 @@
     <ClCompile Include="Vista.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\Documents\Mortal Kombat misc\mortal64.mid" />
     <None Include="jsoncpp.dll" />
     <None Include="lib\libjpeg-9.dll" />
     <None Include="lib\libpng16-16.dll" />
@@ -171,6 +173,15 @@
     <Image Include="ima\bkg\t_bkg.png" />
     <Image Include="ima\sprites\player1.png" />
     <Image Include="ima\sprites\player_default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\LiuDie2.wav" />
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\LiuFire.wav" />
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\Liuhua1.wav" />
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\Liuhua2.wav" />
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\Liuwada.wav" />
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\LiuWin1.wav" />
+    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\liuwins.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
