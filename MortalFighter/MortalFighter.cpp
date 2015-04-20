@@ -34,6 +34,9 @@ int _tmain(int argc, _TCHAR* argv[])
 			//WARNING WARNING WARNING!!! ACA NO VA UN RETURN 1 ???
 		}
 
+		/*********************************************************************/
+		/*      Inicialización de vista y variables del juego               */
+		/*********************************************************************/
 		//Parte de creación inicial.
 		Vista* unaVista = new Vista();
 		Mundo* unMundo = new Mundo(vecGravedad);
@@ -51,7 +54,50 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		std::vector<MOV_TIPO> movimientos = std::vector<MOV_TIPO>();
 
-		//Gameloop
+
+
+		/*********************************************************************/
+		/*       Sonido - SDL_mixer                                          */
+		/*********************************************************************/
+		// Se inicializa la librería SDL_Mixer
+		if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, \
+			MIX_DEFAULT_CHANNELS, 4096) < 0) {
+			cerr << "Error iniciando SDL_mixer: " << endl;
+			exit(1);
+		}
+
+		// Se carga un sonido
+		Mix_Chunk *sonido;
+
+		sonido = Mix_LoadWAV("./son/the_who.wav");
+
+		if (sonido == NULL) {
+
+			cerr << "Falla al cargar el sonido" << endl;
+			exit(1);
+
+		}
+
+		// volumen de reproducción
+		int volumen = 100;
+
+		Mix_VolumeChunk(sonido, volumen);
+
+		// Se establece 2 canales
+		Mix_AllocateChannels(2);
+
+		// Se reproduce el sonido en el canal 1
+		// 0 para reproducir una sola vez 
+		// o -1 para reproducir loop infinito
+		Mix_PlayChannel(1, sonido, 0);
+
+		/**************************************************************************/
+		/**************************************************************************/
+		
+
+		/***************************************************************************/
+		/*     GAMELOOP															   */
+		/***************************************************************************/
 		while (true) {
 			int estado = Controlador::cambiar(&movimientos);
 			if (estado == REINICIAR){
@@ -86,14 +132,22 @@ int _tmain(int argc, _TCHAR* argv[])
 			if (frameTicks < MSxCUADRO)
 			{
 				//Se espera el tiempo que queda
-				SDL_Delay(MSxCUADRO - frameTicks);
+				SDL_Delay((Uint32)round(MSxCUADRO - frameTicks));
 			}
 		}
+
+		// Se eliminan variables del juego y se libera la memoria
 		delete unaVista;
 		delete unMundo;
 		delete unCuerpo;
 		Parser::FreeInstancia();
 		
+		// Eliminar el sonido y liberar memoria
+		Mix_FreeChunk(sonido);
+
+		// Cerrar SDL_mixer
+		atexit(Mix_CloseAudio);
+
 		SDL_Quit();
 		
 	}
