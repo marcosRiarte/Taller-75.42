@@ -91,20 +91,13 @@ void Vista::actualizar(ESTADO estadoPersonaje){
 	Ventana ventanaVista = Parser::getInstancia().getVentana();	
 
 	//Parametros de la ventana
-	int anchoVentanaPx = ventanaVista.getAnchoPx();
-	int altoVentanaPx = ventanaVista.getAltoPx();
+
 	float anchoVentana = ventanaVista.getAncho();
+	int altoVentanaPx = ventanaVista.getAltoPx();
 
-	//Parametros del personaje
-	int anchoPjPx = manejadorULog.darLongPixels(personajeVista.getAncho());
+	//Parametros del personaje	
+	float xPjUn = personajeVista.getPosicionUn().first;
 	float anchoPj = personajeVista.getAncho();
-	int altoPjPx = manejadorULog.darLongPixels(personajeVista.getAlto(), altoVentanaPx, Parser::getInstancia().getEscenario().getAlto());
-	float xPjUn = personajeVista.getPosicionUn().first;	
-	int xPjPx = personajeVista.getPosicionPx().first;
-	int yPjPx = personajeVista.getPosicionPx().second;
-
-	SDL_Rect camara;
-	camara = { 0, 0, anchoVentanaPx, altoVentanaPx };
 
 	float anchoEscenario = Parser::getInstancia().getEscenario().getAncho();
 	// Correcion al desplazamiento del personaje que no sobrepase el
@@ -119,99 +112,10 @@ void Vista::actualizar(ESTADO estadoPersonaje){
 	if ((xPjUn + anchoPj > anchoVentana - camaraXLog) || (xPjUn < -camaraXLog))
 		camaraXLog += personajeVista.getDeltaX();		
 
-	// Posicion x del personaje dentro de la camara
-	float xLogPjEnCamara = xPjUn + camaraXLog;
-	SDL_Rect personaje;
+	
+	// Dibuja las capas y el personaje
+	Dibujar(&capasVista, &personajeVista, camaraXLog, estadoPersonaje);
 
-	personaje.x = manejadorULog.darLongPixels(xLogPjEnCamara);
-	personaje.y = yPjPx;
-	personaje.w = anchoPjPx;
-	personaje.h = altoPjPx;	
-
-	//Se cargan las capas anteriores al personaje
-	for (size_t i = 0; i < capasVista.size(); i++)
-	{
-		if (capasVista.at(i)->getZIndex() <= personajeVista.getZIndex()) {
-			float anchoCapa = capasVista.at(i)->getAncho();
-			camara.w = manejadorULog.darLongPixels(anchoCapa);
-			// donde toma la camara a la capa parametrizado con el ancho del escenario	
-			camara.x = manejadorULog.darLongPixels((camaraXLog)*(anchoCapa - anchoVentana) / (anchoEscenario - anchoVentana));
-			
-			SDL_RenderCopy(renderer, capasVista.at(i)->getTexturaSDL(), NULL, &camara);
-		}
-	}
-
-	std::string estadoDelPersonaje;
-
-	if ((estadoPersonaje == ESTADO::IZQ_IZQ) || (estadoPersonaje == ESTADO::DER_DER)){
-		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
-		estadoDelPersonaje = personajeVista.getCaminarParaAdelante();
-		else
-			estadoDelPersonaje = personajeVista.getCaminarParaAtras();
-	}
-
-	if ((estadoPersonaje == ESTADO::DER_IZQ) || (estadoPersonaje == ESTADO::IZQ_DER)){
-		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
-			estadoDelPersonaje = personajeVista.getCaminarParaAtras();
-		else
-			estadoDelPersonaje = personajeVista.getCaminarParaAdelante();
-	}
-
-	if ((estadoPersonaje == ESTADO::SALTODER_DER) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
-		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
-		estadoDelPersonaje = personajeVista.getSaltoDiagonal();
-		else
-			estadoDelPersonaje = "SaltoDiagonalIzq";
-	}
-
-	if (estadoPersonaje == ESTADO::SALTOIZQ_DER){
-		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
-		estadoDelPersonaje = "SaltoDiagonalIzq";
-		else
-			estadoDelPersonaje = personajeVista.getSaltoDiagonal();
-	}
-
-	if ((estadoPersonaje == ESTADO::ARRIBA_IZQ) || (estadoPersonaje == ESTADO::ARRIBA_DER)){
-		estadoDelPersonaje = personajeVista.getSalto();
-	}
-
-	/*if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ABAJO_DER)){
-		estadoDelPersonaje = personajeVista.getCaida();
-	}*/
-	if ((estadoPersonaje == ESTADO::QUIETODER) || (estadoPersonaje == ESTADO::QUIETOIZQ)) {
-		estadoDelPersonaje = personajeVista.getQuieto();
-	}
-
-	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
-	listaDeCuadros = elSprite->listaDeCuadros(estadoDelPersonaje);
-	numeroDeCuadro++;
-
-	if ((4 * numeroDeCuadro / (listaDeCuadros->size()))> (listaDeCuadros->size() - 1))
-		numeroDeCuadro = 0;
-
-	//Renderizar el sprite
-		SDL_Rect* cuadroActual = listaDeCuadros->at(4*numeroDeCuadro / (listaDeCuadros->size()));
-		
-
-		//Se carga el personaje
-		if (("IZQ" == Parser::getInstancia().getPersonaje().getOrientacion())){
-		SDL_RenderCopyEx(renderer, texturaSprite, cuadroActual, &personaje, 0, NULL, SDL_FLIP_HORIZONTAL);
-		}
-		else{
-		SDL_RenderCopy(renderer, texturaSprite, cuadroActual, &personaje);
-		}
-
-	//Se cargan las capas posteriores al personaje
-		for (size_t i = 0; i < capasVista.size(); i++)
-		{
-			if (capasVista.at(i)->getZIndex() > personajeVista.getZIndex()) {
-				float anchoCapa = capasVista.at(i)->getAncho();
-				camara.w = manejadorULog.darLongPixels(anchoCapa);
-				// donde toma la camara a la capa parametrizado con el ancho del escenario
-				camara.x = manejadorULog.darLongPixels((camaraXLog)*(anchoCapa - anchoVentana) / (anchoEscenario - anchoVentana));
-				SDL_RenderCopy(renderer, capasVista.at(i)->getTexturaSDL(), NULL, &camara);
-			}
-		}
 
 	//Se actualiza la pantalla
 	SDL_RenderPresent(renderer);
@@ -232,6 +136,144 @@ void Vista::OrdenarCapas()
 		capasVista[minimo] = capaAux;
 	}
 }
+
+
+std::string Vista::GetEstadoDelPersonaje(ESTADO estadoPersonaje, Personaje* personajeVista){
+	std::string estadoDelPersonaje;
+
+	if ((estadoPersonaje == ESTADO::IZQ_IZQ) || (estadoPersonaje == ESTADO::DER_DER)){
+		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
+			estadoDelPersonaje = personajeVista->getCaminarParaAdelante();
+		else
+			estadoDelPersonaje = personajeVista->getCaminarParaAtras();
+	}
+
+	if ((estadoPersonaje == ESTADO::DER_IZQ) || (estadoPersonaje == ESTADO::IZQ_DER)){
+		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
+			estadoDelPersonaje = personajeVista->getCaminarParaAtras();
+		else
+			estadoDelPersonaje = personajeVista->getCaminarParaAdelante();
+	}
+
+	if ((estadoPersonaje == ESTADO::SALTODER_DER) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
+		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
+			estadoDelPersonaje = personajeVista->getSaltoDiagonal();
+		else
+			estadoDelPersonaje = "SaltoDiagonalIzq";
+	}
+
+	if (estadoPersonaje == ESTADO::SALTOIZQ_DER){
+		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
+			estadoDelPersonaje = "SaltoDiagonalIzq";
+		else
+			estadoDelPersonaje = personajeVista->getSaltoDiagonal();
+	}
+
+	if ((estadoPersonaje == ESTADO::ARRIBA_IZQ) || (estadoPersonaje == ESTADO::ARRIBA_DER)){
+		estadoDelPersonaje = personajeVista->getSalto();
+	}
+
+	/*if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ABAJO_DER)){
+	estadoDelPersonaje = personajeVista.getCaida();
+	}*/
+	if ((estadoPersonaje == ESTADO::QUIETODER) || (estadoPersonaje == ESTADO::QUIETOIZQ)) {
+		estadoDelPersonaje = personajeVista->getQuieto();
+	}
+
+	return estadoDelPersonaje;
+}
+
+void Vista::Dibujar(std::vector<Capa*> *capasVista, Personaje* personajeVista, float camaraXLog, ESTADO estadoPersonaje)
+{
+	Ventana ventanaVista = Parser::getInstancia().getVentana();
+	float anchoVentana = ventanaVista.getAncho();	
+	int anchoVentanaPx = ventanaVista.getAnchoPx();
+	int altoVentanaPx = ventanaVista.getAltoPx();
+	float anchoEscenario = Parser::getInstancia().getEscenario().getAncho();
+
+	DibujarCapasAnteriores(capasVista, personajeVista, camaraXLog, anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
+
+	DibujarPersonaje(capasVista, personajeVista, estadoPersonaje, camaraXLog);
+
+	DibujarCapasPosteriores(capasVista, personajeVista, camaraXLog, anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
+	
+}
+
+void Vista::DibujarCapasAnteriores(std::vector<Capa*> *capasVista, Personaje* personajeVista, float camaraXLog, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
+{
+	SDL_Rect camara;
+	camara = { 0, 0, anchoVentanaPx, altoVentanaPx };
+	//Se cargan las capas anteriores al personaje
+	for (size_t i = 0; i < capasVista->size(); i++)
+	{
+		if (capasVista->at(i)->getZIndex() <= personajeVista->getZIndex()) {
+			float anchoCapa = capasVista->at(i)->getAncho();
+			camara.w = manejadorULog.darLongPixels(anchoCapa);
+			// donde toma la camara a la capa parametrizado con el ancho del escenario	
+			camara.x = manejadorULog.darLongPixels((camaraXLog)*(anchoCapa - anchoVentana) / (anchoEscenario - anchoVentana));
+
+			SDL_RenderCopy(renderer, capasVista->at(i)->getTexturaSDL(), NULL, &camara);
+		}
+	}
+}
+
+void Vista::DibujarCapasPosteriores(std::vector<Capa*> *capasVista, Personaje* personajeVista, float camaraXLog, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
+{
+	SDL_Rect camara;
+	camara = { 0, 0, anchoVentanaPx, altoVentanaPx };
+	//Se cargan las capas posteriores al personaje
+	for (size_t i = 0; i < capasVista->size(); i++)
+	{
+		if (capasVista->at(i)->getZIndex() > personajeVista->getZIndex()) {
+			float anchoCapa = capasVista->at(i)->getAncho();
+			camara.w = manejadorULog.darLongPixels(anchoCapa);
+			// donde toma la camara a la capa parametrizado con el ancho del escenario
+			camara.x = manejadorULog.darLongPixels((camaraXLog)*(anchoCapa - anchoVentana) / (anchoEscenario - anchoVentana));
+			SDL_RenderCopy(renderer, capasVista->at(i)->getTexturaSDL(), NULL, &camara);
+		}
+	}
+}
+
+void Vista::DibujarPersonaje(std::vector<Capa*> *capasVista, Personaje* personajeVista, ESTADO estadoPersonaje, float camaraXLog)
+{
+	//Parametros del personaje
+	int anchoPjPx = manejadorULog.darLongPixels(personajeVista->getAncho());
+	int altoPjPx = manejadorULog.darLongPixels(personajeVista->getAlto(), Parser::getInstancia().getVentana().getAltoPx(), Parser::getInstancia().getEscenario().getAlto());
+	int xPjPx = personajeVista->getPosicionPx().first;
+	int yPjPx = personajeVista->getPosicionPx().second;
+	float xPjUn = personajeVista->getPosicionUn().first;
+	float anchoPj = personajeVista->getAncho();
+
+	// Posicion x del personaje dentro de la camara
+	float xLogPjEnCamara = xPjUn + camaraXLog;
+	SDL_Rect personaje;
+
+	personaje.x = manejadorULog.darLongPixels(xLogPjEnCamara);
+	personaje.y = yPjPx;
+	personaje.w = anchoPjPx;
+	personaje.h = altoPjPx;
+	std::string estadoDelPersonaje = GetEstadoDelPersonaje(estadoPersonaje, personajeVista);
+
+	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
+	listaDeCuadros = elSprite->listaDeCuadros(estadoDelPersonaje);
+	numeroDeCuadro++;
+
+	if ((4 * numeroDeCuadro / (listaDeCuadros->size()))> (listaDeCuadros->size() - 1))
+		numeroDeCuadro = 0;
+
+	//Renderizar el sprite
+	SDL_Rect* cuadroActual = listaDeCuadros->at(4 * numeroDeCuadro / (listaDeCuadros->size()));
+
+
+	//Se carga el personaje
+	if (("IZQ" == Parser::getInstancia().getPersonaje().getOrientacion())){
+		SDL_RenderCopyEx(renderer, texturaSprite, cuadroActual, &personaje, 0, NULL, SDL_FLIP_HORIZONTAL);
+	}
+	else{
+		SDL_RenderCopy(renderer, texturaSprite, cuadroActual, &personaje);
+	}
+}
+
 
 Vista::~Vista()
 {	
