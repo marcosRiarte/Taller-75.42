@@ -73,7 +73,7 @@ void Validador::ValidarEscenario(float *anchoEscenario, float *altoEscenario, fl
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*altoEscenario = ALTO_ESCENARIO;
 	}
-	if (!((*yPisoEscenario > 0) && (*yPisoEscenario < *altoEscenario))) {
+	if (((*yPisoEscenario < 0) || (*yPisoEscenario > *altoEscenario))) {
 		std::string mensaje = "yPiso del Escenario fuera de rango, se yPiso por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*yPisoEscenario = Y_PISO_ESCENARIO;

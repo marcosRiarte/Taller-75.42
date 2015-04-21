@@ -82,11 +82,15 @@ std::string Personaje::getOrientacion() const
 }
 
 std::pair<int, int> Personaje::getPosicionPx() const
-{	
-	ManejadorULogicas manejador;
-	float yPiso = Parser::getInstancia().getEscenario().getYPiso() - ALTO_PERSONAJE + alto +ALTO_PERSONAJE/2;
+{
+	ManejadorULogicas manejador;	
+	float yCorrido = Parser::getInstancia().getEscenario().getAlto() - alto;
+	float yRel = yCorrido - posicionUn.second;
 
-	return manejador.obtenerPosicionPx(posicionUn.first, posicionUn.second + yPiso); 
+	int yRelPx = manejador.darLongPixels(yRel, Parser::getInstancia().getVentana().getAltoPx(), Parser::getInstancia().getEscenario().getAlto());
+	int xRelPx = manejador.darLongPixels(posicionUn.first);
+
+	return std::make_pair(xRelPx, yRelPx);
 }
 
 

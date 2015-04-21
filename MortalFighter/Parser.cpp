@@ -181,7 +181,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 			if (capas[i].isMember("zindex") && capas[i].get("zindex", ZINDEX_CAPA).isNumeric() && capas[i].get("zindex", ZINDEX_CAPA) < INT_MAX)
 					zIndexCapa = (capas[i].get("zindex", ZINDEX_CAPA).asInt());				
 			else
-				Log::getInstancia().logearMensajeEnModo("Se carga z-index de capa " + std::to_string(i) + "  por defecto ->" + std::to_string(ZINDEX_CAPA), Log::MODO_WARNING);
+				Log::getInstancia().logearMensajeEnModo("Se carga z-index de capa " + std::to_string(i) + "  por defecto ->" + std::to_string(ZINDEX_CAPA), Log::MODO_DEBUG);
 				
 
 
