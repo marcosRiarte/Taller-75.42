@@ -149,7 +149,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo de las capas", Log::MODO_WARNING);
 		fondo = FONDO_DEFAULT;
 		anchoCapas = ANCHO_CAPA;
-		//xerror jose
+		//xjose jose
 		Validador::ValidarCapas(&anchoCapas, &fondo, 0);
 		Capas.push_back(new Capa(fondo, anchoCapas, 0));
 		Log::getInstancia().logearMensajeEnModo("Se cargaron capas y ancho por defecto", Log::MODO_WARNING);
