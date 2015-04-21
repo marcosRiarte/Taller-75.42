@@ -137,7 +137,6 @@
     <ClCompile Include="Vista.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\Documents\Mortal Kombat misc\mortal64.mid" />
     <None Include="jsoncpp.dll" />
     <None Include="lib\libjpeg-9.dll" />
     <None Include="lib\libpng16-16.dll" />
@@ -155,14 +154,6 @@
     <Library Include="lib\SDL2_image.lib" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Pictures\005_Liu_Kang_MKA.png" />
-    <Image Include="..\..\..\..\Pictures\02.gif" />
-    <Image Include="..\..\..\..\Pictures\06.gif" />
-    <Image Include="..\..\..\..\Pictures\5.png" />
-    <Image Include="..\..\..\..\Pictures\6.png" />
-    <Image Include="..\..\..\..\Pictures\fight Hd.png" />
-    <Image Include="..\..\..\..\Pictures\Nuevo_Lifebar 519x62 pixeles.png" />
-    <Image Include="..\..\..\..\Pictures\render_tn.jpg" />
     <Image Include="ima\bkg\default_bkg.png" />
     <Image Include="ima\bkg\default_capa.png" />
     <Image Include="ima\bkg\default_p1.png" />
@@ -181,15 +172,6 @@
     <Image Include="ima\bkg\t_bkg.png" />
     <Image Include="ima\sprites\player1.png" />
     <Image Include="ima\sprites\player_default.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\LiuDie2.wav" />
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\LiuFire.wav" />
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\Liuhua1.wav" />
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\Liuhua2.wav" />
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\Liuwada.wav" />
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\LiuWin1.wav" />
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\liuwins.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
