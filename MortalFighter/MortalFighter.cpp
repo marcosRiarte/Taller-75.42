@@ -25,14 +25,14 @@ int _tmain(int argc, _TCHAR* argv[])
 		std::string nombreArchivo(PRUEBA_JSON);
 		bool ParseoExitoso= Parser::getInstancia().parsear(nombreArchivo);
 		
-		if (!ParseoExitoso) return 1; //si el json por defecto fallo, el programa termina
+		if (!ParseoExitoso) return EXIT_FAILURE; //si el json por defecto fallo, el programa termina
 
 		vector2D vecGravedad(0.0f, GRAVEDAD_Y);
 
 		if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
 			const char* msg = ((std::string)"Error iniciando SDL: ").append(SDL_GetError()).c_str();
-			//WARNING WARNING WARNING!!! ACA NO VA UN RETURN 1 ??? return  EXIT_FAILURE
-			// y loguear un mensaje de error
+			Log::getInstancia().logearMensajeEnModo("No se puede inicializar SDL, se cierra el programa", Log::MODO_ERROR);
+			return  EXIT_FAILURE;
 		}
 
 		/*********************************************************************/

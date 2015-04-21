@@ -31,13 +31,14 @@ void Validador::ValidarVentana(int* anchoPxVentana, int* altoPxVentana, float* a
 	}
 }
 
-void Validador::ValidarCapas(float *anchoCapa, std::string *fondo){
+void Validador::ValidarCapas(float *anchoCapa, std::string *fondo, size_t numerocapa){
 	if (!(*anchoCapa > 0)){
-		std::string mensaje = "ancho de Capa fuera de rango, se toma ancho por defecto";
+		//xerror jose
+		std::string mensaje = "ancho de Capa " + std::to_string(numerocapa) + " fuera de rango, se toma ancho por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*anchoCapa = ANCHO_CAPA;
 	}
-	
+
 	
 	//  intento abrir el archivo, si el puntero devuelto es NULL NO EXISTE EL ARCHIVO  
 	const char * archivofondo = fondo->c_str(); //casteo
@@ -50,7 +51,7 @@ void Validador::ValidarCapas(float *anchoCapa, std::string *fondo){
 	}
 	else // el archivo no existe!
 	{
-		std::string mensaje = "No existe la capa, se usa capa por defecto";
+		std::string mensaje = "No existe la capa " + std::to_string(numerocapa) + " , se usa capa por defecto";
 	    Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		
 		*fondo = FONDO_DEFAULT;
