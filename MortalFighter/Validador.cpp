@@ -62,7 +62,7 @@ void Validador::ValidarCapas(float *anchoCapa, std::string *fondo, size_t numero
 		
 
 
-void Validador::ValidarEscenario(float *anchoEscenario, float *altoEscenario, float* yPisoEscenario){
+void Validador::ValidarEscenario(float *anchoEscenario, float *altoEscenario, float *altoPersonaje, float* yPisoEscenario){
 	if (!(*anchoEscenario > 0)) {
 		std::string mensaje = "ancho del Escenario fuera de rango, se toma ancho por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
@@ -73,7 +73,7 @@ void Validador::ValidarEscenario(float *anchoEscenario, float *altoEscenario, fl
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*altoEscenario = ALTO_ESCENARIO;
 	}
-	if (((*yPisoEscenario < 0) || (*yPisoEscenario > *altoEscenario))) {
+	if (((*yPisoEscenario < 0) || (*yPisoEscenario > *altoEscenario - *altoPersonaje))) {
 		std::string mensaje = "yPiso del Escenario fuera de rango, se yPiso por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*yPisoEscenario = Y_PISO_ESCENARIO;

@@ -129,15 +129,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		
 	}
 
-	Validador::ValidarEscenario(&anchoEscenario, &altoEscenario, &yPisoEscenario);
-	unEscenario = new Escenario(anchoEscenario, altoEscenario, yPisoEscenario);
-	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario correctamente", Log::MODO_DEBUG);
-
-	// en esta parte se desarma todo......
-	//
-	//
-	//
-	//
+	
 
 	Json::Value capas;
 	capas = raiz["capas"];
@@ -311,6 +303,17 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	
 	unPersonaje = new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal, Caida);
 	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje correctamente", Log::MODO_DEBUG);
+	
+	Validador::ValidarEscenario(&anchoEscenario, &altoEscenario, &alto, &yPisoEscenario);
+	unEscenario = new Escenario(anchoEscenario, altoEscenario, yPisoEscenario);
+	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario correctamente", Log::MODO_DEBUG);
+
+	// en esta parte se desarma todo......
+	//
+	//
+	//
+	//
+	
 	return true;
 }
 
