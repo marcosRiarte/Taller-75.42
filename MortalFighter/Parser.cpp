@@ -135,7 +135,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	capas = raiz["capas"];
 	float anchoCapas;
 	std::string fondo;
-	bool errorCapa;
+	bool errorCapa = false;
 	
 	
 	if (!capas || capas.size() == 0){
@@ -143,7 +143,10 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		fondo = FONDO_DEFAULT;
 		anchoCapas = ANCHO_CAPA;
 		
-		Validador::ValidarCapas(&anchoCapas, &fondo, 0);
+		errorCapa = Validador::ValidarCapas(&anchoCapas, &fondo, 0);
+		if (errorCapa){
+			return false;
+		}
 		Capas.push_back(new Capa(fondo, anchoCapas, 0));
 		Log::getInstancia().logearMensajeEnModo("Se cargaron capas y ancho por defecto", Log::MODO_WARNING);
 	}
@@ -183,11 +186,12 @@ bool Parser::parsear(std::string nombreDelArchivo)
 
 
 			errorCapa = Validador::ValidarCapas(&anchoCapas, &fondo, i);
+			if (errorCapa){
+				return false;
+			}
 			Capas.push_back(new Capa(fondo, anchoCapas, zIndexCapa));
 		}
-		if (!errorCapa){
-			Log::getInstancia().logearMensajeEnModo("Se cargaron capas correctamente", Log::MODO_DEBUG);
-		}
+		Log::getInstancia().logearMensajeEnModo("Se cargaron capas correctamente", Log::MODO_DEBUG);
 	}
 
 
@@ -204,7 +208,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	std::string Salto;
 	std::string SaltoDiagonal;
 	std::string Caida;
-	bool errorPersonaje;
+	bool errorPersonaje = false;
 
 	if (!personaje){
 		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo del personaje", Log::MODO_WARNING);
@@ -304,11 +308,14 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	}
 	
 	errorPersonaje = Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites, &CaminarParaAdelante, &CaminarParaAtras, &Quieto, &Salto, &SaltoDiagonal, &Caida);
-	
-	unPersonaje = new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal, Caida);
-	if (errorPersonaje = false){
-		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje correctamente", Log::MODO_DEBUG);
+	if(errorPersonaje){
+		return false;
 	}
+	unPersonaje = new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal, Caida);
+	
+	
+
+	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje correctamente", Log::MODO_DEBUG);
 	Validador::ValidarEscenario(&anchoEscenario, &altoEscenario, &alto, &yPisoEscenario);
 	unEscenario = new Escenario(anchoEscenario, altoEscenario, yPisoEscenario);
 	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario correctamente", Log::MODO_DEBUG);

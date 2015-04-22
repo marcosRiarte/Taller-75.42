@@ -59,14 +59,14 @@ bool Validador::ValidarCapas(float *anchoCapa, std::string *fondo, size_t numero
 		FILE * pFile;
 		fopen_s(&pFile, archivofondo, "r");
 
-		if (pFile == NULL) //si me devolvio puntero existe, cerralo!!!!!
+		if (pFile == NULL)
 		{
-			Log::getInstancia().logearMensajeEnModo("no existe el fondo por defecto, el juego se cargara sin fondo", Log::MODO_ERROR);
-			return false;
+			Log::getInstancia().logearMensajeEnModo("no existe el fondo por defecto, se cerrara el programa...", Log::MODO_ERROR);
+			return true;
 		}
 		else fclose(pFile);
 	}
-	return true;
+	return false;
 }
 
 		
@@ -127,7 +127,7 @@ bool Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::st
 
 		if (pFile == NULL) //si me devolvio puntero existe, cerralo!!!!!
 		{
-			Log::getInstancia().logearMensajeEnModo("sprites por defecto no existentes, no se mostrara el personaje", Log::MODO_ERROR);
+			Log::getInstancia().logearMensajeEnModo("sprites por defecto no existentes, se cerrara el programa...", Log::MODO_ERROR);
 			return true;
 			
 		}
