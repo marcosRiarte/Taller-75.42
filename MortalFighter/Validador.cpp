@@ -31,7 +31,7 @@ void Validador::ValidarVentana(int* anchoPxVentana, int* altoPxVentana, float* a
 	}
 }
 
-void Validador::ValidarCapas(float *anchoCapa, std::string *fondo, size_t numerocapa){
+bool Validador::ValidarCapas(float *anchoCapa, std::string *fondo, size_t numerocapa){
 	if (!(*anchoCapa > 0)){
 		
 		std::string mensaje = "ancho de Capa " + std::to_string(numerocapa) + " fuera de rango, se toma ancho por defecto";
@@ -55,8 +55,18 @@ void Validador::ValidarCapas(float *anchoCapa, std::string *fondo, size_t numero
 	    Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		
 		*fondo = FONDO_DEFAULT;
+		const char * archivofondo = fondo->c_str(); //casteo
+		FILE * pFile;
+		fopen_s(&pFile, archivofondo, "r");
+
+		if (pFile == NULL) //si me devolvio puntero existe, cerralo!!!!!
+		{
+			Log::getInstancia().logearMensajeEnModo("no existe el fondo por defecto, el juego se cargara sin fondo", Log::MODO_ERROR);
+			return false;
+		}
+		else fclose(pFile);
 	}
-	
+	return true;
 }
 
 		
@@ -81,7 +91,7 @@ void Validador::ValidarEscenario(float *anchoEscenario, float *altoEscenario, fl
 }
 
 
-void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::string* orientacion, std::string* sprites, std::string* CaminarParaAdelante, std::string* CaminarParaAtras, std::string* Quieto, std::string* Salto, std::string* SaltoDiagonal, std::string* Caida){
+bool Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::string* orientacion, std::string* sprites, std::string* CaminarParaAdelante, std::string* CaminarParaAtras, std::string* Quieto, std::string* Salto, std::string* SaltoDiagonal, std::string* Caida){
 	if (!(*ancho > 0) || *ancho > MAX_ANCHO_PERSONAJE) {
 		std::string mensaje = "ancho del Personaje fuera de rango, se toma ancho por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
@@ -107,10 +117,21 @@ void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::st
 		fclose(pFile);
 	}
 	else // el archivo no existe!
-	{
+	{	
 		std::string mensaje = "sprites no existentes, se toman sprites por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*sprites = SPRITE_DEFAULT;
+		const char * archivoPersonaje = sprites->c_str(); //casteo
+		FILE * pFile;
+		fopen_s(&pFile, archivoPersonaje, "r");
+
+		if (pFile == NULL) //si me devolvio puntero existe, cerralo!!!!!
+		{
+			Log::getInstancia().logearMensajeEnModo("sprites por defecto no existentes, no se mostrara el personaje", Log::MODO_ERROR);
+			return true;
+			
+		}
+		else fclose(pFile);
 	}
 	
 	if ((*CaminarParaAdelante != "CaminarParaAdelante") && (*CaminarParaAdelante != "CaminarParaAtras") && (*CaminarParaAdelante != "Quieto") && (*CaminarParaAdelante != "Salto") && (*CaminarParaAdelante != "SaltoDiagonal") && (*CaminarParaAdelante != "Caida")) {
@@ -149,4 +170,5 @@ void Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::st
 		
 		*Caida = CAIDA_DEFAULT;
 	}
+	return false;
 }

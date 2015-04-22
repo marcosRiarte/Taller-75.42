@@ -135,6 +135,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	capas = raiz["capas"];
 	float anchoCapas;
 	std::string fondo;
+	bool errorCapa;
 	
 	
 	if (!capas || capas.size() == 0){
@@ -181,10 +182,12 @@ bool Parser::parsear(std::string nombreDelArchivo)
 				
 
 
-			Validador::ValidarCapas(&anchoCapas, &fondo, i);
+			errorCapa = Validador::ValidarCapas(&anchoCapas, &fondo, i);
 			Capas.push_back(new Capa(fondo, anchoCapas, zIndexCapa));
 		}
-		Log::getInstancia().logearMensajeEnModo("Se cargaron capas correctamente", Log::MODO_DEBUG);
+		if (!errorCapa){
+			Log::getInstancia().logearMensajeEnModo("Se cargaron capas correctamente", Log::MODO_DEBUG);
+		}
 	}
 
 
@@ -201,6 +204,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	std::string Salto;
 	std::string SaltoDiagonal;
 	std::string Caida;
+	bool errorPersonaje;
 
 	if (!personaje){
 		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo del personaje", Log::MODO_WARNING);
@@ -299,11 +303,12 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		
 	}
 	
-	Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites, &CaminarParaAdelante, &CaminarParaAtras, &Quieto, &Salto, &SaltoDiagonal, &Caida);
+	errorPersonaje = Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites, &CaminarParaAdelante, &CaminarParaAtras, &Quieto, &Salto, &SaltoDiagonal, &Caida);
 	
 	unPersonaje = new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal, Caida);
-	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje correctamente", Log::MODO_DEBUG);
-	
+	if (errorPersonaje = false){
+		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje correctamente", Log::MODO_DEBUG);
+	}
 	Validador::ValidarEscenario(&anchoEscenario, &altoEscenario, &alto, &yPisoEscenario);
 	unEscenario = new Escenario(anchoEscenario, altoEscenario, yPisoEscenario);
 	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario correctamente", Log::MODO_DEBUG);
