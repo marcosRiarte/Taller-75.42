@@ -65,14 +65,14 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	}
 	else{
 		//3 comprobaciones, que exista el campo, que sea un numero y que no exceda el maximo
-		if (ventana.isMember("anchopx") && ventana.get("anchopx", ANCHO_PX_VENTANA).isNumeric() && ventana.get("anchopx", ANCHO_PX_VENTANA) < INT_MAX)
+		if (ventana.isMember("anchopx") && ventana.get("anchopx", ANCHO_PX_VENTANA).isNumeric() && ((ventana.get("anchopx", ANCHO_PX_VENTANA) < INT_MAX) && (ventana.get("anchopx", ANCHO_PX_VENTANA) >= ANCHO_MIN)))
 				anchoPxVentana = (ventana.get("anchopx", ANCHO_PX_VENTANA).asInt());			
 		else {
 			anchoPxVentana = ANCHO_PX_VENTANA;
 			Log::getInstancia().logearMensajeEnModo("Se carga anchopx de la ventana por defecto", Log::MODO_WARNING);
 		}
 
-		if (ventana.isMember("altopx") && ventana.get("altopx", ALTO_PX_VENTANA).isNumeric() && ventana.get("altopx", ALTO_PX_VENTANA) < INT_MAX)
+		if (ventana.isMember("altopx") && ventana.get("altopx", ALTO_PX_VENTANA).isNumeric() && ((ventana.get("altopx", ALTO_PX_VENTANA) < INT_MAX) && (ventana.get("altopx", ALTO_PX_VENTANA) >= ALTO_MIN)))
 			altoPxVentana = (ventana.get("altopx", ALTO_PX_VENTANA).asInt());			
 		else {
 			altoPxVentana = ALTO_PX_VENTANA;

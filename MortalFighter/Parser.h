@@ -9,6 +9,8 @@
 #define PRUEBA_JSON "prueba.json"
 #define PRUEBA_JSON_DEFECTO "pruebaDefecto.json"
 
+#define ANCHO_MIN 640
+#define ALTO_MIN 480
 #define ANCHO_PX_VENTANA 800
 #define ALTO_PX_VENTANA 600
 #define ANCHO_VENTANA 200.0f
