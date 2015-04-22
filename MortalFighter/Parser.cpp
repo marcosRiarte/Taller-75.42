@@ -174,7 +174,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 			if (!capas[i].isMember("zindex"))
 				Log::getInstancia().logearMensajeEnModo("Se carga z-index de capa " + std::to_string(i) + "  por defecto ->" + std::to_string(ZINDEX_CAPA), Log::MODO_DEBUG);
 			else {
-				if (capas[i].get("zindex", ZINDEX_CAPA).isNumeric() && capas[i].get("zindex", ZINDEX_CAPA) < INT_MAX)
+				if (capas[i].get("zindex", ZINDEX_CAPA).isNumeric() && capas[i].get("zindex", ZINDEX_CAPA) < INT_MAX && capas[i].get("zindex", ZINDEX_CAPA) > -INT_MAX)
 					zIndexCapa = (capas[i].get("zindex", ZINDEX_CAPA).asInt());
 				else
 					Log::getInstancia().logearMensajeEnModo("Se carga z-index de capa " + std::to_string(i) + "  por defecto ->" + std::to_string(ZINDEX_CAPA), Log::MODO_WARNING);
@@ -238,7 +238,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 			Log::getInstancia().logearMensajeEnModo("Se carga alto del personaje por defecto", Log::MODO_WARNING);
 		}
 
-		if (personaje.isMember("zindex") && personaje.get("zindex", ZINDEX).isNumeric() && personaje.get("zindex", ZINDEX) < INT_MAX)
+		if (personaje.isMember("zindex") && personaje.get("zindex", ZINDEX).isNumeric() && personaje.get("zindex", ZINDEX) < INT_MAX && personaje.get("zindex", ZINDEX) > -INT_MAX)
 				zIndex = (personaje.get("zindex", ZINDEX).asInt());			
 		else {
 			zIndex = ZINDEX;
