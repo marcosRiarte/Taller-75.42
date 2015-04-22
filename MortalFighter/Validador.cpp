@@ -33,7 +33,7 @@ void Validador::ValidarVentana(int* anchoPxVentana, int* altoPxVentana, float* a
 
 void Validador::ValidarCapas(float *anchoCapa, std::string *fondo, size_t numerocapa){
 	if (!(*anchoCapa > 0)){
-		//xjose
+		
 		std::string mensaje = "ancho de Capa " + std::to_string(numerocapa) + " fuera de rango, se toma ancho por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		*anchoCapa = ANCHO_CAPA;

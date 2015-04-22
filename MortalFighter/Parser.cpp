@@ -136,12 +136,12 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	float anchoCapas;
 	std::string fondo;
 	
-	//xjose aca que hace???? probalo
+	
 	if (!capas || capas.size() == 0){
 		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo de las capas", Log::MODO_WARNING);
 		fondo = FONDO_DEFAULT;
 		anchoCapas = ANCHO_CAPA;
-		//xjose jose
+		
 		Validador::ValidarCapas(&anchoCapas, &fondo, 0);
 		Capas.push_back(new Capa(fondo, anchoCapas, 0));
 		Log::getInstancia().logearMensajeEnModo("Se cargaron capas y ancho por defecto", Log::MODO_WARNING);
@@ -252,7 +252,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 			orientacion = (personaje.get("orientacion", ORIENTACION_PERSONAJE).asString());
 		else {
 			orientacion = ORIENTACION_PERSONAJE;
-			Log::getInstancia().logearMensajeEnModo("Se carga orientación del personaje por defecto", Log::MODO_WARNING);
+			Log::getInstancia().logearMensajeEnModo("Se carga orientacion del personaje por defecto", Log::MODO_WARNING);
 		}
 		
 		if (personaje.isMember("CaminarParaAdelante") && personaje.get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).isString())
