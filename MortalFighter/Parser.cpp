@@ -209,6 +209,8 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	std::string SaltoDiagonal;
 	std::string Caida;
 	bool errorPersonaje = false;
+	int anchoMaximoDelPersonaje = (int)((anchoPxVentana * altoEscenario) / altoPxVentana); //el resultado de este calculo deberia ser el ancho maximo de la ventana en uninades logicas.
+	int altoMaximoDelPersonaje = altoEscenario + yPisoEscenario; //este el alto maximo
 
 	if (!personaje){
 		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo del personaje", Log::MODO_WARNING);
@@ -228,14 +230,14 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		
 	}
 	else{
-		if (personaje.isMember("ancho") && personaje.get("ancho", ANCHO_PERSONAJE).isNumeric() && personaje.get("ancho", ANCHO_PERSONAJE) < MAX_ANCHO_ESCENARIO)
+		if (personaje.isMember("ancho") && personaje.get("ancho", ANCHO_PERSONAJE).isNumeric() && ( (personaje.get("ancho", ANCHO_PERSONAJE) < anchoMaximoDelPersonaje) && (anchoMaximoDelPersonaje <= anchoEscenario) ) )
 				ancho = (personaje.get("ancho", ANCHO_PERSONAJE).asFloat());			
 		else {
 			ancho = ANCHO_PERSONAJE;
 			Log::getInstancia().logearMensajeEnModo("Se carga ancho del personaje por defecto", Log::MODO_WARNING);
 		}
 
-		if (personaje.isMember("alto") && personaje.get("alto", ALTO_PERSONAJE).isNumeric() && personaje.get("alto", ALTO_PERSONAJE) < MAX_ALTO_ESCENARIO)
+		if (personaje.isMember("alto") && personaje.get("alto", ALTO_PERSONAJE).isNumeric() && personaje.get("alto", ALTO_PERSONAJE) < altoMaximoDelPersonaje)
 				alto = (personaje.get("alto", ALTO_PERSONAJE).asFloat());
 		else {
 			alto = ALTO_PERSONAJE;
