@@ -7,27 +7,27 @@
     "escenario": {
         "ancho": 1000.5,
         "alto": 150,
-        "ypiso": 25
+        "ypiso": 15
     },
     "capas": [
         {
-            "imagen_fondo": "ima/bkg/t_bkg.png",
+            "imagen_fondo": "ima/bkg/p_bkg.png",
             "ancho": 200
         },
         {
-            "imagen_fondo": "ima/bkg/t_4.png",
+            "imagen_fondo": "ima/bkg/p_4.png",
             "ancho": 260
         },
         {
-            "imagen_fondo": "ima/bkg/t_3.png",
+            "imagen_fondo": "ima/bkg/p_3.png",
             "ancho": 395
         },
         {
-            "imagen_fondo": "ima/bkg/t_2.png",
+            "imagen_fondo": "ima/bkg/p_2.png",
             "ancho": 500            
         },
         {
-            "imagen_fondo": "ima/bkg/t_1.png",
+            "imagen_fondo": "ima/bkg/p_1.png",
             "ancho": 1212
         }
     ],

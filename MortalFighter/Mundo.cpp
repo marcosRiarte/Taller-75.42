@@ -47,11 +47,17 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, std::vector<MOV_TIPO>*
 
 		if (movimientos->at(0) == DER) {
 			nuevoEstado = DER_DER;
-			unCuerpo->mover(DISTANCIA);
+			if (Parser::getInstancia().getPersonaje().getOrientacion() == "DER")
+				unCuerpo->mover(DISTANCIA);
+			else
+				unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
 		}
 		if (movimientos->at(0) == IZQ){
 			nuevoEstado = IZQ_DER;
-			unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
+			if (Parser::getInstancia().getPersonaje().getOrientacion() == "DER")
+				unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
+			else
+				unCuerpo->mover(-DISTANCIA);
 		}
 
 		if (movimientos->at(0) == ARRIBA){

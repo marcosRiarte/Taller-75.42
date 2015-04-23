@@ -19,6 +19,15 @@
     <Filter Include="include">
       <UniqueIdentifier>{793b8bc4-1f94-4c82-9285-93d8013bf43a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\ima">
+      <UniqueIdentifier>{4bdf56ba-6a4c-410d-b7bb-f2007aaad2a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\ima\sprites">
+      <UniqueIdentifier>{4c5b86b0-3454-483b-a913-f2db13dcf282}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\ima\bkg">
+      <UniqueIdentifier>{c703215f-dee3-4d75-ad97-60ccf1a34b17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="lib\LICENSE.jpeg.txt">
@@ -198,9 +207,6 @@
     <None Include="prueba.json">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\..\..\..\Documents\Mortal Kombat misc\mortal64.mid">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\SDL2_image.lib">
@@ -214,106 +220,59 @@
     </Library>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="ima\bkg\p_3.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ima\bkg\p_4.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ima\bkg\p_bkg.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ima\bkg\default_bkg.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ima\bkg\default_p1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ima\bkg\default_p2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ima\bkg\default_p3.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ima\bkg\default_p4.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ima\bkg\p_1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="ima\bkg\p_2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="ima\sprites\player_default.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\ima\sprites</Filter>
     </Image>
     <Image Include="ima\sprites\player1.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\ima\sprites</Filter>
+    </Image>
+    <Image Include="ima\bkg\default_bkg.png">
+      <Filter>Resource Files\ima\bkg</Filter>
     </Image>
     <Image Include="ima\bkg\default_capa.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\ima\bkg</Filter>
     </Image>
-    <Image Include="ima\bkg\t_bkg.png">
-      <Filter>Resource Files</Filter>
+    <Image Include="ima\bkg\default_p1.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\default_p2.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\default_p3.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\default_p4.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\p_1.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\p_2.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\p_3.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\p_4.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\p_bkg.png">
+      <Filter>Resource Files\ima\bkg</Filter>
     </Image>
     <Image Include="ima\bkg\t_1.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\ima\bkg</Filter>
     </Image>
     <Image Include="ima\bkg\t_2.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\ima\bkg</Filter>
     </Image>
     <Image Include="ima\bkg\t_3.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\ima\bkg</Filter>
     </Image>
     <Image Include="ima\bkg\t_4.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\ima\bkg</Filter>
     </Image>
-    <Image Include="..\..\..\..\Pictures\Nuevo_Lifebar 519x62 pixeles.png">
-      <Filter>Resource Files</Filter>
+    <Image Include="ima\bkg\t_bkg.png">
+      <Filter>Resource Files\ima\bkg</Filter>
     </Image>
-    <Image Include="..\..\..\..\Pictures\06.gif">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Pictures\render_tn.jpg">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Pictures\005_Liu_Kang_MKA.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Pictures\fight Hd.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Pictures\02.gif">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Pictures\5.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Pictures\6.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\liuwins.wav">
-      <Filter>Resource Files</Filter>
-    </Media>
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\LiuFire.wav">
-      <Filter>Resource Files</Filter>
-    </Media>
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\LiuWin1.wav">
-      <Filter>Resource Files</Filter>
-    </Media>
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\LiuDie2.wav">
-      <Filter>Resource Files</Filter>
-    </Media>
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\Liuwada.wav">
-      <Filter>Resource Files</Filter>
-    </Media>
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\Liuhua2.wav">
-      <Filter>Resource Files</Filter>
-    </Media>
-    <Media Include="..\..\..\..\Documents\Mortal Kombat misc\Liuhua1.wav">
-      <Filter>Resource Files</Filter>
-    </Media>
   </ItemGroup>
 </Project>

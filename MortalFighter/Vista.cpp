@@ -124,17 +124,22 @@ void Vista::actualizar(ESTADO estadoPersonaje){
 }
 
 void Vista::OrdenarCapas()
-{
-	for (size_t i = 0; i < capasVista.size() - 1; i++) {
-		int minimo = i;
-		for (size_t j = i + 1; j < capasVista.size(); j++){
-			if (capasVista[j]->getZIndex() < capasVista[minimo]->getZIndex() )
-				minimo = j;
-		}
-		Capa* capaAux = capasVista[i];
-		capasVista[i] = capasVista[minimo];
-		capasVista[minimo] = capaAux;
+{	
+	std::vector<Capa*> capasOrdenadas;
+	int i = 0;
+	while ( capasVista.size() > 0) {
+		int minimo = 0;
+		for (size_t j = 1; j < capasVista.size(); j++){
+			if (capasVista[j]->getZIndex() < capasVista[minimo]->getZIndex()) {
+				minimo = j;				
+			}
+		}		
+		capasOrdenadas.push_back(capasVista[minimo]);
+		capasVista.erase(capasVista.begin() + minimo);		
 	}
+	
+	capasVista.clear();
+	capasVista = capasOrdenadas;
 }
 
 
