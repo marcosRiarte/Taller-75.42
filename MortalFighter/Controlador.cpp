@@ -3,9 +3,10 @@
 
 Controlador::Controlador()
 {
+	movimientos = std::vector<MOV_TIPO>();
 }
 
-int Controlador::cambiar(std::vector<MOV_TIPO>* movimientos){
+int Controlador::cambiar(){
 
 	SDL_Event event;
 	SDL_PollEvent(&event);
@@ -24,58 +25,58 @@ int Controlador::cambiar(std::vector<MOV_TIPO>* movimientos){
 			return FIN;
 		case SDLK_UP:
 			if (state[SDL_SCANCODE_RIGHT]){
-				movimientos->clear();
-				movimientos->push_back(SALTODER);
+				movimientos.clear();
+				movimientos.push_back(SALTODER);
 				return CONTINUAR;
 			}
 			if (state[SDL_SCANCODE_LEFT]){
-				movimientos->clear();
-				movimientos->push_back(SALTOIZQ);
+				movimientos.clear();
+				movimientos.push_back(SALTOIZQ);
 			return CONTINUAR;
 			}
-			movimientos->clear();
-			movimientos->push_back(ARRIBA);
+			movimientos.clear();
+			movimientos.push_back(ARRIBA);
 			return CONTINUAR;
 		case SDLK_DOWN:
 			if (state[SDL_SCANCODE_UP]){
-			movimientos->clear();
-			movimientos->push_back(ARRIBA);
+			movimientos.clear();
+			movimientos.push_back(ARRIBA);
 			return CONTINUAR;
 			} else if(state[SDL_SCANCODE_LEFT]){
-				movimientos->clear();
-				movimientos->push_back(IZQ);
+				movimientos.clear();
+				movimientos.push_back(IZQ);
 				return CONTINUAR;
 			}
 			else if (state[SDL_SCANCODE_RIGHT]){
-				movimientos->clear();
-				movimientos->push_back(DER);
+				movimientos.clear();
+				movimientos.push_back(DER);
 				return CONTINUAR;
 			}
 			else{
-			movimientos->clear();
-			movimientos->push_back(ABAJO);
+			movimientos.clear();
+			movimientos.push_back(ABAJO);
 			return CONTINUAR;
 			}
 		case SDLK_RIGHT:
 			if (state[SDL_SCANCODE_LEFT]){
-				movimientos->clear();
-			movimientos->push_back(IZQ);
+				movimientos.clear();
+				movimientos.push_back(IZQ);
 			return CONTINUAR;
 			}
 			else{
-				movimientos->clear();
-			movimientos->push_back(DER);
+				movimientos.clear();
+				movimientos.push_back(DER);
 			return CONTINUAR;
 			}
 		case SDLK_LEFT:
 			if (state[SDL_SCANCODE_RIGHT]){
-				movimientos->clear();
-				movimientos->push_back(DER);
+				movimientos.clear();
+				movimientos.push_back(DER);
 				return CONTINUAR;
 			}
 			else{
-				movimientos->clear();
-				movimientos->push_back(IZQ);
+				movimientos.clear();
+				movimientos.push_back(IZQ);
 				return CONTINUAR;
 			}
 		case SDLK_r:
@@ -84,45 +85,51 @@ int Controlador::cambiar(std::vector<MOV_TIPO>* movimientos){
 	}
 	
 	if ((state[SDL_SCANCODE_LEFT]) && (state[SDL_SCANCODE_RIGHT]))
-		if ((movimientos->at(0) == DER) || (movimientos->at(0) == IZQ))
+		if ((movimientos.at(0) == DER) || (movimientos.at(0) == IZQ))
 		return CONTINUAR;
 		
 	if (state[SDL_SCANCODE_RIGHT]){
-		movimientos->clear();
-		movimientos->push_back(DER);
+		movimientos.clear();
+		movimientos.push_back(DER);
 		return CONTINUAR;
 	}
 
 	if (state[SDL_SCANCODE_LEFT]){
-		movimientos->clear();
-		movimientos->push_back(IZQ);
+		movimientos.clear();
+		movimientos.push_back(IZQ);
 		return CONTINUAR;
 	}
 	
 	if ((state[SDL_SCANCODE_DOWN]) && (state[SDL_SCANCODE_UP])){
-			movimientos->clear();
-			movimientos->push_back(ARRIBA);
+		movimientos.clear();
+		movimientos.push_back(ARRIBA);
 			return CONTINUAR;
 	}
 
 	if ((state[SDL_SCANCODE_DOWN]) && ((state[SDL_SCANCODE_RIGHT]))){
-		movimientos->clear();
-		movimientos->push_back(DER);
+		movimientos.clear();
+		movimientos.push_back(DER);
 		return CONTINUAR;
 	}
 
 	if ((state[SDL_SCANCODE_DOWN]) && ((state[SDL_SCANCODE_LEFT]))){
-		movimientos->clear();
-		movimientos->push_back(IZQ);
+		movimientos.clear();
+		movimientos.push_back(IZQ);
 		return CONTINUAR;
 	}
 
 	
-	movimientos->clear();
-	movimientos->push_back(QUIETO);
+	movimientos.clear();
+	movimientos.push_back(QUIETO);
 
 	return CONTINUAR;
 }
+
+
+std::vector<MOV_TIPO> Controlador::getMovimientos(){
+	return movimientos;
+}
+
 
 Controlador::~Controlador()
 {

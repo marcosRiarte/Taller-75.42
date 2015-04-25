@@ -53,14 +53,14 @@ int _tmain(int argc, _TCHAR* argv[])
 		int conteoDeCuadros = 0;
 		fpsTimer.start();
 
-		std::vector<MOV_TIPO> movimientos = std::vector<MOV_TIPO>();	
+		Controlador* unControlador = new Controlador();
 		
 
 		/***************************************************************************/
 		/*     GAMELOOP															   */
 		/***************************************************************************/
 		while (true) {
-			int estado = Controlador::cambiar(&movimientos);
+			int estado = unControlador->cambiar();
 			if (estado == REINICIAR){
 				break;
 			}
@@ -82,7 +82,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 			//Se actualiza la pantalla
 			unaVista->actualizar(Parser::getInstancia().getPersonajes().at(0)->getEstado());
-			unMundo->Paso(0.13f, &movimientos);
+			unMundo->Paso(0.13f, &(unControlador->getMovimientos()) );
 
 
 			++conteoDeCuadros;
@@ -101,6 +101,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		delete unaVista;
 		delete unMundo;
 		delete unCuerpo;
+		delete unControlador;
 		Parser::FreeInstancia();	
 
 		SDL_Quit();

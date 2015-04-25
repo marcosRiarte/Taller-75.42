@@ -10,6 +10,10 @@ public:
 	Controlador();
 	
 	~Controlador();
-	static int cambiar(std::vector<MOV_TIPO>* movimientos);
+	int cambiar();
+	std::vector<MOV_TIPO> getMovimientos();
+
+private:
+	std::vector<MOV_TIPO> movimientos;
 };
 
