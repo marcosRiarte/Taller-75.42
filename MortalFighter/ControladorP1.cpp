@@ -26,6 +26,11 @@ int ControladorP1::cambiar(){
 		case SDLK_ESCAPE:
 			return FIN;
 		case SDLK_UP:
+			if (state[SDL_SCANCODE_1]){
+				movimientos.clear();
+				movimientos.push_back(DEFENSA);
+				return CONTINUAR;
+			}
 			if (state[SDL_SCANCODE_RIGHT]){
 				movimientos.clear();
 				movimientos.push_back(SALTODER);
@@ -40,6 +45,10 @@ int ControladorP1::cambiar(){
 			movimientos.push_back(ARRIBA);
 			return CONTINUAR;
 		case SDLK_DOWN:
+			if (state[SDL_SCANCODE_1]){
+				movimientos.push_back(DEFENSA);
+				return CONTINUAR;
+			}
 			if (state[SDL_SCANCODE_UP]){
 				movimientos.clear();
 				movimientos.push_back(ARRIBA);
@@ -61,6 +70,11 @@ int ControladorP1::cambiar(){
 				return CONTINUAR;
 			}
 		case SDLK_RIGHT:
+			if (state[SDL_SCANCODE_1]){
+				movimientos.clear();
+				movimientos.push_back(DEFENSA);
+				return CONTINUAR;
+			}
 			if (state[SDL_SCANCODE_LEFT]){
 				movimientos.clear();
 				movimientos.push_back(IZQ);
@@ -72,6 +86,11 @@ int ControladorP1::cambiar(){
 				return CONTINUAR;
 			}
 		case SDLK_LEFT:
+			if (state[SDL_SCANCODE_1]){
+				movimientos.clear();
+				movimientos.push_back(DEFENSA);
+				return CONTINUAR;
+			}
 			if (state[SDL_SCANCODE_RIGHT]){
 				movimientos.clear();
 				movimientos.push_back(DER);
@@ -82,9 +101,19 @@ int ControladorP1::cambiar(){
 				movimientos.push_back(IZQ);
 				return CONTINUAR;
 			}
+		case SDLK_1:
+			movimientos.clear();
+			movimientos.push_back(DEFENSA);
+			return CONTINUAR;
 		case SDLK_r:
 			return REINICIAR;
 		}
+	}
+
+	if (state[SDL_SCANCODE_1]){
+		movimientos.clear();
+		movimientos.push_back(DEFENSA);
+		return CONTINUAR;
 	}
 
 	if ((state[SDL_SCANCODE_LEFT]) && (state[SDL_SCANCODE_RIGHT]))
