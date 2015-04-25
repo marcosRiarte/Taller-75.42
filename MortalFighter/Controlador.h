@@ -13,7 +13,7 @@ public:
 	int cambiar();
 	std::vector<MOV_TIPO> getMovimientos();
 
-protected:
+private:
 	std::vector<MOV_TIPO> movimientos;
 };
 

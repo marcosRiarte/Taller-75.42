@@ -6,8 +6,7 @@
 #include "Vista.h"
 #include "Mundo.h"
 //#include <windows.h>
-#include "ControladorP1.h"
-#include "ControladorP2.h"
+#include "Controlador.h"
 #include "MortalFigther.h"
 #include "Timer.h"
 
@@ -54,7 +53,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		int conteoDeCuadros = 0;
 		fpsTimer.start();
 
-		ControladorP2* unControlador = new ControladorP2();
+		Controlador* unControlador = new Controlador();
 		
 
 		/***************************************************************************/

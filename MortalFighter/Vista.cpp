@@ -22,7 +22,7 @@ Vista::Vista()
 		SDL_Surface* iconoSurf = IMG_Load(icono.c_str());
 		SDL_SetWindowIcon(ventana, iconoSurf);
 
-		renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_SOFTWARE | SDL_RENDERER_TARGETTEXTURE);
+		renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
 			if (renderer == nullptr){
 				SDL_DestroyWindow(ventana);
 				std::string mensaje = "SDL_CreateRenderer Error: ";
