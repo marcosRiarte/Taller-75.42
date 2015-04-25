@@ -17,7 +17,7 @@ Mundo::Mundo(const vector2D& valorGravedad)
 void Mundo::agregarCuerpo(Cuerpo *unCuerpo)
 {
 	Cuerpos.push_back(unCuerpo);
-	unCuerpo->recibeObservador(&Parser::getInstancia().getPersonaje());
+	unCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
 }
 
 void Mundo::Paso(float difTiempo, std::vector<MOV_TIPO>* movimientos)
@@ -47,14 +47,14 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, std::vector<MOV_TIPO>*
 
 		if (movimientos->at(0) == DER) {
 			nuevoEstado = DER_DER;
-			if (Parser::getInstancia().getPersonaje().getOrientacion() == "DER")
+			if (Parser::getInstancia().getPersonajes().at(0)->getOrientacion() == "DER")
 				unCuerpo->mover(DISTANCIA);
 			else
 				unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
 		}
 		if (movimientos->at(0) == IZQ){
 			nuevoEstado = IZQ_DER;
-			if (Parser::getInstancia().getPersonaje().getOrientacion() == "DER")
+			if (Parser::getInstancia().getPersonajes().at(0)->getOrientacion() == "DER")
 				unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
 			else
 				unCuerpo->mover(-DISTANCIA);

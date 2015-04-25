@@ -51,7 +51,7 @@ public:
 
 	Escenario& getEscenario() const;
 	Ventana& getVentana() const;
-	Personaje& getPersonaje() const;
+	std::vector<Personaje*> getPersonajes() const;
 	std::vector<Capa*> getCapas() const;
 
 	static void FreeInstancia();
@@ -61,7 +61,7 @@ private:
 	explicit Parser();
 	
 	std::vector<Capa*> Capas;
-	Personaje* unPersonaje;
+	std::vector<Personaje*> Personajes;
 	Ventana* unaVentana;
 	Escenario* unEscenario;
 

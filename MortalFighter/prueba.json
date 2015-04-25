@@ -1,6 +1,6 @@
 {
     "ventana": {
-        "anchopx":800,
+        "anchopx": 800,
         "altopx": 600,
         "ancho": 200
     },
@@ -24,24 +24,39 @@
         },
         {
             "imagen_fondo": "ima/bkg/p_2.png",
-            "ancho": 500            
+            "ancho": 500
         },
         {
             "imagen_fondo": "ima/bkg/p_1.png",
             "ancho": 1212
         }
     ],
-    "personaje": {
-        "ancho": 40,
-        "alto": 73,
-        "zindex": 1,
-        "orientacion": "DER",
-        "sprites": "ima/sprites/player1.png",
-		"CaminarParaAdelante": "CaminarParaAdelante",
-		"CaminarParaAtras": "CaminarParaAtras",
-		"Quieto": "Quieto",
-		"Salto": "Salto",
-        "SaltoDiagonal": "SaltoDiagonal",
-        "Caida": "Caida"
-    }
+    "personajes": [
+        {
+            "ancho": 40,
+            "alto": 73,
+            "zindex": 1,
+            "orientacion": "DER",
+            "sprites": "ima/sprites/player1.png",
+            "CaminarParaAdelante": "CaminarParaAdelante",
+            "CaminarParaAtras": "CaminarParaAtras",
+            "Quieto": "Quieto",
+            "Salto": "Salto",
+            "SaltoDiagonal": "SaltoDiagonal",
+            "Caida": "Caida"
+        },
+        {
+            "ancho": 40,
+            "alto": 73,
+            "zindex": 1,
+            "orientacion": "DER",
+            "sprites": "ima/sprites/player1.png",
+            "CaminarParaAdelante": "CaminarParaAdelante",
+            "CaminarParaAtras": "CaminarParaAtras",
+            "Quieto": "Quieto",
+            "Salto": "Salto",
+            "SaltoDiagonal": "SaltoDiagonal",
+            "Caida": "Caida"
+        }
+        ]
 }

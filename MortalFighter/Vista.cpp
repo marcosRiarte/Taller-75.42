@@ -51,7 +51,7 @@ Vista::Vista()
 		}
 
 		// inicializo la camara en el centro del escenario
-		camaraXLog = -Parser::getInstancia().getPersonaje().getPosicionUn().first 
+		camaraXLog = - Parser::getInstancia().getPersonajes().at(0)->getPosicionUn().first
 			+ Parser::getInstancia().getVentana().getAncho()/2;
 
 		//Creo el número de cuadros en 0,
@@ -65,7 +65,7 @@ Vista::Vista()
 
 
 		//Dirección de la imagen de Sprites
-		dirImgPersonaje = Parser::getInstancia().getPersonaje().getSprite();
+		dirImgPersonaje = Parser::getInstancia().getPersonajes().at(0)->getSprite();
 
 		//Carga la imagen desde la ruta especificada
 		Superficie = IMG_Load(dirImgPersonaje.c_str());
@@ -87,7 +87,7 @@ Vista::Vista()
 void Vista::actualizar(ESTADO estadoPersonaje){
 
 	// referencias más utilizadas al actualizar la vista
-	Personaje personajeVista = Parser::getInstancia().getPersonaje();
+	Personaje* personajeVista = Parser::getInstancia().getPersonajes().at(0);
 	Ventana ventanaVista = Parser::getInstancia().getVentana();	
 
 	//Parametros de la ventana
@@ -96,8 +96,8 @@ void Vista::actualizar(ESTADO estadoPersonaje){
 	int altoVentanaPx = ventanaVista.getAltoPx();
 
 	//Parametros del personaje	
-	xPjUn = personajeVista.getPosicionUn().first;
-	float anchoPj = personajeVista.getAncho();
+	xPjUn = personajeVista->getPosicionUn().first;
+	float anchoPj = personajeVista->getAncho();
 
 	float anchoEscenario = Parser::getInstancia().getEscenario().getAncho();
 	// Correcion al desplazamiento del personaje que no sobrepase el
@@ -110,11 +110,11 @@ void Vista::actualizar(ESTADO estadoPersonaje){
 
 	// condicion de borde
 	if ((xPjUn + anchoPj > anchoVentana - camaraXLog) || (xPjUn < -camaraXLog))
-		camaraXLog += personajeVista.getDeltaX();		
+		camaraXLog += personajeVista->getDeltaX();
 
 	
 	// Dibuja las capas y el personaje
-	Dibujar(&personajeVista, estadoPersonaje);
+	Dibujar(personajeVista, estadoPersonaje);
 
 
 	//Se actualiza la pantalla
@@ -147,28 +147,28 @@ std::string Vista::GetEstadoDelPersonaje(ESTADO estadoPersonaje, Personaje* pers
 	std::string estadoDelPersonaje;
 
 	if ((estadoPersonaje == ESTADO::IZQ_IZQ) || (estadoPersonaje == ESTADO::DER_DER)){
-		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
+		if (("DER" == Parser::getInstancia().getPersonajes().at(0)->getOrientacion()))
 			estadoDelPersonaje = personajeVista->getCaminarParaAdelante();
 		else
 			estadoDelPersonaje = personajeVista->getCaminarParaAtras();
 	}
 
 	if ((estadoPersonaje == ESTADO::DER_IZQ) || (estadoPersonaje == ESTADO::IZQ_DER)){
-		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
+		if (("DER" == Parser::getInstancia().getPersonajes().at(0)->getOrientacion()))
 			estadoDelPersonaje = personajeVista->getCaminarParaAtras();
 		else
 			estadoDelPersonaje = personajeVista->getCaminarParaAdelante();
 	}
 
 	if ((estadoPersonaje == ESTADO::SALTODER_DER) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
-		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
+		if (("DER" == Parser::getInstancia().getPersonajes().at(0)->getOrientacion()))
 			estadoDelPersonaje = personajeVista->getSaltoDiagonal();
 		else
 			estadoDelPersonaje = "SaltoDiagonalIzq";
 	}
 
 	if (estadoPersonaje == ESTADO::SALTOIZQ_DER){
-		if (("DER" == Parser::getInstancia().getPersonaje().getOrientacion()))
+		if (("DER" == Parser::getInstancia().getPersonajes().at(0)->getOrientacion()))
 			estadoDelPersonaje = "SaltoDiagonalIzq";
 		else
 			estadoDelPersonaje = personajeVista->getSaltoDiagonal();
@@ -270,7 +270,7 @@ void Vista::DibujarPersonaje(Personaje* personajeVista, ESTADO estadoPersonaje)
 
 
 	//Se carga el personaje
-	if (("IZQ" == Parser::getInstancia().getPersonaje().getOrientacion())){
+	if (("IZQ" == Parser::getInstancia().getPersonajes().at(0)->getOrientacion())){
 		SDL_RenderCopyEx(renderer, texturaSprite, cuadroActual, &personaje, 0, NULL, SDL_FLIP_HORIZONTAL);
 	}
 	else{

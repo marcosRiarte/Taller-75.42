@@ -195,8 +195,8 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	}
 
 
-	Json::Value personaje;
-	personaje = raiz["personaje"];
+	Json::Value personajes;
+	personajes = raiz["personajes"];
 	float ancho;
 	float alto;
 	int zIndex;
@@ -212,7 +212,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	int anchoMaximoDelPersonaje = (int)((anchoPxVentana * altoEscenario) / altoPxVentana); //el resultado de este calculo deberia ser el ancho maximo de la ventana en uninades logicas.
 	int altoMaximoDelPersonaje = altoEscenario + yPisoEscenario; //este el alto maximo
 
-	if (!personaje){
+	if (!personajes || personajes.size() == 0){
 		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo del personaje", Log::MODO_WARNING);
 		ancho = ANCHO_PERSONAJE;
 		alto = ALTO_PERSONAJE;
@@ -230,91 +230,93 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		
 	}
 	else{
-		if (personaje.isMember("ancho") && personaje.get("ancho", ANCHO_PERSONAJE).isNumeric() && ( (personaje.get("ancho", ANCHO_PERSONAJE) < anchoMaximoDelPersonaje) && (anchoMaximoDelPersonaje <= anchoEscenario) ) )
-				ancho = (personaje.get("ancho", ANCHO_PERSONAJE).asFloat());			
-		else {
-			ancho = ANCHO_PERSONAJE;
-			Log::getInstancia().logearMensajeEnModo("Se carga ancho del personaje por defecto", Log::MODO_WARNING);
+		for (size_t i = 0; i < personajes.size(); i++) {
+
+			if (personajes[i].isMember("ancho") && personajes[i].get("ancho", ANCHO_PERSONAJE).isNumeric() && ((personajes[i].get("ancho", ANCHO_PERSONAJE) < anchoMaximoDelPersonaje) && (anchoMaximoDelPersonaje <= anchoEscenario)))
+				ancho = (personajes[i].get("ancho", ANCHO_PERSONAJE).asFloat());
+			else {
+				ancho = ANCHO_PERSONAJE;
+				Log::getInstancia().logearMensajeEnModo("Se carga ancho del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			if (personajes[i].isMember("alto") && personajes[i].get("alto", ALTO_PERSONAJE).isNumeric() && personajes[i].get("alto", ALTO_PERSONAJE) < altoMaximoDelPersonaje)
+				alto = (personajes[i].get("alto", ALTO_PERSONAJE).asFloat());
+			else {
+				alto = ALTO_PERSONAJE;
+				Log::getInstancia().logearMensajeEnModo("Se carga alto del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			if (personajes[i].isMember("zindex") && personajes[i].get("zindex", ZINDEX).isNumeric() && personajes[i].get("zindex", ZINDEX) < INT_MAX && personajes[i].get("zindex", ZINDEX) > -INT_MAX)
+				zIndex = (personajes[i].get("zindex", ZINDEX).asInt());
+			else {
+				zIndex = ZINDEX;
+				Log::getInstancia().logearMensajeEnModo("Se carga z-index del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			if (personajes[i].isMember("sprites") && personajes[i].get("sprites", SPRITE_DEFAULT).isString())
+				sprites = (personajes[i].get("sprites", SPRITE_DEFAULT).asString());
+			else {
+				sprites = SPRITE_DEFAULT;
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			if (personajes[i].isMember("orientacion") && personajes[i].get("orientacion", ORIENTACION_PERSONAJE).isString())
+				orientacion = (personajes[i].get("orientacion", ORIENTACION_PERSONAJE).asString());
+			else {
+				orientacion = ORIENTACION_PERSONAJE;
+				Log::getInstancia().logearMensajeEnModo("Se carga orientacion del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			if (personajes[i].isMember("CaminarParaAdelante") && personajes[i].get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).isString())
+				CaminarParaAdelante = (personajes[i].get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).asString());
+			else {
+				CaminarParaAdelante = CAMINARPARAADELANTE_DEFAULT;
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite CaminarParaAdelante del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			if (personajes[i].isMember("CaminarParaAtras") && personajes[i].get("CaminarParaAtras", CAMINARPARAATRAS_DEFAULT).isString())
+				CaminarParaAtras = (personajes[i].get("CaminarParaAtras", CAMINARPARAATRAS_DEFAULT).asString());
+			else {
+				CaminarParaAtras = CAMINARPARAATRAS_DEFAULT;
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite CaminarParaAtras del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			if (personajes[i].isMember("Quieto") && personajes[i].get("Quieto", QUIETO_DEFAULT).isString())
+				Quieto = (personajes[i].get("Quieto", QUIETO_DEFAULT).asString());
+			else {
+				Quieto = QUIETO_DEFAULT;
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite Quieto del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			if (personajes[i].isMember("Salto") && personajes[i].get("Salto", SALTO_DEFAULT).isString())
+				Salto = (personajes[i].get("Salto", SALTO_DEFAULT).asString());
+			else {
+				Salto = SALTO_DEFAULT;
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite Salto del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			if (personajes[i].isMember("SaltoDiagonal") && personajes[i].get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).isString())
+				SaltoDiagonal = (personajes[i].get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).asString());
+			else {
+				SaltoDiagonal = SALTODIAGONAL_DEFAULT;
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite SaltoDiagonal del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			if (personajes[i].isMember("Caida") && personajes[i].get("Caida", CAIDA_DEFAULT).isString())
+				Caida = (personajes[i].get("Caida", CAIDA_DEFAULT).asString());
+			else {
+				Caida = CAIDA_DEFAULT;
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite Caida del personaje por defecto", Log::MODO_WARNING);
+			}
+
 		}
 
-		if (personaje.isMember("alto") && personaje.get("alto", ALTO_PERSONAJE).isNumeric() && personaje.get("alto", ALTO_PERSONAJE) < altoMaximoDelPersonaje)
-				alto = (personaje.get("alto", ALTO_PERSONAJE).asFloat());
-		else {
-			alto = ALTO_PERSONAJE;
-			Log::getInstancia().logearMensajeEnModo("Se carga alto del personaje por defecto", Log::MODO_WARNING);
+		errorPersonaje = Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites, &CaminarParaAdelante, &CaminarParaAtras, &Quieto, &Salto, &SaltoDiagonal, &Caida);
+		if (errorPersonaje){
+			return false;
 		}
-
-		if (personaje.isMember("zindex") && personaje.get("zindex", ZINDEX).isNumeric() && personaje.get("zindex", ZINDEX) < INT_MAX && personaje.get("zindex", ZINDEX) > -INT_MAX)
-				zIndex = (personaje.get("zindex", ZINDEX).asInt());			
-		else {
-			zIndex = ZINDEX;
-			Log::getInstancia().logearMensajeEnModo("Se carga z-index del personaje por defecto", Log::MODO_WARNING);
-		}
-
-		if (personaje.isMember("sprites") && personaje.get("sprites", SPRITE_DEFAULT).isString())
-			sprites = (personaje.get("sprites", SPRITE_DEFAULT).asString());
-		else {
-			sprites = SPRITE_DEFAULT;
-			Log::getInstancia().logearMensajeEnModo("Se carga sprite del personaje por defecto", Log::MODO_WARNING);
-		}
-
-		if (personaje.isMember("orientacion") && personaje.get("orientacion", ORIENTACION_PERSONAJE).isString())
-			orientacion = (personaje.get("orientacion", ORIENTACION_PERSONAJE).asString());
-		else {
-			orientacion = ORIENTACION_PERSONAJE;
-			Log::getInstancia().logearMensajeEnModo("Se carga orientacion del personaje por defecto", Log::MODO_WARNING);
-		}
-		
-		if (personaje.isMember("CaminarParaAdelante") && personaje.get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).isString())
-			CaminarParaAdelante = (personaje.get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).asString());
-		else {
-			CaminarParaAdelante = CAMINARPARAADELANTE_DEFAULT;
-			Log::getInstancia().logearMensajeEnModo("Se carga sprite CaminarParaAdelante del personaje por defecto", Log::MODO_WARNING);
-		}
-
-		if (personaje.isMember("CaminarParaAtras") && personaje.get("CaminarParaAtras", CAMINARPARAATRAS_DEFAULT).isString())
-			CaminarParaAtras = (personaje.get("CaminarParaAtras", CAMINARPARAATRAS_DEFAULT).asString());
-		else {
-			CaminarParaAtras = CAMINARPARAATRAS_DEFAULT;
-			Log::getInstancia().logearMensajeEnModo("Se carga sprite CaminarParaAtras del personaje por defecto", Log::MODO_WARNING);
-		}
-
-		if (personaje.isMember("Quieto") && personaje.get("Quieto", QUIETO_DEFAULT).isString())
-			Quieto = (personaje.get("Quieto", QUIETO_DEFAULT).asString());
-		else {
-			Quieto = QUIETO_DEFAULT;
-			Log::getInstancia().logearMensajeEnModo("Se carga sprite Quieto del personaje por defecto", Log::MODO_WARNING);
-		}
-
-		if (personaje.isMember("Salto") && personaje.get("Salto", SALTO_DEFAULT).isString())
-			Salto = (personaje.get("Salto", SALTO_DEFAULT).asString());
-		else {
-			Salto = SALTO_DEFAULT;
-			Log::getInstancia().logearMensajeEnModo("Se carga sprite Salto del personaje por defecto", Log::MODO_WARNING);
-		}
-
-		if (personaje.isMember("SaltoDiagonal") && personaje.get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).isString())
-			SaltoDiagonal = (personaje.get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).asString());
-		else {
-			SaltoDiagonal = SALTODIAGONAL_DEFAULT;
-			Log::getInstancia().logearMensajeEnModo("Se carga sprite SaltoDiagonal del personaje por defecto", Log::MODO_WARNING);
-		}
-
-		if (personaje.isMember("Caida") && personaje.get("Caida", CAIDA_DEFAULT).isString())
-			Caida = (personaje.get("Caida", CAIDA_DEFAULT).asString());
-		else {
-			Caida = CAIDA_DEFAULT;
-			Log::getInstancia().logearMensajeEnModo("Se carga sprite Caida del personaje por defecto", Log::MODO_WARNING);
-		}
-		
+		Personajes.push_back(new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal, Caida));
 	}
-	
-	errorPersonaje = Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites, &CaminarParaAdelante, &CaminarParaAtras, &Quieto, &Salto, &SaltoDiagonal, &Caida);
-	if(errorPersonaje){
-		return false;
-	}
-	unPersonaje = new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal, Caida);
-	
 	
 
 	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje correctamente", Log::MODO_DEBUG);
@@ -341,9 +343,9 @@ Ventana& Parser::getVentana() const
 	return *unaVentana;
 }
 
-Personaje& Parser::getPersonaje() const
+std::vector<Personaje*> Parser::getPersonajes() const
 {
-	return *unPersonaje;
+	return Personajes;
 }
 
 std::vector<Capa*> Parser::getCapas() const
@@ -356,7 +358,9 @@ void Parser::FreeInstancia()
 {
 	delete getInstancia().unaVentana;
 	delete  getInstancia().unEscenario;
-	delete getInstancia().unPersonaje;
+	for (size_t i = 0; i < getInstancia().Personajes.size(); i++) {
+		delete getInstancia().Personajes.at(i);
+	}
 	for (size_t i = 0; i < getInstancia().Capas.size(); i++) {
 		delete getInstancia().Capas.at(i);		
 	}
