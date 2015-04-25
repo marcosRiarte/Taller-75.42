@@ -21,7 +21,7 @@ struct defCuerpo
 class Cuerpo
 {
 public:
-	Cuerpo(const  defCuerpo unaDefCuerpo);
+	Cuerpo(const  defCuerpo unaDefCuerpo, Controlador* controladorNuevo);
 
 	inline const vector2D& getPosicion() const
 	{
@@ -56,6 +56,12 @@ public:
 		return masa;
 	}
 
+	// Obtener el controlador asociado
+	inline Controlador* getControlador()  const
+	{
+		return controlador;
+	}
+
 	// Devuelve true si está en contacto con el piso o false en caso contrario
 	bool estaEnPiso();
 
@@ -65,7 +71,7 @@ public:
 
 	// Aplica un impulso lineal al cuerpo. Modifica inmediatamente la velocidad
 	// El impulso sería en unidades de N.s o Kg.m/s
-	inline void Cuerpo::aplicarImpulso(vector2D& impulso)
+	inline void aplicarImpulso(vector2D& impulso)
 	{
 		impulso /= masa;
 		velocidad += impulso;
@@ -79,6 +85,7 @@ public:
 	void mover(float unaDistancia);
 
 private:
+	Controlador* controlador;
 	std::string nombre;
 	vector2D posicion, velocidad;
 	float masa;

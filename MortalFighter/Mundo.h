@@ -16,8 +16,8 @@ public:
 	Mundo();
 	Mundo(const vector2D& valorGravedad);
 	void agregarCuerpo(Cuerpo *unCuerpo);
-	void Paso(float difTiempo, std::vector<MOV_TIPO>* movimientos);
-	ESTADO Resolver(float difTiempo, Cuerpo *unCuerpo, std::vector<MOV_TIPO>* movimientos);
+	void Paso(float difTiempo);
+	ESTADO Resolver(float difTiempo, Cuerpo *unCuerpo);
 	float getYPiso() const;
 
 private:

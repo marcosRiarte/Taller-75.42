@@ -39,11 +39,20 @@ int _tmain(int argc, _TCHAR* argv[])
 		/*********************************************************************/
 		/*      Inicialización de vista y variables del juego               */
 		/*********************************************************************/
+		ControladorP2* controladorUno = new ControladorP2();
+		ControladorP1* controladorDos = new ControladorP1();
+
 		//Parte de creación inicial.
 		Vista* unaVista = new Vista();
 		Mundo* unMundo = new Mundo(vecGravedad);
-		Cuerpo *unCuerpo = new Cuerpo(defCuerpo());
+		Cuerpo *unCuerpo = new Cuerpo(defCuerpo(), controladorUno);
+		unCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
 		unMundo->agregarCuerpo(unCuerpo);
+
+		Cuerpo *otroCuerpo = new Cuerpo(defCuerpo(), controladorDos);		
+		otroCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(1));
+		unMundo->agregarCuerpo(otroCuerpo);
+		
 
 		//Timer de cuadros por segundo
 		Timer fpsTimer;
@@ -54,18 +63,19 @@ int _tmain(int argc, _TCHAR* argv[])
 		int conteoDeCuadros = 0;
 		fpsTimer.start();
 
-		ControladorP2* unControlador = new ControladorP2();
+		
 		
 
 		/***************************************************************************/
 		/*     GAMELOOP															   */
 		/***************************************************************************/
 		while (true) {
-			int estado = unControlador->cambiar();
-			if (estado == REINICIAR){
+			int estadoUno = controladorUno->cambiar();
+			int estadoDos = controladorDos->cambiar();
+			if (estadoUno == REINICIAR || estadoDos == REINICIAR){
 				break;
 			}
-			else if (estado == FIN){
+			else if (estadoUno == FIN || estadoDos == FIN){
 				accion = FIN;
 				break;
 			};
@@ -82,8 +92,8 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 
 			//Se actualiza la pantalla
-			unaVista->actualizar(Parser::getInstancia().getPersonajes().at(0)->getEstado());
-			unMundo->Paso(0.13f, &(unControlador->getMovimientos()) );
+			unaVista->actualizar();
+			unMundo->Paso(0.13f);
 
 
 			++conteoDeCuadros;
@@ -102,7 +112,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		delete unaVista;
 		delete unMundo;
 		delete unCuerpo;
-		delete unControlador;
+		delete controladorUno;
+		delete controladorDos;
 		Parser::FreeInstancia();	
 
 		SDL_Quit();

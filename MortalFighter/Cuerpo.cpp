@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "Cuerpo.h"
 
-Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo)
+Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo)
 {
+	controlador = controladorNuevo;
 	nombre = unaDefCuerpo.nombre;
 	posicion = unaDefCuerpo.posicion;
 	velocidad = unaDefCuerpo.velocidad;

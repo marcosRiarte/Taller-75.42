@@ -16,19 +16,18 @@ Mundo::Mundo(const vector2D& valorGravedad)
 
 void Mundo::agregarCuerpo(Cuerpo *unCuerpo)
 {
-	Cuerpos.push_back(unCuerpo);
-	unCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
+	Cuerpos.push_back(unCuerpo);	
 }
 
-void Mundo::Paso(float difTiempo, std::vector<MOV_TIPO>* movimientos)
+void Mundo::Paso(float difTiempo)
 {
 	for (unsigned int i = 0; i < Cuerpos.size(); i++)
 	{
-		Cuerpos.at(i)->notificarObservadores(Resolver(difTiempo, Cuerpos.at(i), movimientos));
+		Cuerpos.at(i)->notificarObservadores(Resolver(difTiempo, Cuerpos.at(i)));
 	}
 }
 
-ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, std::vector<MOV_TIPO>* movimientos)
+ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
 	ESTADO nuevoEstado = QUIETODER;
 	/// integra velocidad, para salto, 
@@ -44,15 +43,16 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, std::vector<MOV_TIPO>*
 		unCuerpo->sumarVelocidad(gravedad * difTiempo);		
 	}
 	else{
+		std::vector<MOV_TIPO> movimientos = unCuerpo->getControlador()->getMovimientos();
 
-		if (movimientos->at(0) == DER) {
+		if (movimientos.at(0) == DER) {
 			nuevoEstado = DER_DER;
 			if (Parser::getInstancia().getPersonajes().at(0)->getOrientacion() == "DER")
 				unCuerpo->mover(DISTANCIA);
 			else
 				unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
 		}
-		if (movimientos->at(0) == IZQ){
+		if (movimientos.at(0) == IZQ){
 			nuevoEstado = IZQ_DER;
 			if (Parser::getInstancia().getPersonajes().at(0)->getOrientacion() == "DER")
 				unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
@@ -60,17 +60,17 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo, std::vector<MOV_TIPO>*
 				unCuerpo->mover(-DISTANCIA);
 		}
 
-		if (movimientos->at(0) == ARRIBA){
+		if (movimientos.at(0) == ARRIBA){
 			nuevoEstado = ARRIBA_DER;
 			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
 		}
 
-		if (movimientos->at(0) == SALTODER){
+		if (movimientos.at(0) == SALTODER){
 			nuevoEstado = SALTODER_DER;
 			unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
 		}
 
-		if (movimientos->at(0) == SALTOIZQ){
+		if (movimientos.at(0) == SALTOIZQ){
 			nuevoEstado = SALTOIZQ_DER;
 			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
 
