@@ -1,7 +1,7 @@
 #pragma once
 #include "Constantes.h"
 
-enum MOV_TIPO { QUIETO, DER, IZQ, ARRIBA, ABAJO, SALTOIZQ, SALTODER, CERRAR, RECARGAR };
+enum MOV_TIPO { QUIETO, DER, IZQ, ARRIBA, ABAJO, SALTOIZQ, SALTODER, DEFENSA, CERRAR, RECARGAR };
 
 
 class Controlador
