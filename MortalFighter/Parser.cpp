@@ -209,8 +209,8 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	std::string SaltoDiagonal;
 	std::string Caida;
 	bool errorPersonaje = false;
-	int anchoMaximoDelPersonaje = (int)((anchoPxVentana * altoEscenario) / altoPxVentana); //el resultado de este calculo deberia ser el ancho maximo de la ventana en uninades logicas.
-	int altoMaximoDelPersonaje = altoEscenario + yPisoEscenario; //este el alto maximo
+	int anchoMaximoDelPersonaje = (int)round((anchoPxVentana * altoEscenario) / altoPxVentana); //el resultado de este calculo deberia ser el ancho maximo de la ventana en uninades logicas.
+	int altoMaximoDelPersonaje = (int)round(altoEscenario + yPisoEscenario); //este el alto maximo
 
 	if (!personajes || personajes.size() == 0){
 		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo del personaje", Log::MODO_WARNING);

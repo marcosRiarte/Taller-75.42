@@ -13,6 +13,7 @@
 #include <json.h>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <fstream>
 #include <sstream>
 #include <string>
