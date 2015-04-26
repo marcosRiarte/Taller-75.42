@@ -32,6 +32,7 @@ bool Cuerpo::estaEnBorde()
 void Cuerpo::sumarPosicion(const vector2D& unaPosicion)
 {
 	posicion += unaPosicion;
+
 	// Que no se mueva debajo del piso
 	if (estaEnPiso() && unaPosicion.y < yPiso) {
 		posicion.y = yPiso;
@@ -45,11 +46,15 @@ void Cuerpo::sumarPosicion(const vector2D& unaPosicion)
 	// que no se mueva menos del cero
 	if (posicion.x <= 0)
 		posicion.x = 0;
+	
 }
 
 void Cuerpo::mover(float unaDistancia)
 {
-	posicion.x += unaDistancia;
+	if ((abs(Parser::getInstancia().getPersonajes().at(0)->getPosicionUn().first - Parser::getInstancia().getPersonajes().at(1)->getPosicionUn().first)) <= (Parser::getInstancia().getVentana().getAncho() - Parser::getInstancia().getPersonajes().at(0)->getAncho()))
+		posicion.x += unaDistancia;
+		else
+		posicion.x -= unaDistancia;
 }
 
 

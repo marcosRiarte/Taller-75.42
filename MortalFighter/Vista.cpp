@@ -66,9 +66,7 @@ Vista::Vista()
 
 		//Se cargan los sprites
 		elSprite = new Sprite();
-
-
-
+		
 		//Dirección de la imagen de Sprites
 		dirImgPersonaje = Parser::getInstancia().getPersonajes().at(0)->getSprite();
 
@@ -109,6 +107,7 @@ void Vista::actualizar(){
 	float anchoPjDos = personajesVista[1]->getAncho();
 
 	float anchoEscenario = Parser::getInstancia().getEscenario().getAncho();
+
 	// Correcion al desplazamiento del personaje que no sobrepase el
 	// escenario con su ancho.
 	xPjUno *= anchoEscenario / (anchoEscenario + anchoPjUno +4);
@@ -122,11 +121,11 @@ void Vista::actualizar(){
 	SDL_RenderClear(renderer);
 
 	// condicion de borde
-	if ((xPjUno + anchoPjUno > anchoVentana - camaraXLog) || (xPjUno < -camaraXLog))
+	if (((xPjUno + anchoPjUno > anchoVentana - camaraXLog) || (xPjUno < -camaraXLog)) && (abs(xPjDos - xPjUno) < anchoVentana-50))
 		camaraXLog += personajesVista[0]->getDeltaX();
 
 	// condicion de borde
-	if ((xPjDos + anchoPjDos > anchoVentana - camaraXLog) || (xPjDos < -camaraXLog))
+	if (((xPjDos + anchoPjDos > anchoVentana - camaraXLog) || (xPjDos < -camaraXLog)) && (abs(xPjDos - xPjUno) < anchoVentana - 50))
 		camaraXLog += personajesVista[1]->getDeltaX();
 
 	
@@ -136,8 +135,6 @@ void Vista::actualizar(){
 
 	//Se actualiza la pantalla
 	SDL_RenderPresent(renderer);
-
-
 }
 
 void Vista::OrdenarCapas()

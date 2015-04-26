@@ -52,13 +52,16 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			else
 				unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
 		}
+		
+
 		if (movimientos.at(0) == IZQ){
 			nuevoEstado = IZQ_DER;
-			if (Parser::getInstancia().getPersonajes().at(0)->getOrientacion() == "DER")
+					if (Parser::getInstancia().getPersonajes().at(0)->getOrientacion() == "DER")
 				unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
 			else
 				unCuerpo->mover(-DISTANCIA);
 		}
+		
 
 		if (movimientos.at(0) == ARRIBA){
 			nuevoEstado = ARRIBA_DER;
