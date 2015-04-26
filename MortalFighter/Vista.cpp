@@ -312,20 +312,14 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	//Renderizar el sprite
 	SDL_Rect* cuadroActualDos = listaDeCuadrosDos->at(4 * numeroDeCuadroDos / (listaDeCuadrosDos->size()));
 
-	//Se carga el personaje 1
-	if (("IZQ" == personajesVista.at(0)->getOrientacion())){
+	//Se cargan ambos acorde a su posición relativa
+	if (personajesVista.at(0)->getPosicionPx().first > personajesVista.at(1)->getPosicionPx().first){
 		SDL_RenderCopyEx(renderer, texturaSpriteUno, cuadroActualUno, &personajeUno, 0, NULL, SDL_FLIP_HORIZONTAL);
+		SDL_RenderCopy(renderer, texturaSpriteDos, cuadroActualDos, &personajeDos);
 	}
 	else{
 		SDL_RenderCopy(renderer, texturaSpriteUno, cuadroActualUno, &personajeUno);
-	}
-
-	//Se carga el personaje 2
-	if (("IZQ" == personajesVista.at(1)->getOrientacion())){
 		SDL_RenderCopyEx(renderer, texturaSpriteDos, cuadroActualDos, &personajeDos, 0, NULL, SDL_FLIP_HORIZONTAL);
-	}
-	else{
-		SDL_RenderCopy(renderer, texturaSpriteDos, cuadroActualDos, &personajeDos);
 	}
 }
 
