@@ -27,7 +27,7 @@ int ControladorP2::cambiar(){
 		case SDLK_ESCAPE:
 			return FIN;
 		case SDLK_w:
-			if (state[SDL_SCANCODE_Z]){
+			if (state[SDL_SCANCODE_J]){
 				movimientos.clear();
 				movimientos.push_back(DEFENSA);
 				return CONTINUAR;
@@ -46,7 +46,7 @@ int ControladorP2::cambiar(){
 			movimientos.push_back(ARRIBA);
 			return CONTINUAR;
 		case SDLK_s:
-			if (state[SDL_SCANCODE_Z]){
+			if (state[SDL_SCANCODE_J]){
 				movimientos.clear();
 				movimientos.push_back(DEFENSA);
 				return CONTINUAR;
@@ -72,7 +72,7 @@ int ControladorP2::cambiar(){
 				return CONTINUAR;
 			}
 		case SDLK_d:
-			if (state[SDL_SCANCODE_Z]){
+			if (state[SDL_SCANCODE_J]){
 				movimientos.clear();
 				movimientos.push_back(DEFENSA);
 				return CONTINUAR;
@@ -88,7 +88,7 @@ int ControladorP2::cambiar(){
 				return CONTINUAR;
 			}
 		case SDLK_a:
-			if (state[SDL_SCANCODE_Z]){
+			if (state[SDL_SCANCODE_J]){
 				movimientos.clear();
 				movimientos.push_back(DEFENSA);
 				return CONTINUAR;
@@ -103,12 +103,116 @@ int ControladorP2::cambiar(){
 				movimientos.push_back(IZQ);
 				return CONTINUAR;
 			}
+		case SDLK_k:
+			if (movimientos.at(0) == ARRIBA){
+				movimientos.clear();
+				movimientos.push_back(G_SALTO);
+				return CONTINUAR;
+			}
+			if (movimientos.at(0) == SALTODER){
+				movimientos.clear();
+				movimientos.push_back(G_SALTODER);
+				return CONTINUAR;
+			}
+			if (movimientos.at(0) == SALTOIZQ){
+				movimientos.clear();
+				movimientos.push_back(G_SALTOIZQ);
+				return CONTINUAR;
+			}
+			if (movimientos.at(0) == ABAJO){
+				movimientos.clear();
+				movimientos.push_back(G_ABAJO);
+				return CONTINUAR;
+			}
+			movimientos.clear();
+			movimientos.push_back(G_BAJO);
+			return CONTINUAR;
+		case SDLK_l:
+			if (movimientos.at(0) == ARRIBA){
+				movimientos.clear();
+				movimientos.push_back(G_SALTO);
+				return CONTINUAR;
+			}
+			if (movimientos.at(0) == SALTODER){
+				movimientos.clear();
+				movimientos.push_back(G_SALTODER);
+				return CONTINUAR;
+			}
+			if (movimientos.at(0) == SALTOIZQ){
+				movimientos.clear();
+				movimientos.push_back(G_SALTOIZQ);
+				return CONTINUAR;
+			}
+			if (movimientos.at(0) == ABAJO){
+				movimientos.clear();
+				movimientos.push_back(G_GANCHO);
+				return CONTINUAR;
+			}
+			movimientos.clear();
+			movimientos.push_back(G_ALTO);
+			return CONTINUAR;
+		case SDLK_i:
+			if (movimientos.at(0) == ARRIBA){
+				movimientos.clear();
+				movimientos.push_back(P_SALTO);
+				return CONTINUAR;
+			}
+			if (movimientos.at(0) == SALTODER){
+				movimientos.clear();
+				movimientos.push_back(P_SALTODER);
+				return CONTINUAR;
+			}
+			if (movimientos.at(0) == SALTOIZQ){
+				movimientos.clear();
+				movimientos.push_back(P_SALTOIZQ);
+				return CONTINUAR;
+			}
+			if (movimientos.at(0) == ABAJO){
+				movimientos.clear();
+				movimientos.push_back(P_BAJA_ABAJO);
+				return CONTINUAR;
+			}
+			movimientos.clear();
+			movimientos.push_back(P_BAJA);
+			return CONTINUAR;
+		case SDLK_o:
+			if (movimientos.at(0) == ARRIBA){
+				movimientos.clear();
+				movimientos.push_back(P_SALTO);
+				return CONTINUAR;
+			}
+			if (movimientos.at(0) == SALTODER){
+				movimientos.clear();
+				movimientos.push_back(P_SALTODER);
+				return CONTINUAR;
+			}
+			if (movimientos.at(0) == SALTOIZQ){
+				movimientos.clear();
+				movimientos.push_back(P_SALTOIZQ);
+				return CONTINUAR;
+			}
+			if (movimientos.at(0) == ABAJO){
+				movimientos.clear();
+				movimientos.push_back(P_ALTA_ABAJO);
+				return CONTINUAR;
+			}
+			movimientos.clear();
+			movimientos.push_back(P_ALTA);
+			return CONTINUAR;
+		case SDLK_u:
+			movimientos.clear();
+			movimientos.push_back(ARMA);
+			return CONTINUAR;
+		case SDLK_j:
+			movimientos.clear();
+			movimientos.push_back(DEFENSA);
+			return CONTINUAR;
 		case SDLK_r:
 			return REINICIAR;
 		}
 	}
 
-	if (state[SDL_SCANCODE_Z]){
+	if (state[SDL_SCANCODE_J]){
 		movimientos.clear();
 		movimientos.push_back(DEFENSA);
 		return CONTINUAR;
@@ -130,21 +234,9 @@ int ControladorP2::cambiar(){
 		return CONTINUAR;
 	}
 
-	if ((state[SDL_SCANCODE_S]) && (state[SDL_SCANCODE_W])){
+	if (state[SDL_SCANCODE_S]){
 		movimientos.clear();
-		movimientos.push_back(ARRIBA);
-		return CONTINUAR;
-	}
-
-	if ((state[SDL_SCANCODE_S]) && ((state[SDL_SCANCODE_D]))){
-		movimientos.clear();
-		movimientos.push_back(DER);
-		return CONTINUAR;
-	}
-
-	if ((state[SDL_SCANCODE_S]) && ((state[SDL_SCANCODE_A]))){
-		movimientos.clear();
-		movimientos.push_back(IZQ);
+		movimientos.push_back(ABAJO);
 		return CONTINUAR;
 	}
 
