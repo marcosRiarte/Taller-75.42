@@ -358,9 +358,10 @@ void Parser::FreeInstancia()
 {
 	delete getInstancia().unaVentana;
 	delete  getInstancia().unEscenario;
-	for (size_t i = 0; i < getInstancia().Personajes.size(); i++) {
-		delete getInstancia().Personajes.at(i);
+	for (size_t j = 0; j < getInstancia().Personajes.size(); j++) {
+		delete getInstancia().Personajes.at(j);
 	}
+	getInstancia().Personajes.clear();
 	for (size_t i = 0; i < getInstancia().Capas.size(); i++) {
 		delete getInstancia().Capas.at(i);		
 	}

@@ -161,4 +161,5 @@ int ControladorP1::cambiar(){
 
 ControladorP1::~ControladorP1()
 {
+	movimientos.clear();
 }
