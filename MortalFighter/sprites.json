@@ -1,5 +1,5 @@
 {
-    "sprites": [
+    "sprites": 
         {
             "imagen": "ima/sprites/player2.png",
             "coordenadas": {
@@ -162,6 +162,5 @@
                     }
                 ]
             }
-        }
-        ]
+        }        
 }
