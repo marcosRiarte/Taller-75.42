@@ -139,19 +139,22 @@ void Vista::actualizar(){
 		PjDosEstaEnBordeIzq = true;	
 	bool PjDosEstaEnBorde = PjDosEstaEnBordeIzq || PjDosEstaEnBordeDer;
 
+	MOV_TIPO mov1 = refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0);
+	MOV_TIPO mov2 = refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0);
+
 	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer)) {
 		refMundo->FrenarCuerpos();
 
-		if (PjUnoEstaEnBordeIzq && (refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == DER))
+		if (PjUnoEstaEnBordeIzq && (mov1 == DER))
 			refMundo->LiberarCuerpos();
 
-		if (PjUnoEstaEnBordeDer && (refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == IZQ))
+		if (PjUnoEstaEnBordeDer && (mov1 == IZQ))
 			refMundo->LiberarCuerpos();
 
-		if (PjDosEstaEnBordeIzq && (refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0) == DER))
+		if (PjDosEstaEnBordeIzq && (mov2 == DER))
 			refMundo->LiberarCuerpos();
 
-		if (PjDosEstaEnBordeDer && (refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0) == IZQ))
+		if (PjDosEstaEnBordeDer && (mov2 == IZQ))
 			refMundo->LiberarCuerpos();
 	}
 
@@ -163,25 +166,25 @@ void Vista::actualizar(){
 	}
 
 	if (PjUnoEstaEnBordeIzq && PjDosEstaEnBordeIzq){ 
-		if ((refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == IZQ) && (refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0) == IZQ))
+		if ((mov1 == IZQ) && (mov2 == IZQ))
 			camaraXLog += personajesVista[0]->getDeltaX();
-		else if (refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0) == IZQ)
+		else if (mov2 == IZQ)
 			camaraXLog += personajesVista[1]->getDeltaX();
-		else if (refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == IZQ)
+		else if (mov1 == IZQ)
 			camaraXLog += personajesVista[0]->getDeltaX();
 	}
 
 	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer){
-		if ((refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == DER) && (refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0) == DER))
+		if ((mov1 == DER) && (mov2 == DER))
 			camaraXLog += personajesVista[0]->getDeltaX();
-		else if (refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0) == DER)
+		else if (mov2 == DER)
 			camaraXLog += personajesVista[1]->getDeltaX();
-		else if (refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == DER)
+		else if (mov1 == DER)
 			camaraXLog += personajesVista[0]->getDeltaX();
 	}
 
 	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer){
-		if (refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == IZQ)
+		if (mov1 == IZQ)
 			camaraXLog += personajesVista[1]->getDeltaX();
 	}
 
@@ -338,12 +341,16 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	float xLogPjDosEnCamara = xPjDos + camaraXLog;
 	SDL_Rect personajeDos;
 
+	SDL_Rect* cuadroBase = elSprite->listaDeCuadros("Quieto")->at(0);
+	float relacionAnchoUno = (float)anchoPjUnoPx / (float)cuadroBase->w;
+	float relacionAltoUno = (float)altoPjUnoPx / (float)cuadroBase->h;
 	personajeUno.x = manejadorULog.darLongPixels(xLogPjUnoEnCamara);
-	personajeUno.y = yPjUnoPx;
-	personajeUno.w = anchoPjUnoPx;
-	personajeUno.h = altoPjUnoPx;
+	personajeUno.y = yPjUnoPx;	
+	// ancho y alto lo calcula cuadro a cuadro
 	std::string estadoDelPersonajeUno = GetEstadoDelPersonaje(personajesVista[0]->getEstado(), personajesVista[0]);
 
+	float relacionAnchoDos = (float)anchoPjDosPx / (float)cuadroBase->w;
+	float relacionAltoDos = (float)altoPjDosPx / (float)cuadroBase->h;
 	personajeDos.x = manejadorULog.darLongPixels(xLogPjDosEnCamara);
 	personajeDos.y = yPjDosPx;
 	personajeDos.w = anchoPjDosPx;
@@ -359,6 +366,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	//Renderizar el sprite
 	SDL_Rect* cuadroActualUno = listaDeCuadrosUno->at(4 * numeroDeCuadroUno / (listaDeCuadrosUno->size()));
+	personajeUno.w = (int)round(relacionAnchoUno*cuadroActualUno->w);
+	personajeUno.h = (int)round(relacionAltoUno*cuadroActualUno->h);
 
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
 	listaDeCuadrosDos = elSprite->listaDeCuadros(estadoDelPersonajeDos);
@@ -369,6 +378,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	//Renderizar el sprite
 	SDL_Rect* cuadroActualDos = listaDeCuadrosDos->at(4 * numeroDeCuadroDos / (listaDeCuadrosDos->size()));
+	personajeDos.w = (int)round(relacionAnchoDos*cuadroActualDos->w);
+	personajeDos.h = (int)round(relacionAltoDos*cuadroActualDos->h);
 
 	//Se cargan ambos acorde a su posición relativa
 	if (personajesVista.at(0)->getPosicionPx().first > personajesVista.at(1)->getPosicionPx().first){
