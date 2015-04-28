@@ -161,6 +161,9 @@
     <Library Include="lib\SDL2_image.lib" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Pictures\005_Liu_Kang_MK daño.png" />
+    <Image Include="..\..\..\..\Pictures\Nuevo_Lifebar 519x62 pixeles.png" />
+    <Image Include="..\..\..\..\Pictures\render_tn.jpg" />
     <Image Include="ima\bkg\default_bkg.png" />
     <Image Include="ima\bkg\default_capa.png" />
     <Image Include="ima\bkg\default_p1.png" />

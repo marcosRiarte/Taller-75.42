@@ -329,6 +329,13 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	//
 	//
 	//
+
+	Json::Value color_alternativo ;
+	color_alternativo = raiz["color_alternativo"];
+	int h_inicial;
+	int h_final ;
+	int desplazamiento;
+	
 	
 	return true;
 }

@@ -301,5 +301,14 @@
     <Image Include="ima\sprites\KenSF.png">
       <Filter>Resource Files\ima\sprites</Filter>
     </Image>
+    <Image Include="..\..\..\..\Pictures\Nuevo_Lifebar 519x62 pixeles.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Pictures\render_tn.jpg">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Pictures\005_Liu_Kang_MK daño.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -57,6 +57,16 @@
             "Salto": "Salto",
             "SaltoDiagonal": "SaltoDiagonal",
             "Caida": "Caida"
+
         }
-        ]
+    ],
+    
+    "color_alternativo": [
+        {
+            "h_inicial": 40,
+            "h_final": 45,
+            "desplazamiento" : 30
+
+        }
+    ]
 }
