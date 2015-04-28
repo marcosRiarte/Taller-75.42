@@ -42,9 +42,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		ControladorP2* controladorUno = new ControladorP2();
 		ControladorP1* controladorDos = new ControladorP1();
 
-		//Parte de creación inicial.
-		Vista* unaVista = new Vista();
+		//Parte de creación inicial.		
 		Mundo* unMundo = new Mundo(vecGravedad);
+		Vista* unaVista = new Vista(unMundo);
 		Cuerpo *unCuerpo = new Cuerpo(defCuerpo(), controladorUno);
 		unCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
 		unMundo->agregarCuerpo(unCuerpo);

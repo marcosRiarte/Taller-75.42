@@ -11,11 +11,13 @@ struct defCuerpo
 		posicion = vector2D(0.0f, 0.0f);
 		velocidad = vector2D(0.0f, 0.0f);
 		masa = 15.0f;
+		estaFrenado = false;
 	}
 
 	std::string nombre;
 	vector2D posicion, velocidad;
 	float masa;
+	bool estaFrenado;
 };
 
 class Cuerpo
@@ -77,6 +79,25 @@ public:
 		velocidad += impulso;
 	}
 
+	// Evita que el cuerpo se mueva, sirve para evitar que los cuerpos se muevan
+	// en ocasiones particulares del juego.
+	inline void Frenar()
+	{
+		estaFrenado = true;
+	}
+
+	// Libera al cuerpo para que se mueva, sirve para evitar que los cuerpos se muevan
+	// en ocasiones particulares del juego.
+	inline void Liberar()
+	{
+		estaFrenado = false;
+	}
+
+	inline bool EstaFrenado()
+	{
+		return estaFrenado;
+	}
+
 	//observer extremadamente simplificado, mejorar
 	void recibeObservador(Personaje* unObservador);
 
@@ -91,4 +112,5 @@ private:
 	float masa;
 	Personaje* observador;
 	float yPiso;
+	bool estaFrenado;
 };

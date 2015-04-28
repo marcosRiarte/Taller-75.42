@@ -11,6 +11,7 @@ Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo)
 	posicion.x = Parser::getInstancia().getEscenario().getAncho() / 2;
 	yPiso = Parser::getInstancia().getEscenario().getYPiso();
 	posicion.y = yPiso;
+	estaFrenado = unaDefCuerpo.estaFrenado;
 }
 
 bool Cuerpo::estaEnPiso()
@@ -51,10 +52,10 @@ void Cuerpo::sumarPosicion(const vector2D& unaPosicion)
 
 void Cuerpo::mover(float unaDistancia)
 {
-	if ((abs(Parser::getInstancia().getPersonajes().at(0)->getPosicionUn().first - Parser::getInstancia().getPersonajes().at(1)->getPosicionUn().first)) <= (Parser::getInstancia().getVentana().getAncho() - Parser::getInstancia().getPersonajes().at(0)->getAncho()))
+	//if ((abs(Parser::getInstancia().getPersonajes().at(0)->getPosicionUn().first - Parser::getInstancia().getPersonajes().at(1)->getPosicionUn().first)) <= (Parser::getInstancia().getVentana().getAncho() - Parser::getInstancia().getPersonajes().at(0)->getAncho()))
 		posicion.x += unaDistancia;
-		else
-		posicion.x -= unaDistancia;
+		//else
+		//posicion.x -= unaDistancia;
 }
 
 

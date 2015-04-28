@@ -19,6 +19,9 @@ public:
 	void Paso(float difTiempo);
 	ESTADO Resolver(float difTiempo, Cuerpo *unCuerpo);
 	float getYPiso() const;
+	void FrenarCuerpos();
+	void LiberarCuerpos();
+	Cuerpo* getCuerpo(size_t pos);
 
 private:
 	vector2D gravedad;

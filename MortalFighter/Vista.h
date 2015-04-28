@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include "Mundo.h"
 #include "Controlador.h"
 #include <list>
 #include "Sprites.h"
@@ -9,8 +10,8 @@
 
 class Vista
 {
-public:
-	Vista();
+public:	
+	Vista(Mundo* unMundo);
 	void actualizar();
 	~Vista();
 private:
@@ -22,6 +23,7 @@ private:
 	SDL_Surface* SuperficieDos;
 	SDL_Texture* texturaSpriteUno;
 	SDL_Texture* texturaSpriteDos;
+	Mundo* refMundo;
 
 	std::string dirImgPersonaje;
 

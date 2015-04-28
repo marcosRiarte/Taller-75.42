@@ -19,6 +19,14 @@ void Mundo::agregarCuerpo(Cuerpo *unCuerpo)
 	Cuerpos.push_back(unCuerpo);	
 }
 
+Cuerpo* Mundo::getCuerpo(size_t pos)
+{
+	if (pos < Cuerpos.size())
+		return Cuerpos.at(pos);
+
+	return nullptr;
+}
+
 void Mundo::Paso(float difTiempo)
 {
 	for (unsigned int i = 0; i < Cuerpos.size(); i++)
@@ -27,22 +35,43 @@ void Mundo::Paso(float difTiempo)
 	}
 }
 
+void Mundo::FrenarCuerpos()
+{
+	for (unsigned int i = 0; i < Cuerpos.size(); i++)
+	{
+		Cuerpos.at(i)->Frenar();
+		Cuerpos.at(i)->notificarObservadores(QUIETODER);
+	}
+}
+
+void Mundo::LiberarCuerpos()
+{
+	for (unsigned int i = 0; i < Cuerpos.size(); i++)
+	{
+		Cuerpos.at(i)->Liberar();
+		Cuerpos.at(i)->notificarObservadores(QUIETODER);
+	}
+}
+
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
 	ESTADO nuevoEstado = QUIETODER;
+
 	/// integra velocidad, para salto, 
 	// si no está en el piso siente la gravedad
-
 	if (!unCuerpo->estaEnPiso()){
 		if (unCuerpo->getVelocidad().x == 0)
 			nuevoEstado = ARRIBA_DER;
 		else if (unCuerpo->getVelocidad().x > 0)
 			nuevoEstado = SALTODER_DER;
-		else 
+		else
 			nuevoEstado = SALTOIZQ_DER;
-		unCuerpo->sumarVelocidad(gravedad * difTiempo);		
-	}
-	else{
+		unCuerpo->sumarVelocidad(gravedad * difTiempo);
+	} // Si está frenado el cuerpo no lo mueve
+	else if (unCuerpo->EstaFrenado())
+		nuevoEstado = QUIETODER;
+	else {	
+
 		std::vector<MOV_TIPO> movimientos = unCuerpo->getControlador()->getMovimientos();
 
 		if (movimientos.at(0) == DER) {

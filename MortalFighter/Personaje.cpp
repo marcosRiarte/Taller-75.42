@@ -19,7 +19,7 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	quieto = QuietoPersonaje;
 	salto = SaltoPersonaje;
 	saltodiagonal = SaltoDiagonalPersonaje;
-	caida = CaidaPersonaje;
+	caida = CaidaPersonaje;	
 }
 
 float Personaje::getAncho() const
@@ -119,10 +119,13 @@ void Personaje::setEstado(ESTADO nuevoEstado)
 	estadoActual = nuevoEstado;
 }
 
+
+
+
 void Personaje::actualizar(float xNuevo, float yNuevo, ESTADO nuevoEstado)
 {
-	deltaX = posicionUn.first - xNuevo;
-	setPosicionUn(xNuevo, yNuevo);
+	deltaX = posicionUn.first - xNuevo;	
+	setPosicionUn(xNuevo, yNuevo);	
 	setEstado(nuevoEstado);
 }
 

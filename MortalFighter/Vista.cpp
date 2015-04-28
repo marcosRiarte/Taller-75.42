@@ -3,7 +3,7 @@
 #include "Mundo.h"
 #include "Log.h"
 
-Vista::Vista()
+Vista::Vista(Mundo* unMundo)
 {	
 	// Se inicia SDL_image
 
@@ -51,7 +51,7 @@ Vista::Vista()
 		}
 
 		// inicializo la camara en el centro del escenario
-		camaraXLog = - Parser::getInstancia().getPersonajes().at(0)->getPosicionUn().first
+		camaraXLog = -Parser::getInstancia().getEscenario().getAncho()/2
 			+ Parser::getInstancia().getVentana().getAncho()/2;
 
 		//Creo el número de cuadros en 0,
@@ -86,6 +86,7 @@ Vista::Vista()
 		//Ordeno las capas por su zindex para ser dibujadas
 		OrdenarCapas();
 
+		refMundo = unMundo;
 }
 
 
@@ -120,14 +121,52 @@ void Vista::actualizar(){
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(renderer);
 
-	// condicion de borde
-	if (((xPjUno + anchoPjUno > anchoVentana - camaraXLog) || (xPjUno < -camaraXLog)) && (abs(xPjDos - xPjUno) < anchoVentana-50))
-		camaraXLog += personajesVista[0]->getDeltaX();
+	// condicion de borde Personaje Uno
+	bool PjUnoEstaEnBordeIzq = false;
+	bool PjUnoEstaEnBordeDer = false;
+	if (xPjUno + anchoPjUno > anchoVentana - camaraXLog)
+		PjUnoEstaEnBordeDer = true;
+	if (xPjUno < -camaraXLog)
+		PjUnoEstaEnBordeIzq = true;
+	bool PjUnoEstaEnBorde = PjUnoEstaEnBordeIzq || PjUnoEstaEnBordeDer;
 
-	// condicion de borde
-	if (((xPjDos + anchoPjDos > anchoVentana - camaraXLog) || (xPjDos < -camaraXLog)) && (abs(xPjDos - xPjUno) < anchoVentana - 50))
-		camaraXLog += personajesVista[1]->getDeltaX();
+	// condicion de borde Personaje Dos
+	bool PjDosEstaEnBordeIzq = false;
+	bool PjDosEstaEnBordeDer = false;
+	if (xPjDos + anchoPjDos > anchoVentana - camaraXLog)
+		PjDosEstaEnBordeDer = true;
+	if (xPjDos < -camaraXLog)
+		PjDosEstaEnBordeIzq = true;	
+	bool PjDosEstaEnBorde = PjDosEstaEnBordeIzq || PjDosEstaEnBordeDer;
 
+	if (PjUnoEstaEnBorde && PjDosEstaEnBorde){
+		refMundo->FrenarCuerpos();
+
+		if (PjUnoEstaEnBordeIzq && (refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == DER))
+			refMundo->LiberarCuerpos();
+
+		if (PjUnoEstaEnBordeDer && (refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == IZQ))
+			refMundo->LiberarCuerpos();
+
+		if (PjDosEstaEnBordeIzq && (refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0) == DER))
+			refMundo->LiberarCuerpos();
+
+		if (PjDosEstaEnBordeDer && (refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0) == IZQ))
+			refMundo->LiberarCuerpos();
+	}
+
+	if (PjUnoEstaEnBorde && !PjDosEstaEnBorde) {
+		camaraXLog += personajesVista[0]->getDeltaX();		
+	}
+	if (!PjUnoEstaEnBorde && PjDosEstaEnBorde) {
+		camaraXLog += personajesVista[1]->getDeltaX();		
+	}
+
+	
+		//camaraXLog += personajesVista[0]->getDeltaX();
+
+	if (!PjUnoEstaEnBorde && !PjDosEstaEnBorde)
+		refMundo->LiberarCuerpos();
 	
 	// Dibuja las capas y el personaje
 	Dibujar(personajesVista);
