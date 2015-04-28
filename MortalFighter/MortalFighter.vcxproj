@@ -172,6 +172,11 @@
     <Image Include="ima\bkg\p_3.png" />
     <Image Include="ima\bkg\p_4.png" />
     <Image Include="ima\bkg\p_bkg.png" />
+    <Image Include="ima\bkg\r_1.png" />
+    <Image Include="ima\bkg\r_2.png" />
+    <Image Include="ima\bkg\r_3.png" />
+    <Image Include="ima\bkg\r_4.png" />
+    <Image Include="ima\bkg\r_bkg.png" />
     <Image Include="ima\bkg\t_1.png" />
     <Image Include="ima\bkg\t_2.png" />
     <Image Include="ima\bkg\t_3.png" />
