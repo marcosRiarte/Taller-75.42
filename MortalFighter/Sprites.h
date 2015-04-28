@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include "Personaje.h"
+#define JSON_SPRITES "ima/sprites/KenSF.json"
 
 class Sprite{
 private:
@@ -12,9 +13,12 @@ private:
 	std::vector<SDL_Rect*>* SaltoDiagonal;
 	std::vector<SDL_Rect*>* SaltoDiagonalIzq;
 	std::vector<SDL_Rect*>* Quieto;
+	SDL_Rect* crearCuadro(int x, int y, int w, int h);
+	SDL_Rect* crearCuadro(Json::Value cuadro);	
 
 public:
 	Sprite();
 	std::vector<SDL_Rect*>* listaDeCuadros(std::string unEstado);
+	Json::Value	ParsearSprites();
 	~Sprite();
 };

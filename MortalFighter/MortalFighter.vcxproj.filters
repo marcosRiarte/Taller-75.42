@@ -228,6 +228,9 @@
     <None Include="sprites.json">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ima\sprites\KenSF.json">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\SDL2_image.lib">
