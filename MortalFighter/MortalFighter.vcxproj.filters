@@ -225,6 +225,9 @@
     <None Include="prueba.json">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="sprites.json">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\SDL2_image.lib">
