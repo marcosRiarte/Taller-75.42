@@ -352,9 +352,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	float relacionAnchoDos = (float)anchoPjDosPx / (float)cuadroBase->w;
 	float relacionAltoDos = (float)altoPjDosPx / (float)cuadroBase->h;
 	personajeDos.x = manejadorULog.darLongPixels(xLogPjDosEnCamara);
-	personajeDos.y = yPjDosPx;
-	personajeDos.w = anchoPjDosPx;
-	personajeDos.h = altoPjDosPx;
+	personajeDos.y = yPjDosPx;	
 	std::string estadoDelPersonajeDos = GetEstadoDelPersonaje(personajesVista[1]->getEstado(), personajesVista[1]);
 
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
