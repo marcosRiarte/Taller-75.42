@@ -295,5 +295,8 @@
     <Image Include="ima\sprites\player2.png">
       <Filter>Resource Files\ima\sprites</Filter>
     </Image>
+    <Image Include="ima\sprites\KenSF.png">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>
