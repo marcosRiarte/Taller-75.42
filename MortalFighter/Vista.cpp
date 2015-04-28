@@ -139,7 +139,7 @@ void Vista::actualizar(){
 		PjDosEstaEnBordeIzq = true;	
 	bool PjDosEstaEnBorde = PjDosEstaEnBordeIzq || PjDosEstaEnBordeDer;
 
-	if (PjUnoEstaEnBorde && PjDosEstaEnBorde){
+	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer)) {
 		refMundo->FrenarCuerpos();
 
 		if (PjUnoEstaEnBordeIzq && (refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == DER))
@@ -162,7 +162,29 @@ void Vista::actualizar(){
 		camaraXLog += personajesVista[1]->getDeltaX();		
 	}
 
-	
+	if (PjUnoEstaEnBordeIzq && PjDosEstaEnBordeIzq){ 
+		if ((refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == IZQ) && (refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0) == IZQ))
+			camaraXLog += personajesVista[0]->getDeltaX();
+		else if (refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0) == IZQ)
+			camaraXLog += personajesVista[1]->getDeltaX();
+		else if (refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == IZQ)
+			camaraXLog += personajesVista[0]->getDeltaX();
+	}
+
+	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer){
+		if ((refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == DER) && (refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0) == DER))
+			camaraXLog += personajesVista[0]->getDeltaX();
+		else if (refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0) == DER)
+			camaraXLog += personajesVista[1]->getDeltaX();
+		else if (refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == DER)
+			camaraXLog += personajesVista[0]->getDeltaX();
+	}
+
+	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer){
+		if (refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0) == IZQ)
+			camaraXLog += personajesVista[1]->getDeltaX();
+	}
+
 		//camaraXLog += personajesVista[0]->getDeltaX();
 
 	if (!PjUnoEstaEnBorde && !PjDosEstaEnBorde)
