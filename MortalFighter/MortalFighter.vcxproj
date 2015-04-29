@@ -95,6 +95,7 @@
     <ClInclude Include="Controlador.h" />
     <ClInclude Include="ControladorP1.h" />
     <ClInclude Include="ControladorP2.h" />
+    <ClInclude Include="ConversorDeEventos.h" />
     <ClInclude Include="Cuerpo.h" />
     <ClInclude Include="Escenario.h" />
     <ClInclude Include="FechayHora.h" />
@@ -123,6 +124,7 @@
     <ClCompile Include="Controlador.cpp" />
     <ClCompile Include="ControladorP1.cpp" />
     <ClCompile Include="ControladorP2.cpp" />
+    <ClCompile Include="ConversorDeEventos.cpp" />
     <ClCompile Include="Cuerpo.cpp" />
     <ClCompile Include="Escenario.cpp" />
     <ClCompile Include="FechayHora.cpp" />

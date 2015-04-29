@@ -39,8 +39,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		/*********************************************************************/
 		/*      Inicialización de vista y variables del juego               */
 		/*********************************************************************/
-		ControladorP2* controladorUno = new ControladorP2();
-		ControladorP1* controladorDos = new ControladorP1();
+		Controlador* controladorUno = Parser::getInstancia().getControlador1();
+		Controlador* controladorDos = Parser::getInstancia().getControlador2();
 
 		//Parte de creación inicial.		
 		Mundo* unMundo = new Mundo(vecGravedad);
