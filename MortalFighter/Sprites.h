@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include "Personaje.h"
-#define JSON_SPRITES "ima/sprites/KenSF.json"
+#define JSON_SPRITES "ima/sprites/player1.json"
 
 class Sprite{
 private:

@@ -231,6 +231,9 @@
     <None Include="ima\sprites\KenSF.json">
       <Filter>Resource Files\ima\sprites</Filter>
     </None>
+    <None Include="ima\sprites\player1.json">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\SDL2_image.lib">
@@ -318,6 +321,15 @@
     </Image>
     <Image Include="ima\bkg\r_4.png">
       <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Pictures\005_Liu_Kang_MK daño.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Pictures\Nuevo_Lifebar 519x62 pixeles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Pictures\render_tn.jpg">
+      <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
 </Project>

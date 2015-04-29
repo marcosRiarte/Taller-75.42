@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ima\sprites\KenSF.json" />
+    <None Include="ima\sprites\player1.json" />
     <None Include="jsoncpp.dll" />
     <None Include="lib\libjpeg-9.dll" />
     <None Include="lib\libpng16-16.dll" />
