@@ -60,13 +60,44 @@
 
         }
     ],
-    
+
     "color_alternativo": [
         {
             "h_inicial": 40,
             "h_final": 45,
-            "desplazamiento" : 30
+            "desplazamiento": 30
 
         }
-    ]
+    ],
+
+    "control_1": {
+        "arriba": "up",
+        "abajo": "down",
+        "izquierda": "left",
+        "derecha": "right",
+        "defensa": "z",
+        "golpe_bajo": "x",
+        "golpe_alto": "c",
+        "patada_baja": "v",
+        "patada_alta": "b",
+        "arma": "n",
+        "salir": "esc",
+        "reiniciar": "r"
+    },
+
+    "control_2": {
+        "arriba": "w",
+        "abajo": "s",
+        "izquierda": "a",
+        "derecha": "d",
+        "defensa": "j",
+        "golpe_bajo": "k",
+        "golpe_alto": "l",
+        "patada_baja": "i",
+        "patada_alta": "o",
+        "arma": "u",
+        "salir": "esc",
+        "reiniciar": "r"
+    }
+
 }

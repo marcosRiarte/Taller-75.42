@@ -3,6 +3,7 @@
 #include "Ventana.h"
 #include "Escenario.h"
 #include "Personaje.h"
+#include "Controlador.h"
 #include "Log.h"
 #include "Validador.h"
 
@@ -43,6 +44,19 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define SALTODIAGONAL_DEFAULT "SaltoDiagonal"
 #define CAIDA_DEFAULT "Caida"
 
+#define ARRIBA_DEFAULT "up"
+#define ABAJO_DEFAULT "down"
+#define IZQUIERDA_DEFAULT "left"
+#define DERECHA_DEFAULT "right"
+#define DEFENSA_DEFAULT "z"
+#define REINICIAR_DEFAULT "r"
+#define SALIR_DEFAULT "esc"
+#define ARMA_DEFAULT "x"
+#define G_BAJO_DEFAULT "c"
+#define G_ALTO_DEFAULT "v"
+#define P_BAJA_DEFAULT "b"
+#define P_ALTA_DEFAULT "n"
+
 class Parser
 {
 public:	
@@ -51,6 +65,8 @@ public:
 
 	Escenario& getEscenario() const;
 	Ventana& getVentana() const;
+	Controlador* getControlador1();
+	Controlador* getControlador2();
 	std::vector<Personaje*> getPersonajes() const;
 	std::vector<Capa*> getCapas() const;
 
@@ -64,6 +80,8 @@ private:
 	std::vector<Personaje*> Personajes;
 	Ventana* unaVentana;
 	Escenario* unEscenario;
+	Controlador* controlador1;
+	Controlador* controlador2;
 
 	virtual ~Parser();
 
