@@ -6,8 +6,6 @@
 #include "Vista.h"
 #include "Mundo.h"
 //#include <windows.h>
-#include "ControladorP1.h"
-#include "ControladorP2.h"
 #include "MortalFigther.h"
 #include "Timer.h"
 
