@@ -363,8 +363,18 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	if ((4 * numeroDeCuadroUno / (listaDeCuadrosUno->size()))> (listaDeCuadrosUno->size() - 1))
 		numeroDeCuadroUno = 0;
 
+
+
 	//Renderizar el sprite
-	SDL_Rect* cuadroActualUno = listaDeCuadrosUno->at(4 * numeroDeCuadroUno / (listaDeCuadrosUno->size()));
+	SDL_Rect* cuadroActualUno;
+
+	if (personajesVista.at(0)->getPosicionPx().first > personajesVista.at(1)->getPosicionPx().first){
+		cuadroActualUno = listaDeCuadrosUno->at((listaDeCuadrosUno->size()-1)-(4 * numeroDeCuadroUno / (listaDeCuadrosUno->size())));
+	}
+	else{
+		cuadroActualUno = listaDeCuadrosUno->at(4 * numeroDeCuadroUno / (listaDeCuadrosUno->size()));
+	}
+
 	personajeUno.w = (int)round(relacionAnchoUno*cuadroActualUno->w);
 	personajeUno.h = (int)round(relacionAltoUno*cuadroActualUno->h);
 
@@ -376,7 +386,15 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		numeroDeCuadroDos = 0;
 
 	//Renderizar el sprite
-	SDL_Rect* cuadroActualDos = listaDeCuadrosDos->at(4 * numeroDeCuadroDos / (listaDeCuadrosDos->size()));
+	SDL_Rect* cuadroActualDos;
+
+	if (personajesVista.at(1)->getPosicionPx().first > personajesVista.at(0)->getPosicionPx().first){
+		cuadroActualDos = listaDeCuadrosDos->at((listaDeCuadrosDos->size() - 1) - (4 * numeroDeCuadroDos / (listaDeCuadrosDos->size())));
+	}
+	else{
+		cuadroActualDos = listaDeCuadrosDos->at(4 * numeroDeCuadroDos / (listaDeCuadrosDos->size()));
+	}
+
 	personajeDos.w = (int)round(relacionAnchoDos*cuadroActualDos->w);
 	personajeDos.h = (int)round(relacionAltoDos*cuadroActualDos->h);
 
