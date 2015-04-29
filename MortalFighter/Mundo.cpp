@@ -49,7 +49,7 @@ void Mundo::LiberarCuerpos()
 	for (unsigned int i = 0; i < Cuerpos.size(); i++)
 	{
 		Cuerpos.at(i)->Liberar();
-		Cuerpos.at(i)->notificarObservadores(QUIETODER);
+		//Cuerpos.at(i)->notificarObservadores(QUIETODER);
 	}
 }
 
@@ -107,11 +107,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
 
 		}
-	}
-	//TODO: falta esta parte...
-	// si el oponente está a izq voltear estados, abusando del enum
-	//if (oponenteAIzq())
-	//	nuevoEstado += 1;
+	}	
 
 	vector2D unaVelocidad = unCuerpo->getVelocidad();
 
