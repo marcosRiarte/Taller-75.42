@@ -6,7 +6,6 @@ public:
 
 	ConversorDeEventos();
 	void setAccion(Acciones unaAccion, std::string keyName);
-	void setAccionesPorDefecto();
 	SDL_Keycode getKeyCodeDeLaAccion(Acciones unaAccion);
 	SDL_Scancode getScanCodeDeLaAccion(Acciones unaAccion);
 	~ConversorDeEventos();

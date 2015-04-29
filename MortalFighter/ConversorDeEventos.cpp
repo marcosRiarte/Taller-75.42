@@ -295,18 +295,16 @@ ConversorDeEventos::KeyAndScanCode ConversorDeEventos::getKeyYScanCodeDeTecla(st
 		keyAndScanCode.scanCode = SDL_SCANCODE_RIGHT;
 		return keyAndScanCode;
 	}
-	
+
+	keyAndScanCode.keyCode = NULL;
+	keyAndScanCode.scanCode = SDL_SCANCODE_INTERNATIONAL9;
+	return keyAndScanCode;
 }
 
 
 
 ConversorDeEventos::ConversorDeEventos()
 {
-}
-
-
-void ConversorDeEventos::setAccionesPorDefecto(){
-
 }
 
 

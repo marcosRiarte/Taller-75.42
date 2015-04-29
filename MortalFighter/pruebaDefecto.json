@@ -14,22 +14,22 @@
             "imagen_fondo": "ima/bkg/default_bkg.png",
             "ancho": 200
         },
-		{
+        {
             "imagen_fondo": "ima/bkg/default_p4.png",
             "ancho": 700.5
         },
-		{
+        {
             "imagen_fondo": "ima/bkg/default_p3.png",
             "ancho": 600.5
         },
-		{
+        {
             "imagen_fondo": "ima/bkg/default_p2.png",
             "ancho": 500.5
         },
-		{
+        {
             "imagen_fondo": "ima/bkg/default_p1.png",
             "ancho": 800.5
-		}
+        }
     ],
     "personaje": {
         "ancho": 50,
@@ -37,11 +37,41 @@
         "zindex": 4,
         "orientacion": "DER",
         "sprites": "ima/sprites/player_default.png",
-		"CaminarParaAdelante": "CaminarParaAdelante",
-		"CaminarParaAtras": "CaminarParaAtras",
-		"Quieto": "Quieto",
-		"Salto": "Salto",
+        "CaminarParaAdelante": "CaminarParaAdelante",
+        "CaminarParaAtras": "CaminarParaAtras",
+        "Quieto": "Quieto",
+        "Salto": "Salto",
         "SaltoDiagonal": "SaltoDiagonal",
         "Caida": "Caida"
+    },
+
+    "control_1": {
+    "arriba": "up",
+    "abajo": "down",
+    "izquierda": "left",
+    "derecha": "right",
+    "defensa": "z",
+    "golpe_bajo": "x",
+    "golpe_alto": "c",
+    "patada_baja": "v",
+    "patada_alta": "b",
+    "arma": "n",
+    "salir": "esc",
+    "reiniciar": "r"
+    },
+
+    "control_2": {
+        "arriba": "w",
+        "abajo": "s",
+        "izquierda": "a",
+        "derecha": "d",
+        "defensa": "j",
+        "golpe_bajo": "k",
+        "golpe_alto": "l",
+        "patada_baja": "i",
+        "patada_alta": "o",
+        "arma": "u",
+        "salir": "esc",
+        "reiniciar": "r"
     }
 }
