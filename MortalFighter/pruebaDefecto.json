@@ -29,6 +29,10 @@
         {
             "imagen_fondo": "ima/bkg/default_p1.png",
             "ancho": 800.5
+        },
+        {
+            "imagen_fondo": "ima/bkg/Lifebar.png",
+            "ancho": 400
         }
     ],
     "personaje": {

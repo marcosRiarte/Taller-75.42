@@ -316,14 +316,17 @@
     <Image Include="ima\bkg\r_4.png">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
-    <Image Include="..\..\..\..\Pictures\005_Liu_Kang_MK daño.png">
-      <Filter>Resource Files</Filter>
+    <Image Include="ima\bkg\LiuKangDamage.png">
+      <Filter>Resource Files\ima\bkg</Filter>
     </Image>
-    <Image Include="..\..\..\..\Pictures\Nuevo_Lifebar 519x62 pixeles.png">
-      <Filter>Resource Files</Filter>
+    <Image Include="ima\bkg\fight Hd.png">
+      <Filter>Resource Files\ima\bkg</Filter>
     </Image>
-    <Image Include="..\..\..\..\Pictures\render_tn.jpg">
-      <Filter>Resource Files</Filter>
+    <Image Include="ima\bkg\Lifebar.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\LiuKangImage.jpg">
+      <Filter>Resource Files\ima\bkg</Filter>
     </Image>
   </ItemGroup>
 </Project>
