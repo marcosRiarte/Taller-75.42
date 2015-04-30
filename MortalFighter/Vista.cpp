@@ -149,27 +149,29 @@ void Vista::actualizar(){
 	MOV_TIPO mov1 = refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0);
 	MOV_TIPO mov2 = refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0);
 
-	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer) || (personajeUno->getSensores().at(0)->hayInterseccion(personajeDos->getPosicionUn(), personajeDos->getAncho(), personajeDos->getAlto()))) {
+	bool interseccion = (personajeUno->getSensores().at(0)->hayInterseccion(personajeDos->getPosicionUn(), personajeDos->getAncho(), personajeDos->getAlto()));
+
+	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer) || interseccion) {
 		refMundo->FrenarCuerpos();
 
-		if (PjUnoEstaEnBordeIzq && (mov1 == DER))
+		if (PjUnoEstaEnBordeIzq && (mov1 == DER) && (!interseccion))
 			refMundo->LiberarCuerpos();
 
-		if (PjUnoEstaEnBordeDer && (mov1 == IZQ))
+		if (PjUnoEstaEnBordeDer && (mov1 == IZQ) && (!interseccion))
 			refMundo->LiberarCuerpos();
 
-		if (PjDosEstaEnBordeIzq && (mov2 == DER))
+		if (PjDosEstaEnBordeIzq && (mov2 == DER) && (!interseccion))
 			refMundo->LiberarCuerpos();
 
-		if (PjDosEstaEnBordeDer && (mov2 == IZQ))
+		if (PjDosEstaEnBordeDer && (mov2 == IZQ) && (!interseccion))
 			refMundo->LiberarCuerpos();
 	}
 	
 
-	if (PjUnoEstaEnBorde && !PjDosEstaEnBorde) {
+	if (PjUnoEstaEnBorde && !PjDosEstaEnBorde && (!interseccion)) {
 		camaraXLog += personajesVista[0]->getDeltaX();		
 	}
-	if (!PjUnoEstaEnBorde && PjDosEstaEnBorde) {
+	if (!PjUnoEstaEnBorde && PjDosEstaEnBorde && (!interseccion)) {
 		camaraXLog += personajesVista[1]->getDeltaX();		
 	}
 
@@ -182,7 +184,7 @@ void Vista::actualizar(){
 			camaraXLog += personajesVista[0]->getDeltaX();
 	}
 
-	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer){
+	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer && (!interseccion)){
 		if ((mov1 == DER) && (mov2 == DER))
 			camaraXLog += personajesVista[0]->getDeltaX();
 		else if (mov2 == DER)
@@ -191,14 +193,14 @@ void Vista::actualizar(){
 			camaraXLog += personajesVista[0]->getDeltaX();
 	}
 
-	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer){
+	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer && (!interseccion)){
 		if (mov1 == IZQ)
 			camaraXLog += personajesVista[1]->getDeltaX();
 	}
 
 		//camaraXLog += personajesVista[0]->getDeltaX();
 
-	if (!PjUnoEstaEnBorde && !PjDosEstaEnBorde)
+	if (!PjUnoEstaEnBorde && !PjDosEstaEnBorde && (!interseccion))
 		refMundo->LiberarCuerpos();
 	
 	// Dibuja las capas y el personaje
