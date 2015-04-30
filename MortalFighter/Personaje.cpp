@@ -6,7 +6,7 @@
 
 
 
-Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje, std::string CaidaPersonaje)
+Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje, std::string CaidaPersonaje, std::string nombrePersonaje)
 {
 	ancho = anchoPersonaje;
 	alto = altoPersonaje;
@@ -20,6 +20,7 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	salto = SaltoPersonaje;
 	saltodiagonal = SaltoDiagonalPersonaje;
 	caida = CaidaPersonaje;	
+	nombreP = nombrePersonaje;
 	sensores.push_back(new Sensor(posicionUn, ancho, alto, false));
 }
 
@@ -77,6 +78,11 @@ std::string Personaje::getSaltoDiagonal() const
 std::string Personaje::getCaida() const
 {
 	return caida;
+}
+
+std::string Personaje::getNombre() const
+{
+	return nombreP;
 }
 
 

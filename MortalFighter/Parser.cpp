@@ -209,6 +209,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	std::string Salto;
 	std::string SaltoDiagonal;
 	std::string Caida;
+	std::string nombre;
 	bool errorPersonaje = false;
 	int anchoMaximoDelPersonaje = (int)round((anchoPxVentana * altoEscenario) / altoPxVentana); //el resultado de este calculo deberia ser el ancho maximo de la ventana en uninades logicas.
 	int altoMaximoDelPersonaje = (int)round(altoEscenario + yPisoEscenario); //este el alto maximo
@@ -227,6 +228,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		Salto = SALTO_DEFAULT;
 		SaltoDiagonal = SALTODIAGONAL_DEFAULT;
 		Caida = CAIDA_DEFAULT;
+		nombre = LIU_KANG;
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje por defecto", Log::MODO_WARNING);
 		
 	}
@@ -311,11 +313,11 @@ bool Parser::parsear(std::string nombreDelArchivo)
 			}
 
 
-			errorPersonaje = Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites, &CaminarParaAdelante, &CaminarParaAtras, &Quieto, &Salto, &SaltoDiagonal, &Caida);
+			errorPersonaje = Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites, &CaminarParaAdelante, &CaminarParaAtras, &Quieto, &Salto, &SaltoDiagonal, &Caida);//, &nombre
 			if (errorPersonaje){
 				return false;
 			}
-			Personajes.push_back(new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal, Caida));
+			Personajes.push_back(new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal, Caida, nombre));
 		}
 	}
 	
@@ -327,9 +329,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 
 	// en esta parte se desarma todo......
 	//
-	//
-	//
-	//
+	
 
 	Json::Value color_alternativo ;
 	color_alternativo = raiz["color_alternativo"];

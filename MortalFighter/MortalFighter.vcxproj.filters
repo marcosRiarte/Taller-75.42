@@ -131,6 +131,9 @@
     <ClInclude Include="ConversorDeEventos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ConrtrolDeColor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -185,6 +188,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ConversorDeEventos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConrtrolDeColor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

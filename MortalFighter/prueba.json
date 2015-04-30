@@ -47,7 +47,8 @@
             "Quieto": "Quieto",
             "Salto": "Salto",
             "SaltoDiagonal": "SaltoDiagonal",
-            "Caida": "Caida"
+            "Caida": "Caida",
+            "nombre": "LiuKang"
         },
         {
             "ancho": 40,
@@ -60,7 +61,8 @@
             "Quieto": "Quieto",
             "Salto": "Salto",
             "SaltoDiagonal": "SaltoDiagonal",
-            "Caida": "Caida"
+            "Caida": "Caida",
+            "nombre": "LiuKang"
 
         }
     ],

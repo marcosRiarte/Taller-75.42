@@ -43,6 +43,7 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define SALTO_DEFAULT "Salto"
 #define SALTODIAGONAL_DEFAULT "SaltoDiagonal"
 #define CAIDA_DEFAULT "Caida"
+#define LIU_KANG "LiuKang"
 
 #define ARRIBA_DEFAULT_1 "up"
 #define ABAJO_DEFAULT_1 "down"

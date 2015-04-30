@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Capa.h" />
+    <ClInclude Include="ConrtrolDeColor.h" />
     <ClInclude Include="Constantes.h" />
     <ClInclude Include="Controlador.h" />
     <ClInclude Include="ConversorDeEventos.h" />
@@ -119,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Capa.cpp" />
+    <ClCompile Include="ConrtrolDeColor.cpp" />
     <ClCompile Include="Controlador.cpp" />
     <ClCompile Include="ConversorDeEventos.cpp" />
     <ClCompile Include="Cuerpo.cpp" />

@@ -10,7 +10,8 @@ class Personaje
 {
 public:
 	
-	Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string orientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string Quieto, std::string Salto, std::string SaltoDiagonal, std::string Caida);
+	std::string nombre;
+	Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string orientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string Quieto, std::string Salto, std::string SaltoDiagonal, std::string Caida, std::string nombrePersonaje);
 	float getAncho() const;
 	float getAlto() const;
 	int getZIndex() ;
@@ -22,6 +23,7 @@ public:
 	std::string getSalto() const;
 	std::string getSaltoDiagonal() const;
 	std::string getCaida() const;
+	std::string getNombre() const;
 	std::pair<int, int> getPosicionPx() const;
 	void setPosicionUn(float x, float y);
 	ESTADO getEstado() const;
@@ -47,6 +49,7 @@ private:
 	std::string salto;
 	std::string saltodiagonal;
 	std::string caida;
+	std::string nombreP;
 	std::pair<float, float> posicionUn;
 	float deltaX;	
 	ESTADO estadoActual;
