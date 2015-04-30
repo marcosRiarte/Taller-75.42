@@ -20,6 +20,7 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	salto = SaltoPersonaje;
 	saltodiagonal = SaltoDiagonalPersonaje;
 	caida = CaidaPersonaje;	
+	sensores.push_back(new Sensor(posicionUn, ancho, alto, false));
 }
 
 float Personaje::getAncho() const
@@ -42,6 +43,10 @@ std::string Personaje::getSprite() const
 	return sprites;
 }
 
+std::vector<Sensor*> Personaje::getSensores()
+{
+	return sensores;
+}
 
 
 std::string Personaje::getCaminarParaAdelante() const
@@ -102,6 +107,7 @@ std::pair<float, float> Personaje::getPosicionUn()const
 void Personaje::setPosicionUn(float x, float y)
 {
 	posicionUn = std::make_pair(x, y);
+	sensores.at(0)->setPosicion(posicionUn);
 }
 
 float Personaje::getDeltaX() const
@@ -132,4 +138,7 @@ void Personaje::actualizar(float xNuevo, float yNuevo, ESTADO nuevoEstado)
 
 Personaje::~Personaje()
 {
+	for (size_t j = 0; j < sensores.size(); j++) {
+		delete sensores.at(j);
+	}
 }

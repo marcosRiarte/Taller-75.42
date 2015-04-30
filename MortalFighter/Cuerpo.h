@@ -23,7 +23,7 @@ struct defCuerpo
 class Cuerpo
 {
 public:
-	Cuerpo(const  defCuerpo unaDefCuerpo, Controlador* controladorNuevo);
+	Cuerpo(const  defCuerpo unaDefCuerpo, Controlador* controladorNuevo, float posicionEnX);
 
 	inline const vector2D& getPosicion() const
 	{

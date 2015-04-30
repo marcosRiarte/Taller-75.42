@@ -101,10 +101,13 @@ void Vista::actualizar(){
 	float anchoVentana = ventanaVista.getAncho();
 	int altoVentanaPx = ventanaVista.getAltoPx();
 
+	Personaje* personajeUno = personajesVista[0];
+	Personaje* personajeDos = personajesVista[1];
+
 	//Parametros del personaje	
-	xPjUno = personajesVista[0]->getPosicionUn().first;
+	xPjUno = personajeUno->getPosicionUn().first;
 	float anchoPjUno = personajesVista[0]->getAncho();
-	xPjDos = personajesVista[1]->getPosicionUn().first;
+	xPjDos = personajeDos->getPosicionUn().first;
 	float anchoPjDos = personajesVista[1]->getAncho();
 
 	float anchoEscenario = Parser::getInstancia().getEscenario().getAncho();
@@ -142,7 +145,7 @@ void Vista::actualizar(){
 	MOV_TIPO mov1 = refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0);
 	MOV_TIPO mov2 = refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0);
 
-	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer)) {
+	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer) || (personajeUno->getSensores().at(0)->hayInterseccion(personajeDos->getPosicionUn(), personajeDos->getAncho(), personajeDos->getAlto()))) {
 		refMundo->FrenarCuerpos();
 
 		if (PjUnoEstaEnBordeIzq && (mov1 == DER))
@@ -347,6 +350,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	float relacionAltoUno = (float)altoPjUnoPx / (float)cuadroBase->h;
 	personajeUno.x = manejadorULog.darLongPixels(xLogPjUnoEnCamara);
 	personajeUno.y = yPjUnoPx;	
+
 	// ancho y alto lo calcula cuadro a cuadro
 	std::string estadoDelPersonajeUno = GetEstadoDelPersonaje(personajesVista[0]->getEstado(), personajesVista[0]);
 

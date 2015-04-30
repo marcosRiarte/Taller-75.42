@@ -43,11 +43,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		//Parte de creación inicial.		
 		Mundo* unMundo = new Mundo(vecGravedad);
 		Vista* unaVista = new Vista(unMundo);
-		Cuerpo *unCuerpo = new Cuerpo(defCuerpo(), controladorUno);
+		Cuerpo *unCuerpo = new Cuerpo(defCuerpo(), controladorUno, Parser::getInstancia().getEscenario().getAncho()/2.3);
 		unCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
 		unMundo->agregarCuerpo(unCuerpo);
 
-		Cuerpo *otroCuerpo = new Cuerpo(defCuerpo(), controladorDos);		
+		Cuerpo *otroCuerpo = new Cuerpo(defCuerpo(), controladorDos, Parser::getInstancia().getEscenario().getAncho()/1.8);
 		otroCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(1));
 		unMundo->agregarCuerpo(otroCuerpo);
 		

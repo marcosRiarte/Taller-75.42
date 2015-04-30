@@ -2,11 +2,12 @@
 #include "Sensor.h"
 
 
-Sensor::Sensor(std::pair<float, float> unaposicion, float unalto, float unancho)
+Sensor::Sensor(std::pair<float, float> unaposicion, float unalto, float unancho, bool valorHitBox)
 {
 	ancho = unancho;
 	alto = unalto;
 	posicion = unaposicion;
+	esHitBox = valorHitBox;
 }
 
 void Sensor::setPosicion(std::pair<float, float> unaposicion){
@@ -15,6 +16,14 @@ void Sensor::setPosicion(std::pair<float, float> unaposicion){
 
 void Sensor::setAlto(float unalto){
 	alto = unalto;
+}
+
+void Sensor::setHitbox(bool valorHitBox){
+	esHitBox = valorHitBox;
+}
+
+bool Sensor::getHitbox(){
+	return esHitBox;
 }
 
 void Sensor::setAncho(float unancho){
@@ -31,6 +40,13 @@ float Sensor::getAlto(){
 
 float Sensor::getAncho(){
 	return ancho;
+}
+
+bool Sensor::hayInterseccion(std::pair<float, float> unaPosicion, float unAncho, float unAlto){
+	if ((unaPosicion.first + unAncho < posicion.first) || (unaPosicion.first > ancho + posicion.first) || (unaPosicion.second + unAlto < posicion.second) || (unaPosicion.second > posicion.second+alto)){
+		return false;
+	}
+	return true;
 }
 
 

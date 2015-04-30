@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #include "Cuerpo.h"
 
-Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo)
+Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo,float posicionEnX)
 {
 	controlador = controladorNuevo;
 	nombre = unaDefCuerpo.nombre;
 	posicion = unaDefCuerpo.posicion;
 	velocidad = unaDefCuerpo.velocidad;
 	masa = unaDefCuerpo.masa;
-	posicion.x = Parser::getInstancia().getEscenario().getAncho() / 2;
+	posicion.x = posicionEnX;
 	yPiso = Parser::getInstancia().getEscenario().getYPiso();
 	posicion.y = yPiso;
 	estaFrenado = unaDefCuerpo.estaFrenado;

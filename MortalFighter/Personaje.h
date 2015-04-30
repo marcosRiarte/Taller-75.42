@@ -1,4 +1,5 @@
 #pragma once
+#include "Sensor.h"
 
 enum ESTADO {
 	QUIETODER, QUIETOIZQ, DER_DER, DER_IZQ, IZQ_DER, IZQ_IZQ, ARRIBA_DER, ARRIBA_IZQ,
@@ -28,7 +29,7 @@ public:
 	float getDeltaX() const;	
 	virtual void actualizar(float xNuevo, float yNuevo, ESTADO);	
 	std::pair<float, float> Personaje::getPosicionUn()const;
-
+	std::vector<Sensor*> getSensores();
 	
 	~Personaje();
 
@@ -37,6 +38,7 @@ private:
 	float alto;
 	int zIndex;
 	int energy;
+	std::vector<Sensor*> sensores;
 	std::string orientacion;
 	std::string sprites;
 	std::string caminaradelante;
