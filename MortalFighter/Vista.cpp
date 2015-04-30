@@ -36,8 +36,10 @@ Vista::Vista(Mundo* unMundo)
 		for (size_t i = 0; i < Parser::getInstancia().getCapas().size(); i++) 
 		{
 			std::string imgFondo(Parser::getInstancia().getCapas().at(i)->getImagenFondo());
-
-			SDL_Texture *tex = IMG_LoadTexture(renderer, imgFondo.c_str());
+			SDL_Surface* superficieCapa = cargarSuperficieOptimizada(imgFondo);
+			SDL_Texture *tex = SDL_CreateTextureFromSurface(renderer, superficieCapa);
+			// se queda con la textura libero la superficie
+			SDL_FreeSurface(superficieCapa);
 
 			if (tex == nullptr){				
 				std::string mensaje = "SDL_CreateTextureFromSurface Error: ";
@@ -71,8 +73,8 @@ Vista::Vista(Mundo* unMundo)
 		dirImgPersonaje = Parser::getInstancia().getPersonajes().at(0)->getSprite();
 
 		//Carga la imagen desde la ruta especificada
-		SuperficieUno = IMG_Load(dirImgPersonaje.c_str());
-		SuperficieDos = IMG_Load(dirImgPersonaje.c_str());
+		SDL_Surface* SuperficieUno = cargarSuperficieOptimizada(dirImgPersonaje);
+		SDL_Surface* SuperficieDos = cargarSuperficieOptimizada(dirImgPersonaje);
 
 		//Seteo del color
 		//SDL_SetColorKey(Superficie, SDL_TRUE, SDL_MapRGB(Superficie->format, 0, 0xFF, 0xFF));
@@ -81,6 +83,8 @@ Vista::Vista(Mundo* unMundo)
 		//Creación de la textura sobre la superficie
 		texturaSpriteUno = SDL_CreateTextureFromSurface(renderer, SuperficieUno);
 		texturaSpriteDos = SDL_CreateTextureFromSurface(renderer, SuperficieDos);
+		SDL_FreeSurface(SuperficieUno);
+		SDL_FreeSurface(SuperficieDos);
 
 		capasVista = Parser::getInstancia().getCapas();
 		//Ordeno las capas por su zindex para ser dibujadas
@@ -203,6 +207,27 @@ void Vista::actualizar(){
 
 	//Se actualiza la pantalla
 	SDL_RenderPresent(renderer);
+}
+
+SDL_Surface* Vista::cargarSuperficieOptimizada(std::string dirImagen)
+{	
+	SDL_Surface* superficieOptimizada = NULL;
+
+	//cargo original
+	SDL_Surface* superficieOriginal = IMG_Load(dirImagen.c_str());
+	if (superficieOriginal == NULL)
+		Log::getInstancia().logearMensajeEnModo("No se pudo cargar imagen" + dirImagen, Log::MODO_ERROR);	
+	else 
+	{	//Optimiza superfice a pantalla
+		superficieOptimizada = SDL_ConvertSurface(superficieOriginal, superficieOriginal->format, NULL);
+		if (superficieOptimizada == NULL)
+			Log::getInstancia().logearMensajeEnModo("No se pudo optimizar imagen" + dirImagen + SDL_GetError(), Log::MODO_ERROR);
+
+		//libero la original
+		SDL_FreeSurface(superficieOriginal);
+	}
+
+	return superficieOptimizada;
 }
 
 void Vista::OrdenarCapas()
@@ -367,18 +392,15 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	if ((4 * numeroDeCuadroUno / (listaDeCuadrosUno->size()))> (listaDeCuadrosUno->size() - 1))
 		numeroDeCuadroUno = 0;
 
-
-
 	//Renderizar el sprite
 	SDL_Rect* cuadroActualUno;
-
 	if (personajesVista.at(0)->getPosicionPx().first > personajesVista.at(1)->getPosicionPx().first){
-		cuadroActualUno = listaDeCuadrosUno->at((listaDeCuadrosUno->size()-1)-(4 * numeroDeCuadroUno / (listaDeCuadrosUno->size())));
+		cuadroActualUno = listaDeCuadrosUno->at((listaDeCuadrosUno->size() - 1) - (4 * numeroDeCuadroUno / (listaDeCuadrosUno->size())));		
 	}
 	else{
-		cuadroActualUno = listaDeCuadrosUno->at(4 * numeroDeCuadroUno / (listaDeCuadrosUno->size()));
+		cuadroActualUno = listaDeCuadrosUno->at(4 * numeroDeCuadroUno / (listaDeCuadrosUno->size()));		
 	}
-
+	
 	personajeUno.w = (int)round(relacionAnchoUno*cuadroActualUno->w);
 	personajeUno.h = (int)round(relacionAltoUno*cuadroActualUno->h);
 
@@ -391,12 +413,11 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	//Renderizar el sprite
 	SDL_Rect* cuadroActualDos;
-
 	if (personajesVista.at(1)->getPosicionPx().first > personajesVista.at(0)->getPosicionPx().first){
-		cuadroActualDos = listaDeCuadrosDos->at((listaDeCuadrosDos->size() - 1) - (4 * numeroDeCuadroDos / (listaDeCuadrosDos->size())));
+		cuadroActualDos = listaDeCuadrosDos->at((listaDeCuadrosDos->size() - 1) - (4 * numeroDeCuadroDos / (listaDeCuadrosDos->size())));		
 	}
 	else{
-		cuadroActualDos = listaDeCuadrosDos->at(4 * numeroDeCuadroDos / (listaDeCuadrosDos->size()));
+		cuadroActualDos = listaDeCuadrosDos->at(4 * numeroDeCuadroDos / (listaDeCuadrosDos->size()));		
 	}
 
 	personajeDos.w = (int)round(relacionAnchoDos*cuadroActualDos->w);
@@ -415,9 +436,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 
 Vista::~Vista()
-{	
-	SDL_FreeSurface(SuperficieUno);
-	SDL_FreeSurface(SuperficieDos);
+{		
 	SDL_DestroyTexture(texturaSpriteUno);
 	SDL_DestroyTexture(texturaSpriteDos);
 

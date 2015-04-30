@@ -13,14 +13,14 @@ class Vista
 public:	
 	Vista(Mundo* unMundo);
 	void actualizar();
+	SDL_Surface* cargarSuperficieOptimizada(std::string dirImagen);
 	~Vista();
+
 private:
 	Sprite* elSprite;
 	SDL_Window* ventana;
 	SDL_Renderer* renderer;
-	std::string rutaImagen;
-	SDL_Surface* SuperficieUno;
-	SDL_Surface* SuperficieDos;
+	std::string rutaImagen;	
 	SDL_Texture* texturaSpriteUno;
 	SDL_Texture* texturaSpriteDos;
 	Mundo* refMundo;

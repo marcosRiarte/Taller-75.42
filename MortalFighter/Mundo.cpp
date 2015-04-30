@@ -39,8 +39,7 @@ void Mundo::FrenarCuerpos()
 {
 	for (unsigned int i = 0; i < Cuerpos.size(); i++)
 	{
-		Cuerpos.at(i)->Frenar();
-		Cuerpos.at(i)->notificarObservadores(QUIETODER);
+		Cuerpos.at(i)->Frenar();		
 	}
 }
 
@@ -48,8 +47,7 @@ void Mundo::LiberarCuerpos()
 {
 	for (unsigned int i = 0; i < Cuerpos.size(); i++)
 	{
-		Cuerpos.at(i)->Liberar();
-		//Cuerpos.at(i)->notificarObservadores(QUIETODER);
+		Cuerpos.at(i)->Liberar();		
 	}
 }
 
