@@ -91,7 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Capa.h" />
-    <ClInclude Include="ConrtrolDeColor.h" />
     <ClInclude Include="Constantes.h" />
     <ClInclude Include="Controlador.h" />
     <ClInclude Include="ConversorDeEventos.h" />
@@ -120,7 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Capa.cpp" />
-    <ClCompile Include="ConrtrolDeColor.cpp" />
     <ClCompile Include="Controlador.cpp" />
     <ClCompile Include="ConversorDeEventos.cpp" />
     <ClCompile Include="Cuerpo.cpp" />
@@ -145,6 +143,7 @@
   <ItemGroup>
     <None Include="ima\sprites\KenSF.json" />
     <None Include="ima\sprites\player1.json" />
+    <None Include="ima\sprites\ScorpionMK3U.json" />
     <None Include="jsoncpp.dll" />
     <None Include="lib\libjpeg-9.dll" />
     <None Include="lib\libpng16-16.dll" />
@@ -192,6 +191,7 @@
     <Image Include="ima\sprites\player1.png" />
     <Image Include="ima\sprites\player2.png" />
     <Image Include="ima\sprites\player_default.png" />
+    <Image Include="ima\sprites\ScorpionMK3U.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

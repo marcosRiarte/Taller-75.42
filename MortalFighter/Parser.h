@@ -12,8 +12,8 @@
 
 #define ANCHO_MIN 640
 #define ALTO_MIN 480
-#define ANCHO_PX_VENTANA 800
-#define ALTO_PX_VENTANA 600
+#define ANCHO_PX_VENTANA 80
+#define ALTO_PX_VENTANA 60
 #define ANCHO_VENTANA 200.0f
 
 #define FPS 60.0f

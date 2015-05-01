@@ -131,9 +131,6 @@
     <ClInclude Include="ConversorDeEventos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ConrtrolDeColor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -190,9 +187,6 @@
     <ClCompile Include="ConversorDeEventos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConrtrolDeColor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="jsoncpp.dll">
@@ -232,6 +226,9 @@
       <Filter>Resource Files\ima\sprites</Filter>
     </None>
     <None Include="ima\sprites\player1.json">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </None>
+    <None Include="ima\sprites\ScorpionMK3U.json">
       <Filter>Resource Files\ima\sprites</Filter>
     </None>
   </ItemGroup>
@@ -333,6 +330,9 @@
     </Image>
     <Image Include="ima\bkg\LiuKangImage.jpg">
       <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\sprites\ScorpionMK3U.png">
+      <Filter>Resource Files\ima\sprites</Filter>
     </Image>
   </ItemGroup>
 </Project>
