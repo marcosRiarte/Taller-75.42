@@ -2,6 +2,7 @@
 #include "Vista.h"
 #include "Mundo.h"
 #include "Log.h"
+#include "ControlDeColor.h"
 
 Vista::Vista(Mundo* unMundo)
 {	
@@ -77,6 +78,38 @@ Vista::Vista(Mundo* unMundo)
 		SDL_Surface* SuperficieDos = cargarSuperficieOptimizada(dirImgPersonaje);
 
 		//Seteo del color
+		//Seteo del color
+		std::string name1 = Parser::getInstancia().getPersonajes().at(0)->getNombre();
+		std::string name2 = Parser::getInstancia().getPersonajes().at(1)->getNombre();
+		int xPixelSuperficie = 0;
+		int yPixelSuperficie = 0;
+		//Si ambos personajes son iguales
+		if (name1 == name2){
+			ControlDeColor color = ControlDeColor(SuperficieDos);
+			Uint32 myPixel = color.GetPixel(SuperficieDos, xPixelSuperficie, yPixelSuperficie);
+
+
+			// Uint8 RGB = SuperficieDos->format->BytesPerPixel; //da un Uint8
+			Uint32 sonic = SuperficieDos->format->format;
+
+
+
+			//SDL_GetRGB(sonic, SuperficieDos->format, rojo, verde, azul);
+
+			/*int troll = (int) (rojo);
+			int R = (int)(rojo);
+			Uint8 G = (Uint8)(verde);
+			Uint8 B = (Uint8)(azul);
+
+			std::cout << troll<<"hola"<<G ;
+			SDL_SetColorKey(SuperficieDos, SDL_TRUE, SDL_MapRGB(SuperficieDos->format, R, G, B));
+			//0, 0xFF, 0xFF
+
+			delete rojo;
+			delete verde;
+			delete azul;*/
+
+		}
 		//SDL_SetColorKey(Superficie, SDL_TRUE, SDL_MapRGB(Superficie->format, 0, 0xFF, 0xFF));
 
 
