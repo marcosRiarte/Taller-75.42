@@ -2,9 +2,14 @@
 #include "ConversorDeEventos.h"
 
 
-ConversorDeEventos::KeyAndScanCode ConversorDeEventos::getKeyYScanCodeDeTecla(std::string tecla){
-	KeyAndScanCode keyAndScanCode;
+ConversorDeEventos::CodigosDeEvento ConversorDeEventos::getCodigosDeEventoDeTecla(std::string tecla){
+	CodigosDeEvento keyAndScanCode;
+	keyAndScanCode.jBoton = NULO;
+	keyAndScanCode.joystick = NULO;
+	keyAndScanCode.keyCode = NULL;
+	keyAndScanCode.scanCode = SDL_SCANCODE_INTERNATIONAL9;
 
+	//TECLADO
 	if (tecla == "0"){
 		keyAndScanCode.keyCode = SDLK_0;
 		keyAndScanCode.scanCode = SDL_SCANCODE_0;
@@ -301,8 +306,110 @@ ConversorDeEventos::KeyAndScanCode ConversorDeEventos::getKeyYScanCodeDeTecla(st
 		return keyAndScanCode;
 	}
 
-	keyAndScanCode.keyCode = NULL;
-	keyAndScanCode.scanCode = SDL_SCANCODE_INTERNATIONAL9;
+	//JOYSTICK 1
+	if (tecla == "j1_0" || tecla == "J1_0" || tecla == "j1_Button_0" || tecla == "J1_Button_0" || tecla == "j1_button_0" || tecla == "J1_button_0" || tecla == "J1_BUTTON_0" || tecla == "j1_Boton_0" || tecla == "J1_Boton_0" || tecla == "j1_boton_0" || tecla == "J1_boton_0" || tecla == "J1_BOTON_0"){
+		keyAndScanCode.jBoton = 0;
+		keyAndScanCode.joystick = 0;
+		return keyAndScanCode;
+	}
+	if (tecla == "j1_1" || tecla == "J1_1" || tecla == "j1_Button_1" || tecla == "J1_Button_1" || tecla == "j1_button_1" || tecla == "J1_button_1" || tecla == "J1_BUTTON_1" || tecla == "j1_Boton_1" || tecla == "J1_Boton_1" || tecla == "j1_boton_1" || tecla == "J1_boton_1" || tecla == "J1_BOTON_1"){
+		keyAndScanCode.jBoton = 1;
+		keyAndScanCode.joystick = 0;
+		return keyAndScanCode;
+	}
+	if (tecla == "j1_2" || tecla == "J1_2" || tecla == "j1_Button_2" || tecla == "J1_Button_2" || tecla == "j1_button_2" || tecla == "J1_button_2" || tecla == "J1_BUTTON_2" || tecla == "j1_Boton_2" || tecla == "J1_Boton_2" || tecla == "j1_boton_2" || tecla == "J1_boton_2" || tecla == "J1_BOTON_2"){
+		keyAndScanCode.jBoton = 2;
+		keyAndScanCode.joystick = 0;
+		return keyAndScanCode;
+	}
+	if (tecla == "j1_3" || tecla == "J1_3" || tecla == "j1_Button_3" || tecla == "J1_Button_3" || tecla == "j1_button_3" || tecla == "J1_button_3" || tecla == "J1_BUTTON_3" || tecla == "j1_Boton_3" || tecla == "J1_Boton_3" || tecla == "j1_boton_3" || tecla == "J1_boton_3" || tecla == "J1_BOTON_3"){
+		keyAndScanCode.jBoton = 3;
+		keyAndScanCode.joystick = 0;
+		return keyAndScanCode;
+	}
+	if (tecla == "j1_4" || tecla == "J1_4" || tecla == "j1_Button_4" || tecla == "J1_Button_4" || tecla == "j1_button_4" || tecla == "J1_button_4" || tecla == "J1_BUTTON_4" || tecla == "j1_Boton_4" || tecla == "J1_Boton_4" || tecla == "j1_boton_4" || tecla == "J1_boton_4" || tecla == "J1_BOTON_4"){
+		keyAndScanCode.jBoton = 4;
+		keyAndScanCode.joystick = 0;
+		return keyAndScanCode;
+	}
+	if (tecla == "j1_5" || tecla == "J1_5" || tecla == "j1_Button_5" || tecla == "J1_Button_5" || tecla == "j1_button_5" || tecla == "J1_button_5" || tecla == "J1_BUTTON_5" || tecla == "j1_Boton_5" || tecla == "J1_Boton_5" || tecla == "j1_boton_5" || tecla == "J1_boton_5" || tecla == "J1_BOTON_5"){
+		keyAndScanCode.jBoton = 5;
+		keyAndScanCode.joystick = 0;
+		return keyAndScanCode;
+	}
+	if (tecla == "j1_6" || tecla == "J1_6" || tecla == "j1_Button_6" || tecla == "J1_Button_6" || tecla == "j1_button_6" || tecla == "J1_button_6" || tecla == "J1_BUTTON_6" || tecla == "j1_Boton_6" || tecla == "J1_Boton_6" || tecla == "j1_boton_6" || tecla == "J1_boton_6" || tecla == "J1_BOTON_6"){
+		keyAndScanCode.jBoton = 6;
+		keyAndScanCode.joystick = 0;
+		return keyAndScanCode;
+	}
+	if (tecla == "j1_7" || tecla == "J1_7" || tecla == "j1_Button_7" || tecla == "J1_Button_7" || tecla == "j1_button_7" || tecla == "J1_button_7" || tecla == "J1_BUTTON_7" || tecla == "j1_Boton_7" || tecla == "J1_Boton_7" || tecla == "j1_boton_7" || tecla == "J1_boton_7" || tecla == "J1_BOTON_7"){
+		keyAndScanCode.jBoton = 7;
+		keyAndScanCode.joystick = 0;
+		return keyAndScanCode;
+	}
+	if (tecla == "j1_8" || tecla == "J1_8" || tecla == "j1_Button_8" || tecla == "J1_Button_8" || tecla == "j1_button_8" || tecla == "J1_button_8" || tecla == "J1_BUTTON_8" || tecla == "j1_Boton_8" || tecla == "J1_Boton_8" || tecla == "j1_boton_8" || tecla == "J1_boton_8" || tecla == "J1_BOTON_8"){
+		keyAndScanCode.jBoton = 8;
+		keyAndScanCode.joystick = 0;
+		return keyAndScanCode;
+	}
+	if (tecla == "j1_9" || tecla == "J1_9" || tecla == "j1_Button_9" || tecla == "J1_Button_9" || tecla == "j1_button_9" || tecla == "J1_button_9" || tecla == "J1_BUTTON_9" || tecla == "j1_Boton_9" || tecla == "J1_Boton_9" || tecla == "j1_boton_9" || tecla == "J1_boton_9" || tecla == "J1_BOTON_9"){
+		keyAndScanCode.jBoton = 9;
+		keyAndScanCode.joystick = 0;
+		return keyAndScanCode;
+	}
+
+	//JOYSTICK 2
+	if (tecla == "j2_0" || tecla == "J2_0" || tecla == "j2_Button_0" || tecla == "J2_Button_0" || tecla == "j2_button_0" || tecla == "J2_button_0" || tecla == "J2_BUTTON_0" || tecla == "j2_Boton_0" || tecla == "J2_Boton_0" || tecla == "j2_boton_0" || tecla == "J2_boton_0" || tecla == "J2_BOTON_0"){
+		keyAndScanCode.jBoton = 0;
+		keyAndScanCode.joystick = 1;
+		return keyAndScanCode;
+	}
+	if (tecla == "j2_1" || tecla == "J2_1" || tecla == "j2_Button_1" || tecla == "J2_Button_1" || tecla == "j2_button_1" || tecla == "J2_button_1" || tecla == "J2_BUTTON_1" || tecla == "j2_Boton_1" || tecla == "J2_Boton_1" || tecla == "j2_boton_1" || tecla == "J2_boton_1" || tecla == "J2_BOTON_1"){
+		keyAndScanCode.jBoton = 1;
+		keyAndScanCode.joystick = 1;
+		return keyAndScanCode;
+	}
+	if (tecla == "j2_2" || tecla == "J2_2" || tecla == "j2_Button_2" || tecla == "J2_Button_2" || tecla == "j2_button_2" || tecla == "J2_button_2" || tecla == "J2_BUTTON_2" || tecla == "j2_Boton_2" || tecla == "J2_Boton_2" || tecla == "j2_boton_2" || tecla == "J2_boton_2" || tecla == "J2_BOTON_2"){
+		keyAndScanCode.jBoton = 2;
+		keyAndScanCode.joystick = 1;
+		return keyAndScanCode;
+	}
+	if (tecla == "j2_3" || tecla == "J2_3" || tecla == "j2_Button_3" || tecla == "J2_Button_3" || tecla == "j2_button_3" || tecla == "J2_button_3" || tecla == "J2_BUTTON_3" || tecla == "j2_Boton_3" || tecla == "J2_Boton_3" || tecla == "j2_boton_3" || tecla == "J2_boton_3" || tecla == "J2_BOTON_3"){
+		keyAndScanCode.jBoton = 3;
+		keyAndScanCode.joystick = 1;
+		return keyAndScanCode;
+	}
+	if (tecla == "j2_4" || tecla == "J2_4" || tecla == "j2_Button_4" || tecla == "J2_Button_4" || tecla == "j2_button_4" || tecla == "J2_button_4" || tecla == "J2_BUTTON_4" || tecla == "j2_Boton_4" || tecla == "J2_Boton_4" || tecla == "j2_boton_4" || tecla == "J2_boton_4" || tecla == "J2_BOTON_4"){
+		keyAndScanCode.jBoton = 4;
+		keyAndScanCode.joystick = 1;
+		return keyAndScanCode;
+	}
+	if (tecla == "j2_5" || tecla == "J2_5" || tecla == "j2_Button_5" || tecla == "J2_Button_5" || tecla == "j2_button_5" || tecla == "J2_button_5" || tecla == "J2_BUTTON_5" || tecla == "j2_Boton_5" || tecla == "J2_Boton_5" || tecla == "j2_boton_5" || tecla == "J2_boton_5" || tecla == "J2_BOTON_5"){
+		keyAndScanCode.jBoton = 5;
+		keyAndScanCode.joystick = 1;
+		return keyAndScanCode;
+	}
+	if (tecla == "j2_6" || tecla == "J2_6" || tecla == "j2_Button_6" || tecla == "J1_Button_6" || tecla == "j2_button_6" || tecla == "J2_button_6" || tecla == "J2_BUTTON_6" || tecla == "j2_Boton_6" || tecla == "J2_Boton_6" || tecla == "j2_boton_6" || tecla == "J2_boton_6" || tecla == "J2_BOTON_6"){
+		keyAndScanCode.jBoton = 6;
+		keyAndScanCode.joystick = 1;
+		return keyAndScanCode;
+	}
+	if (tecla == "j2_7" || tecla == "J2_7" || tecla == "j2_Button_7" || tecla == "J2_Button_7" || tecla == "j2_button_7" || tecla == "J2_button_7" || tecla == "J2_BUTTON_7" || tecla == "j2_Boton_7" || tecla == "J2_Boton_7" || tecla == "j2_boton_7" || tecla == "J2_boton_7" || tecla == "J2_BOTON_7"){
+		keyAndScanCode.jBoton = 7;
+		keyAndScanCode.joystick = 1;
+		return keyAndScanCode;
+	}
+	if (tecla == "j2_8" || tecla == "J2_8" || tecla == "j2_Button_8" || tecla == "J2_Button_8" || tecla == "j2_button_8" || tecla == "J2_button_8" || tecla == "J2_BUTTON_8" || tecla == "j2_Boton_8" || tecla == "J2_Boton_8" || tecla == "j2_boton_8" || tecla == "J2_boton_8" || tecla == "J2_BOTON_8"){
+		keyAndScanCode.jBoton = 8;
+		keyAndScanCode.joystick = 1;
+		return keyAndScanCode;
+	}
+	if (tecla == "j2_9" || tecla == "J2_9" || tecla == "j2_Button_9" || tecla == "J2_Button_9" || tecla == "j2_button_9" || tecla == "J2_button_9" || tecla == "J2_BUTTON_9" || tecla == "j2_Boton_9" || tecla == "J2_Boton_9" || tecla == "j2_boton_9" || tecla == "J2_boton_9" || tecla == "J2_BOTON_9"){
+		keyAndScanCode.jBoton = 9;
+		keyAndScanCode.joystick = 1;
+		return keyAndScanCode;
+	}
+
 	return keyAndScanCode;
 }
 
@@ -315,13 +422,15 @@ ConversorDeEventos::ConversorDeEventos()
 
 bool ConversorDeEventos::setAccion(Acciones unaAccion, std::string keyName){
 	Accion nuevaAccion;
-	KeyAndScanCode keyYScanCode;
+	CodigosDeEvento codigosDeEvento;
 	nuevaAccion.accion = unaAccion;
-	keyYScanCode = getKeyYScanCodeDeTecla(keyName);
-	nuevaAccion.keyCodeDelEvento = keyYScanCode.keyCode;
-	nuevaAccion.scanCodeDelEvento = keyYScanCode.scanCode;
+	codigosDeEvento = getCodigosDeEventoDeTecla(keyName);
+	nuevaAccion.keyCodeDelEvento = codigosDeEvento.keyCode;
+	nuevaAccion.scanCodeDelEvento = codigosDeEvento.scanCode;
+	nuevaAccion.jBoton = codigosDeEvento.jBoton;
+	nuevaAccion.numeroDeJoystick = codigosDeEvento.joystick;
 	acciones[unaAccion] = nuevaAccion;
-	if (!keyYScanCode.keyCode){
+	if (!codigosDeEvento.keyCode && codigosDeEvento.joystick == NULO){
 		return false;
 	}
 	return true;
@@ -335,6 +444,16 @@ SDL_Keycode ConversorDeEventos::getKeyCodeDeLaAccion(Acciones unaAccion){
 
 SDL_Scancode ConversorDeEventos::getScanCodeDeLaAccion(Acciones unaAccion){
 	return (acciones[unaAccion].scanCodeDelEvento);
+}
+
+
+int ConversorDeEventos::getJbotonDeLaAccion(Acciones unaAccion){
+	return (acciones[unaAccion].jBoton);
+}
+
+
+int ConversorDeEventos::geNnumeroDeJoystickDeLaAccion(Acciones unaAccion){
+	return (acciones[unaAccion].numeroDeJoystick);
 }
 
 
