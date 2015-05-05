@@ -230,6 +230,10 @@ int Controlador::cambiar(){
 
 			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::HOLD)){
 				movimientos.clear();
+				if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::DOWN)]){
+					movimientos.push_back(DEFENSA_AGACHADO);
+					return CONTINUAR;
+				}
 				movimientos.push_back(DEFENSA);
 				return CONTINUAR;
 			}
@@ -239,6 +243,13 @@ int Controlador::cambiar(){
 	}
 
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HOLD)]){
+		if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::DOWN)]){
+			if (movimientos.at(0) == ABAJO || movimientos.at(0) == DEFENSA_AGACHADO){
+				movimientos.clear();
+				movimientos.push_back(DEFENSA_AGACHADO);
+				return CONTINUAR;
+			}
+		}
 		movimientos.clear();
 		movimientos.push_back(DEFENSA);
 		return CONTINUAR;
