@@ -95,9 +95,14 @@ ConversorDeEventos::KeyAndScanCode ConversorDeEventos::getKeyYScanCodeDeTecla(st
 		keyAndScanCode.scanCode = SDL_SCANCODE_I;
 		return keyAndScanCode;
 	}
-	if (tecla == "p" || tecla == "O"){
-		keyAndScanCode.keyCode = SDLK_p;
+	if (tecla == "o" || tecla == "O"){
+		keyAndScanCode.keyCode = SDLK_o;
 		keyAndScanCode.scanCode = SDL_SCANCODE_O;
+		return keyAndScanCode;
+	}
+	if (tecla == "p" || tecla == "P"){
+		keyAndScanCode.keyCode = SDLK_p;
+		keyAndScanCode.scanCode = SDL_SCANCODE_P;
 		return keyAndScanCode;
 	}
 	if (tecla == "a" || tecla == "A"){
@@ -308,7 +313,7 @@ ConversorDeEventos::ConversorDeEventos()
 }
 
 
-void ConversorDeEventos::setAccion(Acciones unaAccion, std::string keyName){
+bool ConversorDeEventos::setAccion(Acciones unaAccion, std::string keyName){
 	Accion nuevaAccion;
 	KeyAndScanCode keyYScanCode;
 	nuevaAccion.accion = unaAccion;
@@ -316,6 +321,10 @@ void ConversorDeEventos::setAccion(Acciones unaAccion, std::string keyName){
 	nuevaAccion.keyCodeDelEvento = keyYScanCode.keyCode;
 	nuevaAccion.scanCodeDelEvento = keyYScanCode.scanCode;
 	acciones[unaAccion] = nuevaAccion;
+	if (!keyYScanCode.keyCode){
+		return false;
+	}
+	return true;
 }
 
 

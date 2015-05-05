@@ -5,7 +5,7 @@ public:
 	enum Acciones {UP, DOWN, RIGHT, LEFT, HOLD, LOW_PUNCH, HIGH_PUNCH, LOW_KICK, HIGH_KICK, WEAPON, QUIT, REBOOT};
 
 	ConversorDeEventos();
-	void setAccion(Acciones unaAccion, std::string keyName);
+	bool setAccion(Acciones unaAccion, std::string keyName);
 	SDL_Keycode getKeyCodeDeLaAccion(Acciones unaAccion);
 	SDL_Scancode getScanCodeDeLaAccion(Acciones unaAccion);
 	~ConversorDeEventos();

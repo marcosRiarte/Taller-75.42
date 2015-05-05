@@ -451,19 +451,20 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		}
 	}
 
-	unConversorDeEventos->setAccion(ConversorDeEventos::UP, arriba);
-	unConversorDeEventos->setAccion(ConversorDeEventos::DOWN, abajo);
-	unConversorDeEventos->setAccion(ConversorDeEventos::RIGHT, derecha);
-	unConversorDeEventos->setAccion(ConversorDeEventos::LEFT, izquierda);
-	unConversorDeEventos->setAccion(ConversorDeEventos::HOLD, defensa);
-	unConversorDeEventos->setAccion(ConversorDeEventos::REBOOT, reiniciar);
-	unConversorDeEventos->setAccion(ConversorDeEventos::QUIT, salir);
-	unConversorDeEventos->setAccion(ConversorDeEventos::LOW_PUNCH, golpe_bajo);
-	unConversorDeEventos->setAccion(ConversorDeEventos::HIGH_PUNCH, golpe_alto);
-	unConversorDeEventos->setAccion(ConversorDeEventos::LOW_KICK, patada_baja);
-	unConversorDeEventos->setAccion(ConversorDeEventos::HIGH_KICK, patada_alta);
+	if (!unConversorDeEventos->setAccion(ConversorDeEventos::UP, arriba)) Log::getInstancia().logearMensajeEnModo("Accion arriba del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!unConversorDeEventos->setAccion(ConversorDeEventos::DOWN, abajo)) Log::getInstancia().logearMensajeEnModo("Accion abajo del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!unConversorDeEventos->setAccion(ConversorDeEventos::RIGHT, derecha)) Log::getInstancia().logearMensajeEnModo("Accion derecha del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!unConversorDeEventos->setAccion(ConversorDeEventos::LEFT, izquierda)) Log::getInstancia().logearMensajeEnModo("Accion abajo del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!unConversorDeEventos->setAccion(ConversorDeEventos::HOLD, defensa)) Log::getInstancia().logearMensajeEnModo("Accion defensa del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!unConversorDeEventos->setAccion(ConversorDeEventos::REBOOT, reiniciar)) Log::getInstancia().logearMensajeEnModo("Accion reiniciar del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!unConversorDeEventos->setAccion(ConversorDeEventos::QUIT, salir)) Log::getInstancia().logearMensajeEnModo("Accion salir del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!unConversorDeEventos->setAccion(ConversorDeEventos::LOW_PUNCH, golpe_bajo)) Log::getInstancia().logearMensajeEnModo("Accion golpe bajo del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!unConversorDeEventos->setAccion(ConversorDeEventos::HIGH_PUNCH, golpe_alto)) Log::getInstancia().logearMensajeEnModo("Accion golpe alto del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!unConversorDeEventos->setAccion(ConversorDeEventos::LOW_KICK, patada_baja)) Log::getInstancia().logearMensajeEnModo("Accion patada baja del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!unConversorDeEventos->setAccion(ConversorDeEventos::HIGH_KICK, patada_alta)) Log::getInstancia().logearMensajeEnModo("Accion patada alta del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
 
 	controlador1->setConversorDeEventos(unConversorDeEventos);
+	Log::getInstancia().logearMensajeEnModo("Se configuraron las acciones del control 2", Log::MODO_DEBUG);
 
 	//CONTROL 2
 	Json::Value control_2;
@@ -573,19 +574,21 @@ bool Parser::parsear(std::string nombreDelArchivo)
 			Log::getInstancia().logearMensajeEnModo("Se carga boton patada_alta por defecto", Log::MODO_WARNING);
 		}
 	}
-	otroConversorDeEventos->setAccion(ConversorDeEventos::UP, arriba);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::DOWN, abajo);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::RIGHT, derecha);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::LEFT, izquierda);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::HOLD, defensa);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::REBOOT, reiniciar);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::QUIT, salir);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::LOW_PUNCH, golpe_bajo);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::HIGH_PUNCH, golpe_alto);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::LOW_KICK, patada_baja);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::HIGH_KICK, patada_alta);
+
+	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::UP, arriba)) Log::getInstancia().logearMensajeEnModo("Accion arriba del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::DOWN, abajo)) Log::getInstancia().logearMensajeEnModo("Accion abajo del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::RIGHT, derecha)) Log::getInstancia().logearMensajeEnModo("Accion derecha del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::LEFT, izquierda)) Log::getInstancia().logearMensajeEnModo("Accion abajo del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::HOLD, defensa)) Log::getInstancia().logearMensajeEnModo("Accion defensa del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::REBOOT, reiniciar)) Log::getInstancia().logearMensajeEnModo("Accion reiniciar del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::QUIT, salir)) Log::getInstancia().logearMensajeEnModo("Accion salir del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::LOW_PUNCH, golpe_bajo)) Log::getInstancia().logearMensajeEnModo("Accion golpe bajo del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::HIGH_PUNCH, golpe_alto)) Log::getInstancia().logearMensajeEnModo("Accion golpe alto del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::LOW_KICK, patada_baja)) Log::getInstancia().logearMensajeEnModo("Accion patada baja del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::HIGH_KICK, patada_alta)) Log::getInstancia().logearMensajeEnModo("Accion patada alta del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
 
 	controlador2->setConversorDeEventos(otroConversorDeEventos);
+	Log::getInstancia().logearMensajeEnModo("Se configuraron las acciones del control 1", Log::MODO_DEBUG);
 	
 	return true;
 }
