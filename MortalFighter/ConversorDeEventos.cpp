@@ -3,414 +3,501 @@
 
 
 ConversorDeEventos::CodigosDeEvento ConversorDeEventos::getCodigosDeEventoDeTecla(std::string tecla){
-	CodigosDeEvento keyAndScanCode;
-	keyAndScanCode.jBoton = NULO;
-	keyAndScanCode.joystick = NULO;
-	keyAndScanCode.keyCode = NULL;
-	keyAndScanCode.scanCode = SDL_SCANCODE_INTERNATIONAL9;
+	CodigosDeEvento codigosDeEvento;
+	codigosDeEvento.jBoton = NULO;
+	codigosDeEvento.joystick = NULO;
+	codigosDeEvento.keyCode = NULL;
+	codigosDeEvento.eje = false;
+	codigosDeEvento.ejeDesde = -10;
+	codigosDeEvento.ejeHasta = -10;
+	codigosDeEvento.scanCode = SDL_SCANCODE_INTERNATIONAL9;
 
 	//TECLADO
 	if (tecla == "0"){
-		keyAndScanCode.keyCode = SDLK_0;
-		keyAndScanCode.scanCode = SDL_SCANCODE_0;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_0;
+		codigosDeEvento.scanCode = SDL_SCANCODE_0;
+		return codigosDeEvento;
 	}
 	if (tecla == "1"){
-		keyAndScanCode.keyCode = SDLK_1;
-		keyAndScanCode.scanCode = SDL_SCANCODE_1;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_1;
+		codigosDeEvento.scanCode = SDL_SCANCODE_1;
+		return codigosDeEvento;
 	}
 	if (tecla == "2"){
-		keyAndScanCode.keyCode = SDLK_2;
-		keyAndScanCode.scanCode = SDL_SCANCODE_2;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_2;
+		codigosDeEvento.scanCode = SDL_SCANCODE_2;
+		return codigosDeEvento;
 	}
 	if (tecla == "3"){
-		keyAndScanCode.keyCode = SDLK_3;
-		keyAndScanCode.scanCode = SDL_SCANCODE_3;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_3;
+		codigosDeEvento.scanCode = SDL_SCANCODE_3;
+		return codigosDeEvento;
 	}
 	if (tecla == "4"){
-		keyAndScanCode.keyCode = SDLK_4;
-		keyAndScanCode.scanCode = SDL_SCANCODE_4;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_4;
+		codigosDeEvento.scanCode = SDL_SCANCODE_4;
+		return codigosDeEvento;
 	}
 	if (tecla == "5"){
-		keyAndScanCode.keyCode = SDLK_5;
-		keyAndScanCode.scanCode = SDL_SCANCODE_5;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_5;
+		codigosDeEvento.scanCode = SDL_SCANCODE_5;
+		return codigosDeEvento;
 	}
 	if (tecla == "6"){
-		keyAndScanCode.keyCode = SDLK_6;
-		keyAndScanCode.scanCode = SDL_SCANCODE_6;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_6;
+		codigosDeEvento.scanCode = SDL_SCANCODE_6;
+		return codigosDeEvento;
 	}
 	if (tecla == "7"){
-		keyAndScanCode.keyCode = SDLK_7;
-		keyAndScanCode.scanCode = SDL_SCANCODE_7;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_7;
+		codigosDeEvento.scanCode = SDL_SCANCODE_7;
+		return codigosDeEvento;
 	}
 	if (tecla == "8"){
-		keyAndScanCode.keyCode = SDLK_8;
-		keyAndScanCode.scanCode = SDL_SCANCODE_8;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_8;
+		codigosDeEvento.scanCode = SDL_SCANCODE_8;
+		return codigosDeEvento;
 	}
 	if (tecla == "9"){
-		keyAndScanCode.keyCode = SDLK_9;
-		keyAndScanCode.scanCode = SDL_SCANCODE_9;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_9;
+		codigosDeEvento.scanCode = SDL_SCANCODE_9;
+		return codigosDeEvento;
 	}
 	if (tecla == "q" || tecla == "Q"){
-		keyAndScanCode.keyCode = SDLK_q;
-		keyAndScanCode.scanCode = SDL_SCANCODE_Q;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_q;
+		codigosDeEvento.scanCode = SDL_SCANCODE_Q;
+		return codigosDeEvento;
 	}
 	if (tecla == "w" || tecla == "W"){
-		keyAndScanCode.keyCode = SDLK_w;
-		keyAndScanCode.scanCode = SDL_SCANCODE_W;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_w;
+		codigosDeEvento.scanCode = SDL_SCANCODE_W;
+		return codigosDeEvento;
 	}
 	if (tecla == "e" || tecla == "E"){
-		keyAndScanCode.keyCode = SDLK_e;
-		keyAndScanCode.scanCode = SDL_SCANCODE_E;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_e;
+		codigosDeEvento.scanCode = SDL_SCANCODE_E;
+		return codigosDeEvento;
 	}
 	if (tecla == "r" || tecla == "R"){
-		keyAndScanCode.keyCode = SDLK_r;
-		keyAndScanCode.scanCode = SDL_SCANCODE_R;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_r;
+		codigosDeEvento.scanCode = SDL_SCANCODE_R;
+		return codigosDeEvento;
 	}
 	if (tecla == "t" || tecla == "T"){
-		keyAndScanCode.keyCode = SDLK_t;
-		keyAndScanCode.scanCode = SDL_SCANCODE_T;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_t;
+		codigosDeEvento.scanCode = SDL_SCANCODE_T;
+		return codigosDeEvento;
 	}
 	if (tecla == "y" || tecla == "Y"){
-		keyAndScanCode.keyCode = SDLK_y;
-		keyAndScanCode.scanCode = SDL_SCANCODE_Y;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_y;
+		codigosDeEvento.scanCode = SDL_SCANCODE_Y;
+		return codigosDeEvento;
 	}
 	if (tecla == "u" || tecla == "U"){
-		keyAndScanCode.keyCode = SDLK_u;
-		keyAndScanCode.scanCode = SDL_SCANCODE_U;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_u;
+		codigosDeEvento.scanCode = SDL_SCANCODE_U;
+		return codigosDeEvento;
 	}
 	if (tecla == "i" || tecla == "I"){
-		keyAndScanCode.keyCode = SDLK_i;
-		keyAndScanCode.scanCode = SDL_SCANCODE_I;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_i;
+		codigosDeEvento.scanCode = SDL_SCANCODE_I;
+		return codigosDeEvento;
 	}
 	if (tecla == "o" || tecla == "O"){
-		keyAndScanCode.keyCode = SDLK_o;
-		keyAndScanCode.scanCode = SDL_SCANCODE_O;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_o;
+		codigosDeEvento.scanCode = SDL_SCANCODE_O;
+		return codigosDeEvento;
 	}
 	if (tecla == "p" || tecla == "P"){
-		keyAndScanCode.keyCode = SDLK_p;
-		keyAndScanCode.scanCode = SDL_SCANCODE_P;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_p;
+		codigosDeEvento.scanCode = SDL_SCANCODE_P;
+		return codigosDeEvento;
 	}
 	if (tecla == "a" || tecla == "A"){
-		keyAndScanCode.keyCode = SDLK_a;
-		keyAndScanCode.scanCode = SDL_SCANCODE_A;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_a;
+		codigosDeEvento.scanCode = SDL_SCANCODE_A;
+		return codigosDeEvento;
 	}
 	if (tecla == "s" || tecla == "S"){
-		keyAndScanCode.keyCode = SDLK_s;
-		keyAndScanCode.scanCode = SDL_SCANCODE_S;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_s;
+		codigosDeEvento.scanCode = SDL_SCANCODE_S;
+		return codigosDeEvento;
 	}
 	if (tecla == "d" || tecla == "D"){
-		keyAndScanCode.keyCode = SDLK_d;
-		keyAndScanCode.scanCode = SDL_SCANCODE_D;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_d;
+		codigosDeEvento.scanCode = SDL_SCANCODE_D;
+		return codigosDeEvento;
 	}
 	if (tecla == "f" || tecla == "F"){
-		keyAndScanCode.keyCode = SDLK_f;
-		keyAndScanCode.scanCode = SDL_SCANCODE_F;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_f;
+		codigosDeEvento.scanCode = SDL_SCANCODE_F;
+		return codigosDeEvento;
 	}
 	if (tecla == "g" || tecla == "G"){
-		keyAndScanCode.keyCode = SDLK_g;
-		keyAndScanCode.scanCode = SDL_SCANCODE_G;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_g;
+		codigosDeEvento.scanCode = SDL_SCANCODE_G;
+		return codigosDeEvento;
 	}
 	if (tecla == "h" || tecla == "H"){
-		keyAndScanCode.keyCode = SDLK_h;
-		keyAndScanCode.scanCode = SDL_SCANCODE_H;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_h;
+		codigosDeEvento.scanCode = SDL_SCANCODE_H;
+		return codigosDeEvento;
 	}
 	if (tecla == "j" || tecla == "J"){
-		keyAndScanCode.keyCode = SDLK_j;
-		keyAndScanCode.scanCode = SDL_SCANCODE_J;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_j;
+		codigosDeEvento.scanCode = SDL_SCANCODE_J;
+		return codigosDeEvento;
 	}
 	if (tecla == "k" || tecla == "K"){
-		keyAndScanCode.keyCode = SDLK_k;
-		keyAndScanCode.scanCode = SDL_SCANCODE_K;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_k;
+		codigosDeEvento.scanCode = SDL_SCANCODE_K;
+		return codigosDeEvento;
 	}
 	if (tecla == "l" || tecla == "L"){
-		keyAndScanCode.keyCode = SDLK_l;
-		keyAndScanCode.scanCode = SDL_SCANCODE_L;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_l;
+		codigosDeEvento.scanCode = SDL_SCANCODE_L;
+		return codigosDeEvento;
 	}
 	if (tecla == "z" || tecla == "Z"){
-		keyAndScanCode.keyCode = SDLK_z;
-		keyAndScanCode.scanCode = SDL_SCANCODE_Z;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_z;
+		codigosDeEvento.scanCode = SDL_SCANCODE_Z;
+		return codigosDeEvento;
 	}
 	if (tecla == "x" || tecla == "X"){
-		keyAndScanCode.keyCode = SDLK_x;
-		keyAndScanCode.scanCode = SDL_SCANCODE_X;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_x;
+		codigosDeEvento.scanCode = SDL_SCANCODE_X;
+		return codigosDeEvento;
 	}
 	if (tecla == "c" || tecla == "C"){
-		keyAndScanCode.keyCode = SDLK_c;
-		keyAndScanCode.scanCode = SDL_SCANCODE_C;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_c;
+		codigosDeEvento.scanCode = SDL_SCANCODE_C;
+		return codigosDeEvento;
 	}
 	if (tecla == "v" || tecla == "V"){
-		keyAndScanCode.keyCode = SDLK_v;
-		keyAndScanCode.scanCode = SDL_SCANCODE_V;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_v;
+		codigosDeEvento.scanCode = SDL_SCANCODE_V;
+		return codigosDeEvento;
 	}
 	if (tecla == "b" || tecla == "B"){
-		keyAndScanCode.keyCode = SDLK_b;
-		keyAndScanCode.scanCode = SDL_SCANCODE_B;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_b;
+		codigosDeEvento.scanCode = SDL_SCANCODE_B;
+		return codigosDeEvento;
 	}
 	if (tecla == "n" || tecla == "N"){
-		keyAndScanCode.keyCode = SDLK_n;
-		keyAndScanCode.scanCode = SDL_SCANCODE_N;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_n;
+		codigosDeEvento.scanCode = SDL_SCANCODE_N;
+		return codigosDeEvento;
 	}
 	if (tecla == "m" || tecla == "M"){
-		keyAndScanCode.keyCode = SDLK_m;
-		keyAndScanCode.scanCode = SDL_SCANCODE_M;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_m;
+		codigosDeEvento.scanCode = SDL_SCANCODE_M;
+		return codigosDeEvento;
 	}
 	if (tecla == "esc" || tecla == "Esc" || tecla == "ESC" || tecla == "ESCAPE" || tecla == "escape" || tecla == "Escape"){
-		keyAndScanCode.keyCode = SDLK_ESCAPE;
-		keyAndScanCode.scanCode = SDL_SCANCODE_ESCAPE;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_ESCAPE;
+		codigosDeEvento.scanCode = SDL_SCANCODE_ESCAPE;
+		return codigosDeEvento;
 	}
 	if (tecla == "Space" || tecla == "space" || tecla == "SPACE"){
-		keyAndScanCode.keyCode = SDLK_SPACE;
-		keyAndScanCode.scanCode = SDL_SCANCODE_SPACE;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_SPACE;
+		codigosDeEvento.scanCode = SDL_SCANCODE_SPACE;
+		return codigosDeEvento;
 	}
 	if (tecla == "Ctrl" || tecla == "ctrl" || tecla == "CTRL" || tecla == "Control" || tecla == "control" || tecla == "CONTROL"){
-		keyAndScanCode.keyCode = SDLK_LCTRL;
-		keyAndScanCode.scanCode = SDL_SCANCODE_LCTRL;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_LCTRL;
+		codigosDeEvento.scanCode = SDL_SCANCODE_LCTRL;
+		return codigosDeEvento;
 	}
 	if (tecla == "Shift" || tecla == "shift" || tecla == "SHIFT"){
-		keyAndScanCode.keyCode = SDLK_LSHIFT;
-		keyAndScanCode.scanCode = SDL_SCANCODE_LSHIFT;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_LSHIFT;
+		codigosDeEvento.scanCode = SDL_SCANCODE_LSHIFT;
+		return codigosDeEvento;
 	}
 	if (tecla == "Alt" || tecla == "alt" || tecla == "ALT"){
-		keyAndScanCode.keyCode = SDLK_LALT;
-		keyAndScanCode.scanCode = SDL_SCANCODE_LALT;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_LALT;
+		codigosDeEvento.scanCode = SDL_SCANCODE_LALT;
+		return codigosDeEvento;
 	}
 	if (tecla == "Alt Gr" || tecla == "alt gr" || tecla == "ALT GR" || tecla == "Alt gr" || tecla == "AltGr" || tecla == "altgr" || tecla == "ALTGR" || tecla == "Altgr"){
-		keyAndScanCode.keyCode = SDLK_RALT;
-		keyAndScanCode.scanCode = SDL_SCANCODE_RALT;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_RALT;
+		codigosDeEvento.scanCode = SDL_SCANCODE_RALT;
+		return codigosDeEvento;
 	}
 	if (tecla == "Bloq Mayus" || tecla == "bloq mayus" || tecla == "BLOQ MAYUS" || tecla == "Bloq mayus" || tecla == "BloqMayus" || tecla == "bloqmayus" || tecla == "BLOQMAYUS" || tecla == "Bloqmayus" || tecla == "Caps Lock" || tecla == "caps lock" || tecla == "Caps lock" || tecla == "CAPS LOCK" || tecla == "CapsLock" || tecla == "capslock" || tecla == "Capslock" || tecla == "CAPSLOCK"){
-		keyAndScanCode.keyCode = SDLK_CAPSLOCK;
-		keyAndScanCode.scanCode = SDL_SCANCODE_CAPSLOCK;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_CAPSLOCK;
+		codigosDeEvento.scanCode = SDL_SCANCODE_CAPSLOCK;
+		return codigosDeEvento;
 	}
 	if (tecla == "Tab" || tecla == "tab" || tecla == "TAB"){
-		keyAndScanCode.keyCode = SDLK_TAB;
-		keyAndScanCode.scanCode = SDL_SCANCODE_TAB;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_TAB;
+		codigosDeEvento.scanCode = SDL_SCANCODE_TAB;
+		return codigosDeEvento;
 	}
 	if (tecla == "f1" || tecla == "F1"){
-		keyAndScanCode.keyCode = SDLK_F1;
-		keyAndScanCode.scanCode = SDL_SCANCODE_F1;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_F1;
+		codigosDeEvento.scanCode = SDL_SCANCODE_F1;
+		return codigosDeEvento;
 	}
 	if (tecla == "f2" || tecla == "F2"){
-		keyAndScanCode.keyCode = SDLK_F2;
-		keyAndScanCode.scanCode = SDL_SCANCODE_F2;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_F2;
+		codigosDeEvento.scanCode = SDL_SCANCODE_F2;
+		return codigosDeEvento;
 	}
 	if (tecla == "f3" || tecla == "F3"){
-		keyAndScanCode.keyCode = SDLK_F3;
-		keyAndScanCode.scanCode = SDL_SCANCODE_F3;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_F3;
+		codigosDeEvento.scanCode = SDL_SCANCODE_F3;
+		return codigosDeEvento;
 	}
 	if (tecla == "f4" || tecla == "F4"){
-		keyAndScanCode.keyCode = SDLK_F4;
-		keyAndScanCode.scanCode = SDL_SCANCODE_F4;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_F4;
+		codigosDeEvento.scanCode = SDL_SCANCODE_F4;
+		return codigosDeEvento;
 	}
 	if (tecla == "f5" || tecla == "F5"){
-		keyAndScanCode.keyCode = SDLK_F5;
-		keyAndScanCode.scanCode = SDL_SCANCODE_F5;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_F5;
+		codigosDeEvento.scanCode = SDL_SCANCODE_F5;
+		return codigosDeEvento;
 	}
 	if (tecla == "f6" || tecla == "F6"){
-		keyAndScanCode.keyCode = SDLK_F6;
-		keyAndScanCode.scanCode = SDL_SCANCODE_F6;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_F6;
+		codigosDeEvento.scanCode = SDL_SCANCODE_F6;
+		return codigosDeEvento;
 	}
 	if (tecla == "f7" || tecla == "F7"){
-		keyAndScanCode.keyCode = SDLK_F7;
-		keyAndScanCode.scanCode = SDL_SCANCODE_F7;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_F7;
+		codigosDeEvento.scanCode = SDL_SCANCODE_F7;
+		return codigosDeEvento;
 	}
 	if (tecla == "f8" || tecla == "F8"){
-		keyAndScanCode.keyCode = SDLK_F8;
-		keyAndScanCode.scanCode = SDL_SCANCODE_F8;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_F8;
+		codigosDeEvento.scanCode = SDL_SCANCODE_F8;
+		return codigosDeEvento;
 	}
 	if (tecla == "f9" || tecla == "F9"){
-		keyAndScanCode.keyCode = SDLK_F9;
-		keyAndScanCode.scanCode = SDL_SCANCODE_F9;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_F9;
+		codigosDeEvento.scanCode = SDL_SCANCODE_F9;
+		return codigosDeEvento;
 	}
 	if (tecla == "enter" || tecla == "Enter" || tecla == "ENTER" || tecla == "Return" || tecla == "return" || tecla == "RETURN"){
-		keyAndScanCode.keyCode = SDLK_RETURN;
-		keyAndScanCode.scanCode = SDL_SCANCODE_RETURN;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_RETURN;
+		codigosDeEvento.scanCode = SDL_SCANCODE_RETURN;
+		return codigosDeEvento;
 	}
 	if (tecla == "back" || tecla == "Back" || tecla == "BACK" || tecla == "BACKSPACE" || tecla == "BackSpace" || tecla == "Backspace" || tecla == "backspace" || tecla == "Back Space" || tecla == "BACK SPACE" || tecla == "Back space" || tecla == "back space"){
-		keyAndScanCode.keyCode = SDLK_BACKSPACE;
-		keyAndScanCode.scanCode = SDL_SCANCODE_BACKSPACE;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_BACKSPACE;
+		codigosDeEvento.scanCode = SDL_SCANCODE_BACKSPACE;
+		return codigosDeEvento;
 	}
 	if (tecla == "up" || tecla == "Up" || tecla == "UP" || tecla == "arriba" || tecla == "Arriba" || tecla == "ARRIBA"){
-		keyAndScanCode.keyCode = SDLK_UP;
-		keyAndScanCode.scanCode = SDL_SCANCODE_UP;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_UP;
+		codigosDeEvento.scanCode = SDL_SCANCODE_UP;
+		return codigosDeEvento;
 	}
 	if (tecla == "down" || tecla == "Down" || tecla == "DOWN" || tecla == "abajo" || tecla == "Abajo" || tecla == "ABAJO"){
-		keyAndScanCode.keyCode = SDLK_DOWN;
-		keyAndScanCode.scanCode = SDL_SCANCODE_DOWN;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_DOWN;
+		codigosDeEvento.scanCode = SDL_SCANCODE_DOWN;
+		return codigosDeEvento;
 	}
 	if (tecla == "izquierda" || tecla == "Izquierda" || tecla == "IZQUIERDA" || tecla == "left" || tecla == "Left" || tecla == "LEFT"){
-		keyAndScanCode.keyCode = SDLK_LEFT;
-		keyAndScanCode.scanCode = SDL_SCANCODE_LEFT;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_LEFT;
+		codigosDeEvento.scanCode = SDL_SCANCODE_LEFT;
+		return codigosDeEvento;
 	}
 	if (tecla == "right" || tecla == "Right" || tecla == "RIGHT" || tecla == "derecha" || tecla == "Derecha" || tecla == "DERECHA"){
-		keyAndScanCode.keyCode = SDLK_RIGHT;
-		keyAndScanCode.scanCode = SDL_SCANCODE_RIGHT;
-		return keyAndScanCode;
+		codigosDeEvento.keyCode = SDLK_RIGHT;
+		codigosDeEvento.scanCode = SDL_SCANCODE_RIGHT;
+		return codigosDeEvento;
 	}
 
 	//JOYSTICK 1
 	if (tecla == "j1_0" || tecla == "J1_0" || tecla == "j1_Button_0" || tecla == "J1_Button_0" || tecla == "j1_button_0" || tecla == "J1_button_0" || tecla == "J1_BUTTON_0" || tecla == "j1_Boton_0" || tecla == "J1_Boton_0" || tecla == "j1_boton_0" || tecla == "J1_boton_0" || tecla == "J1_BOTON_0"){
-		keyAndScanCode.jBoton = 0;
-		keyAndScanCode.joystick = 0;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 0;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
 	}
 	if (tecla == "j1_1" || tecla == "J1_1" || tecla == "j1_Button_1" || tecla == "J1_Button_1" || tecla == "j1_button_1" || tecla == "J1_button_1" || tecla == "J1_BUTTON_1" || tecla == "j1_Boton_1" || tecla == "J1_Boton_1" || tecla == "j1_boton_1" || tecla == "J1_boton_1" || tecla == "J1_BOTON_1"){
-		keyAndScanCode.jBoton = 1;
-		keyAndScanCode.joystick = 0;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 1;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
 	}
 	if (tecla == "j1_2" || tecla == "J1_2" || tecla == "j1_Button_2" || tecla == "J1_Button_2" || tecla == "j1_button_2" || tecla == "J1_button_2" || tecla == "J1_BUTTON_2" || tecla == "j1_Boton_2" || tecla == "J1_Boton_2" || tecla == "j1_boton_2" || tecla == "J1_boton_2" || tecla == "J1_BOTON_2"){
-		keyAndScanCode.jBoton = 2;
-		keyAndScanCode.joystick = 0;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 2;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
 	}
 	if (tecla == "j1_3" || tecla == "J1_3" || tecla == "j1_Button_3" || tecla == "J1_Button_3" || tecla == "j1_button_3" || tecla == "J1_button_3" || tecla == "J1_BUTTON_3" || tecla == "j1_Boton_3" || tecla == "J1_Boton_3" || tecla == "j1_boton_3" || tecla == "J1_boton_3" || tecla == "J1_BOTON_3"){
-		keyAndScanCode.jBoton = 3;
-		keyAndScanCode.joystick = 0;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 3;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
 	}
 	if (tecla == "j1_4" || tecla == "J1_4" || tecla == "j1_Button_4" || tecla == "J1_Button_4" || tecla == "j1_button_4" || tecla == "J1_button_4" || tecla == "J1_BUTTON_4" || tecla == "j1_Boton_4" || tecla == "J1_Boton_4" || tecla == "j1_boton_4" || tecla == "J1_boton_4" || tecla == "J1_BOTON_4"){
-		keyAndScanCode.jBoton = 4;
-		keyAndScanCode.joystick = 0;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 4;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
 	}
 	if (tecla == "j1_5" || tecla == "J1_5" || tecla == "j1_Button_5" || tecla == "J1_Button_5" || tecla == "j1_button_5" || tecla == "J1_button_5" || tecla == "J1_BUTTON_5" || tecla == "j1_Boton_5" || tecla == "J1_Boton_5" || tecla == "j1_boton_5" || tecla == "J1_boton_5" || tecla == "J1_BOTON_5"){
-		keyAndScanCode.jBoton = 5;
-		keyAndScanCode.joystick = 0;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 5;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
 	}
 	if (tecla == "j1_6" || tecla == "J1_6" || tecla == "j1_Button_6" || tecla == "J1_Button_6" || tecla == "j1_button_6" || tecla == "J1_button_6" || tecla == "J1_BUTTON_6" || tecla == "j1_Boton_6" || tecla == "J1_Boton_6" || tecla == "j1_boton_6" || tecla == "J1_boton_6" || tecla == "J1_BOTON_6"){
-		keyAndScanCode.jBoton = 6;
-		keyAndScanCode.joystick = 0;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 6;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
 	}
 	if (tecla == "j1_7" || tecla == "J1_7" || tecla == "j1_Button_7" || tecla == "J1_Button_7" || tecla == "j1_button_7" || tecla == "J1_button_7" || tecla == "J1_BUTTON_7" || tecla == "j1_Boton_7" || tecla == "J1_Boton_7" || tecla == "j1_boton_7" || tecla == "J1_boton_7" || tecla == "J1_BOTON_7"){
-		keyAndScanCode.jBoton = 7;
-		keyAndScanCode.joystick = 0;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 7;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
 	}
 	if (tecla == "j1_8" || tecla == "J1_8" || tecla == "j1_Button_8" || tecla == "J1_Button_8" || tecla == "j1_button_8" || tecla == "J1_button_8" || tecla == "J1_BUTTON_8" || tecla == "j1_Boton_8" || tecla == "J1_Boton_8" || tecla == "j1_boton_8" || tecla == "J1_boton_8" || tecla == "J1_BOTON_8"){
-		keyAndScanCode.jBoton = 8;
-		keyAndScanCode.joystick = 0;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 8;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
 	}
 	if (tecla == "j1_9" || tecla == "J1_9" || tecla == "j1_Button_9" || tecla == "J1_Button_9" || tecla == "j1_button_9" || tecla == "J1_button_9" || tecla == "J1_BUTTON_9" || tecla == "j1_Boton_9" || tecla == "J1_Boton_9" || tecla == "j1_boton_9" || tecla == "J1_boton_9" || tecla == "J1_BOTON_9"){
-		keyAndScanCode.jBoton = 9;
-		keyAndScanCode.joystick = 0;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 9;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
+	}
+	if (tecla == "j1_10" || tecla == "J1_10" || tecla == "j1_Button_10" || tecla == "J1_Button_10" || tecla == "j1_button_10" || tecla == "J1_button_10" || tecla == "J1_BUTTON_10" || tecla == "j1_Boton_10" || tecla == "J1_Boton_10" || tecla == "j1_boton_10" || tecla == "J1_boton_10" || tecla == "J1_BOTON_10"){
+		codigosDeEvento.jBoton = 10;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
+	}
+	if (tecla == "j1_11" || tecla == "J1_11" || tecla == "j1_Button_11" || tecla == "J1_Button_11" || tecla == "j1_button_11" || tecla == "J1_button_11" || tecla == "J1_BUTTON_11" || tecla == "j1_Boton_11" || tecla == "J1_Boton_11" || tecla == "j1_boton_11" || tecla == "J1_boton_11" || tecla == "J1_BOTON_11"){
+		codigosDeEvento.jBoton = 11;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
+	}
+	if (tecla == "j1_up" || tecla == "j1_Up" || tecla == "j1_UP" || tecla == "J1_up" || tecla == "J1_Up" || tecla == "J1_UP" || tecla == "j1_arriba" || tecla == "j1_Arriba" || tecla == "j1_ARRIBA" || tecla == "J1_arriba" || tecla == "J1_Arriba" || tecla == "J1_ARRIBA"){
+		codigosDeEvento.eje = true;
+		codigosDeEvento.jBoton = 1;
+		codigosDeEvento.joystick = 0;
+		codigosDeEvento.ejeDesde = -32768;
+		codigosDeEvento.ejeHasta = 1;
+		return codigosDeEvento;
+	}
+	if (tecla == "j1_down" || tecla == "j1_Down" || tecla == "j1_DOWN" || tecla == "J1_down" || tecla == "J1_Down" || tecla == "J1_DOWN" || tecla == "j1_abajo" || tecla == "j1_Abajo" || tecla == "j1_ABAJO" || tecla == "J1_abajo" || tecla == "J1_Abajo" || tecla == "J1_ABAJO"){
+		codigosDeEvento.eje = true;
+		codigosDeEvento.jBoton = 1;
+		codigosDeEvento.joystick = 0;
+		codigosDeEvento.ejeDesde = 1;
+		codigosDeEvento.ejeHasta = 32767;
+		return codigosDeEvento;
+	}
+	if (tecla == "j1_right" || tecla == "j1_Right" || tecla == "j1_RIGHT" || tecla == "J1_right" || tecla == "J1_Right" || tecla == "J1_RIGHT" || tecla == "j1_derecha" || tecla == "j1_Derecha" || tecla == "j1_DERECHA" || tecla == "J1_derecha" || tecla == "J1_Derecha" || tecla == "J1_DERECHA"){
+		codigosDeEvento.eje = true;
+		codigosDeEvento.jBoton = 0;
+		codigosDeEvento.joystick = 0;
+		codigosDeEvento.ejeDesde = 1;
+		codigosDeEvento.ejeHasta = 32767;
+		return codigosDeEvento;
+	}
+	if (tecla == "j1_left" || tecla == "j1_Left" || tecla == "j1_LEFT" || tecla == "J1_left" || tecla == "J1_Left" || tecla == "J1_LEFT" || tecla == "j1_izquierda" || tecla == "j1_Izquierda" || tecla == "j1_IZQUIERDA" || tecla == "J1_izquierda" || tecla == "J1_Izquierda" || tecla == "J1_IZQUIERDA"){
+		codigosDeEvento.eje = true;
+		codigosDeEvento.jBoton = 0;
+		codigosDeEvento.joystick = 0;
+		codigosDeEvento.ejeDesde = -32768;
+		codigosDeEvento.ejeHasta = 1;
+		return codigosDeEvento;
 	}
 
 	//JOYSTICK 2
 	if (tecla == "j2_0" || tecla == "J2_0" || tecla == "j2_Button_0" || tecla == "J2_Button_0" || tecla == "j2_button_0" || tecla == "J2_button_0" || tecla == "J2_BUTTON_0" || tecla == "j2_Boton_0" || tecla == "J2_Boton_0" || tecla == "j2_boton_0" || tecla == "J2_boton_0" || tecla == "J2_BOTON_0"){
-		keyAndScanCode.jBoton = 0;
-		keyAndScanCode.joystick = 1;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 0;
+		codigosDeEvento.joystick = 1;
+		return codigosDeEvento;
 	}
 	if (tecla == "j2_1" || tecla == "J2_1" || tecla == "j2_Button_1" || tecla == "J2_Button_1" || tecla == "j2_button_1" || tecla == "J2_button_1" || tecla == "J2_BUTTON_1" || tecla == "j2_Boton_1" || tecla == "J2_Boton_1" || tecla == "j2_boton_1" || tecla == "J2_boton_1" || tecla == "J2_BOTON_1"){
-		keyAndScanCode.jBoton = 1;
-		keyAndScanCode.joystick = 1;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 1;
+		codigosDeEvento.joystick = 1;
+		return codigosDeEvento;
 	}
 	if (tecla == "j2_2" || tecla == "J2_2" || tecla == "j2_Button_2" || tecla == "J2_Button_2" || tecla == "j2_button_2" || tecla == "J2_button_2" || tecla == "J2_BUTTON_2" || tecla == "j2_Boton_2" || tecla == "J2_Boton_2" || tecla == "j2_boton_2" || tecla == "J2_boton_2" || tecla == "J2_BOTON_2"){
-		keyAndScanCode.jBoton = 2;
-		keyAndScanCode.joystick = 1;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 2;
+		codigosDeEvento.joystick = 1;
+		return codigosDeEvento;
 	}
 	if (tecla == "j2_3" || tecla == "J2_3" || tecla == "j2_Button_3" || tecla == "J2_Button_3" || tecla == "j2_button_3" || tecla == "J2_button_3" || tecla == "J2_BUTTON_3" || tecla == "j2_Boton_3" || tecla == "J2_Boton_3" || tecla == "j2_boton_3" || tecla == "J2_boton_3" || tecla == "J2_BOTON_3"){
-		keyAndScanCode.jBoton = 3;
-		keyAndScanCode.joystick = 1;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 3;
+		codigosDeEvento.joystick = 1;
+		return codigosDeEvento;
 	}
 	if (tecla == "j2_4" || tecla == "J2_4" || tecla == "j2_Button_4" || tecla == "J2_Button_4" || tecla == "j2_button_4" || tecla == "J2_button_4" || tecla == "J2_BUTTON_4" || tecla == "j2_Boton_4" || tecla == "J2_Boton_4" || tecla == "j2_boton_4" || tecla == "J2_boton_4" || tecla == "J2_BOTON_4"){
-		keyAndScanCode.jBoton = 4;
-		keyAndScanCode.joystick = 1;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 4;
+		codigosDeEvento.joystick = 1;
+		return codigosDeEvento;
 	}
 	if (tecla == "j2_5" || tecla == "J2_5" || tecla == "j2_Button_5" || tecla == "J2_Button_5" || tecla == "j2_button_5" || tecla == "J2_button_5" || tecla == "J2_BUTTON_5" || tecla == "j2_Boton_5" || tecla == "J2_Boton_5" || tecla == "j2_boton_5" || tecla == "J2_boton_5" || tecla == "J2_BOTON_5"){
-		keyAndScanCode.jBoton = 5;
-		keyAndScanCode.joystick = 1;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 5;
+		codigosDeEvento.joystick = 1;
+		return codigosDeEvento;
 	}
 	if (tecla == "j2_6" || tecla == "J2_6" || tecla == "j2_Button_6" || tecla == "J1_Button_6" || tecla == "j2_button_6" || tecla == "J2_button_6" || tecla == "J2_BUTTON_6" || tecla == "j2_Boton_6" || tecla == "J2_Boton_6" || tecla == "j2_boton_6" || tecla == "J2_boton_6" || tecla == "J2_BOTON_6"){
-		keyAndScanCode.jBoton = 6;
-		keyAndScanCode.joystick = 1;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 6;
+		codigosDeEvento.joystick = 1;
+		return codigosDeEvento;
 	}
 	if (tecla == "j2_7" || tecla == "J2_7" || tecla == "j2_Button_7" || tecla == "J2_Button_7" || tecla == "j2_button_7" || tecla == "J2_button_7" || tecla == "J2_BUTTON_7" || tecla == "j2_Boton_7" || tecla == "J2_Boton_7" || tecla == "j2_boton_7" || tecla == "J2_boton_7" || tecla == "J2_BOTON_7"){
-		keyAndScanCode.jBoton = 7;
-		keyAndScanCode.joystick = 1;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 7;
+		codigosDeEvento.joystick = 1;
+		return codigosDeEvento;
 	}
 	if (tecla == "j2_8" || tecla == "J2_8" || tecla == "j2_Button_8" || tecla == "J2_Button_8" || tecla == "j2_button_8" || tecla == "J2_button_8" || tecla == "J2_BUTTON_8" || tecla == "j2_Boton_8" || tecla == "J2_Boton_8" || tecla == "j2_boton_8" || tecla == "J2_boton_8" || tecla == "J2_BOTON_8"){
-		keyAndScanCode.jBoton = 8;
-		keyAndScanCode.joystick = 1;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 8;
+		codigosDeEvento.joystick = 1;
+		return codigosDeEvento;
+	}
+	if (tecla == "j2_10" || tecla == "J2_10" || tecla == "j2_Button_10" || tecla == "J2_Button_10" || tecla == "j2_button_10" || tecla == "J2_button_10" || tecla == "J2_BUTTON_10" || tecla == "j2_Boton_10" || tecla == "J2_Boton_10" || tecla == "j2_boton_10" || tecla == "J2_boton_10" || tecla == "J2_BOTON_10"){
+		codigosDeEvento.jBoton = 10;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
+	}
+	if (tecla == "j2_11" || tecla == "J2_11" || tecla == "j2_Button_11" || tecla == "J2_Button_11" || tecla == "j2_button_11" || tecla == "J2_button_11" || tecla == "J2_BUTTON_11" || tecla == "j2_Boton_11" || tecla == "J2_Boton_11" || tecla == "j2_boton_11" || tecla == "J2_boton_11" || tecla == "J2_BOTON_11"){
+		codigosDeEvento.jBoton = 11;
+		codigosDeEvento.joystick = 0;
+		return codigosDeEvento;
 	}
 	if (tecla == "j2_9" || tecla == "J2_9" || tecla == "j2_Button_9" || tecla == "J2_Button_9" || tecla == "j2_button_9" || tecla == "J2_button_9" || tecla == "J2_BUTTON_9" || tecla == "j2_Boton_9" || tecla == "J2_Boton_9" || tecla == "j2_boton_9" || tecla == "J2_boton_9" || tecla == "J2_BOTON_9"){
-		keyAndScanCode.jBoton = 9;
-		keyAndScanCode.joystick = 1;
-		return keyAndScanCode;
+		codigosDeEvento.jBoton = 9;
+		codigosDeEvento.joystick = 1;
+		return codigosDeEvento;
+	}
+	if (tecla == "j2_up" || tecla == "j2_Up" || tecla == "j2_UP" || tecla == "J2_up" || tecla == "J2_Up" || tecla == "J2_UP" || tecla == "j2_arriba" || tecla == "j2_Arriba" || tecla == "j2_ARRIBA" || tecla == "J2_arriba" || tecla == "J2_Arriba" || tecla == "J2_ARRIBA"){
+		codigosDeEvento.eje = true;
+		codigosDeEvento.jBoton = 1;
+		codigosDeEvento.joystick = 1;
+		codigosDeEvento.ejeDesde = -32768;
+		codigosDeEvento.ejeHasta = 1;
+		return codigosDeEvento;
+	}
+	if (tecla == "j2_down" || tecla == "j2_Down" || tecla == "j2_DOWN" || tecla == "J2_down" || tecla == "J2_Down" || tecla == "J2_DOWN" || tecla == "j2_abajo" || tecla == "j2_Abajo" || tecla == "j2_ABAJO" || tecla == "J2_abajo" || tecla == "J2_Abajo" || tecla == "J2_ABAJO"){
+		codigosDeEvento.eje = true;
+		codigosDeEvento.jBoton = 1;
+		codigosDeEvento.joystick = 1;
+		codigosDeEvento.ejeDesde = 1;
+		codigosDeEvento.ejeHasta = 32767;
+		return codigosDeEvento;
+	}
+	if (tecla == "j2_right" || tecla == "j2_Right" || tecla == "j2_RIGHT" || tecla == "J2_right" || tecla == "J2_Right" || tecla == "J2_RIGHT" || tecla == "j2_derecha" || tecla == "j2_Derecha" || tecla == "j2_DERECHA" || tecla == "J2_derecha" || tecla == "J2_Derecha" || tecla == "J2_DERECHA"){
+		codigosDeEvento.eje = true;
+		codigosDeEvento.jBoton = 0;
+		codigosDeEvento.joystick = 1;
+		codigosDeEvento.ejeDesde = 1;
+		codigosDeEvento.ejeHasta = 32767;
+		return codigosDeEvento;
+	}
+	if (tecla == "j2_left" || tecla == "j2_Left" || tecla == "j2_LEFT" || tecla == "J2_left" || tecla == "J2_Left" || tecla == "J2_LEFT" || tecla == "j2_izquierda" || tecla == "j2_Izquierda" || tecla == "j2_IZQUIERDA" || tecla == "J2_izquierda" || tecla == "J2_Izquierda" || tecla == "J2_IZQUIERDA"){
+		codigosDeEvento.eje = true;
+		codigosDeEvento.jBoton = 0;
+		codigosDeEvento.joystick = 1;
+		codigosDeEvento.ejeDesde = -32768;
+		codigosDeEvento.ejeHasta = 1;
+		return codigosDeEvento;
 	}
 
-	return keyAndScanCode;
+	return codigosDeEvento;
 }
 
 
@@ -429,6 +516,9 @@ bool ConversorDeEventos::setAccion(Acciones unaAccion, std::string keyName){
 	nuevaAccion.scanCodeDelEvento = codigosDeEvento.scanCode;
 	nuevaAccion.jBoton = codigosDeEvento.jBoton;
 	nuevaAccion.numeroDeJoystick = codigosDeEvento.joystick;
+	nuevaAccion.eje = codigosDeEvento.eje;
+	nuevaAccion.ejeDesde = codigosDeEvento.ejeDesde;
+	nuevaAccion.ejeHasta = codigosDeEvento.ejeHasta;
 	acciones[unaAccion] = nuevaAccion;
 	if (!codigosDeEvento.keyCode && codigosDeEvento.joystick == NULO){
 		return false;
@@ -454,6 +544,21 @@ int ConversorDeEventos::getJbotonDeLaAccion(Acciones unaAccion){
 
 int ConversorDeEventos::geNnumeroDeJoystickDeLaAccion(Acciones unaAccion){
 	return (acciones[unaAccion].numeroDeJoystick);
+}
+
+
+bool ConversorDeEventos::hayEjeParaLaAccion(Acciones unaAccion){
+	return (acciones[unaAccion].eje);
+}
+
+
+Sint16 ConversorDeEventos::getValorDesdeDelEjeDeLaAccion(Acciones unaAccion){
+	return (acciones[unaAccion].ejeDesde);
+}
+
+
+Sint16 ConversorDeEventos::getValorHastaDelEjeDeLaAccion(Acciones unaAccion){
+	return (acciones[unaAccion].ejeHasta);
 }
 
 
