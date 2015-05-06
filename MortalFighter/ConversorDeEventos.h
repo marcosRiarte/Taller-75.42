@@ -12,8 +12,10 @@ public:
 	int getJbotonDeLaAccion(Acciones unaAccion);
 	int geNnumeroDeJoystickDeLaAccion(Acciones unaAccion);
 	bool hayEjeParaLaAccion(Acciones unaAccion);
+	bool hayFlechasParaLaAccion(Acciones unaAccion);
 	Sint16 getValorDesdeDelEjeDeLaAccion(Acciones unaAccion);
 	Sint16 getValorHastaDelEjeDeLaAccion(Acciones unaAccion);
+	Uint8 getHatDeLaAccion(Acciones unaAccion);
 	~ConversorDeEventos();
 
 private:
@@ -22,8 +24,10 @@ private:
 		SDL_Scancode scanCodeDelEvento;
 		int	jBoton;
 		bool eje;
+		bool flechas;
 		Sint16 ejeDesde;
 		Sint16 ejeHasta;
+		Uint8 hat;
 		int numeroDeJoystick;
 		Acciones accion;
 	};
@@ -32,8 +36,10 @@ private:
 		SDL_Keycode keyCode;
 		SDL_Scancode scanCode;
 		bool eje;
+		bool flechas;
 		int joystick;
 		int jBoton;
+		Uint8 hat;
 		Sint16 ejeDesde;
 		Sint16 ejeHasta;
 	};

@@ -81,6 +81,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="Botones del controlador.txt" />
     <Text Include="E:\Datos\LISTAdeFALLAS.txt" />
     <Text Include="lib\LICENSE.jpeg.txt" />
     <Text Include="lib\LICENSE.png.txt" />

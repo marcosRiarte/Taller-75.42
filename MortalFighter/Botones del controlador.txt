@@ -1,0 +1,30 @@
+Botones:
+jx_button_numeroDeBoton
+jx_boton_numeroDeBoton
+jx_numeroDeBoton
+
+Stick Analogico:
+jx_analog_accion
+jx_analogic_accion
+jx_analogico_accio
+
+Flechas o stick direccional:
+jx_accion
+
+Accion puede ser derecha, izquierda, arriba, abajo o bien right, left, up, down.
+
+numeroDeBoton equivale al numero de boton en el joystick,
+en un joystick de tipo playstation esto suele ir de 0 a 11 representando a:
+X, Triangulo, O, Cuadrado, L2, R2, L1, R1, Select, Start, L3 y R3.
+
+La x despues de la j equivale al numero de joystick, 1 y 2 en este caso.
+
+Entonces por ejemplo si quiero setear la flecha de arriba del joystick 1:
+j1_up
+
+Si quiero setear el stick analogico derecho para el joystick 2:
+j2_analog_right
+
+Si quiero setear el boton 0 del joystick 1(equivalente a X en un joystick de playstation):
+j1_0
+

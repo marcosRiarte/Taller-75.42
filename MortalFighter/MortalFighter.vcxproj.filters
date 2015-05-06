@@ -51,6 +51,9 @@
     <Text Include="E:\Datos\LISTAdeFALLAS.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Botones del controlador.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
