@@ -6,24 +6,24 @@
 #include "Vista.h"
 #include "Mundo.h"
 //#include <windows.h>
-#include "MortalFigther.h"
+#include "MortalFighter.h"
 #include "Timer.h"
+#include "Sprites.h"
 
 
 //int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 int _tmain(int argc, _TCHAR* argv[])
-{	
+{
 
-	#ifdef DEBUGENVENTANA
-			cout << "Esta activado el modo DEBUG EN VENTANA, se registra solo por consola" << "\n";
-	#endif
-
+#ifdef DEBUGENVENTANA
+	cout << "Esta activado el modo DEBUG EN VENTANA, se registra solo por consola" << "\n";
+#endif
 
 	int accion = REINICIAR;
 	while (accion == REINICIAR){
 		std::string nombreArchivo(PRUEBA_JSON);
-		bool ParseoExitoso= Parser::getInstancia().parsear(nombreArchivo);
-		
+		bool ParseoExitoso = Parser::getInstancia().parsear(nombreArchivo);
+
 		if (!ParseoExitoso) return EXIT_FAILURE; //si el json por defecto fallo, el programa termina
 
 		vector2D vecGravedad(0.0f, GRAVEDAD_Y);
@@ -32,7 +32,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			const char* msg = ((std::string)"Error iniciando SDL: ").append(SDL_GetError()).c_str();
 			Log::getInstancia().logearMensajeEnModo("No se puede inicializar SDL, se cierra el programa", Log::MODO_ERROR);
 			return  EXIT_FAILURE;
-		}
+		}		
 
 		/*********************************************************************/
 		/*      Inicialización de vista y variables del juego               */
@@ -41,16 +41,21 @@ int _tmain(int argc, _TCHAR* argv[])
 		Controlador* controladorDos = Parser::getInstancia().getControlador2();
 
 		//Parte de creación inicial.		
-		Mundo* unMundo = new Mundo(vecGravedad);
-		Vista* unaVista = new Vista(unMundo);
-		Cuerpo *unCuerpo = new Cuerpo(defCuerpo(), controladorUno, Parser::getInstancia().getEscenario().getAncho()/2.3);
+		Sprite* unSprite = new Sprite(JSON_SPRITES);
+		Mundo* unMundo = new Mundo(vecGravedad, unSprite);
+		Vista* unaVista = new Vista(unMundo, unSprite);
+		Cuerpo *unCuerpo = new Cuerpo(defCuerpo(), controladorUno, (float)(Parser::getInstancia().getEscenario().getAncho() / 2.3));
 		unCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
+		unCuerpo->setSensores(unSprite->getSensores());		
+
 		unMundo->agregarCuerpo(unCuerpo);
 
-		Cuerpo *otroCuerpo = new Cuerpo(defCuerpo(), controladorDos, Parser::getInstancia().getEscenario().getAncho()/1.8);
+		Cuerpo *otroCuerpo = new Cuerpo(defCuerpo(), controladorDos, (float)(Parser::getInstancia().getEscenario().getAncho() / 1.8));
 		otroCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(1));
+		otroCuerpo->setSensores(unSprite->getSensores());
+
 		unMundo->agregarCuerpo(otroCuerpo);
-		
+
 
 		//Timer de cuadros por segundo
 		Timer fpsTimer;
@@ -61,8 +66,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		int conteoDeCuadros = 0;
 		fpsTimer.start();
 
-		
-		
 
 		/***************************************************************************/
 		/*     GAMELOOP															   */
@@ -90,13 +93,12 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 
 			//Se actualiza la pantalla
-			unaVista->actualizar();
 			unMundo->Paso(0.13f);
-
+			unaVista->actualizar();
+			
 
 			++conteoDeCuadros;
-
-
+			
 			//Si el cuadro finalizó antes
 			int frameTicks = capTimer.getTicks();
 			if (frameTicks < MSxCUADRO)
@@ -112,12 +114,14 @@ int _tmain(int argc, _TCHAR* argv[])
 		delete unCuerpo;
 		delete controladorUno;
 		delete controladorDos;
-		Parser::FreeInstancia();	
+		Parser::FreeInstancia();
 
 		SDL_Quit();
-		
+
 	}
 
 	return EXIT_SUCCESS;
 }
+
+
 

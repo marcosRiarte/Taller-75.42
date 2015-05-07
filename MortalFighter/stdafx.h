@@ -17,6 +17,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <vector>
 #include "Vector2D.h"
 #include "ManejadorULogicas.h"
 

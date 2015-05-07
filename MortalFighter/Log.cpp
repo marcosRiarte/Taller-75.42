@@ -2,13 +2,9 @@
 #include "Log.h"
 #include <fstream>
 #include "FechayHora.h"
-#include "MortalFigther.h"
-
-
-
+#include "MortalFighter.h"
 
 std::string Log::pathDelArchivo = "log.txt";
-
 
 Log::Log(){
 

@@ -1,5 +1,6 @@
 #include "Parser.h"
 #include "ConversorDeEventos.h"
+#include "stdafx.h"
 
 Parser& Parser::getInstancia() {
 
@@ -208,6 +209,11 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	std::string Quieto;
 	std::string Salto;
 	std::string SaltoDiagonal;
+
+	std::string Golpeado;
+	std::string PatadaAlta;
+	std::string Agacharse;
+
 	std::string Caida;
 	std::string nombre;
 	bool errorPersonaje = false;
@@ -229,6 +235,11 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		SaltoDiagonal = SALTODIAGONAL_DEFAULT;
 		Caida = CAIDA_DEFAULT;
 		nombre = LIU_KANG;
+
+		Golpeado = GOLPEADO_DEFAULT;
+		Agacharse = AGACHARSE_DEFAULT;
+		PatadaAlta = PATADAALTA_DEFAULT;
+
 		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje por defecto", Log::MODO_WARNING);
 		
 	}
@@ -304,6 +315,27 @@ bool Parser::parsear(std::string nombreDelArchivo)
 				SaltoDiagonal = SALTODIAGONAL_DEFAULT;
 				Log::getInstancia().logearMensajeEnModo("Se carga sprite SaltoDiagonal del personaje por defecto", Log::MODO_WARNING);
 			}
+			//xjose
+			if (personajes[i].isMember("PatadaAlta") && personajes[i].get("PatadaAlta", PATADAALTA_DEFAULT).isString())
+				PatadaAlta = (personajes[i].get("PatadaAlta", PATADAALTA_DEFAULT).asString());
+			else {
+				PatadaAlta = PATADAALTA_DEFAULT;
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite PatadaAlta del personaje por defecto", Log::MODO_WARNING);
+			}
+			if (personajes[i].isMember("Agacharse") && personajes[i].get("Agacharse", AGACHARSE_DEFAULT).isString())
+				Agacharse = (personajes[i].get("Agacharse", AGACHARSE_DEFAULT).asString());
+			else {
+				Agacharse = AGACHARSE_DEFAULT;
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite Agacharse del personaje por defecto", Log::MODO_WARNING);
+			}
+			if (personajes[i].isMember("Golpeado") && personajes[i].get("Golpeado", GOLPEADO_DEFAULT).isString())
+				Golpeado = (personajes[i].get("Golpeado", GOLPEADO_DEFAULT).asString());
+			else {
+				Golpeado = GOLPEADO_DEFAULT;
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite Golpeado del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			//xjose
 
 			if (personajes[i].isMember("Caida") && personajes[i].get("Caida", CAIDA_DEFAULT).isString())
 				Caida = (personajes[i].get("Caida", CAIDA_DEFAULT).asString());
@@ -312,12 +344,12 @@ bool Parser::parsear(std::string nombreDelArchivo)
 				Log::getInstancia().logearMensajeEnModo("Se carga sprite Caida del personaje por defecto", Log::MODO_WARNING);
 			}
 
-
+			//xjose  TODO falta validar agacharse, golpeado, patadaalta
 			errorPersonaje = Validador::ValidarPersonaje(&ancho, &alto, &zIndex, &orientacion, &sprites, &CaminarParaAdelante, &CaminarParaAtras, &Quieto, &Salto, &SaltoDiagonal, &Caida);//, &nombre
 			if (errorPersonaje){
 				return false;
 			}
-			Personajes.push_back(new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal, Caida, nombre));
+			Personajes.push_back(new Personaje(ancho, alto, zIndex, orientacion, sprites, CaminarParaAdelante, CaminarParaAtras, Quieto, Salto, SaltoDiagonal, Caida, PatadaAlta, Golpeado, Agacharse, nombre));
 		}
 	}
 	
@@ -328,19 +360,12 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario correctamente", Log::MODO_DEBUG);
 
 	// en esta parte se desarma todo......
+	//
 	
-	//Parseo de la pelea
-	Json::Value pelea;
-	pelea = raiz["pelea"];
-	std::string fighters;
-	
-	
-	//Parseo del color
+
 	Json::Value color_alternativo ;
 	color_alternativo = raiz["color_alternativo"];
-	int h_inicial;
-	int h_final ;
-	int desplazamiento;
+	
 	
 
 	//PARSEO DE LOS CONTROLES
@@ -456,20 +481,19 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		}
 	}
 
-	if (!unConversorDeEventos->setAccion(ConversorDeEventos::UP, arriba)) Log::getInstancia().logearMensajeEnModo("Accion arriba del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!unConversorDeEventos->setAccion(ConversorDeEventos::DOWN, abajo)) Log::getInstancia().logearMensajeEnModo("Accion abajo del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!unConversorDeEventos->setAccion(ConversorDeEventos::RIGHT, derecha)) Log::getInstancia().logearMensajeEnModo("Accion derecha del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!unConversorDeEventos->setAccion(ConversorDeEventos::LEFT, izquierda)) Log::getInstancia().logearMensajeEnModo("Accion abajo del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!unConversorDeEventos->setAccion(ConversorDeEventos::HOLD, defensa)) Log::getInstancia().logearMensajeEnModo("Accion defensa del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!unConversorDeEventos->setAccion(ConversorDeEventos::REBOOT, reiniciar)) Log::getInstancia().logearMensajeEnModo("Accion reiniciar del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!unConversorDeEventos->setAccion(ConversorDeEventos::QUIT, salir)) Log::getInstancia().logearMensajeEnModo("Accion salir del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!unConversorDeEventos->setAccion(ConversorDeEventos::LOW_PUNCH, golpe_bajo)) Log::getInstancia().logearMensajeEnModo("Accion golpe bajo del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!unConversorDeEventos->setAccion(ConversorDeEventos::HIGH_PUNCH, golpe_alto)) Log::getInstancia().logearMensajeEnModo("Accion golpe alto del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!unConversorDeEventos->setAccion(ConversorDeEventos::LOW_KICK, patada_baja)) Log::getInstancia().logearMensajeEnModo("Accion patada baja del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!unConversorDeEventos->setAccion(ConversorDeEventos::HIGH_KICK, patada_alta)) Log::getInstancia().logearMensajeEnModo("Accion patada alta del control 1 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	unConversorDeEventos->setAccion(ConversorDeEventos::UP, arriba);
+	unConversorDeEventos->setAccion(ConversorDeEventos::DOWN, abajo);
+	unConversorDeEventos->setAccion(ConversorDeEventos::RIGHT, derecha);
+	unConversorDeEventos->setAccion(ConversorDeEventos::LEFT, izquierda);
+	unConversorDeEventos->setAccion(ConversorDeEventos::HOLD, defensa);
+	unConversorDeEventos->setAccion(ConversorDeEventos::REBOOT, reiniciar);
+	unConversorDeEventos->setAccion(ConversorDeEventos::QUIT, salir);
+	unConversorDeEventos->setAccion(ConversorDeEventos::LOW_PUNCH, golpe_bajo);
+	unConversorDeEventos->setAccion(ConversorDeEventos::HIGH_PUNCH, golpe_alto);
+	unConversorDeEventos->setAccion(ConversorDeEventos::LOW_KICK, patada_baja);
+	unConversorDeEventos->setAccion(ConversorDeEventos::HIGH_KICK, patada_alta);
 
 	controlador1->setConversorDeEventos(unConversorDeEventos);
-	Log::getInstancia().logearMensajeEnModo("Se configuraron las acciones del control 2", Log::MODO_DEBUG);
 
 	//CONTROL 2
 	Json::Value control_2;
@@ -579,21 +603,19 @@ bool Parser::parsear(std::string nombreDelArchivo)
 			Log::getInstancia().logearMensajeEnModo("Se carga boton patada_alta por defecto", Log::MODO_WARNING);
 		}
 	}
-
-	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::UP, arriba)) Log::getInstancia().logearMensajeEnModo("Accion arriba del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::DOWN, abajo)) Log::getInstancia().logearMensajeEnModo("Accion abajo del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::RIGHT, derecha)) Log::getInstancia().logearMensajeEnModo("Accion derecha del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::LEFT, izquierda)) Log::getInstancia().logearMensajeEnModo("Accion abajo del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::HOLD, defensa)) Log::getInstancia().logearMensajeEnModo("Accion defensa del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::REBOOT, reiniciar)) Log::getInstancia().logearMensajeEnModo("Accion reiniciar del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::QUIT, salir)) Log::getInstancia().logearMensajeEnModo("Accion salir del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::LOW_PUNCH, golpe_bajo)) Log::getInstancia().logearMensajeEnModo("Accion golpe bajo del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::HIGH_PUNCH, golpe_alto)) Log::getInstancia().logearMensajeEnModo("Accion golpe alto del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::LOW_KICK, patada_baja)) Log::getInstancia().logearMensajeEnModo("Accion patada baja del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
-	if (!otroConversorDeEventos->setAccion(ConversorDeEventos::HIGH_KICK, patada_alta)) Log::getInstancia().logearMensajeEnModo("Accion patada alta del control 2 no tiene un boton correcto asignado, quedara sin setear", Log::MODO_WARNING);
+	otroConversorDeEventos->setAccion(ConversorDeEventos::UP, arriba);
+	otroConversorDeEventos->setAccion(ConversorDeEventos::DOWN, abajo);
+	otroConversorDeEventos->setAccion(ConversorDeEventos::RIGHT, derecha);
+	otroConversorDeEventos->setAccion(ConversorDeEventos::LEFT, izquierda);
+	otroConversorDeEventos->setAccion(ConversorDeEventos::HOLD, defensa);
+	otroConversorDeEventos->setAccion(ConversorDeEventos::REBOOT, reiniciar);
+	otroConversorDeEventos->setAccion(ConversorDeEventos::QUIT, salir);
+	otroConversorDeEventos->setAccion(ConversorDeEventos::LOW_PUNCH, golpe_bajo);
+	otroConversorDeEventos->setAccion(ConversorDeEventos::HIGH_PUNCH, golpe_alto);
+	otroConversorDeEventos->setAccion(ConversorDeEventos::LOW_KICK, patada_baja);
+	otroConversorDeEventos->setAccion(ConversorDeEventos::HIGH_KICK, patada_alta);
 
 	controlador2->setConversorDeEventos(otroConversorDeEventos);
-	Log::getInstancia().logearMensajeEnModo("Se configuraron las acciones del control 1", Log::MODO_DEBUG);
 	
 	return true;
 }
@@ -615,10 +637,12 @@ Controlador* Parser::getControlador1(){
 Controlador* Parser::getControlador2(){
 	return controlador2;
 }
+
 std::string Parser::getPelea()const
 {
 	return this->pelea;
 }
+
 std::vector<Personaje*> Parser::getPersonajes() const
 {
 	return Personajes;

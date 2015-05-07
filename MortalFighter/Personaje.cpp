@@ -6,7 +6,7 @@
 
 
 
-Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje, std::string CaidaPersonaje, std::string nombrePersonaje)
+Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje, std::string CaidaPersonaje, std::string PatadaAltaPersonaje, std::string GolpeadoPersonaje, std::string AgachadoPersonaje, std::string nombrePersonaje)
 {
 	ancho = anchoPersonaje;
 	alto = altoPersonaje;
@@ -21,7 +21,10 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	saltodiagonal = SaltoDiagonalPersonaje;
 	caida = CaidaPersonaje;	
 	nombreP = nombrePersonaje;
-	sensores.push_back(new Sensor(posicionUn, ancho, alto, false));
+	//xjose
+	patadaalta = PatadaAltaPersonaje;
+	agachado = AgachadoPersonaje;
+	golpeado = GolpeadoPersonaje;
 }
 
 float Personaje::getAncho() const
@@ -44,10 +47,7 @@ std::string Personaje::getSprite() const
 	return sprites;
 }
 
-std::vector<Sensor*> Personaje::getSensores()
-{
-	return sensores;
-}
+
 
 
 std::string Personaje::getCaminarParaAdelante() const
@@ -79,6 +79,23 @@ std::string Personaje::getCaida() const
 {
 	return caida;
 }
+
+//xjose
+std::string Personaje::getPatadaAlta() const
+{
+	return patadaalta;
+}
+std::string Personaje::getGolpeado() const
+{
+	return golpeado;
+}
+
+std::string Personaje::getAgacharse() const
+{
+	return agachado;
+}
+
+
 
 std::string Personaje::getNombre() const
 {
@@ -112,8 +129,7 @@ std::pair<float, float> Personaje::getPosicionUn()const
 
 void Personaje::setPosicionUn(float x, float y)
 {
-	posicionUn = std::make_pair(x, y);
-	sensores.at(0)->setPosicion(posicionUn);
+	posicionUn = std::make_pair(x, y);	
 }
 
 float Personaje::getDeltaX() const
@@ -141,10 +157,7 @@ void Personaje::actualizar(float xNuevo, float yNuevo, ESTADO nuevoEstado)
 	setEstado(nuevoEstado);
 }
 
-
 Personaje::~Personaje()
 {
-	for (size_t j = 0; j < sensores.size(); j++) {
-		delete sensores.at(j);
-	}
+
 }

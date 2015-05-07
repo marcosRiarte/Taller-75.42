@@ -12,7 +12,20 @@ Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo,float
 	yPiso = Parser::getInstancia().getEscenario().getYPiso();
 	posicion.y = yPiso;
 	estaFrenado = unaDefCuerpo.estaFrenado;
+	demora = unaDefCuerpo.demora; //xjose
+	sensorActivoStr = "";
 }
+
+std::vector<Sensor*>* Cuerpo::getSensoresActivos() const
+{
+	for (size_t i = 0; i<sensores.size(); i++)
+		if (sensores[i]->at(0)->getEstadoStr() == sensorActivoStr)
+			return sensores[i];
+
+	// si no se seteo un sensor activo pasa el primero
+	return sensores[0];
+}
+
 
 bool Cuerpo::estaEnPiso()
 {
@@ -21,6 +34,32 @@ bool Cuerpo::estaEnPiso()
 
 	return true;
 }
+
+
+
+int Cuerpo::GetDemora()
+{
+	
+	return demora;
+}
+
+ESTADO Cuerpo::getEstado()
+{
+	return observador->getEstado();
+}
+
+void Cuerpo::setDemora(int demoratiempo)
+{
+	demora = demoratiempo;
+}
+
+void Cuerpo::DisminuirDemora()
+{
+	demora = demora--;
+
+}
+
+
 
 bool Cuerpo::estaEnBorde()
 {
@@ -47,15 +86,11 @@ void Cuerpo::sumarPosicion(const vector2D& unaPosicion)
 	// que no se mueva menos del cero
 	if (posicion.x <= 0)
 		posicion.x = 0;
-	
 }
 
 void Cuerpo::mover(float unaDistancia)
 {
-	//if ((abs(Parser::getInstancia().getPersonajes().at(0)->getPosicionUn().first - Parser::getInstancia().getPersonajes().at(1)->getPosicionUn().first)) <= (Parser::getInstancia().getVentana().getAncho() - Parser::getInstancia().getPersonajes().at(0)->getAncho()))
 		posicion.x += unaDistancia;
-		//else
-		//posicion.x -= unaDistancia;
 }
 
 

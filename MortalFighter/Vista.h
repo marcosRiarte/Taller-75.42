@@ -5,13 +5,12 @@
 #include <list>
 #include "Sprites.h"
 
-#define TITULO_VENTANA "Mortal Figther"
-#define ICONO "ima/MF_icono.png"
+
 
 class Vista
 {
 public:	
-	Vista(Mundo* unMundo);
+	Vista(Mundo* unMundo, Sprite* unSprite);
 	void actualizar();
 	SDL_Surface* cargarSuperficieOptimizada(std::string dirImagen);
 	~Vista();
@@ -24,6 +23,9 @@ private:
 	SDL_Texture* texturaSpriteUno;
 	SDL_Texture* texturaSpriteDos;
 	Mundo* refMundo;
+	int tiempoSecuenciaSpritesDos;
+	int tiempoSecuenciaSpritesUno;
+	SDL_Texture *texturaVerde;
 
 	std::string dirImgPersonaje;
 
@@ -38,6 +40,8 @@ private:
 	float xPjDos;
 	ManejadorULogicas manejadorULog;
 	
+	ESTADO estadoAnteriorPj1;
+	ESTADO estadoAnteriorPj2;
 	void OrdenarCapas();
 	std::string GetEstadoDelPersonaje(ESTADO , Personaje* );
 	void Dibujar(std::vector<Personaje*>);

@@ -13,12 +13,26 @@ private:
 	std::vector<SDL_Rect*>* SaltoDiagonal;
 	std::vector<SDL_Rect*>* SaltoDiagonalIzq;
 	std::vector<SDL_Rect*>* Quieto;
+
+	std::vector<SDL_Rect*>*Agacharse;
+	std::vector<SDL_Rect*>*PatadaAlta;
+	std::vector<SDL_Rect*>*Golpeado;
+	
+	std::vector<float>* cuadrosRep;
+
+	std::vector<std::vector<Sensor*>*> Sensores;
 	SDL_Rect* crearCuadro(int x, int y, int w, int h);
 	SDL_Rect* crearCuadro(Json::Value cuadro);	
+	void cargarSensores(std::string unEstadoStr, Json::Value spritesRaiz);
+	void cargarSprites(std::vector<SDL_Rect*>* estadoCuadros, std::string unEstadoStr, Json::Value spritesRaiz);
+	ManejadorULogicas manejadorULog;
+
 
 public:
-	Sprite();
+	Sprite(std::string);
 	std::vector<SDL_Rect*>* listaDeCuadros(std::string unEstado);
-	Json::Value	ParsearSprites();
+	Json::Value	ParsearSprites(std::string);
+	std::vector<std::vector<Sensor*>*> getSensores() const;
+	int getConstantes(std::string movimiento);
 	~Sprite();
 };

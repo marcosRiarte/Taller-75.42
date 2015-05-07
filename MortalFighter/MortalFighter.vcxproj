@@ -105,6 +105,7 @@
     <ClInclude Include="include\SDL_image.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="ManejadorULogicas.h" />
+    <ClInclude Include="MortalFighter.h" />
     <ClInclude Include="MortalFigther.h" />
     <ClInclude Include="Mundo.h" />
     <ClInclude Include="Parser.h" />
@@ -148,6 +149,7 @@
     <None Include="ima\sprites\player1.json" />
     <None Include="ima\sprites\ScorpionMK3U.json" />
     <None Include="jsoncpp.dll" />
+    <None Include="libpng16-16.dll" />
     <None Include="lib\libjpeg-9.dll" />
     <None Include="lib\libpng16-16.dll" />
     <None Include="lib\libtiff-5.dll" />
@@ -157,7 +159,9 @@
     <None Include="pruebaDefecto.json" />
     <None Include="SDL2.dll" />
     <None Include="SDL2_image.dll" />
+    <None Include="SDL2_ttf.dll" />
     <None Include="sprites.json" />
+    <None Include="zlib1.dll" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\SDL2main.lib" />

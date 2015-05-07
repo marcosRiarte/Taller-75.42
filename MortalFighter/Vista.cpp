@@ -2,12 +2,12 @@
 #include "Vista.h"
 #include "Mundo.h"
 #include "Log.h"
-#include "ControlDeColor.h"
 
-Vista::Vista(Mundo* unMundo)
+Vista::Vista(Mundo* unMundo, Sprite* unSprite)
 {	
+	// Usa filtro anisotropico
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 	// Se inicia SDL_image
-
 	IMG_Init(IMG_INIT_PNG);
 	ventana = SDL_CreateWindow(TITULO_VENTANA, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Parser::getInstancia().getVentana().getAnchoPx(), Parser::getInstancia().getVentana().getAltoPx(), SDL_WINDOW_SHOWN);
 		if (ventana == nullptr){
@@ -68,7 +68,7 @@ Vista::Vista(Mundo* unMundo)
 		listaDeCuadrosDos = nullptr;
 
 		//Se cargan los sprites
-		elSprite = new Sprite();
+		elSprite = unSprite;
 		
 		//Dirección de la imagen de Sprites
 		dirImgPersonaje = Parser::getInstancia().getPersonajes().at(0)->getSprite();
@@ -77,40 +77,7 @@ Vista::Vista(Mundo* unMundo)
 		SDL_Surface* SuperficieUno = cargarSuperficieOptimizada(dirImgPersonaje);
 		SDL_Surface* SuperficieDos = cargarSuperficieOptimizada(dirImgPersonaje);
 
-		
 		//Seteo del color
-		std::string pelea = Parser::getInstancia().getPelea();
-		
-		int xPixelSuperficie = 0;
-		int yPixelSuperficie = 0;
-		//Si ambos personajes son iguales
-		if ((pelea == "scorpion VS scorpion") || (pelea == "liuKang VS liuKang"))
-		{
-			ControlDeColor color = ControlDeColor(SuperficieDos);
-			Uint32 myPixel = color.GetPixel(SuperficieDos, xPixelSuperficie, yPixelSuperficie);
-
-
-			// Uint8 RGB = SuperficieDos->format->BytesPerPixel; //da un Uint8
-			Uint32 sonic = SuperficieDos->format->format;
-
-
-
-			//SDL_GetRGB(sonic, SuperficieDos->format, rojo, verde, azul);
-
-			/*int troll = (int) (rojo);
-			int R = (int)(rojo);
-			Uint8 G = (Uint8)(verde);
-			Uint8 B = (Uint8)(azul);
-
-			std::cout << troll<<"hola"<<G ;
-			SDL_SetColorKey(SuperficieDos, SDL_TRUE, SDL_MapRGB(SuperficieDos->format, R, G, B));
-			//0, 0xFF, 0xFF
-
-			delete rojo;
-			delete verde;
-			delete azul;*/
-
-		}
 		//SDL_SetColorKey(Superficie, SDL_TRUE, SDL_MapRGB(Superficie->format, 0, 0xFF, 0xFF));
 
 
@@ -124,6 +91,13 @@ Vista::Vista(Mundo* unMundo)
 		//Ordeno las capas por su zindex para ser dibujadas
 		OrdenarCapas();
 
+		//   Se crea textura para dibujar sensores
+		SDL_Surface* sup = cargarSuperficieOptimizada("ima/bkg/texturaVerde.png");
+		texturaVerde = SDL_CreateTextureFromSurface(renderer, sup);
+		SDL_FreeSurface(sup);
+
+		estadoAnteriorPj1 = QUIETODER;
+		estadoAnteriorPj2 = QUIETODER;
 		refMundo = unMundo;
 }
 
@@ -183,29 +157,27 @@ void Vista::actualizar(){
 	MOV_TIPO mov1 = refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0);
 	MOV_TIPO mov2 = refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0);
 
-	bool interseccion = (personajeUno->getSensores().at(0)->hayInterseccion(personajeDos->getPosicionUn(), personajeDos->getAncho(), personajeDos->getAlto()));
-
-	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer) || interseccion) {
+	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer)) {
 		refMundo->FrenarCuerpos();
 
-		if (PjUnoEstaEnBordeIzq && (mov1 == DER) && (!interseccion))
+		if (PjUnoEstaEnBordeIzq && (mov1 == DER))
 			refMundo->LiberarCuerpos();
 
-		if (PjUnoEstaEnBordeDer && (mov1 == IZQ) && (!interseccion))
+		if (PjUnoEstaEnBordeDer && (mov1 == IZQ))
 			refMundo->LiberarCuerpos();
 
-		if (PjDosEstaEnBordeIzq && (mov2 == DER) && (!interseccion))
+		if (PjDosEstaEnBordeIzq && (mov2 == DER))
 			refMundo->LiberarCuerpos();
 
-		if (PjDosEstaEnBordeDer && (mov2 == IZQ) && (!interseccion))
+		if (PjDosEstaEnBordeDer && (mov2 == IZQ))
 			refMundo->LiberarCuerpos();
 	}
 	
 
-	if (PjUnoEstaEnBorde && !PjDosEstaEnBorde && (!interseccion)) {
+	if (PjUnoEstaEnBorde && !PjDosEstaEnBorde) {
 		camaraXLog += personajesVista[0]->getDeltaX();		
 	}
-	if (!PjUnoEstaEnBorde && PjDosEstaEnBorde && (!interseccion)) {
+	if (!PjUnoEstaEnBorde && PjDosEstaEnBorde) {
 		camaraXLog += personajesVista[1]->getDeltaX();		
 	}
 
@@ -218,7 +190,7 @@ void Vista::actualizar(){
 			camaraXLog += personajesVista[0]->getDeltaX();
 	}
 
-	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer && (!interseccion)){
+	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer){
 		if ((mov1 == DER) && (mov2 == DER))
 			camaraXLog += personajesVista[0]->getDeltaX();
 		else if (mov2 == DER)
@@ -227,14 +199,14 @@ void Vista::actualizar(){
 			camaraXLog += personajesVista[0]->getDeltaX();
 	}
 
-	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer && (!interseccion)){
+	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer){
 		if (mov1 == IZQ)
 			camaraXLog += personajesVista[1]->getDeltaX();
 	}
 
 		//camaraXLog += personajesVista[0]->getDeltaX();
 
-	if (!PjUnoEstaEnBorde && !PjDosEstaEnBorde && (!interseccion))
+	if (!PjUnoEstaEnBorde && !PjDosEstaEnBorde)
 		refMundo->LiberarCuerpos();
 	
 	// Dibuja las capas y el personaje
@@ -302,7 +274,7 @@ std::string Vista::GetEstadoDelPersonaje(ESTADO estadoPersonaje, Personaje* pers
 		else
 			estadoDelPersonaje = personajeVista->getCaminarParaAdelante();
 	}
-
+	
 	if ((estadoPersonaje == ESTADO::SALTODER_DER) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
 		if (("DER" == personajeVista->getOrientacion()))
 			estadoDelPersonaje = personajeVista->getSaltoDiagonal();
@@ -328,6 +300,18 @@ std::string Vista::GetEstadoDelPersonaje(ESTADO estadoPersonaje, Personaje* pers
 		estadoDelPersonaje = personajeVista->getQuieto();
 	}
 
+	//jose
+	if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ABAJO_DER)){
+		estadoDelPersonaje = personajeVista->getAgacharse();
+	}
+
+	if ((estadoPersonaje == ESTADO::P_ALTADER) || (estadoPersonaje == ESTADO::P_ALTAIZQ)){
+		estadoDelPersonaje = personajeVista->getPatadaAlta();
+	}
+	if ((estadoPersonaje == ESTADO::GOLPEADOIZQ) || (estadoPersonaje == ESTADO::GOLPEADODER)){
+		estadoDelPersonaje = personajeVista->getGolpeado();
+	}
+	
 	return estadoDelPersonaje;
 }
 
@@ -388,7 +372,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	int anchoPjUnoPx = manejadorULog.darLongPixels(personajesVista[0]->getAncho());
 	int altoPjUnoPx = manejadorULog.darLongPixels(personajesVista[0]->getAlto(), Parser::getInstancia().getVentana().getAltoPx(), Parser::getInstancia().getEscenario().getAlto());
 	int xPjUnoPx = personajesVista[0]->getPosicionPx().first;
-	int yPjUnoPx = personajesVista[0]->getPosicionPx().second;	
+	int yPjUnoPx = personajesVista[0]->getPosicionPx().second;
 	float anchoPjUno = personajesVista[0]->getAncho();
 
 	//Parametros del personaje 2
@@ -410,7 +394,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	float relacionAnchoUno = (float)anchoPjUnoPx / (float)cuadroBase->w;
 	float relacionAltoUno = (float)altoPjUnoPx / (float)cuadroBase->h;
 	personajeUno.x = manejadorULog.darLongPixels(xLogPjUnoEnCamara);
-	personajeUno.y = yPjUnoPx;	
+	personajeUno.y = yPjUnoPx;
 
 	// ancho y alto lo calcula cuadro a cuadro
 	std::string estadoDelPersonajeUno = GetEstadoDelPersonaje(personajesVista[0]->getEstado(), personajesVista[0]);
@@ -418,47 +402,69 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	float relacionAnchoDos = (float)anchoPjDosPx / (float)cuadroBase->w;
 	float relacionAltoDos = (float)altoPjDosPx / (float)cuadroBase->h;
 	personajeDos.x = manejadorULog.darLongPixels(xLogPjDosEnCamara);
-	personajeDos.y = yPjDosPx;	
+	personajeDos.y = yPjDosPx;
 	std::string estadoDelPersonajeDos = GetEstadoDelPersonaje(personajesVista[1]->getEstado(), personajesVista[1]);
 
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
 	listaDeCuadrosUno = elSprite->listaDeCuadros(estadoDelPersonajeUno);
-	numeroDeCuadroUno++;
+	tiempoSecuenciaSpritesUno = elSprite->getConstantes(estadoDelPersonajeUno);
 
-	if ((4 * numeroDeCuadroUno / (listaDeCuadrosUno->size()))> (listaDeCuadrosUno->size() - 1))
+	if (estadoAnteriorPj1 != personajesVista[0]->getEstado()){
+		numeroDeCuadroUno = 0;
+		estadoAnteriorPj1 = personajesVista[0]->getEstado();
+	}
+
+	if (estadoAnteriorPj2 != personajesVista[1]->getEstado()){
+		numeroDeCuadroDos = 0;
+		estadoAnteriorPj2 = personajesVista[1]->getEstado();
+	}
+
+
+	if ((numeroDeCuadroUno) > (tiempoSecuenciaSpritesUno*listaDeCuadrosUno->size()))
+		numeroDeCuadroUno = 0;
+
+	if (0 >= ((listaDeCuadrosUno->size() - 1) - (numeroDeCuadroUno / tiempoSecuenciaSpritesUno)))
 		numeroDeCuadroUno = 0;
 
 	//Renderizar el sprite
 	SDL_Rect* cuadroActualUno;
 	if (personajesVista.at(0)->getPosicionPx().first > personajesVista.at(1)->getPosicionPx().first){
-		cuadroActualUno = listaDeCuadrosUno->at((listaDeCuadrosUno->size() - 1) - (4 * numeroDeCuadroUno / (listaDeCuadrosUno->size())));		
+		cuadroActualUno = listaDeCuadrosUno->at((listaDeCuadrosUno->size() - 1) - (numeroDeCuadroUno / tiempoSecuenciaSpritesUno));
 	}
 	else{
-		cuadroActualUno = listaDeCuadrosUno->at(4 * numeroDeCuadroUno / (listaDeCuadrosUno->size()));		
+		cuadroActualUno = listaDeCuadrosUno->at(numeroDeCuadroUno / (tiempoSecuenciaSpritesUno));
 	}
-	
+
+	numeroDeCuadroUno++;
+
 	personajeUno.w = (int)round(relacionAnchoUno*cuadroActualUno->w);
 	personajeUno.h = (int)round(relacionAltoUno*cuadroActualUno->h);
 
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
 	listaDeCuadrosDos = elSprite->listaDeCuadros(estadoDelPersonajeDos);
-	numeroDeCuadroDos++;
 
-	if ((4 * numeroDeCuadroDos / (listaDeCuadrosDos->size()))> (listaDeCuadrosDos->size() - 1))
+	tiempoSecuenciaSpritesDos = elSprite->getConstantes(estadoDelPersonajeDos);
+
+	if ((numeroDeCuadroDos) > (tiempoSecuenciaSpritesDos*listaDeCuadrosDos->size()))
+		numeroDeCuadroDos = 0;
+	
+	if (0 >= ((listaDeCuadrosDos->size() - 1) - (numeroDeCuadroDos / tiempoSecuenciaSpritesDos)))
 		numeroDeCuadroDos = 0;
 
 	//Renderizar el sprite
 	SDL_Rect* cuadroActualDos;
 	if (personajesVista.at(1)->getPosicionPx().first > personajesVista.at(0)->getPosicionPx().first){
-		cuadroActualDos = listaDeCuadrosDos->at((listaDeCuadrosDos->size() - 1) - (4 * numeroDeCuadroDos / (listaDeCuadrosDos->size())));		
+		cuadroActualDos = listaDeCuadrosDos->at((listaDeCuadrosDos->size()-1) - (numeroDeCuadroDos / tiempoSecuenciaSpritesDos));
 	}
 	else{
-		cuadroActualDos = listaDeCuadrosDos->at(4 * numeroDeCuadroDos / (listaDeCuadrosDos->size()));		
+		cuadroActualDos = listaDeCuadrosDos->at(numeroDeCuadroDos / (tiempoSecuenciaSpritesDos));
 	}
-
+	numeroDeCuadroDos++;
+	
 	personajeDos.w = (int)round(relacionAnchoDos*cuadroActualDos->w);
 	personajeDos.h = (int)round(relacionAltoDos*cuadroActualDos->h);
 
+	
 	//Se cargan ambos acorde a su posición relativa
 	if (personajesVista.at(0)->getPosicionPx().first > personajesVista.at(1)->getPosicionPx().first){
 		SDL_RenderCopyEx(renderer, texturaSpriteUno, cuadroActualUno, &personajeUno, 0, NULL, SDL_FLIP_HORIZONTAL);
@@ -468,13 +474,40 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		SDL_RenderCopy(renderer, texturaSpriteUno, cuadroActualUno, &personajeUno);
 		SDL_RenderCopyEx(renderer, texturaSpriteDos, cuadroActualDos, &personajeDos, 0, NULL, SDL_FLIP_HORIZONTAL);
 	}
-}
 
+	if (MODO_DEBUG_SDL){
+		SDL_Rect r;
+		SDL_Rect r2;
+		std::vector<Sensor*>* sensoresCuerpo1 = refMundo->getCuerpo(0)->getSensores();
+		std::vector<Sensor*>* sensoresCuerpo2 = refMundo->getCuerpo(1)->getSensores();
+		Uint8 Alfa = 128;
+		SDL_SetRenderTarget(renderer, texturaVerde);
+		SDL_SetRenderDrawColor(renderer, 0, 255, 0, Alfa);
+		SDL_SetTextureAlphaMod(texturaVerde, Alfa);
+
+		for (unsigned i = 0; i<sensoresCuerpo1->size(); i++){
+			r.x = sensoresCuerpo1->at(i)->getPosicion().first + personajeUno.x;
+			r.y = sensoresCuerpo1->at(i)->getPosicion().second + personajeUno.y;
+			r.w = sensoresCuerpo1->at(i)->getAncho();
+			r.h = sensoresCuerpo1->at(i)->getAlto();
+			SDL_RenderCopy(renderer, texturaVerde, NULL, &r);
+		}
+		for (unsigned i = 0; i < sensoresCuerpo2->size(); i++){
+			r2.x = sensoresCuerpo2->at(i)->getPosicion().first + personajeDos.x;
+			r2.y = sensoresCuerpo2->at(i)->getPosicion().second + personajeDos.y;
+			r2.w = sensoresCuerpo2->at(i)->getAncho();
+			r2.h = sensoresCuerpo2->at(i)->getAlto();
+			SDL_RenderCopy(renderer, texturaVerde, NULL, &r2);
+		}
+		SDL_SetRenderTarget(renderer, NULL);
+	}
+}
 
 Vista::~Vista()
 {		
 	SDL_DestroyTexture(texturaSpriteUno);
 	SDL_DestroyTexture(texturaSpriteDos);
+	SDL_DestroyTexture(texturaVerde);
 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(ventana);

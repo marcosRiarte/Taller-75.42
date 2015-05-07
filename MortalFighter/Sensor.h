@@ -2,24 +2,26 @@
 class Sensor
 {
 public:
-	Sensor(std::pair<float, float> posicion, float alto, float ancho, bool esHitBox);
+	Sensor(std::pair<float, float> posicion, int alto, int ancho, bool esHitBox, std::string unestadoStr);
 	
 	void setPosicion(std::pair<float, float> posicion);
-	void setAlto(float alto);
-	void setAncho(float ancho);
+	void setAlto(int alto);
+	void setAncho(int ancho);
 	void setHitbox(bool valorHitBox);
-	bool hayInterseccion(std::pair<float, float> unaPosicion, float unAncho, float unAlto);
+	bool hayInterseccion(std::pair<float, float> unaPosicion, int unAncho, int unAlto);
 
 	bool getHitbox();
 	std::pair<float, float> getPosicion();
-	float getAlto();
-	float getAncho();
+	int getAlto();
+	int getAncho();
+	std::string getEstadoStr() const;
 	
 	~Sensor();
 private:
 	std::pair<float, float> posicion;
-	float ancho;
-	float alto;
+	int ancho;
+	int alto;
 	bool esHitBox;
+	std::string estadoStr;
 };
 

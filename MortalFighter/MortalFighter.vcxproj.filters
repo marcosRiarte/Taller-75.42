@@ -137,6 +137,9 @@
     <ClInclude Include="ControlDeColor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MortalFighter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -240,6 +243,9 @@
     <None Include="ima\sprites\ScorpionMK3U.json">
       <Filter>Resource Files\ima\sprites</Filter>
     </None>
+    <None Include="libpng16-16.dll" />
+    <None Include="SDL2_ttf.dll" />
+    <None Include="zlib1.dll" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\SDL2_image.lib">

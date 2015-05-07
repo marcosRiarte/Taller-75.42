@@ -7,17 +7,21 @@ struct defCuerpo
 	// constructor con valores por defecto
 	defCuerpo()
 	{
-		nombre = "Scorpion";
+		nombre = "Scorpion"; //Xjose error esto esta hardco....
 		posicion = vector2D(0.0f, 0.0f);
 		velocidad = vector2D(0.0f, 0.0f);
 		masa = 15.0f;
 		estaFrenado = false;
+		//xjose NO INSULTARME
+		estaGolpeado = false; // PARA PROBARLO RAPIDAMENTE
 	}
 
 	std::string nombre;
 	vector2D posicion, velocidad;
 	float masa;
 	bool estaFrenado;
+	bool estaGolpeado;
+	int demora;
 };
 
 class Cuerpo
@@ -28,6 +32,39 @@ public:
 	inline const vector2D& getPosicion() const
 	{
 		return posicion;
+	}
+
+	// Obtiene los sensores activos actualmente
+	std::vector<Sensor*>* getSensores() const
+	{
+		return getSensoresActivos();
+	}
+
+	// Inicializa el conjunto de todos los sensores asociados al cuerpo
+	void setSensores(std::vector<std::vector<Sensor*>*> sensoresNuevo)
+	{
+		sensores = sensoresNuevo;
+	}
+
+	// Le pasa el nombre del estado actual para activar los sensores correspondientes
+	inline void SetSensorActivoStr(ESTADO estadoActual)
+	{
+		if (estadoActual == DER)
+			sensorActivoStr = "Caminar";
+		if (estadoActual == QUIETODER)
+			sensorActivoStr = "Quieto";
+		if (estadoActual == ARRIBA_DER)
+			sensorActivoStr = "Salto";
+		if ((estadoActual == SALTOIZQ_DER) || (estadoActual == SALTODER_DER))
+			sensorActivoStr = "SaltoDiagonal";
+		if (estadoActual == IZQ_DER)
+			sensorActivoStr = "CaminarAtras";
+		if (estadoActual == ABAJO_DER)
+			sensorActivoStr = "Agacharse";
+		if (estadoActual == P_ALTADER)
+			sensorActivoStr = "PatadaAlta";
+		if (estadoActual == GOLPEADOIZQ)
+			sensorActivoStr = "Golpeado";
 	}
 
 	inline void SetPosicion(const vector2D& unaPosicion)
@@ -45,6 +82,11 @@ public:
 	inline void SetVelocidad(const vector2D& unaVelocidad)
 	{
 		velocidad = unaVelocidad;
+	}
+
+	inline void SetVelocidadX(float velocidadenX)
+	{
+		velocidad.x = velocidadenX;
 	}
 
 	void sumarVelocidad(const vector2D& unaVelocidad)
@@ -66,6 +108,16 @@ public:
 
 	// Devuelve true si está en contacto con el piso o false en caso contrario
 	bool estaEnPiso();
+
+	// Devuelve true si lo fajaron o false en caso contrario
+	bool estaGolpeado();
+
+	// Devuelve la demora que hay para la reproduccion del sprite de patada, sino duraba un instante....
+
+	//Xjose
+	int GetDemora();
+	void Cuerpo::setDemora(int demoratiempo);
+	void Cuerpo::DisminuirDemora();
 
 	// Devuelve true si está en borde derecho o false en caso contrario
 	// borde izquierdo se toma cero siempre
@@ -98,14 +150,20 @@ public:
 		return estaFrenado;
 	}
 
+	//xjose .......................
+
+	
+
 	//observer extremadamente simplificado, mejorar
 	void recibeObservador(Personaje* unObservador);
 
 	void notificarObservadores(ESTADO nuevoEstado);
 
 	void mover(float unaDistancia);
+	ESTADO getEstado();
 
 private:
+	std::vector<Sensor*>* getSensoresActivos() const;
 	Controlador* controlador;
 	std::string nombre;
 	vector2D posicion, velocidad;
@@ -113,4 +171,11 @@ private:
 	Personaje* observador;
 	float yPiso;
 	bool estaFrenado;
+	int demora; // esto deberia ser privado y con metodo incrementar demora o disminuir demora... es para que reproduzca bien la patada
+
+	ESTADO nuevoEstado;
+	
+	
+	std::vector<std::vector<Sensor*>*> sensores;
+	std::string sensorActivoStr;
 };

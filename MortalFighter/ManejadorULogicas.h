@@ -36,6 +36,12 @@ struct ManejadorULogicas
 	{
 		return (int)round(uLogicas*relacion);
 	}
+
+	int darLongUnidades(int pixeles)
+	{
+		return (float)(pixeles/relacion);
+	}
+
 	
 	int darLongPixels(float uLogicas, int longPx, float longLog)
 	{
