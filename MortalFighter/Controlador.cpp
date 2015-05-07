@@ -663,7 +663,11 @@ int Controlador::cambiar(){
 	if (conversorDeEventos->hayEjeParaLaAccion(ConversorDeEventos::RIGHT)){
 		valorDelEje = SDL_JoystickGetAxis(unJoystick, conversorDeEventos->getJbotonDeLaAccion(ConversorDeEventos::RIGHT));
 		if ((valorDelEje >= conversorDeEventos->getValorDesdeDelEjeDeLaAccion(ConversorDeEventos::RIGHT)) && (valorDelEje <= conversorDeEventos->getValorHastaDelEjeDeLaAccion(ConversorDeEventos::RIGHT))){
-			if (movimientos.at(0) == IZQ) return IZQ;
+			if (movimientos.at(0) == IZQ){
+				movimientos.clear();
+				movimientos.push_back(IZQ);
+				return CONTINUAR;
+			}
 			movimientos.clear();
 			movimientos.push_back(DER);
 			return CONTINUAR;
@@ -671,14 +675,22 @@ int Controlador::cambiar(){
 	}
 	else{
 		if (SDL_JoystickGetButton(unJoystick, conversorDeEventos->getJbotonDeLaAccion(ConversorDeEventos::RIGHT)) == 1){
-			if (movimientos.at(0) == IZQ) return IZQ;
+			if (movimientos.at(0) == IZQ){
+				movimientos.clear();
+				movimientos.push_back(IZQ);
+				return CONTINUAR;
+			}
 			movimientos.clear();
 			movimientos.push_back(DER);
 			return CONTINUAR;
 		}
 		if (conversorDeEventos->hayFlechasParaLaAccion(ConversorDeEventos::RIGHT)){
 			if (conversorDeEventos->getHatDeLaAccion(ConversorDeEventos::RIGHT) == SDL_JoystickGetHat(unJoystick, 0)){
-				if (movimientos.at(0) == IZQ) return IZQ;
+				if (movimientos.at(0) == IZQ){
+					movimientos.clear();
+					movimientos.push_back(IZQ);
+					return CONTINUAR;
+				}
 				movimientos.clear();
 				movimientos.push_back(DER);
 				return CONTINUAR;
@@ -690,6 +702,11 @@ int Controlador::cambiar(){
 	if (conversorDeEventos->hayEjeParaLaAccion(ConversorDeEventos::LEFT)){
 		valorDelEje = SDL_JoystickGetAxis(unJoystick, conversorDeEventos->getJbotonDeLaAccion(ConversorDeEventos::LEFT));
 		if ((valorDelEje >= conversorDeEventos->getValorDesdeDelEjeDeLaAccion(ConversorDeEventos::LEFT)) && (valorDelEje <= conversorDeEventos->getValorHastaDelEjeDeLaAccion(ConversorDeEventos::LEFT))){
+			if (movimientos.at(0) == DER){
+				movimientos.clear();
+				movimientos.push_back(DER);
+				return CONTINUAR;
+			}
 			movimientos.clear();
 			movimientos.push_back(IZQ);
 			return CONTINUAR;
@@ -697,12 +714,22 @@ int Controlador::cambiar(){
 	}
 	else{
 		if (SDL_JoystickGetButton(unJoystick, conversorDeEventos->getJbotonDeLaAccion(ConversorDeEventos::LEFT)) == 1){
+			if (movimientos.at(0) == DER){
+				movimientos.clear();
+				movimientos.push_back(DER);
+				return CONTINUAR;
+			}
 			movimientos.clear();
 			movimientos.push_back(IZQ);
 			return CONTINUAR;
 		}
 		if (conversorDeEventos->hayFlechasParaLaAccion(ConversorDeEventos::LEFT)){
 			if (conversorDeEventos->getHatDeLaAccion(ConversorDeEventos::LEFT) == SDL_JoystickGetHat(unJoystick, 0)){
+				if (movimientos.at(0) == DER){
+					movimientos.clear();
+					movimientos.push_back(DER);
+					return CONTINUAR;
+				}
 				movimientos.clear();
 				movimientos.push_back(IZQ);
 				return CONTINUAR;

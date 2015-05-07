@@ -6,7 +6,7 @@ ConversorDeEventos::CodigosDeEvento ConversorDeEventos::getCodigosDeEventoDeTecl
 	CodigosDeEvento codigosDeEvento;
 	codigosDeEvento.jBoton = NULO;
 	codigosDeEvento.joystick = NULO;
-	codigosDeEvento.keyCode = NULL;
+	codigosDeEvento.keyCode = NULO;
 	codigosDeEvento.hat = (Uint8)NULO;
 	codigosDeEvento.eje = false;
 	codigosDeEvento.flechas = false;
@@ -572,7 +572,7 @@ bool ConversorDeEventos::setAccion(Acciones unaAccion, std::string keyName){
 	nuevaAccion.ejeHasta = codigosDeEvento.ejeHasta;
 	nuevaAccion.hat = codigosDeEvento.hat;
 	acciones[unaAccion] = nuevaAccion;
-	if (!codigosDeEvento.keyCode && codigosDeEvento.joystick == NULO){
+	if ( (codigosDeEvento.keyCode == NULO) && (codigosDeEvento.joystick == NULO) ){
 		return false;
 	}
 	return true;
