@@ -328,9 +328,14 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario correctamente", Log::MODO_DEBUG);
 
 	// en esta parte se desarma todo......
-	//
 	
-
+	//Parseo de la pelea
+	Json::Value pelea;
+	pelea = raiz["pelea"];
+	std::string fighters;
+	
+	
+	//Parseo del color
 	Json::Value color_alternativo ;
 	color_alternativo = raiz["color_alternativo"];
 	int h_inicial;
@@ -610,7 +615,10 @@ Controlador* Parser::getControlador1(){
 Controlador* Parser::getControlador2(){
 	return controlador2;
 }
-
+std::string Parser::getPelea()const
+{
+	return this->pelea;
+}
 std::vector<Personaje*> Parser::getPersonajes() const
 {
 	return Personajes;

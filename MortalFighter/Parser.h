@@ -80,7 +80,7 @@ public:
 	Controlador* getControlador2();
 	std::vector<Personaje*> getPersonajes() const;
 	std::vector<Capa*> getCapas() const;
-
+	std::string Parser::getPelea() const;
 	static void FreeInstancia();
 
 private:	
@@ -93,7 +93,7 @@ private:
 	Escenario* unEscenario;
 	Controlador* controlador1;
 	Controlador* controlador2;
-
+	std::string pelea;
 	virtual ~Parser();
 
 	Parser(Parser const&) = delete;

@@ -77,14 +77,15 @@ Vista::Vista(Mundo* unMundo)
 		SDL_Surface* SuperficieUno = cargarSuperficieOptimizada(dirImgPersonaje);
 		SDL_Surface* SuperficieDos = cargarSuperficieOptimizada(dirImgPersonaje);
 
+		
 		//Seteo del color
-		//Seteo del color
-		std::string name1 = Parser::getInstancia().getPersonajes().at(0)->getNombre();
-		std::string name2 = Parser::getInstancia().getPersonajes().at(1)->getNombre();
+		std::string pelea = Parser::getInstancia().getPelea();
+		
 		int xPixelSuperficie = 0;
 		int yPixelSuperficie = 0;
 		//Si ambos personajes son iguales
-		if (name1 == name2){
+		if ((pelea == "scorpion VS scorpion") || (pelea == "liuKang VS liuKang"))
+		{
 			ControlDeColor color = ControlDeColor(SuperficieDos);
 			Uint32 myPixel = color.GetPixel(SuperficieDos, xPixelSuperficie, yPixelSuperficie);
 

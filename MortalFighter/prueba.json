@@ -62,8 +62,13 @@
             "Salto": "Salto",
             "SaltoDiagonal": "SaltoDiagonal",
             "Caida": "Caida",
-            "nombre": "LiuKang"
+            "nombre": "Scoprion"
 
+        }
+    ],
+    "pelea": [
+        { 
+            "fighters": "scorpion VS scorpion"
         }
     ],
 
