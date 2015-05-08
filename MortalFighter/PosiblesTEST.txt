@@ -1,0 +1,9 @@
+                                             Posibles test para 
+Estado                          TEST                                                       CORRIGIO
+ -                         h final = hfinal
+ -                         ingresar hfinal > hinicial
+ -                         ingresa hinicial / final > 360
+ -                         ingresa hinicial / final < 0
+ -                         ingresar desplazamiento >360
+ -                         ingresar desplazamiento >360
+ -                         ingresar hinicial o final o desplazamiento como una letra

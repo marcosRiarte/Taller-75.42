@@ -48,10 +48,10 @@
     <Text Include="ReadMe.txt">
       <Filter>lib</Filter>
     </Text>
-    <Text Include="E:\Datos\LISTAdeFALLAS.txt">
+    <Text Include="Botones del controlador.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="Botones del controlador.txt">
+    <Text Include="PosiblesTEST.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
