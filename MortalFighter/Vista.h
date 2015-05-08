@@ -12,11 +12,14 @@ class Vista
 public:	
 	Vista(Mundo* unMundo, Sprite* unSprite);
 	void actualizar();
+	void habilitarVibracion();
+	void deshabilitarVibracion();
 	SDL_Surface* cargarSuperficieOptimizada(std::string dirImagen);
 	~Vista();
 
 private:
 	int vibraciones;
+	bool vibracion;
 
 	Sprite* elSprite;
 	SDL_Window* ventana;

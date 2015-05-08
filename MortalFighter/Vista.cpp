@@ -7,8 +7,9 @@
 
 Vista::Vista(Mundo* unMundo, Sprite* unSprite)
 {	
-	//PRUEBA
+	//VIBRACION
 	vibraciones = 0;
+	vibracion = false;
 
 	// Usa filtro anisotropico
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
@@ -154,7 +155,7 @@ void Vista::actualizar(){
 
 	// referencias más utilizadas al actualizar la vista
 	std::vector<Personaje*> personajesVista = Parser::getInstancia().getPersonajes();
-	Ventana ventanaVista = Parser::getInstancia().getVentana();	
+	Ventana ventanaVista = Parser::getInstancia().getVentana();
 
 	//Parametros de la ventana
 
@@ -174,7 +175,7 @@ void Vista::actualizar(){
 
 	// Correcion al desplazamiento del personaje que no sobrepase el
 	// escenario con su ancho.
-	xPjUno *= anchoEscenario / (anchoEscenario + anchoPjUno +4);
+	xPjUno *= anchoEscenario / (anchoEscenario + anchoPjUno + 4);
 
 	// Correcion al desplazamiento del personaje que no sobrepase el
 	// escenario con su ancho.
@@ -199,7 +200,7 @@ void Vista::actualizar(){
 	if (xPjDos + anchoPjDos > anchoVentana - camaraXLog)
 		PjDosEstaEnBordeDer = true;
 	if (xPjDos < -camaraXLog)
-		PjDosEstaEnBordeIzq = true;	
+		PjDosEstaEnBordeIzq = true;
 	bool PjDosEstaEnBorde = PjDosEstaEnBordeIzq || PjDosEstaEnBordeDer;
 
 	MOV_TIPO mov1 = refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0);
@@ -220,16 +221,16 @@ void Vista::actualizar(){
 		if (PjDosEstaEnBordeDer && (mov2 == IZQ))
 			refMundo->LiberarCuerpos();
 	}
-	
+
 
 	if (PjUnoEstaEnBorde && !PjDosEstaEnBorde) {
-		camaraXLog += personajesVista[0]->getDeltaX();		
+		camaraXLog += personajesVista[0]->getDeltaX();
 	}
 	if (!PjUnoEstaEnBorde && PjDosEstaEnBorde) {
-		camaraXLog += personajesVista[1]->getDeltaX();		
+		camaraXLog += personajesVista[1]->getDeltaX();
 	}
 
-	if (PjUnoEstaEnBordeIzq && PjDosEstaEnBordeIzq){ 
+	if (PjUnoEstaEnBordeIzq && PjDosEstaEnBordeIzq){
 		if ((mov1 == IZQ) && (mov2 == IZQ))
 			camaraXLog += personajesVista[0]->getDeltaX();
 		else if (mov2 == IZQ)
@@ -252,58 +253,58 @@ void Vista::actualizar(){
 			camaraXLog += personajesVista[1]->getDeltaX();
 	}
 
-		//camaraXLog += personajesVista[0]->getDeltaX();
+	//camaraXLog += personajesVista[0]->getDeltaX();
 
-	//Lo siguiente es para vibrar la camara
-	bool golpeado = false;
-	for (int i = 0; i < personajesVista.size(); i++){
-		if ((personajesVista.at(i)->getEstado() == P_ALTADER) || (personajesVista.at(i)->getEstado() == P_ALTAIZQ)){
-			golpeado = true;
-			break;
+	//Vibracion de la camara
+	if (vibracion){
+		bool golpeado = false;
+		for (int i = 0; i < personajesVista.size(); i++){
+			if ((personajesVista.at(i)->getEstado() == P_ALTADER) || (personajesVista.at(i)->getEstado() == P_ALTAIZQ)){
+				golpeado = true;
+				break;
+			}
 		}
-	}
-
-	/*Este es el codigo que deberia ir en realidad pero todavia no hay gancho
-	if (personajesVista.at(0)->getEstado() == GOLPEADODER){
-		if (personajesVista.at(1)->getEstado() == GANCHO_IZQ){
-			golpeado = true;
-		}
-	}
-	else {
-		if (personajesVista.at(0)->getEstado() == GOLPEADOIZQ){
-			if (personajesVista.at(1)->getEstado() == GANCHO_DER){
+		/*Este es el codigo que deberia ir en realidad pero todavia no hay gancho
+		if (personajesVista.at(0)->getEstado() == GOLPEADODER){
+			if (personajesVista.at(1)->getEstado() == GANCHO_IZQ){
 				golpeado = true;
 			}
 		}
-	}
-	else{
-		if (personajesVista.at(1)->getEstado() == GOLPEADODER){
-			if (personajesVista.at(0)->getEstado() == GANCHO_IZQ){
-			golpeado = true;
-			}
-		}
 		else {
-			if (personajesVista.at(1)->getEstado() == GOLPEADOIZQ){
-				if (personajesVista.at(0)->getEstado() == GANCHO_DER){
+			if (personajesVista.at(0)->getEstado() == GOLPEADOIZQ){
+				if (personajesVista.at(1)->getEstado() == GANCHO_DER){
 					golpeado = true;
 				}
 			}
 		}
-	}
-	*/
-
-	if (golpeado) vibraciones++;
-	else vibraciones = 0;
-	
-	if (vibraciones != 0){
-		if (vibraciones % 2 == 0){
-			camaraXLog = camaraXLog - 5;
-		}
 		else{
-			camaraXLog = camaraXLog + 5;
+			if (personajesVista.at(1)->getEstado() == GOLPEADODER){
+				if (personajesVista.at(0)->getEstado() == GANCHO_IZQ){
+				golpeado = true;
+				}
+			}
+			else {
+				if (personajesVista.at(1)->getEstado() == GOLPEADOIZQ){
+					if (personajesVista.at(0)->getEstado() == GANCHO_DER){
+						golpeado = true;
+					}
+				}
+			}
+		}
+		*/
+
+		if (golpeado) vibraciones++;
+		else vibraciones = 0;
+
+		if (vibraciones != 0){
+			if (vibraciones % 2 == 0){
+				camaraXLog = camaraXLog - 5;
+			}
+			else{
+				camaraXLog = camaraXLog + 5;
+			}
 		}
 	}
-
 	
 
 	if (!PjUnoEstaEnBorde && !PjDosEstaEnBorde)
@@ -603,6 +604,17 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		SDL_SetRenderTarget(renderer, NULL);
 	}
 }
+
+
+void Vista::habilitarVibracion(){
+	vibracion = true;
+}
+
+
+void Vista::deshabilitarVibracion(){
+	vibracion = false;
+}
+
 
 Vista::~Vista()
 {		
