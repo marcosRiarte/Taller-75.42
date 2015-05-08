@@ -18,7 +18,8 @@ public:
 	Controlador* getControlador1();
 	Controlador* getControlador2();
 	std::vector<Personaje*> getPersonajes() const;
-	std::vector<Capa*> getCapas() const;	
+	std::vector<Capa*> getCapas() const;
+	std::vector<int> getColorAlternativo();
 	std::string Parser::getPelea() const;
 	static void FreeInstancia();
 
@@ -33,6 +34,7 @@ private:
 	Controlador* controlador1;
 	Controlador* controlador2;
 	std::string pelea;
+	std::vector<int> colorAlternativo;
 	virtual ~Parser();
 
 	Parser(Parser const&) = delete;

@@ -66,21 +66,20 @@
 
         }
     ],
-    "pelea": [
+    "pelea": 
         { 
-            "fighters": "scorpion VS scorpion"
-        }
-    ],
+           "fighters": "scorpion VS scorpion"
+        },
+    
 
-    "color_alternativo": [
+    "color_alternativo": 
         {
-            "h_inicial": 40,
-            "h_final": 45,
-            "desplazamiento": 30
+          "h_inicial": 40,
+          "h_final": 45,
+          "desplazamiento": 30
 
-        }
-    ],
-
+        },
+    
     "control_1": {
         "arriba": "up",
         "abajo": "down",

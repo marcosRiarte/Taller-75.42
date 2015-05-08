@@ -53,6 +53,12 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define SALTODIAGONAL_DEFAULT "SaltoDiagonal"
 #define CAIDA_DEFAULT "Caida"
 
+#define PELEA_INICIAL "scorpion VS scorpion"
+
+#define H_INICIAL 40
+#define H_FINAL 45
+#define DESPLAZAMIENTO 30
+
 #define GOLPEADO_DEFAULT "Golpeado"
 #define AGACHARSE_DEFAULT "Agacharse"
 #define PATADAALTA_DEFAULT "PatadaAlta"

@@ -2,6 +2,8 @@
 #include "Vista.h"
 #include "Mundo.h"
 #include "Log.h"
+#include "ControlDeColor.h"
+
 
 Vista::Vista(Mundo* unMundo, Sprite* unSprite)
 {	
@@ -77,9 +79,52 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite)
 		SDL_Surface* SuperficieUno = cargarSuperficieOptimizada(dirImgPersonaje);
 		SDL_Surface* SuperficieDos = cargarSuperficieOptimizada(dirImgPersonaje);
 
-		//Seteo del color
-		//SDL_SetColorKey(Superficie, SDL_TRUE, SDL_MapRGB(Superficie->format, 0, 0xFF, 0xFF));
+		//Seteo del color		
+		std::string pelea = Parser::getInstancia().getPelea();
+		int h_inicio = Parser::getInstancia().getColorAlternativo().at(0);
+		int h_final = Parser::getInstancia().getColorAlternativo().at(1);;
+		int deplazamiento = Parser::getInstancia().getColorAlternativo().at(2);
 
+		int xPixelSuperficie = 0;
+		int yPixelSuperficie = 0;
+		//Si ambos personajes son iguales
+		if ((pelea == "scorpion VS scorpion") || (pelea == "liuKang VS liuKang"))
+		{
+			ControlDeColor color = ControlDeColor(SuperficieDos);
+			if (SDL_MUSTLOCK(SuperficieDos))
+			{
+				int bloqueoDeSuperficie = SDL_LockSurface(SuperficieDos);
+				if (bloqueoDeSuperficie == 0)
+				{
+					std::cout << "superficie bloqueada con exito";
+				}
+			}
+
+			//La variable xPixelSuperficie sera la coordenada x en el pixel e ira de 0 a 100
+			//La variable yPixelSuperficie sera la coordenada y en el pixel e ira de 0 a 100
+
+			//	for (int xPixelSuperficie = 0; xPixelSuperficie < 100; xPixelSuperficie++)
+			//	{
+			//		for (int yPixelSuperficie = 0; yPixelSuperficie < 100; yPixelSuperficie++)
+			//		{
+
+
+
+			//	}
+
+			//}
+			//SDL_SetColorKey(Superficie, SDL_TRUE, SDL_MapRGB(Superficie->format, 0, 0xFF, 0xFF));
+
+			// Actualizamos la pantalla parar mostrar el cambio
+
+			//int flip = SDL_Flip(SuperficieDos);
+
+			// Una vez dibujado procedemos a desbloquear la superficie siempre y cuando hubiese sido bloqueada
+			if (SDL_MUSTLOCK(SuperficieDos))
+			{
+				SDL_UnlockSurface(SuperficieDos);
+			}
+		}//Fin del if
 
 		//Creación de la textura sobre la superficie
 		texturaSpriteUno = SDL_CreateTextureFromSurface(renderer, SuperficieUno);
@@ -91,7 +136,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite)
 		//Ordeno las capas por su zindex para ser dibujadas
 		OrdenarCapas();
 
-		//   Se crea textura para dibujar sensores
+		// Se crea textura para dibujar sensores
 		SDL_Surface* sup = cargarSuperficieOptimizada("ima/bkg/texturaVerde.png");
 		texturaVerde = SDL_CreateTextureFromSurface(renderer, sup);
 		SDL_FreeSurface(sup);
