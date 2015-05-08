@@ -7,6 +7,9 @@
 
 Vista::Vista(Mundo* unMundo, Sprite* unSprite)
 {	
+	//PRUEBA
+	vibraciones = 0;
+
 	// Usa filtro anisotropico
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 	// Se inicia SDL_image
@@ -251,6 +254,58 @@ void Vista::actualizar(){
 
 		//camaraXLog += personajesVista[0]->getDeltaX();
 
+	//Lo siguiente es para vibrar la camara
+	bool golpeado = false;
+	for (int i = 0; i < personajesVista.size(); i++){
+		if ((personajesVista.at(i)->getEstado() == P_ALTADER) || (personajesVista.at(i)->getEstado() == P_ALTAIZQ)){
+			golpeado = true;
+			break;
+		}
+	}
+
+	/*Este es el codigo que deberia ir en realidad pero todavia no hay gancho
+	if (personajesVista.at(0)->getEstado() == GOLPEADODER){
+		if (personajesVista.at(1)->getEstado() == GANCHO_IZQ){
+			golpeado = true;
+		}
+	}
+	else {
+		if (personajesVista.at(0)->getEstado() == GOLPEADOIZQ){
+			if (personajesVista.at(1)->getEstado() == GANCHO_DER){
+				golpeado = true;
+			}
+		}
+	}
+	else{
+		if (personajesVista.at(1)->getEstado() == GOLPEADODER){
+			if (personajesVista.at(0)->getEstado() == GANCHO_IZQ){
+			golpeado = true;
+			}
+		}
+		else {
+			if (personajesVista.at(1)->getEstado() == GOLPEADOIZQ){
+				if (personajesVista.at(0)->getEstado() == GANCHO_DER){
+					golpeado = true;
+				}
+			}
+		}
+	}
+	*/
+
+	if (golpeado) vibraciones++;
+	else vibraciones = 0;
+	
+	if (vibraciones != 0){
+		if (vibraciones % 2 == 0){
+			camaraXLog = camaraXLog - 5;
+		}
+		else{
+			camaraXLog = camaraXLog + 5;
+		}
+	}
+
+	
+
 	if (!PjUnoEstaEnBorde && !PjDosEstaEnBorde)
 		refMundo->LiberarCuerpos();
 	
@@ -363,7 +418,8 @@ std::string Vista::GetEstadoDelPersonaje(ESTADO estadoPersonaje, Personaje* pers
 void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 {
 	Ventana ventanaVista = Parser::getInstancia().getVentana();
-	float anchoVentana = ventanaVista.getAncho();	
+
+	float anchoVentana = ventanaVista.getAncho();
 	int anchoVentanaPx = ventanaVista.getAnchoPx();
 	int altoVentanaPx = ventanaVista.getAltoPx();
 	float anchoEscenario = Parser::getInstancia().getEscenario().getAncho();

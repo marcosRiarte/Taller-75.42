@@ -16,6 +16,8 @@ public:
 	~Vista();
 
 private:
+	int vibraciones;
+
 	Sprite* elSprite;
 	SDL_Window* ventana;
 	SDL_Renderer* renderer;
