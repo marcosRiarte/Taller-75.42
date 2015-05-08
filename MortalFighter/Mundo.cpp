@@ -166,13 +166,16 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 		if ((movimientos.at(0) == P_ALTA) || (unCuerpo->getEstado() == P_ALTADER)){
 			for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
-				if ((sensoresOtroCuerpo->at(i)->getHitbox()) && (sensoresCuerpo->at(0)->hayInterseccion(sensoresOtroCuerpo->at(i)->getPosicion(), sensoresOtroCuerpo->at(0)->getAncho(), sensoresOtroCuerpo->at(0)->getAlto())))
-					elOtroCuerpo->notificarObservadores(GOLPEADOIZQ);
-				estadoAnteriorPj2 = GOLPEADOIZQ;
-			}
+				if (elOtroCuerpo->getEstado() != GOLPEADOIZQ){
+					if ((sensoresOtroCuerpo->at(i)->getHitbox()) && (sensoresCuerpo->at(0)->hayInterseccion(sensoresOtroCuerpo->at(i)->getPosicion(), sensoresOtroCuerpo->at(0)->getAncho(), sensoresOtroCuerpo->at(0)->getAlto())))
+						elOtroCuerpo->notificarObservadores(GOLPEADOIZQ);
+						estadoAnteriorPj2 = GOLPEADOIZQ;
+					}
+				}
+
 		}
 		//aca deberia tener en cuenta ademas si no estoy en estado golpeado, por que si me pegaron se tiene que interrumpir
-		if (unCuerpo->GetDemora() > 0) {
+		if ( (unCuerpo->GetDemora() > 0) && (unCuerpo->getEstado() != GOLPEADOIZQ) ) {
 			unCuerpo->DisminuirDemora();
 			if (nuevoEstado != GOLPEADOIZQ)
 				nuevoEstado = estadoAnteriorPj1;
@@ -183,6 +186,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		if ((movimientos.at(0) == QUIETO) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = QUIETODER;
 		}
+
 		}
 
 		unCuerpo->SetSensorActivoStr(nuevoEstado);
