@@ -98,7 +98,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			elOtroCuerpo = Cuerpos.at(0);
 		}
 
-		if (movimientos.at(0) == DER){
+		if ((movimientos.at(0) == DER) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = DER_DER;
 			if (elOtroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
 				unCuerpo->mover(DISTANCIA);
@@ -107,7 +107,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		}
 
 
-		if (movimientos.at(0) == IZQ){
+		if ((movimientos.at(0) == IZQ) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = IZQ_DER;
 			if (elOtroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
 				unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
@@ -116,19 +116,19 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		}
 
 
-		if ((movimientos.at(0) == ARRIBA)){
+		if ((movimientos.at(0) == ARRIBA) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = ARRIBA_DER;
 			estadoAnteriorPj1 = nuevoEstado;
 			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
 		}
 
-		if ((movimientos.at(0) == SALTODER)){
+		if ((movimientos.at(0) == SALTODER) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = SALTODER_DER;
 			estadoAnteriorPj1 = nuevoEstado;
 			unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
 		}
 
-		if ((movimientos.at(0) == SALTOIZQ)){
+		if ((movimientos.at(0) == SALTOIZQ) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = SALTOIZQ_DER;
 			estadoAnteriorPj1 = nuevoEstado;
 			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
@@ -136,7 +136,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 		//xjose estoy mandando fruta, nuevo estado "abajo derecha" y abajo izq???
 
-		if (movimientos.at(0) == ABAJO){
+		if ((movimientos.at(0) == ABAJO) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = ABAJO_DER;
 			estadoAnteriorPj1 = nuevoEstado;
 		}
