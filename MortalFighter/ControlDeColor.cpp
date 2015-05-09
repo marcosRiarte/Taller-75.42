@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "ControlDeColor.h"
+#include <Math.h>
 
-//Pagina 133 de tutorial sdl
-ControlDeColor::ControlDeColor(SDL_Surface* Superficie)
+ControlDeColor::ControlDeColor(SDL_Surface* superficie)
 {
+	this->superficie = superficie;
 }
 
 /*Sustituye el color del píxel (x, y) de la superficie surface por el color que recibe en el parámtro pixel*/
@@ -59,8 +60,8 @@ void ControlDeColor::PutPixel(SDL_Surface *superficie, int x, int y, Uint32 pixe
 	}
 }
 
-
-// devuelve el color del píxel de la posición (x, y) de la superficie
+// devuelve el color del píxel de la posición (x, y) de la superficie en un formato de BPF 32Bits s/s,
+//si devuelve 0, el formato no es reconocido.
 Uint32 ControlDeColor::GetPixel(SDL_Surface *superficie, int x, int y)
 {
 	// Obtenemos la profunidad de color
@@ -108,43 +109,338 @@ Uint32 ControlDeColor::GetPixel(SDL_Surface *superficie, int x, int y)
 
 }
 //Convierte la superficie de formato RGB a HSV , devuelve 0 si todo ok, sino devuelve -1
-int ControlDeColor::HSVtoRGB()
+std::vector<int> ControlDeColor::HSVtoRGB(double H, int pixelX, int pixelY, double S, double V)
 {
-	Uint8 *rojo = new Uint8();
-	Uint8 *verde = new Uint8();
-	Uint8 *azul = new Uint8();
+	
+	std::vector<int> nuevoColor;
+	int R, G, B, A;
 
-	return 0;
+	if (H > 360){
+		std::cout << "Fallo la conversion de RGBA a HSV";
+	}
+	if (H == -1)
+	{
+		std::cout << "Fallo la conversion de la H";
+	}
+	double Hi = H / 60;
+	double seis = 6;
+	double c = V * S;
+	double f = remainder(Hi, 2) - 1;
+	double X = c * (1 - (abs(f)));  //Ver sie abs es el modulo
+	double m = V - c;
+
+	//Si es RGBA
+	if ((Hi >= 0) && (Hi < 1))     //Remplazar por un case
+	{
+		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+		{
+			A = (int)*(this->alpha);  //A
+			R = c + m;                //R
+			G = X + m;          //G
+			B = m;                  //B
+		}
+		else{
+
+			B = m;             //B
+			G = (int)X + m;             //G 
+			R = (int)c + m;             //R
+			A = (int)*(this->alpha); //A
+		}
+	}
+	if ((Hi >= 1) && (Hi < 2))
+	{
+		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+		{
+
+			A = (int)*(this->alpha);     //A
+			R = (int)X + m;              //R
+			G = (int)c + m;             //G
+			B = m;                     //B
+		}
+		else
+		{
+			B = m;                  //B
+			G = (int)c + m;         //G
+			R = (int)X + m;         //R
+			A = (int)*(this->alpha); //A
+		}
+	}
+
+	if ((Hi >= 2) && (Hi < 3))
+	{
+		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+		{
+			A = (int)*(this->alpha); //A
+			R = m;             //R
+			G = c + m;             //G
+			B = (int)X + m;        //B
+		}
+		else
+		{
+			B = (int)X + m;       //B
+			G = (int)c + m;        //G        
+			R = m;              //R     
+			A = (int)*(this->alpha); //A          
+		}
+	}
+
+	if ((Hi >= 3) && (Hi < 4))
+	{
+		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+		{
+			A = (int)*(this->alpha);
+			R = m;
+			G = (int)X + m;
+			B = (int)c + m;
+		}
+		else
+		{
+			B = (int)c + m;
+			G = (int)X + m;
+			R = m;
+			A = (int)*(this->alpha);
+		}
+	}
+
+	if ((Hi >= 4) && (Hi < 5))
+	{
+		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+		{
+			A = (int)*(this->alpha);
+			R = (int)X + m;
+			G = m;
+			B = (int)c + m;
+		}
+		else
+		{
+			B = (int)c + m;
+			G = m;
+			R = (int)X + m;
+			A = (int)*(this->alpha);
+		}
+	}
+
+	if ((Hi >= 5) && (Hi < 6))
+	{
+		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+		{
+			A = (int)*(this->alpha);
+			R = (int)c + m;
+			G = m;
+			B = (int)X + m;
+		}
+		else
+		{
+			B = (int)X + m;
+			G = m;
+			R = (int)c + m;
+			A = (int)*(this->alpha);
+		}
+	}
+	/*Uint8 *p = (Uint8 *) colorPixel;
+	//Si es big endian
+	if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
+
+	// Calculamos cada una de las componentes de color ,3 bytes, 3 posiciones
+	p[R] = (colorPixel >> 16) & 0xFF; //Realiza un AND con 0xff
+	p[G] = (colorPixel >> 8) & 0xFF;
+	p[B] = colorPixel & 0xFF;
+
+	}
+	else {
+	// Calculamos cada una de las componentes de color, 3 bytes, 3 posiciones
+
+	p[R] = colorPixel & 0xFF;
+	p[G] = (colorPixel >> 8) & 0xFF;
+	p[B] = (colorPixel >> 16) & 0xFF;
+
+	}*/
+	return nuevoColor;
 }
-//Convierte la superficie de formato HSV a RGB , devuelve el valor de H , si es invalido devuelve -1
+
+//Convierte la superficie de formato RGB a HSV , devuelve el valor de H , si es invalido devuelve -1
 //Rango de valore va de 0 a 255
-double ControlDeColor::RGBtoHSV()
+double ControlDeColor::RGBtoHSV(int h_inicio, int h_final, int desplazamiento, SDL_Surface *superficie, int x, int y)
 {
 	double H = -1;
-	const int MAX = 255;
-	const int MIN = 0;
+	double Hi = -1;
+	//Repara la h_inicial ,h_final y el desplazamiento de entrada si estos superan 360
+	if (h_inicio > 360)
+	{
+		h_inicio =  this->reductorDeVueltas(h_inicio);
+		Log::getInstancia().logearMensajeEnModo("HUE Inicial MAYOR A 360 ,se corrije ", Log::MODO_WARNING);
+	}
+	if (h_final > 360)
+	{
+		h_final = this->reductorDeVueltas(h_final);
+		Log::getInstancia().logearMensajeEnModo("HUE Final MAYOR A 360 ,se corrije ", Log::MODO_WARNING);
+	}
 
-	if (MAX == MIN) {
-		return H = -1;
+	if (desplazamiento > 360)
+	{
+		desplazamiento = this->reductorDeVueltas(desplazamiento);
+		Log::getInstancia().logearMensajeEnModo("DESPLAZAMIENTO MAYOR A 360 ,se corrije ", Log::MODO_WARNING);
+	}
+	
+	//Si el dato de entrada tiene un valor negativo , toma el angulo en el sentido opuesto.
+	
+	if (h_inicio < 0)
+	{
+		h_inicio = 360 + (h_inicio);
+	}
+	if (h_final < 0)
+	{
+		h_final = 360 + (h_final);
+	}
+	
+	//Lee un pixel ,calcula H y si H esta en el rango valido le aplica la tranSformacion.
+
+	Uint32 colorPixel = ControlDeColor::GetPixel(superficie, x, y);//Color encriptado en 4 bytes de un pixel
+
+	//Levanto en cada puntero(rojo,verde ,azul,alpha) el valor en 8 bits de cada uno
+	SDL_GetRGBA(colorPixel, superficie->format, this->rojo, this->verde, this->azul, this->alpha);
+	
+	int red = (int)*(this->rojo); //Casteo el valor como un entero debe estar entre 255 y 0 
+	int green = (int)*(this->verde);
+	int blue = (int)*(this->azul);
+
+	//std::cout << red;
+	//std::cout << green;
+	//std::cout << blue;
+	//Calculo el maximo entre los 3 compoentes del color
+	int M = ControlDeColor::maximoEntreRGB(red, green, blue);
+	int m = ControlDeColor::minimoEntreRGB(red, green, blue);
+	int c = M - m;
+
+	//Si la diferencia c es 0 entonces H no esta definido
+	if (c == 0)
+	{
+		H = 0;
+	}
+	else{
+		Hi = ((green - blue) / c);
+
+		if (M == red)
+		{
+			H = 60 * (remainder(Hi, 6.0));
+		}
+		if (M == green)
+		{
+			H = 60 * (((blue - red) / c) + 2);
+		}
+		if (M == blue)
+		{
+			H = 60 * (((red - green) / c) + 4);
+		}
+	}//Fin del else
+
+	if ((H >= h_inicio) && (H <= h_final))
+	{
+		H = H + desplazamiento;
 	}
 	else
-		if ((R == MAX) && (G >= B))
-		{
-			H = 60 + ((G - B) / (MAX - MIN)) + 0;  //TRANSFORMAR A GRADOS
-		}
-	if ((R == MAX) && (G < B))
 	{
-		H = 60 + ((G - B) / (MAX - MIN)) + 360;
+		H = -1;
 	}
-	if (G == MAX){
-		H = 60 + ((B - R) / (MAX - MIN)) + 120;
-	}
-	if (B == MAX){
-		H = 60 + ((R - G) / (MAX - MIN)) + 240;
-	}
+	//Corrijo si el resultado es mayor a 360 grados
+	H = this->reductorDeVueltas(H);
 	return H;
-
 }
+
+double ControlDeColor::reductorDeVueltas(double h)
+{
+	if (h > 360)
+	{
+		h = ((h / 360) - trunc(h / 360)) * 360;   //Ver si es el TRUNC QUE NESCESITO->( DIVISON - PARTE ENTERA) = PARTE DECIMAL
+	}
+
+	return h;
+}
+
+//Devuelve la componete S de HSV
+double ControlDeColor::obtenerSaturacion(int red, int green, int blue)
+{
+	double S = -1;
+	int maximo = this->maximoEntreRGB(red, green, blue);
+	int minimo = this->minimoEntreRGB(red, green, blue);
+	if (maximo == 0)
+	{
+		S = 0;
+	}
+	else
+	{
+		S = (maximo - minimo) / maximo;
+	}
+	return S;
+}
+
+//Devuelve la componete V de HSV
+double ControlDeColor::obtenerBrillo(int red, int green, int blue)
+{
+	int maximo = this->maximoEntreRGB(red, green, blue);
+	double V = maximo;
+	return V;
+}
+
+int ControlDeColor::maximoEntreRGB(int red, int green, int blue)
+{
+	int max = -1;
+
+	if ((red >= green) && (red >= blue))
+	{
+		max = red;
+	}
+	if ((green >= red) && (green >= blue))
+	{
+		max = green;
+	}
+
+	if ((blue >= red) && (blue >= green))
+	{
+		max = blue;
+	}
+	return max;
+}
+int ControlDeColor::minimoEntreRGB(int red, int blue, int green)
+{
+	int min = -1;
+
+	if ((red <= green) && (red <= blue))
+	{
+		min = red;
+	}
+	if ((green <= red) && (green <= blue))
+	{
+		min = green;
+	}
+
+	if ((blue <= red) && (blue <= green))
+	{
+		min = blue;
+	}
+	return min;
+}
+Uint8* ControlDeColor::getRojo()
+{
+	return this->rojo;
+}
+
+Uint8* ControlDeColor::getVerde()
+{
+	return this->verde;
+}
+
+Uint8* ControlDeColor::getAzul()
+{
+	return this->azul;
+}
+
+Uint8* ControlDeColor::getAlpha()
+{
+	return this->alpha;
+}
+
+
 float  ControlDeColor::radianesAGrados(float anguloRad)
 {
 	float anguloGrad = (anguloRad / M_PI)*180.0;
@@ -156,11 +452,25 @@ float  ControlDeColor::radianesAGrados(float anguloRad)
 	}
 	return anguloGrad;
 }
+
 float  ControlDeColor::gradosARadianes(float anguloGrad)
 {
 	return (anguloGrad / 180.0)*M_PI;
 }
 
+SDL_Surface* ControlDeColor::getSuperficie()
+{
+	return this->superficie;
+}
+
 ControlDeColor::~ControlDeColor()
 {
+	//Borra los punteros de los colores
+	delete rojo;
+	delete verde;
+	delete azul;
+	delete alpha;
 }
+
+
+

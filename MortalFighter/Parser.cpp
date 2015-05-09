@@ -131,8 +131,6 @@ bool Parser::parsear(std::string nombreDelArchivo)
 		
 	}
 
-	
-
 	Json::Value capas;
 	capas = raiz["capas"];
 	float anchoCapas;
