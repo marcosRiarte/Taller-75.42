@@ -45,7 +45,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		Mundo* unMundo = new Mundo(vecGravedad, unSprite);
 		Vista* unaVista = new Vista(unMundo, unSprite);
 		//HABILITAR VIBRACION
-		unaVista->habilitarVibracion();
+		//unaVista->habilitarVibracion();
 		Cuerpo *unCuerpo = new Cuerpo(defCuerpo(), controladorUno, (float)(Parser::getInstancia().getEscenario().getAncho() / 2.3));
 		unCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
 		unCuerpo->setSensores(unSprite->getSensores());		
