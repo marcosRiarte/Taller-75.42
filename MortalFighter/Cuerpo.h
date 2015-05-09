@@ -47,6 +47,10 @@ public:
 		sensores = sensoresNuevo;
 	}
 
+	void setEstadoAnterior(ESTADO unestadoAnterior){
+		estadoAnterior = unestadoAnterior;
+	}
+
 	// Le pasa el nombre del estado actual para activar los sensores correspondientes
 	inline void SetSensorActivoStr(ESTADO estadoActual)
 	{
@@ -162,6 +166,7 @@ public:
 
 	void mover(float unaDistancia);
 	ESTADO getEstado();
+	ESTADO getEstadoAnterior();
 
 private:
 	std::vector<Sensor*>* getSensoresActivos() const;
@@ -173,9 +178,9 @@ private:
 	float yPiso;
 	bool estaFrenado;
 	int demora; // esto deberia ser privado y con metodo incrementar demora o disminuir demora... es para que reproduzca bien la patada
-
+	int demoraAux;
 	ESTADO nuevoEstado;
-	
+	ESTADO estadoAnterior;
 	
 	std::vector<std::vector<Sensor*>*> sensores;
 	std::string sensorActivoStr;

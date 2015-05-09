@@ -48,14 +48,22 @@ ESTADO Cuerpo::getEstado()
 	return observador->getEstado();
 }
 
+ESTADO Cuerpo::getEstadoAnterior()
+{
+	return estadoAnterior;
+}
+
 void Cuerpo::setDemora(int demoratiempo)
 {
-	if(demoratiempo >= 0) demora = demoratiempo;
+	if (demoratiempo >= 0){
+		demora = demoratiempo;
+		demoraAux = demora;
+	}
 }
 
 void Cuerpo::DisminuirDemora()
 {
-	int demoraAux = demora;
+	
 	demoraAux--;
 	if (demoraAux >= 0) demora = demoraAux;
 
