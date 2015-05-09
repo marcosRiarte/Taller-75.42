@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Cuerpo.h"
 
-Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo,float posicionEnX)
+Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo, float posicionEnX, float posicionEnY)
 {
 	controlador = controladorNuevo;
 	nombre = unaDefCuerpo.nombre;
@@ -9,6 +9,7 @@ Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo,float
 	velocidad = unaDefCuerpo.velocidad;
 	masa = unaDefCuerpo.masa;
 	posicion.x = posicionEnX;
+	posicion.y = posicionEnY;
 	yPiso = Parser::getInstancia().getEscenario().getYPiso();
 	posicion.y = yPiso;
 	estaFrenado = unaDefCuerpo.estaFrenado;

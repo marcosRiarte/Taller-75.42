@@ -46,13 +46,13 @@ int _tmain(int argc, _TCHAR* argv[])
 		Vista* unaVista = new Vista(unMundo, unSprite);
 		//HABILITAR VIBRACION
 		//unaVista->habilitarVibracion();
-		Cuerpo *unCuerpo = new Cuerpo(defCuerpo(), controladorUno, (float)(Parser::getInstancia().getEscenario().getAncho() / 2.3));
+		Cuerpo *unCuerpo = new Cuerpo(defCuerpo(), controladorUno, (float)(Parser::getInstancia().getEscenario().getAncho() / 2.3), (float)(Parser::getInstancia().getEscenario().getAlto()-Parser::getInstancia().getEscenario().getYPiso()));
 		unCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
 		unCuerpo->setSensores(unSprite->getSensores());		
 
 		unMundo->agregarCuerpo(unCuerpo);
 
-		Cuerpo *otroCuerpo = new Cuerpo(defCuerpo(), controladorDos, (float)(Parser::getInstancia().getEscenario().getAncho() / 1.8));
+		Cuerpo *otroCuerpo = new Cuerpo(defCuerpo(), controladorDos, (float)(Parser::getInstancia().getEscenario().getAncho() / 1.8), (float)(Parser::getInstancia().getEscenario().getAlto() - Parser::getInstancia().getEscenario().getYPiso()));
 		otroCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(1));
 		otroCuerpo->setSensores(unSprite->getSensores());
 

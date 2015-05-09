@@ -13,8 +13,6 @@ struct defCuerpo
 		masa = 15.0f;
 		demora = 0;
 		estaFrenado = false;
-		//xjose NO INSULTARME
-		estaGolpeado = false; // PARA PROBARLO RAPIDAMENTE
 	}
 
 	std::string nombre;
@@ -28,7 +26,7 @@ struct defCuerpo
 class Cuerpo
 {
 public:
-	Cuerpo(const  defCuerpo unaDefCuerpo, Controlador* controladorNuevo, float posicionEnX);
+	Cuerpo(const  defCuerpo unaDefCuerpo, Controlador* controladorNuevo, float posicionEnX, float posicionEnY);
 
 	inline const vector2D& getPosicion() const
 	{
