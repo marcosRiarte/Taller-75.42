@@ -50,12 +50,14 @@ ESTADO Cuerpo::getEstado()
 
 void Cuerpo::setDemora(int demoratiempo)
 {
-	demora = demoratiempo;
+	if(demoratiempo >= 0) demora = demoratiempo;
 }
 
 void Cuerpo::DisminuirDemora()
 {
-	demora = demora--;
+	int demoraAux = demora;
+	demoraAux--;
+	if (demoraAux >= 0) demora = demoraAux;
 
 }
 

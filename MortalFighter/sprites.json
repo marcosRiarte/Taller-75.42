@@ -1,9 +1,17 @@
 {
-    "sprites": 
-        {
-            "imagen": "ima/sprites/player2.png",
-            "coordenadas": {
-                "Salto": [
+    "sprites": {
+        "imagen": "ima/sprites/player2.png", //no se tiene en cuenta
+        "coordenadas": {
+            "Salto": {
+                "sensores": [
+                    {
+                        "x": 1,
+                        "y": 3043,
+                        "ancho": 200,
+                        "alto": 200
+                    }
+                ],
+                "secuenciaSprites": [
                     {
                         "x": 1,
                         "y": 3043,
@@ -46,8 +54,18 @@
                         "ancho": 256,
                         "alto": 576
                     }
+                ]
+            },
+            "Caminar": {
+                "sensores": [
+                    {
+                        "x": 1,
+                        "y": 3043,
+                        "ancho": 256,
+                        "alto": 494
+                    }
                 ],
-                "Caminar": [
+                "secuenciaSprites": [
                     {
                         "x": 1,
                         "y": 1025,
@@ -78,8 +96,18 @@
                         "ancho": 256,
                         "alto": 494
                     }
+                ]
+            },
+            "SaltoDiagonal": {
+                "sensores": [
+                    {
+                        "x": 1,
+                        "y": 3043,
+                        "ancho": 256,
+                        "alto": 494
+                    }
                 ],
-                "SaltoDiagonal": [
+                "secuenciaSprites": [
                     {
                         "x": 154,
                         "y": 1068,
@@ -122,8 +150,18 @@
                         "ancho": 154,
                         "alto": 264
                     }
+                ]
+            },
+            "Quieto": {
+                "sensores": [
+                    {
+                        "x": 1,
+                        "y": 3043,
+                        "ancho": 256,
+                        "alto": 494
+                    }
                 ],
-                "Quieto": [
+                "secuenciaSprites": [
                     {
                         "x": 1,
                         "y": 1,
@@ -161,6 +199,169 @@
                         "alto": 494
                     }
                 ]
+            },
+			"Agacharse": {
+                "sensores": [
+                    {
+                        "x": 1,
+                        "y": 3043,
+                        "ancho": 256,
+                        "alto": 494
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 154,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 308,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 462,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 616,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 770,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 924,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 1078,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    }
+                ]
+            },
+			"PatadaAlta": {
+                "sensores": [
+                    {
+                        "x": 1,
+                        "y": 3043,
+                        "ancho": 256,
+                        "alto": 494
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 154,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 308,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 462,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 616,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 770,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 924,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 1078,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    }
+                ]
+            },
+			"Golpeado": {
+                "sensores": [
+                    {
+                        "x": 1,
+                        "y": 3043,
+                        "ancho": 256,
+                        "alto": 494
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 154,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 308,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 462,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 616,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 770,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 924,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    },
+                    {
+                        "x": 1078,
+                        "y": 1068,
+                        "ancho": 154,
+                        "alto": 264
+                    }
+                ]
             }
-        }        
-}
+        }
+    }
+    }

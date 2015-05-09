@@ -349,5 +349,8 @@
     <Image Include="ima\sprites\ScorpionMK3U.png">
       <Filter>Resource Files\ima\sprites</Filter>
     </Image>
+    <Image Include="ima\bkg\texturaVerde.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
   </ItemGroup>
 </Project>

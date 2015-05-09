@@ -98,7 +98,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			elOtroCuerpo = Cuerpos.at(0);
 		}
 
-		if (movimientos.at(0) == DER){
+		if ((movimientos.at(0) == DER) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = DER_DER;
 			if (elOtroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
 				unCuerpo->mover(DISTANCIA);
@@ -107,7 +107,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		}
 
 
-		if (movimientos.at(0) == IZQ){
+		if ((movimientos.at(0) == IZQ) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = IZQ_DER;
 			if (elOtroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
 				unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
@@ -116,19 +116,19 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		}
 
 
-		if ((movimientos.at(0) == ARRIBA)){
+		if ((movimientos.at(0) == ARRIBA) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = ARRIBA_DER;
 			estadoAnteriorPj1 = nuevoEstado;
 			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
 		}
 
-		if ((movimientos.at(0) == SALTODER)){
+		if ((movimientos.at(0) == SALTODER) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = SALTODER_DER;
 			estadoAnteriorPj1 = nuevoEstado;
 			unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
 		}
 
-		if ((movimientos.at(0) == SALTOIZQ)){
+		if ((movimientos.at(0) == SALTOIZQ) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = SALTOIZQ_DER;
 			estadoAnteriorPj1 = nuevoEstado;
 			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
@@ -136,7 +136,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 		//xjose estoy mandando fruta, nuevo estado "abajo derecha" y abajo izq???
 
-		if (movimientos.at(0) == ABAJO){
+		if ((movimientos.at(0) == ABAJO) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = ABAJO_DER;
 			estadoAnteriorPj1 = nuevoEstado;
 		}
@@ -166,13 +166,16 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 		if ((movimientos.at(0) == P_ALTA) || (unCuerpo->getEstado() == P_ALTADER)){
 			for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
-				if ((sensoresOtroCuerpo->at(i)->getHitbox()) && (sensoresCuerpo->at(0)->hayInterseccion(sensoresOtroCuerpo->at(i)->getPosicion(), sensoresOtroCuerpo->at(0)->getAncho(), sensoresOtroCuerpo->at(0)->getAlto())))
-					elOtroCuerpo->notificarObservadores(GOLPEADOIZQ);
-				estadoAnteriorPj2 = GOLPEADOIZQ;
-			}
+				if (elOtroCuerpo->getEstado() != GOLPEADOIZQ){
+					if ((sensoresOtroCuerpo->at(i)->getHitbox()) && (sensoresCuerpo->at(0)->hayInterseccion(sensoresOtroCuerpo->at(i)->getPosicion(), sensoresOtroCuerpo->at(0)->getAncho(), sensoresOtroCuerpo->at(0)->getAlto())))
+						elOtroCuerpo->notificarObservadores(GOLPEADOIZQ);
+						estadoAnteriorPj2 = GOLPEADOIZQ;
+					}
+				}
+
 		}
 		//aca deberia tener en cuenta ademas si no estoy en estado golpeado, por que si me pegaron se tiene que interrumpir
-		if (unCuerpo->GetDemora() > 0) {
+		if ( (unCuerpo->GetDemora() > 0) && (unCuerpo->getEstado() != GOLPEADOIZQ) ) {
 			unCuerpo->DisminuirDemora();
 			if (nuevoEstado != GOLPEADOIZQ)
 				nuevoEstado = estadoAnteriorPj1;
@@ -183,6 +186,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		if ((movimientos.at(0) == QUIETO) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = QUIETODER;
 		}
+
 		}
 
 		unCuerpo->SetSensorActivoStr(nuevoEstado);

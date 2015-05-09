@@ -11,6 +11,7 @@ struct defCuerpo
 		posicion = vector2D(0.0f, 0.0f);
 		velocidad = vector2D(0.0f, 0.0f);
 		masa = 15.0f;
+		demora = 0;
 		estaFrenado = false;
 		//xjose NO INSULTARME
 		estaGolpeado = false; // PARA PROBARLO RAPIDAMENTE

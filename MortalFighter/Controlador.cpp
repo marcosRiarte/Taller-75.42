@@ -39,17 +39,27 @@ int Controlador::cambiar(){
 			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::QUIT)) return FIN;
 
 			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::UP)){
-				if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HOLD)]){
+				if (movimientos.at(0) == DEFENSA){
 					movimientos.clear();
 					movimientos.push_back(DEFENSA);
 					return CONTINUAR;
 				}
-				if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::RIGHT)]){
+				if (movimientos.at(0) == ABAJO){
+					movimientos.clear();
+					movimientos.push_back(ABAJO);
+					return CONTINUAR;
+				}
+				if (movimientos.at(0) == DEFENSA_AGACHADO){
+					movimientos.clear();
+					movimientos.push_back(DEFENSA_AGACHADO);
+					return CONTINUAR;
+				}
+				if (movimientos.at(0) == DER){
 					movimientos.clear();
 					movimientos.push_back(SALTODER);
 					return CONTINUAR;
 				}
-				if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LEFT)]){
+				if (movimientos.at(0) == IZQ){
 					movimientos.clear();
 					movimientos.push_back(SALTOIZQ);
 					return CONTINUAR;
@@ -60,25 +70,11 @@ int Controlador::cambiar(){
 			}
 
 			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::DOWN)){
-				if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HOLD)]){
-					movimientos.push_back(DEFENSA);
+				if (movimientos.at(0) == DEFENSA){
+					movimientos.push_back(DEFENSA_AGACHADO);
 					return CONTINUAR;
 				}
-				if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::UP)]){
-					movimientos.clear();
-					movimientos.push_back(ARRIBA);
-					return CONTINUAR;
-				}
-				else if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LEFT)]){
-					movimientos.clear();
-					movimientos.push_back(IZQ);
-					return CONTINUAR;
-				}
-				else if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::RIGHT)]){
-					movimientos.clear();
-					movimientos.push_back(DER);
-					return CONTINUAR;
-				}
+
 				else{
 					movimientos.clear();
 					movimientos.push_back(ABAJO);
@@ -87,12 +83,22 @@ int Controlador::cambiar(){
 			}
 			
 			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::RIGHT)){
-				if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HOLD)]){
+				if (movimientos.at(0) == DEFENSA){
 					movimientos.clear();
 					movimientos.push_back(DEFENSA);
 					return CONTINUAR;
 				}
-				if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LEFT)]){
+				if (movimientos.at(0) == ABAJO){
+					movimientos.clear();
+					movimientos.push_back(ABAJO);
+					return CONTINUAR;
+				}
+				if (movimientos.at(0) == DEFENSA_AGACHADO){
+					movimientos.clear();
+					movimientos.push_back(DEFENSA_AGACHADO);
+					return CONTINUAR;
+				}
+				if (movimientos.at(0) == IZQ){
 					movimientos.clear();
 					movimientos.push_back(IZQ);
 					return CONTINUAR;
@@ -105,12 +111,22 @@ int Controlador::cambiar(){
 			}
 
 			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::LEFT)){
-				if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HOLD)]){
+				if (movimientos.at(0) == DEFENSA){
 					movimientos.clear();
 					movimientos.push_back(DEFENSA);
 					return CONTINUAR;
 				}
-				if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::RIGHT)]){
+				if (movimientos.at(0) == DEFENSA_AGACHADO){
+					movimientos.clear();
+					movimientos.push_back(DEFENSA_AGACHADO);
+					return CONTINUAR;
+				}
+				if (movimientos.at(0) == ABAJO){
+					movimientos.clear();
+					movimientos.push_back(ABAJO);
+					return CONTINUAR;
+				}
+				if (movimientos.at(0) == DER){
 					movimientos.clear();
 					movimientos.push_back(DER);
 					return CONTINUAR;
@@ -234,7 +250,7 @@ int Controlador::cambiar(){
 
 			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::HOLD)){
 				movimientos.clear();
-				if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::DOWN)]){
+				if (movimientos.at(0) == ABAJO){
 					movimientos.push_back(DEFENSA_AGACHADO);
 					return CONTINUAR;
 				}
@@ -375,6 +391,12 @@ int Controlador::cambiar(){
 		return CONTINUAR;
 	}
 
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::DOWN)]){
+		movimientos.clear();
+		movimientos.push_back(ABAJO);
+		return CONTINUAR;
+	}
+
 	if ((state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LEFT)]) && (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::RIGHT)]))
 		if ((movimientos.at(0) == DER) || (movimientos.at(0) == IZQ))
 			return CONTINUAR;
@@ -388,12 +410,6 @@ int Controlador::cambiar(){
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LEFT)]){
 		movimientos.clear();
 		movimientos.push_back(IZQ);
-		return CONTINUAR;
-	}
-
-	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::DOWN)]){
-		movimientos.clear();
-		movimientos.push_back(ABAJO);
 		return CONTINUAR;
 	}
 
