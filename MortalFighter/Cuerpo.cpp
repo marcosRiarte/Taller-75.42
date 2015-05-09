@@ -35,11 +35,8 @@ bool Cuerpo::estaEnPiso()
 	return true;
 }
 
-
-
 int Cuerpo::GetDemora()
 {
-	
 	return demora;
 }
 
@@ -55,18 +52,12 @@ ESTADO Cuerpo::getEstadoAnterior()
 
 void Cuerpo::setDemora(int demoratiempo)
 {
-	if (demoratiempo >= 0){
 		demora = demoratiempo;
-		demoraAux = demora;
-	}
 }
 
 void Cuerpo::DisminuirDemora()
 {
-	
-	demoraAux--;
-	if (demoraAux >= 0) demora = demoraAux;
-
+	demora--;
 }
 
 
@@ -78,6 +69,8 @@ bool Cuerpo::estaEnBorde()
 
 	return true;
 }
+
+
 
 void Cuerpo::sumarPosicion(const vector2D& unaPosicion)
 {

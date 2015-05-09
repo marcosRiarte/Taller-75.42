@@ -177,8 +177,7 @@ private:
 	Personaje* observador;
 	float yPiso;
 	bool estaFrenado;
-	int demora; // esto deberia ser privado y con metodo incrementar demora o disminuir demora... es para que reproduzca bien la patada
-	int demoraAux;
+	int demora;
 	ESTADO nuevoEstado;
 	ESTADO estadoAnterior;
 	

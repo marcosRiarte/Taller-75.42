@@ -32,4 +32,5 @@ private:
 	ESTADO estadoAnteriorPj2;
 	float yPiso;
 	std::vector<Cuerpo*> Cuerpos;
+	bool hayInterseccion(std::pair<float, float> unaPosicion, int unAncho, int unAlto, std::pair<float, float> otraPos, int otroAncho, int otoAlto);
 };

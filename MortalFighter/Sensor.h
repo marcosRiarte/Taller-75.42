@@ -8,7 +8,6 @@ public:
 	void setAlto(int alto);
 	void setAncho(int ancho);
 	void setHitbox(bool valorHitBox);
-	bool hayInterseccion(std::pair<float, float> unaPosicion, int unAncho, int unAlto);
 
 	bool getHitbox();
 	std::pair<float, float> getPosicion();

@@ -43,14 +43,6 @@ int Sensor::getAncho(){
 	return ancho;
 }
 
-bool Sensor::hayInterseccion(std::pair<float, float> unaPosicion, int unAncho, int unAlto){
-	if ((unaPosicion.first + unAncho < posicion.first) || (unaPosicion.first > ancho + posicion.first) || (unaPosicion.second + unAlto < posicion.second) || (unaPosicion.second > posicion.second+alto)){
-		return false;
-	}
-	return true;
-}
-
-
 std::string Sensor::getEstadoStr() const
 {
 	return estadoStr;

@@ -53,6 +53,22 @@ void Mundo::LiberarCuerpos()
 	}
 }
 
+std::pair<float, float> getPosicionAbsSensor(float x, float y, Cuerpo* unCuerpo){
+	std::pair<float, float> posicionOtroCuerpo;
+	int posX = x + unCuerpo->getPosicion().x;
+	int posY = y + unCuerpo->getPosicion().y;
+	posicionOtroCuerpo.first = posX;
+	posicionOtroCuerpo.second = posY;
+	return posicionOtroCuerpo;
+}
+
+bool Mundo::hayInterseccion(std::pair<float, float> unaPosicion, int unAncho, int unAlto, std::pair<float, float> otraPos, int otroAncho, int otroAlto){
+	if ((unaPosicion.first + unAncho < otraPos.first) || (unaPosicion.first > otroAncho + otraPos.first) || (unaPosicion.second + unAlto < otraPos.second) || (unaPosicion.second > otraPos.second + otroAlto)){
+		return false;
+	}
+	return true;
+}
+
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
 	ESTADO nuevoEstado = QUIETODER;
@@ -164,20 +180,24 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
 		std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
 
+		std::pair<float, float> posAbsOtroCuerpo;
+		std::pair<float, float> posAbsCuerpo;
+
 		if ((movimientos.at(0) == P_ALTA) || (unCuerpo->getEstado() == P_ALTADER)){
 			for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
 				if (elOtroCuerpo->getEstado() != GOLPEADOIZQ){
-					if ((sensoresOtroCuerpo->at(i)->getHitbox()) && (sensoresCuerpo->at(0)->hayInterseccion(sensoresOtroCuerpo->at(i)->getPosicion(), sensoresOtroCuerpo->at(0)->getAncho(), sensoresOtroCuerpo->at(0)->getAlto())))
+					posAbsOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(0)->getPosicion().first, sensoresOtroCuerpo->at(0)->getPosicion().second, elOtroCuerpo);
+					posAbsCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(0)->getPosicion().first, sensoresCuerpo->at(0)->getPosicion().second, unCuerpo);
+					if (hayInterseccion(posAbsCuerpo, sensoresCuerpo->at(0)->getAncho(), sensoresCuerpo->at(0)->getAlto(), posAbsOtroCuerpo, sensoresOtroCuerpo->at(i)->getAncho(), sensoresCuerpo->at(i)->getAlto()))
 						elOtroCuerpo->notificarObservadores(GOLPEADOIZQ);
 					}
 				}
-
 		}
 
 		//aca deberia tener en cuenta ademas si no estoy en estado golpeado, por que si me pegaron se tiene que interrumpir
 		if ( (unCuerpo->GetDemora() > 0)) {
 			unCuerpo->DisminuirDemora();
-			nuevoEstado = estadoAnterior;
+			nuevoEstado = unCuerpo->getEstadoAnterior();
 		}
 
 		if ((movimientos.at(0) == QUIETO) && (unCuerpo->GetDemora() <= 0)){
@@ -194,7 +214,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		/// integra posicion	
 		unCuerpo->sumarPosicion(unaVelocidad * difTiempo);
 		return nuevoEstado;
-	}
+}
 
 
 float Mundo::getYPiso() const
