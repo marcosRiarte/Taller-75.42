@@ -63,6 +63,8 @@ public:
 	float getAncho() const;
 	float getAlto() const;
 	int getZIndex() ;
+	int getEnergy();
+	void setEnergy(int);
 	std::string getOrientacion() const;
 	std::string getSprite() const;
 	std::string getCaminarParaAdelante() const;
@@ -72,6 +74,7 @@ public:
 	std::string getSaltoDiagonal() const;
 	std::string getCaida() const;
 	std::string getNombre() const;
+	
 	std::string getPatadaAlta() const;
 	std::string getAgacharse() const;
 	std::string getGolpeado() const;

@@ -95,7 +95,15 @@ std::string Personaje::getAgacharse() const
 	return agachado;
 }
 
+int  Personaje::getEnergy() 
+{
+	return this->energy;
+}
 
+void Personaje::setEnergy(int nuevaEnergia)
+{
+	this->energy = nuevaEnergia;
+}
 
 std::string Personaje::getNombre() const
 {
