@@ -187,13 +187,15 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 		if ((movimientos.at(0) == P_ALTA) || (unCuerpo->getEstado() == P_ALTADER)){
 			for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
-				if (elOtroCuerpo->getEstado() != GOLPEADOIZQ){
-					ManejadorULogicas manejadorUnidades;
-					posAbsOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(0)->getPosicion().first, sensoresOtroCuerpo->at(0)->getPosicion().second, elOtroCuerpo);
-					posAbsCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(0)->getPosicion().first, sensoresCuerpo->at(0)->getPosicion().second, unCuerpo);
-					if (hayInterseccion(posAbsCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(0)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(0)->getAlto()), posAbsOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto())))
-						elOtroCuerpo->notificarObservadores(GOLPEADOIZQ);
+				for (unsigned j = 0; j < sensoresCuerpo->size(); j++){
+					if (elOtroCuerpo->getEstado() != GOLPEADOIZQ){
+						ManejadorULogicas manejadorUnidades;
+						posAbsOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion().first, sensoresOtroCuerpo->at(j)->getPosicion().second, elOtroCuerpo);
+						posAbsCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion().first, sensoresCuerpo->at(i)->getPosicion().second, unCuerpo);
+						if (hayInterseccion(posAbsCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto())))
+							elOtroCuerpo->notificarObservadores(GOLPEADOIZQ);
 					}
+				}
 				}
 		}
 
