@@ -340,7 +340,7 @@
                         "esHitBox": true
                     },
                     {
-                        "x": 60,
+                        "x": 75,
                         "y": 0,
                         "ancho": 50,
                         "alto": 50,
@@ -351,7 +351,7 @@
                         "x": 40,
                         "y": 160,
                         "ancho": 110,
-                        "alto": 155,
+                        "alto": 135,
                         "nSprite": 0,
                         "esHitBox": true
                     }
