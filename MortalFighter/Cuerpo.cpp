@@ -11,7 +11,7 @@ Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo, floa
 	posicion.x = posicionEnX;
 	posicion.y = posicionEnY;
 	yPiso = Parser::getInstancia().getEscenario().getYPiso();
-	posicion.y = yPiso;
+	//posicion.y = yPiso;
 	estaFrenado = unaDefCuerpo.estaFrenado;
 	demora = unaDefCuerpo.demora; //xjose
 	sensorActivoStr = "";

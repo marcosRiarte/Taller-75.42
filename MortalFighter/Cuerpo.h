@@ -7,12 +7,13 @@ struct defCuerpo
 	// constructor con valores por defecto
 	defCuerpo()
 	{
-		nombre = "Scorpion"; //Xjose error esto esta hardco....
+		nombre = "Scorpion"; 
 		posicion = vector2D(0.0f, 0.0f);
 		velocidad = vector2D(0.0f, 0.0f);
 		masa = 15.0f;
 		demora = 0;
 		estaFrenado = false;
+		estaGolpeado = false;
 	}
 
 	std::string nombre;
