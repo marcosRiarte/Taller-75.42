@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Cuerpo.h"
 
-Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo, float posicionEnX, float posicionEnY)
+Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo, float posicionEnX, Personaje* unPersonaje)
 {
 	controlador = controladorNuevo;
 	nombre = unaDefCuerpo.nombre;
@@ -9,12 +9,12 @@ Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo, floa
 	velocidad = unaDefCuerpo.velocidad;
 	masa = unaDefCuerpo.masa;
 	posicion.x = posicionEnX;
-	posicion.y = posicionEnY;
 	yPiso = Parser::getInstancia().getEscenario().getYPiso();
-	//posicion.y = yPiso;
+	posicion.y = yPiso;
 	estaFrenado = unaDefCuerpo.estaFrenado;
 	demora = unaDefCuerpo.demora; //xjose
 	sensorActivoStr = "";
+	refPersonaje = unPersonaje;
 }
 
 std::vector<Sensor*>* Cuerpo::getSensoresActivos() const
@@ -71,7 +71,9 @@ bool Cuerpo::estaEnBorde()
 	return true;
 }
 
-
+Personaje* Cuerpo::getRefPersonaje(){
+	return refPersonaje;
+}
 
 void Cuerpo::sumarPosicion(const vector2D& unaPosicion)
 {

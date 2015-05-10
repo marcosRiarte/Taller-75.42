@@ -53,12 +53,19 @@ void Mundo::LiberarCuerpos()
 	}
 }
 
-std::pair<int, int> getPosicionAbsSensor(float x, float y, Cuerpo* unCuerpo){
+std::pair<int, int> getPosicionAbsSensor(std::pair<float, float> posSensor, Cuerpo* unCuerpo, float anchoDelSensor, bool invertido){
 	std::pair<int, int> posicionOtroCuerpo;
+	float posX, posY, posFinPj;
 	ManejadorULogicas manejadorUnidades;
+	if (!(invertido)){
+		posX = manejadorUnidades.darLongUnidades(posSensor.first) + unCuerpo->getPosicion().x;
+	}
+	else{
+		posFinPj = unCuerpo->getPosicion().x + unCuerpo->getRefPersonaje()->getAncho();
+		posX = posFinPj - manejadorUnidades.darLongUnidades(posSensor.first) - manejadorUnidades.darLongUnidades(anchoDelSensor);
+	}
 
-	int posX = manejadorUnidades.darLongUnidades(x) + unCuerpo->getPosicion().x;
-	int posY = manejadorUnidades.darLongUnidades(y) + unCuerpo->getPosicion().y;
+	posY = manejadorUnidades.darLongUnidades(posSensor.second) + unCuerpo->getPosicion().y;
 	posicionOtroCuerpo.first = posX;
 	posicionOtroCuerpo.second = posY;
 	return posicionOtroCuerpo;
@@ -77,6 +84,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
 	ESTADO nuevoEstado = QUIETODER;
 	std::vector<MOV_TIPO> movimientos = unCuerpo->getControlador()->getMovimientos();
+	bool invertido;
 
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 
@@ -120,9 +128,14 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			elOtroCuerpo = Cuerpos.at(0);
 		}
 
+		if (elOtroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
+			invertido = false;
+		else
+			invertido = true;
+
 		if ((movimientos.at(0) == DER) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado = DER_DER;
-			if (elOtroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
+			if (!(invertido))
 				unCuerpo->mover(DISTANCIA);
 			else
 				unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
@@ -184,17 +197,17 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
 		std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
 
-		std::pair<float, float> posAbsOtroCuerpo;
-		std::pair<float, float> posAbsCuerpo;
+		std::pair<float, float> posAbsSensoresOtroCuerpo;
+		std::pair<float, float> posAbsSensoresCuerpo;
 
 		if ((movimientos.at(0) == P_ALTA) || (unCuerpo->getEstado() == P_ALTADER)){
 			for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
 				for (unsigned j = 0; j < sensoresCuerpo->size(); j++){
 					if (elOtroCuerpo->getEstado() != GOLPEADOIZQ){
 						ManejadorULogicas manejadorUnidades;
-						posAbsOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion().first, sensoresOtroCuerpo->at(j)->getPosicion().second, elOtroCuerpo);
-						posAbsCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion().first, sensoresCuerpo->at(i)->getPosicion().second, unCuerpo);
-						if (!(sensoresCuerpo->at(i)->getHitbox()) && (sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto())))
+						posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), !invertido);
+						posAbsSensoresCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion(), unCuerpo, sensoresCuerpo->at(i)->getAncho(), invertido);
+						if (!(sensoresCuerpo->at(i)->getHitbox()) && (sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto())))
 							elOtroCuerpo->notificarObservadores(GOLPEADOIZQ);
 					}
 				}

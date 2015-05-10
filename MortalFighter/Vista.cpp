@@ -497,6 +497,9 @@ void Vista::DibujarCapasPosteriores(std::vector<Personaje*> personajesVista, flo
 
 void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 {
+	//Parámetro para ver si el jugador esta a izquierda o derecha.
+	bool invertido = (personajesVista.at(0)->getPosicionPx().first > personajesVista.at(1)->getPosicionPx().first);
+
 	//Parametros del personaje 1
 	int anchoPjUnoPx = manejadorULog.darLongPixels(personajesVista[0]->getAncho());
 	int altoPjUnoPx = manejadorULog.darLongPixels(personajesVista[0]->getAlto(), Parser::getInstancia().getVentana().getAltoPx(), Parser::getInstancia().getEscenario().getAlto());
@@ -557,7 +560,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	//Renderizar el sprite
 	SDL_Rect* cuadroActualUno;
-	if (personajesVista.at(0)->getPosicionPx().first > personajesVista.at(1)->getPosicionPx().first){
+	if (invertido){
 		cuadroActualUno = listaDeCuadrosUno->at((listaDeCuadrosUno->size() - 1) - (numeroDeCuadroUno / tiempoSecuenciaSpritesUno));
 	}
 	else{
@@ -582,7 +585,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	//Renderizar el sprite
 	SDL_Rect* cuadroActualDos;
-	if (personajesVista.at(1)->getPosicionPx().first > personajesVista.at(0)->getPosicionPx().first){
+	if (!invertido){
 		cuadroActualDos = listaDeCuadrosDos->at((listaDeCuadrosDos->size()-1) - (numeroDeCuadroDos / tiempoSecuenciaSpritesDos));
 	}
 	else{
@@ -595,7 +598,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	
 	//Se cargan ambos acorde a su posición relativa
-	if (personajesVista.at(0)->getPosicionPx().first > personajesVista.at(1)->getPosicionPx().first){
+	if (invertido){
 		SDL_RenderCopyEx(renderer, texturaSpriteUno, cuadroActualUno, &personajeUno, 0, NULL, SDL_FLIP_HORIZONTAL);
 		SDL_RenderCopy(renderer, texturaSpriteDos, cuadroActualDos, &personajeDos);
 	}
@@ -615,14 +618,24 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		SDL_SetTextureAlphaMod(texturaVerde, Alfa);
 
 		for (unsigned i = 0; i<sensoresCuerpo1->size(); i++){
-			r.x = sensoresCuerpo1->at(i)->getPosicion().first + personajeUno.x;
+			if (!(invertido)){
+				r.x = sensoresCuerpo1->at(i)->getPosicion().first + personajeUno.x;
+			}
+			else{
+				r.x = personajeUno.x + personajeUno.w - sensoresCuerpo1->at(i)->getPosicion().first - sensoresCuerpo1->at(i)->getAncho();
+			}
 			r.y = sensoresCuerpo1->at(i)->getPosicion().second + personajeUno.y;
 			r.w = sensoresCuerpo1->at(i)->getAncho();
 			r.h = sensoresCuerpo1->at(i)->getAlto();
 			SDL_RenderCopy(renderer, texturaVerde, NULL, &r);
 		}
 		for (unsigned i = 0; i < sensoresCuerpo2->size(); i++){
-			r2.x = sensoresCuerpo2->at(i)->getPosicion().first + personajeDos.x;
+			if (!(invertido)){
+				r2.x = personajeDos.x + personajeDos.w - sensoresCuerpo2->at(i)->getPosicion().first - sensoresCuerpo2->at(i)->getAncho();
+			}
+			else{
+				r2.x = sensoresCuerpo2->at(i)->getPosicion().first + personajeDos.x;
+			}
 			r2.y = sensoresCuerpo2->at(i)->getPosicion().second + personajeDos.y;
 			r2.w = sensoresCuerpo2->at(i)->getAncho();
 			r2.h = sensoresCuerpo2->at(i)->getAlto();

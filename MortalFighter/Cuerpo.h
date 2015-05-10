@@ -27,7 +27,7 @@ struct defCuerpo
 class Cuerpo
 {
 public:
-	Cuerpo(const  defCuerpo unaDefCuerpo, Controlador* controladorNuevo, float posicionEnX, float posicionEnY);
+	Cuerpo(const  defCuerpo unaDefCuerpo, Controlador* controladorNuevo, float posicionEnX, Personaje* refPersonaje);
 
 	inline const vector2D& getPosicion() const
 	{
@@ -167,6 +167,8 @@ public:
 	ESTADO getEstado();
 	ESTADO getEstadoAnterior();
 
+	Personaje* Cuerpo::getRefPersonaje();
+
 private:
 	std::vector<Sensor*>* getSensoresActivos() const;
 	Controlador* controlador;
@@ -179,7 +181,7 @@ private:
 	int demora;
 	ESTADO nuevoEstado;
 	ESTADO estadoAnterior;
-	
+	Personaje* refPersonaje;
 	std::vector<std::vector<Sensor*>*> sensores;
 	std::string sensorActivoStr;
 };
