@@ -65,6 +65,8 @@ std::pair<int, int> getPosicionAbsSensor(float x, float y, Cuerpo* unCuerpo){
 }
 
 bool Mundo::hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int unAlto, std::pair<int, int> otraPos, int otroAncho, int otroAlto){
+	if (!((unaPosicion.first >= 0 && unaPosicion.second >= 0) && (unAncho >= 0) && (unAlto >= 0) && (otraPos.first >= 0 && otraPos.second >= 0) && (otroAncho >= 0) && (otroAlto >= 0)))
+		return false;
 	if ((unaPosicion.first + unAncho < otraPos.first) || (unaPosicion.first > otroAncho + otraPos.first) || (unaPosicion.second + unAlto < otraPos.second) || (unaPosicion.second > otraPos.second + otroAlto)){
 		return false;
 	}
@@ -192,7 +194,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 						ManejadorULogicas manejadorUnidades;
 						posAbsOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion().first, sensoresOtroCuerpo->at(j)->getPosicion().second, elOtroCuerpo);
 						posAbsCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion().first, sensoresCuerpo->at(i)->getPosicion().second, unCuerpo);
-						if (hayInterseccion(posAbsCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto())))
+						if (!(sensoresCuerpo->at(i)->getHitbox()) && (sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto())))
 							elOtroCuerpo->notificarObservadores(GOLPEADOIZQ);
 					}
 				}
