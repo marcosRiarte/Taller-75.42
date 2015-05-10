@@ -595,13 +595,18 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	personajeDos.w = (int)round(relacionAnchoDos*cuadroActualDos->w);
 	personajeDos.h = (int)round(relacionAltoDos*cuadroActualDos->h);
 
+	float auxPj1 = (int)round(((relacionAnchoUno*cuadroActualUno->w) - manejadorULog.darLongPixels(personajesVista.at(0)->getAncho())) / 2);
+	float auxPj2 = (int)round(((relacionAnchoDos*cuadroActualDos->w) - manejadorULog.darLongPixels(personajesVista.at(1)->getAncho())) / 2);
 	
+
 	//Se cargan ambos acorde a su posición relativa
 	if (invertido){
+		personajeDos.x = personajeDos.x - auxPj2;
 		SDL_RenderCopyEx(renderer, texturaSpriteUno, cuadroActualUno, &personajeUno, 0, NULL, SDL_FLIP_HORIZONTAL);
 		SDL_RenderCopy(renderer, texturaSpriteDos, cuadroActualDos, &personajeDos);
 	}
 	else{
+		personajeUno.x = personajeUno.x - auxPj1;
 		SDL_RenderCopy(renderer, texturaSpriteUno, cuadroActualUno, &personajeUno);
 		SDL_RenderCopyEx(renderer, texturaSpriteDos, cuadroActualDos, &personajeDos, 0, NULL, SDL_FLIP_HORIZONTAL);
 	}
