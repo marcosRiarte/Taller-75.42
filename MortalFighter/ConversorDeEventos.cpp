@@ -10,8 +10,8 @@ ConversorDeEventos::CodigosDeEvento ConversorDeEventos::getCodigosDeEventoDeTecl
 	codigosDeEvento.hat = (Uint8)NULO;
 	codigosDeEvento.eje = false;
 	codigosDeEvento.flechas = false;
-	codigosDeEvento.ejeDesde = -10;
-	codigosDeEvento.ejeHasta = -10;
+	codigosDeEvento.ejeDesde = 0;
+	codigosDeEvento.ejeHasta = 0;
 	codigosDeEvento.scanCode = SDL_SCANCODE_INTERNATIONAL9;
 
 	//TECLADO
@@ -312,70 +312,61 @@ ConversorDeEventos::CodigosDeEvento ConversorDeEventos::getCodigosDeEventoDeTecl
 	}
 
 	//JOYSTICK 1
+	if (SDL_NumJoysticks() > 0){
+		codigosDeEvento.joystick = 0;
+	}
+
 	if (tecla == "j1_0" || tecla == "J1_0" || tecla == "j1_Button_0" || tecla == "J1_Button_0" || tecla == "j1_button_0" || tecla == "J1_button_0" || tecla == "J1_BUTTON_0" || tecla == "j1_Boton_0" || tecla == "J1_Boton_0" || tecla == "j1_boton_0" || tecla == "J1_boton_0" || tecla == "J1_BOTON_0"){
 		codigosDeEvento.jBoton = 0;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_1" || tecla == "J1_1" || tecla == "j1_Button_1" || tecla == "J1_Button_1" || tecla == "j1_button_1" || tecla == "J1_button_1" || tecla == "J1_BUTTON_1" || tecla == "j1_Boton_1" || tecla == "J1_Boton_1" || tecla == "j1_boton_1" || tecla == "J1_boton_1" || tecla == "J1_BOTON_1"){
 		codigosDeEvento.jBoton = 1;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_2" || tecla == "J1_2" || tecla == "j1_Button_2" || tecla == "J1_Button_2" || tecla == "j1_button_2" || tecla == "J1_button_2" || tecla == "J1_BUTTON_2" || tecla == "j1_Boton_2" || tecla == "J1_Boton_2" || tecla == "j1_boton_2" || tecla == "J1_boton_2" || tecla == "J1_BOTON_2"){
 		codigosDeEvento.jBoton = 2;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_3" || tecla == "J1_3" || tecla == "j1_Button_3" || tecla == "J1_Button_3" || tecla == "j1_button_3" || tecla == "J1_button_3" || tecla == "J1_BUTTON_3" || tecla == "j1_Boton_3" || tecla == "J1_Boton_3" || tecla == "j1_boton_3" || tecla == "J1_boton_3" || tecla == "J1_BOTON_3"){
 		codigosDeEvento.jBoton = 3;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_4" || tecla == "J1_4" || tecla == "j1_Button_4" || tecla == "J1_Button_4" || tecla == "j1_button_4" || tecla == "J1_button_4" || tecla == "J1_BUTTON_4" || tecla == "j1_Boton_4" || tecla == "J1_Boton_4" || tecla == "j1_boton_4" || tecla == "J1_boton_4" || tecla == "J1_BOTON_4"){
 		codigosDeEvento.jBoton = 4;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_5" || tecla == "J1_5" || tecla == "j1_Button_5" || tecla == "J1_Button_5" || tecla == "j1_button_5" || tecla == "J1_button_5" || tecla == "J1_BUTTON_5" || tecla == "j1_Boton_5" || tecla == "J1_Boton_5" || tecla == "j1_boton_5" || tecla == "J1_boton_5" || tecla == "J1_BOTON_5"){
 		codigosDeEvento.jBoton = 5;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_6" || tecla == "J1_6" || tecla == "j1_Button_6" || tecla == "J1_Button_6" || tecla == "j1_button_6" || tecla == "J1_button_6" || tecla == "J1_BUTTON_6" || tecla == "j1_Boton_6" || tecla == "J1_Boton_6" || tecla == "j1_boton_6" || tecla == "J1_boton_6" || tecla == "J1_BOTON_6"){
 		codigosDeEvento.jBoton = 6;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_7" || tecla == "J1_7" || tecla == "j1_Button_7" || tecla == "J1_Button_7" || tecla == "j1_button_7" || tecla == "J1_button_7" || tecla == "J1_BUTTON_7" || tecla == "j1_Boton_7" || tecla == "J1_Boton_7" || tecla == "j1_boton_7" || tecla == "J1_boton_7" || tecla == "J1_BOTON_7"){
 		codigosDeEvento.jBoton = 7;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_8" || tecla == "J1_8" || tecla == "j1_Button_8" || tecla == "J1_Button_8" || tecla == "j1_button_8" || tecla == "J1_button_8" || tecla == "J1_BUTTON_8" || tecla == "j1_Boton_8" || tecla == "J1_Boton_8" || tecla == "j1_boton_8" || tecla == "J1_boton_8" || tecla == "J1_BOTON_8"){
 		codigosDeEvento.jBoton = 8;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_9" || tecla == "J1_9" || tecla == "j1_Button_9" || tecla == "J1_Button_9" || tecla == "j1_button_9" || tecla == "J1_button_9" || tecla == "J1_BUTTON_9" || tecla == "j1_Boton_9" || tecla == "J1_Boton_9" || tecla == "j1_boton_9" || tecla == "J1_boton_9" || tecla == "J1_BOTON_9"){
 		codigosDeEvento.jBoton = 9;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_10" || tecla == "J1_10" || tecla == "j1_Button_10" || tecla == "J1_Button_10" || tecla == "j1_button_10" || tecla == "J1_button_10" || tecla == "J1_BUTTON_10" || tecla == "j1_Boton_10" || tecla == "J1_Boton_10" || tecla == "j1_boton_10" || tecla == "J1_boton_10" || tecla == "J1_BOTON_10"){
 		codigosDeEvento.jBoton = 10;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_11" || tecla == "J1_11" || tecla == "j1_Button_11" || tecla == "J1_Button_11" || tecla == "j1_button_11" || tecla == "J1_button_11" || tecla == "J1_BUTTON_11" || tecla == "j1_Boton_11" || tecla == "J1_Boton_11" || tecla == "j1_boton_11" || tecla == "J1_boton_11" || tecla == "J1_BOTON_11"){
 		codigosDeEvento.jBoton = 11;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_analog_up" || tecla == "j1_Analog_Up" || tecla == "j1_ANALOG_UP" || tecla == "J1_analog_up" || tecla == "J1_Analog_Up" || tecla == "J1_ANALOG_UP" || tecla == "j1_analog_arriba" || tecla == "j1_Analog_Arriba" || tecla == "j1_ANALOG_ARRIBA" || tecla == "J1_analog_arriba" || tecla == "J1_Analog_Arriba" || tecla == "J1_ANALOG_ARRIBA" || tecla == "j1_analogic_up" || tecla == "j1_Analogic_Up" || tecla == "j1_ANALOGIC_UP" || tecla == "J1_analogic_up" || tecla == "J1_Analogic_Up" || tecla == "J1_ANALOG_UP" || tecla == "j1_analogic_arriba" || tecla == "j1_Analogic_Arriba" || tecla == "j1_ANALOGIC_ARRIBA" || tecla == "J1_analogic_arriba" || tecla == "J1_Analogic_Arriba" || tecla == "J1_ANALOGIC_ARRIBA" || tecla == "j1_analogico_up" || tecla == "j1_Analogico_Up" || tecla == "j1_ANALOGICO_UP" || tecla == "J1_analogico_up" || tecla == "J1_Analogico_Up" || tecla == "J1_ANALOGICO_UP" || tecla == "j1_analogico_arriba" || tecla == "j1_Analogico_Arriba" || tecla == "j1_ANALOGICO_ARRIBA" || tecla == "J1_analogico_arriba" || tecla == "J1_Analogico_Arriba" || tecla == "J1_ANALOGICO_ARRIBA"){
 		codigosDeEvento.eje = true;
 		codigosDeEvento.jBoton = 1;
-		codigosDeEvento.joystick = 0;
 		codigosDeEvento.ejeDesde = -32768;
 		codigosDeEvento.ejeHasta = -2000;
 		return codigosDeEvento;
@@ -383,7 +374,6 @@ ConversorDeEventos::CodigosDeEvento ConversorDeEventos::getCodigosDeEventoDeTecl
 	if (tecla == "j1_analog_down" || tecla == "j1_Analog_Down" || tecla == "j1_ANALOG_DOWN" || tecla == "J1_analog_down" || tecla == "J1_Analog_Down" || tecla == "J1_ANALOG_DOWN" || tecla == "j1_analog_abajo" || tecla == "j1_Analog_Abajo" || tecla == "j1_ANALOG_ABAJO" || tecla == "J1_analog_abajo" || tecla == "J1_Analog_Abajo" || tecla == "J1_ANALOG_ABAJO" || tecla == "j1_analogic_down" || tecla == "j1_Analogic_Down" || tecla == "j1_ANALOGIC_Down" || tecla == "J1_analogic_Down" || tecla == "J1_Analogic_Down" || tecla == "J1_ANALOG_DOWN" || tecla == "j1_analogic_down" || tecla == "j1_Analogic_Down" || tecla == "j1_ANALOGIC_DOWN" || tecla == "J1_analogic_down" || tecla == "J1_Analogic_Down" || tecla == "J1_ANALOGIC_DOWN" || tecla == "j1_analogico_down" || tecla == "j1_Analogico_Down" || tecla == "j1_ANALOGICO_DOWN" || tecla == "J1_analogico_up" || tecla == "J1_Analogico_Down" || tecla == "J1_ANALOGICO_DOWN" || tecla == "j1_analogico_abajo" || tecla == "j1_Analogico_Abajo" || tecla == "j1_ANALOGICO_ABAJO" || tecla == "J1_analogico_abajo" || tecla == "J1_Analogico_Abajo" || tecla == "J1_ANALOGICO_ABAJO"){
 		codigosDeEvento.eje = true;
 		codigosDeEvento.jBoton = 1;
-		codigosDeEvento.joystick = 0;
 		codigosDeEvento.ejeDesde = 2000;
 		codigosDeEvento.ejeHasta = 32767;
 		return codigosDeEvento;
@@ -391,7 +381,6 @@ ConversorDeEventos::CodigosDeEvento ConversorDeEventos::getCodigosDeEventoDeTecl
 	if (tecla == "j1_analog_right" || tecla == "j1_Analog_Right" || tecla == "j1_ANALOG_RIGHT" || tecla == "J1_analog_right" || tecla == "J1_Analog_Right" || tecla == "J1_ANALOG_RIGHT" || tecla == "j1_analog_derecha" || tecla == "j1_Analog_Derecha" || tecla == "j1_ANALOG_DERECHA" || tecla == "J1_analog_derecha" || tecla == "J1_Analog_Derecha" || tecla == "J1_ANALOG_DERECHA" || tecla == "j1_analogic_right" || tecla == "j1_Analogic_Right" || tecla == "j1_ANALOGIC_RIGHT" || tecla == "J1_analogic_right" || tecla == "J1_Analogic_Right" || tecla == "J1_ANALOG_RIGHT" || tecla == "j1_analogic_derecha" || tecla == "j1_Analogic_Derecha" || tecla == "j1_ANALOGIC_DERECHA" || tecla == "J1_analogic_derecha" || tecla == "J1_Analogic_Derecha" || tecla == "J1_ANALOGIC_DERECHA" || tecla == "j1_analogico_right" || tecla == "j1_Analogico_Right" || tecla == "j1_ANALOGICO_RIGHT" || tecla == "J1_analogico_right" || tecla == "J1_Analogico_Right" || tecla == "J1_ANALOGICO_RIGHT" || tecla == "j1_analogico_derecha" || tecla == "j1_Analogico_Derecha" || tecla == "j1_ANALOGICO_DERECHA" || tecla == "J1_analogico_derecha" || tecla == "J1_Analogico_Derecha" || tecla == "J1_ANALOGICO_DERECHA"){
 		codigosDeEvento.eje = true;
 		codigosDeEvento.jBoton = 0;
-		codigosDeEvento.joystick = 0;
 		codigosDeEvento.ejeDesde = 2000;
 		codigosDeEvento.ejeHasta = 32767;
 		return codigosDeEvento;
@@ -399,101 +388,87 @@ ConversorDeEventos::CodigosDeEvento ConversorDeEventos::getCodigosDeEventoDeTecl
 	if (tecla == "j1_analog_left" || tecla == "j1_Analog_Left" || tecla == "j1_ANALOG_LEFT" || tecla == "J1_analog_left" || tecla == "J1_Analog_Left" || tecla == "J1_ANALOG_LEFT" || tecla == "j1_analog_izquierda" || tecla == "j1_Analog_Izquierda" || tecla == "j1_ANALOG_IZQUIERDA" || tecla == "J1_analog_izquierda" || tecla == "J1_Analog_Izquierda" || tecla == "J1_ANALOG_IZQUIERDA" || tecla == "j1_analogic_left" || tecla == "j1_Analogic_Left" || tecla == "j1_ANALOGIC_LEFT" || tecla == "J1_analogic_left" || tecla == "J1_Analogic_Left" || tecla == "J1_ANALOG_LEFT" || tecla == "j1_analogic_izquierda" || tecla == "j1_Analogic_Izquierda" || tecla == "j1_ANALOGIC_IZQUIERDA" || tecla == "J1_analogic_izquierda" || tecla == "J1_Analogic_Izquierda" || tecla == "J1_ANALOGIC_IZQUIERDA" || tecla == "j1_analogico_left" || tecla == "j1_Analogico_Left" || tecla == "j1_ANALOGICO_LEFT" || tecla == "J1_analogico_left" || tecla == "J1_Analogico_Left" || tecla == "J1_ANALOGICO_LEFT" || tecla == "j1_analogico_izquierda" || tecla == "j1_Analogico_Izquierda" || tecla == "j1_ANALOGICO_IZQUIERDA" || tecla == "J1_analogico_izquierda" || tecla == "J1_Analogico_Izquierda" || tecla == "J1_ANALOGICO_IZQUIERDA"){
 		codigosDeEvento.eje = true;
 		codigosDeEvento.jBoton = 0;
-		codigosDeEvento.joystick = 0;
 		codigosDeEvento.ejeDesde = -32768;
 		codigosDeEvento.ejeHasta = -2000;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_up" || tecla == "j1_Up" || tecla == "j1_UP" || tecla == "J1_up" || tecla == "J1_Up" || tecla == "J1_UP" || tecla == "j1_arriba" || tecla == "j1_Arriba" || tecla == "j1_ARRIBA" || tecla == "J1_arriba" || tecla == "J1_Arriba" || tecla == "J1_ARRIBA"){
 		codigosDeEvento.hat = SDL_HAT_UP;
-		codigosDeEvento.joystick = 0;
 		codigosDeEvento.flechas = true;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_down" || tecla == "j1_Down" || tecla == "j1_DOWN" || tecla == "J1_down" || tecla == "J1_Down" || tecla == "J1_DOWN" || tecla == "j1_abajo" || tecla == "j1_Abajo" || tecla == "j1_ABAJO" || tecla == "J1_abajo" || tecla == "J1_Abajo" || tecla == "J1_ABAJO"){
 		codigosDeEvento.hat = SDL_HAT_DOWN;
-		codigosDeEvento.joystick = 0;
 		codigosDeEvento.flechas = true;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_right" || tecla == "j1_Right" || tecla == "j1_RIGHT" || tecla == "J1_right" || tecla == "J1_Right" || tecla == "J1_RIGHT" || tecla == "j1_derecha" || tecla == "j1_Derecha" || tecla == "j1_DERECHA" || tecla == "J1_derecha" || tecla == "J1_Derecha" || tecla == "J1_DERECHA"){
 		codigosDeEvento.hat = SDL_HAT_RIGHT;
-		codigosDeEvento.joystick = 0;
 		codigosDeEvento.flechas = true;
 		return codigosDeEvento;
 	}
 	if (tecla == "j1_left" || tecla == "j1_Left" || tecla == "j1_LEFT" || tecla == "J1_left" || tecla == "J1_Left" || tecla == "J1_LEFT" || tecla == "j1_izquierda" || tecla == "j1_Izquierda" || tecla == "j1_IZQUIERDA" || tecla == "J1_izquierda" || tecla == "J1_Izquierda" || tecla == "J1_IZQUIERDA"){
 		codigosDeEvento.hat = SDL_HAT_LEFT;
-		codigosDeEvento.joystick = 0;
 		codigosDeEvento.flechas = true;
 		return codigosDeEvento;
 	}
 
 	//JOYSTICK 2
+	if (SDL_NumJoysticks() > 1){
+		codigosDeEvento.joystick = 1;
+	}
+
 	if (tecla == "j2_0" || tecla == "J2_0" || tecla == "j2_Button_0" || tecla == "J2_Button_0" || tecla == "j2_button_0" || tecla == "J2_button_0" || tecla == "J2_BUTTON_0" || tecla == "j2_Boton_0" || tecla == "J2_Boton_0" || tecla == "j2_boton_0" || tecla == "J2_boton_0" || tecla == "J2_BOTON_0"){
 		codigosDeEvento.jBoton = 0;
-		codigosDeEvento.joystick = 1;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_1" || tecla == "J2_1" || tecla == "j2_Button_1" || tecla == "J2_Button_1" || tecla == "j2_button_1" || tecla == "J2_button_1" || tecla == "J2_BUTTON_1" || tecla == "j2_Boton_1" || tecla == "J2_Boton_1" || tecla == "j2_boton_1" || tecla == "J2_boton_1" || tecla == "J2_BOTON_1"){
 		codigosDeEvento.jBoton = 1;
-		codigosDeEvento.joystick = 1;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_2" || tecla == "J2_2" || tecla == "j2_Button_2" || tecla == "J2_Button_2" || tecla == "j2_button_2" || tecla == "J2_button_2" || tecla == "J2_BUTTON_2" || tecla == "j2_Boton_2" || tecla == "J2_Boton_2" || tecla == "j2_boton_2" || tecla == "J2_boton_2" || tecla == "J2_BOTON_2"){
 		codigosDeEvento.jBoton = 2;
-		codigosDeEvento.joystick = 1;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_3" || tecla == "J2_3" || tecla == "j2_Button_3" || tecla == "J2_Button_3" || tecla == "j2_button_3" || tecla == "J2_button_3" || tecla == "J2_BUTTON_3" || tecla == "j2_Boton_3" || tecla == "J2_Boton_3" || tecla == "j2_boton_3" || tecla == "J2_boton_3" || tecla == "J2_BOTON_3"){
 		codigosDeEvento.jBoton = 3;
-		codigosDeEvento.joystick = 1;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_4" || tecla == "J2_4" || tecla == "j2_Button_4" || tecla == "J2_Button_4" || tecla == "j2_button_4" || tecla == "J2_button_4" || tecla == "J2_BUTTON_4" || tecla == "j2_Boton_4" || tecla == "J2_Boton_4" || tecla == "j2_boton_4" || tecla == "J2_boton_4" || tecla == "J2_BOTON_4"){
 		codigosDeEvento.jBoton = 4;
-		codigosDeEvento.joystick = 1;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_5" || tecla == "J2_5" || tecla == "j2_Button_5" || tecla == "J2_Button_5" || tecla == "j2_button_5" || tecla == "J2_button_5" || tecla == "J2_BUTTON_5" || tecla == "j2_Boton_5" || tecla == "J2_Boton_5" || tecla == "j2_boton_5" || tecla == "J2_boton_5" || tecla == "J2_BOTON_5"){
 		codigosDeEvento.jBoton = 5;
-		codigosDeEvento.joystick = 1;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_6" || tecla == "J2_6" || tecla == "j2_Button_6" || tecla == "J1_Button_6" || tecla == "j2_button_6" || tecla == "J2_button_6" || tecla == "J2_BUTTON_6" || tecla == "j2_Boton_6" || tecla == "J2_Boton_6" || tecla == "j2_boton_6" || tecla == "J2_boton_6" || tecla == "J2_BOTON_6"){
 		codigosDeEvento.jBoton = 6;
-		codigosDeEvento.joystick = 1;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_7" || tecla == "J2_7" || tecla == "j2_Button_7" || tecla == "J2_Button_7" || tecla == "j2_button_7" || tecla == "J2_button_7" || tecla == "J2_BUTTON_7" || tecla == "j2_Boton_7" || tecla == "J2_Boton_7" || tecla == "j2_boton_7" || tecla == "J2_boton_7" || tecla == "J2_BOTON_7"){
 		codigosDeEvento.jBoton = 7;
-		codigosDeEvento.joystick = 1;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_8" || tecla == "J2_8" || tecla == "j2_Button_8" || tecla == "J2_Button_8" || tecla == "j2_button_8" || tecla == "J2_button_8" || tecla == "J2_BUTTON_8" || tecla == "j2_Boton_8" || tecla == "J2_Boton_8" || tecla == "j2_boton_8" || tecla == "J2_boton_8" || tecla == "J2_BOTON_8"){
 		codigosDeEvento.jBoton = 8;
-		codigosDeEvento.joystick = 1;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_10" || tecla == "J2_10" || tecla == "j2_Button_10" || tecla == "J2_Button_10" || tecla == "j2_button_10" || tecla == "J2_button_10" || tecla == "J2_BUTTON_10" || tecla == "j2_Boton_10" || tecla == "J2_Boton_10" || tecla == "j2_boton_10" || tecla == "J2_boton_10" || tecla == "J2_BOTON_10"){
 		codigosDeEvento.jBoton = 10;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_11" || tecla == "J2_11" || tecla == "j2_Button_11" || tecla == "J2_Button_11" || tecla == "j2_button_11" || tecla == "J2_button_11" || tecla == "J2_BUTTON_11" || tecla == "j2_Boton_11" || tecla == "J2_Boton_11" || tecla == "j2_boton_11" || tecla == "J2_boton_11" || tecla == "J2_BOTON_11"){
 		codigosDeEvento.jBoton = 11;
-		codigosDeEvento.joystick = 0;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_9" || tecla == "J2_9" || tecla == "j2_Button_9" || tecla == "J2_Button_9" || tecla == "j2_button_9" || tecla == "J2_button_9" || tecla == "J2_BUTTON_9" || tecla == "j2_Boton_9" || tecla == "J2_Boton_9" || tecla == "j2_boton_9" || tecla == "J2_boton_9" || tecla == "J2_BOTON_9"){
 		codigosDeEvento.jBoton = 9;
-		codigosDeEvento.joystick = 1;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_analog_up" || tecla == "j2_Analog_Up" || tecla == "j2_ANALOG_UP" || tecla == "J2_analog_up" || tecla == "J2_Analog_Up" || tecla == "J2_ANALOG_UP" || tecla == "j2_analog_arriba" || tecla == "j2_Analog_Arriba" || tecla == "j2_ANALOG_ARRIBA" || tecla == "J2_analog_arriba" || tecla == "J2_Analog_Arriba" || tecla == "J2_ANALOG_ARRIBA" || tecla == "j2_analogic_up" || tecla == "j2_Analogic_Up" || tecla == "j2_ANALOGIC_UP" || tecla == "J2_analogic_up" || tecla == "J2_Analogic_Up" || tecla == "J2_ANALOG_UP" || tecla == "j2_analogic_arriba" || tecla == "j2_Analogic_Arriba" || tecla == "j2_ANALOGIC_ARRIBA" || tecla == "J2_analogic_arriba" || tecla == "J2_Analogic_Arriba" || tecla == "J2_ANALOGIC_ARRIBA" || tecla == "j2_analogico_up" || tecla == "j2_Analogico_Up" || tecla == "j2_ANALOGICO_UP" || tecla == "J2_analogico_up" || tecla == "J2_Analogico_Up" || tecla == "J2_ANALOGICO_UP" || tecla == "j2_analogico_arriba" || tecla == "j2_Analogico_Arriba" || tecla == "j2_ANALOGICO_ARRIBA" || tecla == "J2_analogico_arriba" || tecla == "J2_Analogico_Arriba" || tecla == "J2_ANALOGICO_ARRIBA"){
 		codigosDeEvento.eje = true;
 		codigosDeEvento.jBoton = 1;
-		codigosDeEvento.joystick = 1;
 		codigosDeEvento.ejeDesde = -32768;
 		codigosDeEvento.ejeHasta = -2000;
 		return codigosDeEvento;
@@ -501,7 +476,6 @@ ConversorDeEventos::CodigosDeEvento ConversorDeEventos::getCodigosDeEventoDeTecl
 	if (tecla == "j2_analog_down" || tecla == "j2_Analog_Down" || tecla == "j2_ANALOG_DOWN" || tecla == "J2_analog_down" || tecla == "J2_Analog_Down" || tecla == "J2_ANALOG_DOWN" || tecla == "j2_analog_abajo" || tecla == "j2_Analog_Abajo" || tecla == "j2_ANALOG_ABAJO" || tecla == "J2_analog_abajo" || tecla == "J2_Analog_Abajo" || tecla == "J2_ANALOG_ABAJO" || tecla == "j2_analogic_down" || tecla == "j2_Analogic_Down" || tecla == "j2_ANALOGIC_Down" || tecla == "J2_analogic_Down" || tecla == "J2_Analogic_Down" || tecla == "J2_ANALOG_DOWN" || tecla == "j2_analogic_down" || tecla == "j2_Analogic_Down" || tecla == "j2_ANALOGIC_DOWN" || tecla == "J2_analogic_down" || tecla == "J2_Analogic_Down" || tecla == "J2_ANALOGIC_DOWN" || tecla == "j2_analogico_down" || tecla == "j2_Analogico_Down" || tecla == "j2_ANALOGICO_DOWN" || tecla == "J2_analogico_up" || tecla == "J2_Analogico_Down" || tecla == "J2_ANALOGICO_DOWN" || tecla == "j2_analogico_abajo" || tecla == "j2_Analogico_Abajo" || tecla == "j2_ANALOGICO_ABAJO" || tecla == "J2_analogico_abajo" || tecla == "J2_Analogico_Abajo" || tecla == "J2_ANALOGICO_ABAJO"){
 		codigosDeEvento.eje = true;
 		codigosDeEvento.jBoton = 1;
-		codigosDeEvento.joystick = 1;
 		codigosDeEvento.ejeDesde = 2000;
 		codigosDeEvento.ejeHasta = 32767;
 		return codigosDeEvento;
@@ -509,7 +483,6 @@ ConversorDeEventos::CodigosDeEvento ConversorDeEventos::getCodigosDeEventoDeTecl
 	if (tecla == "j2_analog_right" || tecla == "j2_Analog_Right" || tecla == "j2_ANALOG_RIGHT" || tecla == "J2_analog_right" || tecla == "J2_Analog_Right" || tecla == "J2_ANALOG_RIGHT" || tecla == "j2_analog_derecha" || tecla == "j2_Analog_Derecha" || tecla == "j2_ANALOG_DERECHA" || tecla == "J2_analog_derecha" || tecla == "J2_Analog_Derecha" || tecla == "J2_ANALOG_DERECHA" || tecla == "j2_analogic_right" || tecla == "j2_Analogic_Right" || tecla == "j2_ANALOGIC_RIGHT" || tecla == "J2_analogic_right" || tecla == "J2_Analogic_Right" || tecla == "J2_ANALOG_RIGHT" || tecla == "j2_analogic_derecha" || tecla == "j2_Analogic_Derecha" || tecla == "j2_ANALOGIC_DERECHA" || tecla == "J2_analogic_derecha" || tecla == "J2_Analogic_Derecha" || tecla == "J2_ANALOGIC_DERECHA" || tecla == "j2_analogico_right" || tecla == "j2_Analogico_Right" || tecla == "j2_ANALOGICO_RIGHT" || tecla == "J2_analogico_right" || tecla == "J2_Analogico_Right" || tecla == "J2_ANALOGICO_RIGHT" || tecla == "j2_analogico_derecha" || tecla == "j2_Analogico_Derecha" || tecla == "j2_ANALOGICO_DERECHA" || tecla == "J2_analogico_derecha" || tecla == "J2_Analogico_Derecha" || tecla == "J2_ANALOGICO_DERECHA"){
 		codigosDeEvento.eje = true;
 		codigosDeEvento.jBoton = 0;
-		codigosDeEvento.joystick = 1;
 		codigosDeEvento.ejeDesde = 2000;
 		codigosDeEvento.ejeHasta = 32767;
 		return codigosDeEvento;
@@ -517,32 +490,27 @@ ConversorDeEventos::CodigosDeEvento ConversorDeEventos::getCodigosDeEventoDeTecl
 	if (tecla == "j2_analog_left" || tecla == "j2_Analog_Left" || tecla == "j2_ANALOG_LEFT" || tecla == "J2_analog_left" || tecla == "J2_Analog_Left" || tecla == "J2_ANALOG_LEFT" || tecla == "j2_analog_izquierda" || tecla == "j2_Analog_Izquierda" || tecla == "j2_ANALOG_IZQUIERDA" || tecla == "J2_analog_izquierda" || tecla == "J2_Analog_Izquierda" || tecla == "J2_ANALOG_IZQUIERDA" || tecla == "j2_analogic_left" || tecla == "j2_Analogic_Left" || tecla == "j2_ANALOGIC_LEFT" || tecla == "J2_analogic_left" || tecla == "J2_Analogic_Left" || tecla == "J2_ANALOG_LEFT" || tecla == "j2_analogic_izquierda" || tecla == "j2_Analogic_Izquierda" || tecla == "j2_ANALOGIC_IZQUIERDA" || tecla == "J2_analogic_izquierda" || tecla == "J2_Analogic_Izquierda" || tecla == "J2_ANALOGIC_IZQUIERDA" || tecla == "j2_analogico_left" || tecla == "j2_Analogico_Left" || tecla == "j2_ANALOGICO_LEFT" || tecla == "J2_analogico_left" || tecla == "J2_Analogico_Left" || tecla == "J2_ANALOGICO_LEFT" || tecla == "j2_analogico_izquierda" || tecla == "j2_Analogico_Izquierda" || tecla == "j2_ANALOGICO_IZQUIERDA" || tecla == "J2_analogico_izquierda" || tecla == "J2_Analogico_Izquierda" || tecla == "J2_ANALOGICO_IZQUIERDA"){
 		codigosDeEvento.eje = true;
 		codigosDeEvento.jBoton = 0;
-		codigosDeEvento.joystick = 1;
 		codigosDeEvento.ejeDesde = -32768;
 		codigosDeEvento.ejeHasta = -2000;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_up" || tecla == "j2_Up" || tecla == "j2_UP" || tecla == "J2_up" || tecla == "J2_Up" || tecla == "J2_UP" || tecla == "j2_arriba" || tecla == "j2_Arriba" || tecla == "j2_ARRIBA" || tecla == "J2_arriba" || tecla == "J2_Arriba" || tecla == "J2_ARRIBA"){
 		codigosDeEvento.hat = SDL_HAT_UP;
-		codigosDeEvento.joystick = 1;
 		codigosDeEvento.flechas = true;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_down" || tecla == "j2_Down" || tecla == "j2_DOWN" || tecla == "J2_down" || tecla == "J2_Down" || tecla == "J2_DOWN" || tecla == "j2_abajo" || tecla == "j2_Abajo" || tecla == "j2_ABAJO" || tecla == "J2_abajo" || tecla == "J2_Abajo" || tecla == "J2_ABAJO"){
 		codigosDeEvento.hat = SDL_HAT_DOWN;
-		codigosDeEvento.joystick = 1;
 		codigosDeEvento.flechas = true;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_right" || tecla == "j2_Right" || tecla == "j2_RIGHT" || tecla == "J2_right" || tecla == "J2_Right" || tecla == "J2_RIGHT" || tecla == "j2_derecha" || tecla == "j2_Derecha" || tecla == "j2_DERECHA" || tecla == "J2_derecha" || tecla == "J2_Derecha" || tecla == "J2_DERECHA"){
 		codigosDeEvento.hat = SDL_HAT_RIGHT;
-		codigosDeEvento.joystick = 1;
 		codigosDeEvento.flechas = true;
 		return codigosDeEvento;
 	}
 	if (tecla == "j2_left" || tecla == "j2_Left" || tecla == "j2_LEFT" || tecla == "J2_left" || tecla == "J2_Left" || tecla == "J2_LEFT" || tecla == "j2_izquierda" || tecla == "j2_Izquierda" || tecla == "j2_IZQUIERDA" || tecla == "J2_izquierda" || tecla == "J2_Izquierda" || tecla == "J2_IZQUIERDA"){
 		codigosDeEvento.hat = SDL_HAT_LEFT;
-		codigosDeEvento.joystick = 1;
 		codigosDeEvento.flechas = true;
 		return codigosDeEvento;
 	}

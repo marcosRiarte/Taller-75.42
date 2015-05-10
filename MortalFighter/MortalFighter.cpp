@@ -21,18 +21,19 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	int accion = REINICIAR;
 	while (accion == REINICIAR){
-		std::string nombreArchivo(PRUEBA_JSON);
-		bool ParseoExitoso = Parser::getInstancia().parsear(nombreArchivo);
-
-		if (!ParseoExitoso) return EXIT_FAILURE; //si el json por defecto fallo, el programa termina
-
-		vector2D vecGravedad(0.0f, GRAVEDAD_Y);
 
 		if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
 			const char* msg = ((std::string)"Error iniciando SDL: ").append(SDL_GetError()).c_str();
 			Log::getInstancia().logearMensajeEnModo("No se puede inicializar SDL, se cierra el programa", Log::MODO_ERROR);
 			return  EXIT_FAILURE;
-		}		
+		}
+
+		std::string nombreArchivo(PRUEBA_JSON);
+		bool ParseoExitoso = Parser::getInstancia().parsear(nombreArchivo);
+
+		if (!ParseoExitoso) return EXIT_FAILURE; //si el json por defecto fallo, el programa termina
+
+		vector2D vecGravedad(0.0f, GRAVEDAD_Y);	
 
 		/*********************************************************************/
 		/*      Inicialización de vista y variables del juego               */
