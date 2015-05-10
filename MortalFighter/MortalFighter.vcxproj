@@ -116,6 +116,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Validador.h" />
+    <ClInclude Include="ValidadorDeCapas.h" />
     <ClInclude Include="ValidadorDeEscenario.h" />
     <ClInclude Include="ValidadorDeVentana.h" />
     <ClInclude Include="Vector2D.h" />
@@ -143,6 +144,7 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Validador.cpp" />
+    <ClCompile Include="ValidadorDeCapas.cpp" />
     <ClCompile Include="ValidadorDeEscenario.cpp" />
     <ClCompile Include="ValidadorDeVentana.cpp" />
     <ClCompile Include="Ventana.cpp" />
