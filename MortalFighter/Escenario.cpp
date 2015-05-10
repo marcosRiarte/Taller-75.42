@@ -26,6 +26,20 @@ float Escenario::getYPiso() const
 
 }
 
+void Escenario::setAncho(float unAncho){
+	ancho = unAncho;
+}
+
+
+void Escenario::setAlto(float unAlto){
+	alto = unAlto;
+}
+
+
+void Escenario::setYPiso(float unyPiso){
+	yPiso = unyPiso;
+}
+
 Escenario::~Escenario()
 {
 }

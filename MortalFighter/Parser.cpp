@@ -61,40 +61,13 @@ bool Parser::parsear(std::string nombreDelArchivo)
 
 	Json::Value escenario;
 	escenario = raiz["escenario"];
-	float anchoEscenario;
-	float altoEscenario;
-	float yPisoEscenario;
 
-	if (!escenario){
-		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo del escenario", Log::MODO_WARNING);
-		anchoEscenario = ANCHO_ESCENARIO;
-		altoEscenario = ALTO_ESCENARIO;
-		yPisoEscenario = Y_PISO_ESCENARIO;
-		Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario por defecto", Log::MODO_WARNING);
-	}
-	else{
-		if (escenario.isMember("ancho") && escenario.get("ancho", ANCHO_ESCENARIO).isNumeric() && escenario.get("ancho", ANCHO_ESCENARIO) < MAX_ANCHO_ESCENARIO)
-				anchoEscenario = (escenario.get("ancho", ANCHO_ESCENARIO).asFloat());				
-		else {
-			anchoEscenario = ANCHO_ESCENARIO;
-			Log::getInstancia().logearMensajeEnModo("Se carga ancho del escenario por defecto", Log::MODO_WARNING);
-		}
+	validadorDeEscenario = new ValidadorDeEscenario();
+	validadorDeEscenario->validarEscenarioDesde(escenario);
 
-		if (escenario.isMember("alto") && escenario.get("alto", ALTO_ESCENARIO).isNumeric() && escenario.get("alto", ALTO_ESCENARIO) < MAX_ALTO_ESCENARIO)
-				altoEscenario = (escenario.get("alto", ALTO_ESCENARIO).asFloat());			
-		else {
-			altoEscenario = ALTO_ESCENARIO;
-			Log::getInstancia().logearMensajeEnModo("Se carga alto del escenario por defecto", Log::MODO_WARNING);
-		}
-
-		if (escenario.isMember("ypiso") && escenario.get("ypiso", Y_PISO_ESCENARIO).isNumeric() && escenario.get("ypiso", Y_PISO_ESCENARIO) < MAX_ALTO_ESCENARIO)
-				yPisoEscenario = (escenario.get("ypiso", Y_PISO_ESCENARIO).asFloat());			
-		else {
-			yPisoEscenario = Y_PISO_ESCENARIO;
-			Log::getInstancia().logearMensajeEnModo("Se carga piso del escenario por defecto", Log::MODO_WARNING);
-		}
-		
-	}
+	float anchoEscenario = validadorDeEscenario->getEscenario()->getAncho();
+	float altoEscenario = validadorDeEscenario->getEscenario()->getAlto();
+	float yPisoEscenario = validadorDeEscenario->getEscenario()->getYPiso();
 
 	Json::Value capas;
 	capas = raiz["capas"];
@@ -319,9 +292,8 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	
 
 	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del personaje correctamente", Log::MODO_DEBUG);
-	Validador::ValidarEscenario(&anchoEscenario, &altoEscenario, &alto, &yPisoEscenario);
-	unEscenario = new Escenario(anchoEscenario, altoEscenario, yPisoEscenario);
-	Log::getInstancia().logearMensajeEnModo("Se cargaron valores del escenario correctamente", Log::MODO_DEBUG);
+	
+	validadorDeEscenario->validaryPisoCon(alto);
 
 	// en esta parte se desarma todo......
 	
@@ -648,7 +620,7 @@ bool Parser::parsear(std::string nombreDelArchivo)
 
 Escenario& Parser::getEscenario() const
 {
-	return *unEscenario;
+	return *(validadorDeEscenario->getEscenario());
 }
 
 Ventana& Parser::getVentana() const
@@ -688,7 +660,7 @@ std::vector<int> Parser::getColorAlternativo()
 void Parser::FreeInstancia()
 {
 	delete getInstancia().validadorDeVentana;
-	delete  getInstancia().unEscenario;
+	delete  getInstancia().validadorDeEscenario;
 	for (size_t j = 0; j < getInstancia().Personajes.size(); j++) {
 		delete getInstancia().Personajes.at(j);
 	}
