@@ -1,35 +1,6 @@
 #include "stdafx.h"
 #include "Validador.h"
-#include "wtypes.h"
 #include <iostream>
-
-void Validador::ValidarVentana(int* anchoPxVentana, int* altoPxVentana, float* anchoVentana) {
-	RECT escritorio;
-	// Un manejador 
-	const HWND tam = GetDesktopWindow();
-	// tomar el tamanio
-	GetWindowRect(tam, &escritorio);
-	int horizontal = escritorio.right;
-	int vertical = escritorio.bottom;
-
-	if (!((*anchoPxVentana > 0) && (*anchoPxVentana < horizontal))) {
-		std::string mensaje = "ancho de Ventana fuera de rango, se toma ancho Px ventana por defecto";
-		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*anchoPxVentana = ANCHO_PX_VENTANA;
-	}
-
-	if (!((*altoPxVentana > 0) && (*altoPxVentana < vertical))) {
-		std::string mensaje = "alto de Ventana fuera de rango, se toma alto Px ventana por defecto";
-		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*altoPxVentana = ALTO_PX_VENTANA;
-	}
-
-	if (!(*anchoVentana > 0)) {
-		std::string mensaje = "anchoUn de Ventana fuera de rango, se toma ancho en unidades por defecto";
-		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*anchoVentana = ANCHO_VENTANA;
-	}
-}
 
 bool Validador::ValidarCapas(float *anchoCapa, std::string *fondo, size_t numerocapa){
 	if (!(*anchoCapa > 0)){

@@ -1,11 +1,9 @@
 #pragma once
 #include "stdafx.h"
-#include "Parser.h"
 
 class Validador
 {
 public:
-	static void ValidarVentana(int* anchoPxVentana, int* altoPxVentana, float* anchoVentana);
 	
 	static bool ValidarCapas(float* anchoCapas, std::string* fondo, size_t numerocapa);
 	static void ValidarEscenario(float *anchoEscenario, float *altoEscenario, float *altoPersonaje, float* yPisoEscenario);

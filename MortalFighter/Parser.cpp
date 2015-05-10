@@ -10,7 +10,8 @@ Parser& Parser::getInstancia() {
 	return instancia;
 }
 
-Parser::Parser() { }
+Parser::Parser() { 
+}
 
 
 bool Parser::parsear(std::string nombreDelArchivo)
@@ -54,45 +55,9 @@ bool Parser::parsear(std::string nombreDelArchivo)
 
 	Json::Value ventana;
 	ventana = raiz["ventana"];
-	int anchoPxVentana;
-	int altoPxVentana;
-	float anchoVentana;
 
-	if (!ventana){
-		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo de la ventana", Log::MODO_WARNING);
-		anchoPxVentana = ANCHO_PX_VENTANA;
-		altoPxVentana = ALTO_PX_VENTANA;
-		anchoVentana = ANCHO_VENTANA;
-		Log::getInstancia().logearMensajeEnModo("Se cargaron valores de la ventana por defecto", Log::MODO_WARNING);
-	}
-	else{
-		//3 comprobaciones, que exista el campo, que sea un numero y que no exceda el maximo
-		if (ventana.isMember("anchopx") && ventana.get("anchopx", ANCHO_PX_VENTANA).isNumeric() && ((ventana.get("anchopx", ANCHO_PX_VENTANA) < INT_MAX) && (ventana.get("anchopx", ANCHO_PX_VENTANA) >= ANCHO_MIN)))
-				anchoPxVentana = (ventana.get("anchopx", ANCHO_PX_VENTANA).asInt());			
-		else {
-			anchoPxVentana = ANCHO_PX_VENTANA;
-			Log::getInstancia().logearMensajeEnModo("Se carga anchopx de la ventana por defecto", Log::MODO_WARNING);
-		}
-
-		if (ventana.isMember("altopx") && ventana.get("altopx", ALTO_PX_VENTANA).isNumeric() && ((ventana.get("altopx", ALTO_PX_VENTANA) < INT_MAX) && (ventana.get("altopx", ALTO_PX_VENTANA) >= ALTO_MIN)))
-			altoPxVentana = (ventana.get("altopx", ALTO_PX_VENTANA).asInt());			
-		else {
-			altoPxVentana = ALTO_PX_VENTANA;
-			Log::getInstancia().logearMensajeEnModo("Se carga altopx de la ventana por defecto", Log::MODO_WARNING);
-		}
-
-		if (ventana.isMember("ancho") && ventana.get("ancho", ANCHO_VENTANA).isNumeric() && ventana.get("ancho", ANCHO_VENTANA) < INT_MAX)
-				anchoVentana = (ventana.get("ancho", ANCHO_VENTANA).asFloat());			
-		else {
-			anchoVentana = ANCHO_VENTANA;
-			Log::getInstancia().logearMensajeEnModo("Se carga ancho de la ventana por defecto", Log::MODO_WARNING);
-		}
-		
-	}
-
-	Validador::ValidarVentana(&anchoPxVentana, &altoPxVentana, &anchoVentana);
-	unaVentana = new Ventana(anchoPxVentana, altoPxVentana, anchoVentana);
-	Log::getInstancia().logearMensajeEnModo("Se cargaron valores de la ventana correctamente", Log::MODO_DEBUG);
+	validadorDeVentana = new ValidadorDeVentana();
+	validadorDeVentana->validarVentanaDesde(ventana);
 
 	Json::Value escenario;
 	escenario = raiz["escenario"];
@@ -215,7 +180,8 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	std::string Caida;
 	std::string nombre;
 	bool errorPersonaje = false;
-	int anchoMaximoDelPersonaje = (int)round((anchoPxVentana * altoEscenario) / altoPxVentana); //el resultado de este calculo deberia ser el ancho maximo de la ventana en uninades logicas.
+	int altoPxVentana = validadorDeVentana->getVentana()->getAnchoPx();
+	int anchoMaximoDelPersonaje = (int)round((altoPxVentana * altoEscenario) / altoPxVentana); //el resultado de este calculo deberia ser el ancho maximo de la ventana en uninades logicas.
 	int altoMaximoDelPersonaje = (int)round(altoEscenario + yPisoEscenario); //este el alto maximo
 
 	if (!personajes || personajes.size() == 0){
@@ -687,7 +653,7 @@ Escenario& Parser::getEscenario() const
 
 Ventana& Parser::getVentana() const
 {
-	return *unaVentana;
+	return *(validadorDeVentana->getVentana());
 }
 
 Controlador* Parser::getControlador1(){
@@ -721,7 +687,7 @@ std::vector<int> Parser::getColorAlternativo()
 
 void Parser::FreeInstancia()
 {
-	delete getInstancia().unaVentana;
+	delete getInstancia().validadorDeVentana;
 	delete  getInstancia().unEscenario;
 	for (size_t j = 0; j < getInstancia().Personajes.size(); j++) {
 		delete getInstancia().Personajes.at(j);

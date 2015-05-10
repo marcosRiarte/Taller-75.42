@@ -6,6 +6,9 @@ public:
 	int getAnchoPx() const;
 	int getAltoPx() const;
 	float getAncho() const;
+	void setAnchoPx(int unAnchoPx);
+	void setAltoPx(int unAltoPx);
+	void setAncho(float unAncho);
 
 	~Ventana();
 private:

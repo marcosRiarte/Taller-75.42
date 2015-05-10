@@ -6,6 +6,7 @@
 #include "Controlador.h"
 #include "Log.h"
 #include "Validador.h"
+#include "ValidadorDeVentana.h"
 
 class Parser
 {
@@ -29,7 +30,7 @@ private:
 	
 	std::vector<Capa*> Capas;
 	std::vector<Personaje*> Personajes;	
-	Ventana* unaVentana;
+	ValidadorDeVentana* validadorDeVentana;
 	Escenario* unEscenario;
 	Controlador* controlador1;
 	Controlador* controlador2;
