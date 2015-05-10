@@ -550,8 +550,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		numeroDeCuadroDos = 0;
 		estadoAnteriorPj2 = personajesVista[1]->getEstado();
 	}
-
-
+	
 	if ((numeroDeCuadroUno) > (tiempoSecuenciaSpritesUno*listaDeCuadrosUno->size()))
 		numeroDeCuadroUno = 0;
 
@@ -569,8 +568,13 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	numeroDeCuadroUno++;
 
+	/*
 	personajeUno.w = (int)round(relacionAnchoUno*cuadroActualUno->w);
 	personajeUno.h = (int)round(relacionAltoUno*cuadroActualUno->h);
+	*/
+
+	personajeUno.w = manejadorULog.darLongPixels(personajesVista.at(0)->getAncho());
+	personajeUno.h = manejadorULog.darLongPixels(personajesVista.at(0)->getAlto());
 
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
 	listaDeCuadrosDos = elSprite->listaDeCuadros(estadoDelPersonajeDos);
@@ -591,11 +595,15 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	else{
 		cuadroActualDos = listaDeCuadrosDos->at(numeroDeCuadroDos / (tiempoSecuenciaSpritesDos));
 	}
-	numeroDeCuadroDos++;
-	
+	numeroDeCuadroDos++; 
+
+	/*
 	personajeDos.w = (int)round(relacionAnchoDos*cuadroActualDos->w);
 	personajeDos.h = (int)round(relacionAltoDos*cuadroActualDos->h);
+	*/
 
+	personajeDos.w = manejadorULog.darLongPixels(personajesVista.at(1)->getAncho());
+	personajeDos.h = manejadorULog.darLongPixels(personajesVista.at(1)->getAlto());
 	
 	//Se cargan ambos acorde a su posición relativa
 	if (invertido){
