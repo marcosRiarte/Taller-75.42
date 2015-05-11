@@ -76,6 +76,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		while (true) {
 			int estadoUno = controladorUno->cambiar();
 			int estadoDos = controladorDos->cambiar();
+
 			if (estadoUno == REINICIAR || estadoDos == REINICIAR){
 				break;
 			}
@@ -99,7 +100,6 @@ int _tmain(int argc, _TCHAR* argv[])
 			unMundo->Paso(0.13f);
 			unaVista->actualizar();
 			
-
 			++conteoDeCuadros;
 			
 			//Si el cuadro finalizó antes

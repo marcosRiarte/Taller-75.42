@@ -55,8 +55,8 @@ void Mundo::LiberarCuerpos()
 	}
 }
 
-std::pair<int, int> getPosicionAbsSensor(std::pair<float, float> posSensor, Cuerpo* unCuerpo, float anchoDelSensor, bool invertido){
-	std::pair<int, int> posicionOtroCuerpo;
+std::pair<float, float> getPosicionAbsSensor(std::pair<float, float> posSensor, Cuerpo* unCuerpo, float anchoDelSensor, bool invertido){
+	std::pair<float, float> posicionOtroCuerpo;
 	float posX, posY, posFinPj;
 	ManejadorULogicas manejadorUnidades;
 	if (!(invertido)){
