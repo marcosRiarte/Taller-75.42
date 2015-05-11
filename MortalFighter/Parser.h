@@ -12,6 +12,7 @@
 #include "ValidadorDePersonajes.h"
 #include "ValidadorDelControlador.h"
 #include "ValidadorDePelea.h"
+#include "ValidadorDelColor.h"
 
 class Parser
 {
@@ -39,7 +40,7 @@ private:
 	ValidadorDeEscenario* validadorDeEscenario;
 	ValidadorDelControlador* validadorDelControlador;
 	ValidadorDePelea* validadorDePelea;
-	std::vector<int> colorAlternativo;
+	ValidadorDelColor* validadorDelColor;
 	virtual ~Parser();
 
 	Parser(Parser const&) = delete;
