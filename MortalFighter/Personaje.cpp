@@ -155,7 +155,70 @@ void Personaje::setEstado(ESTADO nuevoEstado)
 	estadoActual = nuevoEstado;
 }
 
+//SETTERS
+void Personaje::setDeltaX(float unDeltaX){
+	deltaX = unDeltaX;
+}
 
+void Personaje::setAncho(float unAncho){
+	ancho = unAncho;
+}
+
+void Personaje::setAlto(float unAlto){
+	alto = unAlto;
+}
+
+void Personaje::setZIndex(int unZindex){
+	zIndex = unZindex;
+}
+
+void Personaje::setOrientacion(std::string unaOrientacion){
+	orientacion = unaOrientacion;
+}
+
+void Personaje::setSprites(std::string unosSprites){
+	sprites = unosSprites;
+}
+
+void Personaje::setCaminarParaAdelante(std::string unCaminarParaAdelante){
+	caminaradelante = unCaminarParaAdelante;
+}
+
+void Personaje::setCaminarParaAtras(std::string unCaminarParaAtras){
+	caminaratras = unCaminarParaAtras;
+}
+
+void Personaje::setQuieto(std::string unQuieto){
+	quieto = unQuieto;
+}
+
+void Personaje::setSalto(std::string unSalto){
+	salto = unSalto;
+}
+
+void Personaje::setSaltoDiagonal(std::string unSaltoDiagonal){
+	saltodiagonal = unSaltoDiagonal;
+}
+
+void Personaje::setCaida(std::string UnaCaida){
+	caida = UnaCaida;
+}
+
+void Personaje::setNombre(std::string unNombre){
+	nombreP = unNombre;
+}
+
+void Personaje::getPatadaAlta(std::string unaPatadaAlta){
+	patadaalta = unaPatadaAlta;
+}
+
+void Personaje::getAgacharse(std::string unAgacharse){
+	agachado = unAgacharse;
+}
+
+void Personaje::getGolpeado(std::string unGolpeado){
+	golpeado = unGolpeado;
+}
 
 
 void Personaje::actualizar(float xNuevo, float yNuevo, ESTADO nuevoEstado)

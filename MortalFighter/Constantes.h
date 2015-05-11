@@ -4,18 +4,22 @@
 #define FIN   		2
 
 #define MODO_DEBUG_SDL true
+
+//JSON
 #define PRUEBA_JSON "prueba.json"
 #define PRUEBA_JSON_DEFECTO "pruebaDefecto.json"
 
 //Constantes para la vista
-#define TITULO_VENTANA "Bickbox"
-#define ICONO "ima/Bbx_icono.png"
+//VENTANA
 #define ANCHO_MIN 640
 #define ALTO_MIN 480
 #define ANCHO_PX_VENTANA 80
 #define ALTO_PX_VENTANA 60
 #define ANCHO_VENTANA 200.0f
+#define TITULO_VENTANA "Bickbox"
+#define ICONO "ima/Bbx_icono.png"
 
+//FISICA
 #define FPS 60.0f
 const float MSxCUADRO = 1000.0f / FPS;
 #define tiempoCaminarParaAdelante 1000.0f
@@ -28,15 +32,18 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define tiempoPatadaAlta 500.0f
 #define tiempoGolpeado 500.0f
 
+//ESCENARIO
 #define ANCHO_ESCENARIO 1000.5f
 #define MAX_ANCHO_ESCENARIO 4000.0f
 #define ALTO_ESCENARIO 150.0f
 #define MAX_ALTO_ESCENARIO 2000.0f
 #define Y_PISO_ESCENARIO 20.0f
 
+//CAPA
 #define ANCHO_CAPA 500.0f
 #define ZINDEX_CAPA 0
 
+//PERSONAJE
 #define ANCHO_PERSONAJE 50.0f
 #define MAX_ANCHO_PERSONAJE 1000.0f
 #define ALTO_PERSONAJE 70.0f
@@ -65,6 +72,7 @@ const float MSxCUADRO = 1000.0f / FPS;
 
 #define LIU_KANG "LiuKang"
 
+//CONTROLADOR
 #define ARRIBA_DEFAULT_1 "up"
 #define ABAJO_DEFAULT_1 "down"
 #define IZQUIERDA_DEFAULT_1 "left"

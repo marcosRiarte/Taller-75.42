@@ -2,47 +2,6 @@
 #include "Validador.h"
 #include <iostream>
 
-
-bool Validador::ValidarCapas(float *anchoCapa, std::string *fondo, size_t numerocapa){
-	if (!(*anchoCapa > 0)){
-		
-		std::string mensaje = "ancho de Capa " + std::to_string(numerocapa) + " fuera de rango, se toma ancho por defecto";
-		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		*anchoCapa = ANCHO_CAPA;
-	}
-
-	
-	//  intento abrir el archivo, si el puntero devuelto es NULL NO EXISTE EL ARCHIVO  
-	const char * archivofondo = fondo->c_str(); //casteo
-	FILE * pFile; 
-	fopen_s(&pFile, archivofondo, "r");
-
-	if (pFile != NULL) //si me devolvio puntero existe, cerralo!!!!!
-	{
-		fclose(pFile);
-	}
-	else // el archivo no existe!
-	{
-		std::string mensaje = "No existe la capa " + std::to_string(numerocapa) + " , se usa capa por defecto";
-	    Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		
-		*fondo = FONDO_DEFAULT;
-		const char * archivofondo = fondo->c_str(); //casteo
-		FILE * pFile;
-		fopen_s(&pFile, archivofondo, "r");
-
-		if (pFile == NULL)
-		{
-			Log::getInstancia().logearMensajeEnModo("no existe el fondo por defecto, se cerrara el programa...", Log::MODO_ERROR);
-			return true;
-		}
-		else fclose(pFile);
-	}
-	return false;
-}
-
-
-
 bool Validador::ValidarPersonaje(float *ancho, float* alto, int* zindex, std::string* orientacion, std::string* sprites, std::string* CaminarParaAdelante, std::string* CaminarParaAtras, std::string* Quieto, std::string* Salto, std::string* SaltoDiagonal, std::string* Caida){
 	if (!(*ancho > 0) || *ancho > MAX_ANCHO_PERSONAJE) {
 		std::string mensaje = "ancho del Personaje fuera de rango, se toma ancho por defecto";

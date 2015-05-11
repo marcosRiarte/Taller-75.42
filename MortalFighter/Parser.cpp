@@ -52,13 +52,14 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	}else Log::getInstancia().logearMensajeEnModo("Parseo del archivo json correcto", Log::MODO_DEBUG);
 
 
-
+	//VENTANA
 	Json::Value ventana;
 	ventana = raiz["ventana"];
 
 	validadorDeVentana = new ValidadorDeVentana();
 	validadorDeVentana->validarVentanaDesde(ventana);
 
+	//ESCENARIO
 	Json::Value escenario;
 	escenario = raiz["escenario"];
 
@@ -69,70 +70,14 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	float altoEscenario = validadorDeEscenario->getEscenario()->getAlto();
 	float yPisoEscenario = validadorDeEscenario->getEscenario()->getYPiso();
 
+	//CAPAS
 	Json::Value capas;
 	capas = raiz["capas"];
-	float anchoCapas;
-	std::string fondo;
-	bool errorCapa = false;
-	
-	
-	if (!capas || capas.size() == 0){
-		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo de las capas", Log::MODO_WARNING);
-		fondo = FONDO_DEFAULT;
-		anchoCapas = ANCHO_CAPA;
-		
-		errorCapa = Validador::ValidarCapas(&anchoCapas, &fondo, 0);
-		if (errorCapa){
-			return false;
-		}
-		Capas.push_back(new Capa(fondo, anchoCapas, 0));
-		Log::getInstancia().logearMensajeEnModo("Se cargaron capas y ancho por defecto", Log::MODO_WARNING);
-	}
-	else{//se valida que exista el campo, que sea un tipo dedato correcto. De los rangos y existencia de archivo se encarga el validador
-		for (size_t i = 0; i < capas.size(); i++) {
-			
-			std::string fondo(FONDO_DEFAULT);//asigno fondo por defecto
-			
-			//valido que exista el campo y que tenga un string
-			if (capas[i].isMember("imagen_fondo") && capas[i].get("imagen_fondo", FONDO_DEFAULT).isString())
-				fondo = (capas[i].get("imagen_fondo", FONDO_DEFAULT).asString());
-			else
-				Log::getInstancia().logearMensajeEnModo("Campo Imagen_fondo incorrecto en capa " + std::to_string(i) + " , se usa capa por defecto", Log::MODO_WARNING);
-			    //la capa por defecto se asigno arriba
 
+	validadorDeCapas = new ValidadorDeCapas();
+	if (!validadorDeCapas->validarCapasDesde(capas)) return false;
 
-
-			if (capas[i].isMember("ancho") && capas[i].get("ancho", ANCHO_CAPA).isNumeric() && capas[i].get("ancho", ANCHO_CAPA) < MAX_ANCHO_ESCENARIO)
-					anchoCapas = (capas[i].get("ancho", ANCHO_CAPA).asFloat());				
-			else {
-				anchoCapas = ANCHO_CAPA;
-				Log::getInstancia().logearMensajeEnModo("Se carga ancho de capa " + std::to_string(i) + " , por defecto", Log::MODO_WARNING);
-			}
-
-
-
-			int zIndexCapa = ZINDEX_CAPA;
-			if (!capas[i].isMember("zindex"))
-				Log::getInstancia().logearMensajeEnModo("Se carga z-index de capa " + std::to_string(i) + "  por defecto ->" + std::to_string(ZINDEX_CAPA), Log::MODO_DEBUG);
-			else {
-				if (capas[i].get("zindex", ZINDEX_CAPA).isNumeric() && capas[i].get("zindex", ZINDEX_CAPA) < INT_MAX && capas[i].get("zindex", ZINDEX_CAPA) > -INT_MAX)
-					zIndexCapa = (capas[i].get("zindex", ZINDEX_CAPA).asInt());
-				else
-					Log::getInstancia().logearMensajeEnModo("Se carga z-index de capa " + std::to_string(i) + "  por defecto ->" + std::to_string(ZINDEX_CAPA), Log::MODO_WARNING);
-			}
-				
-
-
-			errorCapa = Validador::ValidarCapas(&anchoCapas, &fondo, i);
-			if (errorCapa){
-				return false;
-			}
-			Capas.push_back(new Capa(fondo, anchoCapas, zIndexCapa));
-		}
-		Log::getInstancia().logearMensajeEnModo("Se cargaron capas correctamente", Log::MODO_DEBUG);
-	}
-
-
+	//PERSONAJES
 	Json::Value personajes;
 	personajes = raiz["personajes"];
 	float ancho;
@@ -648,7 +593,7 @@ std::vector<Personaje*> Parser::getPersonajes() const
 
 std::vector<Capa*> Parser::getCapas() const
 {
-	return Capas;
+	return *(validadorDeCapas->getCapas());
 
 }
 std::vector<int> Parser::getColorAlternativo()
@@ -665,10 +610,7 @@ void Parser::FreeInstancia()
 		delete getInstancia().Personajes.at(j);
 	}
 	getInstancia().Personajes.clear();
-	for (size_t i = 0; i < getInstancia().Capas.size(); i++) {
-		delete getInstancia().Capas.at(i);		
-	}
-	getInstancia().Capas.clear();
+	delete getInstancia().validadorDeCapas;
 }
 
 Parser::~Parser()
