@@ -172,8 +172,8 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite)
 		texturaVerde = SDL_CreateTextureFromSurface(renderer, sup);
 		SDL_FreeSurface(sup);
 
-		estadoAnteriorPj1 = QUIETODER;
-		estadoAnteriorPj2 = QUIETODER;
+		estadoAnteriorPj1.movimiento = PARADO;
+		estadoAnteriorPj2.movimiento = PARADO;
 		refMundo = unMundo;
 }
 
@@ -286,7 +286,7 @@ void Vista::actualizar(){
 	if (vibracion){
 		bool golpeado = false;
 		for (int i = 0; i < personajesVista.size(); i++){
-			if ((personajesVista.at(i)->getEstado() == P_ALTADER) || (personajesVista.at(i)->getEstado() == P_ALTAIZQ)){
+			if ((personajesVista.at(i)->getEstado().accion == PATADA_ALTA)){
 				golpeado = true;
 				break;
 			}
@@ -385,64 +385,6 @@ void Vista::OrdenarCapas()
 	capasVista = capasOrdenadas;
 }
 
-
-std::string Vista::GetEstadoDelPersonaje(ESTADO estadoPersonaje, Personaje* personajeVista){
-	std::string estadoDelPersonaje;
-
-	if ((estadoPersonaje == ESTADO::IZQ_IZQ) || (estadoPersonaje == ESTADO::DER_DER)){
-		if (("DER" == personajeVista->getOrientacion()))
-			estadoDelPersonaje = personajeVista->getCaminarParaAdelante();
-		else
-			estadoDelPersonaje = personajeVista->getCaminarParaAtras();
-	}
-
-	if ((estadoPersonaje == ESTADO::DER_IZQ) || (estadoPersonaje == ESTADO::IZQ_DER)){
-		if (("DER" == personajeVista->getOrientacion()))
-			estadoDelPersonaje = personajeVista->getCaminarParaAtras();
-		else
-			estadoDelPersonaje = personajeVista->getCaminarParaAdelante();
-	}
-	
-	if ((estadoPersonaje == ESTADO::SALTODER_DER) || (estadoPersonaje == ESTADO::SALTODER_IZQ) || (estadoPersonaje == ESTADO::SALTOIZQ_IZQ)){
-		if (("DER" == personajeVista->getOrientacion()))
-			estadoDelPersonaje = personajeVista->getSaltoDiagonal();
-		else
-			estadoDelPersonaje = "SaltoDiagonalIzq";
-	}
-
-	if (estadoPersonaje == ESTADO::SALTOIZQ_DER){
-		if (("DER" == personajeVista->getOrientacion()))
-			estadoDelPersonaje = "SaltoDiagonalIzq";
-		else
-			estadoDelPersonaje = personajeVista->getSaltoDiagonal();
-	}
-
-	if ((estadoPersonaje == ESTADO::ARRIBA_IZQ) || (estadoPersonaje == ESTADO::ARRIBA_DER)){
-		estadoDelPersonaje = personajeVista->getSalto();
-	}
-
-	/*if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ABAJO_DER)){
-	estadoDelPersonaje = personajeVista.getCaida();
-	}*/
-	if ((estadoPersonaje == ESTADO::QUIETODER) || (estadoPersonaje == ESTADO::QUIETOIZQ)) {
-		estadoDelPersonaje = personajeVista->getQuieto();
-	}
-
-	//jose
-	if ((estadoPersonaje == ESTADO::ABAJO_IZQ) || (estadoPersonaje == ESTADO::ABAJO_DER)){
-		estadoDelPersonaje = personajeVista->getAgacharse();
-	}
-
-	if ((estadoPersonaje == ESTADO::P_ALTADER) || (estadoPersonaje == ESTADO::P_ALTAIZQ)){
-		estadoDelPersonaje = personajeVista->getPatadaAlta();
-	}
-	if ((estadoPersonaje == ESTADO::GOLPEADOIZQ) || (estadoPersonaje == ESTADO::GOLPEADODER)){
-		estadoDelPersonaje = personajeVista->getGolpeado();
-	}
-	
-	return estadoDelPersonaje;
-}
-
 void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 {
 	Ventana ventanaVista = Parser::getInstancia().getVentana();
@@ -522,31 +464,34 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	float xLogPjDosEnCamara = xPjDos + camaraXLog;
 	SDL_Rect personajeDos;
 
-	SDL_Rect* cuadroBase = elSprite->listaDeCuadros("Quieto")->at(0);
+	ESTADO estadoAux;
+	estadoAux.movimiento = PARADO;
+	SDL_Rect* cuadroBase = elSprite->listaDeCuadros(estadoAux)->at(0);
 	float relacionAnchoUno = (float)anchoPjUnoPx / (float)cuadroBase->w;
 	float relacionAltoUno = (float)altoPjUnoPx / (float)cuadroBase->h;
 	personajeUno.x = manejadorULog.darLongPixels(xLogPjUnoEnCamara);
 	personajeUno.y = yPjUnoPx;
 
 	// ancho y alto lo calcula cuadro a cuadro
-	std::string estadoDelPersonajeUno = GetEstadoDelPersonaje(personajesVista[0]->getEstado(), personajesVista[0]);
+	ESTADO estadoDelPersonajeUno = personajesVista[0]->getEstado();
 
 	float relacionAnchoDos = (float)anchoPjDosPx / (float)cuadroBase->w;
 	float relacionAltoDos = (float)altoPjDosPx / (float)cuadroBase->h;
 	personajeDos.x = manejadorULog.darLongPixels(xLogPjDosEnCamara);
 	personajeDos.y = yPjDosPx;
-	std::string estadoDelPersonajeDos = GetEstadoDelPersonaje(personajesVista[1]->getEstado(), personajesVista[1]);
+	ESTADO estadoDelPersonajeDos = personajesVista[1]->getEstado();
 
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
 	listaDeCuadrosUno = elSprite->listaDeCuadros(estadoDelPersonajeUno);
 	tiempoSecuenciaSpritesUno = elSprite->getConstantes(estadoDelPersonajeUno);
 
-	if (estadoAnteriorPj1 != personajesVista[0]->getEstado()){
+
+	if ((estadoAnteriorPj1.movimiento != estadoDelPersonajeUno.movimiento) || (estadoAnteriorPj1.accion != estadoDelPersonajeUno.accion) || (estadoAnteriorPj1.golpeado != estadoDelPersonajeUno.golpeado)){
 		numeroDeCuadroUno = 0;
 		estadoAnteriorPj1 = personajesVista[0]->getEstado();
 	}
 
-	if (estadoAnteriorPj2 != personajesVista[1]->getEstado()){
+	if ((estadoAnteriorPj2.movimiento != estadoDelPersonajeDos.movimiento) || (estadoAnteriorPj2.accion != estadoDelPersonajeDos.accion) || (estadoAnteriorPj2.golpeado != estadoDelPersonajeDos.golpeado)){
 		numeroDeCuadroDos = 0;
 		estadoAnteriorPj2 = personajesVista[1]->getEstado();
 	}

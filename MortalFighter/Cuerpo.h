@@ -53,21 +53,21 @@ public:
 	// Le pasa el nombre del estado actual para activar los sensores correspondientes
 	inline void SetSensorActivoStr(ESTADO estadoActual)
 	{
-		if (estadoActual == DER)
+		if (estadoActual.movimiento == CAMINARDER)
 			sensorActivoStr = "Caminar";
-		if (estadoActual == QUIETODER)
+		if (estadoActual.movimiento == PARADO)
 			sensorActivoStr = "Quieto";
-		if (estadoActual == ARRIBA_DER)
+		if (estadoActual.movimiento == SALTO)
 			sensorActivoStr = "Salto";
-		if ((estadoActual == SALTOIZQ_DER) || (estadoActual == SALTODER_DER))
+		if ((estadoActual.movimiento == SALTODIAGIZQ) || (estadoActual.movimiento == SALTODIAGDER))
 			sensorActivoStr = "SaltoDiagonal";
-		if (estadoActual == IZQ_DER)
+		if (estadoActual.movimiento == CAMINARIZQ)
 			sensorActivoStr = "CaminarAtras";
-		if (estadoActual == ABAJO_DER)
+		if (estadoActual.movimiento == AGACHADO)
 			sensorActivoStr = "Agacharse";
-		if (estadoActual == P_ALTADER)
+		if (estadoActual.accion == PATADA_ALTA)
 			sensorActivoStr = "PatadaAlta";
-		if (estadoActual == GOLPEADOIZQ)
+		if (estadoActual.golpeado == GOLPEADO)
 			sensorActivoStr = "Golpeado";
 	}
 

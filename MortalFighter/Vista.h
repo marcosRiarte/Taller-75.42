@@ -5,8 +5,6 @@
 #include <list>
 #include "Sprites.h"
 
-
-
 class Vista
 {
 public:	

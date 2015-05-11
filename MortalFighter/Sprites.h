@@ -30,9 +30,9 @@ private:
 
 public:
 	Sprite(std::string);
-	std::vector<SDL_Rect*>* listaDeCuadros(std::string unEstado);
+	std::vector<SDL_Rect*>* listaDeCuadros(ESTADO unEstado);
 	Json::Value	ParsearSprites(std::string);
 	std::vector<std::vector<Sensor*>*> getSensores() const;
-	int getConstantes(std::string movimiento);
+	int getConstantes(ESTADO estadoDelPersonaje);
 	~Sprite();
 };

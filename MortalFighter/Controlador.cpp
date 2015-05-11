@@ -283,12 +283,12 @@ int Controlador::cambiar(){
 					movimientos.push_back(G_SALTO);
 					return CONTINUAR;
 				}
-				if (movimientos.at(0) == ARRIBA_DER){
+				if (movimientos.at(0) == SALTODER){
 					movimientos.clear();
 					movimientos.push_back(G_SALTODER);
 					return CONTINUAR;
 				}
-				if (movimientos.at(0) == ARRIBA_IZQ){
+				if (movimientos.at(0) == SALTOIZQ){
 					movimientos.clear();
 					movimientos.push_back(G_SALTOIZQ);
 					return CONTINUAR;
@@ -309,12 +309,12 @@ int Controlador::cambiar(){
 					movimientos.push_back(G_SALTO);
 					return CONTINUAR;
 				}
-				if (movimientos.at(0) == ARRIBA_DER){
+				if (movimientos.at(0) == SALTODER){
 					movimientos.clear();
 					movimientos.push_back(G_SALTODER);
 					return CONTINUAR;
 				}
-				if (movimientos.at(0) == ARRIBA_IZQ){
+				if (movimientos.at(0) == SALTOIZQ){
 					movimientos.clear();
 					movimientos.push_back(G_SALTOIZQ);
 					return CONTINUAR;
@@ -335,12 +335,12 @@ int Controlador::cambiar(){
 					movimientos.push_back(P_SALTO);
 					return CONTINUAR;
 				}
-				if (movimientos.at(0) == ARRIBA_DER){
+				if (movimientos.at(0) == SALTODER){
 					movimientos.clear();
 					movimientos.push_back(P_SALTODER);
 					return CONTINUAR;
 				}
-				if (movimientos.at(0) == ARRIBA_IZQ){
+				if (movimientos.at(0) == SALTOIZQ){
 					movimientos.clear();
 					movimientos.push_back(P_SALTOIZQ);
 					return CONTINUAR;
@@ -361,12 +361,12 @@ int Controlador::cambiar(){
 					movimientos.push_back(P_SALTO);
 					return CONTINUAR;
 				}
-				if (movimientos.at(0) == ARRIBA_DER){
+				if (movimientos.at(0) == SALTODER){
 					movimientos.clear();
 					movimientos.push_back(P_SALTODER);
 					return CONTINUAR;
 				}
-				if (movimientos.at(0) == ARRIBA_IZQ){
+				if (movimientos.at(0) == SALTOIZQ){
 					movimientos.clear();
 					movimientos.push_back(P_SALTOIZQ);
 					return CONTINUAR;

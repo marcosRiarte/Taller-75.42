@@ -18,7 +18,9 @@ Mundo::Mundo(const vector2D& valorGravedad, Sprite* unSprite)
 void Mundo::agregarCuerpo(Cuerpo *unCuerpo)
 {
 	Cuerpos.push_back(unCuerpo);
-	unCuerpo->SetSensorActivoStr(QUIETODER);
+	ESTADO parado;
+	parado.movimiento = PARADO;
+	unCuerpo->SetSensorActivoStr(parado);
 }
 
 Cuerpo* Mundo::getCuerpo(size_t pos)
@@ -82,7 +84,8 @@ bool Mundo::hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int un
 
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
-	ESTADO nuevoEstado = QUIETODER;
+	ESTADO nuevoEstado; 
+	nuevoEstado.movimiento = PARADO;
 	std::vector<MOV_TIPO> movimientos = unCuerpo->getControlador()->getMovimientos();
 	bool invertido;
 
@@ -93,13 +96,13 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	if (!unCuerpo->estaEnPiso()){
 		if ((unCuerpo->getVelocidad().x == 0)){
 			nuevoEstado = estadoAnterior;
-			if (estadoAnterior == ARRIBA_DER)
-				nuevoEstado = ARRIBA_DER;
+			if (estadoAnterior.movimiento == SALTO)
+				nuevoEstado.movimiento = SALTO;
 		}
 		else if (unCuerpo->getVelocidad().x > 0)
-			nuevoEstado = SALTODER_DER;
+			nuevoEstado.movimiento = SALTODIAGDER;
 		else
-			nuevoEstado = SALTOIZQ_DER;
+			nuevoEstado.movimiento = SALTODIAGIZQ;
 		unCuerpo->sumarVelocidad(gravedad * difTiempo);
 		if (unCuerpo->EstaFrenado()){
 			unCuerpo->SetVelocidadX(0.0f);
@@ -108,12 +111,12 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	else if (unCuerpo->EstaFrenado()){
 		unCuerpo->SetVelocidadX(0.0f);
 		if ((movimientos.at(0) == ARRIBA)){
-			nuevoEstado = ARRIBA_DER;
+			nuevoEstado.movimiento = SALTO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
 		}
 		if (movimientos.at(0) == ABAJO){
-			nuevoEstado = ABAJO_DER;
+			nuevoEstado.movimiento = AGACHADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
 	}
@@ -134,7 +137,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			invertido = true;
 
 		if ((movimientos.at(0) == DER) && (unCuerpo->GetDemora() == 0)){
-			nuevoEstado = DER_DER;
+			nuevoEstado.movimiento = CAMINARDER;
 			if (!(invertido))
 				unCuerpo->mover(DISTANCIA);
 			else
@@ -143,7 +146,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 
 		if ((movimientos.at(0) == IZQ) && (unCuerpo->GetDemora() == 0)){
-			nuevoEstado = IZQ_DER;
+			nuevoEstado.movimiento = CAMINARIZQ;
 			if (elOtroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
 				unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
 			else
@@ -152,19 +155,19 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 
 		if ((movimientos.at(0) == ARRIBA) && (unCuerpo->GetDemora() == 0)){
-			nuevoEstado = ARRIBA_DER;
+			nuevoEstado.movimiento = SALTO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
 		}
 
 		if ((movimientos.at(0) == SALTODER) && (unCuerpo->GetDemora() == 0)){
-			nuevoEstado = SALTODER_DER;
+			nuevoEstado.movimiento = SALTODIAGDER;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
 		}
 
 		if ((movimientos.at(0) == SALTOIZQ) && (unCuerpo->GetDemora() == 0)){
-			nuevoEstado = SALTOIZQ_DER;
+			nuevoEstado.movimiento = SALTODIAGIZQ;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
 		}
@@ -172,7 +175,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		//xjose estoy mandando fruta, nuevo estado "abajo derecha" y abajo izq???
 
 		if ((movimientos.at(0) == ABAJO) && (unCuerpo->GetDemora() == 0)){
-			nuevoEstado = ABAJO_DER;
+			nuevoEstado.movimiento = AGACHADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
 
@@ -181,16 +184,16 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		//aca hay que aplicar una demora para que reproduzca un tiempo el sprite de patada.
 		// ojo, tener en cuenta que la demora se tiene que interrumpir si me barren y quedo golpeado mientras tiraba la patada.
 
-		if (movimientos.at(0) == P_ALTA && !(unCuerpo->getEstado() == P_ALTADER)){
-			nuevoEstado = P_ALTADER;
+		if (movimientos.at(0) == P_ALTA && !(unCuerpo->getEstado().movimiento == PATADA_ALTA)){
+			nuevoEstado.accion = PATADA_ALTA;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->setDemora((elSprite->getConstantes("PatadaAlta"))*(elSprite->listaDeCuadros("PatadaAlta")->size()));
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		}
 
 		
-		if ((unCuerpo->getEstado() == GOLPEADOIZQ) && (estadoAnterior != GOLPEADOIZQ)){
-			unCuerpo->setDemora((elSprite->getConstantes("Golpeado"))*(elSprite->listaDeCuadros("Golpeado")->size()));
-			nuevoEstado = GOLPEADOIZQ;
+		if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (estadoAnterior.golpeado != GOLPEADO)){
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			nuevoEstado.golpeado = GOLPEADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
 		
@@ -200,15 +203,18 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		std::pair<float, float> posAbsSensoresOtroCuerpo;
 		std::pair<float, float> posAbsSensoresCuerpo;
 
-		if ((movimientos.at(0) == P_ALTA) || (unCuerpo->getEstado() == P_ALTADER)){
+		if ((movimientos.at(0) == P_ALTA) || (unCuerpo->getEstado().accion == PATADA_ALTA)){
 			for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
 				for (unsigned j = 0; j < sensoresCuerpo->size(); j++){
-					if (elOtroCuerpo->getEstado() != GOLPEADOIZQ){
+					if (elOtroCuerpo->getEstado().movimiento != GOLPEADO){
 						ManejadorULogicas manejadorUnidades;
 						posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), !invertido);
 						posAbsSensoresCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion(), unCuerpo, sensoresCuerpo->at(i)->getAncho(), invertido);
-						if (!(sensoresCuerpo->at(i)->getHitbox()) && (sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto())))
-							elOtroCuerpo->notificarObservadores(GOLPEADOIZQ);
+						if (!(sensoresCuerpo->at(i)->getHitbox()) && (sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
+							ESTADO unEstado;
+							unEstado.golpeado = GOLPEADO;
+							elOtroCuerpo->notificarObservadores(unEstado);
+						}
 					}
 				}
 				}
@@ -221,7 +227,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		}
 
 		if ((movimientos.at(0) == QUIETO) && (unCuerpo->GetDemora() <= 0)){
-			nuevoEstado = QUIETODER;
+			nuevoEstado.movimiento = PARADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
 

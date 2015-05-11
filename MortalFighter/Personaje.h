@@ -1,27 +1,24 @@
 #pragma once
 #include "Sensor.h"
 
-
-
 enum Movimientos
 {
-	PARADO, CAMINARDER, CAMINARIZQ, AGACHADO, SALTO , SALTODIAGIZQ, SALTODIAGDER
+	PARADO, CAMINARDER, CAMINARIZQ, AGACHADO, SALTO, SALTODIAGIZQ, SALTODIAGDER
 };
 
 enum Acciones
 {
-	GUARDIA, GANCHO, PATADA_ALTA, PATADA_BAJA, GOLPE_ALTO, GOLPE_BAJO, ARMA_ARROJABLE
+	SIN_ACCION, GUARDIA, GANCHO, PATADA_ALTA, PATADA_BAJA, GOLPE_ALTO, GOLPE_BAJO, ARMA_ARROJABLE
 };
-
 enum Golpeado
 {
-	GOLPEADO
+	NOGOLPEADO, GOLPEADO
 };
 
-enum ESTADO {
-	QUIETODER, QUIETOIZQ, DER_DER, DER_IZQ, IZQ_DER, IZQ_IZQ, ARRIBA_DER, ARRIBA_IZQ,
-	ABAJO_DER, ABAJO_IZQ, SALTOIZQ_DER, SALTOIZQ_IZQ, SALTODER_DER, SALTODER_IZQ,
-	P_ALTADER,P_ALTAIZQ,GOLPEADOIZQ,GOLPEADODER
+struct ESTADO {
+	Movimientos movimiento;
+	Acciones accion;
+	Golpeado golpeado;
 };
 
 class Personaje
@@ -73,11 +70,7 @@ public:
 	void setAgacharse(std::string unAgacharse);
 	void setGolpeado(std::string unGolpeado);
 	
-	struct tipo {
-		Movimientos movimiento;
-		Acciones accion;
-		Golpeado golpeado;
-	};
+
 
 	~Personaje();
 
@@ -101,7 +94,5 @@ private:
 	std::pair<float, float> posicionUn;
 	float deltaX;	
 	ESTADO estadoActual;
-
-
 };
 

@@ -127,39 +127,37 @@ Json::Value	Sprite::ParsearSprites(std::string jsonSprites)
 	return raiz;	
 }
 
-std::vector<SDL_Rect*>* Sprite::listaDeCuadros(std::string unEstado){
-	if (unEstado == "CaminarParaAdelante"){
+std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
+	if (unEstado.movimiento == CAMINARDER){
 		return CaminandoParaAdelante;
 	}
-	if (unEstado == "CaminarParaAtras"){
+	if (unEstado.movimiento == CAMINARIZQ){
 		return CaminandoParaAtras;
 	}
-	if (unEstado == "Quieto"){
+	if (unEstado.movimiento == PARADO){
 		return Quieto;
 	}
-	if (unEstado == "Salto"){
+	if (unEstado.movimiento == SALTO){
 		return Salto;
 	}
-	if (unEstado == "SaltoDiagonal"){
+	if (unEstado.movimiento == SALTODIAGDER){
 		return SaltoDiagonal;
 	}
 
-	if (unEstado == "SaltoDiagonalIzq"){
+	if (unEstado.movimiento == SALTODIAGIZQ){
 		
 		return SaltoDiagonalIzq;
 	}
 
-
-
-	if (unEstado == "Agacharse"){
+	if (unEstado.movimiento == AGACHADO){
 
 		return Agacharse;
 	}
-	if (unEstado == "PatadaAlta"){
+	if (unEstado.accion == PATADA_ALTA){
 
 		return PatadaAlta;
 	}
-	if (unEstado == "Golpeado"){
+	if (unEstado.golpeado == GOLPEADO){
 
 		return Golpeado;
 	}
@@ -167,24 +165,24 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(std::string unEstado){
 	return Quieto;
 }
 
-int Sprite::getConstantes(std::string estadoDelPersonaje){
-	if (estadoDelPersonaje == "CaminarParaAdelante")
+int Sprite::getConstantes(ESTADO estadoDelPersonaje){
+	if (estadoDelPersonaje.movimiento == CAMINARDER)
 		return (tiempoCaminarParaAdelante / (this->CaminandoParaAdelante->size()) / MSxCUADRO);
-	if (estadoDelPersonaje == "CaminarParaAtras")
+	if (estadoDelPersonaje.movimiento == CAMINARIZQ)
 		return (tiempoCaminarParaAtras / (this->CaminandoParaAtras->size()) / MSxCUADRO);
-	if (estadoDelPersonaje == "Quieto")
+	if (estadoDelPersonaje.movimiento == PARADO)
 		return (tiempoQuieto / (this->Quieto->size()) / MSxCUADRO);
-	if (estadoDelPersonaje == "Salto")
+	if (estadoDelPersonaje.movimiento == SALTO)
 		return (tiempoSalto / (this->Salto->size()) / MSxCUADRO);
-	if (estadoDelPersonaje == "SaltoDiagonal")
+	if (estadoDelPersonaje.movimiento == SALTODIAGDER)
 		return (tiempoSaltoDiagonal / (this->SaltoDiagonal->size()) / MSxCUADRO);
-	if (estadoDelPersonaje == "Agacharse")
+	if (estadoDelPersonaje.movimiento == AGACHADO)
 		return (tiempoAgacharse / (this->Agacharse->size()) / MSxCUADRO);
-	if (estadoDelPersonaje == "PatadaAlta")
+	if (estadoDelPersonaje.accion == PATADA_ALTA)
 		return (tiempoPatadaAlta / (this->PatadaAlta->size()) / MSxCUADRO);
-	if (estadoDelPersonaje == "Golpeado")
+	if (estadoDelPersonaje.movimiento == GOLPEADO)
 		return (tiempoGolpeado / (this->Golpeado->size()) / MSxCUADRO);
-	if (estadoDelPersonaje == "SaltoDiagonalIzq")
+	if (estadoDelPersonaje.movimiento == SALTODIAGIZQ)
 		return (tiempoSaltoDiagonalIzq / (this->SaltoDiagonalIzq->size()) / MSxCUADRO);
 }
 
