@@ -83,25 +83,13 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	
 	validadorDeEscenario->validaryPisoCon(validadorDePersonajes->getPersonajes()->at(0)->getAlto());
 
-	// en esta parte se desarma todo......
-	
-	//Parseo de la pelea
+	//PELEA
 	Json::Value pelea;
 	pelea = raiz["pelea"];
-	std::string fighters;
-	if (!pelea)
-	{
-		Log::getInstancia().logearMensajeEnModo("[BAD] Fallo el parseo de la pelea", Log::MODO_WARNING);
-	}
-	//Valida los campos
 
-	if (pelea.isMember("fighters") && pelea.get("fighters", PELEA_INICIAL).isString())
-		this->pelea = pelea.get("fighters", PELEA_INICIAL).asString();
-	else {
-		this->pelea = PELEA_INICIAL;
-		Log::getInstancia().logearMensajeEnModo("Se carga el combate por defecto", Log::MODO_WARNING);
-	}
-	Log::getInstancia().logearMensajeEnModo("Se cargo el combate con exito", Log::MODO_DEBUG);
+	validadorDePelea = new ValidadorDePelea();
+	validadorDePelea->validarPeleaDesdeParaLosPeronajes(pelea, validadorDePersonajes->getPersonajes());
+
 	//Parseo del color    
 	Json::Value color_alternativo;
 	color_alternativo = raiz["color_alternativo"];
@@ -192,7 +180,7 @@ Controlador* Parser::getControlador2(){
 
 std::string Parser::getPelea()const
 {
-	return this->pelea;
+	return validadorDePelea->getPelea();
 }
 
 std::vector<Personaje*> Parser::getPersonajes() const
