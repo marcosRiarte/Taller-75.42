@@ -118,6 +118,7 @@
     <ClInclude Include="Validador.h" />
     <ClInclude Include="ValidadorDeCapas.h" />
     <ClInclude Include="ValidadorDeEscenario.h" />
+    <ClInclude Include="ValidadorDelColor.h" />
     <ClInclude Include="ValidadorDelControlador.h" />
     <ClInclude Include="ValidadorDePelea.h" />
     <ClInclude Include="ValidadorDePersonajes.h" />
@@ -149,6 +150,7 @@
     <ClCompile Include="Validador.cpp" />
     <ClCompile Include="ValidadorDeCapas.cpp" />
     <ClCompile Include="ValidadorDeEscenario.cpp" />
+    <ClCompile Include="ValidadorDelColor.cpp" />
     <ClCompile Include="ValidadorDelControlador.cpp" />
     <ClCompile Include="ValidadorDePelea.cpp" />
     <ClCompile Include="ValidadorDePersonajes.cpp" />

@@ -90,57 +90,13 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	validadorDePelea = new ValidadorDePelea();
 	validadorDePelea->validarPeleaDesdeParaLosPeronajes(pelea, validadorDePersonajes->getPersonajes());
 
-	//Parseo del color    
+	//COLOR  
 	Json::Value color_alternativo;
 	color_alternativo = raiz["color_alternativo"];
-	int h_inicial;
-	int h_final;
-	int desplazamiento;
 
-	if (!color_alternativo)
-	{
-		Log::getInstancia().logearMensajeEnModo("[BAD] Fallo el parseo del color", Log::MODO_WARNING);
-	}
-	//Valida los campos
+	validadorDelColor = new ValidadorDelColor();
+	validadorDelColor->validarColorDesde(color_alternativo);
 
-	if (color_alternativo.isMember("h_inicial") && color_alternativo.get("h_inicial", H_INICIAL).isNumeric() && color_alternativo.get("h_inicial", H_INICIAL) < INT_MAX && color_alternativo.get("h_inicial", H_INICIAL) > -INT_MAX)
-		h_inicial = color_alternativo.get("h_inicial", H_INICIAL).asInt();
-	else {
-		h_inicial = H_INICIAL;
-		Log::getInstancia().logearMensajeEnModo("Se carga HUE INICIAL por defecto", Log::MODO_WARNING);
-	}
-	if (color_alternativo.isMember("h_final") && color_alternativo.get("h_final", H_FINAL).isNumeric() && color_alternativo.get("h_final", H_FINAL) < INT_MAX && color_alternativo.get("h_final", H_FINAL) > -INT_MAX)
-		h_final = color_alternativo.get("h_final", H_FINAL).asInt();
-	else {
-		h_final = H_FINAL;
-		Log::getInstancia().logearMensajeEnModo("Se carga HUE FINAL por defecto", Log::MODO_WARNING);
-	}
-	if (color_alternativo.isMember("desplazamiento") && color_alternativo.get("desplazamiento", DESPLAZAMIENTO).isNumeric() && color_alternativo.get("desplazamiento", DESPLAZAMIENTO) < INT_MAX && color_alternativo.get("desplazamiento", DESPLAZAMIENTO) > -INT_MAX)
-		desplazamiento = color_alternativo.get("desplazamiento", DESPLAZAMIENTO).asInt();
-	else {
-		desplazamiento = DESPLAZAMIENTO;
-		Log::getInstancia().logearMensajeEnModo("Se carga HUE FINAL por defecto", Log::MODO_WARNING);
-	}
-
-	if (h_final < h_inicial)
-	{
-		std::string mensaje = "Hue final mayor que el inicial, se toma el modulo del intervalo";
-		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
-		int aux = h_final;
-		h_final = h_inicial;
-		h_inicial = aux;
-	}
-	if (h_final == h_inicial)
-	{
-		Log::getInstancia().logearMensajeEnModo("Intervalo nulo de hue nulo,tomo valores por default", Log::MODO_WARNING);
-		h_final = 0;
-		h_inicial = 0;
-
-	}
-	this->colorAlternativo.push_back(h_inicial);
-	this->colorAlternativo.push_back(h_final);
-	this->colorAlternativo.push_back(desplazamiento);
-	Log::getInstancia().logearMensajeEnModo("HUE y desplazamiento de rango valido", Log::MODO_DEBUG);
 		
 	//PARSEO DE LOS CONTROLES
 	validadorDelControlador = new ValidadorDelControlador();
@@ -195,7 +151,7 @@ std::vector<Capa*> Parser::getCapas() const
 }
 std::vector<int> Parser::getColorAlternativo()
 {
-	return this->colorAlternativo;
+	return validadorDelColor->getColorAlternativo();
 }
 
 
@@ -205,6 +161,8 @@ void Parser::FreeInstancia()
 	delete  getInstancia().validadorDeEscenario;
 	delete getInstancia().validadorDePersonajes;
 	delete getInstancia().validadorDeCapas;
+	delete getInstancia().validadorDelColor;
+	delete getInstancia().validadorDePelea;
 }
 
 Parser::~Parser()

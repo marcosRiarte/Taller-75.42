@@ -12,7 +12,7 @@ void ValidadorDePelea::validarPeleaDesdeParaLosPeronajes(Json::Value unaPelea, s
 	std::string peleaAux;
 
 	int posicion;
-	size_t i = 0;
+	size_t i;
 	bool corte = false;
 
 	bool peleador1 = false;
@@ -35,7 +35,9 @@ void ValidadorDePelea::validarPeleaDesdeParaLosPeronajes(Json::Value unaPelea, s
 			peleaAux = fighters;
 			peleaAux = peleaAux.substr(0, posicion);
 
-			while (!corte && i < personajes->size()){
+			i = 0;
+			corte = false;
+			while (!corte && (i < personajes->size())){
 				if (peleaAux == personajes->at(i)->getNombre()){
 					peleador1 = true;
 					corte = true;
@@ -49,7 +51,8 @@ void ValidadorDePelea::validarPeleaDesdeParaLosPeronajes(Json::Value unaPelea, s
 			fighters = fighters.substr(posicion + 1, fighters.size() - posicion);
 
 			i = 0;
-			while (!corte && i < personajes->size()){
+			corte = false;
+			while (!corte && (i < personajes->size())){
 				if (fighters == personajes->at(i)->getNombre()){
 					peleador2 = true;
 					corte = true;
