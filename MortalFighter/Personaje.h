@@ -85,6 +85,24 @@ public:
 	float getDeltaX() const;	
 	virtual void actualizar(float xNuevo, float yNuevo, ESTADO);	
 	std::pair<float, float> Personaje::getPosicionUn()const;	
+
+	//SETTERS
+	void setDeltaX(float unDeltaX);
+	void setAncho(float unAncho);
+	void setAlto(float unAlto);
+	void setZIndex(int unZindex);
+	void setOrientacion(std::string unaOrientacion);
+	void setSprites(std::string unosSprites);
+	void setCaminarParaAdelante(std::string unCaminarParaAdelante);
+	void setCaminarParaAtras(std::string unCaminarParaAtras);
+	void setQuieto(std::string unQuieto);
+	void setSalto(std::string unSalto);
+	void setSaltoDiagonal(std::string unSaltoDiagonal);
+	void setCaida(std::string UnaCaida);
+	void setNombre(std::string unNombre);
+	void getPatadaAlta(std::string unaPatadaAlta);
+	void getAgacharse(std::string unAgacharse);
+	void getGolpeado(std::string unGolpeado);
 	
 	~Personaje();
 
