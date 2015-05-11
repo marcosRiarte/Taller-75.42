@@ -152,6 +152,9 @@
     <ClInclude Include="ValidadorDePersonajes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ValidadorDelControlador.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -221,6 +224,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ValidadorDePersonajes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ValidadorDelControlador.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

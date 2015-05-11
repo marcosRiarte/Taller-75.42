@@ -159,253 +159,19 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	Log::getInstancia().logearMensajeEnModo("HUE y desplazamiento de rango valido", Log::MODO_DEBUG);
 		
 	//PARSEO DE LOS CONTROLES
-	std::string arriba, abajo, izquierda, derecha, golpe_bajo, golpe_alto;
-	std::string patada_baja, patada_alta, defensa, arma, reiniciar, salir;
+	validadorDelControlador = new ValidadorDelControlador();
 
 	//CONTROL 1
 	Json::Value control_1;
 	control_1 = raiz["control_1"];
 
-	ConversorDeEventos* unConversorDeEventos = new ConversorDeEventos();
-	controlador1 = new Controlador();
-
-	arriba = ARRIBA_DEFAULT_1;
-	abajo = ABAJO_DEFAULT_1;
-	izquierda = IZQUIERDA_DEFAULT_1;
-	derecha = DERECHA_DEFAULT_1;
-	defensa = DEFENSA_DEFAULT_1;
-	arma = ARMA_DEFAULT_1;
-	reiniciar = REINICIAR_DEFAULT;
-	salir = SALIR_DEFAULT;
-	golpe_bajo = G_BAJO_DEFAULT_1;
-	golpe_alto = G_ALTO_DEFAULT_1;
-	patada_baja = P_BAJA_DEFAULT_1;
-	patada_alta = P_ALTA_DEFAULT_1;
-	
-	if (!control_1){
-		Log::getInstancia().logearMensajeEnModo("Fallo el parseo del Control 1, se cargara por defecto", Log::MODO_WARNING);
-	}
-	else{
-		if ((control_1.isMember("arriba") && control_1.get("arriba", ARRIBA_DEFAULT_1).isString())){
-			arriba = control_1.get("arriba", ARRIBA_DEFAULT_1).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton arriba por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_1.isMember("abajo") && control_1.get("abajo", ABAJO_DEFAULT_1).isString())){
-			abajo = control_1.get("abajo", ABAJO_DEFAULT_1).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton abajo por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_1.isMember("izquierda") && control_1.get("izquierda", IZQUIERDA_DEFAULT_1).isString())){
-			izquierda = control_1.get("izquierda", IZQUIERDA_DEFAULT_1).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton izquierda por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_1.isMember("derecha") && control_1.get("derecha", DERECHA_DEFAULT_1).isString())){
-			derecha = control_1.get("derecha", DERECHA_DEFAULT_1).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton derecha por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_1.isMember("defensa") && control_1.get("defensa", DEFENSA_DEFAULT_1).isString())){
-			defensa = control_1.get("defensa", DEFENSA_DEFAULT_1).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton defensa por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_1.isMember("arma") && control_1.get("arma", ARMA_DEFAULT_1).isString())){
-			arma = control_1.get("arma", ARMA_DEFAULT_1).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton arma por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_1.isMember("reiniciar") && control_1.get("reiniciar", REINICIAR_DEFAULT).isString())){
-			reiniciar = control_1.get("reiniciar", REINICIAR_DEFAULT).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton reiniciar por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_1.isMember("salir") && control_1.get("salir", SALIR_DEFAULT).isString())){
-			salir = control_1.get("salir", SALIR_DEFAULT).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton salir por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_1.isMember("golpe_bajo") && control_1.get("golpe_bajo", G_BAJO_DEFAULT_1).isString())){
-			golpe_bajo = control_1.get("golpe_bajo", G_BAJO_DEFAULT_1).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton golpe_bajo por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_1.isMember("golpe_alto") && control_1.get("golpe_alto", G_ALTO_DEFAULT_1).isString())){
-			golpe_alto = control_1.get("golpe_alto", G_ALTO_DEFAULT_1).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton golpe_alto por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_1.isMember("patada_baja") && control_1.get("patada_baja", P_BAJA_DEFAULT_1).isString())){
-			patada_baja = control_1.get("patada_baja", P_BAJA_DEFAULT_1).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton patada_baja por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_1.isMember("patada_alta") && control_1.get("patada_alta", P_ALTA_DEFAULT_1).isString())){
-			patada_alta = control_1.get("patada_alta", P_ALTA_DEFAULT_1).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton patada_alta por defecto", Log::MODO_WARNING);
-		}
-	}
-
-	unConversorDeEventos->setAccion(ConversorDeEventos::UP, arriba);
-	unConversorDeEventos->setAccion(ConversorDeEventos::DOWN, abajo);
-	unConversorDeEventos->setAccion(ConversorDeEventos::RIGHT, derecha);
-	unConversorDeEventos->setAccion(ConversorDeEventos::LEFT, izquierda);
-	unConversorDeEventos->setAccion(ConversorDeEventos::HOLD, defensa);
-	unConversorDeEventos->setAccion(ConversorDeEventos::REBOOT, reiniciar);
-	unConversorDeEventos->setAccion(ConversorDeEventos::QUIT, salir);
-	unConversorDeEventos->setAccion(ConversorDeEventos::LOW_PUNCH, golpe_bajo);
-	unConversorDeEventos->setAccion(ConversorDeEventos::HIGH_PUNCH, golpe_alto);
-	unConversorDeEventos->setAccion(ConversorDeEventos::LOW_KICK, patada_baja);
-	unConversorDeEventos->setAccion(ConversorDeEventos::HIGH_KICK, patada_alta);
-
-	controlador1->setConversorDeEventos(unConversorDeEventos);
+	validadorDelControlador->validarControladorDesde(control_1);
 
 	//CONTROL 2
 	Json::Value control_2;
 	control_2 = raiz["control_2"];
 
-	ConversorDeEventos* otroConversorDeEventos = new ConversorDeEventos();
-	controlador2 = new Controlador();
-
-	arriba = ARRIBA_DEFAULT_2;
-	abajo = ABAJO_DEFAULT_2;
-	izquierda = IZQUIERDA_DEFAULT_2;
-	derecha = DERECHA_DEFAULT_2;
-	defensa = DEFENSA_DEFAULT_2;
-	arma = ARMA_DEFAULT_2;
-	reiniciar = REINICIAR_DEFAULT;
-	salir = SALIR_DEFAULT;
-	golpe_bajo = G_BAJO_DEFAULT_2;
-	golpe_alto = G_ALTO_DEFAULT_2;
-	patada_baja = P_BAJA_DEFAULT_2;
-	patada_alta = P_ALTA_DEFAULT_2;
-
-	if (!control_2){
-		Log::getInstancia().logearMensajeEnModo("Fallo el parseo del Control 2, se cargara por defecto", Log::MODO_WARNING);
-	}
-	else{
-		if ((control_2.isMember("arriba") && control_2.get("arriba", ARRIBA_DEFAULT_2).isString())){
-			arriba = control_2.get("arriba", ARRIBA_DEFAULT_2).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton arriba por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_2.isMember("abajo") && control_2.get("abajo", ABAJO_DEFAULT_2).isString())){
-			abajo = control_2.get("abajo", ABAJO_DEFAULT_2).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton abajo por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_2.isMember("izquierda") && control_2.get("izquierda", IZQUIERDA_DEFAULT_2).isString())){
-			izquierda = control_2.get("izquierda", IZQUIERDA_DEFAULT_2).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton izquierda por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_2.isMember("derecha") && control_2.get("derecha", DERECHA_DEFAULT_2).isString())){
-			derecha = control_2.get("derecha", DERECHA_DEFAULT_2).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton derecha por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_2.isMember("defensa") && control_2.get("defensa", DEFENSA_DEFAULT_2).isString())){
-			defensa = control_2.get("defensa", DEFENSA_DEFAULT_2).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton defensa por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_2.isMember("arma") && control_2.get("arma", ARMA_DEFAULT_2).isString())){
-			arma = control_2.get("arma", ARMA_DEFAULT_2).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton arma por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_2.isMember("reiniciar") && control_2.get("reiniciar", REINICIAR_DEFAULT).isString())){
-			reiniciar = control_2.get("reiniciar", REINICIAR_DEFAULT).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton reiniciar por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_2.isMember("salir") && control_2.get("salir", SALIR_DEFAULT).isString())){
-			salir = control_2.get("salir", SALIR_DEFAULT).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton salir por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_2.isMember("golpe_bajo") && control_2.get("golpe_bajo", G_BAJO_DEFAULT_2).isString())){
-			golpe_bajo = control_2.get("golpe_bajo", G_BAJO_DEFAULT_2).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton golpe_bajo por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_2.isMember("golpe_alto") && control_2.get("golpe_alto", G_ALTO_DEFAULT_2).isString())){
-			golpe_alto = control_2.get("golpe_alto", G_ALTO_DEFAULT_2).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton golpe_alto por defecto", Log::MODO_WARNING);
-		}
-
-		if ((control_2.isMember("patada_baja") && control_2.get("patada_baja", P_BAJA_DEFAULT_2).isString())){
-			patada_baja = control_2.get("patada_baja", P_BAJA_DEFAULT_2).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton patada_baja por defecto", Log::MODO_WARNING);;
-		}
-
-		if ((control_2.isMember("patada_alta") && control_2.get("patada_alta", P_ALTA_DEFAULT_2).isString())){
-			patada_alta = control_2.get("patada_alta", P_ALTA_DEFAULT_2).asString();
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Se carga boton patada_alta por defecto", Log::MODO_WARNING);
-		}
-	}
-	otroConversorDeEventos->setAccion(ConversorDeEventos::UP, arriba);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::DOWN, abajo);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::RIGHT, derecha);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::LEFT, izquierda);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::HOLD, defensa);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::REBOOT, reiniciar);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::QUIT, salir);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::LOW_PUNCH, golpe_bajo);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::HIGH_PUNCH, golpe_alto);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::LOW_KICK, patada_baja);
-	otroConversorDeEventos->setAccion(ConversorDeEventos::HIGH_KICK, patada_alta);
-
-	controlador2->setConversorDeEventos(otroConversorDeEventos);
+	validadorDelControlador->validarControladorDesde(control_2);
 	
 	return true;
 }
@@ -421,11 +187,11 @@ Ventana& Parser::getVentana() const
 }
 
 Controlador* Parser::getControlador1(){
-	return controlador1;
+	return validadorDelControlador->getControlador1();
 }
 
 Controlador* Parser::getControlador2(){
-	return controlador2;
+	return validadorDelControlador->getControlador2();
 }
 
 std::string Parser::getPelea()const
