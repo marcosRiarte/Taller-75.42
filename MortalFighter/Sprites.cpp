@@ -31,6 +31,11 @@ Sprite::Sprite(std::string jsonSprites){
 	this->Agacharse = new std::vector<SDL_Rect*>();
 	this->PatadaAlta = new std::vector<SDL_Rect*>();
 	this->Golpeado = new std::vector<SDL_Rect*>();
+
+	this->AgachadoGolpeado = new std::vector<SDL_Rect*>();
+	this->SaltoGolpeado = new std::vector<SDL_Rect*>();
+	this->AgachadoDefensa = new std::vector<SDL_Rect*>();
+
 	
 	Json::Value raiz = ParsearSprites(jsonSprites);
 	Json::Value sprites = raiz["sprites"]["coordenadas"];
@@ -75,7 +80,22 @@ Sprite::Sprite(std::string jsonSprites){
 	// Sensores Golpeado
 	cargarSensores("Golpeado", sprites);
 		
-	
+	// Sprites AgachadoGolpeado
+	cargarSprites(this->AgachadoGolpeado, "AgachadoGolpeado", sprites);
+	// Sensores AgachadoGolpeado
+	cargarSensores("AgachadoGolpeado", sprites);
+
+	// Sprites SaltoGolpeado
+	cargarSprites(this->SaltoGolpeado, "SaltoGolpeado", sprites);
+	// Sensores SaltoGolpeado
+	cargarSensores("SaltoGolpeado", sprites);
+
+	// Sprites AgachadoDefensa
+	cargarSprites(this->AgachadoDefensa, "AgachadoDefensa", sprites);
+	// Sensores AgachadoDefensa
+	cargarSensores("AgachadoDefensa", sprites);
+
+
 	*SaltoDiagonalIzq = *SaltoDiagonal;
 	std::reverse(SaltoDiagonalIzq->begin(), SaltoDiagonalIzq->end());
 }
