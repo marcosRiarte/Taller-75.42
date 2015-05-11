@@ -205,7 +205,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 		if ((movimientos.at(0) == P_ALTA) || (unCuerpo->getEstado().accion == PATADA_ALTA)){
 			for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
-				for (unsigned j = 0; j < sensoresCuerpo->size(); j++){
+				for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
 					if (elOtroCuerpo->getEstado().movimiento != GOLPEADO){
 						ManejadorULogicas manejadorUnidades;
 						posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), !invertido);

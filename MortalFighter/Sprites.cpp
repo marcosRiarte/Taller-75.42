@@ -17,7 +17,6 @@ SDL_Rect* Sprite::crearCuadro(Json::Value cuadro){
 	unCuadro->y = cuadro.get("y", 0).asInt();
 	unCuadro->w = cuadro.get("ancho", 0).asInt();
 	unCuadro->h = cuadro.get("alto", 0).asInt();
-
 	return unCuadro;
 }
 
