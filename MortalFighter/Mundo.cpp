@@ -206,12 +206,12 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		if ((movimientos.at(0) == P_ALTA) || (unCuerpo->getEstado().accion == PATADA_ALTA)){
 			for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
 				for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
-					if (elOtroCuerpo->getEstado().movimiento != GOLPEADO){
+					if (elOtroCuerpo->getEstado().golpeado != GOLPEADO){
 						ManejadorULogicas manejadorUnidades;
 						posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), !invertido);
 						posAbsSensoresCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion(), unCuerpo, sensoresCuerpo->at(i)->getAncho(), invertido);
 						if (!(sensoresCuerpo->at(i)->getHitbox()) && (sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
-							ESTADO unEstado;
+							ESTADO unEstado = elOtroCuerpo->getEstado();
 							unEstado.golpeado = GOLPEADO;
 							elOtroCuerpo->notificarObservadores(unEstado);
 						}
