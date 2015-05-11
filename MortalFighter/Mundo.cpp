@@ -184,7 +184,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		//aca hay que aplicar una demora para que reproduzca un tiempo el sprite de patada.
 		// ojo, tener en cuenta que la demora se tiene que interrumpir si me barren y quedo golpeado mientras tiraba la patada.
 
-		if (movimientos.at(0) == P_ALTA && !(unCuerpo->getEstado().movimiento == PATADA_ALTA)){
+		if (movimientos.at(0) == P_ALTA && !(unCuerpo->getEstado().accion == PATADA_ALTA)){
 			nuevoEstado.accion = PATADA_ALTA;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
