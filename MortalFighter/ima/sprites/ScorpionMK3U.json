@@ -707,16 +707,16 @@
             "PatadaAlta": {
                 "sensores": [
                     {
-                        "x": 841,
-                        "y": 2272,
+                        "x": 724,
+                        "y": 2242,
                         "ancho": 26,
-                        "alto": 35,
+                        "alto": 26,
                         "nSprite": 6,
                         "esHitBox": false
                     },
 					{
-                        "x": 800,
-                        "y": 2277,
+                        "x": 650,
+                        "y": 2297,
                         "ancho": 26,
                         "alto": 18,
                         "nSprite": 6,

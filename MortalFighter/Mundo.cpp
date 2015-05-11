@@ -220,7 +220,6 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 				}
 		}
 
-		//aca deberia tener en cuenta ademas si no estoy en estado golpeado, por que si me pegaron se tiene que interrumpir
 		if ( (unCuerpo->GetDemora() > 0)) {
 			unCuerpo->DisminuirDemora();
 			nuevoEstado = unCuerpo->getEstadoAnterior();
