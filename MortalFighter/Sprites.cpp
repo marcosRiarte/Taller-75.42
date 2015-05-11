@@ -128,6 +128,9 @@ Json::Value	Sprite::ParsearSprites(std::string jsonSprites)
 }
 
 std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
+	if (unEstado.accion == PATADA_ALTA){
+		return PatadaAlta;
+	}
 	if (unEstado.movimiento == CAMINARDER){
 		return CaminandoParaAdelante;
 	}
@@ -153,10 +156,6 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 
 		return Agacharse;
 	}
-	if (unEstado.accion == PATADA_ALTA){
-
-		return PatadaAlta;
-	}
 	if (unEstado.golpeado == GOLPEADO){
 
 		return Golpeado;
@@ -166,24 +165,25 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 }
 
 int Sprite::getConstantes(ESTADO estadoDelPersonaje){
+	//TODO
+	if (estadoDelPersonaje.accion == PATADA_ALTA)
+		return (tiempoPatadaAlta / (this->PatadaAlta->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == CAMINARDER)
 		return (tiempoCaminarParaAdelante / (this->CaminandoParaAdelante->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == CAMINARIZQ)
 		return (tiempoCaminarParaAtras / (this->CaminandoParaAtras->size()) / MSxCUADRO);
-	if (estadoDelPersonaje.movimiento == PARADO)
-		return (tiempoQuieto / (this->Quieto->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == SALTO)
 		return (tiempoSalto / (this->Salto->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == SALTODIAGDER)
 		return (tiempoSaltoDiagonal / (this->SaltoDiagonal->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == AGACHADO)
 		return (tiempoAgacharse / (this->Agacharse->size()) / MSxCUADRO);
-	if (estadoDelPersonaje.accion == PATADA_ALTA)
-		return (tiempoPatadaAlta / (this->PatadaAlta->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == GOLPEADO)
 		return (tiempoGolpeado / (this->Golpeado->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == SALTODIAGIZQ)
 		return (tiempoSaltoDiagonalIzq / (this->SaltoDiagonalIzq->size()) / MSxCUADRO);
+	if (estadoDelPersonaje.movimiento == PARADO)
+		return (tiempoQuieto / (this->Quieto->size()) / MSxCUADRO);
 }
 
 Sprite::~Sprite()

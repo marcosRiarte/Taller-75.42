@@ -53,6 +53,10 @@ public:
 	// Le pasa el nombre del estado actual para activar los sensores correspondientes
 	inline void SetSensorActivoStr(ESTADO estadoActual)
 	{
+		if (estadoActual.accion == PATADA_ALTA){
+			sensorActivoStr = "PatadaAlta";
+		}
+		else{
 		if (estadoActual.movimiento == CAMINARDER)
 			sensorActivoStr = "Caminar";
 		if (estadoActual.movimiento == PARADO)
@@ -65,10 +69,9 @@ public:
 			sensorActivoStr = "CaminarAtras";
 		if (estadoActual.movimiento == AGACHADO)
 			sensorActivoStr = "Agacharse";
-		if (estadoActual.accion == PATADA_ALTA)
-			sensorActivoStr = "PatadaAlta";
 		if (estadoActual.golpeado == GOLPEADO)
 			sensorActivoStr = "Golpeado";
+		}
 	}
 
 	inline void SetPosicion(const vector2D& unaPosicion)
