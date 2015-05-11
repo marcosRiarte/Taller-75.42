@@ -85,12 +85,14 @@ Sprite::Sprite(std::string jsonSprites){
 void Sprite::cargarSensores(std::string unEstadoStr, Json::Value spritesRaiz)
 {
 	Json::Value estadoSens = spritesRaiz[unEstadoStr]["sensores"];
-	Json::Value estadoSprites = spritesRaiz[unEstadoStr]["secuenciaSprites"];
+	Json::Value estadoSprites = spritesRaiz[unEstadoStr]["secuenciaSprites"]; 
+	
 	this->Sensores.push_back(new std::vector<Sensor*>());
 	for (size_t j = 0; j < estadoSens.size(); j++) {
 		//seteo de variables
-		float xSens = estadoSens[j].get("x", 0).asFloat() - estadoSprites[0].get("x", 0).asFloat();
-		float ySens = estadoSens[j].get("y", 0).asFloat() - estadoSprites[0].get("y", 0).asFloat();
+		int nSprite = estadoSens[j].get("nSprite", 0).asInt();
+		float xSens = estadoSens[j].get("x", 0).asFloat() - estadoSprites[nSprite].get("x", 0).asFloat();
+		float ySens = estadoSens[j].get("y", 0).asFloat() - estadoSprites[nSprite].get("y", 0).asFloat();
 		std::pair<float, float> XYSens = std::make_pair(xSens, ySens);
 		int anchoSens = estadoSens[j].get("ancho", 0).asFloat();
 		int altoSens = estadoSens[j].get("alto", 0).asFloat();

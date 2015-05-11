@@ -23,16 +23,16 @@ http://stackoverflow.com/questions/18344646/combine-enums-c  ver respuesta de co
 /*
 enum tipo {
 	Movimientos = 0x100,
-	Golpes = 0x200,
+	Acciones = 0x200,
 	Golpeado = 0x300
 };
 
 enum Movimientos
 {
-	QUIETO = Movimientos, DER, IZQ, ARRIBA, ABAJO, SALTOIZQ, SALTODER
+	QUIETO = Movimientos, DER, IZQ, AGACHADO, SALTO , SALTOIZQ, SALTODER
 };
 
-enum Golpes
+enum Acciones
 {
 	DEFENSA = Golpes, GANCHO, PATADA_ALTA, PATADA_BAJA, GOLPE_ALTO, GOLPE_BAJO, ARMA_ARROJABLE
 };
