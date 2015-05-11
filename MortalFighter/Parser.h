@@ -11,6 +11,7 @@
 #include "ValidadorDeCapas.h"
 #include "ValidadorDePersonajes.h"
 #include "ValidadorDelControlador.h"
+#include "ValidadorDePelea.h"
 
 class Parser
 {
@@ -37,7 +38,7 @@ private:
 	ValidadorDeVentana* validadorDeVentana;
 	ValidadorDeEscenario* validadorDeEscenario;
 	ValidadorDelControlador* validadorDelControlador;
-	std::string pelea;
+	ValidadorDePelea* validadorDePelea;
 	std::vector<int> colorAlternativo;
 	virtual ~Parser();
 

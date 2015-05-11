@@ -45,6 +45,12 @@ bool ValidadorDePersonajes::validarPersonajesDesdeConEscenarioYventana(Json::Val
 		for (size_t i = 0; i < personajesParseados.size(); i++) {
 
 			Personaje* unPersonaje = new Personaje(ANCHO_PERSONAJE, ALTO_PERSONAJE, ZINDEX, ORIENTACION_PERSONAJE, SPRITE_DEFAULT, CAMINARPARAADELANTE_DEFAULT, CAMINARPARAATRAS_DEFAULT, QUIETO_DEFAULT, SALTO_DEFAULT, SALTODIAGONAL_DEFAULT, CAIDA_DEFAULT, PATADAALTA_DEFAULT, GOLPEADO_DEFAULT, AGACHARSE_DEFAULT, LIU_KANG);
+			
+			//NOMBRE
+			if (personajesParseados[i].isMember("nombre") && personajesParseados[i].get("nombre", LIU_KANG).isString()){
+				unPersonaje->setNombre(personajesParseados[i].get("nombre", LIU_KANG).asString());
+			}
+			else Log::getInstancia().logearMensajeEnModo("Se carga nombre del personaje por defecto", Log::MODO_WARNING);
 
 			//ANCHO
 			if (personajesParseados[i].isMember("ancho") && personajesParseados[i].get("ancho", ANCHO_PERSONAJE).isNumeric() && ((personajesParseados[i].get("ancho", ANCHO_PERSONAJE) < anchoMaximoDelPersonaje) && (anchoMaximoDelPersonaje <= unEscenario->getAncho()))){
