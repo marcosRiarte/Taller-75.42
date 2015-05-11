@@ -60,7 +60,7 @@ void ValidadorDeEscenario::validarEscenarioDesde(Json::Value unEscenario){
 
 }
 
-void ValidadorDeEscenario::validaryPisoCon(int altoPersonaje){
+void ValidadorDeEscenario::validaryPisoCon(float altoPersonaje){
 	if ((escenario->getYPiso() < 0) || (escenario->getYPiso() > (escenario->getAlto() - altoPersonaje))) {
 		std::string mensaje = "yPiso del Escenario fuera de rango, se yPiso por defecto";
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);

@@ -10,7 +10,7 @@ public:
 	ValidadorDeEscenario();
 	void validarEscenarioDesde(Json::Value unEscenario);
 	Escenario* getEscenario();
-	void validaryPisoCon(int altoPersonaje);
+	void validaryPisoCon(float altoPersonaje);
 	~ValidadorDeEscenario();
 };
 
