@@ -1,63 +1,32 @@
 #pragma once
 #include "Sensor.h"
 
-//xjose1 hay que dividir los enumerados.
-/*
-yo los clasificaria en
-movimientos, golpes, sufriendo
-movimientos "quito, saltar, caminar...."
-golpes "piña alta, patada, arma"
-sufriendo "golpebajo,arrojado,congelado...."
 
-hay que tener un atributo orientacion que determine si esta en orientacion izq o derecha y no duplicar aca estados!
-http://stackoverflow.com/questions/18344646/combine-enums-c  ver respuesta de compiancion d enumerados
-
-*/
-//
-//
-//
-
-// usando convencion de controlador .h
-//enum MOV_TIPO { QUIETO, DER, IZQ, ARRIBA, ABAJO, SALTOIZQ, SALTODER, DEFENSA, G_BAJO, G_ALTO, G_ABAJO, G_GANCHO, G_SALTO, G_SALTOIZQ, G_SALTODER, P_BAJA, P_ALTA, P_BAJA_ABAJO, P_ALTA_ABAJO, P_SALTO, P_SALTOIZQ, P_SALTODER, ARMA, CERRAR, RECARGAR };
-
-/*
-enum tipo {
-	Movimientos = 0x100,
-	Acciones = 0x200,
-	Golpeado = 0x300
-};
 
 enum Movimientos
 {
-	QUIETO = Movimientos, DER, IZQ, AGACHADO, SALTO , SALTOIZQ, SALTODER
+	PARADO, CAMINARDER, CAMINARIZQ, AGACHADO, SALTO , SALTODIAGIZQ, SALTODIAGDER
 };
 
 enum Acciones
 {
-	DEFENSA = Golpes, GANCHO, PATADA_ALTA, PATADA_BAJA, GOLPE_ALTO, GOLPE_BAJO, ARMA_ARROJABLE
+	GUARDIA, GANCHO, PATADA_ALTA, PATADA_BAJA, GOLPE_ALTO, GOLPE_BAJO, ARMA_ARROJABLE
 };
 
 enum Golpeado
 {
-	GOLPEADO = Golpeado
+	GOLPEADO
 };
-
-constexpr tipo getOperationType(unsigned value) {
-	return value & 0xFF00;
-}
-*/
 
 enum ESTADO {
 	QUIETODER, QUIETOIZQ, DER_DER, DER_IZQ, IZQ_DER, IZQ_IZQ, ARRIBA_DER, ARRIBA_IZQ,
 	ABAJO_DER, ABAJO_IZQ, SALTOIZQ_DER, SALTOIZQ_IZQ, SALTODER_DER, SALTODER_IZQ,
 	P_ALTADER,P_ALTAIZQ,GOLPEADOIZQ,GOLPEADODER
-	
 };
 
 class Personaje
 {
 public:
-	
 	std::string nombre;
 	Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje, std::string CaidaPersonaje, std::string PatadaAltaPersonaje, std::string GolpeadoPersonaje, std::string AgachadoPersonaje, std::string nombrePersonaje);
 	float getAncho() const;
@@ -104,6 +73,12 @@ public:
 	void getAgacharse(std::string unAgacharse);
 	void getGolpeado(std::string unGolpeado);
 	
+	struct tipo {
+		Movimientos movimiento;
+		Acciones accion;
+		Golpeado golpeado;
+	};
+
 	~Personaje();
 
 private:
@@ -126,5 +101,7 @@ private:
 	std::pair<float, float> posicionUn;
 	float deltaX;	
 	ESTADO estadoActual;
+
+
 };
 
