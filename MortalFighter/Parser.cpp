@@ -66,10 +66,6 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	validadorDeEscenario = new ValidadorDeEscenario();
 	validadorDeEscenario->validarEscenarioDesde(escenario);
 
-	float anchoEscenario = validadorDeEscenario->getEscenario()->getAncho();
-	float altoEscenario = validadorDeEscenario->getEscenario()->getAlto();
-	float yPisoEscenario = validadorDeEscenario->getEscenario()->getYPiso();
-
 	//CAPAS
 	Json::Value capas;
 	capas = raiz["capas"];
