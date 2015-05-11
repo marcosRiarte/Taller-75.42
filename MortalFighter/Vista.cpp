@@ -573,7 +573,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 				r.x = sensoresCuerpo1->at(i)->getPosicion().first + personajeUno.x;
 			}
 			else{
-				r.x = personajeUno.x + personajeUno.w - sensoresCuerpo1->at(i)->getPosicion().first - sensoresCuerpo1->at(i)->getAncho();
+				r.x = personajeUno.x + manejadorULog.darLongPixels(personajesVista.at(0)->getAncho()) - sensoresCuerpo1->at(i)->getPosicion().first - sensoresCuerpo1->at(i)->getAncho();
 			}
 			r.y = sensoresCuerpo1->at(i)->getPosicion().second + personajeUno.y;
 			r.w = sensoresCuerpo1->at(i)->getAncho();
@@ -582,7 +582,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		}
 		for (unsigned i = 0; i < sensoresCuerpo2->size(); i++){
 			if (!(invertido)){
-				r2.x = personajeDos.x + personajeDos.w - sensoresCuerpo2->at(i)->getPosicion().first - sensoresCuerpo2->at(i)->getAncho();
+				r2.x = personajeDos.x + manejadorULog.darLongPixels(personajesVista.at(1)->getAncho()) - sensoresCuerpo2->at(i)->getPosicion().first - sensoresCuerpo2->at(i)->getAncho();
 			}
 			else{
 				r2.x = sensoresCuerpo2->at(i)->getPosicion().first + personajeDos.x;
