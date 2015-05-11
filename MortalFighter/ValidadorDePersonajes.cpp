@@ -199,7 +199,7 @@ bool ValidadorDePersonajes::validarPersonajesDesdeConEscenarioYventana(Json::Val
 					std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto Patada Alta";
 					Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 				}
-				//unPersonaje->setPatadaAlta(PatadaAlta);
+				unPersonaje->setPatadaAlta(PatadaAlta);
 			}
 			else {
 				Log::getInstancia().logearMensajeEnModo("Se carga sprite PatadaAlta del personaje por defecto", Log::MODO_WARNING);
@@ -212,7 +212,7 @@ bool ValidadorDePersonajes::validarPersonajesDesdeConEscenarioYventana(Json::Val
 					std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto Agacharse";
 					Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 				}
-				//unPersonaje->setAgacharse(Agacharse);
+				unPersonaje->setAgacharse(Agacharse);
 			}
 			else {
 				Log::getInstancia().logearMensajeEnModo("Se carga sprite Agacharse del personaje por defecto", Log::MODO_WARNING);
@@ -225,7 +225,7 @@ bool ValidadorDePersonajes::validarPersonajesDesdeConEscenarioYventana(Json::Val
 					std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto Golpeado";
 					Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 				}
-				//unPersonaje->setGolpeado(Golpeado);
+				unPersonaje->setGolpeado(Golpeado);
 			}
 			else {
 				Log::getInstancia().logearMensajeEnModo("Se carga sprite Golpeado del personaje por defecto", Log::MODO_WARNING);

@@ -218,15 +218,15 @@ void Personaje::setNombre(std::string unNombre){
 	nombreP = unNombre;
 }
 
-void Personaje::getPatadaAlta(std::string unaPatadaAlta){
+void Personaje::setPatadaAlta(std::string unaPatadaAlta){
 	patadaalta = unaPatadaAlta;
 }
 
-void Personaje::getAgacharse(std::string unAgacharse){
+void Personaje::setAgacharse(std::string unAgacharse){
 	agachado = unAgacharse;
 }
 
-void Personaje::getGolpeado(std::string unGolpeado){
+void Personaje::setGolpeado(std::string unGolpeado){
 	golpeado = unGolpeado;
 }
 

@@ -69,9 +69,9 @@ public:
 	void setSaltoDiagonal(std::string unSaltoDiagonal);
 	void setCaida(std::string UnaCaida);
 	void setNombre(std::string unNombre);
-	void getPatadaAlta(std::string unaPatadaAlta);
-	void getAgacharse(std::string unAgacharse);
-	void getGolpeado(std::string unGolpeado);
+	void setPatadaAlta(std::string unaPatadaAlta);
+	void setAgacharse(std::string unAgacharse);
+	void setGolpeado(std::string unGolpeado);
 	
 	struct tipo {
 		Movimientos movimiento;
