@@ -27,8 +27,9 @@ Sprite::Sprite(std::string jsonSprites){
 	this->CaminandoParaAtras = new std::vector<SDL_Rect*>();
 	this->SaltoDiagonal = new std::vector<SDL_Rect*>();
 	this->SaltoDiagonalIzq = new std::vector<SDL_Rect*>();
-	this->Quieto = new std::vector<SDL_Rect*>();
+	this->Quieto = new std::vector<SDL_Rect*>(); 
 	this->Agacharse = new std::vector<SDL_Rect*>();
+	this->Defensa = new std::vector<SDL_Rect*>();
 	this->PatadaAlta = new std::vector<SDL_Rect*>();
 	this->Golpeado = new std::vector<SDL_Rect*>();
 
@@ -69,6 +70,11 @@ Sprite::Sprite(std::string jsonSprites){
 	cargarSprites(this->Agacharse, "Agacharse", sprites);
 	// Sensores Agacharse
 	cargarSensores("Agacharse", sprites);
+
+	// Sprites Defensa
+	cargarSprites(this->Defensa, "Defensa", sprites);
+	// Sensores Defensa
+	cargarSensores("Defensa", sprites);
 
 	// Sprites PatadaAlta
 	cargarSprites(this->PatadaAlta, "PatadaAlta", sprites);

@@ -871,7 +871,7 @@
                 }
             ]
             },
-			"Golpeado": {
+            "Golpeado": {
                 "sensores": [
                     {
                         "x": 1535,
@@ -888,32 +888,59 @@
                         "y": 1124,
                         "ancho": 160,
                         "alto": 366
-                    },					
-					
-                     {
+                    },
+
+                    {
                         "x": 1680,
                         "y": 1124,
                         "ancho": 170,
                         "alto": 366
                     },
-					{
+                    {
                         "x": 1850,
                         "y": 1124,
                         "ancho": 181,
                         "alto": 366
                     },
-					 {
+                    {
                         "x": 1680,
                         "y": 1124,
                         "ancho": 170,
                         "alto": 366
                     },
-					 {
+                    {
                         "x": 1520,
                         "y": 1124,
                         "ancho": 160,
                         "alto": 366
                     }
+                ]
+            },
+            "Defensa": {
+                "sensores": [
+                   {
+                        "x": 230,
+                        "y": 1511,
+                        "ancho": 149,
+                        "alto": 347,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    }
+                ],
+                "secuenciaSprites": [
+
+                    {
+                        "x": 230,
+                        "y": 1511,
+                        "ancho": 149,
+                        "alto": 347
+                    },
+                    {
+                        "x": 440,
+                        "y": 1511,
+                        "ancho": 143,
+                        "alto": 341
+                    }                   
                 ]
             },
 			"Agacharse": {

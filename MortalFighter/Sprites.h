@@ -13,6 +13,7 @@ private:
 	std::vector<SDL_Rect*>* SaltoDiagonal;
 	std::vector<SDL_Rect*>* SaltoDiagonalIzq;
 	std::vector<SDL_Rect*>* Quieto;
+	std::vector<SDL_Rect*>*Defensa;
 
 	std::vector<SDL_Rect*>*Agacharse;
 	std::vector<SDL_Rect*>*PatadaAlta;
