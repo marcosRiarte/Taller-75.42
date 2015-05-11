@@ -488,12 +488,12 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	if ((estadoAnteriorPj1.movimiento != estadoDelPersonajeUno.movimiento) || (estadoAnteriorPj1.accion != estadoDelPersonajeUno.accion) || (estadoAnteriorPj1.golpeado != estadoDelPersonajeUno.golpeado)){
 		numeroDeCuadroUno = 0;
-		estadoAnteriorPj1 = personajesVista[0]->getEstado();
+		estadoAnteriorPj1 = estadoDelPersonajeUno;
 	}
 
 	if ((estadoAnteriorPj2.movimiento != estadoDelPersonajeDos.movimiento) || (estadoAnteriorPj2.accion != estadoDelPersonajeDos.accion) || (estadoAnteriorPj2.golpeado != estadoDelPersonajeDos.golpeado)){
 		numeroDeCuadroDos = 0;
-		estadoAnteriorPj2 = personajesVista[1]->getEstado();
+		estadoAnteriorPj2 = estadoDelPersonajeDos;
 	}
 	
 	if ((numeroDeCuadroUno) > (tiempoSecuenciaSpritesUno*listaDeCuadrosUno->size()))

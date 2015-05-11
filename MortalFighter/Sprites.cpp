@@ -130,6 +130,10 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 	if (unEstado.accion == PATADA_ALTA){
 		return PatadaAlta;
 	}
+	if (unEstado.golpeado == GOLPEADO){
+
+		return Golpeado;
+	}
 	if (unEstado.movimiento == CAMINARDER){
 		return CaminandoParaAdelante;
 	}
@@ -155,11 +159,6 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 
 		return Agacharse;
 	}
-	if (unEstado.golpeado == GOLPEADO){
-
-		return Golpeado;
-	}
-
 	return Quieto;
 }
 
