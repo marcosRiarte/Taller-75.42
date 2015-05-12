@@ -16,8 +16,15 @@ public:
 	std::vector<MOV_TIPO> getMovimientos();
 	void setConversorDeEventos(ConversorDeEventos* unConversorDeEventos);
 
-protected:
+private:
 	std::vector<MOV_TIPO> movimientos;
 	ConversorDeEventos* conversorDeEventos;
+	SDL_Event event;
+	const Uint8 *state;
+	SDL_Keycode keyCode;
+	SDL_JoystickID numeroDeJoystick;
+	Uint8 jBoton;
+	SDL_Joystick* unJoystick;
+	Sint16 valorDelEje;
 };
 
