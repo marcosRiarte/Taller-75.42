@@ -20,6 +20,7 @@ std::vector<MOV_TIPO> Controlador::getMovimientos(){
 int Controlador::cambiar(){
 
 	SDL_JoystickUpdate();
+	SDL_PumpEvents();
 	SDL_Event event;
 	SDL_PollEvent(&event);
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
@@ -41,7 +42,7 @@ int Controlador::cambiar(){
 
 		if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::QUIT)) return FIN;
 
-		if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::UP)){
+		/*if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::UP)){
 			if (movimientos.at(0) == DEFENSA){
 				movimientos.clear();
 				movimientos.push_back(DEFENSA);
@@ -139,7 +140,7 @@ int Controlador::cambiar(){
 				movimientos.push_back(IZQ);
 				return CONTINUAR;
 			}
-		}
+		}*/
 
 		if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::LOW_PUNCH)){
 			if (movimientos.at(0) == ARRIBA){
@@ -251,7 +252,7 @@ int Controlador::cambiar(){
 			return CONTINUAR;
 		}
 
-		if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::HOLD)){
+		/*if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::HOLD)){
 			if (movimientos.at(0) == ABAJO){
 				movimientos.clear();
 				movimientos.push_back(DEFENSA_AGACHADO);
@@ -260,7 +261,7 @@ int Controlador::cambiar(){
 			movimientos.clear();
 			movimientos.push_back(DEFENSA);
 			return CONTINUAR;
-		}
+		}*/
 
 		if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::REBOOT)) return REINICIAR;
 
@@ -408,14 +409,30 @@ int Controlador::cambiar(){
 			return CONTINUAR;
 
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::RIGHT)]){
+		if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::UP)]){
+			movimientos.clear();
+			movimientos.push_back(SALTODER);
+			return CONTINUAR;
+		}
 		movimientos.clear();
 		movimientos.push_back(DER);
 		return CONTINUAR;
 	}
 
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LEFT)]){
+		if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::UP)]){
+			movimientos.clear();
+			movimientos.push_back(SALTOIZQ);
+			return CONTINUAR;
+		}
 		movimientos.clear();
 		movimientos.push_back(IZQ);
+		return CONTINUAR;
+	}
+
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::UP)]){
+		movimientos.clear();
+		movimientos.push_back(ARRIBA);
 		return CONTINUAR;
 	}
 
