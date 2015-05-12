@@ -151,6 +151,14 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	//caso en piso no frenado
 	else {
 
+		//esto hace que no pueda saltar en el aire
+		if (estadoAnterior.movimiento == SALTO || estadoAnterior.movimiento == SALTODIAGDER || estadoAnterior.movimiento == SALTODIAGIZQ)
+		{
+			unCuerpo->setEstadoAnterior(nuevoEstado);
+			//aca frutie dividiendo por 20 por que necesitaba una demora chiquitita
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()) / 30);
+		}
+
 		//Se setea de que cuerpo se esta tratando.
 		Cuerpo* elOtroCuerpo;
 		if (unCuerpo == Cuerpos.at(0)){
