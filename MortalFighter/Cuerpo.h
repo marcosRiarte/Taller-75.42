@@ -140,6 +140,7 @@ public:
 
 	// Evita que el cuerpo se mueva, sirve para evitar que los cuerpos se muevan
 	// en ocasiones particulares del juego.
+	//xjose y cuales son las ocaciones particulares???
 	inline void Frenar()
 	{
 		estaFrenado = true;
