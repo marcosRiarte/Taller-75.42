@@ -948,17 +948,17 @@
                     {
                         "x": 2462,
                         "y": 1161,
-                        "ancho": 159,
-                        "alto": 170
+                        "ancho": 170,
+                        "alto": 187
                     }
                 ],
                 "secuenciaSprites": [
                    
                     {
                         "x": 2462,
-                        "y": 1037,
-                        "ancho": 189,
-                        "alto": 347
+                        "y": 1161,
+                        "ancho": 170,
+                        "alto": 187
                     }
                    
                 ]
