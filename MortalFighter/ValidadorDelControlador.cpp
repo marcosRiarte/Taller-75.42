@@ -211,6 +211,11 @@ void ValidadorDelControlador::validarControladorDesde(Json::Value unControlador)
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 	}
 
+	if (!unConversorDeEventos->setAccion(ConversorDeEventos::WEAPON, arma)){
+		mensaje = "Accion arma del control " + mensajeDelNumeroDeControlador;
+		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+	}
+
 	if (!unConversorDeEventos->setAccion(ConversorDeEventos::QUIT, salir)){
 		mensaje = "Accion salir del control " + mensajeDelNumeroDeControlador;
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);

@@ -19,120 +19,161 @@ std::vector<MOV_TIPO> Controlador::getMovimientos(){
 
 int Controlador::cambiar(){
 	SDL_JoystickUpdate();
-	/*SDL_PumpEvents();*/
+	SDL_PumpEvents();
 	state = SDL_GetKeyboardState(NULL);
 
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::QUIT)]) {
+		return FIN;
+	}
+
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::REBOOT)]) {
+		return REINICIAR;
+	}
+
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LOW_PUNCH)]){
+		if (movimientos.at(0) == G_BAJO){
+			movimientos.clear();
+			movimientos.push_back(QUIETO);
+			return CONTINUAR;
+		}
+		if (movimientos.at(0) == G_ABAJO){
+			movimientos.clear();
+			movimientos.push_back(ABAJO);
+			return CONTINUAR;
+		}
+		if (movimientos.at(0) == ABAJO){
+			movimientos.clear();
+			movimientos.push_back(G_ABAJO);
+			return CONTINUAR;
+		}
+		movimientos.clear();
+		movimientos.push_back(G_BAJO);
+		return CONTINUAR;
+	}
+
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HIGH_PUNCH)]){
+		if (movimientos.at(0) == G_ALTO){
+			movimientos.clear();
+			movimientos.push_back(QUIETO);
+			return CONTINUAR;
+		}
+		if (movimientos.at(0) == G_GANCHO){
+			movimientos.clear();
+			movimientos.push_back(ABAJO);
+			return CONTINUAR;
+		}
+		if (movimientos.at(0) == ABAJO){
+			movimientos.clear();
+			movimientos.push_back(G_GANCHO);
+			return CONTINUAR;
+		}
+		movimientos.clear();
+		movimientos.push_back(G_ALTO);
+		return CONTINUAR;
+	}
+
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LOW_KICK)]){
+		if (movimientos.at(0) == P_BAJA){
+			movimientos.clear();
+			movimientos.push_back(QUIETO);
+			return CONTINUAR;
+		}
+		if (movimientos.at(0) == P_BAJA_ABAJO){
+			movimientos.clear();
+			movimientos.push_back(ABAJO);
+			return CONTINUAR;
+		}
+		if (movimientos.at(0) == ABAJO){
+			movimientos.clear();
+			movimientos.push_back(P_BAJA_ABAJO);
+			return CONTINUAR;
+		}
+		movimientos.clear();
+		movimientos.push_back(P_BAJA);
+		return CONTINUAR;
+	}
+
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HIGH_KICK)]){
+		if (movimientos.at(0) == P_ALTA){
+			movimientos.clear();
+			movimientos.push_back(QUIETO);
+			return CONTINUAR;
+		}
+		if (movimientos.at(0) == P_ALTA_ABAJO){
+			movimientos.clear();
+			movimientos.push_back(ABAJO);
+			return CONTINUAR;
+		}
+		if (movimientos.at(0) == ABAJO){
+			movimientos.clear();
+			movimientos.push_back(P_ALTA_ABAJO);
+			return CONTINUAR;
+		}
+		movimientos.clear();
+		movimientos.push_back(P_ALTA);
+		return CONTINUAR;
+	}
+	
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::WEAPON)]){
+		movimientos.clear();
+		movimientos.push_back(ARMA);
+		return CONTINUAR;
+	}
+
+
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HOLD)]){
+		if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::DOWN)]){
+			if (movimientos.at(0) == ABAJO || movimientos.at(0) == DEFENSA_AGACHADO){
+				movimientos.clear();
+				movimientos.push_back(DEFENSA_AGACHADO);
+				return CONTINUAR;
+			}
+		}
+		movimientos.clear();
+		movimientos.push_back(DEFENSA);
+		return CONTINUAR;
+	}
+
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::DOWN)]){
+		movimientos.clear();
+		movimientos.push_back(ABAJO);
+		return CONTINUAR;
+	}
+
+	if ((state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LEFT)]) && (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::RIGHT)]))
+		if ((movimientos.at(0) == DER) || (movimientos.at(0) == IZQ))
+			return CONTINUAR;
+
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::RIGHT)]){
+		if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::UP)]){
+			movimientos.clear();
+			movimientos.push_back(SALTODER);
+			return CONTINUAR;
+		}
+		movimientos.clear();
+		movimientos.push_back(DER);
+		return CONTINUAR;
+	}
+
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LEFT)]){
+		if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::UP)]){
+			movimientos.clear();
+			movimientos.push_back(SALTOIZQ);
+			return CONTINUAR;
+		}
+		movimientos.clear();
+		movimientos.push_back(IZQ);
+		return CONTINUAR;
+	}
+
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::UP)]){
+		movimientos.clear();
+		movimientos.push_back(ARRIBA);
+		return CONTINUAR;
+	}
+
+
 	if (SDL_PollEvent(&event) != 0){
-
-
-		if (event.type == SDL_QUIT) {
-			return FIN;
-		}
-
-		if (event.type == SDL_KEYDOWN){
-			std::cout << "se presiono una tecla \n";
-			keyCode = (event.key.keysym.sym);
-
-			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::QUIT)) return FIN;
-
-			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::LOW_PUNCH)){
-				if (movimientos.at(0) == G_BAJO){
-					movimientos.clear();
-					movimientos.push_back(QUIETO);
-					return CONTINUAR;
-				}
-				if (movimientos.at(0) == G_ABAJO){
-					movimientos.clear();
-					movimientos.push_back(ABAJO);
-					return CONTINUAR;
-				}
-				if (movimientos.at(0) == ABAJO){
-					movimientos.clear();
-					movimientos.push_back(G_ABAJO);
-					return CONTINUAR;
-				}
-				movimientos.clear();
-				movimientos.push_back(G_BAJO);
-				return CONTINUAR;
-			}
-
-			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::HIGH_PUNCH)){
-				if (movimientos.at(0) == G_ALTO){
-					movimientos.clear();
-					movimientos.push_back(QUIETO);
-					return CONTINUAR;
-				}
-				if (movimientos.at(0) == G_GANCHO){
-					movimientos.clear();
-					movimientos.push_back(ABAJO);
-					return CONTINUAR;
-				}
-				if (movimientos.at(0) == ABAJO){
-					movimientos.clear();
-					movimientos.push_back(G_GANCHO);
-					return CONTINUAR;
-				}
-				movimientos.clear();
-				movimientos.push_back(G_ALTO);
-				return CONTINUAR;
-			}
-
-			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::LOW_KICK)){
-				if (movimientos.at(0) == P_BAJA){
-					movimientos.clear();
-					movimientos.push_back(QUIETO);
-					return CONTINUAR;
-				}
-				if (movimientos.at(0) == P_BAJA_ABAJO){
-					movimientos.clear();
-					movimientos.push_back(ABAJO);
-					return CONTINUAR;
-				}
-				if (movimientos.at(0) == ABAJO){
-					movimientos.clear();
-					movimientos.push_back(P_BAJA_ABAJO);
-					return CONTINUAR;
-				}
-				movimientos.clear();
-				movimientos.push_back(P_BAJA);
-				return CONTINUAR;
-			}
-
-			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::HIGH_KICK)){
-				if (movimientos.at(0) == P_ALTA){
-					movimientos.clear();
-					movimientos.push_back(QUIETO);
-					return CONTINUAR;
-				}
-				if (movimientos.at(0) == P_ALTA_ABAJO){
-					movimientos.clear();
-					movimientos.push_back(ABAJO);
-					return CONTINUAR;
-				}
-				if (movimientos.at(0) == ABAJO){
-					movimientos.clear();
-					movimientos.push_back(P_ALTA_ABAJO);
-					return CONTINUAR;
-				}
-				movimientos.clear();
-				movimientos.push_back(P_ALTA);
-				return CONTINUAR;
-			}
-
-			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::WEAPON)){
-				if (movimientos.at(0) == ARMA){
-					movimientos.clear();
-					movimientos.push_back(QUIETO);
-					return CONTINUAR;
-				}
-				movimientos.clear();
-				movimientos.push_back(ARMA);
-				return CONTINUAR;
-			}
-
-			if (keyCode == conversorDeEventos->getKeyCodeDeLaAccion(ConversorDeEventos::REBOOT)) return REINICIAR;
-
-		}
 
 		if (SDL_NumJoysticks() > 0){
 			if (event.type == SDL_JOYBUTTONDOWN){
@@ -195,57 +236,6 @@ int Controlador::cambiar(){
 				}
 			}
 		}
-	}
-
-	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HOLD)]){
-		if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::DOWN)]){
-			if (movimientos.at(0) == ABAJO || movimientos.at(0) == DEFENSA_AGACHADO){
-				movimientos.clear();
-				movimientos.push_back(DEFENSA_AGACHADO);
-				return CONTINUAR;
-			}
-		}
-		movimientos.clear();
-		movimientos.push_back(DEFENSA);
-		return CONTINUAR;
-	}
-
-	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::DOWN)]){
-		movimientos.clear();
-		movimientos.push_back(ABAJO);
-		return CONTINUAR;
-	}
-
-	if ((state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LEFT)]) && (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::RIGHT)]))
-		if ((movimientos.at(0) == DER) || (movimientos.at(0) == IZQ))
-			return CONTINUAR;
-
-	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::RIGHT)]){
-		if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::UP)]){
-			movimientos.clear();
-			movimientos.push_back(SALTODER);
-			return CONTINUAR;
-		}
-		movimientos.clear();
-		movimientos.push_back(DER);
-		return CONTINUAR;
-	}
-
-	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LEFT)]){
-		if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::UP)]){
-			movimientos.clear();
-			movimientos.push_back(SALTOIZQ);
-			return CONTINUAR;
-		}
-		movimientos.clear();
-		movimientos.push_back(IZQ);
-		return CONTINUAR;
-	}
-
-	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::UP)]){
-		movimientos.clear();
-		movimientos.push_back(ARRIBA);
-		return CONTINUAR;
 	}
 
 	//JOYSTICK
