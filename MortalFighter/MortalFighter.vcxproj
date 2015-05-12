@@ -82,6 +82,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="Botones del controlador.txt" />
+    <Text Include="implementar.txt" />
     <Text Include="lib\LICENSE.jpeg.txt" />
     <Text Include="lib\LICENSE.png.txt" />
     <Text Include="lib\LICENSE.tiff.txt" />

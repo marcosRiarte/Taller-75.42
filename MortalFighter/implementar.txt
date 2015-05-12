@@ -1,0 +1,5 @@
+esto tiene que estar en cuerpo
+	//PRE: recibe la posicion de dos cuerpos del mundo y el espacio que estan ocupando (guarda por que no es un punto sino un rectangulo)
+	//devuelve true si el perosnaje esta ocupando espacio del  otro personaje
+	bool estaSuperpuesto();
+
