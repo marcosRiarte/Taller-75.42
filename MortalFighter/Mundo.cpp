@@ -88,14 +88,16 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	nuevoEstado.movimiento = PARADO;
 	std::vector<MOV_TIPO> movimientos = unCuerpo->getControlador()->getMovimientos();
 	bool invertido;
-
+	
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 
 	/// integra velocidad, para salto, 
 	// si no está en el piso siente la gravedad
+	
 	if (!unCuerpo->estaEnPiso()){
+		
 		if ((unCuerpo->getVelocidad().x == 0)){
-			nuevoEstado = estadoAnterior;
+			nuevoEstado = estadoAnterior; 
 			if (estadoAnterior.movimiento == SALTO)
 				nuevoEstado.movimiento = SALTO;
 		}
@@ -108,6 +110,8 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			unCuerpo->SetVelocidadX(0.0f);
 		}
 	} // Si está frenado el cuerpo no lo mueve
+	  // CASO ESTA EN PISO y frenado
+	// el caso frenado lo maneja la vista es cuando estan en borde... este frenado deberia ser imposibilitar el traslado en el eje x
 	else if (unCuerpo->EstaFrenado()){
 		unCuerpo->SetVelocidadX(0.0f);
 		if ((movimientos.at(0) == ARRIBA)){
@@ -120,7 +124,25 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			nuevoEstado.movimiento = AGACHADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
+		if ((movimientos.at(0) == SALTODER) && (unCuerpo->GetDemora() == 0)){
+			nuevoEstado.movimiento = SALTODIAGDER;
+			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
+		}
+		if ((movimientos.at(0) == SALTOIZQ) && (unCuerpo->GetDemora() == 0)){
+			nuevoEstado.movimiento = SALTODIAGIZQ;
+			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
+		}
+		if ((movimientos.at(0) == DER) && (unCuerpo->GetDemora() == 0)){
+			nuevoEstado.movimiento = CAMINARDER;
+		}
+		if ((movimientos.at(0) == IZQ) && (unCuerpo->GetDemora() == 0)){
+			nuevoEstado.movimiento = CAMINARIZQ;
+		}
+
 	}
+	//caso en piso no frenado
 	else {
 
 		//Se setea de que cuerpo se esta tratando.
