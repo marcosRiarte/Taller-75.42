@@ -82,11 +82,14 @@ bool Mundo::hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int un
 	return true;
 }
 
-//POR FAVOR NO TOCAR ESTE MODULO
+
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
 	ESTADO nuevoEstado; 
 	nuevoEstado.movimiento = PARADO;
+	nuevoEstado.accion = SIN_ACCION;
+	nuevoEstado.golpeado = NOGOLPEADO;
+
 	std::vector<MOV_TIPO> movimientos = unCuerpo->getControlador()->getMovimientos();
 	bool invertido;
 	
@@ -156,7 +159,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		{
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			//aca frutie dividiendo por 20 por que necesitaba una demora chiquitita
-			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()) / 30);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()) / 15);
 		}
 
 		//Se setea de que cuerpo se esta tratando.
@@ -221,28 +224,27 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		//aca hay que aplicar una demora para que reproduzca un tiempo el sprite de patada.
 		// ojo, tener en cuenta que la demora se tiene que interrumpir si me barren y quedo golpeado mientras tiraba la patada.
 
-		if (movimientos.at(0) == G_BAJO && !(unCuerpo->getEstado().accion == GOLPE_BAJO)){
+		if ((movimientos.at(0) == G_BAJO) && !(unCuerpo->getEstado().accion == GOLPE_BAJO)){
 			nuevoEstado.accion = GOLPE_BAJO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		}
-		if (movimientos.at(0) == P_ALTA && !(unCuerpo->getEstado().accion == PATADA_ALTA)){
+		if ((movimientos.at(0) == P_ALTA) && !(unCuerpo->getEstado().accion == PATADA_ALTA)){
 			nuevoEstado.accion = PATADA_ALTA;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		}
-		if (movimientos.at(0) == P_BAJA && !(unCuerpo->getEstado().accion == PATADA_BAJA)){
+		if ((movimientos.at(0) == P_BAJA) && !(unCuerpo->getEstado().accion == PATADA_BAJA)){
 			nuevoEstado.accion = PATADA_BAJA;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		}
-
-		if (movimientos.at(0) == G_ALTO && !(unCuerpo->getEstado().accion == GOLPE_ALTO)){
+		if ((movimientos.at(0) == G_ALTO) && !(unCuerpo->getEstado().accion == GOLPE_ALTO)){
 			nuevoEstado.accion = GOLPE_ALTO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		}
-		if (movimientos.at(0) == ARMA && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
+		if ((movimientos.at(0) == ARMA) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
 			nuevoEstado.accion = ARMA_ARROJABLE;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
@@ -267,8 +269,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			nuevoEstado.golpeado = GOLPEADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
-
-		
+				
 		std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
 		std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
 

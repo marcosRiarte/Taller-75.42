@@ -479,6 +479,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	// ancho y alto lo calcula cuadro a cuadro
 	ESTADO estadoDelPersonajeUno = personajesVista[0]->getEstado();
 
+	
 	float relacionAnchoDos = (float)anchoPjDosPx / (float)cuadroBase->w;
 	float relacionAltoDos = (float)altoPjDosPx / (float)cuadroBase->h;
 	personajeDos.x = manejadorULog.darLongPixels(xLogPjDosEnCamara);
@@ -523,7 +524,6 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
 	listaDeCuadrosDos = elSprite->listaDeCuadros(estadoDelPersonajeDos);
-
 	tiempoSecuenciaSpritesDos = elSprite->getConstantes(estadoDelPersonajeDos);
 
 	if ((numeroDeCuadroDos) > (tiempoSecuenciaSpritesDos*listaDeCuadrosDos->size()))
@@ -599,6 +599,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		}
 		SDL_SetRenderTarget(renderer, NULL);
 	}
+
 }
 
 

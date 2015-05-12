@@ -53,8 +53,19 @@ public:
 	// Le pasa el nombre del estado actual para activar los sensores correspondientes
 	inline void SetSensorActivoStr(ESTADO estadoActual)
 	{
+		if (estadoActual.accion != SIN_ACCION){
+		if (estadoActual.accion == PATADA_BAJA){
+			sensorActivoStr = "PatadaBaja";
+		}
 		if (estadoActual.accion == PATADA_ALTA){
 			sensorActivoStr = "PatadaAlta";
+		}
+		if (estadoActual.accion == GOLPE_BAJO){
+			sensorActivoStr = "GolpeBajo";
+		}
+		if (estadoActual.accion == GOLPE_ALTO){
+			sensorActivoStr = "GolpeAlto";
+		}
 		}
 		else{
 		if (estadoActual.movimiento == CAMINARDER)
