@@ -536,12 +536,12 @@
             "GolpeBajo": {
                 "sensores": [
                     {
-                        "x": 1,
+                        "x": 120,
                         "y": 1871,
-                        "ancho": 289,
-                        "alto": 337,
+                        "ancho": 140,
+                        "alto": 30,
                         "nSprite": 0,
-                        "esHitBox": true
+                        "esHitBox": false
                     }
                 ],
                 "secuenciaSprites":[
@@ -587,10 +587,10 @@
             "GolpeAlto": {
                 "sensores": [
                     {
-                        "x": 2,
+                        "x": 72,
                         "y": 747,
-                        "ancho": 141,
-                        "alto": 345,
+                        "ancho": 70,
+                        "alto": 100,
                         "nSprite": 0,
                         "esHitBox": false
                     }
@@ -656,9 +656,9 @@
             "PatadaBaja": {
                 "sensores": [
                     {
-                        "x": 1,
+                        "x": 85,
                         "y": 1139,
-                        "ancho": 167,
+                        "ancho": 83,
                         "alto": 339,
                         "nSprite": 0,
                         "esHitBox": false
