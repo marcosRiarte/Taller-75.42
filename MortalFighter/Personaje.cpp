@@ -127,6 +127,17 @@ std::pair<int, int> Personaje::getPosicionPx() const
 	return std::make_pair(xRelPx, yRelPx);
 }
 
+std::pair<int, int> Personaje::getPosicionPx(int altoSprite) const
+{
+	ManejadorULogicas manejador;
+	float yCorrido = Parser::getInstancia().getEscenario().getAlto() - altoSprite + alto/4 ;
+	float yRel = yCorrido - posicionUn.second;
+
+	int yRelPx = manejador.darLongPixels(yRel, Parser::getInstancia().getVentana().getAltoPx(), Parser::getInstancia().getEscenario().getAlto());
+	int xRelPx = manejador.darLongPixels(posicionUn.first);
+
+	return std::make_pair(xRelPx, yRelPx);
+}
 
 std::pair<float, float> Personaje::getPosicionUn()const
 {

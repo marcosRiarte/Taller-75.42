@@ -45,6 +45,7 @@ public:
 	std::string getAgacharse() const;
 	std::string getGolpeado() const;
 	std::pair<int, int> getPosicionPx() const;
+	std::pair<int, int> Personaje::getPosicionPx(int altoSprite) const;
 	void setPosicionUn(float x, float y);
 	ESTADO getEstado() const;
 	void setEstado(ESTADO nuevoEstado);
