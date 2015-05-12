@@ -53,6 +53,11 @@ public:
 	// Le pasa el nombre del estado actual para activar los sensores correspondientes
 	inline void SetSensorActivoStr(ESTADO estadoActual)
 	{
+		if (estadoActual.golpeado == GOLPEADO){
+			if (estadoActual.movimiento == SALTO || estadoActual.movimiento == SALTODIAGDER || estadoActual.movimiento == SALTODIAGIZQ)
+				sensorActivoStr = "SaltoGolpeado";
+				sensorActivoStr = "Golpeado";
+		}
 		if (estadoActual.accion != SIN_ACCION){
 		if (estadoActual.accion == PATADA_BAJA){
 			sensorActivoStr = "PatadaBaja";
@@ -65,6 +70,9 @@ public:
 		}
 		if (estadoActual.accion == GOLPE_ALTO){
 			sensorActivoStr = "GolpeAlto";
+		}
+		if (estadoActual.accion == ARMA_ARROJABLE){
+			sensorActivoStr = "Arma";
 		}
 		}
 		else{
@@ -80,8 +88,6 @@ public:
 			sensorActivoStr = "CaminarAtras";
 		if (estadoActual.movimiento == AGACHADO)
 			sensorActivoStr = "Agacharse";
-		if (estadoActual.golpeado == GOLPEADO)
-			sensorActivoStr = "Golpeado";
 		}
 	}
 
