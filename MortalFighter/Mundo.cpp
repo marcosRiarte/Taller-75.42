@@ -116,6 +116,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
 		}
 		if (movimientos.at(0) == ABAJO){
+			if (unCuerpo->getEstado().accion == GUARDIA)
 			nuevoEstado.movimiento = AGACHADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
@@ -190,6 +191,19 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		}
 
+		if ((movimientos.at(0) == DEFENSA) && (unCuerpo->GetDemora() == 0)){
+			nuevoEstado.movimiento = PARADO;
+			nuevoEstado.accion = GUARDIA;
+			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
+
+		if ((movimientos.at(0) == DEFENSA_AGACHADO) && (unCuerpo->GetDemora() == 0)){
+			nuevoEstado.movimiento = AGACHADO;
+			nuevoEstado.accion = GUARDIA;
+			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
 		
 		if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (estadoAnterior.golpeado != GOLPEADO)){
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));

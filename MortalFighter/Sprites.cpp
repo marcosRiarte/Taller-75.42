@@ -157,8 +157,12 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 		return PatadaAlta;
 	}
 	if (unEstado.golpeado == GOLPEADO){
-
 		return Golpeado;
+	}
+	if (unEstado.accion == GUARDIA){
+		if (unEstado.movimiento == AGACHADO)
+			return AgachadoDefensa;
+		return Defensa;
 	}
 	if (unEstado.movimiento == CAMINARDER){
 		return CaminandoParaAdelante;
@@ -192,6 +196,10 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 	//TODO
 	if (estadoDelPersonaje.accion == PATADA_ALTA)
 		return (tiempoPatadaAlta / (this->PatadaAlta->size()) / MSxCUADRO);
+	if (estadoDelPersonaje.accion == GOLPEADO)
+		return (tiempoGolpeado / (this->Golpeado->size()) / MSxCUADRO);
+	if (estadoDelPersonaje.accion == GUARDIA)
+		return (tiempoDefensa / (this->Defensa->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == CAMINARDER)
 		return (tiempoCaminarParaAdelante / (this->CaminandoParaAdelante->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == CAMINARIZQ)
@@ -202,8 +210,6 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 		return (tiempoSaltoDiagonal / (this->SaltoDiagonal->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == AGACHADO)
 		return (tiempoAgacharse / (this->Agacharse->size()) / MSxCUADRO);
-	if (estadoDelPersonaje.movimiento == GOLPEADO)
-		return (tiempoGolpeado / (this->Golpeado->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == SALTODIAGIZQ)
 		return (tiempoSaltoDiagonalIzq / (this->SaltoDiagonalIzq->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == PARADO)
