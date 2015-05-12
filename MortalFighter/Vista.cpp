@@ -473,14 +473,17 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	SDL_Rect* cuadroBase = elSprite->listaDeCuadros(estadoAux)->at(0);
 	float relacionAnchoUno = (float)anchoPjUnoPx / (float)cuadroBase->w;
 	float relacionAltoUno = (float)altoPjUnoPx / (float)cuadroBase->h;
-	
+	personajeUno.x = manejadorULog.darLongPixels(xLogPjUnoEnCamara);
+	personajeUno.y = yPjUnoPx;
 
 	// ancho y alto lo calcula cuadro a cuadro
 	ESTADO estadoDelPersonajeUno = personajesVista[0]->getEstado();
 
 	float relacionAnchoDos = (float)anchoPjDosPx / (float)cuadroBase->w;
 	float relacionAltoDos = (float)altoPjDosPx / (float)cuadroBase->h;
-	
+	personajeDos.x = manejadorULog.darLongPixels(xLogPjDosEnCamara);
+	personajeDos.y = yPjDosPx;
+
 	ESTADO estadoDelPersonajeDos = personajesVista[1]->getEstado();
 
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
@@ -517,8 +520,6 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	personajeUno.w = (int)round(relacionAnchoUno*cuadroActualUno->w);
 	personajeUno.h = (int)round(relacionAltoUno*cuadroActualUno->h);
-	personajeUno.x = manejadorULog.darLongPixels(xLogPjUnoEnCamara);
-	personajeUno.y = personajesVista[0]->getPosicionPx(manejadorULog.darLongUnidades(cuadroActualUno->h)).second;
 
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
 	listaDeCuadrosDos = elSprite->listaDeCuadros(estadoDelPersonajeDos);
@@ -543,8 +544,6 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	
 	personajeDos.w = (int)round(relacionAnchoDos*cuadroActualDos->w);
 	personajeDos.h = (int)round(relacionAltoDos*cuadroActualDos->h);
-	personajeDos.x = manejadorULog.darLongPixels(xLogPjDosEnCamara);
-	personajeDos.y = personajesVista[1]->getPosicionPx(manejadorULog.darLongUnidades(cuadroActualDos->h)).second;
 
 	float auxPj1 = (int)round(((relacionAnchoUno*cuadroActualUno->w) - manejadorULog.darLongPixels(personajesVista.at(0)->getAncho())));
 	float auxPj2 = (int)round(((relacionAnchoDos*cuadroActualDos->w) - manejadorULog.darLongPixels(personajesVista.at(1)->getAncho())));

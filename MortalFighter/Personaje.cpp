@@ -115,6 +115,7 @@ std::string Personaje::getOrientacion() const
 	return orientacion;
 }
 
+
 std::pair<int, int> Personaje::getPosicionPx() const
 {
 	ManejadorULogicas manejador;	
