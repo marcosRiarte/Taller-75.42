@@ -18,10 +18,15 @@ private:
 	std::vector<SDL_Rect*>*Agacharse;
 	std::vector<SDL_Rect*>*PatadaAlta;
 	std::vector<SDL_Rect*>*Golpeado;
-	
+	std::vector<SDL_Rect*>*PatadaBaja;
+	std::vector<SDL_Rect*>*GolpeAlto;
+	std::vector<SDL_Rect*>*GolpeBajo;
+	std::vector<SDL_Rect*>*Arma;
+
 	std::vector<SDL_Rect*>*AgachadoGolpeado;
 	std::vector<SDL_Rect*>*SaltoGolpeado;
 	std::vector<SDL_Rect*>*AgachadoDefensa;
+
 
 
 	std::vector<float>* cuadrosRep;

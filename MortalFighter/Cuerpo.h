@@ -183,7 +183,6 @@ private:
 	float yPiso;
 	bool estaFrenado;
 	int demora;
-	ESTADO nuevoEstado;
 	ESTADO estadoAnterior;
 	Personaje* refPersonaje;
 	std::vector<std::vector<Sensor*>*> sensores;

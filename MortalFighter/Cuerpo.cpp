@@ -15,6 +15,9 @@ Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo, floa
 	demora = unaDefCuerpo.demora; //xjose
 	sensorActivoStr = "";
 	refPersonaje = unPersonaje;
+	estadoAnterior.accion = SIN_ACCION;
+	estadoAnterior.golpeado = NOGOLPEADO;
+	estadoAnterior.movimiento = PARADO;
 }
 
 std::vector<Sensor*>* Cuerpo::getSensoresActivos() const

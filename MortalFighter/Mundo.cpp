@@ -218,6 +218,26 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		}
+		if (movimientos.at(0) == P_BAJA && !(unCuerpo->getEstado().accion == PATADA_BAJA)){
+			nuevoEstado.accion = PATADA_BAJA;
+			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
+		if (movimientos.at(0) == G_BAJO && !(unCuerpo->getEstado().accion == GOLPE_BAJO)){
+			nuevoEstado.accion = GOLPE_BAJO;
+			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
+		if (movimientos.at(0) == G_ALTO && !(unCuerpo->getEstado().accion == GOLPE_ALTO)){
+			nuevoEstado.accion = GOLPE_ALTO;
+			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
+		if (movimientos.at(0) == ARMA && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
+			nuevoEstado.accion = ARMA_ARROJABLE;
+			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
 
 		if ((movimientos.at(0) == DEFENSA) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado.movimiento = PARADO;
@@ -238,6 +258,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			nuevoEstado.golpeado = GOLPEADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
+
 		
 		std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
 		std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
@@ -245,7 +266,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		std::pair<float, float> posAbsSensoresOtroCuerpo;
 		std::pair<float, float> posAbsSensoresCuerpo;
 
-		if ((movimientos.at(0) == P_ALTA) || (unCuerpo->getEstado().accion == PATADA_ALTA)){
+		if (!(unCuerpo->getEstado().accion == GUARDIA) && !(unCuerpo->getEstado().accion == SIN_ACCION)){
 			for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
 				for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
 					if (elOtroCuerpo->getEstado().golpeado != GOLPEADO){

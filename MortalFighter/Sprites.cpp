@@ -31,13 +31,18 @@ Sprite::Sprite(std::string jsonSprites){
 	this->Agacharse = new std::vector<SDL_Rect*>();
 	this->Defensa = new std::vector<SDL_Rect*>();
 	this->PatadaAlta = new std::vector<SDL_Rect*>();
+
+	this->PatadaBaja = new std::vector<SDL_Rect*>();
+	this->GolpeAlto = new std::vector<SDL_Rect*>();
+	this->GolpeBajo = new std::vector<SDL_Rect*>();
+	this->Arma = new std::vector<SDL_Rect*>();
+
 	this->Golpeado = new std::vector<SDL_Rect*>();
 
 	this->AgachadoGolpeado = new std::vector<SDL_Rect*>();
 	this->SaltoGolpeado = new std::vector<SDL_Rect*>();
 	this->AgachadoDefensa = new std::vector<SDL_Rect*>();
 
-	
 	Json::Value raiz = ParsearSprites(jsonSprites);
 	Json::Value sprites = raiz["sprites"]["coordenadas"];
 		
@@ -101,11 +106,29 @@ Sprite::Sprite(std::string jsonSprites){
 	// Sensores AgachadoDefensa
 	cargarSensores("AgachadoDefensa", sprites);
 
+	// Sprites PatadaBaja
+	cargarSprites(this->PatadaBaja, "PatadaBaja", sprites);
+	// Sensores PatadaBaja
+	cargarSensores("PatadaBaja", sprites);
+
+	// Sprites GolpeBajo
+	cargarSprites(this->GolpeBajo, "GolpeBajo", sprites);
+	// Sensores GolpeBajo
+	cargarSensores("GolpeBajo", sprites);
+
+	// Sprites GolpeAlto
+	cargarSprites(this->GolpeAlto, "GolpeAlto", sprites);
+	// Sensores GolpeAlto
+	cargarSensores("GolpeAlto", sprites);
+
+	// Sprites Arma
+	cargarSprites(this->Arma, "Arma", sprites);
+	// Sensores GolpeAlto
+	cargarSensores("Arma", sprites);
 
 	*SaltoDiagonalIzq = *SaltoDiagonal;
 	std::reverse(SaltoDiagonalIzq->begin(), SaltoDiagonalIzq->end());
 }
-
 
 void Sprite::cargarSensores(std::string unEstadoStr, Json::Value spritesRaiz)
 {
@@ -153,11 +176,29 @@ Json::Value	Sprite::ParsearSprites(std::string jsonSprites)
 }
 
 std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
+	if (unEstado.golpeado == GOLPEADO){
+		if (unEstado.movimiento == SALTO || unEstado.movimiento == SALTODIAGIZQ || unEstado.movimiento == SALTODIAGDER)
+			return SaltoGolpeado;
+		return Golpeado;
+	}
 	if (unEstado.accion == PATADA_ALTA){
 		return PatadaAlta;
 	}
-	if (unEstado.golpeado == GOLPEADO){
-		return Golpeado;
+	if (unEstado.accion == PATADA_BAJA){
+		return PatadaBaja;
+	}
+	if (unEstado.accion == GOLPE_ALTO){
+		return GolpeAlto;
+	}
+	if (unEstado.accion == GOLPE_BAJO){
+		return GolpeBajo;
+	}
+	if (unEstado.accion == ARMA_ARROJABLE){
+		return Arma;
+	}
+	
+	if (unEstado.movimiento == AGACHADO){
+		return Agacharse;
 	}
 	if (unEstado.accion == GUARDIA){
 		if (unEstado.movimiento == AGACHADO)
@@ -179,12 +220,10 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 	if (unEstado.movimiento == SALTODIAGDER){
 		return SaltoDiagonal;
 	}
-
 	if (unEstado.movimiento == SALTODIAGIZQ){
 		
 		return SaltoDiagonalIzq;
 	}
-
 	if (unEstado.movimiento == AGACHADO){
 
 		return Agacharse;
@@ -193,11 +232,21 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 }
 
 int Sprite::getConstantes(ESTADO estadoDelPersonaje){
-	//TODO
+	if (estadoDelPersonaje.accion == PATADA_BAJA)
+		return (tiempoPatadaBaja / (this->PatadaBaja->size()) / MSxCUADRO);
+	if (estadoDelPersonaje.accion == GOLPE_ALTO)
+		return (tiempoGolpeAlto / (this->GolpeAlto->size()) / MSxCUADRO);
+	if (estadoDelPersonaje.accion == GOLPE_BAJO)
+		return (tiempoGolpeBajo / (this->GolpeBajo->size()) / MSxCUADRO);
+	if (estadoDelPersonaje.accion == ARMA_ARROJABLE)
+		return (tiempoArmaArrojable / (this->Arma->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.accion == PATADA_ALTA)
 		return (tiempoPatadaAlta / (this->PatadaAlta->size()) / MSxCUADRO);
-	if (estadoDelPersonaje.accion == GOLPEADO)
+	if (estadoDelPersonaje.accion == GOLPEADO){
+		if (estadoDelPersonaje.movimiento == SALTO || estadoDelPersonaje.movimiento == SALTODIAGIZQ || estadoDelPersonaje.movimiento == SALTODIAGDER)
+			return (tiempoSaltoGolpeado / (this->SaltoGolpeado->size()) / MSxCUADRO);
 		return (tiempoGolpeado / (this->Golpeado->size()) / MSxCUADRO);
+	}	
 	if (estadoDelPersonaje.accion == GUARDIA)
 		return (tiempoDefensa / (this->Defensa->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == CAMINARDER)
@@ -243,8 +292,6 @@ Sprite::~Sprite()
 	CaminandoParaAtras->clear();
 	delete CaminandoParaAtras;
 
-
-
 	for (size_t i = 0; i < Agacharse->size(); i++)
 		delete Agacharse->at(i);
 	Agacharse->clear();
@@ -259,9 +306,6 @@ Sprite::~Sprite()
 		delete Golpeado->at(i);
 	Golpeado->clear();
 	delete Golpeado;
-
-
-
 
 	for (size_t i = 0; i < Quieto->size(); i++)
 		delete Quieto->at(i);
