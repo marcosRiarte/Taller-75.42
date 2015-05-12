@@ -312,6 +312,46 @@ Sprite::~Sprite()
 	Quieto->clear();
 	delete Quieto;
 
+	for (size_t i = 0; i < Arma->size(); i++)
+		delete Arma->at(i);
+	Arma->clear();
+	delete Arma;
+
+	for (size_t i = 0; i < GolpeBajo->size(); i++)
+		delete GolpeBajo->at(i);
+	GolpeBajo->clear();
+	delete GolpeBajo;
+
+	for (size_t i = 0; i < GolpeAlto->size(); i++)
+		delete GolpeAlto->at(i);
+	GolpeAlto->clear();
+	delete GolpeAlto;
+
+	for (size_t i = 0; i < PatadaBaja->size(); i++)
+		delete PatadaBaja->at(i);
+	PatadaBaja->clear();
+	delete PatadaBaja;
+
+	SaltoDiagonalIzq->clear();
+	delete SaltoDiagonalIzq;
+		
+
+	for (size_t i = 0; i < AgachadoDefensa->size(); i++)
+		delete AgachadoDefensa->at(i);
+	AgachadoDefensa->clear();
+	delete AgachadoDefensa;
+
+	for (size_t i = 0; i < SaltoGolpeado->size(); i++)
+		delete SaltoGolpeado->at(i);
+	SaltoGolpeado->clear();
+	delete SaltoGolpeado;
+
+	for (size_t i = 0; i < Quieto->size(); i++)
+		delete AgachadoGolpeado->at(i);
+	AgachadoGolpeado->clear();
+	delete AgachadoGolpeado;
+
+
 	for (size_t i = 0; i < Sensores.size(); i++) {
 		for (size_t j = 0; j < Sensores[i]->size(); j++) 
 			delete Sensores[i]->at(j);
