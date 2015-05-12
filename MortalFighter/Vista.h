@@ -8,7 +8,7 @@
 class Vista
 {
 public:	
-	Vista(Mundo* unMundo, Sprite* unSprite);
+	Vista(Mundo* unMundo, Sprite* unSprite, bool* error);
 	void actualizar();
 	void habilitarVibracion();
 	void deshabilitarVibracion();

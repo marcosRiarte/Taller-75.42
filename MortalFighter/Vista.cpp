@@ -5,8 +5,9 @@
 #include "ControlDeColor.h"
 
 
-Vista::Vista(Mundo* unMundo, Sprite* unSprite)
+Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 {	
+	*error = false;
 	//VIBRACION
 	vibraciones = 0;
 	vibracion = false;
@@ -22,6 +23,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite)
 			mensaje += elError;
 			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
 			SDL_Quit();
+			*error = true;
 			return;
 		}
 
@@ -37,6 +39,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite)
 				mensaje += elError;
 				Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
 				SDL_Quit();
+				*error = true;
 				return;
 			}			
 
@@ -53,6 +56,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite)
 				const char* elError = SDL_GetError();
 				mensaje += elError;
 				Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
+				*error = true;
 				return;
 			}
 

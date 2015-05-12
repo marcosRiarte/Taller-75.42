@@ -18,6 +18,7 @@ int _tmain(int argc, _TCHAR* argv[])
 #ifdef DEBUGENVENTANA
 	cout << "Esta activado el modo DEBUG EN VENTANA, se registra solo por consola" << "\n";
 #endif
+	bool error;
 
 	int accion = REINICIAR;
 	while (accion == REINICIAR){
@@ -44,7 +45,15 @@ int _tmain(int argc, _TCHAR* argv[])
 		//Parte de creación inicial.		
 		Sprite* unSprite = new Sprite(JSON_SPRITES);
 		Mundo* unMundo = new Mundo(vecGravedad, unSprite);
-		Vista* unaVista = new Vista(unMundo, unSprite);
+		Vista* unaVista = new Vista(unMundo, unSprite, &error);
+
+		if (error){
+			std::string mensaje = ((std::string)"Error iniciando SDL: ").append(SDL_GetError()).c_str();
+			mensaje += ", se cierra el programa";
+				Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
+			return  EXIT_FAILURE;
+		}
+
 		//HABILITAR VIBRACION
 		//unaVista->habilitarVibracion();
 		Cuerpo *unCuerpo = new Cuerpo(defCuerpo(), controladorUno, (float)(Parser::getInstancia().getEscenario().getAncho() / 2.3), Parser::getInstancia().getPersonajes().at(0));
