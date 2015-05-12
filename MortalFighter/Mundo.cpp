@@ -213,6 +213,11 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		//aca hay que aplicar una demora para que reproduzca un tiempo el sprite de patada.
 		// ojo, tener en cuenta que la demora se tiene que interrumpir si me barren y quedo golpeado mientras tiraba la patada.
 
+		if (movimientos.at(0) == G_BAJO && !(unCuerpo->getEstado().accion == GOLPE_BAJO)){
+			nuevoEstado.accion = GOLPE_BAJO;
+			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
 		if (movimientos.at(0) == P_ALTA && !(unCuerpo->getEstado().accion == PATADA_ALTA)){
 			nuevoEstado.accion = PATADA_ALTA;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
@@ -223,11 +228,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		}
-		if (movimientos.at(0) == G_BAJO && !(unCuerpo->getEstado().accion == GOLPE_BAJO)){
-			nuevoEstado.accion = GOLPE_BAJO;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
-		}
+
 		if (movimientos.at(0) == G_ALTO && !(unCuerpo->getEstado().accion == GOLPE_ALTO)){
 			nuevoEstado.accion = GOLPE_ALTO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);

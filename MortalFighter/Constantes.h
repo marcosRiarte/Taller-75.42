@@ -3,7 +3,7 @@
 #define REINICIAR	1
 #define FIN   		2
 
-#define MODO_DEBUG_SDL false
+#define MODO_DEBUG_SDL true
 
 //JSON
 #define PRUEBA_JSON "prueba.json"
