@@ -70,9 +70,9 @@
 
     "color_alternativo": 
         {
-          "h_inicial": 40,
-          "h_final": 45,
-          "desplazamiento": 30
+          "h_inicial": 0,
+          "h_final": 60,
+          "desplazamiento": 240
 
         },
     
