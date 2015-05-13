@@ -385,6 +385,9 @@
     <Image Include="ima\bkg\fight Hd.png">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
+    <Image Include="ima\bkg\Lifebar.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
     <Image Include="ima\bkg\LiuKangImage.jpg">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
@@ -392,9 +395,6 @@
       <Filter>Resource Files\ima\sprites</Filter>
     </Image>
     <Image Include="ima\bkg\texturaVerde.png">
-      <Filter>Resource Files\ima\bkg</Filter>
-    </Image>
-    <Image Include="ima\bkg\barraDeVida.png">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
   </ItemGroup>

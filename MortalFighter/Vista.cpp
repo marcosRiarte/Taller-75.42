@@ -176,30 +176,15 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 		texturaVerde = SDL_CreateTextureFromSurface(renderer, sup);
 		SDL_FreeSurface(sup);
 
-		//Textura para la barra de vida
-		superficieBarraDeVida = cargarSuperficieOptimizada("ima/bkg/barraDeVida.png");
-		texturaBarraDeVida = SDL_CreateTextureFromSurface(renderer, superficieBarraDeVida);
-		SDL_FreeSurface(superficieBarraDeVida);
-
 		int anchoBarraDeVida = Parser::getInstancia().getVentana().getAnchoPx() / 3;
 		int altoBarraDeVida = 20;
 
-		int posXBarraDeVida1 = (Parser::getInstancia().getVentana().getAnchoPx() / 2) - anchoBarraDeVida - 10;
-		int posXBarraDeVida2 = Parser::getInstancia().getVentana().getAnchoPx() / 2 + 10;
-		
+		int posXBarraDeVida1 = Parser::getInstancia().getVentana().getAnchoPx() / 2 + 10;
+		int posXBarraDeVida2 = (Parser::getInstancia().getVentana().getAnchoPx() / 2) - anchoBarraDeVida - 10;
 		int posYBarraDeVida = 10;
-
-		barraDeVidaImagen1.x = 0;
-		barraDeVidaImagen1.y = 0;
-		barraDeVidaImagen1.w = superficieBarraDeVida->w;
-		barraDeVidaImagen1.h = superficieBarraDeVida->h;
-
-		barraDeVidaImagen2 = barraDeVidaImagen1;
 
 		anchoBarraDeVida1 = anchoBarraDeVida;
 		anchoBarraDeVida2 = anchoBarraDeVida;
-
-		anchoImagenBarraDeVida = barraDeVidaImagen1.w;
 
 		//Carga de barras de vida
 		barraDeVida1 = { posXBarraDeVida1, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
@@ -373,8 +358,19 @@ void Vista::actualizar(){
 	// Dibuja las capas y el personaje
 	Dibujar(personajesVista);
 
-	//Dibuja las barras de vida
-	DibujarBarrasDeVida(personajesVista);
+	int vidaPj1 = personajesVista.at(0)->getVida();
+	int vidaPj2 = personajesVista.at(1)->getVida();
+
+	int nuevoAnchoBarraDeVida1 = (vidaPj1 * anchoBarraDeVida1) / 100;
+	int nuevoAnchoBarraDeVida2 = (vidaPj2 * anchoBarraDeVida2) / 100;
+
+	barraDeVida1.w = nuevoAnchoBarraDeVida1;
+	barraDeVida2.w = nuevoAnchoBarraDeVida2;
+
+	// Se dibujan las barras de vida
+	SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
+	SDL_RenderFillRect(renderer, &this->barraDeVida1);
+	SDL_RenderFillRect(renderer, &this->barraDeVida2);
 
 	//Se actualiza la pantalla
 	SDL_RenderPresent(renderer);
@@ -436,34 +432,6 @@ void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 	DibujarCapasPosteriores(personajesVista, anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
 	
 }
-void Vista::DibujarBarrasDeVida(std::vector<Personaje*> personajesVista)
-{
-	Uint8 Alfa = 128;
-	SDL_SetRenderTarget(renderer, texturaBarraDeVida);
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, Alfa);
-	SDL_SetTextureAlphaMod(texturaVerde, Alfa);
-
-	int vidaPj1 = personajesVista.at(0)->getVida();
-	int vidaPj2 = personajesVista.at(1)->getVida();
-
-	int nuevoAnchoBarraDeVida1 = (vidaPj1 * anchoBarraDeVida1) / 100;
-	int nuevoAnchoBarraDeVida2 = (vidaPj2 * anchoBarraDeVida2) / 100;
-
-	int nuevoanchoImagenBarraDeVida1 = (vidaPj1 *anchoImagenBarraDeVida) / 100;
-	int nuevoanchoImagenBarraDeVida2 = (vidaPj2 *anchoImagenBarraDeVida) / 100;
-
-	barraDeVida1.w = nuevoAnchoBarraDeVida1;
-	barraDeVida2.w = nuevoAnchoBarraDeVida2;
-
-	barraDeVidaImagen1.w = nuevoanchoImagenBarraDeVida1;
-	barraDeVidaImagen2.w = nuevoanchoImagenBarraDeVida2;
-
-	SDL_RenderCopyEx(renderer, texturaBarraDeVida, &barraDeVidaImagen1, &barraDeVida1, 0, NULL, SDL_FLIP_HORIZONTAL);
-	SDL_RenderCopy(renderer, texturaBarraDeVida, &barraDeVidaImagen2, &barraDeVida2);
-	
-	SDL_SetRenderTarget(renderer, NULL);
-}
-
 
 void Vista::DibujarCapasAnteriores(std::vector<Personaje*> personajesVista, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
 {

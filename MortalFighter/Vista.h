@@ -29,14 +29,8 @@ private:
 	int tiempoSecuenciaSpritesDos;
 	int tiempoSecuenciaSpritesUno;
 	SDL_Texture *texturaVerde;
-	SDL_Texture *texturaBarraDeVida;
-	SDL_Surface* superficieBarraDeVida;
 	SDL_Rect barraDeVida1;
 	SDL_Rect barraDeVida2;
-	SDL_Rect barraDeVidaImagen1;
-	SDL_Rect barraDeVidaImagen2;
-
-	int anchoImagenBarraDeVida;
 	int anchoBarraDeVida1;
 	int anchoBarraDeVida2;
 	
@@ -58,7 +52,6 @@ private:
 	void OrdenarCapas();
 	std::string GetEstadoDelPersonaje(ESTADO , Personaje* );
 	void Dibujar(std::vector<Personaje*>);
-	void DibujarBarrasDeVida(std::vector<Personaje*>);
 	void DibujarCapasAnteriores(std::vector<Personaje*> personajes, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
 	void DibujarCapasPosteriores(std::vector<Personaje*> personajes, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
 	void DibujarPersonajes(std::vector<Personaje*> personajes);

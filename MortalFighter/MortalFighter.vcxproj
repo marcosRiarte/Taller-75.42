@@ -184,7 +184,6 @@
     <Library Include="lib\SDL2_image.lib" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="ima\bkg\barraDeVida.png" />
     <Image Include="ima\bkg\default_bkg.png" />
     <Image Include="ima\bkg\default_capa.png" />
     <Image Include="ima\bkg\default_p1.png" />
@@ -192,6 +191,7 @@
     <Image Include="ima\bkg\default_p3.png" />
     <Image Include="ima\bkg\default_p4.png" />
     <Image Include="ima\bkg\fight Hd.png" />
+    <Image Include="ima\bkg\Lifebar.png" />
     <Image Include="ima\bkg\LiuKangDamage.png" />
     <Image Include="ima\bkg\LiuKangImage.jpg" />
     <Image Include="ima\bkg\p_1.png" />
