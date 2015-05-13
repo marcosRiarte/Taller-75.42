@@ -62,7 +62,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		unMundo->agregarCuerpo(unCuerpo);
 
-		Cuerpo *otroCuerpo = new Cuerpo(defCuerpo(), controladorDos, (float)(Parser::getInstancia().getEscenario().getAncho() / 1.8), Parser::getInstancia().getPersonajes().at(0));
+		Cuerpo *otroCuerpo = new Cuerpo(defCuerpo(), controladorDos, (float)(Parser::getInstancia().getEscenario().getAncho() / 1.8), Parser::getInstancia().getPersonajes().at(1));
 		otroCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(1));
 		otroCuerpo->setSensores(unSprite->getSensores());
 
