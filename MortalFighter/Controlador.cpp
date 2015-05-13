@@ -4,6 +4,12 @@
 Controlador::Controlador()
 {
 	movimientos = std::vector<MOV_TIPO>();
+	if (SDL_NumJoysticks() > 0){
+		unJoystick = SDL_JoystickOpen(0);
+		if (SDL_NumJoysticks() > 1){
+			otroJoystick = SDL_JoystickOpen(1);
+		}
+	}
 }
 
 

@@ -25,6 +25,7 @@ private:
 	SDL_JoystickID numeroDeJoystick;
 	Uint8 jBoton;
 	SDL_Joystick* unJoystick;
+	SDL_Joystick* otroJoystick;
 	Sint16 valorDelEje;
 };
 
