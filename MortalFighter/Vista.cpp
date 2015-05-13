@@ -179,7 +179,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 		//Textura para la barra de vida
 		superficieBarraDeVida = cargarSuperficieOptimizada("ima/bkg/barraDeVida.png");
 		texturaBarraDeVida = SDL_CreateTextureFromSurface(renderer, superficieBarraDeVida);
-		SDL_FreeSurface(superficieBarraDeVida);
+		
 
 		int anchoBarraDeVida = Parser::getInstancia().getVentana().getAnchoPx() / 3;
 		int altoBarraDeVida = 20;
@@ -193,6 +193,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 		barraDeVidaImagen1.y = 0;
 		barraDeVidaImagen1.w = superficieBarraDeVida->w;
 		barraDeVidaImagen1.h = superficieBarraDeVida->h;
+		SDL_FreeSurface(superficieBarraDeVida);
 
 		barraDeVidaImagen2 = barraDeVidaImagen1;
 
@@ -201,6 +202,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 
 		anchoImagenBarraDeVida = barraDeVidaImagen1.w;
 
+		posBarraDeVida1 = posXBarraDeVida1;
 		//Carga de barras de vida
 		barraDeVida1 = { posXBarraDeVida1, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
 		barraDeVida2 = { posXBarraDeVida2, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
@@ -457,6 +459,7 @@ void Vista::DibujarBarrasDeVida(std::vector<Personaje*> personajesVista)
 
 	barraDeVidaImagen1.w = nuevoanchoImagenBarraDeVida1;
 	barraDeVidaImagen2.w = nuevoanchoImagenBarraDeVida2;
+	barraDeVida1.x = posBarraDeVida1 + anchoBarraDeVida1 - nuevoAnchoBarraDeVida1;
 
 	SDL_RenderCopyEx(renderer, texturaBarraDeVida, &barraDeVidaImagen1, &barraDeVida1, 0, NULL, SDL_FLIP_HORIZONTAL);
 	SDL_RenderCopy(renderer, texturaBarraDeVida, &barraDeVidaImagen2, &barraDeVida2);
@@ -677,7 +680,7 @@ Vista::~Vista()
 	SDL_DestroyTexture(texturaSpriteUno);
 	SDL_DestroyTexture(texturaSpriteDos);
 	SDL_DestroyTexture(texturaVerde);
-
+	SDL_DestroyTexture(texturaBarraDeVida);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(ventana);
 	delete elSprite;

@@ -36,6 +36,7 @@ private:
 	SDL_Rect barraDeVidaImagen1;
 	SDL_Rect barraDeVidaImagen2;
 
+	int posBarraDeVida1;
 	int anchoImagenBarraDeVida;
 	int anchoBarraDeVida1;
 	int anchoBarraDeVida2;
