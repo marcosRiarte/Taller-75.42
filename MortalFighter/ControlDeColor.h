@@ -17,7 +17,7 @@ public:
 	double RGBtoHSV(int, int, int, SDL_Surface *, int x, int y);
 	double obtenerSaturacion(int, int, int); //Devuelve la componete S
 	double obtenerBrillo(int red, int green, int blue); //Devuelve la componete V
-	std::vector<int> HSVtoRGB(double H, int pixelX, int pixelY, double S, double V);
+	std::vector<int> HSVtoRGB(double H,double S, double V);
 	Uint8 * getRojo();
 	Uint8 * getVerde();
 	Uint8 * getAzul();

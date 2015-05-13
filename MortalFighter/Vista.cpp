@@ -93,12 +93,17 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 		int h_final = Parser::getInstancia().getColorAlternativo().at(1);;
 		int deplazamiento = Parser::getInstancia().getColorAlternativo().at(2);
 
-		int xPixelSuperficie = 0;
-		int yPixelSuperficie = 0;
-		//Si ambos personajes son iguales
+
+		//Tamaño de la imagen
+		int ancho = ancho = SuperficieDos->w;
+		int alto = ancho = SuperficieDos->h;
+
+		//Si ambos personajes son iguales,modifico la superficie
 		if ((pelea == "scorpion VS scorpion") || (pelea == "liuKang VS liuKang"))
 		{
 			ControlDeColor color = ControlDeColor(SuperficieDos);
+
+			//Bloqueo superficie
 			if (SDL_MUSTLOCK(SuperficieDos))
 			{
 				int bloqueoDeSuperficie = SDL_LockSurface(SuperficieDos);
@@ -108,52 +113,35 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 				}
 			}
 
-			//La variable xPixelSuperficie sera la coordenada x en el pixel e ira de 0 a 100
-			//La variable yPixelSuperficie sera la coordenada y en el pixel e ira de 0 a 100
+			//La variable xPixelSuperficie sera la coordenada x en el pixel
+			//La variable yPixelSuperficie sera la coordenada y en el pixel 
+			for (int xPixelSuperficie = 0; xPixelSuperficie < ancho; xPixelSuperficie++)
+			{
+				for (int yPixelSuperficie = 0; yPixelSuperficie < alto; yPixelSuperficie++)
+				{
+					//Convertimos de RGB a HSV
+					/*H*/		double hue = color.RGBtoHSV(h_inicio, h_final, deplazamiento, color.getSuperficie(), xPixelSuperficie, yPixelSuperficie);
+					/*S*/		double saturation = color.obtenerSaturacion((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
+					/*V*/		double value = color.obtenerBrillo((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
 
-				for (int xPixelSuperficie = 0; xPixelSuperficie < 100; xPixelSuperficie++)
-				  {
-					for (int yPixelSuperficie = 0; yPixelSuperficie < 100; yPixelSuperficie++)
+					//Si el hue esta en el rango a cambiar
+					if (hue != -1)
 					{
-						//Convertimos de RGB a HSV
-						/*H*/		double hue = color.RGBtoHSV(h_inicio, h_final, deplazamiento, color.getSuperficie(), xPixelSuperficie, yPixelSuperficie);
-						/*S*/		double saturation = color.obtenerSaturacion((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
-						/*V*/		double value = color.obtenerBrillo((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
-						
-						//Si el hue esta en el rango a cambiar
-	
-						if (hue != -1)
-						{
 						//Convertimos los nuevos valores HSV a RGB(devuelve un vector con cada color)
-						std::vector<int> nuevosRGB = color.HSVtoRGB(hue, xPixelSuperficie, yPixelSuperficie, saturation, value);
-                        
-						 //Construye el Uint 32 con el nuevo color r g b
-						//PONER EL RGBa
-						Uint32 nuevoMapaRGB = SDL_MapRGB(color.getSuperficie()->format, nuevosRGB.at(0), nuevosRGB.at(1), nuevosRGB.at(2));
-							 
+						std::vector<int> nuevosRGB = color.HSVtoRGB(hue, saturation, value);
+						//Construye el Uint 32 con el nuevo color r g b
+						Uint32 nuevoMapaRGB = SDL_MapRGBA(color.getSuperficie()->format, nuevosRGB.at(0), nuevosRGB.at(1), nuevosRGB.at(2), nuevosRGB.at(3));
 						//Coloca los nuevos valores RGB en el pixel
-
 						color.PutPixel(color.getSuperficie(), xPixelSuperficie, yPixelSuperficie, nuevoMapaRGB);
 
 						//SDL_SetColorKey(SuperficieDos, SDL_TRUE, SDL_MapRGB(SuperficieDos->format, nuevosRGB.at(0), nuevosRGB.at(1), nuevosRGB.at(2)));
-						
-						 // Actualizamos la pantalla parar mostrar el cambio
+
 						//SDL_SetColorKey(color.getSuperficie(), SDL_TRUE, nuevoMapaRGB);
-						//int flip = SDL_Flip(SuperficieDos);
-						}
 
-
+					}
 				}
 
 			}
-			
-		// Uint8 RGB = SuperficieDos->format->BytesPerPixel; //da un Uint8
-
-		//SDL_SetColorKey(Superficie, SDL_TRUE, SDL_MapRGB(Superficie->format, 0, 0xFF, 0xFF));
-
-			// Uint8 RGB = SuperficieDos->format->BytesPerPixel; //da un Uint8
-			//Uint32 sonic = SuperficieDos->format->format;
-
 			// Una vez dibujado procedemos a desbloquear la superficie siempre y cuando hubiese sido bloqueada
 			if (SDL_MUSTLOCK(SuperficieDos))
 			{
