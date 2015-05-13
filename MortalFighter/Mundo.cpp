@@ -236,6 +236,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		    // estoy golpeado
 		    // me acaban de golpear
 		
+		
 			//si hay demora
 			if (unCuerpo->HayDemora())
 			{
@@ -245,12 +246,9 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 				else // aca entran todos los casos demorados que no sean recien golpeado
 				{
-					unCuerpo->DisminuirDemora();
+				//	unCuerpo->DisminuirDemora();
 				//	nuevoEstado = unCuerpo->getEstadoAnterior();
-
-					
-						
-					
+										
 				}
 				
 			}
@@ -262,7 +260,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			}// listo todo terminado
 
 
-			//	unCuerpo->setEstadoAnterior(nuevoEstado); //asigno estado actual como anterior para la proxima
+				//unCuerpo->setEstadoAnterior(nuevoEstado); //asigno estado actual como anterior para la proxima
 
 			
 		}// en esta parte finalizario el resolver
@@ -397,6 +395,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		}
+
 		if ((movimientos.at(0) == P_BAJA) && !(unCuerpo->getEstado().accion == PATADA_BAJA)){
 			nuevoEstado.accion = PATADA_BAJA;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
@@ -456,7 +455,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 				}
 		}
 
-		if ( (unCuerpo->GetDemora() > 0)) {
+		if (unCuerpo->GetDemora() > 0) {
 			unCuerpo->DisminuirDemora();
 			nuevoEstado = unCuerpo->getEstadoAnterior();
 		}

@@ -146,10 +146,12 @@ public:
 	// Devuelve la demora que hay para la reproduccion del sprite de patada, sino duraba un instante....
 
 	//Xjose
+	
 	int GetDemora();
-	void Cuerpo::setDemora(int demoratiempo);
-	void Cuerpo::DisminuirDemora();
-	bool Cuerpo::HayDemora();
+	void setDemora(int demoratiempo);
+	void DisminuirDemora();
+	bool HayDemora();
+
 
 	// Devuelve true si está en borde derecho o false en caso contrario
 	// borde izquierdo se toma cero siempre

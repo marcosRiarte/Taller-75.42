@@ -232,6 +232,13 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 }
 
 int Sprite::getConstantes(ESTADO estadoDelPersonaje){
+	if (estadoDelPersonaje.golpeado == GOLPEADO){
+		if (estadoDelPersonaje.movimiento == SALTO || estadoDelPersonaje.movimiento == SALTODIAGIZQ || estadoDelPersonaje.movimiento == SALTODIAGDER)
+			return (tiempoSaltoGolpeado / (this->SaltoGolpeado->size()) / MSxCUADRO);
+		if (estadoDelPersonaje.accion == GUARDIA)
+			return (tiempoDefensa / (this->Defensa->size()) / MSxCUADRO);
+		return (tiempoGolpeado / (this->Golpeado->size()) / MSxCUADRO);
+	}
 	if (estadoDelPersonaje.accion == PATADA_BAJA)
 		return (tiempoPatadaBaja / (this->PatadaBaja->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.accion == GOLPE_ALTO)
@@ -242,11 +249,6 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 		return (tiempoArmaArrojable / (this->Arma->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.accion == PATADA_ALTA)
 		return (tiempoPatadaAlta / (this->PatadaAlta->size()) / MSxCUADRO);
-	if (estadoDelPersonaje.golpeado == GOLPEADO){
-		if (estadoDelPersonaje.movimiento == SALTO || estadoDelPersonaje.movimiento == SALTODIAGIZQ || estadoDelPersonaje.movimiento == SALTODIAGDER)
-			return (tiempoSaltoGolpeado / (this->SaltoGolpeado->size()) / MSxCUADRO);
-		return (tiempoGolpeado / (this->Golpeado->size()) / MSxCUADRO);
-	}	
 	if (estadoDelPersonaje.accion == GUARDIA)
 		return (tiempoDefensa / (this->Defensa->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.movimiento == CAMINARDER)
