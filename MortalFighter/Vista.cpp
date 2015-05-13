@@ -113,6 +113,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 				}
 			}
 
+			/*
 			//La variable xPixelSuperficie sera la coordenada x en el pixel
 			//La variable yPixelSuperficie sera la coordenada y en el pixel 
 			for (int xPixelSuperficie = 0; xPixelSuperficie < ancho; xPixelSuperficie++)
@@ -120,11 +121,12 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 				for (int yPixelSuperficie = 0; yPixelSuperficie < alto; yPixelSuperficie++)
 				{
 					//Convertimos de RGB a HSV
-					/*H*/		double hue = color.RGBtoHSV(h_inicio, h_final, deplazamiento, color.getSuperficie(), xPixelSuperficie, yPixelSuperficie);
-					/*S*/		double saturation = color.obtenerSaturacion((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
-					/*V*/		double value = color.obtenerBrillo((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
+					//		double hue = color.RGBtoHSV(h_inicio, h_final, deplazamiento, color.getSuperficie(), xPixelSuperficie, yPixelSuperficie);
+					//		double saturation = color.obtenerSaturacion((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
+					//		double value = color.obtenerBrillo((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
 
 					//Si el hue esta en el rango a cambiar
+					/*
 					if (hue != -1)
 					{
 						//Convertimos los nuevos valores HSV a RGB(devuelve un vector con cada color)
@@ -142,6 +144,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 				}
 
 			}
+			*/
 			// Una vez dibujado procedemos a desbloquear la superficie siempre y cuando hubiese sido bloqueada
 			if (SDL_MUSTLOCK(SuperficieDos))
 			{
