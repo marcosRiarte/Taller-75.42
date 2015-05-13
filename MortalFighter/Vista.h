@@ -7,7 +7,7 @@
 
 class Vista
 {
-public:
+public:	
 	Vista(Mundo* unMundo, Sprite* unSprite, bool* error);
 	void actualizar();
 	void habilitarVibracion();
@@ -22,7 +22,7 @@ private:
 	Sprite* elSprite;
 	SDL_Window* ventana;
 	SDL_Renderer* renderer;
-	std::string rutaImagen;
+	std::string rutaImagen;	
 	SDL_Texture* texturaSpriteUno;
 	SDL_Texture* texturaSpriteDos;
 	Mundo* refMundo;
@@ -39,7 +39,7 @@ private:
 	int anchoImagenBarraDeVida;
 	int anchoBarraDeVida1;
 	int anchoBarraDeVida2;
-
+	
 	std::string dirImgPersonaje;
 
 	std::vector<Capa*> capasVista;
@@ -52,11 +52,11 @@ private:
 	float xPjUno;
 	float xPjDos;
 	ManejadorULogicas manejadorULog;
-
+	
 	ESTADO estadoAnteriorPj1;
 	ESTADO estadoAnteriorPj2;
 	void OrdenarCapas();
-	std::string GetEstadoDelPersonaje(ESTADO, Personaje*);
+	std::string GetEstadoDelPersonaje(ESTADO , Personaje* );
 	void Dibujar(std::vector<Personaje*>);
 	void DibujarBarrasDeVida(std::vector<Personaje*>);
 	void DibujarCapasAnteriores(std::vector<Personaje*> personajes, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);

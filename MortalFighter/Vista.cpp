@@ -6,7 +6,7 @@
 
 
 Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
-{
+{	
 	*error = false;
 	//VIBRACION
 	vibraciones = 0;
@@ -17,197 +17,197 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 	// Se inicia SDL_image
 	IMG_Init(IMG_INIT_PNG);
 	ventana = SDL_CreateWindow(TITULO_VENTANA, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Parser::getInstancia().getVentana().getAnchoPx(), Parser::getInstancia().getVentana().getAltoPx(), SDL_WINDOW_SHOWN);
-	if (ventana == nullptr){
-		std::string mensaje = "SDL_CreateWindow Error: ";
-		const char* elError = SDL_GetError();
-		mensaje += elError;
-		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
-		SDL_Quit();
-		*error = true;
-		return;
-	}
-
-	std::string icono(ICONO);
-	SDL_Surface* iconoSurf = IMG_Load(icono.c_str());
-	SDL_SetWindowIcon(ventana, iconoSurf);
-
-	renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
-	if (renderer == nullptr){
-		SDL_DestroyWindow(ventana);
-		std::string mensaje = "SDL_CreateRenderer Error: ";
-		const char* elError = SDL_GetError();
-		mensaje += elError;
-		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
-		SDL_Quit();
-		*error = true;
-		return;
-	}
-
-	for (size_t i = 0; i < Parser::getInstancia().getCapas().size(); i++)
-	{
-		std::string imgFondo(Parser::getInstancia().getCapas().at(i)->getImagenFondo());
-		SDL_Surface* superficieCapa = cargarSuperficieOptimizada(imgFondo);
-		SDL_Texture *tex = SDL_CreateTextureFromSurface(renderer, superficieCapa);
-		// se queda con la textura libero la superficie
-		SDL_FreeSurface(superficieCapa);
-
-		if (tex == nullptr){
-			std::string mensaje = "SDL_CreateTextureFromSurface Error: ";
+		if (ventana == nullptr){
+			std::string mensaje = "SDL_CreateWindow Error: ";
 			const char* elError = SDL_GetError();
 			mensaje += elError;
 			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
+			SDL_Quit();
 			*error = true;
 			return;
 		}
 
-		Parser::getInstancia().getCapas().at(i)->setTexturaSDL(tex);
-	}
+		std::string icono(ICONO);
+		SDL_Surface* iconoSurf = IMG_Load(icono.c_str());
+		SDL_SetWindowIcon(ventana, iconoSurf);
 
-	// inicializo la camara en el centro del escenario
-	camaraXLog = -Parser::getInstancia().getEscenario().getAncho() / 2
-		+ Parser::getInstancia().getVentana().getAncho() / 2;
+		renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
+			if (renderer == nullptr){
+				SDL_DestroyWindow(ventana);
+				std::string mensaje = "SDL_CreateRenderer Error: ";
+				const char* elError = SDL_GetError();
+				mensaje += elError;
+				Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
+				SDL_Quit();
+				*error = true;
+				return;
+			}			
 
-	//Creo el número de cuadros en 0,
-	numeroDeCuadroUno = 0;
-	//y la lista de cuadros puntero a null
-	listaDeCuadrosUno = nullptr;
-
-	//Creo el número de cuadros en 0,
-	numeroDeCuadroDos = 0;
-	//y la lista de cuadros puntero a null
-	listaDeCuadrosDos = nullptr;
-
-	//Se cargan los sprites
-	elSprite = unSprite;
-
-	//Dirección de la imagen de Sprites
-	dirImgPersonaje = Parser::getInstancia().getPersonajes().at(0)->getSprite();
-
-	//Carga la imagen desde la ruta especificada
-	SDL_Surface* SuperficieUno = cargarSuperficieOptimizada(dirImgPersonaje);
-	SDL_Surface* SuperficieDos = cargarSuperficieOptimizada(dirImgPersonaje);
-
-	//Seteo del color		
-	std::string pelea = Parser::getInstancia().getPelea();
-	int h_inicio = Parser::getInstancia().getColorAlternativo().at(0);
-	int h_final = Parser::getInstancia().getColorAlternativo().at(1);;
-	int deplazamiento = Parser::getInstancia().getColorAlternativo().at(2);
-
-	int xPixelSuperficie = 0;
-	int yPixelSuperficie = 0;
-	//Si ambos personajes son iguales
-	if ((pelea == "scorpion VS scorpion") || (pelea == "liuKang VS liuKang"))
-	{
-		ControlDeColor color = ControlDeColor(SuperficieDos);
-		if (SDL_MUSTLOCK(SuperficieDos))
+		for (size_t i = 0; i < Parser::getInstancia().getCapas().size(); i++) 
 		{
-			int bloqueoDeSuperficie = SDL_LockSurface(SuperficieDos);
-			if (bloqueoDeSuperficie == 0)
-			{
-				std::cout << "superficie bloqueada con exito";
+			std::string imgFondo(Parser::getInstancia().getCapas().at(i)->getImagenFondo());
+			SDL_Surface* superficieCapa = cargarSuperficieOptimizada(imgFondo);
+			SDL_Texture *tex = SDL_CreateTextureFromSurface(renderer, superficieCapa);
+			// se queda con la textura libero la superficie
+			SDL_FreeSurface(superficieCapa);
+
+			if (tex == nullptr){				
+				std::string mensaje = "SDL_CreateTextureFromSurface Error: ";
+				const char* elError = SDL_GetError();
+				mensaje += elError;
+				Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
+				*error = true;
+				return;
 			}
+
+			Parser::getInstancia().getCapas().at(i)->setTexturaSDL(tex);			
 		}
 
-		//La variable xPixelSuperficie sera la coordenada x en el pixel e ira de 0 a 100
-		//La variable yPixelSuperficie sera la coordenada y en el pixel e ira de 0 a 100
+		// inicializo la camara en el centro del escenario
+		camaraXLog = -Parser::getInstancia().getEscenario().getAncho()/2
+			+ Parser::getInstancia().getVentana().getAncho()/2;
 
-		for (int xPixelSuperficie = 0; xPixelSuperficie < 100; xPixelSuperficie++)
+		//Creo el número de cuadros en 0,
+		numeroDeCuadroUno = 0;
+		//y la lista de cuadros puntero a null
+		listaDeCuadrosUno = nullptr;
+
+		//Creo el número de cuadros en 0,
+		numeroDeCuadroDos = 0;
+		//y la lista de cuadros puntero a null
+		listaDeCuadrosDos = nullptr;
+
+		//Se cargan los sprites
+		elSprite = unSprite;
+		
+		//Dirección de la imagen de Sprites
+		dirImgPersonaje = Parser::getInstancia().getPersonajes().at(0)->getSprite();
+
+		//Carga la imagen desde la ruta especificada
+		SDL_Surface* SuperficieUno = cargarSuperficieOptimizada(dirImgPersonaje);
+		SDL_Surface* SuperficieDos = cargarSuperficieOptimizada(dirImgPersonaje);
+
+		//Seteo del color		
+		std::string pelea = Parser::getInstancia().getPelea();
+		int h_inicio = Parser::getInstancia().getColorAlternativo().at(0);
+		int h_final = Parser::getInstancia().getColorAlternativo().at(1);;
+		int deplazamiento = Parser::getInstancia().getColorAlternativo().at(2);
+
+		int xPixelSuperficie = 0;
+		int yPixelSuperficie = 0;
+		//Si ambos personajes son iguales
+		if ((pelea == "scorpion VS scorpion") || (pelea == "liuKang VS liuKang"))
 		{
-			for (int yPixelSuperficie = 0; yPixelSuperficie < 100; yPixelSuperficie++)
+			ControlDeColor color = ControlDeColor(SuperficieDos);
+			if (SDL_MUSTLOCK(SuperficieDos))
 			{
-				//Convertimos de RGB a HSV
-				/*H*/		double hue = color.RGBtoHSV(h_inicio, h_final, deplazamiento, color.getSuperficie(), xPixelSuperficie, yPixelSuperficie);
-				/*S*/		double saturation = color.obtenerSaturacion((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
-				/*V*/		double value = color.obtenerBrillo((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
-
-				//Si el hue esta en el rango a cambiar
-
-				if (hue != -1)
+				int bloqueoDeSuperficie = SDL_LockSurface(SuperficieDos);
+				if (bloqueoDeSuperficie == 0)
 				{
-					//Convertimos los nuevos valores HSV a RGB(devuelve un vector con cada color)
-					std::vector<int> nuevosRGB = color.HSVtoRGB(hue, xPixelSuperficie, yPixelSuperficie, saturation, value);
+					std::cout << "superficie bloqueada con exito";
+				}
+			}
 
-					//Construye el Uint 32 con el nuevo color r g b
-					//PONER EL RGBa
-					Uint32 nuevoMapaRGB = SDL_MapRGB(color.getSuperficie()->format, nuevosRGB.at(0), nuevosRGB.at(1), nuevosRGB.at(2));
+			//La variable xPixelSuperficie sera la coordenada x en el pixel e ira de 0 a 100
+			//La variable yPixelSuperficie sera la coordenada y en el pixel e ira de 0 a 100
 
-					//Coloca los nuevos valores RGB en el pixel
+				for (int xPixelSuperficie = 0; xPixelSuperficie < 100; xPixelSuperficie++)
+				  {
+					for (int yPixelSuperficie = 0; yPixelSuperficie < 100; yPixelSuperficie++)
+					{
+						//Convertimos de RGB a HSV
+						/*H*/		double hue = color.RGBtoHSV(h_inicio, h_final, deplazamiento, color.getSuperficie(), xPixelSuperficie, yPixelSuperficie);
+						/*S*/		double saturation = color.obtenerSaturacion((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
+						/*V*/		double value = color.obtenerBrillo((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
+						
+						//Si el hue esta en el rango a cambiar
+	
+						if (hue != -1)
+						{
+						//Convertimos los nuevos valores HSV a RGB(devuelve un vector con cada color)
+						std::vector<int> nuevosRGB = color.HSVtoRGB(hue, xPixelSuperficie, yPixelSuperficie, saturation, value);
+                        
+						 //Construye el Uint 32 con el nuevo color r g b
+						//PONER EL RGBa
+						Uint32 nuevoMapaRGB = SDL_MapRGB(color.getSuperficie()->format, nuevosRGB.at(0), nuevosRGB.at(1), nuevosRGB.at(2));
+							 
+						//Coloca los nuevos valores RGB en el pixel
 
-					color.PutPixel(color.getSuperficie(), xPixelSuperficie, yPixelSuperficie, nuevoMapaRGB);
+						color.PutPixel(color.getSuperficie(), xPixelSuperficie, yPixelSuperficie, nuevoMapaRGB);
 
-					//SDL_SetColorKey(SuperficieDos, SDL_TRUE, SDL_MapRGB(SuperficieDos->format, nuevosRGB.at(0), nuevosRGB.at(1), nuevosRGB.at(2)));
+						//SDL_SetColorKey(SuperficieDos, SDL_TRUE, SDL_MapRGB(SuperficieDos->format, nuevosRGB.at(0), nuevosRGB.at(1), nuevosRGB.at(2)));
+						
+						 // Actualizamos la pantalla parar mostrar el cambio
+						//SDL_SetColorKey(color.getSuperficie(), SDL_TRUE, nuevoMapaRGB);
+						//int flip = SDL_Flip(SuperficieDos);
+						}
 
-					// Actualizamos la pantalla parar mostrar el cambio
-					//SDL_SetColorKey(color.getSuperficie(), SDL_TRUE, nuevoMapaRGB);
-					//int flip = SDL_Flip(SuperficieDos);
+
 				}
 
-
 			}
-
-		}
-
+			
 		// Uint8 RGB = SuperficieDos->format->BytesPerPixel; //da un Uint8
 
 		//SDL_SetColorKey(Superficie, SDL_TRUE, SDL_MapRGB(Superficie->format, 0, 0xFF, 0xFF));
 
-		// Uint8 RGB = SuperficieDos->format->BytesPerPixel; //da un Uint8
-		//Uint32 sonic = SuperficieDos->format->format;
+			// Uint8 RGB = SuperficieDos->format->BytesPerPixel; //da un Uint8
+			//Uint32 sonic = SuperficieDos->format->format;
 
-		// Una vez dibujado procedemos a desbloquear la superficie siempre y cuando hubiese sido bloqueada
-		if (SDL_MUSTLOCK(SuperficieDos))
-		{
-			SDL_UnlockSurface(SuperficieDos);
-		}
-	}//Fin del if
+			// Una vez dibujado procedemos a desbloquear la superficie siempre y cuando hubiese sido bloqueada
+			if (SDL_MUSTLOCK(SuperficieDos))
+			{
+				SDL_UnlockSurface(SuperficieDos);
+			}
+		}//Fin del if
 
-	//Creación de la textura sobre la superficie
-	texturaSpriteUno = SDL_CreateTextureFromSurface(renderer, SuperficieUno);
-	texturaSpriteDos = SDL_CreateTextureFromSurface(renderer, SuperficieDos);
-	SDL_FreeSurface(SuperficieUno);
-	SDL_FreeSurface(SuperficieDos);
+		//Creación de la textura sobre la superficie
+		texturaSpriteUno = SDL_CreateTextureFromSurface(renderer, SuperficieUno);
+		texturaSpriteDos = SDL_CreateTextureFromSurface(renderer, SuperficieDos);
+		SDL_FreeSurface(SuperficieUno);
+		SDL_FreeSurface(SuperficieDos);
 
-	capasVista = Parser::getInstancia().getCapas();
-	//Ordeno las capas por su zindex para ser dibujadas
-	OrdenarCapas();
-	+
-	// Se crea textura para dibujar sensores
-	SDL_Surface* sup = cargarSuperficieOptimizada("ima/bkg/texturaVerde.png");
-	texturaVerde = SDL_CreateTextureFromSurface(renderer, sup);
-	SDL_FreeSurface(sup);
+		capasVista = Parser::getInstancia().getCapas();
+		//Ordeno las capas por su zindex para ser dibujadas
+		OrdenarCapas();
 
-	//Textura para la barra de vida
-	superficieBarraDeVida = cargarSuperficieOptimizada("ima/bkg/barraDeVida.png");
-	texturaBarraDeVida = SDL_CreateTextureFromSurface(renderer, superficieBarraDeVida);
-	SDL_FreeSurface(superficieBarraDeVida);
+		// Se crea textura para dibujar sensores
+		SDL_Surface* sup = cargarSuperficieOptimizada("ima/bkg/texturaVerde.png");
+		texturaVerde = SDL_CreateTextureFromSurface(renderer, sup);
+		SDL_FreeSurface(sup);
 
-	int anchoBarraDeVida = Parser::getInstancia().getVentana().getAnchoPx() / 3;
-	int altoBarraDeVida = 20;
+		//Textura para la barra de vida
+		superficieBarraDeVida = cargarSuperficieOptimizada("ima/bkg/barraDeVida.png");
+		texturaBarraDeVida = SDL_CreateTextureFromSurface(renderer, superficieBarraDeVida);
+		SDL_FreeSurface(superficieBarraDeVida);
 
-	int posXBarraDeVida1 = (Parser::getInstancia().getVentana().getAnchoPx() / 2) - anchoBarraDeVida - 10;
-	int posXBarraDeVida2 = Parser::getInstancia().getVentana().getAnchoPx() / 2 + 10;
+		int anchoBarraDeVida = Parser::getInstancia().getVentana().getAnchoPx() / 3;
+		int altoBarraDeVida = 20;
 
-	int posYBarraDeVida = 10;
+		int posXBarraDeVida1 = (Parser::getInstancia().getVentana().getAnchoPx() / 2) - anchoBarraDeVida - 10;
+		int posXBarraDeVida2 = Parser::getInstancia().getVentana().getAnchoPx() / 2 + 10;
+		
+		int posYBarraDeVida = 10;
 
-	barraDeVidaImagen1.x = 0;
-	barraDeVidaImagen1.y = 0;
-	barraDeVidaImagen1.w = superficieBarraDeVida->w;
-	barraDeVidaImagen1.h = superficieBarraDeVida->h;
+		barraDeVidaImagen1.x = 0;
+		barraDeVidaImagen1.y = 0;
+		barraDeVidaImagen1.w = superficieBarraDeVida->w;
+		barraDeVidaImagen1.h = superficieBarraDeVida->h;
 
-	barraDeVidaImagen2 = barraDeVidaImagen1;
+		barraDeVidaImagen2 = barraDeVidaImagen1;
 
-	anchoBarraDeVida1 = anchoBarraDeVida;
-	anchoBarraDeVida2 = anchoBarraDeVida;
+		anchoBarraDeVida1 = anchoBarraDeVida;
+		anchoBarraDeVida2 = anchoBarraDeVida;
 
-	anchoImagenBarraDeVida = barraDeVidaImagen1.w;
+		anchoImagenBarraDeVida = barraDeVidaImagen1.w;
 
-	//Carga de barras de vida
-	barraDeVida1 = { posXBarraDeVida1, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
-	barraDeVida2 = { posXBarraDeVida2, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
+		//Carga de barras de vida
+		barraDeVida1 = { posXBarraDeVida1, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
+		barraDeVida2 = { posXBarraDeVida2, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
 
-	estadoAnteriorPj1.movimiento = PARADO;
-	estadoAnteriorPj2.movimiento = PARADO;
-	refMundo = unMundo;
+		estadoAnteriorPj1.movimiento = PARADO;
+		estadoAnteriorPj2.movimiento = PARADO;
+		refMundo = unMundo;
 }
 
 
@@ -326,30 +326,30 @@ void Vista::actualizar(){
 		}
 		/*Este es el codigo que deberia ir en realidad pero todavia no hay gancho
 		if (personajesVista.at(0)->getEstado() == GOLPEADODER){
-		if (personajesVista.at(1)->getEstado() == GANCHO_IZQ){
-		golpeado = true;
-		}
+			if (personajesVista.at(1)->getEstado() == GANCHO_IZQ){
+				golpeado = true;
+			}
 		}
 		else {
-		if (personajesVista.at(0)->getEstado() == GOLPEADOIZQ){
-		if (personajesVista.at(1)->getEstado() == GANCHO_DER){
-		golpeado = true;
-		}
-		}
+			if (personajesVista.at(0)->getEstado() == GOLPEADOIZQ){
+				if (personajesVista.at(1)->getEstado() == GANCHO_DER){
+					golpeado = true;
+				}
+			}
 		}
 		else{
-		if (personajesVista.at(1)->getEstado() == GOLPEADODER){
-		if (personajesVista.at(0)->getEstado() == GANCHO_IZQ){
-		golpeado = true;
-		}
-		}
-		else {
-		if (personajesVista.at(1)->getEstado() == GOLPEADOIZQ){
-		if (personajesVista.at(0)->getEstado() == GANCHO_DER){
-		golpeado = true;
-		}
-		}
-		}
+			if (personajesVista.at(1)->getEstado() == GOLPEADODER){
+				if (personajesVista.at(0)->getEstado() == GANCHO_IZQ){
+				golpeado = true;
+				}
+			}
+			else {
+				if (personajesVista.at(1)->getEstado() == GOLPEADOIZQ){
+					if (personajesVista.at(0)->getEstado() == GANCHO_DER){
+						golpeado = true;
+					}
+				}
+			}
 		}
 		*/
 
@@ -365,11 +365,11 @@ void Vista::actualizar(){
 			}
 		}
 	}
-
+	
 
 	if (!PjUnoEstaEnBorde && !PjDosEstaEnBorde)
 		refMundo->LiberarCuerpos();
-
+	
 	// Dibuja las capas y el personaje
 	Dibujar(personajesVista);
 
@@ -381,14 +381,14 @@ void Vista::actualizar(){
 }
 
 SDL_Surface* Vista::cargarSuperficieOptimizada(std::string dirImagen)
-{
+{	
 	SDL_Surface* superficieOptimizada = NULL;
 
 	//cargo original
 	SDL_Surface* superficieOriginal = IMG_Load(dirImagen.c_str());
 	if (superficieOriginal == NULL)
-		Log::getInstancia().logearMensajeEnModo("No se pudo cargar imagen" + dirImagen, Log::MODO_ERROR);
-	else
+		Log::getInstancia().logearMensajeEnModo("No se pudo cargar imagen" + dirImagen, Log::MODO_ERROR);	
+	else 
 	{	//Optimiza superfice a pantalla
 		superficieOptimizada = SDL_ConvertSurface(superficieOriginal, superficieOriginal->format, NULL);
 		if (superficieOptimizada == NULL)
@@ -402,20 +402,20 @@ SDL_Surface* Vista::cargarSuperficieOptimizada(std::string dirImagen)
 }
 
 void Vista::OrdenarCapas()
-{
+{	
 	std::vector<Capa*> capasOrdenadas;
 	int i = 0;
-	while (capasVista.size() > 0) {
+	while ( capasVista.size() > 0) {
 		int minimo = 0;
 		for (size_t j = 1; j < capasVista.size(); j++){
 			if (capasVista[j]->getZIndex() < capasVista[minimo]->getZIndex()) {
-				minimo = j;
+				minimo = j;				
 			}
-		}
+		}		
 		capasOrdenadas.push_back(capasVista[minimo]);
-		capasVista.erase(capasVista.begin() + minimo);
+		capasVista.erase(capasVista.begin() + minimo);		
 	}
-
+	
 	capasVista.clear();
 	capasVista = capasOrdenadas;
 }
@@ -434,7 +434,7 @@ void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 	DibujarPersonajes(personajesVista);
 
 	DibujarCapasPosteriores(personajesVista, anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
-
+	
 }
 void Vista::DibujarBarrasDeVida(std::vector<Personaje*> personajesVista)
 {
@@ -460,7 +460,7 @@ void Vista::DibujarBarrasDeVida(std::vector<Personaje*> personajesVista)
 
 	SDL_RenderCopyEx(renderer, texturaBarraDeVida, &barraDeVidaImagen1, &barraDeVida1, 0, NULL, SDL_FLIP_HORIZONTAL);
 	SDL_RenderCopy(renderer, texturaBarraDeVida, &barraDeVidaImagen2, &barraDeVida2);
-
+	
 	SDL_SetRenderTarget(renderer, NULL);
 }
 
@@ -538,7 +538,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	// ancho y alto lo calcula cuadro a cuadro
 	ESTADO estadoDelPersonajeUno = personajesVista[0]->getEstado();
 
-
+	
 	float relacionAnchoDos = (float)anchoPjDosPx / (float)cuadroBase->w;
 	float relacionAltoDos = (float)altoPjDosPx / (float)cuadroBase->h;
 	personajeDos.x = manejadorULog.darLongPixels(xLogPjDosEnCamara);
@@ -560,7 +560,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		numeroDeCuadroDos = 0;
 		estadoAnteriorPj2 = estadoDelPersonajeDos;
 	}
-
+	
 	if ((numeroDeCuadroUno) > (tiempoSecuenciaSpritesUno*listaDeCuadrosUno->size()))
 		numeroDeCuadroUno = 0;
 
@@ -587,20 +587,20 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	if ((numeroDeCuadroDos) > (tiempoSecuenciaSpritesDos*listaDeCuadrosDos->size()))
 		numeroDeCuadroDos = 0;
-
+	
 	if (0 >= ((listaDeCuadrosDos->size() - 1) - (numeroDeCuadroDos / tiempoSecuenciaSpritesDos)))
 		numeroDeCuadroDos = 0;
 
 	//Renderizar el sprite
 	SDL_Rect* cuadroActualDos;
 	if (!invertido){
-		cuadroActualDos = listaDeCuadrosDos->at((listaDeCuadrosDos->size() - 1) - (numeroDeCuadroDos / tiempoSecuenciaSpritesDos));
+		cuadroActualDos = listaDeCuadrosDos->at((listaDeCuadrosDos->size()-1) - (numeroDeCuadroDos / tiempoSecuenciaSpritesDos));
 	}
 	else{
 		cuadroActualDos = listaDeCuadrosDos->at(numeroDeCuadroDos / (tiempoSecuenciaSpritesDos));
 	}
-	numeroDeCuadroDos++;
-
+	numeroDeCuadroDos++; 
+	
 	personajeDos.w = (int)round(relacionAnchoDos*cuadroActualDos->w);
 	personajeDos.h = (int)round(relacionAltoDos*cuadroActualDos->h);
 
@@ -673,7 +673,7 @@ void Vista::deshabilitarVibracion(){
 
 
 Vista::~Vista()
-{
+{		
 	SDL_DestroyTexture(texturaSpriteUno);
 	SDL_DestroyTexture(texturaSpriteDos);
 	SDL_DestroyTexture(texturaVerde);
