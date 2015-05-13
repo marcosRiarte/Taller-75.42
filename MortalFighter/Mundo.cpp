@@ -167,6 +167,8 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEs
 	IF SALTAR , evaluar si estas frenado, osea en borde, tu velocidad en x tiene que ser 0
 
 	IF GOLPES , evaluar que golpe es y en que lugar estas. quieto, agachado, salto vertical, saltodiagonal
+	           //RECORDAR METER EL TEMBLEQUE DE CAMARA EN EL GANCHO
+
 
 	IF DEFENSA, si no estas en piso no se puede aplicar, si estas en piso y no agachado es defensaquieto sino agachado defensa. evaluar contra estado anterior
 	            y ordenes nuevas
@@ -211,7 +213,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	else{ // NO HAY SUPERPOSICION, LO SIGUIENTE A RESOLVER ES LA COLISION
 		
 			/*
-			if (hayInterseccion())
+			if (hayInterseccion()) SEBA FIJATE SI PODES METER TODO LO DE INTERSECCION Y sensores EN UN METODO
 			{
 				// //esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada 
 				 nuevoEstado= Mundo::ResolverColisiones(difTiempo, unCuerpo, nuevoEstado);
