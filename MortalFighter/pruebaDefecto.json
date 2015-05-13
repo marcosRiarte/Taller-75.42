@@ -29,39 +29,66 @@
         {
             "imagen_fondo": "ima/bkg/default_p1.png",
             "ancho": 800.5
-        },
-        {
-            "imagen_fondo": "ima/bkg/Lifebar.png",
-            "ancho": 400
         }
     ],
-    "personaje": {
-        "ancho": 50,
-        "alto": 70,
-        "zindex": 4,
-        "orientacion": "DER",
-        "sprites": "ima/sprites/player_default.png",
-        "CaminarParaAdelante": "CaminarParaAdelante",
-        "CaminarParaAtras": "CaminarParaAtras",
-        "Quieto": "Quieto",
-        "Salto": "Salto",
-        "SaltoDiagonal": "SaltoDiagonal",
-        "Caida": "Caida"
-    },
+   "personajes": [
+        {
+            "ancho": 80,
+            "alto": 90,
+            "zindex": 1,
+            "orientacion": "DER",
+            "sprites": "ima/bkg/default_bkg.png",
+            "CaminarParaAdelante": "CaminarParaAdelante",
+            "CaminarParaAtras": "CaminarParaAtras",
+            "Quieto": "Quieto",
+            "Salto": "Salto",
+            "SaltoDiagonal": "SaltoDiagonal",
+            "Caida": "Caida",
+            "nombre": "Vacio"
+        },
+        {
+            "ancho": 80,
+            "alto": 90,
+            "zindex": 1,
+            "orientacion": "DER",
+            "sprites": "ima/bkg/default_bkg.png",
+            "CaminarParaAdelante": "CaminarParaAdelante",
+            "CaminarParaAtras": "CaminarParaAtras",
+            "Quieto": "Quieto",
+            "Salto": "Salto",
+            "SaltoDiagonal": "SaltoDiagonal",
+            "Caida": "Caida",
+            "nombre": "Vacio"
 
+        }
+    ],
+    "pelea": 
+        { 
+           "fighters": "Vacio VS Vacio"
+        },
+    
+
+    "color_alternativo": 
+        {
+          "h_inicial": 40,
+          "h_final": 45,
+          "desplazamiento": 30
+
+        },
+    
     "control_1": {
-    "arriba": "up",
-    "abajo": "down",
-    "izquierda": "left",
-    "derecha": "right",
-    "defensa": "z",
-    "golpe_bajo": "x",
-    "golpe_alto": "c",
-    "patada_baja": "v",
-    "patada_alta": "b",
-    "arma": "n",
-    "salir": "esc",
-    "reiniciar": "r"
+        "arriba": "up",
+        "abajo": "down",
+        "izquierda": "left",
+        "derecha": "right",
+        "defensa": "z",
+        "golpe_bajo": "x",
+        "golpe_alto": "c",
+        "patada_baja": "v",
+        "patada_alta": "b",
+        "arma": "n",
+        "salir": "esc",
+        "reiniciar": "r"
     },
 
     "control_2": {
@@ -78,4 +105,5 @@
         "salir": "esc",
         "reiniciar": "r"
     }
+
 }
