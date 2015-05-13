@@ -99,6 +99,29 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 
+	//voy dejando partes del algoritmo, es modular para resolver los detalles finales en la implementacion puntual
+	/*
+
+	//la superposicion se da al final de un salto o al final de la caida de un golpe esto lo trato en otro lugar
+	// resolver superposicion tiene una logica de separacion de personajes que despues detallo
+	//superposicion es un bool superposicion   del cuerpo atributoooo
+	if (superposicion) resolver superposicion()
+
+	else
+
+	determinar colisiones ()
+
+	si (hubo colision)
+	resolver colision   //esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada o no golpeado veremos
+
+
+
+	*/
+
+
+
+
+
 	/// integra velocidad, para salto, 
 	// si no está en el piso siente la gravedad
 	
