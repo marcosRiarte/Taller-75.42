@@ -31,12 +31,16 @@ Cuerpo* Mundo::getCuerpo(size_t pos)
 	return nullptr;
 }
 
-void Mundo::Paso(float difTiempo)
+int Mundo::Paso(float difTiempo)
 {
+	int estadoJuego = CONTINUAR;
 	for (unsigned int i = 0; i < Cuerpos.size(); i++)
 	{
-		Cuerpos.at(i)->notificarObservadores(Resolver(difTiempo, Cuerpos.at(i)));
+		estadoJuego = Cuerpos.at(i)->notificarObservadores(Resolver(difTiempo, Cuerpos.at(i)));
+		if (estadoJuego != CONTINUAR)
+			break;
 	}
+	return estadoJuego;
 }
 
 void Mundo::FrenarCuerpos()
@@ -286,7 +290,12 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 						if (!(sensoresCuerpo->at(i)->getHitbox()) && (sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
 							ESTADO unEstado = elOtroCuerpo->getEstado();
 							unEstado.golpeado = GOLPEADO;
-							elOtroCuerpo->notificarObservadores(unEstado);
+							if ((elOtroCuerpo->getRefPersonaje()->descontarVida(elOtroCuerpo->getEstado(), unCuerpo->getEstado())) == REINICIAR){
+								unEstado.golpeado = FALLECIDO;
+								nuevoEstado.golpeado = FALLECIDO;
+							}
+								elOtroCuerpo->notificarObservadores(unEstado);
+							
 						}
 					}
 				}

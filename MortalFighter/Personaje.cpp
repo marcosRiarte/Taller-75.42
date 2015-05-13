@@ -10,7 +10,7 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	alto = altoPersonaje;
 	zIndex = zIndexPersonaje;
 	orientacion = unaorientacion;
-	energy = 100;
+	vida = 100;
 	sprites = spritesPersonaje;
 	caminaradelante = CaminarParaAdelante;
 	caminaratras = CaminarParaAtras;
@@ -45,6 +45,10 @@ std::string Personaje::getSprite() const
 	return sprites;
 }
 
+int Personaje::getVida()
+{
+	return vida;
+}
 
 
 
@@ -93,14 +97,61 @@ std::string Personaje::getAgacharse() const
 	return agachado;
 }
 
-int  Personaje::getEnergy() 
+int Personaje::descontarVida(ESTADO estadoPj, ESTADO estadoPj2)
 {
-	return this->energy;
-}
-
-void Personaje::setEnergy(int nuevaEnergia)
-{
-	this->energy = nuevaEnergia;
+	if (estadoPj.accion==GUARDIA){
+		switch (estadoPj2.accion){
+		case PATADA_ALTA:
+			vida = vida - 5;
+			break;
+		case PATADA_BAJA:
+			vida = vida - 5;
+			break;
+		case GOLPE_BAJO:
+			vida = vida - 3;
+			break;
+		case GOLPE_ALTO:
+			vida = vida - 3;
+			break;
+		case GANCHO:
+			vida = vida - 10;
+			break;
+		case ARMA_ARROJABLE:
+			vida = vida - 10;
+			break;
+		default:
+			vida = vida - 5;
+			break;
+		}
+	}
+	else{
+		switch (estadoPj2.accion){
+		case PATADA_ALTA:
+			vida = vida - 10;
+			break;
+		case PATADA_BAJA:
+			vida = vida - 10;
+			break;
+		case GOLPE_BAJO:
+			vida = vida - 6;
+			break;
+		case GOLPE_ALTO:
+			vida = vida - 6;
+			break;
+		case GANCHO:
+			vida = vida - 20;
+			break;
+		case ARMA_ARROJABLE:
+			vida = vida - 20;
+			break;
+		default:
+			vida = vida - 10;
+			break;
+		}
+	}
+	if (vida <= 0)
+		return REINICIAR;
+	return CONTINUAR;
 }
 
 std::string Personaje::getNombre() const

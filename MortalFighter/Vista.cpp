@@ -176,6 +176,18 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 		texturaVerde = SDL_CreateTextureFromSurface(renderer, sup);
 		SDL_FreeSurface(sup);
 
+		int anchoBarraDeVida = Parser::getInstancia().getVentana().getAnchoPx() / 3;
+		int altoBarraDeVida = 20;
+
+		int posXBarraDeVida1 = Parser::getInstancia().getVentana().getAnchoPx() / 2 + 10;
+		int posXBarraDeVida2 = (Parser::getInstancia().getVentana().getAnchoPx() / 2) - anchoBarraDeVida - 10;
+		int posYBarraDeVida = 10;
+
+
+		//Carga de barras de vida
+		barraDeVida1 = { posXBarraDeVida1, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
+		barraDeVida2 = { posXBarraDeVida2, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
+
 		estadoAnteriorPj1.movimiento = PARADO;
 		estadoAnteriorPj2.movimiento = PARADO;
 		refMundo = unMundo;
@@ -344,6 +356,19 @@ void Vista::actualizar(){
 	// Dibuja las capas y el personaje
 	Dibujar(personajesVista);
 
+	int vidaPj1 = personajesVista.at(0)->getVida();
+	int vidaPj2 = personajesVista.at(1)->getVida();
+
+	int nuevoAnchoBarraDeVida1 = (vidaPj1 * barraDeVida1.w) / 100;
+	int nuevoAnchoBarraDeVida2 = (vidaPj2 * barraDeVida2.w) / 100;
+
+	barraDeVida1.w = nuevoAnchoBarraDeVida1;
+	barraDeVida2.w = nuevoAnchoBarraDeVida2;
+
+	// Se dibujan las barras de vida
+	SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
+	SDL_RenderFillRect(renderer, &this->barraDeVida1);
+	SDL_RenderFillRect(renderer, &this->barraDeVida2);
 
 	//Se actualiza la pantalla
 	SDL_RenderPresent(renderer);

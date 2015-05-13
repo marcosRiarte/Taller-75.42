@@ -97,7 +97,6 @@ int _tmain(int argc, _TCHAR* argv[])
 			//Se inicializa el Timer de corte
 			capTimer.start();
 
-
 			//Calcula y corrije cuadros por segundo
 			float avgFPS = conteoDeCuadros / (fpsTimer.getTicks() / 1000.f);
 			if (avgFPS > 2000000)
@@ -106,9 +105,17 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 
 			//Se actualiza la pantalla
-			unMundo->Paso(0.13f);
+			int estadoVida = unMundo->Paso(0.13f);
 			unaVista->actualizar();
-			
+
+			if (estadoVida == REINICIAR || estadoVida == REINICIAR){
+				break;
+			}
+			else if (estadoVida == FIN || estadoVida == FIN){
+				accion = FIN;
+				break;
+			};
+
 			++conteoDeCuadros;
 			
 			//Si el cuadro finalizó antes

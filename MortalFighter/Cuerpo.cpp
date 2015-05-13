@@ -106,7 +106,10 @@ void Cuerpo::recibeObservador(Personaje* unObservador)
 	observador = unObservador;
 }
 
-void Cuerpo::notificarObservadores(ESTADO nuevoEstado)
+int Cuerpo::notificarObservadores(ESTADO nuevoEstado)
 {
+	if (nuevoEstado.golpeado == FALLECIDO)
+		return REINICIAR;
 	observador->actualizar(posicion.x, posicion.y, nuevoEstado);
+		return CONTINUAR;
 }

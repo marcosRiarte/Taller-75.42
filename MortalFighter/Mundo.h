@@ -18,7 +18,7 @@ public:
 	Mundo();
 	Mundo(const vector2D& valorGravedad, Sprite* unSprite);
 	void agregarCuerpo(Cuerpo *unCuerpo);
-	void Paso(float difTiempo);
+	int Paso(float difTiempo);
 	ESTADO Resolver(float difTiempo, Cuerpo *unCuerpo);
 	float getYPiso() const;
 	void FrenarCuerpos();

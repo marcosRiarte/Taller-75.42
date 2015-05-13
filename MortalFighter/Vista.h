@@ -29,6 +29,8 @@ private:
 	int tiempoSecuenciaSpritesDos;
 	int tiempoSecuenciaSpritesUno;
 	SDL_Texture *texturaVerde;
+	SDL_Rect barraDeVida1;
+	SDL_Rect barraDeVida2;
 
 	std::string dirImgPersonaje;
 

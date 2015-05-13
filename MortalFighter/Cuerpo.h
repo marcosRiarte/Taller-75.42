@@ -182,7 +182,7 @@ public:
 	//observer extremadamente simplificado, mejorar
 	void recibeObservador(Personaje* unObservador);
 
-	void notificarObservadores(ESTADO nuevoEstado);
+	int notificarObservadores(ESTADO nuevoEstado);
 
 	void mover(float unaDistancia);
 	ESTADO getEstado();

@@ -12,7 +12,7 @@ enum Acciones
 };
 enum Golpeado
 {
-	NOGOLPEADO, GOLPEADO
+	NOGOLPEADO, GOLPEADO,FALLECIDO
 };
 
 struct ESTADO {
@@ -29,8 +29,8 @@ public:
 	float getAncho() const;
 	float getAlto() const;
 	int getZIndex() ;
-	int getEnergy();
-	void setEnergy(int);
+	int descontarVida(ESTADO estadoPj, ESTADO estadoPj2);
+	int getVida();
 	std::string getOrientacion() const;
 	std::string getSprite() const;
 	std::string getCaminarParaAdelante() const;
@@ -50,7 +50,7 @@ public:
 	ESTADO getEstado() const;
 	void setEstado(ESTADO nuevoEstado);
 	float getDeltaX() const;	
-	virtual void actualizar(float xNuevo, float yNuevo, ESTADO);	
+	virtual void actualizar(float xNuevo, float yNuevo, ESTADO estadoJugador);	
 	std::pair<float, float> Personaje::getPosicionUn()const;	
 
 	//SETTERS
@@ -79,7 +79,7 @@ private:
 	float ancho;
 	float alto;
 	int zIndex;
-	int energy;	
+	int vida;	
 	std::string orientacion;
 	std::string sprites;
 	std::string caminaradelante;
