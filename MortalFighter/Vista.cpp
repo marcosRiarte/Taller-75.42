@@ -183,6 +183,8 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 		int posXBarraDeVida2 = (Parser::getInstancia().getVentana().getAnchoPx() / 2) - anchoBarraDeVida - 10;
 		int posYBarraDeVida = 10;
 
+		anchoBarraDeVida1 = anchoBarraDeVida;
+		anchoBarraDeVida2 = anchoBarraDeVida;
 
 		//Carga de barras de vida
 		barraDeVida1 = { posXBarraDeVida1, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
@@ -359,8 +361,8 @@ void Vista::actualizar(){
 	int vidaPj1 = personajesVista.at(0)->getVida();
 	int vidaPj2 = personajesVista.at(1)->getVida();
 
-	int nuevoAnchoBarraDeVida1 = (vidaPj1 * barraDeVida1.w) / 100;
-	int nuevoAnchoBarraDeVida2 = (vidaPj2 * barraDeVida2.w) / 100;
+	int nuevoAnchoBarraDeVida1 = (vidaPj1 * anchoBarraDeVida1) / 100;
+	int nuevoAnchoBarraDeVida2 = (vidaPj2 * anchoBarraDeVida2) / 100;
 
 	barraDeVida1.w = nuevoAnchoBarraDeVida1;
 	barraDeVida2.w = nuevoAnchoBarraDeVida2;

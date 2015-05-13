@@ -272,7 +272,11 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			nuevoEstado.golpeado = GOLPEADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
-		}
+			if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado())) == REINICIAR)
+					nuevoEstado.golpeado = FALLECIDO;
+				
+			}
+		
 				
 		std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
 		std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
@@ -280,24 +284,19 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		std::pair<float, float> posAbsSensoresOtroCuerpo;
 		std::pair<float, float> posAbsSensoresCuerpo;
 
-		if (!(unCuerpo->getEstado().accion == GUARDIA) && !(unCuerpo->getEstado().accion == SIN_ACCION)){
+		if (!(unCuerpo->getEstado().accion == SIN_ACCION)){
 			for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
 				for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
-					if (elOtroCuerpo->getEstado().golpeado != GOLPEADO){
 						ManejadorULogicas manejadorUnidades;
 						posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), !invertido);
 						posAbsSensoresCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion(), unCuerpo, sensoresCuerpo->at(i)->getAncho(), invertido);
 						if (!(sensoresCuerpo->at(i)->getHitbox()) && (sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
 							ESTADO unEstado = elOtroCuerpo->getEstado();
 							unEstado.golpeado = GOLPEADO;
-							if ((elOtroCuerpo->getRefPersonaje()->descontarVida(elOtroCuerpo->getEstado(), unCuerpo->getEstado())) == REINICIAR){
-								unEstado.golpeado = FALLECIDO;
-								nuevoEstado.golpeado = FALLECIDO;
-							}
-								elOtroCuerpo->notificarObservadores(unEstado);
+							elOtroCuerpo->notificarObservadores(unEstado);
 							
 						}
-					}
+					
 				}
 				}
 		}

@@ -31,7 +31,9 @@ private:
 	SDL_Texture *texturaVerde;
 	SDL_Rect barraDeVida1;
 	SDL_Rect barraDeVida2;
-
+	int anchoBarraDeVida1;
+	int anchoBarraDeVida2;
+	
 	std::string dirImgPersonaje;
 
 	std::vector<Capa*> capasVista;
