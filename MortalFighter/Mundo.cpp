@@ -430,10 +430,9 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (estadoAnterior.golpeado != GOLPEADO)){
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			nuevoEstado.golpeado = GOLPEADO;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
 			if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado())) == REINICIAR)
 					nuevoEstado.golpeado = FALLECIDO;
-				
+			unCuerpo->setEstadoAnterior(nuevoEstado);
 			}
 		
 				
