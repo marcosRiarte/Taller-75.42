@@ -33,4 +33,8 @@ private:
 	float yPiso;
 	std::vector<Cuerpo*> Cuerpos;
 	bool hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int unAlto, std::pair<int, int> otraPos, int otroAncho, int otoAlto);
+	bool Mundo::DeterminarSuperposicionDeCuerpos();
+	void Mundo::ResolverColisiones(Cuerpo *unCuerpo);
+	void Mundo::ResolverSaltos(Cuerpo *unCuerpo);
+
 };

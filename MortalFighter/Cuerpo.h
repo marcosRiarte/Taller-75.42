@@ -14,6 +14,7 @@ struct defCuerpo
 		demora = 0;
 		estaFrenado = false;
 		estaGolpeado = false;
+		estaSuperpuesto = false;
 	}
 
 	std::string nombre;
@@ -21,6 +22,7 @@ struct defCuerpo
 	float masa;
 	bool estaFrenado;
 	bool estaGolpeado;
+	bool estaSuperpuesto;
 	int demora;
 };
 
@@ -96,6 +98,11 @@ public:
 		posicion = unaPosicion;
 	}
 
+	inline void Superponer()
+	{
+		estaSuperpuesto = true;
+	}
+
 	void sumarPosicion(const vector2D& unaPosicion);
 
 	inline const vector2D& getVelocidad() const
@@ -147,6 +154,9 @@ public:
 	// borde izquierdo se toma cero siempre
 	bool estaEnBorde();
 
+
+	
+
 	// Aplica un impulso lineal al cuerpo. Modifica inmediatamente la velocidad
 	// El impulso sería en unidades de N.s o Kg.m/s
 	inline void aplicarImpulso(vector2D& impulso)
@@ -175,9 +185,28 @@ public:
 		return estaFrenado;
 	}
 
+	inline bool EstaSuperpuesto()
+	{
+		return estaSuperpuesto;
+	}
 	//xjose .......................
 
-	
+	//pre recibe 2 cuerpos. si ambos estan en el piso, desplaza al cuerpo que estas tratando hacia la izquierda si es izquierdo
+	//ojo chequear que no este en borde por que sino no lo podes desplazar
+	//OJO LO HACE CON UN SOLO CUERPO por que este metodo es llamado luego con el otro cuerpo  va a hacer lo mismo
+	//al final chequear si se resolvio o no.
+	//si se resolvio setear estaSuperpuesto = false;
+	//TODO XJOSE
+	inline void ResolverSuperposicion()
+	{
+		//si ya se qe estoy frutenando
+		// if (Mundo::DeterminarSuperposicionDeCuerpos())
+		//resolve
+
+		//else 
+        // SI ESTA resuelta setear en falso
+		estaSuperpuesto = false;
+	}
 
 	//observer extremadamente simplificado, mejorar
 	void recibeObservador(Personaje* unObservador);
@@ -199,6 +228,7 @@ private:
 	Personaje* observador;
 	float yPiso;
 	bool estaFrenado;
+	bool estaSuperpuesto;
 	int demora;
 	ESTADO estadoAnterior;
 	Personaje* refPersonaje;

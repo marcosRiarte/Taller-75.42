@@ -87,6 +87,17 @@ bool Mundo::hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int un
 }
 
 
+//PRE: recibe la posicion de dos cuerpos del mundo y el espacio que estan ocupando (guarda por que no es un punto sino un rectangulo)
+// si los cuerpos estan en el piso solo cheqea eje x que no se esten invadiendo
+//si los cuerpoes no estan en el piso tiene que determinar si se van a intersectar en el eje x e y en realidad esta parte tiene que evitar que se toquen 
+//devuelve true si el perosnaje esta ocupando espacio del  otro personaje
+bool Mundo::DeterminarSuperposicionDeCuerpos(){
+
+	return true;
+}
+
+
+
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
 	ESTADO nuevoEstado;  //defino estado por defecto Si no es golpeado, si no vas a hacer nada y si no estas en el aire, devuelve esto
@@ -99,40 +110,46 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 
-
+	//la superposicion se da:
+	// al final de un salto , al final de la caida de un golpe
+	// o cuando estan los 2 en el aire saltando, en este caso deberia setearse velocidad.x ==0 para que no se toquen
 	//
-
-	//voy dejando partes del algoritmo, es modular para resolver los detalles finales en la implementacion puntual
-	/*
-
-	//la superposicion se da al final de un salto o al final de la caida de un golpe esto lo trato en otro lugar
-	
-	//superposicion es un bool superposicion   del cuerpo atributoooo
-	
-	if (superposicion) {
-	
-	// resolver superposicion tiene una logica de separacion de personajes que despues detallo 
-
-	resolver superposicion()
-	break;
-	
+	if (unCuerpo->EstaSuperpuesto()) {
+	    
+		// resolver superposicion tiene una logica de separacion de personajes que despues detallo 
+		unCuerpo->ResolverSuperposicion();
+		
 	}
-
-	else
-
-		determinar colisiones ()
-
-		si (hubo colision)
+	else{ // 
+		
+		/*
+		if (hayInterseccion())
 		{
-		// //esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada 
-		resolver colision ()  
+			// //esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada 
+			Mundo::ResolverColisiones(unCuerpo);
+
 		}
+		*/
+
 
 		//ahora hay que resolver la logica de altura
 		//el tipo puede estar saltando, pudo haber sido golpeado, pude estar superponiendose en el aire
-		// al llegar al piso 1 suspender accion de golpe
+		// al llegar al piso primero suspender accion de golpe por si esta con una patada boladora
 		// y chequear superposicion
-		resolverlogicadealtura()
+		//Mundo::ResolverSaltos(unCuerpo);
+		
+
+	
+	}
+
+	
+	/*
+
+	else
+
+		
+
+		
 
 
 
@@ -375,6 +392,8 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 		}
 
+
+	//	unCuerpo->setEstadoAnterior(nuevoEstado);
 		unCuerpo->SetSensorActivoStr(nuevoEstado);
 
 		vector2D unaVelocidad = unCuerpo->getVelocidad();
