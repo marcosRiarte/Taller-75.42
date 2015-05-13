@@ -242,7 +242,7 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 		return (tiempoArmaArrojable / (this->Arma->size()) / MSxCUADRO);
 	if (estadoDelPersonaje.accion == PATADA_ALTA)
 		return (tiempoPatadaAlta / (this->PatadaAlta->size()) / MSxCUADRO);
-	if (estadoDelPersonaje.accion == GOLPEADO){
+	if (estadoDelPersonaje.golpeado == GOLPEADO){
 		if (estadoDelPersonaje.movimiento == SALTO || estadoDelPersonaje.movimiento == SALTODIAGIZQ || estadoDelPersonaje.movimiento == SALTODIAGDER)
 			return (tiempoSaltoGolpeado / (this->SaltoGolpeado->size()) / MSxCUADRO);
 		return (tiempoGolpeado / (this->Golpeado->size()) / MSxCUADRO);

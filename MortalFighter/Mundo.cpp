@@ -434,7 +434,6 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 					nuevoEstado.golpeado = FALLECIDO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			}
-		
 				
 		std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
 		std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
@@ -452,9 +451,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 							ESTADO unEstado = elOtroCuerpo->getEstado();
 							unEstado.golpeado = GOLPEADO;
 							elOtroCuerpo->notificarObservadores(unEstado);
-							
 						}
-					
 				}
 				}
 		}

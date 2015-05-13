@@ -181,8 +181,8 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 		texturaBarraDeVida = SDL_CreateTextureFromSurface(renderer, superficieBarraDeVida);
 		
 
-		int anchoBarraDeVida = Parser::getInstancia().getVentana().getAnchoPx() / 3;
-		int altoBarraDeVida = 20;
+		int anchoBarraDeVida = Parser::getInstancia().getVentana().getAnchoPx() / 2.2;
+		int altoBarraDeVida = 30;
 
 		int posXBarraDeVida1 = (Parser::getInstancia().getVentana().getAnchoPx() / 2) - anchoBarraDeVida - 10;
 		int posXBarraDeVida2 = Parser::getInstancia().getVentana().getAnchoPx() / 2 + 10;
