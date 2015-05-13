@@ -64,6 +64,15 @@ void Cuerpo::DisminuirDemora()
 	demora--;
 }
 
+bool Cuerpo::HayDemora()
+{
+	if (GetDemora() == 0) return false;
+	
+	return true;
+
+}
+
+
 bool Cuerpo::estaEnBorde()
 {
 	if (posicion.x < Parser::getInstancia().getEscenario().getAncho())

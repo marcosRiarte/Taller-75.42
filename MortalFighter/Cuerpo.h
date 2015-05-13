@@ -149,6 +149,7 @@ public:
 	int GetDemora();
 	void Cuerpo::setDemora(int demoratiempo);
 	void Cuerpo::DisminuirDemora();
+	bool Cuerpo::HayDemora();
 
 	// Devuelve true si está en borde derecho o false en caso contrario
 	// borde izquierdo se toma cero siempre
@@ -189,7 +190,21 @@ public:
 	{
 		return estaSuperpuesto;
 	}
-	//xjose .......................
+	
+
+	//PRE: recibe la posicion de dos cuerpos del mundo y el espacio que estan ocupando (guarda por que no es un punto sino un rectangulo)
+	// si los cuerpos estan en el piso solo cheqea eje x que no se esten invadiendo
+	//si los cuerpoes no estan en el piso tiene que determinar si se van a intersectar en el eje x e y en realidad esta parte tiene que evitar que se toquen 
+	//devuelve true si el perosnaje esta ocupando espacio del  otro personaje
+	 bool DeterminarSuperposicionDeCuerpos(vector2D *PosicionOtroCuerpo){
+		
+		//comparar estas dos posiciones para ver si se estan tocando
+		//frutin abajo
+
+		//if (Cuerpo::getPosicion() == PosicionOtroCuerpo )
+			
+		return true;
+	}
 
 	//pre recibe 2 cuerpos. si ambos estan en el piso, desplaza al cuerpo que estas tratando hacia la izquierda si es izquierdo
 	//ojo chequear que no este en borde por que sino no lo podes desplazar
@@ -197,15 +212,22 @@ public:
 	//al final chequear si se resolvio o no.
 	//si se resolvio setear estaSuperpuesto = false;
 	//TODO XJOSE
-	inline void ResolverSuperposicion()
+	inline void ResolverSuperposicion(vector2D *PosicionOtroCuerpo)
 	{
-		//si ya se qe estoy frutenando
-		// if (Mundo::DeterminarSuperposicionDeCuerpos())
-		//resolve
+		
 
-		//else 
-        // SI ESTA resuelta setear en falso
-		estaSuperpuesto = false;
+		if (DeterminarSuperposicionDeCuerpos(PosicionOtroCuerpo))
+		{
+			//resolve
+		}
+		
+
+		else // SI ESTA resuelta setear en falso
+		{
+			estaSuperpuesto = false;
+		}
+        
+		
 	}
 
 	//observer extremadamente simplificado, mejorar
