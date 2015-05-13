@@ -91,6 +91,9 @@ bool Mundo::hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int un
 
 // //esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada 
 ESTADO Mundo::ResolverColisiones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEstado){
+	//si llego aca es por que hay una colision.
+	// 4 cconsideraciones, me golpearon??,  con que fue?, que estado tengo? por que en base a eso determino que golpeado soy
+	// estoy en modo defensa???
 
 
 	return nuevoEstado;
@@ -98,6 +101,8 @@ ESTADO Mundo::ResolverColisiones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevo
 }
 
 //logica de saltos
+//el tipo en el aire -----> mantenerle el estado de salto, sacarle velocidad si se esta por chocar y la logica de bordes
+//el tipo tocando piso recien -->chequear superposicion
 ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEstado){
 
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
@@ -123,6 +128,9 @@ ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEsta
 			nuevoEstado.movimiento = SALTODIAGDER;
 		else
 			nuevoEstado.movimiento = SALTODIAGIZQ;
+		
+		//Si estafrenado, osea si esta en un borde la velocidad en x deberia ser 0
+		//igual a esto le falta vuelta de tuerca, al tipo sele debe impedir trasladarse hacia fuera de la ventana no hacia el medio
 		unCuerpo->sumarVelocidad(gravedad * difTiempo);
 		if (unCuerpo->EstaFrenado()){
 			unCuerpo->SetVelocidadX(0.0f);
@@ -149,9 +157,29 @@ ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEsta
 }
 
 //logica de acciones
+//esta es la mas larga, pero es un case... quizas haya que modularizar con pequeños metodos... sino va a quedar un mundo
+//RECORDA QUE ACA SOLO ENTRAS SI NO HAY DEMORA APLICADA, OSEA SI NO ESTAS HACIENDO ALGO VOS O SI NO ESTAS GOLPEADO
 ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEstado)
 {
+	/*
+	IF CAMINAR , evaluar no irse de ventana y escenario. no podes invadir al personaje, si te chocas y no tiene defensa lo arrastras, si tiene defensa lo arrastras menos
+	            , si estas en modo defensa no te podes mover.
+	IF SALTAR , evaluar si estas frenado, osea en borde, tu velocidad en x tiene que ser 0
 
+	IF GOLPES , evaluar que golpe es y en que lugar estas. quieto, agachado, salto vertical, saltodiagonal
+
+	IF DEFENSA, si no estas en piso no se puede aplicar, si estas en piso y no agachado es defensaquieto sino agachado defensa. evaluar contra estado anterior
+	            y ordenes nuevas
+
+	IF AGACHADO para agacharse tenes que estar en piso
+	
+	
+	
+	
+	
+	
+	
+	*/
 
 
 
@@ -171,7 +199,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 
 	//la superposicion se da:
-	// al final de un salto , al final de la caida de un golpe
+	// al final de un salto , al final de la caida de un golpe y la activa el metodo resolver saltos
 	// o cuando estan los 2 en el aire saltando, en este caso deberia setearse velocidad.x ==0 para que no se toquen
 	//
 	if (unCuerpo->EstaSuperpuesto()) {
@@ -230,10 +258,10 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			//	unCuerpo->setEstadoAnterior(nuevoEstado); //asigno estado actual como anterior para la proxima
 
 			
-		}
+		}// en esta parte finalizario el resolver
 
 	
-
+	
 
 	/*
 	
@@ -280,15 +308,15 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	
 	//caso en piso no frenado
 	
+	//esto hace que no pueda saltar en el aire
+	if (estadoAnterior.movimiento == SALTO || estadoAnterior.movimiento == SALTODIAGDER || estadoAnterior.movimiento == SALTODIAGIZQ)
+	{
+		unCuerpo->setEstadoAnterior(nuevoEstado);
+		//aca frutie dividiendo por 20 por que necesitaba una demora chiquitita
+		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()) / 15);
+	}
 
-		//esto hace que no pueda saltar en el aire
-		if (estadoAnterior.movimiento == SALTO || estadoAnterior.movimiento == SALTODIAGDER || estadoAnterior.movimiento == SALTODIAGIZQ)
-		{
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-			//aca frutie dividiendo por 20 por que necesitaba una demora chiquitita
-			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()) / 15);
-		}
-
+		
 
 		//Se setea de que cuerpo se esta tratando.
 		Cuerpo* elOtroCuerpo;
