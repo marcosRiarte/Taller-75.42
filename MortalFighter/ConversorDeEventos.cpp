@@ -312,9 +312,7 @@ ConversorDeEventos::CodigosDeEvento ConversorDeEventos::getCodigosDeEventoDeTecl
 	}
 
 	//JOYSTICK 1
-	if (SDL_NumJoysticks() > 0){
-		codigosDeEvento.joystick = 0;
-	}
+	codigosDeEvento.joystick = 0;
 
 	if (tecla == "j1_0" || tecla == "J1_0" || tecla == "j1_Button_0" || tecla == "J1_Button_0" || tecla == "j1_button_0" || tecla == "J1_button_0" || tecla == "J1_BUTTON_0" || tecla == "j1_Boton_0" || tecla == "J1_Boton_0" || tecla == "j1_boton_0" || tecla == "J1_boton_0" || tecla == "J1_BOTON_0"){
 		codigosDeEvento.jBoton = 0;
@@ -414,9 +412,8 @@ ConversorDeEventos::CodigosDeEvento ConversorDeEventos::getCodigosDeEventoDeTecl
 	}
 
 	//JOYSTICK 2
-	if (SDL_NumJoysticks() > 1){
-		codigosDeEvento.joystick = 1;
-	}
+
+	codigosDeEvento.joystick = 1;
 
 	if (tecla == "j2_0" || tecla == "J2_0" || tecla == "j2_Button_0" || tecla == "J2_Button_0" || tecla == "j2_button_0" || tecla == "J2_button_0" || tecla == "J2_BUTTON_0" || tecla == "j2_Boton_0" || tecla == "J2_Boton_0" || tecla == "j2_boton_0" || tecla == "J2_boton_0" || tecla == "J2_BOTON_0"){
 		codigosDeEvento.jBoton = 0;
