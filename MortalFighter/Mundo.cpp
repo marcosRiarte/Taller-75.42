@@ -129,7 +129,13 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		}
 
 		//ahora hay que resolver la logica de altura
+		//el tipo puede estar saltando, pudo haber sido golpeado, pude estar superponiendose en el aire
+		// al llegar al piso 1 suspender accion de golpe
+		// y chequear superposicion
 		resolverlogicadealtura()
+
+
+
 
 		//casos, demora por un accion que estas llevando a cabo o demora por que estas golpeado o te acaban de golpear
 		Si hay (demora){
