@@ -1,5 +1,18 @@
 esto tiene que estar en cuerpo
 	//PRE: recibe la posicion de dos cuerpos del mundo y el espacio que estan ocupando (guarda por que no es un punto sino un rectangulo)
+	// si los cuerpos estan en el piso solo cheqea eje x
+	//si los cuerpoes no estan en el piso tiene que determinar si se van a intersectar en el eje x e y
 	//devuelve true si el perosnaje esta ocupando espacio del  otro personaje
-	bool estaSuperpuesto();
+	determinarsuperposuciondepersonajes()
+	
+	bool estaSuperpuesto();return superpuesto
 
+	
+
+
+	//pre recibe 2 personajes. si ambos estan en el piso, desplaza al cuerpo que estas tratando hacia la izquierda si es izquierdo
+	//ojo chequear que no este en borde por que sino no lo podes desplazar
+	//con el otro personaje va a hacer lo mismo
+	//al final chequear si se resolvio o no.
+	//si se resolvio setear cuerpo.suerperpuesto=false
+	resolversuperposicion()

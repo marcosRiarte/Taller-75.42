@@ -89,32 +89,71 @@ bool Mundo::hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int un
 
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
-	ESTADO nuevoEstado; 
+	ESTADO nuevoEstado;  //defino estado por defecto Si no es golpeado, si no vas a hacer nada y si no estas en el aire, devuelve esto
 	nuevoEstado.movimiento = PARADO;
 	nuevoEstado.accion = SIN_ACCION;
 	nuevoEstado.golpeado = NOGOLPEADO;
 
 	std::vector<MOV_TIPO> movimientos = unCuerpo->getControlador()->getMovimientos();
-	bool invertido;
+	bool invertido; // esto no se que es
 	
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
+
+
+	//
 
 	//voy dejando partes del algoritmo, es modular para resolver los detalles finales en la implementacion puntual
 	/*
 
 	//la superposicion se da al final de un salto o al final de la caida de un golpe esto lo trato en otro lugar
-	// resolver superposicion tiene una logica de separacion de personajes que despues detallo
+	
 	//superposicion es un bool superposicion   del cuerpo atributoooo
-	if (superposicion) resolver superposicion()
+	
+	if (superposicion) {
+	
+	// resolver superposicion tiene una logica de separacion de personajes que despues detallo 
+
+	resolver superposicion()
+	break;
+	
+	}
 
 	else
 
-	determinar colisiones ()
+		determinar colisiones ()
 
-	si (hubo colision)
-	resolver colision   //esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada o no golpeado veremos
+		si (hubo colision)
+		{
+		// //esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada 
+		resolver colision ()  
+		}
+
+		//ahora hay que resolver la logica de altura
+		//el tipo puede estar saltando, pudo haber sido golpeado, pude estar superponiendose en el aire
+		// al llegar al piso 1 suspender accion de golpe
+		// y chequear superposicion
+		resolverlogicadealtura()
 
 
+
+
+		//casos, demora por un accion que estas llevando a cabo o demora por que estas golpeado o te acaban de golpear
+		Si hay (demora){
+		    //esta logica esta mal tiene que ser inversa pero no se me ocurre, por ahora dejarlo asi despues se pule
+		   si (estadoactual.golpeado==golpeado y !estadoanterior.golpeado==golpeado ) no hacer nada // este caso es recien me golpearon en este if asi que no disminuyo demora
+
+			else //viene con golpe anterior o accion anterior
+			   disminuir demora
+	
+		}
+
+		else {// si llega aca, no esta golpeado y no esta haciendo nada (y voy a evaluar si ahora si va a hacer algo)
+		    resolver acciones
+			}
+
+		}// listo todo terminado
+
+	estadoanterior =estadoactual //asigno estado actual como anterior para la proxima
 
 	*/
 
@@ -295,7 +334,11 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			nuevoEstado.golpeado = GOLPEADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
-		}
+			if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado())) == REINICIAR)
+					nuevoEstado.golpeado = FALLECIDO;
+				
+			}
+		
 				
 		std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
 		std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
@@ -303,24 +346,19 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		std::pair<float, float> posAbsSensoresOtroCuerpo;
 		std::pair<float, float> posAbsSensoresCuerpo;
 
-		if (!(unCuerpo->getEstado().accion == GUARDIA) && !(unCuerpo->getEstado().accion == SIN_ACCION)){
+		if (!(unCuerpo->getEstado().accion == SIN_ACCION)){
 			for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
 				for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
-					if (elOtroCuerpo->getEstado().golpeado != GOLPEADO){
 						ManejadorULogicas manejadorUnidades;
 						posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), !invertido);
 						posAbsSensoresCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion(), unCuerpo, sensoresCuerpo->at(i)->getAncho(), invertido);
 						if (!(sensoresCuerpo->at(i)->getHitbox()) && (sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
 							ESTADO unEstado = elOtroCuerpo->getEstado();
 							unEstado.golpeado = GOLPEADO;
-							if ((elOtroCuerpo->getRefPersonaje()->descontarVida(elOtroCuerpo->getEstado(), unCuerpo->getEstado())) == REINICIAR){
-								unEstado.golpeado = FALLECIDO;
-								nuevoEstado.golpeado = FALLECIDO;
-							}
-								elOtroCuerpo->notificarObservadores(unEstado);
+							elOtroCuerpo->notificarObservadores(unEstado);
 							
 						}
-					}
+					
 				}
 				}
 		}
