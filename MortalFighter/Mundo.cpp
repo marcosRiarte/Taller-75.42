@@ -241,11 +241,16 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			{
 				//esta logica esta mal tiene que ser inversa pero no se me ocurre, por ahora dejarlo asi despues se pule
 					
-				if ((nuevoEstado.golpeado == GOLPEADO) & (estadoAnterior.golpeado != 0)); // este caso es recien me golpearon en este if asi que no disminuyo demora
+				if ((nuevoEstado.golpeado == GOLPEADO) & (estadoAnterior.golpeado != GOLPEADO)); // este caso es recien me golpearon en este if asi que no disminuyo demora
 
 				else // aca entran todos los casos demorados que no sean recien golpeado
 				{
 					unCuerpo->DisminuirDemora();
+				//	nuevoEstado = unCuerpo->getEstadoAnterior();
+
+					
+						
+					
 				}
 				
 			}

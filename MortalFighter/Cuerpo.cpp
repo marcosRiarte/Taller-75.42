@@ -61,12 +61,12 @@ void Cuerpo::setDemora(int demoratiempo)
 
 void Cuerpo::DisminuirDemora()
 {
-	demora--;
+	 if (demora>0) 	demora--;
 }
 
 bool Cuerpo::HayDemora()
 {
-	if (GetDemora() == 0) return false;
+	if (GetDemora() > 0) return false;
 	
 	return true;
 
