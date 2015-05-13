@@ -89,32 +89,65 @@ bool Mundo::hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int un
 
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
-	ESTADO nuevoEstado; 
+	ESTADO nuevoEstado;  //defino estado por defecto Si no es golpeado, si no vas a hacer nada y si no estas en el aire, devuelve esto
 	nuevoEstado.movimiento = PARADO;
 	nuevoEstado.accion = SIN_ACCION;
 	nuevoEstado.golpeado = NOGOLPEADO;
 
 	std::vector<MOV_TIPO> movimientos = unCuerpo->getControlador()->getMovimientos();
-	bool invertido;
+	bool invertido; // esto no se que es
 	
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
+
+
+	//
 
 	//voy dejando partes del algoritmo, es modular para resolver los detalles finales en la implementacion puntual
 	/*
 
 	//la superposicion se da al final de un salto o al final de la caida de un golpe esto lo trato en otro lugar
-	// resolver superposicion tiene una logica de separacion de personajes que despues detallo
+	
 	//superposicion es un bool superposicion   del cuerpo atributoooo
-	if (superposicion) resolver superposicion()
+	
+	if (superposicion) {
+	
+	// resolver superposicion tiene una logica de separacion de personajes que despues detallo 
+
+	resolver superposicion()
+	break;
+	
+	}
 
 	else
 
-	determinar colisiones ()
+		determinar colisiones ()
 
-	si (hubo colision)
-	resolver colision   //esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada o no golpeado veremos
+		si (hubo colision)
+		{
+		// //esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada 
+		resolver colision ()  
+		}
 
+		//ahora hay que resolver la logica de altura
+		resolverlogicadealtura()
 
+		//casos, demora por un accion que estas llevando a cabo o demora por que estas golpeado o te acaban de golpear
+		Si hay (demora){
+		    //esta logica esta mal tiene que ser inversa pero no se me ocurre, por ahora dejarlo asi despues se pule
+		   si (estadoactual.golpeado==golpeado y !estadoanterior.golpeado==golpeado ) no hacer nada // este caso es recien me golpearon en este if asi que no disminuyo demora
+
+			else //viene con golpe anterior o accion anterior
+			   disminuir demora
+	
+		}
+
+		else {// si llega aca, no esta golpeado y no esta haciendo nada (y voy a evaluar si ahora si va a hacer algo)
+		    resolver acciones
+			}
+
+		}// listo todo terminado
+
+	estadoanterior =estadoactual //asigno estado actual como anterior para la proxima
 
 	*/
 
