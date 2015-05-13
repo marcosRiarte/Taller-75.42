@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ValidadorDelColor.h"
-
+#include "ControlDeColor.h"
 
 ValidadorDelColor::ValidadorDelColor()
 {
@@ -10,13 +10,14 @@ void ValidadorDelColor::validarColorDesde(Json::Value color_alternativo){
 	int h_inicial = H_INICIAL;
 	int h_final = H_FINAL;
 	int desplazamiento = DESPLAZAMIENTO;
+	ControlDeColor control = ControlDeColor();
 
 	if (!color_alternativo)
 	{
 		Log::getInstancia().logearMensajeEnModo("[BAD] Fallo el parseo del color", Log::MODO_WARNING);
 		Log::getInstancia().logearMensajeEnModo("se toman valores por defecto para el color", Log::MODO_WARNING);
 	}
-	
+
 	else{
 		if (color_alternativo.isMember("h_inicial") && color_alternativo.get("h_inicial", H_INICIAL).isNumeric() && color_alternativo.get("h_inicial", H_INICIAL) < INT_MAX && color_alternativo.get("h_inicial", H_INICIAL) > -INT_MAX)
 			h_inicial = color_alternativo.get("h_inicial", H_INICIAL).asInt();
@@ -33,10 +34,42 @@ void ValidadorDelColor::validarColorDesde(Json::Value color_alternativo){
 		else {
 			Log::getInstancia().logearMensajeEnModo("Se carga desplazamiento por defecto", Log::MODO_WARNING);
 		}
+		//Repara la h_inicial ,h_final y el desplazamiento de entrada si estos superan 360
+		if (h_inicial > 360)
+		{
+			h_inicial = control.reductorDeVueltas(h_inicial);
+			Log::getInstancia().logearMensajeEnModo("HUE Inicial MAYOR A 360 ,se corrije ", Log::MODO_WARNING);
+		}
+		if (h_final > 360)
+		{
+			h_final = control.reductorDeVueltas(h_final);
+			Log::getInstancia().logearMensajeEnModo("HUE Final MAYOR A 360 ,se corrije ", Log::MODO_WARNING);
+		}
+
+		if (desplazamiento > 360)
+		{
+			desplazamiento = control.reductorDeVueltas(desplazamiento);
+			Log::getInstancia().logearMensajeEnModo("DESPLAZAMIENTO MAYOR A 360 ,se corrije ", Log::MODO_WARNING);
+		}
+
+		//Si el dato de entrada tiene un valor negativo , toma el angulo en el sentido opuesto.
+
+		if (h_inicial < 0)
+		{
+			h_inicial = 360 + (h_inicial);
+			std::string mensaje = "H inicial negativo, se corrige 360 + el valor";
+			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+		}
+		if (h_final < 0)
+		{
+			h_final = 360 + (h_final);
+			std::string mensaje = "H final negativo, se corrige 360 + el valor";
+			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+		}
 
 		if (h_final < h_inicial)
 		{
-			std::string mensaje = "Hue final mayor que el inicial, se toma el modulo del intervalo";
+			std::string mensaje = "Hue final menor que el inicial, se toma el modulo del intervalo";
 			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 			int aux = h_final;
 			h_final = h_inicial;

@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "ControlDeColor.h"
 #include <Math.h>
-
+ControlDeColor::ControlDeColor()
+{
+}
 ControlDeColor::ControlDeColor(SDL_Surface* superficie)
 {
 	this->superficie = superficie;

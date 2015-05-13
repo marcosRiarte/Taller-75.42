@@ -4,6 +4,7 @@ enum colores { R, G, B };
 class ControlDeColor
 {
 public:
+	ControlDeColor();
 	ControlDeColor(SDL_Surface*);
 	SDL_Surface * getSuperficie();
 	double reductorDeVueltas(double h);
