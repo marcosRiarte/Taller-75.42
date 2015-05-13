@@ -33,8 +33,8 @@
     ],
     "personajes": [
         {
-            "ancho": 40,
-            "alto": 73,
+            "ancho": 80,
+            "alto": 90,
             "zindex": 1,
             "orientacion": "DER",
             "sprites": "ima/sprites/ScorpionMK3U.png",
@@ -47,8 +47,8 @@
             "nombre": "LiuKang"
         },
         {
-            "ancho": 40,
-            "alto": 73,
+            "ancho": 80,
+            "alto": 90,
             "zindex": 1,
             "orientacion": "DER",
             "sprites": "ima/sprites/ScorpionMK3U.png",
