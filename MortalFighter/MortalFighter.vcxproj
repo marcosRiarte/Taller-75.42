@@ -160,6 +160,7 @@
     <ClCompile Include="Vista.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\bak\MortalFighter\ima\sprites\LiuKangMK3U.json" />
     <None Include="ima\sprites\KenSF.json" />
     <None Include="ima\sprites\player1.json" />
     <None Include="ima\sprites\ScorpionMK3U.json" />
@@ -184,6 +185,7 @@
     <Library Include="lib\SDL2_image.lib" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\bak\MortalFighter\ima\sprites\LiuKangMK3U.png" />
     <Image Include="ima\bkg\barraDeVida.png" />
     <Image Include="ima\bkg\default_bkg.png" />
     <Image Include="ima\bkg\default_capa.png" />

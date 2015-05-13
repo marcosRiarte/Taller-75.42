@@ -291,6 +291,9 @@
     <None Include="libpng16-16.dll" />
     <None Include="SDL2_ttf.dll" />
     <None Include="zlib1.dll" />
+    <None Include="..\..\bak\MortalFighter\ima\sprites\LiuKangMK3U.json">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\SDL2_image.lib">
@@ -396,6 +399,9 @@
     </Image>
     <Image Include="ima\bkg\barraDeVida.png">
       <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="..\..\bak\MortalFighter\ima\sprites\LiuKangMK3U.png">
+      <Filter>Resource Files\ima\sprites</Filter>
     </Image>
   </ItemGroup>
 </Project>
