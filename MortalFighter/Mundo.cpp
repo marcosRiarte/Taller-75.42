@@ -103,7 +103,7 @@ ESTADO Mundo::ResolverColisiones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevo
 //logica de saltos
 //el tipo en el aire -----> mantenerle el estado de salto, sacarle velocidad si se esta por chocar y la logica de bordes
 //el tipo tocando piso recien -->chequear superposicion
-ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEstado){
+ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, ESTADO nuevoEstado,bool invertido){
 
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 	
@@ -113,7 +113,10 @@ ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEsta
 	if (!unCuerpo->estaEnPiso()){
 		//IMPLEMENTAR determinarsuperposicionenelaire osea si che chocan en el aire
 		// si se estan por superponer setvelocidad.x=0
-		
+		if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido)){
+			if ((unCuerpo->getEstado().accion == SIN_ACCION) && (elOtroCuerpo->getEstado().accion != SIN_ACCION) && (elOtroCuerpo->getEstado().accion != GUARDIA))
+				ResolverGolpiza(elOtroCuerpo, unCuerpo, invertido);
+		}
 		
 		//la velocidad puede ser 0 en 2 casos. si el tipo tiene un salto vertical o si estan por chocarse y se les anulo la velocidad en x
 		if ((unCuerpo->getVelocidad().x == 0) & (nuevoEstado.movimiento==estadoAnterior.movimiento))
@@ -188,15 +191,71 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEs
 	return nuevoEstado;
 }
 
+bool Mundo::haySuperposicion(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido){
+	std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
+	std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
+
+	std::pair<float, float> posAbsSensoresOtroCuerpo;
+	std::pair<float, float> posAbsSensoresCuerpo;
+	for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
+		for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
+			ManejadorULogicas manejadorUnidades;
+			posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), !invertido);
+			posAbsSensoresCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion(), unCuerpo, sensoresCuerpo->at(i)->getAncho(), invertido);
+			if (hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+void Mundo::ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido){
+	std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
+	std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
+
+	std::pair<float, float> posAbsSensoresOtroCuerpo;
+	std::pair<float, float> posAbsSensoresCuerpo;
+
+	if (!(unCuerpo->getEstado().accion == SIN_ACCION)){
+		for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
+			for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
+				ManejadorULogicas manejadorUnidades;
+				posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), !invertido);
+				posAbsSensoresCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion(), unCuerpo, sensoresCuerpo->at(i)->getAncho(), invertido);
+				if (!(sensoresCuerpo->at(i)->getHitbox()) && (sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
+					ESTADO unEstado = elOtroCuerpo->getEstado();
+					unEstado.golpeado = GOLPEADO;
+					elOtroCuerpo->notificarObservadores(unEstado);
+				}
+			}
+		}
+	}
+}
+
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
 	ESTADO nuevoEstado;  //defino estado por defecto Si no es golpeado, si no vas a hacer nada y si no estas en el aire, devuelve esto
 	nuevoEstado.movimiento = PARADO;
 	nuevoEstado.accion = SIN_ACCION;
 	nuevoEstado.golpeado = NOGOLPEADO;
+	//Se setea de que cuerpo se esta tratando.
+	Cuerpo* elOtroCuerpo;
+	if (unCuerpo == Cuerpos.at(0)){
+		elOtroCuerpo = Cuerpos.at(1);
+	}
+	else{
+		elOtroCuerpo = Cuerpos.at(0);
+	}
+
+	bool invertido; 
+	if (elOtroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
+		invertido = false;
+	else
+		invertido = true;
 
 	std::vector<MOV_TIPO> movimientos = unCuerpo->getControlador()->getMovimientos();
-	bool invertido; // esto no se que es
+	
 	
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 
@@ -228,7 +287,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			//tanto golpeado como golpeando no nos importa por que analizamos en principio la parte de .movimiento
 			// al llegar al piso primero suspender accion de golpe por si esta con una patada boladora
 			// y chequear superposicion
-		nuevoEstado = Mundo::ResolverSaltos( difTiempo, unCuerpo, nuevoEstado);
+		nuevoEstado = Mundo::ResolverSaltos( difTiempo, unCuerpo, elOtroCuerpo, nuevoEstado, invertido);
 		
 			//AHORA HAY QUE ANALIZAR SI HAY DEMORA, LA DEMORA PUEDE SER POR UN UN ESTADO ANTERIOR O POR QUE SE APLICO EN EL ESTADO ACTUAL UN GOLPEADO
 		    //casos:
@@ -322,21 +381,6 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	}
 
 		
-
-		//Se setea de que cuerpo se esta tratando.
-		Cuerpo* elOtroCuerpo;
-		if (unCuerpo == Cuerpos.at(0)){
-			elOtroCuerpo = Cuerpos.at(1);
-		}
-		else{
-			elOtroCuerpo = Cuerpos.at(0);
-		}
-
-		if (elOtroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
-			invertido = false;
-		else
-			invertido = true;
-
 		if ((movimientos.at(0) == DER) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado.movimiento = CAMINARDER;
 			if (!(invertido))
@@ -353,7 +397,6 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			else
 				unCuerpo->mover(-DISTANCIA);
 		}
-
 
 		if ((movimientos.at(0) == ARRIBA) && (unCuerpo->GetDemora() == 0)){
 			nuevoEstado.movimiento = SALTO;
@@ -434,27 +477,6 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			}
 				
-		std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
-		std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
-
-		std::pair<float, float> posAbsSensoresOtroCuerpo;
-		std::pair<float, float> posAbsSensoresCuerpo;
-
-		if (!(unCuerpo->getEstado().accion == SIN_ACCION)){
-			for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
-				for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
-						ManejadorULogicas manejadorUnidades;
-						posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), !invertido);
-						posAbsSensoresCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion(), unCuerpo, sensoresCuerpo->at(i)->getAncho(), invertido);
-						if (!(sensoresCuerpo->at(i)->getHitbox()) && (sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
-							ESTADO unEstado = elOtroCuerpo->getEstado();
-							unEstado.golpeado = GOLPEADO;
-							elOtroCuerpo->notificarObservadores(unEstado);
-						}
-				}
-				}
-		}
-
 		if (unCuerpo->GetDemora() > 0) {
 			unCuerpo->DisminuirDemora();
 			nuevoEstado = unCuerpo->getEstadoAnterior();
@@ -465,10 +487,8 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
 
-		
+		ResolverGolpiza(unCuerpo, elOtroCuerpo, invertido);
 
-
-	
 		unCuerpo->SetSensorActivoStr(nuevoEstado);
 
 		vector2D unaVelocidad = unCuerpo->getVelocidad();

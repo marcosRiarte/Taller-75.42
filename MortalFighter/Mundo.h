@@ -33,9 +33,12 @@ private:
 	float yPiso;
 	std::vector<Cuerpo*> Cuerpos;
 	bool hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int unAlto, std::pair<int, int> otraPos, int otroAncho, int otoAlto);
-	
-	ESTADO Mundo::ResolverColisiones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEstado);
-	ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEstado);
-	ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEstado);
+	bool haySuperposicion(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido);
+
+	void ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido);
+
+	ESTADO ResolverColisiones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEstado);
+	ESTADO ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, ESTADO nuevoEstado, bool invertido);
+	ESTADO ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEstado);
 
 };
