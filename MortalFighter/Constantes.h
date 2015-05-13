@@ -4,7 +4,6 @@
 #define FIN   		2
 
 #define MODO_DEBUG_SDL false
-
 //JSON
 #define PRUEBA_JSON "prueba.json"
 #define PRUEBA_JSON_DEFECTO "pruebaDefecto.json"
