@@ -117,8 +117,8 @@ std::vector<int> ControlDeColor::HSVtoRGB(double H, double S, double V)
 {
 
 	std::vector<int> nuevoColor;
-	int R, G, B, A;
-
+	int R=0, G=0, B=0, A=0;
+	
 	if (H > 360){
 		std::cout << "Fallo la conversion de RGBA a HSV";
 	}
@@ -126,6 +126,7 @@ std::vector<int> ControlDeColor::HSVtoRGB(double H, double S, double V)
 	{
 		std::cout << "Fallo la conversion de la H";
 	}
+	
 	double Hi = H / 60;
 	double dos = 2;
 	double c = V * S;
@@ -133,39 +134,42 @@ std::vector<int> ControlDeColor::HSVtoRGB(double H, double S, double V)
 	double X = c * (1 - (abs(f)));  //Ver sie abs es el modulo
 	double m = V - c;
 
+	
+	
 	//Si es RGBA
 	if ((Hi >= 0) && (Hi < 1))     //Remplazar por un case
 	{
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
 		{
 			A = (int)*(this->alpha);  //A
-			R = c + m;                //R
-			G = X + m;          //G
-			B = m;                  //B
+			R = (int)(c + m);                //R
+			G = (int)(X + m);          //G
+			B = (int)m;                  //B
 		}
 		else{
 
-			B = m;                      //B
-			G = (int)X + m;             //G 
-			R = (int)c + m;             //R
+			B = (int)m;                      //B
+			G = (int)(X + m);             //G 
+			R = (int)(c + m);             //R
 			A = (int)*(this->alpha); //A
 		}
 	}
+	
 	if ((Hi >= 1) && (Hi < 2))
 	{
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
 		{
 
 			A = (int)*(this->alpha);     //A
-			R = (int)X + m;              //R
-			G = (int)c + m;             //G
-			B = m;                     //B
+			R = (int)(X + m);              //R
+			G = (int)(c + m);             //G
+			B = (int)m;                     //B
 		}
-		else
+	     else
 		{
-			B = m;                  //B
-			G = (int)c + m;         //G
-			R = (int)X + m;         //R
+			B =(int) m;                  //B
+			G = (int)(c + m);         //G
+			R = (int)(X + m);         //R
 			A = (int)*(this->alpha); //A
 		}
 	}
@@ -175,15 +179,15 @@ std::vector<int> ControlDeColor::HSVtoRGB(double H, double S, double V)
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
 		{
 			A = (int)*(this->alpha); //A
-			R = m;             //R
-			G = c + m;             //G
-			B = (int)X + m;        //B
+			R = (int)m;             //R
+			G = (int)(c + m);             //G
+			B = (int)(X + m);        //B
 		}
 		else
 		{
-			B = (int)X + m;       //B
-			G = (int)c + m;        //G        
-			R = m;              //R     
+			B = (int)(X + m);       //B
+			G = (int)(c + m);        //G        
+			R = (int)m;              //R     
 			A = (int)*(this->alpha); //A          
 		}
 	}
@@ -193,15 +197,15 @@ std::vector<int> ControlDeColor::HSVtoRGB(double H, double S, double V)
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
 		{
 			A = (int)*(this->alpha);
-			R = m;
-			G = (int)X + m;
-			B = (int)c + m;
+			R =(int) m;
+			G = (int)(X + m);
+			B = (int)(c + m);
 		}
 		else
 		{
-			B = (int)c + m;
-			G = (int)X + m;
-			R = m;
+			B = (int)(c + m);
+			G = (int)(X + m);
+			R =(int) m;
 			A = (int)*(this->alpha);
 		}
 	}
@@ -209,17 +213,17 @@ std::vector<int> ControlDeColor::HSVtoRGB(double H, double S, double V)
 	if ((Hi >= 4) && (Hi < 5))
 	{
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
-		{
+	       {
 			A = (int)*(this->alpha);
-			R = (int)X + m;
-			G = m;
-			B = (int)c + m;
+			R = (int)(X + m);
+			G = (int)m;
+			B = (int)(c + m);
 		}
 		else
 		{
-			B = (int)c + m;
-			G = m;
-			R = (int)X + m;
+			B = (int)(c + m);
+			G =(int) m;
+			R = (int)(X + m);
 			A = (int)*(this->alpha);
 		}
 	}
@@ -229,15 +233,15 @@ std::vector<int> ControlDeColor::HSVtoRGB(double H, double S, double V)
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
 		{
 			A = (int)*(this->alpha);
-			R = (int)c + m;
-			G = m;
-			B = (int)X + m;
+			R = (int)(c + m);
+			G = (int)m;
+			B = (int)(X + m);
 		}
 		else
 		{
-			B = (int)X + m;
-			G = m;
-			R = (int)c + m;
+			B = (int)(X + m);
+			G = (int)m;
+			R = (int)(c + m);
 			A = (int)*(this->alpha);
 		}
 	}
@@ -277,7 +281,7 @@ double ControlDeColor::RGBtoHSV(int h_inicio, int h_final, int desplazamiento, S
 	//Si la diferencia c es 0 entonces H no esta definido
 	if (c == 0)
 	{
-		H = 0;
+		H = -1;
 	}
 	else{
 		double resta = green - blue;

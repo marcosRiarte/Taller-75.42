@@ -127,6 +127,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 					//Si el hue esta en el rango a cambiar
 					if (hue != -1)
 					{
+						
 						//Convertimos los nuevos valores HSV a RGB(devuelve un vector con cada color)
 						std::vector<int> nuevosRGB = color.HSVtoRGB(hue, saturation, value);
 						//Construye el Uint 32 con el nuevo color r g b
@@ -137,7 +138,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 						//SDL_SetColorKey(SuperficieDos, SDL_TRUE, SDL_MapRGB(SuperficieDos->format, nuevosRGB.at(0), nuevosRGB.at(1), nuevosRGB.at(2)));
 
 						//SDL_SetColorKey(color.getSuperficie(), SDL_TRUE, nuevoMapaRGB);
-
+                      
 					}
 				}
 
