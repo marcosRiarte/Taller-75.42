@@ -17,7 +17,9 @@ public:
 
 private:
 	int vibraciones;
+	int retraso;
 	bool vibracion;
+	bool estaVibrando;
 
 	Sprite* elSprite;
 	SDL_Window* ventana;

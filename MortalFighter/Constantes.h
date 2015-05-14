@@ -8,6 +8,8 @@
 #define PRUEBA_JSON "prueba.json"
 #define PRUEBA_JSON_DEFECTO "pruebaDefecto.json"
 
+#define VIBRACIONES 3
+
 //Constantes para la vista
 //VENTANA
 #define ANCHO_MIN 640
@@ -23,7 +25,7 @@
 const float MSxCUADRO = 1000.0f / FPS;
 #define tiempoCaminarParaAdelante 1000.0f
 #define tiempoCaminarParaAtras 1000.0f
-#define tiempoQuieto 1300.0f
+#define tiempoQuieto 1000.0f
 #define tiempoSalto 1500.0f
 #define tiempoSaltoDiagonal 1500.0f
 #define tiempoSaltoDiagonalIzq 1500.0f
@@ -31,7 +33,7 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define tiempoPatadaAlta 500.0f
 #define tiempoPatadaBaja 1000.0f
 #define tiempoGolpeado 1400.0f
-#define tiempoDefensa 500.0f
+#define tiempoDefensa 200.0f
 #define tiempoGolpeAlto 500.0f
 #define tiempoGolpeBajo 500.0f
 #define tiempoArmaArrojable 500.0f

@@ -10,7 +10,9 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 	*error = false;
 	//VIBRACION
 	vibraciones = 0;
+	retraso = VIBRACIONES;
 	vibracion = false;
+	estaVibrando = false;
 
 	// Usa filtro anisotropico
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
@@ -113,6 +115,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 				}
 			}
 
+			
 			//La variable xPixelSuperficie sera la coordenada x en el pixel
 			//La variable yPixelSuperficie sera la coordenada y en el pixel 
 			for (int xPixelSuperficie = 0; xPixelSuperficie < ancho; xPixelSuperficie++)
@@ -120,11 +123,12 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 				for (int yPixelSuperficie = 0; yPixelSuperficie < alto; yPixelSuperficie++)
 				{
 					//Convertimos de RGB a HSV
-					/*H*/		double hue = color.RGBtoHSV(h_inicio, h_final, deplazamiento, color.getSuperficie(), xPixelSuperficie, yPixelSuperficie);
-					/*S*/		double saturation = color.obtenerSaturacion((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
-					/*V*/		double value = color.obtenerBrillo((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
+							double hue = color.RGBtoHSV(h_inicio, h_final, deplazamiento, color.getSuperficie(), xPixelSuperficie, yPixelSuperficie);
+							double saturation = color.obtenerSaturacion((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
+							double value = color.obtenerBrillo((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
 
 					//Si el hue esta en el rango a cambiar
+					
 					if (hue != -1)
 					{
 						
@@ -143,6 +147,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error)
 				}
 
 			}
+			
 			// Una vez dibujado procedemos a desbloquear la superficie siempre y cuando hubiese sido bloqueada
 			if (SDL_MUSTLOCK(SuperficieDos))
 			{
@@ -344,15 +349,21 @@ void Vista::actualizar(){
 		}
 		*/
 
-		if (golpeado) vibraciones++;
-		else vibraciones = 0;
+/*		if (golpeado) vibraciones++;
+		else vibraciones = 0;*/
 
-		if (vibraciones != 0){
-			if (vibraciones % 2 == 0){
-				camaraXLog = camaraXLog - 5;
-			}
-			else{
-				camaraXLog = camaraXLog + 5;
+		if (golpeado){
+			retraso--;
+			if (retraso == 0){
+				retraso = VIBRACIONES;
+				if (!estaVibrando){
+					camaraXLog = camaraXLog + 5;
+					estaVibrando = true;
+				}
+				else{
+					estaVibrando = false;
+					camaraXLog = camaraXLog - 5;
+				}
 			}
 		}
 	}
