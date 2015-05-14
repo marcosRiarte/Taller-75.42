@@ -45,12 +45,18 @@ int _tmain(int argc, _TCHAR* argv[])
 		//Parte de creación inicial.		
 		Sprite* unSprite = new Sprite(JSON_SPRITES);
 		Mundo* unMundo = new Mundo(vecGravedad, unSprite);
-		Vista* unaVista = new Vista(unMundo, unSprite, &error);
+		Vista* unaVista = new Vista(unMundo, unSprite, &error, true);
 
+		if (error){
+			Log::getInstancia().logearMensajeEnModo("Error iniciando SDL con aceleracion de hardware, se iniciara en modo software...", Log::MODO_WARNING);
+			delete unaVista;
+			Vista* unaVista = new Vista(unMundo, unSprite, &error, false);
+		}
 		if (error){
 			std::string mensaje = ((std::string)"Error iniciando SDL: ").append(SDL_GetError()).c_str();
 			mensaje += ", se cierra el programa";
-				Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
+			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
+			delete unaVista;
 			return  EXIT_FAILURE;
 		}
 
