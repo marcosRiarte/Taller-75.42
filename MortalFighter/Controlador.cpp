@@ -24,12 +24,30 @@ std::vector<MOV_TIPO> Controlador::getMovimientos(){
 }
 
 
+void Controlador::mantenerMovimientos(){
+	std::vector<MOV_TIPO> movimientosAuxilares;
+
+	if (movimientos.size() == CANTIDAD_MAXIMA_EVENTOS){
+		movimientosAuxilares = std::vector<MOV_TIPO>();
+		for (int i = (movimientos.size() - (CANTIDAD_MAXIMA_EVENTOS / 2) - 1); i < movimientos.size(); i++){
+			movimientosAuxilares.push_back(movimientos.at(i));
+		}
+		movimientos = movimientosAuxilares;
+	}
+
+}
+
+
 int Controlador::cambiar(){
 
 	if (conversorDeEventos != nullptr){
+
 	SDL_JoystickUpdate();
 	SDL_PumpEvents();
 	state = SDL_GetKeyboardState(NULL);
+
+	//ACTUALIZO EL VECTOR
+	mantenerMovimientos();
 
 	//TECLADO--------------------------------------------------------------------------
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::QUIT)]) {

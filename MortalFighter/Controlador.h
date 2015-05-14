@@ -27,5 +27,7 @@ private:
 	SDL_Joystick* unJoystick;
 	SDL_Joystick* otroJoystick;
 	Sint16 valorDelEje;
+
+	void Controlador::mantenerMovimientos();
 };
 
