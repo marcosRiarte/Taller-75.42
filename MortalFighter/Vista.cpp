@@ -263,8 +263,8 @@ void Vista::actualizar(){
 		PjDosEstaEnBordeIzq = true;
 	bool PjDosEstaEnBorde = PjDosEstaEnBordeIzq || PjDosEstaEnBordeDer;
 
-	MOV_TIPO mov1 = refMundo->getCuerpo(0)->getControlador()->getMovimientos().at(0);
-	MOV_TIPO mov2 = refMundo->getCuerpo(1)->getControlador()->getMovimientos().at(0);
+	MOV_TIPO mov1 = refMundo->getCuerpo(0)->getControlador()->getMovimientos().back();
+	MOV_TIPO mov2 = refMundo->getCuerpo(1)->getControlador()->getMovimientos().back();
 
 	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer)) {
 		refMundo->FrenarCuerpos();
