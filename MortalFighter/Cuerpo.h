@@ -103,6 +103,11 @@ public:
 		estaSuperpuesto = true;
 	}
 
+	inline void Separados()
+	{
+		estaSuperpuesto = false;
+	}
+
 	void sumarPosicion(const vector2D& unaPosicion);
 
 	inline const vector2D& getVelocidad() const
@@ -192,7 +197,6 @@ public:
 	{
 		return estaSuperpuesto;
 	}
-	
 
 	//PRE: recibe la posicion de dos cuerpos del mundo y el espacio que estan ocupando (guarda por que no es un punto sino un rectangulo)
 	// si los cuerpos estan en el piso solo cheqea eje x que no se esten invadiendo
