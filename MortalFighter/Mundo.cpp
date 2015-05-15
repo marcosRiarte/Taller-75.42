@@ -113,7 +113,6 @@ void Mundo::moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido)
 //el tipo tocando piso recien -->chequear superposicion
 ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<MOV_TIPO>* movimientos){
 
-	unCuerpo->sumarVelocidad(gravedad * difTiempo);
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 
 	/// integra velocidad, para salto, 
@@ -203,21 +202,24 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			else
 				unCuerpo->mover(-DISTANCIA);
 		}
-		if ((movimientos->back() == ARRIBA) && (unCuerpo->GetDemora() == 0)){
+		if ((movimientos->back() == ARRIBA) && !(unCuerpo->getEstado().movimiento == SALTO)){
 			nuevoEstado.movimiento = SALTO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
 		}
 
-		if ((movimientos->back() == SALTODER)){
+		if ((movimientos->back() == SALTODER) && !(unCuerpo->getEstado().movimiento == SALTODIAGDER)){
 			nuevoEstado.movimiento = SALTODIAGDER;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
 		}
 
-		if ((movimientos->back() == SALTOIZQ)){
+		if ((movimientos->back() == SALTOIZQ) && !(unCuerpo->getEstado().movimiento == SALTODIAGIZQ)){
 			nuevoEstado.movimiento = SALTODIAGIZQ;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
 		}
 
@@ -387,6 +389,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	unCuerpo->setEstadoAnterior(nuevoEstado);
 	vector2D unaVelocidad = unCuerpo->getVelocidad();
 	unCuerpo->sumarPosicion(unaVelocidad * difTiempo);
+	unCuerpo->sumarVelocidad(gravedad * difTiempo);
 	return nuevoEstado;
 }
 
