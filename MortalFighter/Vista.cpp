@@ -104,6 +104,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error, bool habilitarAceler
 		int ancho = ancho = SuperficieDos->w;
 		int alto = ancho = SuperficieDos->h;
 
+		if (MODO_COLOR){
 		//Si ambos personajes son iguales,modifico la superficie
 		if ((pelea == "scorpion VS scorpion") || (pelea == "liuKang VS liuKang"))
 		{
@@ -158,6 +159,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error, bool habilitarAceler
 				SDL_UnlockSurface(SuperficieDos);
 			}
 		}//Fin del if
+		}
 
 		//Creación de la textura sobre la superficie
 		texturaSpriteUno = SDL_CreateTextureFromSurface(renderer, SuperficieUno);

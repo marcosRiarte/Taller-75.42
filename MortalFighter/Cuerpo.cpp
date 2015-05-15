@@ -66,12 +66,11 @@ void Cuerpo::DisminuirDemora()
 
 bool Cuerpo::HayDemora()
 {
-	if (GetDemora() > 0) return false;
+	if (GetDemora() > 0) return true;
 	
-	return true;
+	return false;
 
 }
-
 
 bool Cuerpo::estaEnBorde()
 {
