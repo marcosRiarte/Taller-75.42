@@ -126,7 +126,19 @@ ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCu
 					ResolverGolpiza(elOtroCuerpo, unCuerpo, invertido);
 			}
 		}
-	
+
+		if ((unCuerpo->getVelocidad().x == 0)){
+			nuevoEstado = estadoAnterior;
+		}
+		else if (unCuerpo->getVelocidad().x > 0)
+			nuevoEstado.movimiento = SALTODIAGDER;
+		else
+			nuevoEstado.movimiento = SALTODIAGIZQ;
+
+		if (unCuerpo->EstaFrenado()){
+			unCuerpo->SetVelocidadX(0.0f);
+		}
+
 		if (unCuerpo->EstaFrenado()){
 		unCuerpo->SetVelocidadX(0.0f);
 		
@@ -147,10 +159,9 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 
 	if (unCuerpo->EstaFrenado()){
-		if ((movimientos->back() == ARRIBA) && !(unCuerpo->getEstado().movimiento == SALTO)){
+		if ((movimientos->back() == ARRIBA)){
 			nuevoEstado.movimiento = SALTO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
 		}
 		if (movimientos->back() == ABAJO){
@@ -158,16 +169,14 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 				nuevoEstado.movimiento = AGACHADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
-		if ((movimientos->at(0) == SALTODER) && !(unCuerpo->getEstado().movimiento == SALTODIAGDER)){
+		if ((movimientos->at(0) == SALTODER)){
 			nuevoEstado.movimiento = SALTODIAGDER;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
 		}
-		if ((movimientos->at(0) == SALTOIZQ) && !(unCuerpo->getEstado().movimiento == SALTODIAGIZQ)){
+		if ((movimientos->at(0) == SALTOIZQ)){
 			nuevoEstado.movimiento = SALTODIAGIZQ;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
 		}
 		if ((movimientos->at(0) == DER)){
@@ -207,24 +216,21 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			else
 				unCuerpo->mover(-DISTANCIA);
 		}
-		if ((movimientos->back() == ARRIBA) && !(unCuerpo->getEstado().movimiento == SALTO)){
+		if ((movimientos->back() == ARRIBA)){
 			nuevoEstado.movimiento = SALTO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
 		}
 
-		if ((movimientos->back() == SALTODER) && !(unCuerpo->getEstado().movimiento == SALTODIAGDER)){
+		if ((movimientos->back() == SALTODER)){
 			nuevoEstado.movimiento = SALTODIAGDER;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
-			unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
+				unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
 		}
 
-		if ((movimientos->back() == SALTOIZQ) && !(unCuerpo->getEstado().movimiento == SALTODIAGIZQ)){
+		if ((movimientos->back() == SALTOIZQ)){
 			nuevoEstado.movimiento = SALTODIAGIZQ;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
 		}
 
@@ -360,20 +366,15 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 	std::vector<MOV_TIPO> movimientos = unCuerpo->getControlador()->getMovimientos();
 
-	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
-
 	if (unCuerpo->EstaSuperpuesto()){
 		moverCuerpos(unCuerpo, elOtroCuerpo, invertido);
 	}
 	else{
-		
-
 		if (unCuerpo->HayDemora())
 		{
 			unCuerpo->DisminuirDemora();
 			nuevoEstado = unCuerpo->getEstadoAnterior();
 		}
-		else 
 		{
 			if(unCuerpo->estaEnPiso())
 			nuevoEstado = Mundo::ResolverAcciones(difTiempo, unCuerpo, elOtroCuerpo, nuevoEstado, invertido, &movimientos);
