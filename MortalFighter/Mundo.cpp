@@ -113,78 +113,39 @@ void Mundo::moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido)
 //el tipo tocando piso recien -->chequear superposicion
 ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<MOV_TIPO>* movimientos){
 
+	unCuerpo->sumarVelocidad(gravedad * difTiempo);
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 
 	/// integra velocidad, para salto, 
 	// si no está en el piso siente la gravedad
 
-	if (!unCuerpo->estaEnPiso()){
 		if (!elOtroCuerpo->estaEnPiso()){
 			if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido)){
 				if ((unCuerpo->getEstado().accion == SIN_ACCION) && (elOtroCuerpo->getEstado().accion != SIN_ACCION) && (elOtroCuerpo->getEstado().accion != GUARDIA))
 					ResolverGolpiza(elOtroCuerpo, unCuerpo, invertido);
 			}
 		}
-		if ((unCuerpo->getVelocidad().x == 0)){
-			nuevoEstado = estadoAnterior;
-			if (estadoAnterior.movimiento == SALTO)
-				nuevoEstado.movimiento = SALTO;
-		}
-		else if (unCuerpo->getVelocidad().x > 0)
-			nuevoEstado.movimiento = SALTODIAGDER;
-		else
-			nuevoEstado.movimiento = SALTODIAGIZQ;
-		unCuerpo->sumarVelocidad(gravedad * difTiempo);
+	
 		if (unCuerpo->EstaFrenado()){
-			unCuerpo->SetVelocidadX(0.0f);
-		}
-	} 
-	else if (unCuerpo->EstaFrenado()){
 		unCuerpo->SetVelocidadX(0.0f);
-		if ((movimientos->back() == ARRIBA)){
-			nuevoEstado.movimiento = SALTO;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
-		}
-		if (movimientos->back() == ABAJO){
-			if (unCuerpo->getEstado().accion == GUARDIA)
-				nuevoEstado.movimiento = AGACHADO;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-		}
-		if ((movimientos->back() == SALTODER) && (unCuerpo->GetDemora() == 0)){
+		
+		if ((movimientos->back() == SALTODER)){
 			nuevoEstado.movimiento = SALTODIAGDER;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
 		}
-		if ((movimientos->back() == SALTOIZQ) && (unCuerpo->GetDemora() == 0)){
+		if ((movimientos->back() == SALTOIZQ)){
 			nuevoEstado.movimiento = SALTODIAGIZQ;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
-		}
-		if ((movimientos->back() == DER) && (unCuerpo->GetDemora() == 0)){
-			nuevoEstado.movimiento = CAMINARDER;
-		}
-		if ((movimientos->back() == IZQ) && (unCuerpo->GetDemora() == 0)){
-			nuevoEstado.movimiento = CAMINARIZQ;
-		}
-		if ((movimientos->back() == ABAJO) && (unCuerpo->GetDemora() == 0)){
-			nuevoEstado.movimiento = AGACHADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
 	}
-	
-		return nuevoEstado;
+	return nuevoEstado;
 }
 
-//logica de acciones
-//esta es la mas larga, pero es un case... quizas haya que modularizar con pequeños metodos... sino va a quedar un mundo
-//RECORDA QUE ACA SOLO ENTRAS SI NO HAY DEMORA APLICADA, OSEA SI NO ESTAS HACIENDO ALGO VOS O SI NO ESTAS GOLPEADO
 ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<MOV_TIPO>* movimientos)
 {
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 
-	if (unCuerpo->EstaFrenado() && unCuerpo->estaEnPiso()){
-		unCuerpo->SetVelocidadX(0.0f);
+	if (unCuerpo->EstaFrenado()){
 		if ((movimientos->back() == ARRIBA)){
 			nuevoEstado.movimiento = SALTO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
@@ -217,8 +178,6 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 		}
 	}
 	else{
-		//caso en piso no frenado
-
 		//esto hace que no pueda saltar en el aire
 		if (estadoAnterior.movimiento == SALTO || estadoAnterior.movimiento == SALTODIAGDER || estadoAnterior.movimiento == SALTODIAGIZQ)
 		{
@@ -237,7 +196,6 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 				unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
 		}
 
-
 		if ((movimientos->back() == IZQ)){
 			nuevoEstado.movimiento = CAMINARIZQ;
 			if (otroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
@@ -245,9 +203,25 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			else
 				unCuerpo->mover(-DISTANCIA);
 		}
+		if ((movimientos->back() == ARRIBA) && (unCuerpo->GetDemora() == 0)){
+			nuevoEstado.movimiento = SALTO;
+			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
+		}
 
+		if ((movimientos->back() == SALTODER)){
+			nuevoEstado.movimiento = SALTODIAGDER;
+			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
+		}
 
-		if ((movimientos->back() == ABAJO) && (unCuerpo->GetDemora() == 0)){
+		if ((movimientos->back() == SALTOIZQ)){
+			nuevoEstado.movimiento = SALTODIAGIZQ;
+			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
+		}
+
+		if ((movimientos->back() == ABAJO)){
 			nuevoEstado.movimiento = AGACHADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
@@ -383,10 +357,9 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 	if (unCuerpo->EstaSuperpuesto()){
 		moverCuerpos(unCuerpo, elOtroCuerpo, invertido);
-
 	}
 	else{
-		nuevoEstado = Mundo::ResolverSaltos(difTiempo, unCuerpo, elOtroCuerpo, nuevoEstado, invertido, &movimientos);
+		
 
 		if (unCuerpo->HayDemora())
 		{
@@ -395,28 +368,26 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		}
 		else 
 		{
+			if(unCuerpo->estaEnPiso())
 			nuevoEstado = Mundo::ResolverAcciones(difTiempo, unCuerpo, elOtroCuerpo, nuevoEstado, invertido, &movimientos);
-
+			else
+			nuevoEstado = Mundo::ResolverSaltos(difTiempo, unCuerpo, elOtroCuerpo, nuevoEstado, invertido, &movimientos);
 		}
 	}
 
-		ResolverGolpiza(unCuerpo, elOtroCuerpo, invertido);
+	ResolverGolpiza(unCuerpo, elOtroCuerpo, invertido);
 
-		if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION) && (elOtroCuerpo->getEstado().accion == SIN_ACCION)){
-			unCuerpo->Superponer();
-		}
-		else{
-			unCuerpo->Separados();
-		}
-
-		unCuerpo->SetSensorActivoStr(nuevoEstado);
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-
-		vector2D unaVelocidad = unCuerpo->getVelocidad();
-
-		/// integra posicion	
-		unCuerpo->sumarPosicion(unaVelocidad * difTiempo);
-		return nuevoEstado;
+	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION) && (elOtroCuerpo->getEstado().accion == SIN_ACCION)){
+		unCuerpo->Superponer();
+	}
+	else{
+		unCuerpo->Separados();
+	}
+	unCuerpo->SetSensorActivoStr(nuevoEstado);
+	unCuerpo->setEstadoAnterior(nuevoEstado);
+	vector2D unaVelocidad = unCuerpo->getVelocidad();
+	unCuerpo->sumarPosicion(unaVelocidad * difTiempo);
+	return nuevoEstado;
 }
 
 
