@@ -43,6 +43,15 @@ Sprite::Sprite(std::string jsonSprites){
 	this->SaltoGolpeado = new std::vector<SDL_Rect*>();
 	this->AgachadoDefensa = new std::vector<SDL_Rect*>();
 
+	this->Gancho = new std::vector<SDL_Rect*>();
+	this->AgachadoGolpeBajo = new std::vector<SDL_Rect*>();
+	this->SaltoGolpe = new std::vector<SDL_Rect*>();
+	this->SaltoPatada = new std::vector<SDL_Rect*>();
+	this->SaltoDiagonalPatada = new std::vector<SDL_Rect*>();
+	this->AgachadoPatadaBaja = new std::vector<SDL_Rect*>();
+	this->AgachadoPatadaAlta = new std::vector<SDL_Rect*>();
+	this->Disparo = new std::vector<SDL_Rect*>();
+
 	Json::Value raiz = ParsearSprites(jsonSprites);
 	Json::Value sprites = raiz["sprites"]["coordenadas"];
 		
@@ -123,8 +132,51 @@ Sprite::Sprite(std::string jsonSprites){
 
 	// Sprites Arma
 	cargarSprites(this->Arma, "Arma", sprites);
-	// Sensores GolpeAlto
+	// Sensores Arma
 	cargarSensores("Arma", sprites);
+
+
+
+	// Sprites Gancho
+	cargarSprites(this->Gancho, "Gancho", sprites);
+	// Sensores Gancho
+	cargarSensores("Gancho", sprites);
+
+	// Sprites AgachadoGolpeBajo
+	cargarSprites(this->AgachadoGolpeBajo, "AgachadoGolpeBajo", sprites);
+	// Sensores AgachadoGolpeBajo
+	cargarSensores("AgachadoGolpeBajo", sprites);
+
+	// Sprites SaltoGolpe
+	cargarSprites(this->SaltoGolpe, "SaltoGolpe", sprites);
+	// Sensores SaltoGolpe
+	cargarSensores("SaltoGolpe", sprites);
+
+	// Sprites SaltoPatada
+	cargarSprites(this->SaltoPatada, "SaltoPatada", sprites);
+	// Sensores SaltoPatada
+	cargarSensores("SaltoPatada", sprites);
+
+	// Sprites SaltoDiagonalPatada
+	cargarSprites(this->SaltoDiagonalPatada, "SaltoDiagonalPatada", sprites);
+	// Sensores SaltoDiagonalPatada
+	cargarSensores("SaltoDiagonalPatada", sprites);
+
+	// Sprites AgachadoPatadaBaja
+	cargarSprites(this->AgachadoPatadaBaja, "AgachadoPatadaBaja", sprites);
+	// Sensores AgachadoPatadaBaja
+	cargarSensores("AgachadoPatadaBaja", sprites);
+
+	// Sprites AgachadoPatadaAlta
+	cargarSprites(this->AgachadoPatadaAlta, "AgachadoPatadaAlta", sprites);
+	// Sensores AgachadoPatadaAlta
+	cargarSensores("AgachadoPatadaAlta", sprites);
+
+	// Sprites Disparo
+	cargarSprites(this->Disparo, "Disparo", sprites);
+	// Sensores Disparo
+	cargarSensores("Disparo", sprites);
+	
 
 	*SaltoDiagonalIzq = *SaltoDiagonal;
 	std::reverse(SaltoDiagonalIzq->begin(), SaltoDiagonalIzq->end());
@@ -139,8 +191,8 @@ void Sprite::cargarSensores(std::string unEstadoStr, Json::Value spritesRaiz)
 	for (size_t j = 0; j < estadoSens.size(); j++) {
 		//seteo de variables
 		int nSprite = estadoSens[j].get("nSprite", 0).asInt();
-		float xSens = estadoSens[j].get("x", 0).asFloat() - estadoSprites[nSprite].get("x", 0).asFloat();
-		float ySens = estadoSens[j].get("y", 0).asFloat() - estadoSprites[nSprite].get("y", 0).asFloat();
+		float xSens = estadoSens[j].get("x", 0).asFloat();
+		float ySens = estadoSens[j].get("y", 0).asFloat();
 		std::pair<float, float> XYSens = std::make_pair(xSens, ySens);
 		int anchoSens = estadoSens[j].get("ancho", 0).asFloat();
 		int altoSens = estadoSens[j].get("alto", 0).asFloat();
@@ -348,11 +400,50 @@ Sprite::~Sprite()
 	SaltoGolpeado->clear();
 	delete SaltoGolpeado;
 
-	for (size_t i = 0; i < Quieto->size(); i++)
+	for (size_t i = 0; i < AgachadoGolpeado->size(); i++)
 		delete AgachadoGolpeado->at(i);
 	AgachadoGolpeado->clear();
 	delete AgachadoGolpeado;
 
+	for (size_t i = 0; i < Gancho->size(); i++)
+		delete Gancho->at(i);
+	Gancho->clear();
+	delete Gancho;
+
+	for (size_t i = 0; i < AgachadoGolpeBajo->size(); i++)
+		delete AgachadoGolpeBajo->at(i);
+	AgachadoGolpeBajo->clear();
+	delete AgachadoGolpeBajo;
+
+	for (size_t i = 0; i < SaltoGolpe->size(); i++)
+		delete SaltoGolpe->at(i);
+	SaltoGolpe->clear();
+	delete SaltoGolpe;
+
+	for (size_t i = 0; i < SaltoPatada->size(); i++)
+		delete SaltoPatada->at(i);
+	SaltoPatada->clear();
+	delete SaltoPatada;
+
+	for (size_t i = 0; i < SaltoDiagonalPatada->size(); i++)
+		delete SaltoDiagonalPatada->at(i);
+	SaltoDiagonalPatada->clear();
+	delete SaltoDiagonalPatada;
+
+	for (size_t i = 0; i < AgachadoPatadaBaja->size(); i++)
+		delete AgachadoPatadaBaja->at(i);
+	AgachadoPatadaBaja->clear();
+	delete AgachadoPatadaBaja;
+
+	for (size_t i = 0; i < AgachadoPatadaAlta->size(); i++)
+		delete AgachadoPatadaAlta->at(i);
+	AgachadoPatadaAlta->clear();
+	delete AgachadoPatadaAlta;
+
+	for (size_t i = 0; i < Disparo->size(); i++)
+		delete Disparo->at(i);
+	Disparo->clear();
+	delete Disparo;
 
 	for (size_t i = 0; i < Sensores.size(); i++) {
 		for (size_t j = 0; j < Sensores[i]->size(); j++) 

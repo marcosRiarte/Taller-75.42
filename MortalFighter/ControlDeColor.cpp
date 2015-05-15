@@ -117,7 +117,7 @@ std::vector<int> ControlDeColor::HSVtoRGB(double H, double S, double V)
 {
 
 	std::vector<int> nuevoColor;
-	int R=0, G=0, B=0, A=0;
+	int R = 0, G = 0, B = 0, A = 0;
 	
 	if (H > 360){
 		std::cout << "Fallo la conversion de RGBA a HSV";
@@ -151,7 +151,7 @@ std::vector<int> ControlDeColor::HSVtoRGB(double H, double S, double V)
 			B = (int)m;                      //B
 			G = (int)(X + m);             //G 
 			R = (int)(c + m);             //R
-			A = (int)*(this->alpha); //A
+			A =  (int)*(this->alpha); //A
 		}
 	}
 	

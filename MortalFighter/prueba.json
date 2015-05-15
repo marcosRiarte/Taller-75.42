@@ -70,9 +70,9 @@
 
     "color_alternativo": 
         {
-          "h_inicial": 0,
-          "h_final": 120,
-          "desplazamiento": 60
+          "h_inicial": 40,            //hue scopion 44 su rgb promedio es 173,130,12
+          "h_final": -290,//70, //-240,//120,
+          "desplazamiento": 200//60  //316 rojo 76 verde 200 azul
 
         },
     
@@ -92,16 +92,16 @@
     },
 
     "control_2": {
-       "arriba": "j2_up",
-        "abajo": "j2_down",
-        "izquierda": "j2_left",
-        "derecha": "j2_right",
-        "defensa": "j2_0",
-        "golpe_bajo": "j2_1",
-        "golpe_alto": "j2_2",
-        "patada_baja": "j2_3",
-        "patada_alta": "j2_4",
-        "arma": "j2_5",
+        "arriba": "w",
+        "abajo": "s",
+        "izquierda": "a",
+        "derecha": "d",
+        "defensa": "j",
+        "golpe_bajo": "k",
+        "golpe_alto": "l",
+        "patada_baja": "i",
+        "patada_alta": "o",
+        "arma": "u",
         "salir": "esc",
         "reiniciar": "r"
     }
