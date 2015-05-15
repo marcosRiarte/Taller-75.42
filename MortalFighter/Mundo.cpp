@@ -101,9 +101,11 @@ ESTADO Mundo::ResolverColisiones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevo
 }
 void Mundo::moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido){
 	if (invertido){
+		if (unCuerpo->getEstado().movimiento != CAMINARIZQ)
 		unCuerpo->mover(DISTANCIA);
 		elOtroCuerpo->mover(-DISTANCIA);
 	}
+	if (unCuerpo->getEstado().movimiento != CAMINARDER)
 	unCuerpo->mover(-DISTANCIA);
 	elOtroCuerpo->mover(DISTANCIA);
 }
@@ -145,9 +147,10 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 
 	if (unCuerpo->EstaFrenado()){
-		if ((movimientos->back() == ARRIBA)){
+		if ((movimientos->back() == ARRIBA) && !(unCuerpo->getEstado().movimiento == SALTO)){
 			nuevoEstado.movimiento = SALTO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
 		}
 		if (movimientos->back() == ABAJO){
@@ -155,14 +158,16 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 				nuevoEstado.movimiento = AGACHADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
-		if ((movimientos->at(0) == SALTODER)){
+		if ((movimientos->at(0) == SALTODER) && !(unCuerpo->getEstado().movimiento == SALTODIAGDER)){
 			nuevoEstado.movimiento = SALTODIAGDER;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
 		}
-		if ((movimientos->at(0) == SALTOIZQ)){
+		if ((movimientos->at(0) == SALTOIZQ) && !(unCuerpo->getEstado().movimiento == SALTODIAGIZQ)){
 			nuevoEstado.movimiento = SALTODIAGIZQ;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
+			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
 		}
 		if ((movimientos->at(0) == DER)){
