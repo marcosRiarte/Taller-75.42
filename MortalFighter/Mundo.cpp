@@ -185,7 +185,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 		if ((movimientos->at(0) == IZQ)){
 			nuevoEstado.movimiento = CAMINARIZQ;
 		}
-		if ((movimientos->at(0) == ABAJO) && (unCuerpo->GetDemora() == 0)){
+		if ((movimientos->at(0) == ABAJO)){
 			nuevoEstado.movimiento = AGACHADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
@@ -234,10 +234,10 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
 		}
 
-		if ((movimientos->back() == ABAJO)){
-			nuevoEstado.movimiento = AGACHADO;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-		}
+	if ((movimientos->back() == ABAJO)){
+		nuevoEstado.movimiento = AGACHADO;
+		unCuerpo->setEstadoAnterior(nuevoEstado);
+	}
 	
 	if ((movimientos->back() == G_BAJO) && !(unCuerpo->getEstado().accion == GOLPE_BAJO)){
 		nuevoEstado.accion = GOLPE_BAJO;
@@ -266,14 +266,13 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 	}
 
-	if ((movimientos->back() == DEFENSA) && (unCuerpo->GetDemora() == 0)){
+	if ((movimientos->back() == DEFENSA)){
 		nuevoEstado.movimiento = PARADO;
 		nuevoEstado.accion = GUARDIA;
 		unCuerpo->setEstadoAnterior(nuevoEstado);
-		//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 	}
 
-	if ((movimientos->back() == DEFENSA_AGACHADO) && (unCuerpo->GetDemora() == 0)){
+	if ((movimientos->back() == DEFENSA_AGACHADO)){
 		nuevoEstado.movimiento = AGACHADO;
 		nuevoEstado.accion = GUARDIA;
 		unCuerpo->setEstadoAnterior(nuevoEstado);
@@ -290,7 +289,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 		}
 	}
 
-	if ((movimientos->back() == QUIETO) && (unCuerpo->GetDemora() <= 0)){
+	if ((movimientos->back() == QUIETO)){
 		nuevoEstado.movimiento = PARADO;
 		unCuerpo->setEstadoAnterior(nuevoEstado);
 	}
@@ -375,6 +374,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			unCuerpo->DisminuirDemora();
 			nuevoEstado = unCuerpo->getEstadoAnterior();
 		}
+		else
 		{
 			if(unCuerpo->estaEnPiso())
 			nuevoEstado = Mundo::ResolverAcciones(difTiempo, unCuerpo, elOtroCuerpo, nuevoEstado, invertido, &movimientos);
