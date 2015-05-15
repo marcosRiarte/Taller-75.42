@@ -27,6 +27,14 @@ private:
 	std::vector<SDL_Rect*>*SaltoGolpeado;
 	std::vector<SDL_Rect*>*AgachadoDefensa;
 
+	std::vector<SDL_Rect*>* Gancho;
+	std::vector<SDL_Rect*>* AgachadoGolpeBajo;
+	std::vector<SDL_Rect*>* SaltoGolpe;
+	std::vector<SDL_Rect*>* SaltoPatada;
+	std::vector<SDL_Rect*>* SaltoDiagonalPatada;
+	std::vector<SDL_Rect*>* AgachadoPatadaBaja;
+	std::vector<SDL_Rect*>* AgachadoPatadaAlta;
+	std::vector<SDL_Rect*>* Disparo;
 
 
 	std::vector<float>* cuadrosRep;
