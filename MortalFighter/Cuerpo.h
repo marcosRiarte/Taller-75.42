@@ -246,6 +246,7 @@ public:
 	ESTADO getEstadoAnterior();
 
 	Personaje* Cuerpo::getRefPersonaje();
+	Sprite* getSprite() const;
 
 private:
 	std::vector<Sensor*>* getSensoresActivos() const;

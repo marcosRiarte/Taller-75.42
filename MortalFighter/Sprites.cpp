@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "Sprites.h"
 #include <list>
 
 SDL_Rect* Sprite::crearCuadro(int x, int y, int w, int h){
@@ -51,6 +50,11 @@ Sprite::Sprite(std::string jsonSprites){
 	this->AgachadoPatadaBaja = new std::vector<SDL_Rect*>();
 	this->AgachadoPatadaAlta = new std::vector<SDL_Rect*>();
 	this->Disparo = new std::vector<SDL_Rect*>();
+
+	// si recibe una direccion de imagen busca el json asociado
+	std::size_t found = jsonSprites.find(".png");
+	if (found != std::string::npos)
+		jsonSprites.replace(jsonSprites.end() - 3, jsonSprites.end(), "json");
 
 	Json::Value raiz = ParsearSprites(jsonSprites);
 	Json::Value sprites = raiz["sprites"]["coordenadas"];

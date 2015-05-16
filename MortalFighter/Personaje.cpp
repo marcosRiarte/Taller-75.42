@@ -4,14 +4,15 @@
 #include "ManejadorULogicas.h"
 #include "Sprites.h"
 
-Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje, std::string CaidaPersonaje, std::string PatadaAltaPersonaje, std::string GolpeadoPersonaje, std::string AgachadoPersonaje, std::string nombrePersonaje)
+Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesDirPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje, std::string CaidaPersonaje, std::string PatadaAltaPersonaje, std::string GolpeadoPersonaje, std::string AgachadoPersonaje, std::string nombrePersonaje)
 {
 	ancho = anchoPersonaje;
 	alto = altoPersonaje;
 	zIndex = zIndexPersonaje;
 	orientacion = unaorientacion;
 	vida = 100;
-	sprites = spritesPersonaje;
+	spritesDir = spritesDirPersonaje;
+	sprites = new Sprite(spritesDir);
 	caminaradelante = CaminarParaAdelante;
 	caminaratras = CaminarParaAtras;
 	quieto = QuietoPersonaje;
@@ -40,7 +41,12 @@ int Personaje::getZIndex()
 	return zIndex;
 }
 
-std::string Personaje::getSprite() const
+std::string Personaje::getSpriteDir() const
+{
+	return spritesDir;
+}
+
+Sprite* Personaje::getSprite() const
 {
 	return sprites;
 }
@@ -238,7 +244,9 @@ void Personaje::setOrientacion(std::string unaOrientacion){
 }
 
 void Personaje::setSprites(std::string unosSprites){
-	sprites = unosSprites;
+	delete sprites;
+	spritesDir = unosSprites;
+	sprites = new Sprite(spritesDir);
 }
 
 void Personaje::setCaminarParaAdelante(std::string unCaminarParaAdelante){
@@ -291,5 +299,5 @@ void Personaje::actualizar(float xNuevo, float yNuevo, ESTADO nuevoEstado)
 
 Personaje::~Personaje()
 {
-
+	delete sprites;
 }

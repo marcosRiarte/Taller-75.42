@@ -1,5 +1,5 @@
 #pragma once
-#include "Sensor.h"
+#include "Sprites.h"
 
 enum Movimientos
 {
@@ -25,14 +25,15 @@ class Personaje
 {
 public:
 	std::string nombre;
-	Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje, std::string CaidaPersonaje, std::string PatadaAltaPersonaje, std::string GolpeadoPersonaje, std::string AgachadoPersonaje, std::string nombrePersonaje);
+	Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesDirPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje, std::string CaidaPersonaje, std::string PatadaAltaPersonaje, std::string GolpeadoPersonaje, std::string AgachadoPersonaje, std::string nombrePersonaje);
 	float getAncho() const;
 	float getAlto() const;
 	int getZIndex() ;
 	int descontarVida(ESTADO estadoPj, ESTADO estadoPj2);
 	int getVida();
 	std::string getOrientacion() const;
-	std::string getSprite() const;
+	std::string getSpriteDir() const;	
+	Sprite* getSprite() const;
 	std::string getCaminarParaAdelante() const;
 	std::string getCaminarParaAtras() const;
 	std::string getQuieto() const;
@@ -81,7 +82,7 @@ private:
 	int zIndex;
 	int vida;	
 	std::string orientacion;
-	std::string sprites;
+	std::string spritesDir;
 	std::string caminaradelante;
 	std::string caminaratras;
 	std::string quieto;
@@ -92,6 +93,7 @@ private:
 	std::string patadaalta;
 	std::string agachado;
 	std::string golpeado;
+	Sprite* sprites;
 	std::pair<float, float> posicionUn;
 	float deltaX;	
 	ESTADO estadoActual;

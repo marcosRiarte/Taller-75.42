@@ -7,7 +7,7 @@
 #include "Timer.h"
 
 
-Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error, bool habilitarAceleracionDeHardware)
+Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 {	
 	*error = false;
 	//VIBRACION
@@ -88,15 +88,15 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error, bool habilitarAceler
 		//y la lista de cuadros puntero a null
 		listaDeCuadrosDos = nullptr;
 
-		//Se cargan los sprites
-		elSprite = unSprite;
+		//Se cargan los sprites:		
 		
 		//Dirección de la imagen de Sprites
-		dirImgPersonaje = Parser::getInstancia().getPersonajes().at(0)->getSprite();
+		std::string dirImgPersonajeUno = Parser::getInstancia().getPersonajes().at(0)->getSpriteDir();
+		std::string dirImgPersonajeDos = Parser::getInstancia().getPersonajes().at(1)->getSpriteDir();
 
 		//Carga la imagen desde la ruta especificada
-		SDL_Surface* SuperficieUno = cargarSuperficieOptimizada(dirImgPersonaje);
-		SDL_Surface* SuperficieDos = cargarSuperficieOptimizada(dirImgPersonaje);
+		SDL_Surface* SuperficieUno = cargarSuperficieOptimizada(dirImgPersonajeUno);
+		SDL_Surface* SuperficieDos = cargarSuperficieOptimizada(dirImgPersonajeDos);
 
 		//Seteo del color		
 		std::string pelea = Parser::getInstancia().getPelea();
@@ -563,7 +563,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	ESTADO estadoAux;
 	estadoAux.movimiento = PARADO;
-	SDL_Rect* cuadroBase = elSprite->listaDeCuadros(estadoAux)->at(0);
+	SDL_Rect* cuadroBase = personajesVista[0]->getSprite()->listaDeCuadros(estadoAux)->at(0);
 	float relacionAnchoUno = (float)anchoPjUnoPx / (float)cuadroBase->w;
 	float relacionAltoUno = (float)altoPjUnoPx / (float)cuadroBase->h;
 	personajeUno.x = manejadorULog.darLongPixels(xLogPjUnoEnCamara);
@@ -581,8 +581,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	ESTADO estadoDelPersonajeDos = personajesVista[1]->getEstado();
 
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
-	listaDeCuadrosUno = elSprite->listaDeCuadros(estadoDelPersonajeUno);
-	tiempoSecuenciaSpritesUno = elSprite->getConstantes(estadoDelPersonajeUno);
+	listaDeCuadrosUno = personajesVista[0]->getSprite()->listaDeCuadros(estadoDelPersonajeUno);
+	tiempoSecuenciaSpritesUno = personajesVista[0]->getSprite()->getConstantes(estadoDelPersonajeUno);
 
 
 	if ((estadoAnteriorPj1.movimiento != estadoDelPersonajeUno.movimiento) || (estadoAnteriorPj1.accion != estadoDelPersonajeUno.accion) || (estadoAnteriorPj1.golpeado != estadoDelPersonajeUno.golpeado)){
@@ -616,8 +616,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	personajeUno.h = (int)round(relacionAltoUno*cuadroActualUno->h);
 
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
-	listaDeCuadrosDos = elSprite->listaDeCuadros(estadoDelPersonajeDos);
-	tiempoSecuenciaSpritesDos = elSprite->getConstantes(estadoDelPersonajeDos);
+	listaDeCuadrosDos = personajesVista[1]->getSprite()->listaDeCuadros(estadoDelPersonajeDos);
+	tiempoSecuenciaSpritesDos = personajesVista[1]->getSprite()->getConstantes(estadoDelPersonajeDos);
 
 	if ((numeroDeCuadroDos) > (tiempoSecuenciaSpritesDos*listaDeCuadrosDos->size()))
 		numeroDeCuadroDos = 0;
@@ -714,8 +714,7 @@ Vista::~Vista()
 	SDL_DestroyTexture(texturaVerde);
 	SDL_DestroyTexture(texturaBarraDeVida);
 	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(ventana);
-	delete elSprite;
+	SDL_DestroyWindow(ventana);	
     
 	//TTF_Quit();
 	IMG_Quit();

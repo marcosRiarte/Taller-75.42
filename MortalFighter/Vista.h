@@ -9,7 +9,7 @@
 class Vista
 {
 public:	
-	Vista(Mundo* unMundo, Sprite* unSprite, bool* error, bool habilitarAceleracionDeHardware);
+	Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware);
 	void actualizar();
 	void habilitarVibracion();
 	void deshabilitarVibracion();
@@ -21,8 +21,7 @@ private:
 	int retraso;
 	bool vibracion;
 	bool estaVibrando;
-
-	Sprite* elSprite;
+	
 	SDL_Window* ventana;
 	SDL_Renderer* renderer;
 	std::string rutaImagen;	
@@ -46,9 +45,8 @@ private:
 	int posBarraDeVida1;
 	int anchoImagenBarraDeVida;
 	int anchoBarraDeVida1;
-	int anchoBarraDeVida2;
+	int anchoBarraDeVida2;	
 	
-	std::string dirImgPersonaje;
 
 	std::vector<Capa*> capasVista;
 	int numeroDeCuadroUno;

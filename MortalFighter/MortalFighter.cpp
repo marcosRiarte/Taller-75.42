@@ -43,14 +43,13 @@ int _tmain(int argc, _TCHAR* argv[])
 		Controlador* controladorDos = Parser::getInstancia().getControlador2();
 
 		//Parte de creación inicial.		
-		Sprite* unSprite = new Sprite(JSON_SPRITES);
-		Mundo* unMundo = new Mundo(vecGravedad, unSprite);
-		Vista* unaVista = new Vista(unMundo, unSprite, &error, true);
+		Mundo* unMundo = new Mundo(vecGravedad);
+		Vista* unaVista = new Vista(unMundo, &error, true);
 
 		if (error){
 			Log::getInstancia().logearMensajeEnModo("Error iniciando SDL con aceleracion de hardware, se iniciara en modo software...", Log::MODO_WARNING);
 			delete unaVista;
-			Vista* unaVista = new Vista(unMundo, unSprite, &error, false);
+			Vista* unaVista = new Vista(unMundo, &error, false);
 		}
 		if (error){
 			std::string mensaje = ((std::string)"Error iniciando SDL: ").append(SDL_GetError()).c_str();
@@ -64,13 +63,13 @@ int _tmain(int argc, _TCHAR* argv[])
 		unaVista->habilitarVibracion();
 		Cuerpo *unCuerpo = new Cuerpo(defCuerpo(), controladorUno, (float)(Parser::getInstancia().getEscenario().getAncho() / 2.3), Parser::getInstancia().getPersonajes().at(0));
 		unCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
-		unCuerpo->setSensores(unSprite->getSensores());		
+		unCuerpo->setSensores(unCuerpo->getSprite()->getSensores());
 
 		unMundo->agregarCuerpo(unCuerpo);
 
 		Cuerpo *otroCuerpo = new Cuerpo(defCuerpo(), controladorDos, (float)(Parser::getInstancia().getEscenario().getAncho() / 1.8), Parser::getInstancia().getPersonajes().at(1));
 		otroCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(1));
-		otroCuerpo->setSensores(unSprite->getSensores());
+		otroCuerpo->setSensores(otroCuerpo->getSprite()->getSensores());
 
 		unMundo->agregarCuerpo(otroCuerpo);
 

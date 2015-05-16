@@ -23,7 +23,8 @@ Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo, floa
 std::vector<Sensor*>* Cuerpo::getSensoresActivos() const
 {
 	for (size_t i = 0; i<sensores.size(); i++)
-		if (sensores[i]->at(0)->getEstadoStr() == sensorActivoStr)
+		if (sensores[i]->size() == 0) return sensores[0];
+		else if (sensores[i]->at(0)->getEstadoStr() == sensorActivoStr)
 			return sensores[i];
 
 	// si no se seteo un sensor activo pasa el primero
@@ -120,4 +121,9 @@ int Cuerpo::notificarObservadores(ESTADO nuevoEstado)
 		return REINICIAR;
 	observador->actualizar(posicion.x, posicion.y, nuevoEstado);
 		return CONTINUAR;
+}
+
+Sprite* Cuerpo::getSprite() const
+{
+	return refPersonaje->getSprite();
 }

@@ -1,8 +1,12 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "Sensor.h"
 #include "Personaje.h"
-#define JSON_SPRITES "ima/sprites/ScorpionMK3U.json"
+
+// por dependencia circular declaro y despues 
+// se define en Personaje.h
+struct ESTADO;
 
 class Sprite{
 private:
@@ -43,8 +47,7 @@ private:
 	SDL_Rect* crearCuadro(int x, int y, int w, int h);
 	SDL_Rect* crearCuadro(Json::Value cuadro);	
 	void cargarSensores(std::string unEstadoStr, Json::Value spritesRaiz);
-	void cargarSprites(std::vector<SDL_Rect*>* estadoCuadros, std::string unEstadoStr, Json::Value spritesRaiz);
-	ManejadorULogicas manejadorULog;
+	void cargarSprites(std::vector<SDL_Rect*>* estadoCuadros, std::string unEstadoStr, Json::Value spritesRaiz);	
 
 
 public:

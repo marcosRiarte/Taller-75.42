@@ -16,7 +16,7 @@ class Mundo
 {
 public:
 	Mundo();
-	Mundo(const vector2D& valorGravedad, Sprite* unSprite);
+	Mundo(const vector2D& valorGravedad);
 	void agregarCuerpo(Cuerpo *unCuerpo);
 	int Paso(float difTiempo);
 	ESTADO Resolver(float difTiempo, Cuerpo *unCuerpo);
@@ -26,8 +26,7 @@ public:
 	Cuerpo* getCuerpo(size_t pos);
 
 private:
-	vector2D gravedad;
-	Sprite* elSprite;
+	vector2D gravedad;	
 	ESTADO estadoAnteriorPj1;
 	ESTADO estadoAnteriorPj2;
 	float yPiso;

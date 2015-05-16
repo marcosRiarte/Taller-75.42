@@ -7,12 +7,11 @@ Mundo::Mundo()
 
 }
 
-Mundo::Mundo(const vector2D& valorGravedad, Sprite* unSprite)
+Mundo::Mundo(const vector2D& valorGravedad)
 {
 	yPiso = Parser::getInstancia().getEscenario().getYPiso();
 	gravedad = valorGravedad;
-	Cuerpos = std::vector<Cuerpo*>();
-	elSprite = unSprite;
+	Cuerpos = std::vector<Cuerpo*>();	
 }
 
 void Mundo::agregarCuerpo(Cuerpo *unCuerpo)
@@ -157,6 +156,7 @@ ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCu
 ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<MOV_TIPO>* movimientos)
 {
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
+	Sprite* elSprite = unCuerpo->getSprite();
 
 	if (unCuerpo->EstaFrenado()){
 		if ((movimientos->back() == ARRIBA)){
