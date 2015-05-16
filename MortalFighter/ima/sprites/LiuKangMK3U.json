@@ -1,6 +1,6 @@
 {
     "sprites": {
-        "imagen": "ima/sprites/ScorpionMK3U.png",
+        "imagen": "ima/sprites/LiuKangMK3U.png",
         "coordenadas": {
             "SaltoGolpeado": {
                 "sensores": [
