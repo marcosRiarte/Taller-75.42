@@ -1,8 +1,10 @@
 #include "stdafx.h"
+#include "SDL_ttf.h"
 #include "Vista.h"
 #include "Mundo.h"
 #include "Log.h"
 #include "ControlDeColor.h"
+#include "Timer.h"
 
 
 Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error, bool habilitarAceleracionDeHardware)
@@ -14,6 +16,9 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error, bool habilitarAceler
 	vibracion = false;
 	estaVibrando = false;
 
+	//Se inicializa SDLttf
+	//int TTF_Init(void);
+	//this->fuente = TTF_OpenFont("ima/ttf/Vera.ttf",20);
 	// Usa filtro anisotropico
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 	// Se inicia SDL_image
@@ -208,6 +213,14 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error, bool habilitarAceler
 		estadoAnteriorPj1.movimiento = PARADO;
 		estadoAnteriorPj2.movimiento = PARADO;
 		refMundo = unMundo;
+
+		//Carga efectos de fight (Luego de round y reloj)
+		SDL_Surface* fight = cargarSuperficieOptimizada("ima/bkg/fight Hd.png");
+		this->texturaFight = SDL_CreateTextureFromSurface(renderer, fight);
+		SDL_FreeSurface(fight);
+		//Tiempo de permanecia en pantalla de efectos
+		this->efectosTimer.start();
+
 }
 
 
@@ -440,6 +453,8 @@ void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 	DibujarPersonajes(personajesVista);
 
 	DibujarCapasPosteriores(personajesVista, anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
+   
+	DibujarEfectos(anchoVentana, anchoVentanaPx, altoVentanaPx,anchoEscenario); //Ver si esta en ellugar correcto
 	
 }
 void Vista::DibujarBarrasDeVida(std::vector<Personaje*> personajesVista)
@@ -489,7 +504,35 @@ void Vista::DibujarCapasAnteriores(std::vector<Personaje*> personajesVista, floa
 		}
 	}
 }
+void Vista::DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
+{   //Efecto Round
+	//Efecto FIGHT
+	SDL_Rect camaraFight;
+	camaraFight = { (anchoVentanaPx / 3), (altoVentanaPx/8), (anchoVentanaPx/2), (altoVentanaPx)/2 };
+	
+	
+			
+			camaraFight.w = manejadorULog.darLongPixels(100);
 
+			// donde toma la camara a la capa parametrizado con el ancho del escenario
+			camaraFight.x = manejadorULog.darLongPixels((camaraXLog)*(anchoVentana-310) / (anchoEscenario - anchoVentana));
+			
+			//Si el cronometro de efectos es > 1 segundo y menor a 3 muestra Fight.Si es menor lo borra
+			if ((this->efectosTimer.getTicks()>= 1000) && (this->efectosTimer.getTicks() <= 3000))
+			{
+				SDL_RenderCopy(renderer, this->texturaFight, NULL, &camaraFight);
+			}
+			else{
+				if (this->efectosTimer.getTicks() >= 3000)
+				{
+					SDL_DestroyTexture(this->texturaFight);
+					this->efectosTimer.stop();
+				}
+
+			}
+
+     //Efecto Reloj
+}
 void Vista::DibujarCapasPosteriores(std::vector<Personaje*> personajesVista, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
 {
 	SDL_Rect camara;
@@ -680,7 +723,8 @@ void Vista::deshabilitarVibracion(){
 
 
 Vista::~Vista()
-{		
+{
+	//TTF_CloseFont(this->fuente);
 	SDL_DestroyTexture(texturaSpriteUno);
 	SDL_DestroyTexture(texturaSpriteDos);
 	SDL_DestroyTexture(texturaVerde);
@@ -688,7 +732,8 @@ Vista::~Vista()
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(ventana);
 	delete elSprite;
-
+    
+	//TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }

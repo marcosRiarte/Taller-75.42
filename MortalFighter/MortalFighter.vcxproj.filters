@@ -28,6 +28,9 @@
     <Filter Include="Resource Files\ima\bkg">
       <UniqueIdentifier>{c703215f-dee3-4d75-ad97-60ccf1a34b17}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\ima\ttf">
+      <UniqueIdentifier>{ae31a605-23f3-48c5-ac91-a39c2994b1bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="lib\LICENSE.jpeg.txt">
@@ -403,5 +406,40 @@
     <Image Include="ima\sprites\LiuKangMK3U.png">
       <Filter>Resource Files\ima\sprites</Filter>
     </Image>
+    <Image Include="ima\sprites\Reloj.gif">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="ima\ttf\Vera.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraBd.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraBI.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraIt.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraMoBd.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraMoBI.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraMoIt.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraMono.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraSe.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraSeBd.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
   </ItemGroup>
 </Project>

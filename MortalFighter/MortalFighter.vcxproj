@@ -216,7 +216,20 @@
     <Image Include="ima\sprites\player1.png" />
     <Image Include="ima\sprites\player2.png" />
     <Image Include="ima\sprites\player_default.png" />
+    <Image Include="ima\sprites\Reloj.gif" />
     <Image Include="ima\sprites\ScorpionMK3U.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="ima\ttf\Vera.ttf" />
+    <Font Include="ima\ttf\VeraBd.ttf" />
+    <Font Include="ima\ttf\VeraBI.ttf" />
+    <Font Include="ima\ttf\VeraIt.ttf" />
+    <Font Include="ima\ttf\VeraMoBd.ttf" />
+    <Font Include="ima\ttf\VeraMoBI.ttf" />
+    <Font Include="ima\ttf\VeraMoIt.ttf" />
+    <Font Include="ima\ttf\VeraMono.ttf" />
+    <Font Include="ima\ttf\VeraSe.ttf" />
+    <Font Include="ima\ttf\VeraSeBd.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

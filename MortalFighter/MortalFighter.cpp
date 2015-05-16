@@ -83,6 +83,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		//Contador de cuadros
 		int conteoDeCuadros = 0;
 		fpsTimer.start();
+		
 
 
 		/***************************************************************************/

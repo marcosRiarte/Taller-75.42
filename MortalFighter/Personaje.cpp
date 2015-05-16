@@ -19,7 +19,7 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	saltodiagonal = SaltoDiagonalPersonaje;
 	caida = CaidaPersonaje;	
 	nombreP = nombrePersonaje;
-	//xjose
+	
 	patadaalta = PatadaAltaPersonaje;
 	agachado = AgachadoPersonaje;
 	golpeado = GolpeadoPersonaje;

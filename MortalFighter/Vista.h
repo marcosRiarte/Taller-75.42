@@ -4,6 +4,7 @@
 #include "Controlador.h"
 #include <list>
 #include "Sprites.h"
+#include "Timer.h"
 
 class Vista
 {
@@ -32,12 +33,16 @@ private:
 	int tiempoSecuenciaSpritesUno;
 	SDL_Texture *texturaVerde;
 	SDL_Texture *texturaBarraDeVida;
+	SDL_Texture *texturaFight;
+
 	SDL_Surface* superficieBarraDeVida;
 	SDL_Rect barraDeVida1;
 	SDL_Rect barraDeVida2;
 	SDL_Rect barraDeVidaImagen1;
 	SDL_Rect barraDeVidaImagen2;
 
+	Timer efectosTimer;
+	TTF_Font * fuente;
 	int posBarraDeVida1;
 	int anchoImagenBarraDeVida;
 	int anchoBarraDeVida1;
@@ -65,5 +70,6 @@ private:
 	void DibujarCapasAnteriores(std::vector<Personaje*> personajes, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
 	void DibujarCapasPosteriores(std::vector<Personaje*> personajes, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
 	void DibujarPersonajes(std::vector<Personaje*> personajes);
+	void DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
 };
 
