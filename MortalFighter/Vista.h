@@ -13,6 +13,7 @@ public:
 	void actualizar();
 	void habilitarVibracion();
 	void deshabilitarVibracion();
+	void alfa(Uint8 alfa);
 	SDL_Surface* cargarSuperficieOptimizada(std::string dirImagen);
 	~Vista();
 
@@ -33,6 +34,7 @@ private:
 	SDL_Texture *texturaVerde;
 	SDL_Texture *texturaBarraDeVida;
 	SDL_Texture *texturaFight;
+	Uint8 AlfaVida;
 
 	SDL_Surface* superficieBarraDeVida;
 	SDL_Rect barraDeVida1;
