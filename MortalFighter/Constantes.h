@@ -4,6 +4,8 @@
 #define FIN   		2
 
 #define MODO_DEBUG_SDL true
+#define MODO_COLOR false
+
 //JSON
 #define PRUEBA_JSON "prueba.json"
 #define PRUEBA_JSON_DEFECTO "pruebaDefecto.json"
@@ -29,7 +31,8 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define tiempoSalto 1500.0f
 #define tiempoSaltoDiagonal 1500.0f
 #define tiempoSaltoDiagonalIzq 1500.0f
-#define tiempoAgacharse 1000.0f
+#define tiempoAgacharse 200.0f
+#define tiempoAgachadoDefensa 200.0f
 #define tiempoPatadaAlta 500.0f
 #define tiempoPatadaBaja 1000.0f
 #define tiempoGolpeado 1400.0f

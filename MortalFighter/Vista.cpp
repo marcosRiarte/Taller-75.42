@@ -109,6 +109,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error, bool habilitarAceler
 		int ancho = ancho = SuperficieDos->w;
 		int alto = ancho = SuperficieDos->h;
 
+		if (MODO_COLOR){
 		//Si ambos personajes son iguales,modifico la superficie
 		if ((pelea == "scorpion VS scorpion") || (pelea == "liuKang VS liuKang"))
 		{
@@ -163,6 +164,7 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error, bool habilitarAceler
 				SDL_UnlockSurface(SuperficieDos);
 			}
 		}//Fin del if
+		}
 
 		//Creación de la textura sobre la superficie
 		texturaSpriteUno = SDL_CreateTextureFromSurface(renderer, SuperficieUno);
@@ -331,40 +333,26 @@ void Vista::actualizar(){
 	//Vibracion de la camara
 	if (vibracion){
 		bool golpeado = false;
-		for (int i = 0; i < personajesVista.size(); i++){
-			if ((personajesVista.at(i)->getEstado().accion == PATADA_ALTA)){
+		/*for (int i = 0; i < personajesVista.size(); i++){
+			if ((personajesVista.at(i)->getEstado().accion == PATADA_ALTA) && ){
 				golpeado = true;
 				break;
 			}
-		}
-		/*Este es el codigo que deberia ir en realidad pero todavia no hay gancho
-		if (personajesVista.at(0)->getEstado() == GOLPEADODER){
-			if (personajesVista.at(1)->getEstado() == GANCHO_IZQ){
+		}*/
+		//Este es el codigo que deberia ir en realidad pero todavia no hay gancho
+		if (personajesVista.at(0)->getEstado().golpeado == GOLPEADO){
+			if (personajesVista.at(1)->getEstado().accion == PATADA_ALTA){
 				golpeado = true;
-			}
-		}
-		else {
-			if (personajesVista.at(0)->getEstado() == GOLPEADOIZQ){
-				if (personajesVista.at(1)->getEstado() == GANCHO_DER){
-					golpeado = true;
-				}
 			}
 		}
 		else{
-			if (personajesVista.at(1)->getEstado() == GOLPEADODER){
-				if (personajesVista.at(0)->getEstado() == GANCHO_IZQ){
+			if (personajesVista.at(1)->getEstado().golpeado == GOLPEADO){
+				if (personajesVista.at(0)->getEstado().accion == PATADA_ALTA){
 				golpeado = true;
 				}
 			}
-			else {
-				if (personajesVista.at(1)->getEstado() == GOLPEADOIZQ){
-					if (personajesVista.at(0)->getEstado() == GANCHO_DER){
-						golpeado = true;
-					}
-				}
-			}
 		}
-		*/
+		
 
 /*		if (golpeado) vibraciones++;
 		else vibraciones = 0;*/
