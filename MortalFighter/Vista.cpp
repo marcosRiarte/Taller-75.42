@@ -104,7 +104,6 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error, bool habilitarAceler
 		int h_final = Parser::getInstancia().getColorAlternativo().at(1);;
 		int deplazamiento = Parser::getInstancia().getColorAlternativo().at(2);
 
-
 		//Tamaño de la imagen
 		int ancho = ancho = SuperficieDos->w;
 		int alto = ancho = SuperficieDos->h;
@@ -125,7 +124,6 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error, bool habilitarAceler
 				}
 			}
 
-			
 			//La variable xPixelSuperficie sera la coordenada x en el pixel
 			//La variable yPixelSuperficie sera la coordenada y en el pixel 
 			for (int xPixelSuperficie = 0; xPixelSuperficie < ancho; xPixelSuperficie++)
@@ -134,16 +132,14 @@ Vista::Vista(Mundo* unMundo, Sprite* unSprite, bool* error, bool habilitarAceler
 				{
 					//Convertimos de RGB a HSV
 							double hue = color.RGBtoHSV(h_inicio, h_final, deplazamiento, color.getSuperficie(), xPixelSuperficie, yPixelSuperficie);
-							double saturation = color.obtenerSaturacion((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
-							double value = color.obtenerBrillo((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
-
-					//Si el hue esta en el rango a cambiar
-					
-					if (hue != -1)
+												
+					//Si el hue esta en el rango a cambiar					
+					if (hue != -1) 
 					{
-						
+						double saturation = color.obtenerSaturacion((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
+						double value = color.obtenerBrillo((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
 						//Convertimos los nuevos valores HSV a RGB(devuelve un vector con cada color)
-						std::vector<int> nuevosRGB = color.HSVtoRGB(hue, saturation, value);
+						std::vector<int> nuevosRGB = color.HSVtoRGB(hue,saturation, value);
 						//Construye el Uint 32 con el nuevo color r g b
 						Uint32 nuevoMapaRGB = SDL_MapRGBA(color.getSuperficie()->format, nuevosRGB.at(0), nuevosRGB.at(1), nuevosRGB.at(2), nuevosRGB.at(3));
 						//Coloca los nuevos valores RGB en el pixel

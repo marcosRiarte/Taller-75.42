@@ -115,7 +115,6 @@ Uint32 ControlDeColor::GetPixel(SDL_Surface *superficie, int x, int y)
 //Convierte la superficie de formato RGB a HSV , devuelve 0 si todo ok, sino devuelve -1
 std::vector<int> ControlDeColor::HSVtoRGB(double H, double S, double V)
 {
-
 	std::vector<int> nuevoColor;
 	int R = 0, G = 0, B = 0, A = 0;
 	
@@ -180,7 +179,7 @@ std::vector<int> ControlDeColor::HSVtoRGB(double H, double S, double V)
 		{
 			A = (int)*(this->alpha); //A
 			R = (int)m;             //R
-			G = (int)(c + m);             //G
+			G = (int)(c + m);       //G
 			B = (int)(X + m);        //B
 		}
 		else
