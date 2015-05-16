@@ -107,6 +107,7 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		//Tamaño de la imagen
 		int ancho = ancho = SuperficieDos->w;
 		int alto = ancho = SuperficieDos->h;
+		AlfaVida = 255;
 
 		if (MODO_COLOR){
 		//Si ambos personajes son iguales,modifico la superficie
@@ -183,7 +184,7 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		
 
 		int anchoBarraDeVida = Parser::getInstancia().getVentana().getAnchoPx() / 2.2;
-		int altoBarraDeVida = 30;
+		int altoBarraDeVida = 12;
 
 		int posXBarraDeVida1 = (Parser::getInstancia().getVentana().getAnchoPx() / 2) - anchoBarraDeVida - 10;
 		int posXBarraDeVida2 = Parser::getInstancia().getVentana().getAnchoPx() / 2 + 10;
@@ -349,7 +350,10 @@ void Vista::actualizar(){
 			}
 		}
 		
-
+		if ((personajesVista.at(0)->getEstado().golpeado == GOLPEADO) || (personajesVista.at(1)->getEstado().golpeado == GOLPEADO))
+			alfa(128);
+		else
+			alfa(255);
 /*		if (golpeado) vibraciones++;
 		else vibraciones = 0;*/
 
@@ -441,12 +445,16 @@ void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 	DibujarEfectos(anchoVentana, anchoVentanaPx, altoVentanaPx,anchoEscenario); //Ver si esta en ellugar correcto
 	
 }
+
+void Vista::alfa(Uint8 alfa){
+	AlfaVida = alfa;
+}
+
 void Vista::DibujarBarrasDeVida(std::vector<Personaje*> personajesVista)
 {
-	Uint8 Alfa = 128;
 	SDL_SetRenderTarget(renderer, texturaBarraDeVida);
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, Alfa);
-	SDL_SetTextureAlphaMod(texturaVerde, Alfa);
+	SDL_SetRenderDrawColor(renderer, 225, 224, 227, AlfaVida);
+	SDL_SetTextureAlphaMod(texturaBarraDeVida, AlfaVida);
 
 	int vidaPj1 = personajesVista.at(0)->getVida();
 	int vidaPj2 = personajesVista.at(1)->getVida();
@@ -661,7 +669,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		SDL_Rect r2;
 		std::vector<Sensor*>* sensoresCuerpo1 = refMundo->getCuerpo(0)->getSensores();
 		std::vector<Sensor*>* sensoresCuerpo2 = refMundo->getCuerpo(1)->getSensores();
-		Uint8 Alfa = 128;
+		Uint8 Alfa = 50;
 		SDL_SetRenderTarget(renderer, texturaVerde);
 		SDL_SetRenderDrawColor(renderer, 0, 255, 0, Alfa);
 		SDL_SetTextureAlphaMod(texturaVerde, Alfa);
