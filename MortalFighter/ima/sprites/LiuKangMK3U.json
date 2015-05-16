@@ -812,13 +812,7 @@
                         "esHitBox": true
                     }
                 ],
-                "secuenciaSprites": [
-                    {
-                        "x": 1260,
-                        "y": 2520,
-                        "ancho": 180,
-                        "alto": 180
-                    },
+                "secuenciaSprites": [                    
                     {
                         "x": 1080,
                         "y": 2520,
