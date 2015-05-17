@@ -65,10 +65,10 @@ int Controlador::cambiar(){
 	//ACTUALIZO EL VECTOR
 	mantenerMovimientos();
 
-	//if (MOSTRAR_MOVIMIENTOS){
+	if (MOSTRAR_MOVIMIENTOS){
 		std::string mensaje = getUltimoMovimientoActivo();
 		if (mensaje != "") std::cout << mensaje << "\n";
-	//}
+	}
 
 	//TECLADO--------------------------------------------------------------------------
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::QUIT)]) {
