@@ -16,6 +16,7 @@ public:
 	Sint16 getValorDesdeDelEjeDeLaAccion(Acciones unaAccion);
 	Sint16 getValorHastaDelEjeDeLaAccion(Acciones unaAccion);
 	Uint8 getHatDeLaAccion(Acciones unaAccion);
+	std::string getSimboloDeLaAccion(Acciones unaAccion);
 	~ConversorDeEventos();
 
 private:

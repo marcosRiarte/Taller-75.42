@@ -589,6 +589,36 @@ Uint8 ConversorDeEventos::getHatDeLaAccion(Acciones unaAccion){
 }
 
 
+std::string ConversorDeEventos::getSimboloDeLaAccion(Acciones unaAccion){
+	//TECLADO
+	if (acciones[unaAccion].numeroDeJoystick == NULO){
+		if (acciones[unaAccion].keyCodeDelEvento == NULO) return "";
+		return SDL_GetKeyName(acciones[unaAccion].keyCodeDelEvento);
+	}
+	//JOYSTICK
+	//EJES
+	if (acciones[unaAccion].eje){
+		if (acciones[unaAccion].jBoton == 0){
+			if (acciones[unaAccion].ejeDesde > 0) return "DERECHA";
+			return "IZQUIERDA";
+		}
+		if (acciones[unaAccion].ejeDesde > 0) return "ARRIBA";
+		return "ABAJO";
+	}
+	//FLECHAS
+	if (acciones[unaAccion].flechas){
+		if (acciones[unaAccion].hat == SDL_HAT_DOWN) return "ABAJO";
+		if (acciones[unaAccion].hat == SDL_HAT_UP) return "ARRIBA";
+		if (acciones[unaAccion].hat == SDL_HAT_LEFT) return "IZQUIERDA";
+		if (acciones[unaAccion].hat == SDL_HAT_RIGHT) return "DERECHA";
+	}
+	//BOTONES
+	std::stringstream stream;
+	stream << acciones[unaAccion].jBoton;
+	return stream.str();
+}
+
+
 ConversorDeEventos::~ConversorDeEventos()
 {
 }

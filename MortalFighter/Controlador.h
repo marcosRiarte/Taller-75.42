@@ -3,7 +3,7 @@
 #include "ConversorDeEventos.h"
 
 
-enum MOV_TIPO { QUIETO, DER, IZQ, ARRIBA, ABAJO, SALTOIZQ, SALTODER, DEFENSA, DEFENSA_AGACHADO, G_BAJO, G_ALTO, G_ABAJO, G_GANCHO, G_SALTO, G_SALTOIZQ, G_SALTODER, P_BAJA, P_ALTA, P_BAJA_ABAJO, P_ALTA_ABAJO, P_SALTO, P_SALTOIZQ, P_SALTODER, ARMA, CERRAR, RECARGAR };
+enum MOV_TIPO { ARRIBA, ABAJO, DER, IZQ, DEFENSA, G_BAJO, G_ALTO, P_BAJA, P_ALTA, ARMA, CERRAR, RECARGAR, SALTOIZQ, SALTODER, DEFENSA_AGACHADO, G_ABAJO, G_GANCHO, G_SALTO, G_SALTOIZQ, G_SALTODER, P_BAJA_ABAJO, P_ALTA_ABAJO, P_SALTO, P_SALTOIZQ, P_SALTODER, QUIETO };
 
 
 class Controlador
@@ -15,6 +15,7 @@ public:
 	int cambiar();
 	std::vector<MOV_TIPO> getMovimientos();
 	void setConversorDeEventos(ConversorDeEventos* unConversorDeEventos);
+	std::string getUltimoMovimientoActivo();
 
 private:
 	std::vector<MOV_TIPO> movimientos;
@@ -27,7 +28,8 @@ private:
 	SDL_Joystick* unJoystick;
 	SDL_Joystick* otroJoystick;
 	Sint16 valorDelEje;
+	int cantidadDeEventosAnterior;
 
-	void Controlador::mantenerMovimientos();
+	void mantenerMovimientos();
 };
 
