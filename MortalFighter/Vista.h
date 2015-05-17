@@ -35,7 +35,10 @@ private:
 	SDL_Texture *texturaBarraDeVida;
 	SDL_Texture *texturaBarraDeVidaRoja;
 	SDL_Texture *texturaFight;
+
 	Uint8 AlfaVida;
+	Uint8 AlfaAnterior;
+	Uint8 AlfaInicial;
 
 	SDL_Surface* superficieBarraDeVida;
 	SDL_Surface* superficieBarraDeVidaRoja;

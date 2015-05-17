@@ -230,6 +230,8 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		barraRojaDeVida1 = { posXBarraDeVida1, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
 		barraRojaDeVida2 = { posXBarraDeVida2, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
 
+		AlfaInicial = 200;
+		AlfaAnterior = 1;
 		estadoAnteriorPj1.movimiento = PARADO;
 		estadoAnteriorPj2.movimiento = PARADO;
 		refMundo = unMundo;
@@ -371,8 +373,13 @@ void Vista::actualizar(){
 			}
 		}
 		
-		if ((personajesVista.at(0)->getEstado().golpeado == GOLPEADO) || (personajesVista.at(1)->getEstado().golpeado == GOLPEADO))
-			alfa(200);
+		if ((personajesVista.at(0)->getEstado().golpeado == GOLPEADO) || (personajesVista.at(1)->getEstado().golpeado == GOLPEADO)){
+			AlfaInicial = AlfaInicial - AlfaAnterior;
+			if (AlfaInicial < 128){
+				AlfaInicial = 200;
+			}
+			alfa(AlfaInicial);
+		}
 		else
 			alfa(128);
 /*		if (golpeado) vibraciones++;
@@ -507,18 +514,20 @@ void Vista::DibujarBarrasDeVida(std::vector<Personaje*> personajesVista)
 	barraRojaDeVida2.w = anchoAnteriorBarra2 - nuevoAnchoBarraDeVida2;
 	barraRojaDeVida1.x = barraDeVida1.x - barraRojaDeVida1.w;
 
-	barraRojaDeVidaImagen1.x = barraDeVidaImagen1.x;
+	barraRojaDeVidaImagen1.x = barraDeVidaImagen1.x + barraDeVidaImagen1.w;
 	barraRojaDeVidaImagen2.x = barraDeVidaImagen2.x + barraDeVidaImagen2.w;
 	barraRojaDeVidaImagen1.w = anchoAnteriorBarraImagen1 - nuevoanchoImagenBarraDeVida1;
 	barraRojaDeVidaImagen2.w = anchoAnteriorBarraImagen2 - nuevoanchoImagenBarraDeVida2;
 
 	//Se setean atributos anteriores para el próximo cuadro.
+	if (!(personajesVista.at(0)->getEstado().golpeado == GOLPEADO) && !(personajesVista.at(1)->getEstado().golpeado == GOLPEADO)){
 	anchoAnteriorBarra1 = nuevoAnchoBarraDeVida1;
 	anchoAnteriorBarra2 = nuevoAnchoBarraDeVida2;
 
 	anchoAnteriorBarraImagen1 = nuevoanchoImagenBarraDeVida1;
 	anchoAnteriorBarraImagen2 = nuevoanchoImagenBarraDeVida2;
-	
+	}
+
 	SDL_RenderCopyEx(renderer, texturaBarraDeVidaRoja, &barraRojaDeVidaImagen1, &barraRojaDeVida1, 0, NULL, SDL_FLIP_HORIZONTAL);
 	SDL_RenderCopy(renderer, texturaBarraDeVidaRoja, &barraRojaDeVidaImagen2, &barraRojaDeVida2);
 
@@ -547,7 +556,7 @@ void Vista::DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVenta
 {   //Efecto Round
 	//Efecto FIGHT
 	SDL_Rect camaraFight;
-	camaraFight = { (anchoVentanaPx / 3), (altoVentanaPx/8), (anchoVentanaPx/2), (altoVentanaPx)/2 };
+	camaraFight = { (anchoVentanaPx / 3), (altoVentanaPx/8), (anchoVentanaPx/2), (altoVentanaPx)/4 };
 	
 	
 			
