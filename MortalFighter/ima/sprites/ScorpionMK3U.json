@@ -108,23 +108,12 @@
                 ],
                 "secuenciaSprites": [
                     {
-                        "x": 360,
-                        "y": 360,
-                        "ancho": 180,
-                        "alto": 180
-                    },
-                    {
                         "x": 180,
                         "y": 360,
                         "ancho": 180,
                         "alto": 180
-                    },
-                    {
-                        "x": 0,
-                        "y": 360,
-                        "ancho": 180,
-                        "alto": 180
                     }
+                    
                 ]
             },
             "AgachadoGolpeado": {
