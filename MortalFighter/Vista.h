@@ -33,14 +33,25 @@ private:
 	int tiempoSecuenciaSpritesUno;
 	SDL_Texture *texturaVerde;
 	SDL_Texture *texturaBarraDeVida;
+	SDL_Texture *texturaBarraDeVidaRoja;
 	SDL_Texture *texturaFight;
+
 	Uint8 AlfaVida;
+	Uint8 AlfaAnterior;
+	Uint8 AlfaInicial;
 
 	SDL_Surface* superficieBarraDeVida;
+	SDL_Surface* superficieBarraDeVidaRoja;
+
 	SDL_Rect barraDeVida1;
 	SDL_Rect barraDeVida2;
 	SDL_Rect barraDeVidaImagen1;
 	SDL_Rect barraDeVidaImagen2;
+
+	SDL_Rect barraRojaDeVida1;
+	SDL_Rect barraRojaDeVida2;
+	SDL_Rect barraRojaDeVidaImagen1;
+	SDL_Rect barraRojaDeVidaImagen2;
 
 	Timer efectosTimer;
 	TTF_Font * fuente;
@@ -48,7 +59,19 @@ private:
 	int anchoImagenBarraDeVida;
 	int anchoBarraDeVida1;
 	int anchoBarraDeVida2;	
-	
+
+	//Anchos Auxiliares
+	int anchoAnteriorBarra1;
+	int anchoAnteriorBarra2;
+	int anchoAnteriorBarraImagen1;
+	int anchoAnteriorBarraImagen2;
+
+	//Anchos finales
+	int anchoRojoBarra1;
+	int anchoRojoBarra2;
+	int anchoRojoImagenBarra1;
+	int anchoRojoImagenBarra2;
+
 
 	std::vector<Capa*> capasVista;
 	int numeroDeCuadroUno;
