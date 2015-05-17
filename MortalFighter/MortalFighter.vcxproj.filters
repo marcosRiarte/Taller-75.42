@@ -409,6 +409,9 @@
     <Image Include="ima\sprites\Reloj.gif">
       <Filter>Resource Files\ima\sprites</Filter>
     </Image>
+    <Image Include="ima\bkg\barraDeVidaRoja.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="ima\ttf\Vera.ttf">
