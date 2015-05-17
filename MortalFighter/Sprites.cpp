@@ -20,6 +20,7 @@ SDL_Rect* Sprite::crearCuadro(Json::Value cuadro){
 }
 
 Sprite::Sprite(std::string jsonSprites){
+
 	this->Caida = new std::vector<SDL_Rect*>();
 	this->Salto = new std::vector<SDL_Rect*>();
 	this->CaminandoParaAdelante = new std::vector<SDL_Rect*>();
@@ -138,9 +139,7 @@ Sprite::Sprite(std::string jsonSprites){
 	cargarSprites(this->Arma, "Arma", sprites);
 	// Sensores Arma
 	cargarSensores("Arma", sprites);
-
-
-
+	
 	// Sprites Gancho
 	cargarSprites(this->Gancho, "Gancho", sprites);
 	// Sensores Gancho
@@ -180,7 +179,6 @@ Sprite::Sprite(std::string jsonSprites){
 	cargarSprites(this->Disparo, "Disparo", sprites);
 	// Sensores Disparo
 	cargarSensores("Disparo", sprites);
-	
 
 	*SaltoDiagonalIzq = *SaltoDiagonal;
 	std::reverse(SaltoDiagonalIzq->begin(), SaltoDiagonalIzq->end());
@@ -235,33 +233,53 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 	if (unEstado.golpeado == GOLPEADO){
 		if (unEstado.movimiento == SALTO || unEstado.movimiento == SALTODIAGIZQ || unEstado.movimiento == SALTODIAGDER)
 			return SaltoGolpeado;
+		if (unEstado.movimiento == AGACHADO)
+			return AgachadoGolpeado;
 		return Golpeado;
 	}
 	if (unEstado.accion == PATADA_ALTA){
+		if (unEstado.movimiento == AGACHADO)
+			return AgachadoPatadaAlta;
+		if (unEstado.movimiento == SALTO)
+			return SaltoPatada;
+		if (unEstado.movimiento == SALTODIAGIZQ || unEstado.movimiento == SALTODIAGDER)
+			return SaltoDiagonalPatada;
 		return PatadaAlta;
 	}
 	if (unEstado.accion == PATADA_BAJA){
+		if (unEstado.movimiento == AGACHADO)
+			return AgachadoPatadaBaja;
+		if (unEstado.movimiento == SALTO)
+			return SaltoPatada;
+		if (unEstado.movimiento == SALTODIAGIZQ || unEstado.movimiento == SALTODIAGDER)
+			return SaltoDiagonalPatada;
 		return PatadaBaja;
 	}
 	if (unEstado.accion == GOLPE_ALTO){
+		if (unEstado.movimiento == SALTO)
+			return SaltoGolpe;
 		return GolpeAlto;
 	}
 	if (unEstado.accion == GOLPE_BAJO){
+		if (unEstado.movimiento == AGACHADO)
+			return AgachadoGolpeBajo;
+		if (unEstado.movimiento == SALTO)
+			return SaltoGolpe;
 		return GolpeBajo;
+	}
+	if (unEstado.accion == GANCHO){
+		return Gancho;
 	}
 	if (unEstado.accion == ARMA_ARROJABLE){
 		return Arma;
-	}
-	
-	if (unEstado.movimiento == AGACHADO){
-		if (unEstado.accion == GUARDIA)
-			return AgachadoDefensa;
-		return Agacharse;
-	}
+	}	
 	if (unEstado.accion == GUARDIA){
 		if (unEstado.movimiento == AGACHADO)
 			return AgachadoDefensa;
 		return Defensa;
+	}
+	if (unEstado.movimiento == AGACHADO){
+		return Agacharse;
 	}
 	if (unEstado.movimiento == CAMINARDER){
 		return CaminandoParaAdelante;
@@ -293,20 +311,49 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 	if (estadoDelPersonaje.golpeado == GOLPEADO){
 		if (estadoDelPersonaje.movimiento == SALTO || estadoDelPersonaje.movimiento == SALTODIAGIZQ || estadoDelPersonaje.movimiento == SALTODIAGDER)
 			return (tiempoSaltoGolpeado / (this->SaltoGolpeado->size()) / MSxCUADRO);
+		if (estadoDelPersonaje.movimiento == AGACHADO)
+			return (tiempoAgachadoGolpeado / (this->AgachadoGolpeado->size()) / MSxCUADRO);
 		if (estadoDelPersonaje.accion == GUARDIA)
 			return (tiempoDefensa / (this->Defensa->size()) / MSxCUADRO);
 		return (tiempoGolpeado / (this->Golpeado->size()) / MSxCUADRO);
 	}
-	if (estadoDelPersonaje.accion == PATADA_BAJA)
+	if (estadoDelPersonaje.accion == GANCHO)
+		return (tiempoGancho / (this->Gancho->size()) / MSxCUADRO);
+
+	if (estadoDelPersonaje.accion == PATADA_BAJA){
+		if (estadoDelPersonaje.movimiento == AGACHADO)
+			return (tiempoAgachadoPatadaBaja / (this->AgachadoPatadaBaja->size()) / MSxCUADRO);
+		if (estadoDelPersonaje.movimiento == SALTO)
+			return (tiempoSaltoPatada / (this->SaltoPatada->size()) / MSxCUADRO);
+		if (estadoDelPersonaje.movimiento == SALTODIAGIZQ || estadoDelPersonaje.movimiento == SALTODIAGDER)
+			return (tiempoSaltoDiagonalPatada / (this->SaltoDiagonalPatada->size()) / MSxCUADRO);
 		return (tiempoPatadaBaja / (this->PatadaBaja->size()) / MSxCUADRO);
-	if (estadoDelPersonaje.accion == GOLPE_ALTO)
+	}
+	if (estadoDelPersonaje.accion == GOLPE_ALTO){
+		if (estadoDelPersonaje.movimiento == SALTO)
+			return (tiempoSaltoGolpe / (this->SaltoGolpe->size()) / MSxCUADRO);
 		return (tiempoGolpeAlto / (this->GolpeAlto->size()) / MSxCUADRO);
-	if (estadoDelPersonaje.accion == GOLPE_BAJO)
-		return (tiempoGolpeBajo / (this->GolpeBajo->size()) / MSxCUADRO);
+	}
+	if (estadoDelPersonaje.accion == GOLPE_BAJO){
+		if (estadoDelPersonaje.movimiento == AGACHADO)
+			return (tiempoAgachadoGolpeBajo / (this->AgachadoGolpeBajo->size()) / MSxCUADRO);
+		if (estadoDelPersonaje.movimiento == SALTO)
+			return (tiempoSaltoGolpe / (this->SaltoGolpe->size()) / MSxCUADRO);
+			return (tiempoGolpeBajo / (this->GolpeBajo->size()) / MSxCUADRO);
+	}
+
 	if (estadoDelPersonaje.accion == ARMA_ARROJABLE)
 		return (tiempoArmaArrojable / (this->Arma->size()) / MSxCUADRO);
-	if (estadoDelPersonaje.accion == PATADA_ALTA)
+
+	if (estadoDelPersonaje.accion == PATADA_ALTA){
+		if (estadoDelPersonaje.movimiento == AGACHADO)
+			return (tiempoAgachadoPatadaAlta / (this->AgachadoPatadaAlta->size()) / MSxCUADRO);
+		if (estadoDelPersonaje.movimiento == SALTO)
+			return (tiempoSaltoPatada / (this->SaltoPatada->size()) / MSxCUADRO);
+		if (estadoDelPersonaje.movimiento == SALTODIAGIZQ || estadoDelPersonaje.movimiento == SALTODIAGDER)
+			return (tiempoSaltoDiagonalPatada / (this->SaltoDiagonalPatada->size()) / MSxCUADRO);
 		return (tiempoPatadaAlta / (this->PatadaAlta->size()) / MSxCUADRO);
+	}
 	if (estadoDelPersonaje.accion == GUARDIA){
 		if (estadoDelPersonaje.movimiento == AGACHADO)
 			return (tiempoAgachadoDefensa / (this->Defensa->size()) / MSxCUADRO);

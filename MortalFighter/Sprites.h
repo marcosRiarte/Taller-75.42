@@ -9,7 +9,7 @@
 struct ESTADO;
 
 class Sprite{
-private:
+private:	
 	std::vector<SDL_Rect*>* Caida;
 	std::vector<SDL_Rect*>* Salto;
 	std::vector<SDL_Rect*>* CaminandoParaAdelante;
@@ -17,7 +17,7 @@ private:
 	std::vector<SDL_Rect*>* SaltoDiagonal;
 	std::vector<SDL_Rect*>* SaltoDiagonalIzq;
 	std::vector<SDL_Rect*>* Quieto;
-	std::vector<SDL_Rect*>*Defensa;
+	std::vector<SDL_Rect*>* Defensa;
 
 	std::vector<SDL_Rect*>*Agacharse;
 	std::vector<SDL_Rect*>*PatadaAlta;
@@ -39,7 +39,6 @@ private:
 	std::vector<SDL_Rect*>* AgachadoPatadaBaja;
 	std::vector<SDL_Rect*>* AgachadoPatadaAlta;
 	std::vector<SDL_Rect*>* Disparo;
-
 
 	std::vector<float>* cuadrosRep;
 
