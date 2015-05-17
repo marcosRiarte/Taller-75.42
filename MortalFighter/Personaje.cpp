@@ -4,7 +4,7 @@
 #include "ManejadorULogicas.h"
 #include "Sprites.h"
 
-Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesDirPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje, std::string CaidaPersonaje, std::string PatadaAltaPersonaje, std::string GolpeadoPersonaje, std::string AgachadoPersonaje, std::string nombrePersonaje)
+Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesDirPersonaje, std::string nombrePersonaje)
 {
 	ancho = anchoPersonaje;
 	alto = altoPersonaje;
@@ -12,18 +12,8 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	orientacion = unaorientacion;
 	vida = 100;
 	spritesDir = spritesDirPersonaje;
-	sprites = new Sprite(spritesDir);
-	caminaradelante = CaminarParaAdelante;
-	caminaratras = CaminarParaAtras;
-	quieto = QuietoPersonaje;
-	salto = SaltoPersonaje;
-	saltodiagonal = SaltoDiagonalPersonaje;
-	caida = CaidaPersonaje;	
+	sprites = new Sprite(spritesDir);	
 	nombreP = nombrePersonaje;
-	
-	patadaalta = PatadaAltaPersonaje;
-	agachado = AgachadoPersonaje;
-	golpeado = GolpeadoPersonaje;
 }
 
 float Personaje::getAncho() const
@@ -57,51 +47,6 @@ int Personaje::getVida()
 }
 
 
-
-std::string Personaje::getCaminarParaAdelante() const
-{
-	return caminaradelante;
-}
-
-std::string Personaje:: getCaminarParaAtras() const
-{
-	return caminaratras;
-}
-
-std::string Personaje::getQuieto() const
-{
-	return quieto;
-}
-
-std::string Personaje::getSalto() const
-{
-	return salto;
-}
-
-std::string Personaje::getSaltoDiagonal() const
-{
-	return saltodiagonal;
-}
-
-std::string Personaje::getCaida() const
-{
-	return caida;
-}
-
-//xjose
-std::string Personaje::getPatadaAlta() const
-{
-	return patadaalta;
-}
-std::string Personaje::getGolpeado() const
-{
-	return golpeado;
-}
-
-std::string Personaje::getAgacharse() const
-{
-	return agachado;
-}
 
 int Personaje::descontarVida(ESTADO estadoPj, ESTADO estadoPj2)
 {
@@ -164,7 +109,10 @@ std::string Personaje::getNombre() const
 {
 	return nombreP;
 }
-
+void Personaje::setNombre(std::string unNombre)
+{
+	nombreP = unNombre;
+}
 
 //***************************************
 std::string Personaje::getOrientacion() const
@@ -247,46 +195,6 @@ void Personaje::setSprites(std::string unosSprites){
 	delete sprites;
 	spritesDir = unosSprites;
 	sprites = new Sprite(spritesDir);
-}
-
-void Personaje::setCaminarParaAdelante(std::string unCaminarParaAdelante){
-	caminaradelante = unCaminarParaAdelante;
-}
-
-void Personaje::setCaminarParaAtras(std::string unCaminarParaAtras){
-	caminaratras = unCaminarParaAtras;
-}
-
-void Personaje::setQuieto(std::string unQuieto){
-	quieto = unQuieto;
-}
-
-void Personaje::setSalto(std::string unSalto){
-	salto = unSalto;
-}
-
-void Personaje::setSaltoDiagonal(std::string unSaltoDiagonal){
-	saltodiagonal = unSaltoDiagonal;
-}
-
-void Personaje::setCaida(std::string UnaCaida){
-	caida = UnaCaida;
-}
-
-void Personaje::setNombre(std::string unNombre){
-	nombreP = unNombre;
-}
-
-void Personaje::setPatadaAlta(std::string unaPatadaAlta){
-	patadaalta = unaPatadaAlta;
-}
-
-void Personaje::setAgacharse(std::string unAgacharse){
-	agachado = unAgacharse;
-}
-
-void Personaje::setGolpeado(std::string unGolpeado){
-	golpeado = unGolpeado;
 }
 
 

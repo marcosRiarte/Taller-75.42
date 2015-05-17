@@ -38,12 +38,6 @@
             "zindex": 1,
             "orientacion": "DER",
             "sprites": "ima/sprites/LiuKangMK3U.png",
-            "CaminarParaAdelante": "CaminarParaAdelante",
-            "CaminarParaAtras": "CaminarParaAtras",
-            "Quieto": "Quieto",
-            "Salto": "Salto",
-            "SaltoDiagonal": "SaltoDiagonal",
-            "Caida": "Caida",
             "nombre": "Liu Kang"
         },
         {
@@ -52,12 +46,6 @@
             "zindex": 1,
             "orientacion": "DER",
             "sprites": "ima/sprites/ScorpionMK3U.png",
-            "CaminarParaAdelante": "CaminarParaAdelante",
-            "CaminarParaAtras": "CaminarParaAtras",
-            "Quieto": "Quieto",
-            "Salto": "Salto",
-            "SaltoDiagonal": "SaltoDiagonal",
-            "Caida": "Caida",
             "nombre": "Scorpion"
 
         }
