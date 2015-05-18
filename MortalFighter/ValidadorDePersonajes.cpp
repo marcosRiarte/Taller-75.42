@@ -33,18 +33,18 @@ bool ValidadorDePersonajes::validarPersonajesDesdeConEscenarioYventana(Json::Val
 	if (!personajesParseados || personajesParseados.size() == 0){
 		Log::getInstancia().logearMensajeEnModo("  [BAD] Fallo el parseo del personaje", Log::MODO_WARNING);
 		Log::getInstancia().logearMensajeEnModo("Se cargaron personajes por defecto", Log::MODO_WARNING);
-		personajes->push_back(new Personaje(ANCHO_PERSONAJE, ALTO_PERSONAJE, ZINDEX, ORIENTACION_PERSONAJE, SPRITE_DEFAULT, LIU_KANG));
-		personajes->push_back(new Personaje(ANCHO_PERSONAJE, ALTO_PERSONAJE, ZINDEX, ORIENTACION_PERSONAJE, SPRITE_DEFAULT, LIU_KANG));
+		personajes->push_back(new Personaje(ANCHO_PERSONAJE, ALTO_PERSONAJE, ZINDEX, ORIENTACION_PERSONAJE, SPRITE_DEFAULT, CAMINARPARAADELANTE_DEFAULT, CAMINARPARAATRAS_DEFAULT, QUIETO_DEFAULT, SALTO_DEFAULT, SALTODIAGONAL_DEFAULT, CAIDA_DEFAULT, PATADAALTA_DEFAULT, GOLPEADO_DEFAULT, AGACHARSE_DEFAULT, LIU_KANG));
+		personajes->push_back(new Personaje(ANCHO_PERSONAJE, ALTO_PERSONAJE, ZINDEX, ORIENTACION_PERSONAJE, SPRITE_DEFAULT, CAMINARPARAADELANTE_DEFAULT, CAMINARPARAATRAS_DEFAULT, QUIETO_DEFAULT, SALTO_DEFAULT, SALTODIAGONAL_DEFAULT, CAIDA_DEFAULT, PATADAALTA_DEFAULT, GOLPEADO_DEFAULT, AGACHARSE_DEFAULT, LIU_KANG));
 		return true;
 	}
 	else{
 		if (personajesParseados.size() == 1){
-			personajes->push_back(new Personaje(ANCHO_PERSONAJE, ALTO_PERSONAJE, ZINDEX, ORIENTACION_PERSONAJE, SPRITE_DEFAULT, LIU_KANG));
+			personajes->push_back(new Personaje(ANCHO_PERSONAJE, ALTO_PERSONAJE, ZINDEX, ORIENTACION_PERSONAJE, SPRITE_DEFAULT, CAMINARPARAADELANTE_DEFAULT, CAMINARPARAATRAS_DEFAULT, QUIETO_DEFAULT, SALTO_DEFAULT, SALTODIAGONAL_DEFAULT, CAIDA_DEFAULT, PATADAALTA_DEFAULT, GOLPEADO_DEFAULT, AGACHARSE_DEFAULT, LIU_KANG));
 		}
 
 		for (size_t i = 0; i < personajesParseados.size(); i++) {
 
-			Personaje* unPersonaje = new Personaje(ANCHO_PERSONAJE, ALTO_PERSONAJE, ZINDEX, ORIENTACION_PERSONAJE, SPRITE_DEFAULT, LIU_KANG);
+			Personaje* unPersonaje = new Personaje(ANCHO_PERSONAJE, ALTO_PERSONAJE, ZINDEX, ORIENTACION_PERSONAJE, SPRITE_DEFAULT, CAMINARPARAADELANTE_DEFAULT, CAMINARPARAATRAS_DEFAULT, QUIETO_DEFAULT, SALTO_DEFAULT, SALTODIAGONAL_DEFAULT, CAIDA_DEFAULT, PATADAALTA_DEFAULT, GOLPEADO_DEFAULT, AGACHARSE_DEFAULT, LIU_KANG);
 			
 			//NOMBRE
 			if (personajesParseados[i].isMember("nombre") && personajesParseados[i].get("nombre", LIU_KANG).isString()){
@@ -133,7 +133,124 @@ bool ValidadorDePersonajes::validarPersonajesDesdeConEscenarioYventana(Json::Val
 				Log::getInstancia().logearMensajeEnModo("Se carga orientacion del personaje por defecto", Log::MODO_WARNING);
 			}
 
+			//CAMINAR HACIA ADELANTE
+			if (personajesParseados[i].isMember("CaminarParaAdelante") && personajesParseados[i].get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).isString()){
+				CaminarParaAdelante = (personajesParseados[i].get("CaminarParaAdelante", CAMINARPARAADELANTE_DEFAULT).asString());
+				if ((CaminarParaAdelante != "CaminarParaAdelante") && (CaminarParaAdelante != "CaminarParaAtras") && (CaminarParaAdelante != "Quieto") && (CaminarParaAdelante != "Salto") && (CaminarParaAdelante != "SaltoDiagonal") && (CaminarParaAdelante != "Caida")) {
+					std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto Caminar Para Adelante";
+					Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+				}
+				else unPersonaje->setCaminarParaAdelante(CaminarParaAdelante);
+			}
+			else {
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite CaminarParaAdelante del personaje por defecto", Log::MODO_WARNING);
+			}
 
+			//CAMINAR HACIA ATRAS
+			if (personajesParseados[i].isMember("CaminarParaAtras") && personajesParseados[i].get("CaminarParaAtras", CAMINARPARAATRAS_DEFAULT).isString()){
+				CaminarParaAtras = (personajesParseados[i].get("CaminarParaAtras", CAMINARPARAATRAS_DEFAULT).asString());
+				if ((CaminarParaAtras != "CaminarParaAdelante") && (CaminarParaAtras != "CaminarParaAtras") && (CaminarParaAtras != "Quieto") && (CaminarParaAtras != "Salto") && (CaminarParaAtras != "SaltoDiagonal") && (CaminarParaAtras != "Caida")) {
+					std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto Caminar Para Atras";
+					Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+				}
+				else unPersonaje->setCaminarParaAtras(CaminarParaAtras);
+			}
+			else {
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite CaminarParaAtras del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			//QUIETO
+			if (personajesParseados[i].isMember("Quieto") && personajesParseados[i].get("Quieto", QUIETO_DEFAULT).isString()){
+				Quieto = (personajesParseados[i].get("Quieto", QUIETO_DEFAULT).asString());
+				if ((Quieto != "CaminarParaAdelante") && (Quieto != "CaminarParaAtras") && (Quieto != "Quieto") && (Quieto != "Salto") && (Quieto != "SaltoDiagonal") && (Quieto != "Caida")) {
+					std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto Quieto";
+				}
+				else unPersonaje->setQuieto(Quieto);
+			}
+			else {
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite Quieto del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			//SALTO
+			if (personajesParseados[i].isMember("Salto") && personajesParseados[i].get("Salto", SALTO_DEFAULT).isString()){
+				Salto = (personajesParseados[i].get("Salto", SALTO_DEFAULT).asString());
+				if ((Salto != "CaminarParaAdelante") && (Salto != "CaminarParaAtras") && (Salto != "Quieto") && (Salto != "Salto") && (Salto != "SaltoDiagonal") && (Salto != "Caida")) {
+					std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto Salto";
+					Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+				}
+				else unPersonaje->setSalto(Salto);
+			}
+			else {
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite Salto del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			//SALTO DIAGONAL
+			if (personajesParseados[i].isMember("SaltoDiagonal") && personajesParseados[i].get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).isString()){
+				SaltoDiagonal = (personajesParseados[i].get("SaltoDiagonal", SALTODIAGONAL_DEFAULT).asString());
+
+				if ((SaltoDiagonal != "CaminarParaAdelante") && (SaltoDiagonal != "CaminarParaAtras") && (SaltoDiagonal != "Quieto") && (SaltoDiagonal != "Salto") && (SaltoDiagonal != "SaltoDiagonal") && (SaltoDiagonal != "Caida")) {
+					std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto Salto Diagonal";
+					Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+				}
+				else unPersonaje->setSaltoDiagonal(SaltoDiagonal);
+			}
+			else {
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite SaltoDiagonal del personaje por defecto", Log::MODO_WARNING);
+			}
+			
+			//PATADA ALTA
+			if (personajesParseados[i].isMember("PatadaAlta") && personajesParseados[i].get("PatadaAlta", PATADAALTA_DEFAULT).isString()){
+				PatadaAlta = (personajesParseados[i].get("PatadaAlta", PATADAALTA_DEFAULT).asString());
+				if ((PatadaAlta != "CaminarParaAdelante") && (PatadaAlta != "CaminarParaAtras") && (PatadaAlta != "Quieto") && (PatadaAlta != "Salto") && (PatadaAlta != "SaltoDiagonal") && (PatadaAlta != "Caida")) {
+					std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto Patada Alta";
+					Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+				}
+				unPersonaje->setPatadaAlta(PatadaAlta);
+			}
+			else {
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite PatadaAlta del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			//AGACHARSE
+			if (personajesParseados[i].isMember("Agacharse") && personajesParseados[i].get("Agacharse", AGACHARSE_DEFAULT).isString()){
+				Agacharse = (personajesParseados[i].get("Agacharse", AGACHARSE_DEFAULT).asString());
+				if ((Agacharse != "CaminarParaAdelante") && (Agacharse != "CaminarParaAtras") && (Agacharse != "Quieto") && (Agacharse != "Salto") && (Agacharse != "SaltoDiagonal") && (Agacharse != "Caida")) {
+					std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto Agacharse";
+					Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+				}
+				unPersonaje->setAgacharse(Agacharse);
+			}
+			else {
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite Agacharse del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			//GOLPEADO
+			if (personajesParseados[i].isMember("Golpeado") && personajesParseados[i].get("Golpeado", GOLPEADO_DEFAULT).isString()){
+				Golpeado = (personajesParseados[i].get("Golpeado", GOLPEADO_DEFAULT).asString());
+				if ((Golpeado != "CaminarParaAdelante") && (Golpeado != "CaminarParaAtras") && (Golpeado != "Quieto") && (Golpeado != "Salto") && (Golpeado != "SaltoDiagonal") && (Golpeado != "Caida")) {
+					std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto Golpeado";
+					Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+				}
+				unPersonaje->setGolpeado(Golpeado);
+			}
+			else {
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite Golpeado del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			//CAIDA
+			if (personajesParseados[i].isMember("Caida") && personajesParseados[i].get("Caida", CAIDA_DEFAULT).isString()){
+				Caida = (personajesParseados[i].get("Caida", CAIDA_DEFAULT).asString());
+				if ((Caida != "CaminarParaAdelante") && (Caida != "CaminarParaAtras") && (Caida != "Quieto") && (Caida != "Salto") && (Caida != "SaltoDiagonal") && (Caida != "Caida")) {
+					std::string mensaje = "Funcion del personaje invalida, se toma funcion por defecto Caida";
+					Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+				}
+				else unPersonaje->setCaida(Caida);
+			}
+			else {
+				Log::getInstancia().logearMensajeEnModo("Se carga sprite Caida del personaje por defecto", Log::MODO_WARNING);
+			}
+
+			//xjose  TODO falta validar agacharse, golpeado, patadaalta
 			personajes->push_back(unPersonaje);
 		}
 	}

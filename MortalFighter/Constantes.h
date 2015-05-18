@@ -72,13 +72,22 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define ORIENTACION_PERSONAJE "DER"
 #define SPRITE_DEFAULT "ima/sprites/player_default.png"
 #define FONDO_DEFAULT "ima/bkg/default_capa.png" // al ser varias capas la idea esa usar esta por que va a permitir que se vean el resto de las que si estan
-
+#define CAMINARPARAADELANTE_DEFAULT "CaminarParaAdelante"
+#define CAMINARPARAATRAS_DEFAULT "CaminarParaAtras"
+#define QUIETO_DEFAULT "Quieto"
+#define SALTO_DEFAULT "Salto"
+#define SALTODIAGONAL_DEFAULT "SaltoDiagonal"
+#define CAIDA_DEFAULT "Caida"
 
 #define PELEA_INICIAL "scorpion VS scorpion"
 
 #define H_INICIAL 40
 #define H_FINAL 45
 #define DESPLAZAMIENTO 30
+
+#define GOLPEADO_DEFAULT "Golpeado"
+#define AGACHARSE_DEFAULT "Agacharse"
+#define PATADAALTA_DEFAULT "PatadaAlta"
 
 #define LIU_KANG "LiuKang"
 
