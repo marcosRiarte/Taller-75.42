@@ -80,55 +80,45 @@ int Controlador::cambiar(){
 	}
 
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LOW_PUNCH)]){
-		if (movimientos.back() == G_ABAJO){
-			movimientos.push_back(ABAJO);
-			return CONTINUAR;
-		}
 		if (movimientos.back() == ABAJO){
 			movimientos.push_back(G_ABAJO);
 			return CONTINUAR;
 		}
+		if (movimientos.back() == G_ABAJO) return CONTINUAR;
 
 		if(movimientos.back() != G_BAJO) movimientos.push_back(G_BAJO);
 		return CONTINUAR;
 	}
 
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HIGH_PUNCH)]){
-		if (movimientos.back() == G_GANCHO){
-			movimientos.push_back(ABAJO);
-			return CONTINUAR;
-		}
 		if (movimientos.back() == ABAJO){
 			movimientos.push_back(G_GANCHO);
 			return CONTINUAR;
 		}
+		if (movimientos.back() == G_GANCHO) return CONTINUAR;
 
 		if (movimientos.back() != G_ALTO) movimientos.push_back(G_ALTO);
 		return CONTINUAR;
 	}
 
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LOW_KICK)]){
-		if (movimientos.back() == P_BAJA_ABAJO){
-			movimientos.push_back(ABAJO);
-			return CONTINUAR;
-		}
 		if (movimientos.back() == ABAJO){
 			movimientos.push_back(P_BAJA_ABAJO);
 			return CONTINUAR;
 		}
+		if (movimientos.back() == P_BAJA_ABAJO) return CONTINUAR;
+
 		if (movimientos.back() != P_BAJA) movimientos.push_back(P_BAJA);
 		return CONTINUAR;
 	}
 
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HIGH_KICK)]){
-		if (movimientos.back() == P_ALTA_ABAJO){
-			movimientos.push_back(ABAJO);
-			return CONTINUAR;
-		}
 		if (movimientos.back() == ABAJO){
 			movimientos.push_back(P_ALTA_ABAJO);
 			return CONTINUAR;
 		}
+		if (movimientos.back() == P_ALTA_ABAJO) return CONTINUAR;
+
 		if (movimientos.back() != P_ALTA) movimientos.push_back(P_ALTA);
 		return CONTINUAR;
 	}
