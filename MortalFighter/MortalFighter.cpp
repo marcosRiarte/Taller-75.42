@@ -124,6 +124,9 @@ int _tmain(int argc, _TCHAR* argv[])
 				avgFPS = 0;
 			}
 
+			if (controladorUno->getMovimientos().back() == G_ALTO)
+				std::cout << "el controlador esta enviando golpe alto" << std::endl;
+
 			//Se actualiza la pantalla
 			int estadoVida = unMundo->Paso(0.13f);
 			unaVista->actualizar();
