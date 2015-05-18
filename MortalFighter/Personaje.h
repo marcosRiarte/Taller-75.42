@@ -52,7 +52,7 @@ public:
 	void setEstado(ESTADO nuevoEstado);
 	float getDeltaX() const;	
 	virtual void actualizar(float xNuevo, float yNuevo, ESTADO estadoJugador);	
-	std::pair<float, float> Personaje::getPosicionUn()const;	
+	std::pair<float, float> getPosicionUn() const;	
 
 	//SETTERS
 	void setDeltaX(float unDeltaX);
