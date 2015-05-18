@@ -26,6 +26,8 @@ public:
 	Cuerpo* getCuerpo(size_t pos);
 
 private:
+	Cuerpo *proyectilJugador1;
+	Cuerpo *proyectilJugador2;
 	vector2D gravedad;	
 	ESTADO estadoAnteriorPj1;
 	ESTADO estadoAnteriorPj2;

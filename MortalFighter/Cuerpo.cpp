@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Cuerpo.h"
 
-Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo, float posicionEnX, Personaje* unPersonaje)
+Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo, float posicionEnX)
 {
 	controlador = controladorNuevo;
 	nombre = unaDefCuerpo.nombre;
@@ -14,7 +14,6 @@ Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo, floa
 	estaFrenado = unaDefCuerpo.estaFrenado;
 	demora = unaDefCuerpo.demora; //xjose
 	sensorActivoStr = "";
-	refPersonaje = unPersonaje;
 	estadoAnterior.accion = SIN_ACCION;
 	estadoAnterior.golpeado = NOGOLPEADO;
 	estadoAnterior.movimiento = PARADO;
@@ -82,7 +81,7 @@ bool Cuerpo::estaEnBorde()
 }
 
 Personaje* Cuerpo::getRefPersonaje(){
-	return refPersonaje;
+	return observador;
 }
 
 void Cuerpo::sumarPosicion(const vector2D& unaPosicion)
@@ -125,5 +124,5 @@ int Cuerpo::notificarObservadores(ESTADO nuevoEstado)
 
 Sprite* Cuerpo::getSprite() const
 {
-	return refPersonaje->getSprite();
+	return observador->getSprite();
 }
