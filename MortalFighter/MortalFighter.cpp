@@ -83,23 +83,24 @@ int _tmain(int argc, _TCHAR* argv[])
 		defCuerpo proyectil1 = defCuerpo();
 		proyectil1.nombre = "proyectil";
 		proyectil1.posicion = personaje1.posicion;
-		proyectil1.posicion.x += Parser::getInstancia().getPersonajes().at(0)->getAncho();
+		//proyectil1.posicion.x += Parser::getInstancia().getPersonajes().at(0)->getAncho();
 
 		//Se agrega el proyectil a la física del jugador 1
 		Cuerpo *proyectilJugador1 = new Cuerpo(proyectil1, controladorUno);
 		proyectilJugador1->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
-		proyectilJugador1->setSensores(proyectilJugador1->getSprite()->getSensores());
+		proyectilJugador1->setSensoresProyectil(proyectilJugador1->getSprite()->getSensoresDisparo());
+
 		unMundo->agregarCuerpo(proyectilJugador1);
 
 		defCuerpo proyectil2 = defCuerpo();
 		proyectil2.nombre = "proyectil";
 		proyectil2.posicion = personaje2.posicion;
-		proyectil2.posicion.x -= Parser::getInstancia().getPersonajes().at(1)->getAncho();
+		//proyectil2.posicion.x -= Parser::getInstancia().getPersonajes().at(1)->getAncho();
 		
 		//Se agrega el proyectil a la física del jugador 2
 		Cuerpo *proyectilJugador2 = new Cuerpo(proyectil2, controladorDos);
 		proyectilJugador2->recibeObservador(Parser::getInstancia().getPersonajes().at(1));
-		proyectilJugador2->setSensores(proyectilJugador2->getSprite()->getSensores());
+		proyectilJugador2->setSensoresProyectil(proyectilJugador2->getSprite()->getSensoresDisparo());
 
 		unMundo->agregarCuerpo(proyectilJugador2);
 	

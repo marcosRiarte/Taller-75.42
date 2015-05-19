@@ -53,10 +53,11 @@ public:
 		sensoresDisparo = sensoresProyectil;
 	}
 
-	std::vector<Sensor*> getSensoresProyectil(){
+	std::vector<Sensor*> getSensoresProyectil()
+	{
 		return sensoresDisparo;
 	}
-
+	
 	void setEstadoAnterior(ESTADO unestadoAnterior){
 		estadoAnterior = unestadoAnterior;
 	}

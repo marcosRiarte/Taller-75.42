@@ -24,10 +24,8 @@ public:
 	void FrenarCuerpos();
 	void LiberarCuerpos();
 	Cuerpo* getCuerpo(size_t pos);
-
+	Cuerpo* getProyectil(size_t pos);
 private:
-	Cuerpo *proyectilJugador1;
-	Cuerpo *proyectilJugador2;
 	vector2D gravedad;	
 	ESTADO estadoAnteriorPj1;
 	ESTADO estadoAnteriorPj2;

@@ -723,9 +723,14 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	if (MODO_DEBUG_SDL){
 		SDL_Rect r;
 		SDL_Rect r2;
+		SDL_Rect r3;
+		SDL_Rect r4;
 		std::vector<Sensor*>* sensoresCuerpo1 = refMundo->getCuerpo(0)->getSensores();
 		std::vector<Sensor*>* sensoresCuerpo2 = refMundo->getCuerpo(1)->getSensores();
-		Uint8 Alfa = 50;
+		std::vector<Sensor*> sensoresProyectil1 = refMundo->getProyectil(0)->getSensoresProyectil();
+		std::vector<Sensor*> sensoresProyectil2 = refMundo->getProyectil(1)->getSensoresProyectil();
+
+		Uint8 Alfa = 128;
 		SDL_SetRenderTarget(renderer, texturaVerde);
 		SDL_SetRenderDrawColor(renderer, 0, 255, 0, Alfa);
 		SDL_SetTextureAlphaMod(texturaVerde, Alfa);
@@ -754,6 +759,23 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 			r2.h = sensoresCuerpo2->at(i)->getAlto();
 			SDL_RenderCopy(renderer, texturaVerde, NULL, &r2);
 		}
+
+		for (unsigned i = 0; i < sensoresProyectil1.size(); i++){
+			r3.x = sensoresProyectil1.at(i)->getPosicion().first;
+			r3.y = sensoresProyectil1.at(i)->getPosicion().second;
+			r3.w = sensoresProyectil1.at(i)->getAncho();
+			r3.h = sensoresProyectil1.at(i)->getAlto();
+			SDL_RenderCopy(renderer, texturaVerde, NULL, &r3);
+		}
+
+		for (unsigned i = 0; i < sensoresProyectil2.size(); i++){
+			r4.x = sensoresProyectil2.at(i)->getPosicion().first;
+			r4.y = sensoresProyectil2.at(i)->getPosicion().second;
+			r4.w = sensoresProyectil2.at(i)->getAncho();
+			r4.h = sensoresProyectil2.at(i)->getAlto();
+			SDL_RenderCopy(renderer, texturaVerde, NULL, &r4);
+		}
+
 		SDL_SetRenderTarget(renderer, NULL);
 	}
 

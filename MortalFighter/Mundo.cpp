@@ -33,6 +33,14 @@ Cuerpo* Mundo::getCuerpo(size_t pos)
 	return nullptr;
 }
 
+Cuerpo* Mundo::getProyectil(size_t pos)
+{
+	if (pos < Proyectiles.size())
+		return Proyectiles.at(pos);
+
+	return nullptr;
+}
+
 int Mundo::Paso(float difTiempo)
 {
 	int estadoJuego = CONTINUAR;
