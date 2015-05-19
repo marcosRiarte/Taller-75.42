@@ -44,6 +44,27 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		//Parte de creación inicial.		
 		Mundo* unMundo = new Mundo(vecGravedad);
+		
+		defCuerpo personaje1 = defCuerpo();
+		personaje1.posicion = vector2D((Parser::getInstancia().getEscenario().getAncho() / 1.8), (Parser::getInstancia().getEscenario().getYPiso()));
+
+		Cuerpo *unCuerpo = new Cuerpo(personaje1, controladorUno);
+		unCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
+		unCuerpo->setSensores(unCuerpo->getSprite()->getSensores());
+		unCuerpo->setSensoresProyectil(unCuerpo->getSprite()->getSensoresDisparo());
+
+		unMundo->agregarCuerpo(unCuerpo);
+
+		defCuerpo personaje2 = defCuerpo();
+		personaje2.posicion = vector2D((float)(Parser::getInstancia().getEscenario().getAncho() / 2.3), (Parser::getInstancia().getEscenario().getYPiso()));
+
+		Cuerpo *otroCuerpo = new Cuerpo(personaje2, controladorDos);
+		otroCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(1));
+		otroCuerpo->setSensores(otroCuerpo->getSprite()->getSensores());
+		otroCuerpo->setSensoresProyectil(otroCuerpo->getSprite()->getSensoresDisparo());
+
+		unMundo->agregarCuerpo(otroCuerpo);
+					
 		Vista* unaVista = new Vista(unMundo, &error, true);
 
 		if (error){
@@ -61,49 +82,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		//HABILITAR VIBRACION
 		unaVista->habilitarVibracion();
-
-		defCuerpo personaje1 = defCuerpo();
-		personaje1.posicion = vector2D((Parser::getInstancia().getEscenario().getAncho() / 1.8), (Parser::getInstancia().getEscenario().getYPiso()));
-
-		Cuerpo *unCuerpo = new Cuerpo(personaje1, controladorUno);
-		unCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
-		unCuerpo->setSensores(unCuerpo->getSprite()->getSensores());
-
-		unMundo->agregarCuerpo(unCuerpo);
-
-		defCuerpo personaje2 = defCuerpo();
-		personaje2.posicion = vector2D((float)(Parser::getInstancia().getEscenario().getAncho() / 2.3), (Parser::getInstancia().getEscenario().getYPiso()));
-
-		Cuerpo *otroCuerpo = new Cuerpo(personaje2, controladorDos);
-		otroCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(1));
-		otroCuerpo->setSensores(otroCuerpo->getSprite()->getSensores());
-
-		unMundo->agregarCuerpo(otroCuerpo);
-
-		defCuerpo proyectil1 = defCuerpo();
-		proyectil1.nombre = "proyectil";
-		proyectil1.posicion = personaje1.posicion;
-		//proyectil1.posicion.x += Parser::getInstancia().getPersonajes().at(0)->getAncho();
-
-		//Se agrega el proyectil a la física del jugador 1
-		Cuerpo *proyectilJugador1 = new Cuerpo(proyectil1, controladorUno);
-		proyectilJugador1->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
-		proyectilJugador1->setSensoresProyectil(proyectilJugador1->getSprite()->getSensoresDisparo());
-
-		unMundo->agregarCuerpo(proyectilJugador1);
-
-		defCuerpo proyectil2 = defCuerpo();
-		proyectil2.nombre = "proyectil";
-		proyectil2.posicion = personaje2.posicion;
-		//proyectil2.posicion.x -= Parser::getInstancia().getPersonajes().at(1)->getAncho();
-		
-		//Se agrega el proyectil a la física del jugador 2
-		Cuerpo *proyectilJugador2 = new Cuerpo(proyectil2, controladorDos);
-		proyectilJugador2->recibeObservador(Parser::getInstancia().getPersonajes().at(1));
-		proyectilJugador2->setSensoresProyectil(proyectilJugador2->getSprite()->getSensoresDisparo());
-
-		unMundo->agregarCuerpo(proyectilJugador2);
-	
 		//Timer de cuadros por segundo
 		Timer fpsTimer;
 		//Timer del corte de cuadros por segundo

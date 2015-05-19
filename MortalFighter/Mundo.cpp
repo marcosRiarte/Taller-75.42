@@ -16,10 +16,7 @@ Mundo::Mundo(const vector2D& valorGravedad)
 
 void Mundo::agregarCuerpo(Cuerpo *unCuerpo)
 {
-	if (unCuerpo->getNombre() == "proyectil")
-		Proyectiles.push_back(unCuerpo);
-	else
-		Cuerpos.push_back(unCuerpo);
+	Cuerpos.push_back(unCuerpo);
 	ESTADO parado;
 	parado.movimiento = PARADO;
 	unCuerpo->SetSensorActivoStr(parado);
@@ -33,11 +30,12 @@ Cuerpo* Mundo::getCuerpo(size_t pos)
 	return nullptr;
 }
 
-Cuerpo* Mundo::getProyectil(size_t pos)
+Sensor* Mundo::getProyectil(size_t pos)
 {
-	if (pos < Proyectiles.size())
-		return Proyectiles.at(pos);
-
+	if (pos == 1)
+		return Cuerpos.at(0)->getSensoresProyectil().at(0);
+	if (pos == 2)
+		return Cuerpos.at(1)->getSensoresProyectil().at(0);
 	return nullptr;
 }
 

@@ -621,6 +621,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	float xLogPjUnoEnCamara = xPjUno + camaraXLog;
 	SDL_Rect personajeUno;
 
+
+
 	// Posicion x del personaje dentro de la camara
 	float xLogPjDosEnCamara = xPjDos + camaraXLog;
 	SDL_Rect personajeDos;
@@ -632,6 +634,9 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	float relacionAltoUno = (float)altoPjUnoPx / (float)cuadroBase->h;
 	personajeUno.x = manejadorULog.darLongPixels(xLogPjUnoEnCamara);
 	personajeUno.y = yPjUnoPx;
+
+
+
 
 	// ancho y alto lo calcula cuadro a cuadro
 	ESTADO estadoDelPersonajeUno = personajesVista[0]->getEstado();
@@ -702,6 +707,20 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	personajeDos.w = (int)round(relacionAnchoDos*cuadroActualDos->w);
 	personajeDos.h = (int)round(relacionAltoDos*cuadroActualDos->h);
 
+	SDL_Rect proyectilUno;
+	SDL_Rect proyectilDos;
+
+	//Se cargan posiciones de los proyectiles
+	proyectilUno.x = personajeUno.x + refMundo->getProyectil(1)->getPosicion().first;
+	proyectilUno.y = personajeUno.y + refMundo->getProyectil(1)->getPosicion().second;
+	proyectilUno.w = (int)refMundo->getProyectil(1)->getAncho();
+	proyectilUno.h = (int)refMundo->getProyectil(1)->getAlto();
+
+	proyectilDos.x = personajeDos.x + refMundo->getProyectil(2)->getPosicion().first;
+	proyectilDos.y = personajeDos.y + refMundo->getProyectil(2)->getPosicion().second;
+	proyectilDos.w = (int)refMundo->getProyectil(2)->getAncho();
+	proyectilDos.h = (int)refMundo->getProyectil(2)->getAlto();
+	
 	float auxPj1 = (int)round(((relacionAnchoUno*cuadroActualUno->w) - manejadorULog.darLongPixels(personajesVista.at(0)->getAncho())));
 	float auxPj2 = (int)round(((relacionAnchoDos*cuadroActualDos->w) - manejadorULog.darLongPixels(personajesVista.at(1)->getAncho())));
 
@@ -723,12 +742,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	if (MODO_DEBUG_SDL){
 		SDL_Rect r;
 		SDL_Rect r2;
-		SDL_Rect r3;
-		SDL_Rect r4;
 		std::vector<Sensor*>* sensoresCuerpo1 = refMundo->getCuerpo(0)->getSensores();
 		std::vector<Sensor*>* sensoresCuerpo2 = refMundo->getCuerpo(1)->getSensores();
-		std::vector<Sensor*> sensoresProyectil1 = refMundo->getProyectil(0)->getSensoresProyectil();
-		std::vector<Sensor*> sensoresProyectil2 = refMundo->getProyectil(1)->getSensoresProyectil();
 
 		Uint8 Alfa = 128;
 		SDL_SetRenderTarget(renderer, texturaVerde);
@@ -759,22 +774,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 			r2.h = sensoresCuerpo2->at(i)->getAlto();
 			SDL_RenderCopy(renderer, texturaVerde, NULL, &r2);
 		}
-
-		for (unsigned i = 0; i < sensoresProyectil1.size(); i++){
-			r3.x = sensoresProyectil1.at(i)->getPosicion().first;
-			r3.y = sensoresProyectil1.at(i)->getPosicion().second;
-			r3.w = sensoresProyectil1.at(i)->getAncho();
-			r3.h = sensoresProyectil1.at(i)->getAlto();
-			SDL_RenderCopy(renderer, texturaVerde, NULL, &r3);
-		}
-
-		for (unsigned i = 0; i < sensoresProyectil2.size(); i++){
-			r4.x = sensoresProyectil2.at(i)->getPosicion().first;
-			r4.y = sensoresProyectil2.at(i)->getPosicion().second;
-			r4.w = sensoresProyectil2.at(i)->getAncho();
-			r4.h = sensoresProyectil2.at(i)->getAlto();
-			SDL_RenderCopy(renderer, texturaVerde, NULL, &r4);
-		}
+		SDL_RenderCopy(renderer, texturaVerde, NULL, &proyectilUno);
+		SDL_RenderCopy(renderer, texturaVerde, NULL, &proyectilDos);
 
 		SDL_SetRenderTarget(renderer, NULL);
 	}

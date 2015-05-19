@@ -24,14 +24,14 @@ public:
 	void FrenarCuerpos();
 	void LiberarCuerpos();
 	Cuerpo* getCuerpo(size_t pos);
-	Cuerpo* getProyectil(size_t pos);
+	Sensor* getProyectil(size_t pos);
+
 private:
 	vector2D gravedad;	
 	ESTADO estadoAnteriorPj1;
 	ESTADO estadoAnteriorPj2;
 	float yPiso;
 	std::vector<Cuerpo*> Cuerpos;
-	std::vector<Cuerpo*> Proyectiles;
 	bool hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int unAlto, std::pair<int, int> otraPos, int otroAncho, int otoAlto);
 	bool haySuperposicion(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido);
 

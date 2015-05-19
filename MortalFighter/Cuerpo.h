@@ -36,6 +36,18 @@ public:
 		return posicion;
 	}
 
+	std::pair<int, int> Cuerpo::getPosicionPx() const
+	{
+		ManejadorULogicas manejador;
+		float yCorrido = Parser::getInstancia().getEscenario().getAlto() - (1/2)*observador->getAlto();
+		float yRel = yCorrido - posicion.y;
+
+		int yRelPx = manejador.darLongPixels(yRel, Parser::getInstancia().getVentana().getAltoPx(), Parser::getInstancia().getEscenario().getAlto());
+		int xRelPx = manejador.darLongPixels(posicion.x);
+
+		return std::make_pair(xRelPx, yRelPx);
+	}
+
 	// Obtiene los sensores activos actualmente
 	std::vector<Sensor*>* getSensores() const
 	{
