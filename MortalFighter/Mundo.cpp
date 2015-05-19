@@ -107,6 +107,7 @@ ESTADO Mundo::ResolverColisiones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevo
 	return nuevoEstado;
 
 }
+
 void Mundo::moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido){
 	if (invertido){
 		if (unCuerpo->getEstado().movimiento != CAMINARIZQ)

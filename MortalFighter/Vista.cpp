@@ -711,12 +711,18 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	SDL_Rect proyectilDos;
 
 	//Se cargan posiciones de los proyectiles
-	proyectilUno.x = personajeUno.x + refMundo->getProyectil(1)->getPosicion().first;
+	if (!(invertido))
+		proyectilUno.x = personajeUno.x + refMundo->getProyectil(1)->getPosicion().first;
+	else
+		proyectilUno.x = personajeUno.x + manejadorULog.darLongPixels(personajesVista.at(0)->getAncho()) - refMundo->getProyectil(1)->getPosicion().first - refMundo->getProyectil(1)->getAncho();
 	proyectilUno.y = personajeUno.y + refMundo->getProyectil(1)->getPosicion().second;
 	proyectilUno.w = (int)refMundo->getProyectil(1)->getAncho();
 	proyectilUno.h = (int)refMundo->getProyectil(1)->getAlto();
 
-	proyectilDos.x = personajeDos.x + refMundo->getProyectil(2)->getPosicion().first;
+	if (!(invertido))
+		proyectilDos.x = personajeDos.x + manejadorULog.darLongPixels(personajesVista.at(1)->getAncho()) - refMundo->getProyectil(2)->getPosicion().first - refMundo->getProyectil(2)->getAncho();
+	else
+		proyectilDos.x = personajeDos.x + refMundo->getProyectil(2)->getPosicion().first;
 	proyectilDos.y = personajeDos.y + refMundo->getProyectil(2)->getPosicion().second;
 	proyectilDos.w = (int)refMundo->getProyectil(2)->getAncho();
 	proyectilDos.h = (int)refMundo->getProyectil(2)->getAlto();
