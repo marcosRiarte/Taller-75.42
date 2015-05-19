@@ -162,6 +162,7 @@
     <None Include="ima\sprites\KenSF.json" />
     <None Include="ima\sprites\LiuKangMK3U.json" />
     <None Include="ima\sprites\player1.json" />
+    <None Include="ima\sprites\reloj.json" />
     <None Include="ima\sprites\ScorpionMK3U.json" />
     <None Include="jsoncpp.dll" />
     <None Include="libpng16-16.dll" />

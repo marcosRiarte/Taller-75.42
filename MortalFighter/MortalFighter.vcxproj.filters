@@ -294,6 +294,9 @@
     <None Include="ima\sprites\LiuKangMK3U.json">
       <Filter>Resource Files\ima\sprites</Filter>
     </None>
+    <None Include="ima\sprites\reloj.json">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\SDL2_image.lib">

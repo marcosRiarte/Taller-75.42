@@ -1,0 +1,80 @@
+{
+    "spritesFx": {
+        "imagen": "ima/sprites/Reloj.gif",
+
+        "Reloj": [
+            {
+                "Uno": {
+                    "x": 1,
+                    "y": 31,
+                    "ancho": 12,
+                    "alto": 30
+                },
+
+                "Dos": {
+                    "x": 14,
+                    "y": 32,
+                    "ancho": 18,
+                    "alto": 30
+                },
+
+                "Tres": {
+                    "x": 35,
+                    "y": 31,
+                    "ancho": 17,
+                    "alto": 30
+                },
+                "Cuatro": {
+                    "x": 55,
+                    "y": 31,
+                    "ancho": 18,
+                    "alto": 30
+                },
+
+                "Cinco": {
+                    "x": 76,
+                    "y": 31,
+                    "ancho": 17,
+                    "alto": 30
+                },
+                "Seis": {
+                    "x": 98,
+                    "y": 31,
+                    "ancho": 17,
+                    "alto": 30
+                },
+
+                "Siete": {
+                    "x": 120,
+                    "y": 31,
+                    "ancho": 18,
+                    "alto": 30
+                },
+
+
+                "Ocho": {
+                    "x": 141,
+                    "y": 31,
+                    "ancho": 18,
+                    "alto": 30
+                },
+
+                "Nueve": {
+                    "x": 161,
+                    "y": 31,
+                    "ancho": 17,
+                    "alto": 30
+                },
+
+                "Cero": {
+                    "x": 180,
+                    "y": 31,
+                    "ancho": 17,
+                    "alto": 30
+                }
+            }
+
+        ]
+
+    }
+}
