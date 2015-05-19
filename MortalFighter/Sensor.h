@@ -16,10 +16,12 @@ public:
 	std::string getEstadoStr() const;
 
 	void moverProyectil(float unaDistancia);
+	void resetearPosicionInicial();
 
 	~Sensor();
 private:
 	std::pair<float, float> posicion;
+	std::pair<float, float> posicionInicial;
 	int ancho;
 	int alto;
 	bool esHitBox;

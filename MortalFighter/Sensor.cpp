@@ -7,12 +7,16 @@ Sensor::Sensor(std::pair<float, float> unaposicion, int unancho, int unalto, boo
 	ancho = unancho;
 	alto = unalto;
 	posicion = unaposicion;
+	posicionInicial = unaposicion;
 	esHitBox = valorHitBox;
 	estadoStr = unestadoStr;
 }
 
 void Sensor::setPosicion(std::pair<float, float> unaposicion){
 	posicion = unaposicion;
+}
+void Sensor::resetearPosicionInicial(){
+	posicion = posicionInicial;
 }
 
 void Sensor::setAlto(int unalto){
