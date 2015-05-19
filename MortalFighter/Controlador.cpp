@@ -43,11 +43,32 @@ void Controlador::mantenerMovimientos(){
 std::string Controlador::getUltimoMovimientoActivo(){
 	
 	MOV_TIPO unMovimiento;
+	std::string movimiento;
 	if (!movimientos.empty()){
 		unMovimiento = movimientos.back();
 		if (cantidadDeEventosAnterior != movimientos.size()){
 			cantidadDeEventosAnterior = movimientos.size();
-			if (unMovimiento != QUIETO) return conversorDeEventos->getSimboloDeLaAccion((ConversorDeEventos::Acciones)unMovimiento);
+			if (unMovimiento != QUIETO){
+				if (unMovimiento == SALTODER){
+					return (conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::UP) + "+" + conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::RIGHT));
+				}
+				if (unMovimiento == SALTOIZQ){
+					return (conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::UP) + "+" + conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::LEFT));
+				}
+				if (unMovimiento == G_ABAJO){
+					return conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::LOW_PUNCH);
+				}
+				if (unMovimiento == G_GANCHO){
+					return conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::HIGH_PUNCH);
+				}
+				if (unMovimiento == P_BAJA_ABAJO){
+					return conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::LOW_KICK);
+				}
+				if (unMovimiento == P_ALTA_ABAJO){
+					return conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::HIGH_KICK);
+				}
+				return conversorDeEventos->getSimboloDeLaAccion((ConversorDeEventos::Acciones)unMovimiento);
+			}
 		}
 	}
 	return "";

@@ -602,8 +602,8 @@ std::string ConversorDeEventos::getSimboloDeLaAccion(Acciones unaAccion){
 			if (acciones[unaAccion].ejeDesde > 0) return "DERECHA";
 			return "IZQUIERDA";
 		}
-		if (acciones[unaAccion].ejeDesde > 0) return "ARRIBA";
-		return "ABAJO";
+		if (acciones[unaAccion].ejeDesde > 0) return "ABAJO";
+		return "ARRIBA";
 	}
 	//FLECHAS
 	if (acciones[unaAccion].flechas){
@@ -614,7 +614,7 @@ std::string ConversorDeEventos::getSimboloDeLaAccion(Acciones unaAccion){
 	}
 	//BOTONES
 	std::stringstream stream;
-	stream << acciones[unaAccion].jBoton;
+	stream << (acciones[unaAccion].jBoton + 1);
 	return stream.str();
 }
 
