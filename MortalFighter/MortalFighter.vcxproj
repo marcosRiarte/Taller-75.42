@@ -195,14 +195,16 @@
     <Image Include="ima\bkg\default_p4.png" />
     <Image Include="ima\bkg\fight Hd.png" />
     <Image Include="ima\bkg\flaweesVictory.png" />
+    <Image Include="ima\bkg\liukang.jpg" />
     <Image Include="ima\bkg\LiuKangDamage.png" />
-    <Image Include="ima\bkg\LiuKangImage.jpg" />
+    <Image Include="ima\bkg\mainmenu.gif" />
     <Image Include="ima\bkg\multiRound.png" />
     <Image Include="ima\bkg\p_1.png" />
     <Image Include="ima\bkg\p_2.png" />
     <Image Include="ima\bkg\p_3.png" />
     <Image Include="ima\bkg\p_4.png" />
     <Image Include="ima\bkg\p_bkg.png" />
+    <Image Include="ima\bkg\round1.png" />
     <Image Include="ima\bkg\roundDanger.png" />
     <Image Include="ima\bkg\roundWin.png" />
     <Image Include="ima\bkg\r_1.png" />
@@ -210,6 +212,7 @@
     <Image Include="ima\bkg\r_3.png" />
     <Image Include="ima\bkg\r_4.png" />
     <Image Include="ima\bkg\r_bkg.png" />
+    <Image Include="ima\bkg\scorpion.jpg" />
     <Image Include="ima\bkg\texturaVerde.png" />
     <Image Include="ima\bkg\t_1.png" />
     <Image Include="ima\bkg\t_2.png" />

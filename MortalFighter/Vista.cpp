@@ -236,10 +236,18 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		estadoAnteriorPj2.movimiento = PARADO;
 		refMundo = unMundo;
 
-		//Carga efectos de fight (Luego de round y reloj)
+		//Carga efectos de fight (luego reloj)
 		SDL_Surface* fight = cargarSuperficieOptimizada("ima/bkg/fight Hd.png");
 		this->texturaFight = SDL_CreateTextureFromSurface(renderer, fight);
 		SDL_FreeSurface(fight);
+
+		//Carga  textura de round
+		SDL_Surface* round = cargarSuperficieOptimizada("ima/bkg/round1.png");
+		SDL_SetColorKey(round, SDL_TRUE, SDL_MapRGB(round->format, 255,255,255));
+		this->texturaRound = SDL_CreateTextureFromSurface(renderer, round);
+		SDL_FreeSurface(round);
+
+
 		//Tiempo de permanecia en pantalla de efectos
 		this->efectosTimer.start();
 
@@ -553,34 +561,42 @@ void Vista::DibujarCapasAnteriores(std::vector<Personaje*> personajesVista, floa
 	}
 }
 void Vista::DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
-{   //Efecto Round
-	//Efecto FIGHT
+{
 	SDL_Rect camaraFight;
-	camaraFight = { (anchoVentanaPx / 3), (altoVentanaPx/8), (anchoVentanaPx/2), (altoVentanaPx)/4 };
-	
-	
-			
-			camaraFight.w = manejadorULog.darLongPixels(100);
+	camaraFight = { (anchoVentanaPx / 3), (altoVentanaPx / 8), (anchoVentanaPx / 2), (altoVentanaPx) / 3 };
 
-			// donde toma la camara a la capa parametrizado con el ancho del escenario
-			camaraFight.x = manejadorULog.darLongPixels((camaraXLog)*(anchoVentana-310) / (anchoEscenario - anchoVentana));
-			
-			//Si el cronometro de efectos es > 1 segundo y menor a 3 muestra Fight.Si es menor lo borra
-			if ((this->efectosTimer.getTicks()>= 1000) && (this->efectosTimer.getTicks() <= 3000))
+	camaraFight.w = manejadorULog.darLongPixels(100);
+
+	// donde toma la camara a la capa parametrizado con el ancho del escenario
+	camaraFight.x = manejadorULog.darLongPixels((camaraXLog)*(anchoVentana - 310) / (anchoEscenario - anchoVentana));
+
+	//Si el cronometro de efectos es > 1 segundo y menor a 2 muestra Round.
+	//Si es mayor a 2 segundos muestra fight
+	//Si es mayor a 4 segundos detiene el cronometro y limpia pantalla
+	if ((this->efectosTimer.getTicks() >= 1000) && (this->efectosTimer.getTicks() <= 2000))
+	{
+		SDL_RenderCopy(renderer, this->texturaRound, NULL, &camaraFight);
+	}
+	else
+	{
+		if ((this->efectosTimer.getTicks() > 2000) && (this->efectosTimer.getTicks() <= 4000))
+		{
+			SDL_DestroyTexture(this->texturaRound);
+			SDL_RenderCopy(renderer, this->texturaFight, NULL, &camaraFight);
+
+		}
+		else
+		{
+			if (this->efectosTimer.getTicks() > 4000)
 			{
-				SDL_RenderCopy(renderer, this->texturaFight, NULL, &camaraFight);
+				SDL_DestroyTexture(this->texturaFight);
+				this->efectosTimer.stop();
 			}
-			else{
-				if (this->efectosTimer.getTicks() >= 3000)
-				{
-					SDL_DestroyTexture(this->texturaFight);
-					this->efectosTimer.stop();
-				}
+		}
 
-			}
-
-     //Efecto Reloj
+	}
 }
+
 void Vista::DibujarCapasPosteriores(std::vector<Personaje*> personajesVista, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
 {
 	SDL_Rect camara;

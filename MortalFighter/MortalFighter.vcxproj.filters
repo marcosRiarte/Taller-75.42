@@ -391,9 +391,6 @@
     <Image Include="ima\bkg\fight Hd.png">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
-    <Image Include="ima\bkg\LiuKangImage.jpg">
-      <Filter>Resource Files\ima\bkg</Filter>
-    </Image>
     <Image Include="ima\sprites\ScorpionMK3U.png">
       <Filter>Resource Files\ima\sprites</Filter>
     </Image>
@@ -422,6 +419,18 @@
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
     <Image Include="ima\bkg\roundWin.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\liukang.jpg">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\mainmenu.gif">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\round1.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\scorpion.jpg">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
   </ItemGroup>
