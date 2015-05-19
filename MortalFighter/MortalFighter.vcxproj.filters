@@ -409,6 +409,18 @@
     <Image Include="ima\bkg\barraDeVidaRoja.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="ima\bkg\flaweesVictory.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\multiRound.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\roundDanger.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\roundWin.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="ima\ttf\Vera.ttf">
