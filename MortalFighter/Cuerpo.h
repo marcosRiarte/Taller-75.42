@@ -48,6 +48,15 @@ public:
 		sensores = sensoresNuevo;
 	}
 
+	void setSensoresProyectil(std::vector<Sensor*> sensoresProyectil)
+	{
+		sensoresDisparo = sensoresProyectil;
+	}
+
+	std::vector<Sensor*> getSensoresProyectil(){
+		return sensoresDisparo;
+	}
+
 	void setEstadoAnterior(ESTADO unestadoAnterior){
 		estadoAnterior = unestadoAnterior;
 	}
@@ -262,5 +271,6 @@ private:
 	int demora;
 	ESTADO estadoAnterior;
 	std::vector<std::vector<Sensor*>*> sensores;
+	std::vector<Sensor*> sensoresDisparo;
 	std::string sensorActivoStr;
 };

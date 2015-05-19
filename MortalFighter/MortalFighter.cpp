@@ -91,7 +91,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		proyectilJugador1->setSensores(proyectilJugador1->getSprite()->getSensores());
 		unMundo->agregarCuerpo(proyectilJugador1);
 
-
 		defCuerpo proyectil2 = defCuerpo();
 		proyectil2.nombre = "proyectil";
 		proyectil2.posicion = personaje2.posicion;
