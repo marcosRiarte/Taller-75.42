@@ -29,7 +29,7 @@ struct defCuerpo
 class Cuerpo
 {
 public:
-	Cuerpo(const  defCuerpo unaDefCuerpo, Controlador* controladorNuevo, float posicionEnX);
+	Cuerpo(const  defCuerpo unaDefCuerpo, Controlador* controladorNuevo);
 
 	inline const vector2D& getPosicion() const
 	{
@@ -244,6 +244,7 @@ public:
 	void mover(float unaDistancia);
 	ESTADO getEstado();
 	ESTADO getEstadoAnterior();
+	std::string getNombre();
 
 	Personaje* Cuerpo::getRefPersonaje();
 	Sprite* getSprite() const;

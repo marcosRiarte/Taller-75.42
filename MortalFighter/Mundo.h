@@ -33,6 +33,7 @@ private:
 	ESTADO estadoAnteriorPj2;
 	float yPiso;
 	std::vector<Cuerpo*> Cuerpos;
+	std::vector<Cuerpo*> Proyectiles;
 	bool hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int unAlto, std::pair<int, int> otraPos, int otroAncho, int otoAlto);
 	bool haySuperposicion(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido);
 

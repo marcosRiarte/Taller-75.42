@@ -61,33 +61,49 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		//HABILITAR VIBRACION
 		unaVista->habilitarVibracion();
-		Cuerpo *unCuerpo = new Cuerpo(defCuerpo(), controladorUno, (float)(Parser::getInstancia().getEscenario().getAncho() / 2.3));
+
+		defCuerpo personaje1 = defCuerpo();
+		personaje1.posicion = vector2D((Parser::getInstancia().getEscenario().getAncho() / 1.8), (Parser::getInstancia().getEscenario().getYPiso()));
+
+		Cuerpo *unCuerpo = new Cuerpo(personaje1, controladorUno);
 		unCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
 		unCuerpo->setSensores(unCuerpo->getSprite()->getSensores());
 
 		unMundo->agregarCuerpo(unCuerpo);
 
-		Cuerpo *otroCuerpo = new Cuerpo(defCuerpo(), controladorDos, (float)(Parser::getInstancia().getEscenario().getAncho() / 1.8));
+		defCuerpo personaje2 = defCuerpo();
+		personaje2.posicion = vector2D((float)(Parser::getInstancia().getEscenario().getAncho() / 2.3), (Parser::getInstancia().getEscenario().getYPiso()));
+
+		Cuerpo *otroCuerpo = new Cuerpo(personaje2, controladorDos);
 		otroCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(1));
 		otroCuerpo->setSensores(otroCuerpo->getSprite()->getSensores());
 
 		unMundo->agregarCuerpo(otroCuerpo);
 
-		/*
-		//Se agrega el proyectil 1 a la física del jugador 1
-		Cuerpo *proyectilJugador1 = new Cuerpo(defCuerpo(), controladorUno, (float)(Parser::getInstancia().getEscenario().getAncho() / 2.3));
+		defCuerpo proyectil1 = defCuerpo();
+		proyectil1.nombre = "proyectil";
+		proyectil1.posicion = personaje1.posicion;
+		proyectil1.posicion.x += Parser::getInstancia().getPersonajes().at(0)->getAncho();
+
+		//Se agrega el proyectil a la física del jugador 1
+		Cuerpo *proyectilJugador1 = new Cuerpo(proyectil1, controladorUno);
 		proyectilJugador1->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
 		proyectilJugador1->setSensores(proyectilJugador1->getSprite()->getSensores());
 		unMundo->agregarCuerpo(proyectilJugador1);
 
-		//Se agrega el proyectil 1 a la física del jugador 2
-		Cuerpo *proyectilJugador2 = new Cuerpo(defCuerpo(), controladorUno, (float)(Parser::getInstancia().getEscenario().getAncho() / 1.8));
+
+		defCuerpo proyectil2 = defCuerpo();
+		proyectil2.nombre = "proyectil";
+		proyectil2.posicion = personaje2.posicion;
+		proyectil2.posicion.x -= Parser::getInstancia().getPersonajes().at(1)->getAncho();
+		
+		//Se agrega el proyectil a la física del jugador 2
+		Cuerpo *proyectilJugador2 = new Cuerpo(proyectil2, controladorDos);
 		proyectilJugador2->recibeObservador(Parser::getInstancia().getPersonajes().at(1));
 		proyectilJugador2->setSensores(proyectilJugador2->getSprite()->getSensores());
 
-		
 		unMundo->agregarCuerpo(proyectilJugador2);
-		*/
+	
 		//Timer de cuadros por segundo
 		Timer fpsTimer;
 		//Timer del corte de cuadros por segundo

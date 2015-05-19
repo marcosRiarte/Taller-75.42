@@ -1,14 +1,13 @@
 #include "stdafx.h"
 #include "Cuerpo.h"
 
-Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo, float posicionEnX)
+Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo)
 {
 	controlador = controladorNuevo;
 	nombre = unaDefCuerpo.nombre;
 	posicion = unaDefCuerpo.posicion;
 	velocidad = unaDefCuerpo.velocidad;
 	masa = unaDefCuerpo.masa;
-	posicion.x = posicionEnX;
 	yPiso = Parser::getInstancia().getEscenario().getYPiso();
 	posicion.y = yPiso;
 	estaFrenado = unaDefCuerpo.estaFrenado;
@@ -47,6 +46,11 @@ int Cuerpo::GetDemora()
 ESTADO Cuerpo::getEstado()
 {
 	return observador->getEstado();
+}
+
+std::string Cuerpo::getNombre()
+{
+	return nombre;
 }
 
 ESTADO Cuerpo::getEstadoAnterior()
