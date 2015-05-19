@@ -23,6 +23,7 @@
 #define ICONO "ima/Bbx_icono.png"
 
 //FISICA
+//
 #define FPS 60.0f
 const float MSxCUADRO = 1000.0f / FPS;
 #define tiempoCaminarParaAdelante 1000.0f
@@ -33,7 +34,7 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define tiempoSaltoDiagonalIzq 1500.0f
 #define tiempoAgacharse 200.0f
 #define tiempoAgachadoDefensa 200.0f
-#define tiempoPatadaAlta 500.0f
+#define tiempoPatadaAlta 600.0f
 #define tiempoPatadaBaja 1000.0f
 #define tiempoGolpeado 1400.0f
 #define tiempoDefensa 200.0f
