@@ -48,6 +48,11 @@ std::string Sensor::getEstadoStr() const
 	return estadoStr;
 }
 
+void Sensor::moverProyectil(float unaDistancia)
+{
+	posicion.first += unaDistancia;
+}
+
 Sensor::~Sensor()
 {
 }

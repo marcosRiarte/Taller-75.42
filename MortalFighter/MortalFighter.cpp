@@ -44,7 +44,21 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		//Parte de creación inicial.		
 		Mundo* unMundo = new Mundo(vecGravedad);
-		
+		Vista* unaVista = new Vista(unMundo, &error, true);
+
+		if (error){
+			Log::getInstancia().logearMensajeEnModo("Error iniciando SDL con aceleracion de hardware, se iniciara en modo software...", Log::MODO_WARNING);
+			delete unaVista;
+			Vista* unaVista = new Vista(unMundo, &error, false);
+		}
+		if (error){
+			std::string mensaje = ((std::string)"Error iniciando SDL: ").append(SDL_GetError()).c_str();
+			mensaje += ", se cierra el programa";
+			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
+			delete unaVista;
+			return  EXIT_FAILURE;
+		}
+
 		defCuerpo personaje1 = defCuerpo();
 		personaje1.posicion = vector2D((Parser::getInstancia().getEscenario().getAncho() / 1.8), (Parser::getInstancia().getEscenario().getYPiso()));
 
@@ -65,21 +79,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		unMundo->agregarCuerpo(otroCuerpo);
 					
-		Vista* unaVista = new Vista(unMundo, &error, true);
-
-		if (error){
-			Log::getInstancia().logearMensajeEnModo("Error iniciando SDL con aceleracion de hardware, se iniciara en modo software...", Log::MODO_WARNING);
-			delete unaVista;
-			Vista* unaVista = new Vista(unMundo, &error, false);
-		}
-		if (error){
-			std::string mensaje = ((std::string)"Error iniciando SDL: ").append(SDL_GetError()).c_str();
-			mensaje += ", se cierra el programa";
-			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
-			delete unaVista;
-			return  EXIT_FAILURE;
-		}
-
 		//HABILITAR VIBRACION
 		unaVista->habilitarVibracion();
 		//Timer de cuadros por segundo

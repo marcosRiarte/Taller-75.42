@@ -67,6 +67,7 @@ void Mundo::LiberarCuerpos()
 	}
 }
 
+
 std::pair<float, float> getPosicionAbsSensor(std::pair<float, float> posSensor, Cuerpo* unCuerpo, float anchoDelSensor, float altoDelSensor, bool invertido){
 	std::pair<float, float> posicionOtroCuerpo;
 	float posX, posY, posFinPj;
@@ -403,6 +404,14 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	else{
 		unCuerpo->Separados();
 	}
+
+	if (nuevoEstado.accion==ARMA_ARROJABLE){
+		if ((unCuerpo == Cuerpos.at(0)))
+			Cuerpos.at(0)->getSensoresProyectil().at(0)->moverProyectil(DISTANCIAPROYECTIL);
+		if ((unCuerpo == Cuerpos.at(1)))
+			Cuerpos.at(1)->getSensoresProyectil().at(0)->moverProyectil(DISTANCIAPROYECTIL);
+	}
+
 	unCuerpo->SetSensorActivoStr(nuevoEstado);
 	unCuerpo->setEstadoAnterior(nuevoEstado);
 	vector2D unaVelocidad = unCuerpo->getVelocidad();

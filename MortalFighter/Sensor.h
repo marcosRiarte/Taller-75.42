@@ -14,7 +14,9 @@ public:
 	int getAlto();
 	int getAncho();
 	std::string getEstadoStr() const;
-	
+
+	void moverProyectil(float unaDistancia);
+
 	~Sensor();
 private:
 	std::pair<float, float> posicion;
