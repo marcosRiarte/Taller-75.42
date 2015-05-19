@@ -200,7 +200,10 @@ void Sprite::cargarSensores(std::string unEstadoStr, Json::Value spritesRaiz)
 		int altoSens = estadoSens[j].get("alto", 0).asFloat();
 		bool esHitBoxSens = estadoSens[j].get("esHitBox", false).asBool();
 		// se carga el sensor
-		this->Sensores.back()->push_back(new Sensor(XYSens, anchoSens, altoSens, esHitBoxSens, unEstadoStr));
+		if (unEstadoStr != "Disparo")
+			this->Sensores.back()->push_back(new Sensor(XYSens, anchoSens, altoSens, esHitBoxSens, unEstadoStr));
+		else
+			sensoresDisparo.push_back(new Sensor(XYSens, anchoSens, altoSens, esHitBoxSens, unEstadoStr));
 	}
 }
 
@@ -214,6 +217,11 @@ void Sprite::cargarSprites(std::vector<SDL_Rect*>* estadoCuadros, std::string un
 std::vector<std::vector<Sensor*>*> Sprite::getSensores() const
 {
 	return Sensores;
+}
+
+std::vector<Sensor*> Sprite::getSensoresDisparo() const
+{
+	return sensoresDisparo;
 }
 
 Json::Value	Sprite::ParsearSprites(std::string jsonSprites)

@@ -16,6 +16,7 @@ Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo)
 	estadoAnterior.accion = SIN_ACCION;
 	estadoAnterior.golpeado = NOGOLPEADO;
 	estadoAnterior.movimiento = PARADO;
+	estadoAnterior.arrojando = NOARROJANDO;
 }
 
 std::vector<Sensor*>* Cuerpo::getSensoresActivos() const

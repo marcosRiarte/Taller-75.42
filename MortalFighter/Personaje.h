@@ -14,11 +14,16 @@ enum Golpeado
 {
 	NOGOLPEADO, GOLPEADO,FALLECIDO
 };
+enum Arrojando
+{
+	NOARROJANDO, ARROJANDO
+};
 
 struct ESTADO {
 	Movimientos movimiento;
 	Acciones accion;
 	Golpeado golpeado;
+	Arrojando arrojando;
 };
 
 class Personaje
