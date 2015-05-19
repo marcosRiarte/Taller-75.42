@@ -1,4 +1,5 @@
-"spritesFx": {
+{
+    "spritesFx": {
         "imagen": "ima/sprites/Reloj.gif",
 
         "Reloj": [
@@ -73,7 +74,7 @@
                 }
             }
 
-         ]
-            
+        ]
+
     }
 }
