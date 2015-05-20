@@ -571,12 +571,12 @@
                         "alto": 25,
                         "nSprite": 0,
                         "esHitBox": false
-                    },
+                    },                    
                     {
-                        "x": 215,
-                        "y": 190,
-                        "ancho": 30,
-                        "alto": 30,
+                        "x": 200,
+                        "y": 180,
+                        "ancho": 60,
+                        "alto": 100,
                         "nSprite": 0,
                         "esHitBox": false
                     },
@@ -1026,10 +1026,10 @@
             "AgachadoGolpeBajo": {
                 "sensores": [
                     {
-                        "x": 160,
-                        "y": 90,
-                        "ancho": 60,
-                        "alto": 160,
+                        "x": 190,
+                        "y": 220,
+                        "ancho": 70,
+                        "alto": 50,
                         "nSprite": 0,
                         "esHitBox": false
                     },
@@ -1174,10 +1174,10 @@
             "AgachadoPatadaBaja": {
                 "sensores": [
                     {
-                        "x": 160,
-                        "y": 90,
-                        "ancho": 60,
-                        "alto": 160,
+                        "x": 180,
+                        "y": 290,
+                        "ancho": 90,
+                        "alto": 50,
                         "nSprite": 0,
                         "esHitBox": false
                     },
@@ -1226,10 +1226,10 @@
             "AgachadoPatadaAlta": {
                 "sensores": [
                     {
-                        "x": 160,
-                        "y": 90,
-                        "ancho": 60,
-                        "alto": 160,
+                        "x": 185,
+                        "y": 180,
+                        "ancho": 70,
+                        "alto": 50,
                         "nSprite": 0,
                         "esHitBox": false
                     },
