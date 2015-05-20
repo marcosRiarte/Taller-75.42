@@ -360,29 +360,38 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 		{
 
 			//DESPLAZAMIENTOS HORIZONTALES
-
-			if (movimientos->back() == DER){
-				nuevoEstado.movimiento = CAMINARDER;
-				if (!(invertido)){
-					unCuerpo->mover(DISTANCIA);
-					//	if (!(unCuerpo->EstaSuperpuesto())){
-					//		 unCuerpo->mover(DISTANCIA); }
-
+			if (unCuerpo->EstaFrenado()){
+				if ((movimientos->back() == DER)){
+					nuevoEstado.movimiento = CAMINARDER;
 				}
-				else
-					if (!unCuerpo->EstaFrenado()){
-						unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
+				if ((movimientos->back() == IZQ)){
+					nuevoEstado.movimiento = CAMINARIZQ;
+				}
+			}
+			else{
+				//esto hace que no pueda saltar en el air
+
+				if ((movimientos->back() == DER)){
+					nuevoEstado.movimiento = CAMINARDER;
+					if (!(invertido)){
+						if (!(unCuerpo->EstaSuperpuesto()))
+							unCuerpo->mover(DISTANCIA);
 					}
-			}
+					else
+						unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
+				}
 
-			if (movimientos->back() == IZQ) {
-				nuevoEstado.movimiento = CAMINARIZQ;
-				if (otroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
-					unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
-				else
-					unCuerpo->mover(-DISTANCIA);
-			}
+				if ((movimientos->back() == IZQ)){
+					nuevoEstado.movimiento = CAMINARIZQ;
+					if (otroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
+						unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
+					else
+						unCuerpo->mover(-DISTANCIA);
+				}
 
+
+			}
+		
 			
 
 
