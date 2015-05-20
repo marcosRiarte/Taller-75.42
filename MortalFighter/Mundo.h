@@ -4,7 +4,7 @@
 #include "Escenario.h"
 #include "Sprites.h"
 
-#define SALTO_Y 510.0f
+#define SALTO_Y 500.0f
 #define SALTO_X 130.0f
 #define GRAVEDAD_Y -8.0f
 #define DISTANCIA 2.0f
@@ -39,7 +39,7 @@ private:
 
 	void moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido);
 
-	ESTADO ResolverColisiones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEstado);
+	ESTADO ResolverColisiones(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido, ESTADO nuevoEstado);
 	ESTADO ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<MOV_TIPO>* movimientos);
 	ESTADO ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo *otroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<MOV_TIPO>* movimientos);
 

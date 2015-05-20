@@ -44,6 +44,8 @@ int Cuerpo::GetDemora()
 	return demora;
 }
 
+
+
 ESTADO Cuerpo::getEstado()
 {
 	return observador->getEstado();

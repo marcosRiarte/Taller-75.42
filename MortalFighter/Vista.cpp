@@ -301,6 +301,8 @@ void Vista::actualizar(){
 	MOV_TIPO mov1 = refMundo->getCuerpo(0)->getControlador()->getMovimientos().back();
 	MOV_TIPO mov2 = refMundo->getCuerpo(1)->getControlador()->getMovimientos().back();
 
+    //logica de frenado de cuerpos
+
 	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer)) {
 		refMundo->FrenarCuerpos();
 
