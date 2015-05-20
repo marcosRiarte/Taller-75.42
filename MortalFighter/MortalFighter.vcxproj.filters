@@ -137,9 +137,6 @@
     <ClInclude Include="ConversorDeEventos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ControlDeColor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MortalFighter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -165,6 +162,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ConversorAString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MatizColor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -223,9 +223,6 @@
     <ClCompile Include="ConversorDeEventos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ControlDeColor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ValidadorDeVentana.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -248,6 +245,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ConversorAString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MatizColor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

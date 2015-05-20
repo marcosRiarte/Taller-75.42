@@ -95,7 +95,6 @@
     <ClInclude Include="Capa.h" />
     <ClInclude Include="Constantes.h" />
     <ClInclude Include="Controlador.h" />
-    <ClInclude Include="ControlDeColor.h" />
     <ClInclude Include="ConversorAString.h" />
     <ClInclude Include="ConversorDeEventos.h" />
     <ClInclude Include="Cuerpo.h" />
@@ -106,6 +105,7 @@
     <ClInclude Include="include\SDL_image.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="ManejadorULogicas.h" />
+    <ClInclude Include="MatizColor.h" />
     <ClInclude Include="MortalFighter.h" />
     <ClInclude Include="MortalFigther.h" />
     <ClInclude Include="Mundo.h" />
@@ -131,13 +131,13 @@
   <ItemGroup>
     <ClCompile Include="Capa.cpp" />
     <ClCompile Include="Controlador.cpp" />
-    <ClCompile Include="ControlDeColor.cpp" />
     <ClCompile Include="ConversorAString.cpp" />
     <ClCompile Include="ConversorDeEventos.cpp" />
     <ClCompile Include="Cuerpo.cpp" />
     <ClCompile Include="Escenario.cpp" />
     <ClCompile Include="FechayHora.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="MatizColor.cpp" />
     <ClCompile Include="MortalFighter.cpp" />
     <ClCompile Include="Mundo.cpp" />
     <ClCompile Include="Parser.cpp" />

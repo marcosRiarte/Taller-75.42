@@ -178,23 +178,23 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 				nuevoEstado.movimiento = AGACHADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}
-		if ((movimientos->at(0) == SALTODER)){
+		if ((movimientos->back() == SALTODER)){
 			nuevoEstado.movimiento = SALTODIAGDER;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
 		}
-		if ((movimientos->at(0) == SALTOIZQ)){
+		if ((movimientos->back() == SALTOIZQ)){
 			nuevoEstado.movimiento = SALTODIAGIZQ;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
 		}
-		if ((movimientos->at(0) == DER)){
+		if ((movimientos->back() == DER)){
 			nuevoEstado.movimiento = CAMINARDER;
 		}
-		if ((movimientos->at(0) == IZQ)){
+		if ((movimientos->back() == IZQ)){
 			nuevoEstado.movimiento = CAMINARIZQ;
 		}
-		if (movimientos->at(0) == ABAJO){
+		if (movimientos->back() == ABAJO){
 			nuevoEstado.movimiento = AGACHADO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 		}

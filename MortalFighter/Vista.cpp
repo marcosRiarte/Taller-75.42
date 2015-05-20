@@ -3,7 +3,7 @@
 #include "Vista.h"
 #include "Mundo.h"
 #include "Log.h"
-#include "ControlDeColor.h"
+#include "MatizColor.h"
 #include "Timer.h"
 
 
@@ -113,49 +113,9 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		//Si ambos personajes son iguales,modifico la superficie
 		if ((pelea == "scorpion VS scorpion") || (pelea == "liuKang VS liuKang"))
 		{
-			ControlDeColor color = ControlDeColor(SuperficieDos);
-
-			//Bloqueo superficie
-			if (SDL_MUSTLOCK(SuperficieDos))
-			{
-				int bloqueoDeSuperficie = SDL_LockSurface(SuperficieDos);
-				if (bloqueoDeSuperficie == 0)
-				{
-					std::cout << "superficie bloqueada con exito";
-				}
-			}
-
-			//La variable xPixelSuperficie sera la coordenada x en el pixel
-			//La variable yPixelSuperficie sera la coordenada y en el pixel 
-			for (int xPixelSuperficie = 0; xPixelSuperficie < ancho; xPixelSuperficie++)
-			{
-				for (int yPixelSuperficie = 0; yPixelSuperficie < alto; yPixelSuperficie++)
-				{
-					//Convertimos de RGB a HSV
-							double hue = color.RGBtoHSV(h_inicio, h_final, deplazamiento, color.getSuperficie(), xPixelSuperficie, yPixelSuperficie);
-												
-					//Si el hue esta en el rango a cambiar					
-					if (hue != -1) 
-					{
-						double saturation = color.obtenerSaturacion((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
-						double value = color.obtenerBrillo((int)*(color.getRojo()), (int)*(color.getVerde()), (int)*(color.getAzul()));
-						//Convertimos los nuevos valores HSV a RGB(devuelve un vector con cada color)
-						std::vector<int> nuevosRGB = color.HSVtoRGB(hue,saturation, value);
-						//Construye el Uint 32 con el nuevo color r g b
-						Uint32 nuevoMapaRGB = SDL_MapRGBA(color.getSuperficie()->format, nuevosRGB.at(0), nuevosRGB.at(1), nuevosRGB.at(2), nuevosRGB.at(3));
-						//Coloca los nuevos valores RGB en el pixel
-						color.PutPixel(color.getSuperficie(), xPixelSuperficie, yPixelSuperficie, nuevoMapaRGB);                    
-					}
-				}
-
-			}
-			
-			// Una vez dibujado procedemos a desbloquear la superficie siempre y cuando hubiese sido bloqueada
-			if (SDL_MUSTLOCK(SuperficieDos))
-			{
-				SDL_UnlockSurface(SuperficieDos);
-			}
-		}//Fin del if
+			MatizColor matiz(SuperficieDos);
+			matiz.desplazarMatiz(h_inicio, h_final, deplazamiento);
+		}
 		}
 
 		//Creación de la textura sobre la superficie

@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "ValidadorDelColor.h"
-#include "ControlDeColor.h"
 
 ValidadorDelColor::ValidadorDelColor()
 {
@@ -10,7 +9,6 @@ void ValidadorDelColor::validarColorDesde(Json::Value color_alternativo){
 	int h_inicial = H_INICIAL;
 	int h_final = H_FINAL;
 	int desplazamiento = DESPLAZAMIENTO;
-	ControlDeColor control = ControlDeColor();
 
 	if (!color_alternativo)
 	{
@@ -37,18 +35,18 @@ void ValidadorDelColor::validarColorDesde(Json::Value color_alternativo){
 		//Repara la h_inicial ,h_final y el desplazamiento de entrada si estos superan 360
 		if (h_inicial > 360)
 		{
-			h_inicial = control.reductorDeVueltas(h_inicial);
+			h_inicial = h_inicial % 360;
 			Log::getInstancia().logearMensajeEnModo("HUE Inicial MAYOR A 360 ,se corrije ", Log::MODO_WARNING);
 		}
 		if (h_final > 360)
 		{
-			h_final = control.reductorDeVueltas(h_final);
+			h_final = h_final % 360;
 			Log::getInstancia().logearMensajeEnModo("HUE Final MAYOR A 360 ,se corrije ", Log::MODO_WARNING);
 		}
 
 		if (desplazamiento > 360)
 		{
-			desplazamiento = control.reductorDeVueltas(desplazamiento);
+			desplazamiento = desplazamiento % 360;
 			Log::getInstancia().logearMensajeEnModo("DESPLAZAMIENTO MAYOR A 360 ,se corrije ", Log::MODO_WARNING);
 		}
 
@@ -56,27 +54,32 @@ void ValidadorDelColor::validarColorDesde(Json::Value color_alternativo){
 
 		if (h_inicial < 0)
 		{
-			h_inicial = 360 + (h_inicial);
-			std::string mensaje = "H inicial negativo, se corrige 360 + el valor";
+			//lo ubica dentro del rango[0, -360), negativo , y le suma 360 para que quede
+			// en el rango [0, 360), positivo
+			h_inicial = 360 + h_inicial % 360;			
+			std::string mensaje = "H inicial negativo, se corrige al rango [0, 360)";
 			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		}
 		if (h_final < 0)
 		{
-			h_final = 360 + (h_final);
-			std::string mensaje = "H final negativo, se corrige 360 + el valor";
+			//lo ubica dentro del rango[0, -360), negativo , y le suma 360 para que quede
+			// en el rango [0, 360), positivo
+			h_inicial = 360 + h_inicial % 360;
+			std::string mensaje = "H final negativo, se corrige al rango [0, 360)";
 			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		}
-
 		if (desplazamiento < 0)
 		{
-			desplazamiento = 360 + (desplazamiento);
-			std::string mensaje = "Desplazamiento negativo, se corrige 360 + el valor";
+			//lo ubica dentro del rango[0, -360), negativo , y le suma 360 para que quede
+			// en el rango [0, 360), positivo
+			desplazamiento = 360 + desplazamiento % 360;
+			std::string mensaje = "desplazamiento negativo, se corrige al rango [0, 360)";
 			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		}
 
 		if (h_final < h_inicial)
 		{
-			std::string mensaje = "Hue final menor que el inicial, se toma el modulo del intervalo";
+			std::string mensaje = "Hue final menor que el inicial, se intercambian";
 			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 			int aux = h_final;
 			h_final = h_inicial;

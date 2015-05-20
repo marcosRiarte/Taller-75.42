@@ -70,38 +70,38 @@
 
     "color_alternativo": 
         {
-          "h_inicial": 40,            //hue scopion 44 su rgb promedio es 173,130,12
-          "h_final": -290,
-          "desplazamiento": -295  //310(-50) rojo, 65(-295) verde 200(-160) azul
+            "h_inicial": 40,            //hue scopion 44 su rgb promedio es 173,130,12
+            "h_final": 70,
+            "desplazamiento": 54   //x360 original, 54 verde, 100 verdeazulado, 144 celeste, 162 azul,
+                                    // 304 rojo, 330 naranja
 
         },
-    
     "control_1": {
-        "arriba": "up",
-        "abajo": "down",
-        "izquierda": "left",
-        "derecha": "right",
-        "defensa": "z",
-        "golpe_bajo": "x",
-        "golpe_alto": "c",
-        "patada_baja": "v",
-        "patada_alta": "b",
-        "arma": "n",
+        "arriba": "j1_up",
+        "abajo": "j1_down",
+        "izquierda": "j1_left",
+        "derecha": "j1_right",
+        "defensa": "j1_0",
+        "golpe_bajo": "j1_1",
+        "golpe_alto": "j1_2",
+        "patada_baja": "j1_3",
+        "patada_alta": "j1_4",
+        "arma": "j1_5",
         "salir": "esc",
         "reiniciar": "r"
     },
 
     "control_2": {
-        "arriba": "w",
-        "abajo": "s",
-        "izquierda": "a",
-        "derecha": "d",
-        "defensa": "j",
-        "golpe_bajo": "k",
-        "golpe_alto": "l",
-        "patada_baja": "i",
-        "patada_alta": "o",
-        "arma": "u",
+        "arriba": "j2_up",
+        "abajo": "j2_down",
+        "izquierda": "j2_left",
+        "derecha": "j2_right",
+        "defensa": "j2_0",
+        "golpe_bajo": "j2_1",
+        "golpe_alto": "j2_2",
+        "patada_baja": "j2_3",
+        "patada_alta": "j2_4",
+        "arma": "j2_5",
         "salir": "esc",
         "reiniciar": "r"
     }
