@@ -164,11 +164,13 @@ ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCu
 
 
 	
-	/// integra velocidad, para salto, 
-	// si no está en el piso siente la gravedad
+	// si no esta en piso, mantenele el movimiento anterior
 	if (!unCuerpo->estaEnPiso()){
 		nuevoEstado.movimiento = estadoAnterior.movimiento;
-
+		if (unCuerpo->EstaFrenado()){
+			//aca tiene que setear velocidad 0 solo si intenta irse para el lado del fin..... para el otro deberia dejarte
+			unCuerpo->SetVelocidadX(0.0f);
+		}
 	}
 			/*
 			if ((unCuerpo->getVelocidad().x == 0)){
@@ -186,40 +188,7 @@ ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCu
 		}*/
 	
 
-	
-
-
-
-
-
-
-
-
-	/*
-		if ((unCuerpo->getVelocidad().x == 0)){
-		//	nuevoEstado = estadoAnterior;
-		}
-		else if (unCuerpo->getVelocidad().x > 0)
-			nuevoEstado.movimiento = SALTODIAGDER;
-		else
-			nuevoEstado.movimiento = SALTODIAGIZQ;
-
-		if (unCuerpo->EstaFrenado()){
-			unCuerpo->SetVelocidadX(0.0f);
-		}
-
-		if (unCuerpo->EstaFrenado()){
-		unCuerpo->SetVelocidadX(0.0f);
 		
-			if ((movimientos->back() == SALTODER)){
-				nuevoEstado.movimiento = SALTODIAGDER;
-				unCuerpo->setEstadoAnterior(nuevoEstado);
-			}
-			if ((movimientos->back() == SALTOIZQ)){
-				nuevoEstado.movimiento = SALTODIAGIZQ;
-				unCuerpo->setEstadoAnterior(nuevoEstado);
-			}
-		}*/
 		/*
 		//quizas esto deberia ir en
 		if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION) && (elOtroCuerpo->getEstado().accion == SIN_ACCION)){
@@ -239,8 +208,8 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 {
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 	Sprite* elSprite = unCuerpo->getSprite();
-
-	/*if (unCuerpo->EstaFrenado()){
+	/*
+	if (unCuerpo->EstaFrenado()){
 		if ((movimientos->back() == ARRIBA)){
 			nuevoEstado.movimiento = SALTO;
 			unCuerpo->setEstadoAnterior(nuevoEstado);
@@ -284,11 +253,13 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 	if ((movimientos->back() == DER) && unCuerpo->estaEnPiso()){
 			nuevoEstado.movimiento = CAMINARDER;
 			if (!(invertido)){
-				if (!(unCuerpo->EstaSuperpuesto()))
-					unCuerpo->mover(DISTANCIA);
+				if (!(unCuerpo->EstaSuperpuesto())){
+					 unCuerpo->mover(DISTANCIA); }
 			}
 			else
-				unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
+				if (!unCuerpo->EstaFrenado()){
+					unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
+				}
 		}
 
 	if ((movimientos->back() == IZQ) && unCuerpo->estaEnPiso()){
@@ -378,11 +349,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 		}
 	}
 
-	/*
-	if ((movimientos->back() == QUIETO)){
-		nuevoEstado.movimiento = PARADO;
-		//unCuerpo->setEstadoAnterior(nuevoEstado);
-	}*/
+	
 	//}
 
 	return nuevoEstado;
