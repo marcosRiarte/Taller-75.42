@@ -162,7 +162,6 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 			}
 		}//Fin del if
 		}
-
 		//Creación de la textura sobre la superficie
 		texturaSpriteUno = SDL_CreateTextureFromSurface(renderer, SuperficieUno);
 		texturaSpriteDos = SDL_CreateTextureFromSurface(renderer, SuperficieDos);
@@ -489,11 +488,11 @@ void Vista::DibujarBarrasDeVida(std::vector<Personaje*> personajesVista)
 	int vidaPj1 = personajesVista.at(0)->getVida();
 	int vidaPj2 = personajesVista.at(1)->getVida();
 
-	int nuevoAnchoBarraDeVida1 = (vidaPj1 * anchoBarraDeVida1) / 100;
-	int nuevoAnchoBarraDeVida2 = (vidaPj2 * anchoBarraDeVida2) / 100;
+	int nuevoAnchoBarraDeVida1 = (vidaPj2 * anchoBarraDeVida1) / 100;
+	int nuevoAnchoBarraDeVida2 = (vidaPj1 * anchoBarraDeVida2) / 100;
 
-	int nuevoanchoImagenBarraDeVida1 = (vidaPj1 *anchoImagenBarraDeVida) / 100;
-	int nuevoanchoImagenBarraDeVida2 = (vidaPj2 *anchoImagenBarraDeVida) / 100;
+	int nuevoanchoImagenBarraDeVida1 = (vidaPj2 *anchoImagenBarraDeVida) / 100;
+	int nuevoanchoImagenBarraDeVida2 = (vidaPj1 *anchoImagenBarraDeVida) / 100;
 
 	barraDeVida1.w = nuevoAnchoBarraDeVida1;
 	barraDeVida2.w = nuevoAnchoBarraDeVida2;
