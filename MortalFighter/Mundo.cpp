@@ -87,8 +87,6 @@ std::pair<float, float> getPosicionAbsSensor(std::pair<float, float> posSensor, 
 }
 
 bool Mundo::hayInterseccion(std::pair<float, float> unaPosicion, float unAncho, float unAlto, std::pair<float, float> otraPos, float otroAncho, float otroAlto){
-	if (!((unaPosicion.first >= 0 && unaPosicion.second >= 0) && (unAncho >= 0) && (unAlto >= 0) && (otraPos.first >= 0 && otraPos.second >= 0) && (otroAncho >= 0) && (otroAlto >= 0)))
-		return false;
 	if ((unaPosicion.first + unAncho < otraPos.first) || (unaPosicion.first > otroAncho + otraPos.first) || (unaPosicion.second + unAlto < otraPos.second) || (unaPosicion.second > otraPos.second + otroAlto)){
 		return false; 
 	}
@@ -262,6 +260,36 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 		//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 	}
 
+	if ((movimientos->back() == G_GANCHO) && !(unCuerpo->getEstado().accion == GANCHO)){
+		nuevoEstado.accion = GANCHO;
+		unCuerpo->setEstadoAnterior(nuevoEstado);
+		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+	}
+	if ((movimientos->back() == G_ABAJO) && !(unCuerpo->getEstado().accion == GOLPE_BAJO)){
+		nuevoEstado.accion = GOLPE_BAJO;
+		nuevoEstado.movimiento = AGACHADO;
+		unCuerpo->setEstadoAnterior(nuevoEstado);
+		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+	}
+	if ((movimientos->back() == P_BAJA_ABAJO) && !(unCuerpo->getEstado().accion == PATADA_BAJA)){
+		nuevoEstado.accion = PATADA_BAJA;
+		nuevoEstado.movimiento = AGACHADO;
+		unCuerpo->setEstadoAnterior(nuevoEstado);
+		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+	}
+	if ((movimientos->back() == P_ALTA_ABAJO) && !(unCuerpo->getEstado().accion == PATADA_ALTA)){
+		nuevoEstado.accion = PATADA_ALTA;
+		nuevoEstado.movimiento = AGACHADO;
+		unCuerpo->setEstadoAnterior(nuevoEstado);
+		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+	}
+	if ((movimientos->back() == P_SALTO) && !(unCuerpo->getEstado().accion == PATADA_ALTA)){
+		nuevoEstado.accion = PATADA_ALTA;
+		nuevoEstado.movimiento = SALTO;
+		unCuerpo->setEstadoAnterior(nuevoEstado);
+		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+	}
+
 	if ((movimientos->back() == P_BAJA) && !(unCuerpo->getEstado().accion == PATADA_BAJA)){
 		nuevoEstado.accion = PATADA_BAJA;
 		unCuerpo->setEstadoAnterior(nuevoEstado);
@@ -344,9 +372,16 @@ void Mundo::ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool inverti
 				posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), sensoresOtroCuerpo->at(j)->getAlto(), !invertido);
 				posAbsSensoresCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion(), unCuerpo, sensoresCuerpo->at(i)->getAncho(), sensoresCuerpo->at(i)->getAlto(), invertido);
 				if (!(sensoresCuerpo->at(i)->getHitbox()) && (sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
+					if ((unCuerpo->getEstado().accion == GANCHO) && (elOtroCuerpo->getEstadoAnterior().golpeado != GOLPEADO)){
+						if (!(invertido))
+							elOtroCuerpo->aplicarImpulso(vector2D((0.5)*SALTO_X, (0.5)*SALTO_Y));
+						else
+							elOtroCuerpo->aplicarImpulso(vector2D((0.5)*-SALTO_X, (0.5)*SALTO_Y));
+					}
 					ESTADO unEstado = elOtroCuerpo->getEstado();
 					unEstado.golpeado = GOLPEADO;
 					elOtroCuerpo->notificarObservadores(unEstado);
+					
 				}
 			}	
 		}
