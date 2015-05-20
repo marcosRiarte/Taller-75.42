@@ -303,30 +303,43 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			//************************************************************************************************//
 
 			if (movimientos->back() == G_ABAJO){
-				nuevoEstado.movimiento = AGACHADO;
-				nuevoEstado.accion = GOLPE_BAJO;
-				unCuerpo->setDemora(35);
-				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				
+				if (estadoAnterior.accion != GOLPE_BAJO){
+					nuevoEstado.movimiento = AGACHADO;
+					nuevoEstado.accion = GOLPE_BAJO;
+					unCuerpo->setDemora(35);
+					//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				}
 			}
 			if (movimientos->back() == P_ALTA_ABAJO) {
-				nuevoEstado.movimiento = AGACHADO;
-				nuevoEstado.accion = PATADA_ALTA;
+				
+				if (estadoAnterior.accion != PATADA_ALTA){
 
-				unCuerpo->setDemora(35);
-				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+					nuevoEstado.movimiento = AGACHADO;
+					nuevoEstado.accion = PATADA_ALTA;
+
+					unCuerpo->setDemora(35);
+					//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				}
 			}
 
 			if (movimientos->back() == P_BAJA_ABAJO) {
-				nuevoEstado.movimiento = AGACHADO;
-				nuevoEstado.accion = PATADA_BAJA;
-				unCuerpo->setDemora(35);
-				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				
+				if (estadoAnterior.accion != PATADA_BAJA){
+					nuevoEstado.movimiento = AGACHADO;
+					nuevoEstado.accion = PATADA_BAJA;
+					unCuerpo->setDemora(35);
+					//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				}
 			}
 			if (movimientos->back() == G_GANCHO){
-				nuevoEstado.movimiento = AGACHADO;
-				nuevoEstado.accion = GANCHO;
-				unCuerpo->setDemora(35);
-				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				
+				if (estadoAnterior.accion != GANCHO){
+					nuevoEstado.movimiento = AGACHADO;
+					nuevoEstado.accion = GANCHO;
+					unCuerpo->setDemora(35);
+					//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				}
 			}
 
 
