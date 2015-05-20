@@ -160,29 +160,41 @@ ESTADO Mundo::ResolverColisiones(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool in
 }
 
 //
-void Mundo::moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido, std::vector<MOV_TIPO>* movimientos){
+ESTADO Mundo::moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido, std::vector<MOV_TIPO>* movimientos, ESTADO nuevoEstado) {
 	
 	
 	if (invertido){
 		if (unCuerpo->getEstado().movimiento != CAMINARIZQ){
-			
+			nuevoEstado.movimiento = CAMINARDER;
 
 			if (movimientos->back() == DEFENSA){
 
 				unCuerpo->mover(0.2);
 				elOtroCuerpo->mover(-0.2);
 			}
+
 			else{
 				unCuerpo->mover(DISTANCIA);
 				elOtroCuerpo->mover(-DISTANCIA);
 			}
 		}
 	}
-	if (unCuerpo->getEstado().movimiento != CAMINARDER){
-		//unCuerpo->mover(-DISTANCIA);
-		//elOtroCuerpo->mover(DISTANCIA);
-		int b = 1;
-	}
+			if (unCuerpo->getEstado().movimiento != CAMINARDER){
+			nuevoEstado.movimiento = CAMINARIZQ;
+
+			if (movimientos->back() == DEFENSA){
+
+				unCuerpo->mover(-0.2);
+				elOtroCuerpo->mover(0.2);
+			}
+			else{
+				unCuerpo->mover(-DISTANCIA);
+				elOtroCuerpo->mover(DISTANCIA);
+			}
+		}
+
+	
+	return nuevoEstado;
 }
 
 //logica de saltos
@@ -675,14 +687,16 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	// o cuando estan los 2 en el aire saltando, en este caso deberia setearse velocidad.x ==0 para que no se toquen
 	//
 	if (unCuerpo->EstaSuperpuesto()){
-		moverCuerpos(unCuerpo, elOtroCuerpo, invertido, &movimientosOtro);
+		
+		nuevoEstado = Mundo::moverCuerpos(unCuerpo, elOtroCuerpo, invertido, &movimientosOtro, nuevoEstado);
 
 		//mejorar esto
 		if (invertido){
 			if (unCuerpo->getEstado().movimiento != CAMINARIZQ){
 				nuevoEstado = unCuerpo->getEstadoAnterior();
+			
 			}
-		//	nuevoEstado.movimiento = CAMINARIZQ;
+			//nuevoEstado.movimiento = CAMINARIZQ;
 			
 		}
 		
