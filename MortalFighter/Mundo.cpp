@@ -96,7 +96,32 @@ bool Mundo::hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int un
 	return true;
 }
 
+//determina si mi personaje es golpeado o no
+// ya hubo colision, en caso de ser golpeado tambien calculo la vitalidad
+ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido, ESTADO nuevoEstado){
 
+
+	nuevoEstado.golpeado = GOLPEADO;
+
+
+	//****************************************************************
+	// evaluo la vitalidad
+	//************************************************************************
+	//xerror hay que arreglar esto por que se cambio la logica.
+	// aca uncuerpo es el golpeado entonces se le tiene que descontar a uncuerpo
+	if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (unCuerpo->getEstadoAnterior().golpeado != GOLPEADO)){
+		unCuerpo->setDemora(125);
+		//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado())) == REINICIAR){
+			nuevoEstado.golpeado = FALLECIDO;
+			std::string mensaje = "Gano personaje " + elOtroCuerpo->getRefPersonaje()->getNombre();
+			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_DEBUG);
+		}
+	}
+
+
+	return nuevoEstado;
+}
 
 
 // //esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada 
@@ -121,15 +146,13 @@ ESTADO Mundo::ResolverColisiones(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool in
 
 				if ((sensoresCuerpo->at(i)->getHitbox()) && !(sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
 
-					//XJOSE TODO aca hay que modificar.
-
-					
-					nuevoEstado.golpeado = GOLPEADO;
-					unCuerpo->notificarObservadores(nuevoEstado);
+					nuevoEstado = ResolverGolpes(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
+					//unCuerpo->notificarObservadores(nuevoEstado);
 				}
 			}
 		}
 	}
+			
 	return nuevoEstado;
 }
 
@@ -224,24 +247,24 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 		if (movimientos->back() == G_BAJO){
 			nuevoEstado.accion = GOLPE_BAJO;
-			unCuerpo->setDemora(15);
+			unCuerpo->setDemora(25);
 			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		}
 		if (movimientos->back() == P_ALTA) {
 			nuevoEstado.accion = PATADA_ALTA;
 		
-			unCuerpo->setDemora(15);
+			unCuerpo->setDemora(25);
 			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		}
 
 		if (movimientos->back() == P_BAJA) {
 			nuevoEstado.accion = PATADA_BAJA;
-			unCuerpo->setDemora(15);
+			unCuerpo->setDemora(25);
 			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		}
 		if (movimientos->back() == G_ALTO){
 			nuevoEstado.accion = GOLPE_ALTO;
-			unCuerpo->setDemora(15);
+			unCuerpo->setDemora(25);
 			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		}
 
@@ -372,19 +395,19 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 				nuevoEstado.movimiento = AGACHADO;
 			}
 
+			// GOLPES
 
 
-
+			// aca no deberia ir (! arma arrojable) por que deberia tener una demora que le impide entrar a este resolver
+			// pero como no sabemos que demora va a tener el arma por que le van a aumentar la velocidad.... dejemos la redundancia por las dudas
 			if ((movimientos->back() == ARMA) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
 				nuevoEstado.accion = ARMA_ARROJABLE;
-				unCuerpo->setEstadoAnterior(nuevoEstado);
 				unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			}
 
-			if ((movimientos->back() == DEFENSA) && unCuerpo->estaEnPiso()){
-				nuevoEstado.movimiento = PARADO;
+			if (movimientos->back() == DEFENSA) {
+				//nuevoEstado.movimiento = PARADO;
 				nuevoEstado.accion = GUARDIA;
-				unCuerpo->setEstadoAnterior(nuevoEstado);
 			}
 
 			
@@ -403,7 +426,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 			if (movimientos->back() == P_BAJA) {
 				nuevoEstado.accion = PATADA_BAJA;
-				unCuerpo->setDemora(35);
+				unCuerpo->setDemora(15);
 				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			}
 			if (movimientos->back() == G_ALTO){
@@ -411,32 +434,6 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 				unCuerpo->setDemora(35);
 				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 		}
 
@@ -581,6 +578,12 @@ void Mundo::ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool inverti
 		}
 	}
 
+	
+
+
+
+
+
 }
 
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
@@ -610,6 +613,15 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	//////////////////////////////////////////////////////////////////////////////
 
 	std::vector<MOV_TIPO> movimientos = unCuerpo->getControlador()->getMovimientos();
+
+	
+
+
+
+
+
+
+
 
 
 
@@ -668,7 +680,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		//si hay demora
 		if (unCuerpo->HayDemora())
 		{
-			if (!(nuevoEstado.golpeado == GOLPEADO && unCuerpo->getEstadoAnterior().golpeado !=GOLPEADO)){
+			if (!(nuevoEstado.golpeado == GOLPEADO && unCuerpo->getEstadoAnterior().golpeado ==NOGOLPEADO)){
 				unCuerpo->DisminuirDemora();
 				nuevoEstado = unCuerpo->getEstadoAnterior();
 				} //en el caso de que se cumpla, el tipo sale de aca con el estado actual que es golpeado!
