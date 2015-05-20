@@ -439,6 +439,12 @@
     <Image Include="ima\bkg\scorpion.jpg">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
+    <Image Include="ima\bkg\logo.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\netherealm.gif">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="ima\ttf\Vera.ttf">

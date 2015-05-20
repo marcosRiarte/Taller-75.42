@@ -109,7 +109,7 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		int alto = ancho = SuperficieDos->h;
 		AlfaVida = 200;
 
-		if (MODO_COLOR){
+		if (!MODO_COLOR){
 		//Si ambos personajes son iguales,modifico la superficie
 		if ((pelea == "scorpion VS scorpion") || (pelea == "liuKang VS liuKang"))
 		{
@@ -144,12 +144,7 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 						//Construye el Uint 32 con el nuevo color r g b
 						Uint32 nuevoMapaRGB = SDL_MapRGBA(color.getSuperficie()->format, nuevosRGB.at(0), nuevosRGB.at(1), nuevosRGB.at(2), nuevosRGB.at(3));
 						//Coloca los nuevos valores RGB en el pixel
-						color.PutPixel(color.getSuperficie(), xPixelSuperficie, yPixelSuperficie, nuevoMapaRGB);
-
-						//SDL_SetColorKey(SuperficieDos, SDL_TRUE, SDL_MapRGB(SuperficieDos->format, nuevosRGB.at(0), nuevosRGB.at(1), nuevosRGB.at(2)));
-
-						//SDL_SetColorKey(color.getSuperficie(), SDL_TRUE, nuevoMapaRGB);
-                      
+						color.PutPixel(color.getSuperficie(), xPixelSuperficie, yPixelSuperficie, nuevoMapaRGB);                    
 					}
 				}
 
