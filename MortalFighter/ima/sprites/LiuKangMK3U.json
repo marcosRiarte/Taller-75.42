@@ -176,10 +176,18 @@
             "Caminar": {
                 "sensores": [
                     {
-                        "x": 105,
-                        "y": 100,
-                        "ancho": 108,
-                        "alto": 240,
+                        "x": 110,
+                        "y": 142,
+                        "ancho": 80,
+                        "alto": 210,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 125,
+                        "y": 102,
+                        "ancho": 50,
+                        "alto": 40,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -244,16 +252,24 @@
             "CaminarAtras": {
                 "sensores": [
                     {
-                        "x": 105,
-                        "y": 100,
-                        "ancho": 108,
-                        "alto": 240,
+                        "x": 110,
+                        "y": 142,
+                        "ancho": 80,
+                        "alto": 210,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 125,
+                        "y": 102,
+                        "ancho": 50,
+                        "alto": 40,
                         "nSprite": 0,
                         "esHitBox": true
                     }
                 ],
                 "secuenciaSprites": [
-                    {
+                   {
                         "x": 0,
                         "y": 900,
                         "ancho": 180,
@@ -276,13 +292,13 @@
                         "y": 900,
                         "ancho": 180,
                         "alto": 180
-                    },
+                    },                    
                     {
                         "x": 720,
                         "y": 900,
                         "ancho": 180,
                         "alto": 180
-                    },
+                    },                    
                     {
                         "x": 900,
                         "y": 900,
@@ -300,14 +316,8 @@
                         "y": 900,
                         "ancho": 180,
                         "alto": 180
-                    },
-                    {
-                        "x": 1440,
-                        "y": 900,
-                        "ancho": 180,
-                        "alto": 180
-                    }
-
+                    }                   
+                    
                 ]
             },
             "Golpeado": {
@@ -429,10 +439,10 @@
                         "esHitBox": false
                     },
                     {
-                        "x": 220,
-                        "y": 90,
-                        "ancho": 40,
-                        "alto": 50,
+                        "x": 216,
+                        "y": 105,
+                        "ancho": 30,
+                        "alto": 35,
                         "nSprite": 0,
                         "esHitBox": false
                     }
@@ -612,9 +622,9 @@
                 "sensores": [
                     {
                         "x": 150,
-                        "y": 130,
-                        "ancho": 120,
-                        "alto": 55,
+                        "y": 145,
+                        "ancho": 115,
+                        "alto": 35,
                         "nSprite": 0,
                         "esHitBox": false
                     }
@@ -655,10 +665,18 @@
             "Quieto": {
                 "sensores": [
                     {
-                        "x": 100,
+                        "x": 110,
+                        "y": 142,
+                        "ancho": 80,
+                        "alto": 210,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 125,
                         "y": 102,
-                        "ancho": 110,
-                        "alto": 250,
+                        "ancho": 50,
+                        "alto": 40,
                         "nSprite": 0,
                         "esHitBox": true
                     }
