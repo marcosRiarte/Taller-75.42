@@ -98,13 +98,120 @@ bool Mundo::hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int un
 
 //determina si mi personaje es golpeado o no
 // ya hubo colision, en caso de ser golpeado tambien calculo la vitalidad
+// 4 cconsideraciones,   con que me golpearon?, que estado tengo? por que en base a eso determino que golpeado soy
+// estoy en modo defensa???
 ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido, ESTADO nuevoEstado){
 
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
-	
-	if (estadoAnterior.golpeado == NOGOLPEADO){
-		nuevoEstado.golpeado = GOLPEADO;
+	ESTADO estadoEnemigo = elOtroCuerpo->getEstado();
+
+	if (!unCuerpo->estaEnPiso()){ //si esta en el aire no tiene defensa,
+              		
+		if (estadoEnemigo.accion == GANCHO || (estadoEnemigo.accion == PATADA_ALTA && !(elOtroCuerpo->estaEnPiso()))){
+
+			nuevoEstado.golpeado = GOLPEADO;
+			//aca hay que aplicar un impulso
+			if (!unCuerpo->EstaFrenado()){
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
+
+			}
+			else{
+				unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
+
+			}
+			unCuerpo->setDemora(50);
+		}
+		else if (estadoEnemigo.accion != GUARDIA){ // aca como no lo arroja el impulso tiene que ser un toque
+			nuevoEstado.golpeado = GOLPEADO;
+
+
+			if (!unCuerpo->EstaFrenado()){
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X/10, SALTO_Y/10));
+
+			}
+			else{
+				unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y/10));
+
+			}
+
+
+
+
+			unCuerpo->setDemora(30);
+		}
+
 	}
+	else{ // esta en piso o agachado
+	
+		if (estadoAnterior.movimiento == AGACHADO){ //no estoy teniendo en cuenta si son golpes fuertes o ganchos......
+
+			if (estadoAnterior.accion == GUARDIA){ //poca demora, poco desplazamiento
+				nuevoEstado.accion = GUARDIA;
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X/10 , 0));
+				unCuerpo->setDemora(10);
+			}
+			else{
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X , 0));
+				unCuerpo->setDemora(30);
+			
+			}
+			nuevoEstado.movimiento = AGACHADO;
+			nuevoEstado.golpeado = GOLPEADO;
+
+		}
+
+		else // caso el tipo en el piso
+		{
+
+			
+
+				if (estadoAnterior.accion == GUARDIA){ //poca demora, poco desplazamiento
+					nuevoEstado.accion = GUARDIA;
+					unCuerpo->aplicarImpulso(vector2D(-SALTO_X / 10, 0));
+					unCuerpo->setDemora(10);
+				}
+				else{// no esta en guardia analizar golpes
+
+						if (estadoEnemigo.accion == GANCHO || (estadoEnemigo.accion == PATADA_ALTA && (!(elOtroCuerpo->estaEnPiso())   ))){
+
+							nuevoEstado.golpeado = GOLPEADO;
+							//aca hay que aplicar un impulso
+							if (!unCuerpo->EstaFrenado()){
+								unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
+
+							}
+							else{
+								unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
+
+							}
+							unCuerpo->setDemora(30);
+						}
+						else if (estadoEnemigo.accion != GUARDIA){ // aca como no lo arroja el impulso tiene que ser un toque
+							nuevoEstado.golpeado = GOLPEADO;
+							if (!unCuerpo->EstaFrenado()){
+								unCuerpo->aplicarImpulso(vector2D(10, 10));
+
+							}
+							else{
+								unCuerpo->aplicarImpulso(vector2D(0, 10));
+
+							}
+							
+							unCuerpo->setDemora(30);
+						}
+					
+					}
+
+		}
+
+
+	
+	
+	}
+
+
+	
+	
 
 
 	//****************************************************************
@@ -113,8 +220,7 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 	//xerror hay que arreglar esto por que se cambio la logica.
 	// aca uncuerpo es el golpeado entonces se le tiene que descontar a uncuerpo
 	if ((nuevoEstado.golpeado == GOLPEADO) && (estadoAnterior.golpeado == NOGOLPEADO)){
-		unCuerpo->setDemora(40);
-		//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		
 		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado())) == REINICIAR){
 			nuevoEstado.golpeado = FALLECIDO;
 			std::string mensaje = "Gano personaje " + elOtroCuerpo->getRefPersonaje()->getNombre();
@@ -130,8 +236,7 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 // //esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada 
 ESTADO Mundo::ResolverColisiones(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido, ESTADO nuevoEstado){
 	//si llego aca es por que hay una colision.
-	// 4 cconsideraciones, me golpearon??,  con que fue?, que estado tengo? por que en base a eso determino que golpeado soy
-	// estoy en modo defensa???
+	
 	std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
 	std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
 
@@ -139,7 +244,7 @@ ESTADO Mundo::ResolverColisiones(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool in
 	std::pair<float, float> posAbsSensoresCuerpo;
 
 	//si otrocuerpo esta haciendo algo y yo no estoy golpeado, evaluo
-	if ((elOtroCuerpo->getEstado().accion != SIN_ACCION) && nuevoEstado.golpeado == NOGOLPEADO){
+	if ((elOtroCuerpo->getEstado().accion != SIN_ACCION)){
 		for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
 			for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
 				ManejadorULogicas manejadorUnidades;
@@ -651,8 +756,8 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	else{
 		// NO HAY SUPERPOSICION, LO SIGUIENTE A RESOLVER ES LA COLISION
 		
-
-		if (estadoanterior.golpeado == NOGOLPEADO){
+		//si el tipo ya esta golpeado no vuelvo a evaluar
+		if (estadoanterior.golpeado != GOLPEADO){
 			nuevoEstado = Mundo::ResolverColisiones(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
 		}
 		//esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada
@@ -720,7 +825,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	unCuerpo->sumarPosicion(unaVelocidad * difTiempo); //cambio la posicion
 	unCuerpo->sumarVelocidad(gravedad * difTiempo); // aplico gravedad
 
-
+	
 	return nuevoEstado;
 }
 
