@@ -109,7 +109,7 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		int alto = ancho = SuperficieDos->h;
 		AlfaVida = 200;
 
-		if (!MODO_COLOR){
+		if (MODO_COLOR){
 		//Si ambos personajes son iguales,modifico la superficie
 		if ((pelea == "scorpion VS scorpion") || (pelea == "liuKang VS liuKang"))
 		{
@@ -730,8 +730,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	// nacho: obtiene el sprite del disparo, tomo el ultimo de los sprites del disparo
 	SDL_Rect* cuadroProyectilUnoSprite = personajesVista.at(0)->getSprite()->listaDeCuadros(DISPARO_DEFAULT)->back();
 	// nacho: ancho y alto del dibujo del sprite
-	proyectilUno.w = cuadroProyectilUnoSprite->w; //tamanio real  // (int)refMundo->getProyectil(1)->getAncho();
-	proyectilUno.h = cuadroProyectilUnoSprite->h; //tamanio real  // (int)refMundo->getProyectil(1)->getAlto();
+	proyectilUno.w = (int)refMundo->getProyectil(1)->getAncho();
+	proyectilUno.h = (int)refMundo->getProyectil(1)->getAlto();
 
 	if (!(invertido))
 		proyectilDos.x = personajeDos.x + manejadorULog.darLongPixels(personajesVista.at(1)->getAncho()) - refMundo->getProyectil(2)->getPosicion().first - refMundo->getProyectil(2)->getAncho();
@@ -740,8 +740,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	proyectilDos.y = personajeDos.y + refMundo->getProyectil(2)->getPosicion().second;
 	// nacho: obtiene el sprite del disparo, tomo el ultimo de los sprites del disparo
 	SDL_Rect* cuadroProyectilDosSprite = personajesVista.at(1)->getSprite()->listaDeCuadros(DISPARO_DEFAULT)->back();
-	proyectilDos.w = cuadroProyectilDosSprite->w;  //tamanio real // (int)refMundo->getProyectil(2)->getAncho(); 
-	proyectilDos.h = cuadroProyectilDosSprite->h;  //tamanio real // (int)refMundo->getProyectil(2)->getAlto(); 
+	proyectilDos.w = (int)refMundo->getProyectil(2)->getAncho(); 
+	proyectilDos.h = (int)refMundo->getProyectil(2)->getAlto(); 
 	
 	float auxPj1 = (int)round(((relacionAnchoUno*cuadroActualUno->w) - manejadorULog.darLongPixels(personajesVista.at(0)->getAncho())));
 	float auxPj2 = (int)round(((relacionAnchoDos*cuadroActualDos->w) - manejadorULog.darLongPixels(personajesVista.at(1)->getAncho())));
