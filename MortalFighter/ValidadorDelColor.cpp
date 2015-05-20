@@ -67,6 +67,13 @@ void ValidadorDelColor::validarColorDesde(Json::Value color_alternativo){
 			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		}
 
+		if (desplazamiento < 0)
+		{
+			desplazamiento = 360 + (desplazamiento);
+			std::string mensaje = "Desplazamiento negativo, se corrige 360 + el valor";
+			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+		}
+
 		if (h_final < h_inicial)
 		{
 			std::string mensaje = "Hue final menor que el inicial, se toma el modulo del intervalo";

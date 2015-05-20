@@ -72,7 +72,7 @@
         {
           "h_inicial": 40,            //hue scopion 44 su rgb promedio es 173,130,12
           "h_final": -290,
-          "desplazamiento": 65  //310 rojo 65 verde 200 azul
+          "desplazamiento": -295  //310(-50) rojo, 65(-295) verde 200(-160) azul
 
         },
     

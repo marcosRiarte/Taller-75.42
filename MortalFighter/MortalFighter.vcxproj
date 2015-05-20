@@ -197,8 +197,10 @@
     <Image Include="ima\bkg\flaweesVictory.png" />
     <Image Include="ima\bkg\liukang.jpg" />
     <Image Include="ima\bkg\LiuKangDamage.png" />
+    <Image Include="ima\bkg\logo.png" />
     <Image Include="ima\bkg\mainmenu.gif" />
     <Image Include="ima\bkg\multiRound.png" />
+    <Image Include="ima\bkg\netherealm.gif" />
     <Image Include="ima\bkg\p_1.png" />
     <Image Include="ima\bkg\p_2.png" />
     <Image Include="ima\bkg\p_3.png" />

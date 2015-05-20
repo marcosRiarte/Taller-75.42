@@ -270,46 +270,50 @@ double ControlDeColor::RGBtoHSV(int h_inicio, int h_final, int desplazamiento, S
 	int red = (int)*(this->rojo); //Casteo el valor como un entero debe estar entre 255 y 0 
 	int green = (int)*(this->verde);
 	int blue = (int)*(this->azul);
-
+	int alfa = (int)*(this->alpha);
+	
+	
 	//Calculo el maximo entre los 3 compoentes del color
 	int M = ControlDeColor::maximoEntreRGB(red, green, blue);
-	int m = ControlDeColor::minimoEntreRGB(red, green, blue);
+    int m = ControlDeColor::minimoEntreRGB(red, green, blue);
 	int c = M - m;
 	double seis = 6;
 
-	//Si la diferencia c es 0 entonces H no esta definido
-	if (c == 0)
-	{
-		H = -1;
-	}
-	else{
-		double resta = green - blue;
-		Hi = resta / c;
+		//Si la diferencia c es 0 entonces H no esta definido
+		if (c == 0)
+		{
+			H = -1;
+		}
+		else
+		  {
+			double resta = green - blue;
+			Hi = resta / c;
 
-		if (M == red)
-		{
-			H = 60 * (remainder(Hi, seis));
-		}
-		if (M == green)
-		{
-			H = 60 * (((blue - red) / c) + 2);
-		}
-		if (M == blue)
-		{
-			H = 60 * (((red - green) / c) + 4);
-		}
-	}//Fin del else
+			if (M == red)
+			{
+				H = 60 * (remainder(Hi, seis));
+			}
+			if (M == green)
+			{
+				H = 60 * (((blue - red) / c) + 2);
+			}
+			if (M == blue)
+			{
+				H = 60 * (((red - green) / c) + 4);
+			}
+		}//Fin del else
 
-	if ((H >= h_inicio) && (H <= h_final))
-	{
-		H = H + desplazamiento;
-	}
-	else
-	{
-		H = -1;
-	}
-	//Corrijo si el resultado es mayor a 360 grados
-	H = this->reductorDeVueltas(H);
+		if ((H >= h_inicio) && (H <= h_final))
+		{
+			H = H + desplazamiento;
+		}
+		else
+		{
+			H = -1;
+		}
+		//Corrijo si el resultado es mayor a 360 grados
+		H = this->reductorDeVueltas(H);
+	
 	return H;
 }
 
