@@ -266,12 +266,17 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 	if (unEstado.accion == GOLPE_ALTO){
 		if (unEstado.movimiento == SALTO)
 			return SaltoGolpe;
+		//XERROR
+		if (unEstado.movimiento == SALTODIAGIZQ || unEstado.movimiento == SALTODIAGDER)
+			return SaltoGolpe;
 		return GolpeAlto;
 	}
 	if (unEstado.accion == GOLPE_BAJO){
 		if (unEstado.movimiento == AGACHADO)
 			return AgachadoGolpeBajo;
 		if (unEstado.movimiento == SALTO)
+			return SaltoGolpe;
+		if (unEstado.movimiento == SALTODIAGIZQ || unEstado.movimiento == SALTODIAGDER)
 			return SaltoGolpe;
 		return GolpeBajo;
 	}
