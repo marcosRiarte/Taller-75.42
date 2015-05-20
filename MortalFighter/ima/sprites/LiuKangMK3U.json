@@ -369,6 +369,22 @@
                         "alto": 30,
                         "nSprite": 0,
                         "esHitBox": false
+                    },
+                    {
+                        "x": 100,
+                        "y": 142,
+                        "ancho": 100,
+                        "alto": 210,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 105,
+                        "y": 102,
+                        "ancho": 50,
+                        "alto": 40,
+                        "nSprite": 0,
+                        "esHitBox": true
                     }
                 ],
                 "secuenciaSprites": [
@@ -445,6 +461,22 @@
                         "alto": 35,
                         "nSprite": 0,
                         "esHitBox": false
+                    },
+                    {
+                        "x": 110,
+                        "y": 142,
+                        "ancho": 80,
+                        "alto": 210,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 130,
+                        "y": 102,
+                        "ancho": 50,
+                        "alto": 40,
+                        "nSprite": 0,
+                        "esHitBox": true
                     }
                 ],
                 "secuenciaSprites": [
@@ -547,6 +579,22 @@
                         "alto": 30,
                         "nSprite": 0,
                         "esHitBox": false
+                    },
+                    {
+                        "x": 100,
+                        "y": 142,
+                        "ancho": 100,
+                        "alto": 210,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 105,
+                        "y": 102,
+                        "ancho": 50,
+                        "alto": 40,
+                        "nSprite": 0,
+                        "esHitBox": true
                     }
                 ],
                 "secuenciaSprites": [
@@ -627,6 +675,22 @@
                         "alto": 35,
                         "nSprite": 0,
                         "esHitBox": false
+                    },
+                    {
+                        "x": 110,
+                        "y": 142,
+                        "ancho": 80,
+                        "alto": 210,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 140,
+                        "y": 102,
+                        "ancho": 50,
+                        "alto": 40,
+                        "nSprite": 0,
+                        "esHitBox": true
                     }
                 ],
                 "secuenciaSprites": [
