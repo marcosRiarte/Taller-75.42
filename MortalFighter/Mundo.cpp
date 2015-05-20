@@ -173,6 +173,15 @@ ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCu
 			unCuerpo->SetVelocidadX(0.0f);
 		}
 	}
+
+	// si el flaco acaba de llegar al piso y estaba haciendo algo en el aire pero no esta golpeado entonces suspendele la accion cuando llega al piso (evito patada voladora en piso)
+	if (unCuerpo->estaEnPiso() && (estadoAnterior.movimiento == SALTO || estadoAnterior.movimiento == SALTODIAGDER || estadoAnterior.movimiento == SALTODIAGIZQ)){
+
+		if ((estadoAnterior.accion != SIN_ACCION) && nuevoEstado.golpeado==NOGOLPEADO){
+			unCuerpo->setDemora(0);
+		}
+
+	}
 			/*
 			if ((unCuerpo->getVelocidad().x == 0)){
 			nuevoEstado = estadoAnterior;
@@ -200,6 +209,267 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 {
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 	Sprite* elSprite = unCuerpo->getSprite();
+
+
+
+	//
+	//*************************************************************************************************//
+	//                                EL EL AIRE SOLO SE PUEDEN REALIZAR 4 GOLPES
+	//
+	// SEBA, EVALUA QUE SPRITE APLICAR dependiendo de si estado.movimiento es (SALTO) o  (SALTODIAGDER SALTODIAGIZQ)
+	//************************************************************************************************//
+	if (!unCuerpo->estaEnPiso())
+	{
+		
+
+		if (movimientos->back() == G_BAJO){
+			nuevoEstado.accion = GOLPE_BAJO;
+			unCuerpo->setDemora(15);
+			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
+		if (movimientos->back() == P_ALTA) {
+			nuevoEstado.accion = PATADA_ALTA;
+		
+			unCuerpo->setDemora(15);
+			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
+
+		if (movimientos->back() == P_BAJA) {
+			nuevoEstado.accion = PATADA_BAJA;
+			unCuerpo->setDemora(15);
+			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
+		if (movimientos->back() == G_ALTO){
+			nuevoEstado.accion = GOLPE_ALTO;
+			unCuerpo->setDemora(15);
+			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
+
+
+	}
+
+	
+	
+	
+	
+	//*************************************************************************************************//
+	//                               ESTA EN EL PISO, EVALUO AGACHADO Y PARADO
+	//
+	//************************************************************************************************//
+	else{
+		
+		//*************************************************************************************************//
+		//                            CASO TIPO AGACHADO
+		//
+		//************************************************************************************************//
+		if (estadoAnterior.movimiento == AGACHADO)
+		{
+
+			if (movimientos->back() == ABAJO) {
+				nuevoEstado.movimiento = AGACHADO;
+			}
+
+			if (movimientos->back() == DEFENSA_AGACHADO){
+				nuevoEstado.movimiento = AGACHADO;
+				nuevoEstado.accion = GUARDIA;
+				unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+
+			//*************************************************************************************************//
+			//                                GOLPES AGACHADO
+			//************************************************************************************************//
+
+			if (movimientos->back() == G_ABAJO){
+				nuevoEstado.accion = GOLPE_BAJO;
+				unCuerpo->setDemora(35);
+				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+			if (movimientos->back() == P_ALTA_ABAJO) {
+				nuevoEstado.accion = PATADA_ALTA;
+
+				unCuerpo->setDemora(35);
+				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+
+			if (movimientos->back() == P_BAJA_ABAJO) {
+				nuevoEstado.accion = PATADA_BAJA;
+				unCuerpo->setDemora(35);
+				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+			if (movimientos->back() == G_GANCHO){
+				nuevoEstado.accion = GOLPE_ALTO;
+				unCuerpo->setDemora(35);
+				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+
+
+
+
+
+
+		}
+
+		//*************************************************************************************************//
+		//                            CASO TIPO PARADO
+		//
+		//************************************************************************************************//
+		else
+		{
+
+			//DESPLAZAMIENTOS HORIZONTALES
+
+			if (movimientos->back() == DER){
+				nuevoEstado.movimiento = CAMINARDER;
+				if (!(invertido)){
+					unCuerpo->mover(DISTANCIA);
+					//	if (!(unCuerpo->EstaSuperpuesto())){
+					//		 unCuerpo->mover(DISTANCIA); }
+
+				}
+				else
+					if (!unCuerpo->EstaFrenado()){
+						unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
+					}
+			}
+
+			if (movimientos->back() == IZQ) {
+				nuevoEstado.movimiento = CAMINARIZQ;
+				if (otroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
+					unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
+				else
+					unCuerpo->mover(-DISTANCIA);
+			}
+
+			
+
+
+
+			//SALTOS
+
+			if (movimientos->back() == ARRIBA) {
+				nuevoEstado.movimiento = SALTO;
+				unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
+			}
+
+						
+			if (movimientos->back() == SALTODER){
+				nuevoEstado.movimiento = SALTODIAGDER;
+				unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
+			}
+
+			if (movimientos->back() == SALTOIZQ){
+				nuevoEstado.movimiento = SALTODIAGIZQ;
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
+			}
+
+			//AGACHARSE
+
+			if (movimientos->back() == ABAJO){
+				nuevoEstado.movimiento = AGACHADO;
+			}
+
+			if (movimientos->back() == DEFENSA_AGACHADO) { //ESTO ESTA ASI A PROPOSITO
+				nuevoEstado.movimiento = AGACHADO;
+			}
+
+
+
+
+			if ((movimientos->back() == ARMA) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
+				nuevoEstado.accion = ARMA_ARROJABLE;
+				unCuerpo->setEstadoAnterior(nuevoEstado);
+				unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+
+			if ((movimientos->back() == DEFENSA) && unCuerpo->estaEnPiso()){
+				nuevoEstado.movimiento = PARADO;
+				nuevoEstado.accion = GUARDIA;
+				unCuerpo->setEstadoAnterior(nuevoEstado);
+			}
+
+			
+
+			if (movimientos->back() == G_BAJO){
+				nuevoEstado.accion = GOLPE_BAJO;
+				unCuerpo->setDemora(35);
+				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+			if (movimientos->back() == P_ALTA) {
+				nuevoEstado.accion = PATADA_ALTA;
+
+				unCuerpo->setDemora(35);
+				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+
+			if (movimientos->back() == P_BAJA) {
+				nuevoEstado.accion = PATADA_BAJA;
+				unCuerpo->setDemora(35);
+				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+			if (movimientos->back() == G_ALTO){
+				nuevoEstado.accion = GOLPE_ALTO;
+				unCuerpo->setDemora(35);
+				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		}
+
+
+
+		
+
+
+
+
+
+
+		//
+		//
+		//
+
+		///
+		//
+		//
+		//
+		//
+
+
+
+
+
+
+
+
+	}
+
+
+
 	/*
 	if (unCuerpo->EstaFrenado()){
 		if ((movimientos->back() == ARRIBA)){
@@ -242,97 +512,9 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()) / 10);
 		}*/
 
-	if ((movimientos->back() == DER) && unCuerpo->estaEnPiso()){
-			nuevoEstado.movimiento = CAMINARDER;
-			if (!(invertido)){
-				unCuerpo->mover(DISTANCIA);
-			//	if (!(unCuerpo->EstaSuperpuesto())){
-			//		 unCuerpo->mover(DISTANCIA); }
-
-			}
-			else
-				if (!unCuerpo->EstaFrenado()){
-					unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
-				}
-		}
-
-	if ((movimientos->back() == IZQ) && unCuerpo->estaEnPiso()){
-			nuevoEstado.movimiento = CAMINARIZQ;
-			if (otroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
-				unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
-			else
-				unCuerpo->mover(-DISTANCIA);
-		}
-		if ((movimientos->back() == ARRIBA) && unCuerpo->estaEnPiso()){
-			nuevoEstado.movimiento = SALTO;
-			
-			if (unCuerpo->estaEnPiso()){
-				unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
-			}
-		}
-
-		if ((movimientos->back() == SALTODER)&& unCuerpo->estaEnPiso()){
-			nuevoEstado.movimiento = SALTODIAGDER;
-			//unCuerpo->setEstadoAnterior(nuevoEstado);
-			if (unCuerpo->estaEnPiso()){
-				unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
-			}
-		}
-
-		if ((movimientos->back() == SALTOIZQ) && unCuerpo->estaEnPiso()){
-			nuevoEstado.movimiento = SALTODIAGIZQ;
-			//unCuerpo->setEstadoAnterior(nuevoEstado);
-			if (unCuerpo->estaEnPiso()){
-				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
-			}
-		}
-
-		if ((movimientos->back() == ABAJO) && unCuerpo->estaEnPiso()){
-		nuevoEstado.movimiento = AGACHADO;
-		//unCuerpo->setEstadoAnterior(nuevoEstado);
-	}
 	
-	if ((movimientos->back() == G_BAJO) && !(unCuerpo->getEstado().accion == GOLPE_BAJO)){
-		nuevoEstado.accion = GOLPE_BAJO;
-		//unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
-	}
-	if ((movimientos->back() == P_ALTA) && !(unCuerpo->getEstado().accion == PATADA_ALTA)){
-		nuevoEstado.accion = PATADA_ALTA;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora(35);
-		//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
-	}
 
-	if ((movimientos->back() == P_BAJA) && !(unCuerpo->getEstado().accion == PATADA_BAJA)){
-		nuevoEstado.accion = PATADA_BAJA;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
-	}
-	if ((movimientos->back() == G_ALTO) && !(unCuerpo->getEstado().accion == GOLPE_ALTO)){
-		nuevoEstado.accion = GOLPE_ALTO;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
-	}
-	if ((movimientos->back() == ARMA) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
-		nuevoEstado.accion = ARMA_ARROJABLE;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
-	}
-
-	if ((movimientos->back() == DEFENSA) && unCuerpo->estaEnPiso()){
-		nuevoEstado.movimiento = PARADO;
-		nuevoEstado.accion = GUARDIA;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-	}
-
-	if ((movimientos->back() == DEFENSA_AGACHADO) && unCuerpo->estaEnPiso()){
-		nuevoEstado.movimiento = AGACHADO;
-		nuevoEstado.accion = GUARDIA;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
-	}
-
+	/*
 	if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (estadoAnterior.golpeado != GOLPEADO)){
 		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		nuevoEstado.golpeado = GOLPEADO;
@@ -341,7 +523,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			std::string mensaje = "Gano personaje " + otroCuerpo->getRefPersonaje()->getNombre();
 			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_DEBUG);
 		}
-	}
+	}*/
 
 	
 	//}
@@ -486,19 +668,18 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		//si hay demora
 		if (unCuerpo->HayDemora())
 		{
-			/*if (!(nuevoEstado.golpeado == GOLPEADO && unCuerpo->getEstadoAnterior().golpeado !=GOLPEADO)){
+			if (!(nuevoEstado.golpeado == GOLPEADO && unCuerpo->getEstadoAnterior().golpeado !=GOLPEADO)){
 				unCuerpo->DisminuirDemora();
 				nuevoEstado = unCuerpo->getEstadoAnterior();
-				} en el caso de que se cumpla, el tipo sale de aca con el estado actual que es golpeado!*/
+				} //en el caso de que se cumpla, el tipo sale de aca con el estado actual que es golpeado!
 			//si estadoactual=golpeado y estado anterior no lo es no disminuir
-			unCuerpo->DisminuirDemora();
-			nuevoEstado = unCuerpo->getEstadoAnterior();
+			
 		}
 
 
 		
 		else
-		{
+		{//no hay demora,// si llega aca, no esta golpeado y no esta haciendo nada (y voy a evaluar si ahora si va a hacer algo (puede estar en el aire o en piso)
 			
 			nuevoEstado = Mundo::ResolverAcciones(difTiempo, unCuerpo, elOtroCuerpo, nuevoEstado, invertido, &movimientos);
 			
