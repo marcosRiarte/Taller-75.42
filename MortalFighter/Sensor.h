@@ -17,6 +17,9 @@ public:
 
 	void moverProyectil(float unaDistancia);
 	void resetearPosicionInicial();
+	void activarSensor();
+	void desactivarSensor();
+	bool estaActivo();
 
 	~Sensor();
 private:
@@ -25,6 +28,7 @@ private:
 	int ancho;
 	int alto;
 	bool esHitBox;
+	bool activo;
 	std::string estadoStr;
 };
 
