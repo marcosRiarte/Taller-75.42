@@ -100,8 +100,11 @@ bool Mundo::hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int un
 // ya hubo colision, en caso de ser golpeado tambien calculo la vitalidad
 ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido, ESTADO nuevoEstado){
 
-
-	nuevoEstado.golpeado = GOLPEADO;
+	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
+	
+	if (estadoAnterior.golpeado == NOGOLPEADO){
+		nuevoEstado.golpeado = GOLPEADO;
+	}
 
 
 	//****************************************************************
@@ -109,8 +112,8 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 	//************************************************************************
 	//xerror hay que arreglar esto por que se cambio la logica.
 	// aca uncuerpo es el golpeado entonces se le tiene que descontar a uncuerpo
-	if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (unCuerpo->getEstadoAnterior().golpeado != GOLPEADO)){
-		unCuerpo->setDemora(125);
+	if ((nuevoEstado.golpeado == GOLPEADO) && (estadoAnterior.golpeado == NOGOLPEADO)){
+		unCuerpo->setDemora(40);
 		//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado())) == REINICIAR){
 			nuevoEstado.golpeado = FALLECIDO;
@@ -357,29 +360,38 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 		{
 
 			//DESPLAZAMIENTOS HORIZONTALES
-
-			if (movimientos->back() == DER){
-				nuevoEstado.movimiento = CAMINARDER;
-				if (!(invertido)){
-					unCuerpo->mover(DISTANCIA);
-					//	if (!(unCuerpo->EstaSuperpuesto())){
-					//		 unCuerpo->mover(DISTANCIA); }
-
+			if (unCuerpo->EstaFrenado()){
+				if ((movimientos->back() == DER)){
+					nuevoEstado.movimiento = CAMINARDER;
 				}
-				else
-					if (!unCuerpo->EstaFrenado()){
-						unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
+				if ((movimientos->back() == IZQ)){
+					nuevoEstado.movimiento = CAMINARIZQ;
+				}
+			}
+			else{
+				//esto hace que no pueda saltar en el air
+
+				if ((movimientos->back() == DER)){
+					nuevoEstado.movimiento = CAMINARDER;
+					if (!(invertido)){
+						if (!(unCuerpo->EstaSuperpuesto()))
+							unCuerpo->mover(DISTANCIA);
 					}
-			}
+					else
+						unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
+				}
 
-			if (movimientos->back() == IZQ) {
-				nuevoEstado.movimiento = CAMINARIZQ;
-				if (otroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
-					unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
-				else
-					unCuerpo->mover(-DISTANCIA);
-			}
+				if ((movimientos->back() == IZQ)){
+					nuevoEstado.movimiento = CAMINARIZQ;
+					if (otroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
+						unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
+					else
+						unCuerpo->mover(-DISTANCIA);
+				}
 
+
+			}
+		
 			
 
 
@@ -605,6 +617,7 @@ void Mundo::ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool inverti
 
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
+	ESTADO estadoanterior = unCuerpo->getEstadoAnterior();
 	ESTADO nuevoEstado;  //defino estado por defecto Si no es golpeado, si no vas a hacer nada y si no estas en el aire, devuelve esto
 	nuevoEstado.movimiento = PARADO;
 	nuevoEstado.accion = SIN_ACCION;
@@ -670,8 +683,11 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	}
 	else{
 		// NO HAY SUPERPOSICION, LO SIGUIENTE A RESOLVER ES LA COLISION
-		//ResolverGolpiza(unCuerpo, elOtroCuerpo, invertido);
-		nuevoEstado = Mundo::ResolverColisiones(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
+		
+
+		if (estadoanterior.golpeado == NOGOLPEADO){
+			nuevoEstado = Mundo::ResolverColisiones(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
+		}
 		//esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada
 		
 		// PASO 3 RESOLVEMOS LA LOGICA DE SALTOS
