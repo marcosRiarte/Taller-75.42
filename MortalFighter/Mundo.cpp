@@ -493,68 +493,13 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 		}
 
-
-
 		
-
-
-
-
-
-
-		//
-		//
-		//
-
-		///
-		//
-		//
-		//
-		//
-
-
-
-
-
-
-
-
 	}
 
 
 
 	/*
-	if (unCuerpo->EstaFrenado()){
-		if ((movimientos->back() == ARRIBA)){
-			nuevoEstado.movimiento = SALTO;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
-		}
-		if (movimientos->back() == ABAJO){
-			if (unCuerpo->getEstado().accion == GUARDIA)
-				nuevoEstado.movimiento = AGACHADO;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-		}
-		if ((movimientos->at(0) == SALTODER)){
-			nuevoEstado.movimiento = SALTODIAGDER;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
-		}
-		if ((movimientos->at(0) == SALTOIZQ)){
-			nuevoEstado.movimiento = SALTODIAGIZQ;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
-		}
-		if ((movimientos->at(0) == DER)){
-			nuevoEstado.movimiento = CAMINARDER;
-		}
-		if ((movimientos->at(0) == IZQ)){
-			nuevoEstado.movimiento = CAMINARIZQ;
-		}
-		if (movimientos->at(0) == ABAJO){
-			nuevoEstado.movimiento = AGACHADO;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-		}
+	
 	}
 	else{*/
 		//esto hace que no pueda saltar en el aire
@@ -568,14 +513,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 	
 
 	/*
-	if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (estadoAnterior.golpeado != GOLPEADO)){
-		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
-		nuevoEstado.golpeado = GOLPEADO;
-		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), otroCuerpo->getEstado())) == REINICIAR){
-			nuevoEstado.golpeado = FALLECIDO;
-			std::string mensaje = "Gano personaje " + otroCuerpo->getRefPersonaje()->getNombre();
-			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_DEBUG);
-		}
+	
 	}*/
 
 	
