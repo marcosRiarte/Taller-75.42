@@ -730,8 +730,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	// nacho: obtiene el sprite del disparo, tomo el ultimo de los sprites del disparo
 	SDL_Rect* cuadroProyectilUnoSprite = personajesVista.at(0)->getSprite()->listaDeCuadros(DISPARO_DEFAULT)->back();
 	// nacho: ancho y alto del dibujo del sprite
-	proyectilUno.w = cuadroProyectilUnoSprite->w; //tamanio real  // (int)refMundo->getProyectil(1)->getAncho();
-	proyectilUno.h = cuadroProyectilUnoSprite->h; //tamanio real  // (int)refMundo->getProyectil(1)->getAlto();
+	proyectilUno.w = (int)refMundo->getProyectil(1)->getAncho();
+	proyectilUno.h = (int)refMundo->getProyectil(1)->getAlto();
 
 	if (!(invertido))
 		proyectilDos.x = personajeDos.x + manejadorULog.darLongPixels(personajesVista.at(1)->getAncho()) - refMundo->getProyectil(2)->getPosicion().first - refMundo->getProyectil(2)->getAncho();
