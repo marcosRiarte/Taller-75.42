@@ -164,6 +164,9 @@
     <ClInclude Include="ValidadorDelColor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ConversorAString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -242,6 +245,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ValidadorDelColor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConversorAString.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
