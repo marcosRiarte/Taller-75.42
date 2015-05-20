@@ -78,40 +78,74 @@ public:
 	inline void SetSensorActivoStr(ESTADO estadoActual)
 	{
 		if (estadoActual.golpeado == GOLPEADO){
-			if (estadoActual.movimiento == SALTO || estadoActual.movimiento == SALTODIAGDER || estadoActual.movimiento == SALTODIAGIZQ)
+			if ((estadoActual.movimiento == SALTO) || (estadoActual.movimiento == SALTODIAGDER) || (estadoActual.movimiento == SALTODIAGIZQ))
 				sensorActivoStr = "SaltoGolpeado";
+			if (estadoActual.movimiento == AGACHADO)
+				sensorActivoStr = "AgachadoGolpeado";
+			else
 				sensorActivoStr = "Golpeado";
+			return;
 		}
 		if (estadoActual.accion != SIN_ACCION){
-		if (estadoActual.accion == PATADA_BAJA){
-			sensorActivoStr = "PatadaBaja";
-		}
-		if (estadoActual.accion == PATADA_ALTA){
-			sensorActivoStr = "PatadaAlta";
-		}
-		if (estadoActual.accion == GOLPE_BAJO){
-			sensorActivoStr = "GolpeBajo";
-		}
-		if (estadoActual.accion == GOLPE_ALTO){
-			sensorActivoStr = "GolpeAlto";
-		}
-		if (estadoActual.accion == ARMA_ARROJABLE){
-			sensorActivoStr = "Arma";
-		}
+			if (estadoActual.accion == GANCHO)
+				sensorActivoStr = "Gancho";
+			if (estadoActual.accion == PATADA_BAJA){
+				if (estadoActual.movimiento == SALTO)
+					sensorActivoStr = "SaltoPatada";
+				if ((estadoActual.movimiento == SALTODIAGDER) || (estadoActual.movimiento == SALTODIAGIZQ))
+					sensorActivoStr = "SaltoDiagonalPatada";
+				if (estadoActual.movimiento == AGACHADO)
+					sensorActivoStr = "AgachadoPatadaBaja";
+				else
+					sensorActivoStr = "PatadaBaja";
+			}
+			if (estadoActual.accion == PATADA_ALTA){
+				if (estadoActual.movimiento == SALTO)
+					sensorActivoStr = "SaltoPatada";
+				if ((estadoActual.movimiento == SALTODIAGDER) || (estadoActual.movimiento == SALTODIAGIZQ))
+					sensorActivoStr = "SaltoDiagonalPatada";
+				if (estadoActual.movimiento == AGACHADO)
+					sensorActivoStr = "AgachadoPatadaAlta";
+				else
+					sensorActivoStr = "PatadaAlta";
+			}
+			if (estadoActual.accion == GOLPE_BAJO){
+				if (estadoActual.movimiento == SALTO)
+					sensorActivoStr = "SaltoGolpe";
+				if ((estadoActual.movimiento == SALTODIAGDER) || (estadoActual.movimiento == SALTODIAGIZQ))
+					sensorActivoStr = "SaltoGolpe";
+				if (estadoActual.movimiento == AGACHADO)
+					sensorActivoStr = "AgachadoGolpeBajo";
+				else
+					sensorActivoStr = "GolpeBajo";
+			}
+			if (estadoActual.accion == GOLPE_ALTO){
+				if (estadoActual.movimiento == SALTO)
+					sensorActivoStr = "SaltoGolpe";
+				if ((estadoActual.movimiento == SALTODIAGDER) || (estadoActual.movimiento == SALTODIAGIZQ))
+					sensorActivoStr = "SaltoGolpe";
+				if (estadoActual.movimiento == AGACHADO)
+					sensorActivoStr = "Gancho";
+				else
+					sensorActivoStr = "GolpeAlto";
+			}
+			if (estadoActual.accion == ARMA_ARROJABLE){
+				sensorActivoStr = "Arma";
+			}
 		}
 		else{
-		if (estadoActual.movimiento == CAMINARDER)
-			sensorActivoStr = "Caminar";
-		if (estadoActual.movimiento == PARADO)
-			sensorActivoStr = "Quieto";
-		if (estadoActual.movimiento == SALTO)
-			sensorActivoStr = "Salto";
-		if ((estadoActual.movimiento == SALTODIAGIZQ) || (estadoActual.movimiento == SALTODIAGDER))
-			sensorActivoStr = "SaltoDiagonal";
-		if (estadoActual.movimiento == CAMINARIZQ)
-			sensorActivoStr = "CaminarAtras";
-		if (estadoActual.movimiento == AGACHADO)
-			sensorActivoStr = "Agacharse";
+			if (estadoActual.movimiento == CAMINARDER)
+				sensorActivoStr = "Caminar";
+			if (estadoActual.movimiento == PARADO)
+				sensorActivoStr = "Quieto";
+			if (estadoActual.movimiento == SALTO)
+				sensorActivoStr = "Salto";
+			if ((estadoActual.movimiento == SALTODIAGIZQ) || (estadoActual.movimiento == SALTODIAGDER))
+				sensorActivoStr = "SaltoDiagonal";
+			if (estadoActual.movimiento == CAMINARIZQ)
+				sensorActivoStr = "CaminarAtras";
+			if (estadoActual.movimiento == AGACHADO)
+				sensorActivoStr = "Agacharse";
 		}
 	}
 
