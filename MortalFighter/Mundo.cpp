@@ -167,10 +167,9 @@ ESTADO Mundo::moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertid
 		if (unCuerpo->getEstado().movimiento != CAMINARIZQ){
 			nuevoEstado.movimiento = CAMINARDER;
 
-			if (movimientos->back() == DEFENSA){
-
-				unCuerpo->mover(0.2);
-				elOtroCuerpo->mover(-0.2);
+			if ((movimientos->back() == DEFENSA) || (movimientos->back() == DEFENSA_AGACHADO)){
+				unCuerpo->mover(-0.1f);
+				elOtroCuerpo->mover(0.1f);
 			}
 
 			else{
@@ -179,19 +178,21 @@ ESTADO Mundo::moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertid
 			}
 		}
 	}
-			if (unCuerpo->getEstado().movimiento != CAMINARDER){
+	else{
+		if (unCuerpo->getEstado().movimiento != CAMINARDER){
 			nuevoEstado.movimiento = CAMINARIZQ;
 
-			if (movimientos->back() == DEFENSA){
-
-				unCuerpo->mover(-0.2);
-				elOtroCuerpo->mover(0.2);
+			if ((movimientos->back() == DEFENSA) || (movimientos->back() == DEFENSA_AGACHADO)){
+				unCuerpo->mover(0.1f);
+				elOtroCuerpo->mover(-0.1f);
 			}
 			else{
 				unCuerpo->mover(-DISTANCIA);
 				elOtroCuerpo->mover(DISTANCIA);
 			}
+
 		}
+	}
 
 	
 	return nuevoEstado;
