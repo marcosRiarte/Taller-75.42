@@ -11,7 +11,7 @@ Mundo::Mundo(const vector2D& valorGravedad)
 {
 	yPiso = Parser::getInstancia().getEscenario().getYPiso();
 	gravedad = valorGravedad;
-	Cuerpos = std::vector<Cuerpo*>();	
+	Cuerpos = std::vector<Cuerpo*>();
 }
 
 void Mundo::agregarCuerpo(Cuerpo *unCuerpo)
@@ -86,7 +86,7 @@ std::pair<float, float> getPosicionAbsSensor(std::pair<float, float> posSensor, 
 	return posicionOtroCuerpo;
 }
 
-bool Mundo::hayInterseccion(std::pair<int, int> unaPosicion, int unAncho, int unAlto, std::pair<int, int> otraPos, int otroAncho, int otroAlto){
+bool Mundo::hayInterseccion(std::pair<float, float> unaPosicion, float unAncho, float unAlto, std::pair<float, float> otraPos, float otroAncho, float otroAlto){
 	if (!((unaPosicion.first >= 0 && unaPosicion.second >= 0) && (unAncho >= 0) && (unAlto >= 0) && (otraPos.first >= 0 && otraPos.second >= 0) && (otroAncho >= 0) && (otroAlto >= 0)))
 		return false;
 	if ((unaPosicion.first + unAncho < otraPos.first) || (unaPosicion.first > otroAncho + otraPos.first) || (unaPosicion.second + unAlto < otraPos.second) || (unaPosicion.second > otraPos.second + otroAlto)){
@@ -274,7 +274,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 	}
 	if ((movimientos->back() == ARMA) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
 		nuevoEstado.accion = ARMA_ARROJABLE;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
+		unCuerpo->getSensoresProyectil().at(0)->activarSensor();
 		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 	}
 
@@ -304,7 +304,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 	if ((movimientos->back() == QUIETO)){
 		nuevoEstado.movimiento = PARADO;
 		unCuerpo->setEstadoAnterior(nuevoEstado);
-	}
+		}
 	}
 
 	return nuevoEstado;
@@ -348,9 +348,41 @@ void Mundo::ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool inverti
 					unEstado.golpeado = GOLPEADO;
 					elOtroCuerpo->notificarObservadores(unEstado);
 				}
-			}
+			}	
 		}
 	}
+}
+
+void Mundo::ResolverArma(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proyectil, bool invertido){
+	
+	ManejadorULogicas manejadorUnidades;
+
+	std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
+	std::pair<float, float> posAbsSensorProyectil;
+	std::pair<float, float> posAbsSensoresOtroCuerpo;
+
+	std::pair<float, float> posProyectilEngloba;
+
+	posProyectilEngloba.first = unCuerpo->getposProyectilAnterior();
+	posProyectilEngloba.second = proyectil->getPosicion().second;
+
+	float anchoEngloba = proyectil->getPosicion().first - unCuerpo->getposProyectilAnterior() + proyectil->getAncho();
+
+	posAbsSensorProyectil = getPosicionAbsSensor(posProyectilEngloba, unCuerpo, anchoEngloba, proyectil->getAlto(), invertido);
+	
+		for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
+				posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), sensoresOtroCuerpo->at(j)->getAlto(), invertido);
+				if (hayInterseccion(posAbsSensorProyectil, manejadorUnidades.darLongUnidades(anchoEngloba), manejadorUnidades.darLongUnidades(proyectil->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
+					ESTADO unEstado = elOtroCuerpo->getEstado();
+					unEstado.golpeado = GOLPEADO;
+					elOtroCuerpo->notificarObservadores(unEstado);
+					unCuerpo->getSensoresProyectil().at(0)->desactivarSensor();
+				}
+			}	
+}
+
+//Establecimiento de sensor contenedor del actual y el siguiente.
+void Mundo::resolverChoque(Sensor* proyectilUno, Sensor* proyectilDos){
 
 }
 
@@ -362,12 +394,18 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	nuevoEstado.golpeado = NOGOLPEADO;
 	//Se setea de que cuerpo se esta tratando.
 	Cuerpo* elOtroCuerpo;
+
 	if (unCuerpo == Cuerpos.at(0)){
 		elOtroCuerpo = Cuerpos.at(1);
 	}
 	else{
 		elOtroCuerpo = Cuerpos.at(0);
 	}
+
+	Sensor* proyectilUno = unCuerpo->getSensoresProyectil().at(0);
+	Sensor* proyectilDos = elOtroCuerpo->getSensoresProyectil().at(0);
+
+	unCuerpo->setposProyectilAnterior(unCuerpo->getSensoresProyectil().at(0)->getPosicion().first);
 
 	bool invertido;
 
@@ -396,7 +434,24 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		}
 	}
 
-	ResolverGolpiza(unCuerpo, elOtroCuerpo, invertido);
+	if ((unCuerpo->getEstado().accion != SIN_ACCION) || (elOtroCuerpo->getEstado().accion != SIN_ACCION))
+		ResolverGolpiza(unCuerpo, elOtroCuerpo, invertido);
+
+	if ((nuevoEstado.accion == ARMA_ARROJABLE) && (unCuerpo->getSensoresProyectil().at(0)->estaActivo())){
+		unCuerpo->getSensoresProyectil().at(0)->moverProyectil(DISTANCIAPROYECTIL);
+	}
+
+	if ((proyectilUno->estaActivo()) && (proyectilDos->estaActivo())){
+		//resolverChoque(proyectilUno, proyectilDos);
+	}
+	else {
+		if (proyectilUno->estaActivo()){
+			ResolverArma(unCuerpo, elOtroCuerpo, proyectilUno, invertido);
+		}
+		if (proyectilDos->estaActivo()){
+			ResolverArma(elOtroCuerpo, unCuerpo, proyectilDos, invertido);
+		}
+	}
 
 	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION) && (elOtroCuerpo->getEstado().accion == SIN_ACCION)){
 		unCuerpo->Superponer();
@@ -405,11 +460,11 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		unCuerpo->Separados();
 	}
 
-	if (nuevoEstado.accion==ARMA_ARROJABLE)
-			unCuerpo->getSensoresProyectil().at(0)->moverProyectil(DISTANCIAPROYECTIL);
-		
-	if (!(nuevoEstado.accion == ARMA_ARROJABLE) || (unCuerpo->getEstadoAnterior().accion != ARMA_ARROJABLE))
+
+	if (!(nuevoEstado.accion == ARMA_ARROJABLE)){
 		unCuerpo->getSensoresProyectil().at(0)->resetearPosicionInicial();
+		unCuerpo->getSensoresProyectil().at(0)->desactivarSensor();
+	}
 
 	unCuerpo->SetSensorActivoStr(nuevoEstado);
 	unCuerpo->setEstadoAnterior(nuevoEstado);

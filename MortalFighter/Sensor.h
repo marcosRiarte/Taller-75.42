@@ -2,7 +2,7 @@
 class Sensor
 {
 public:
-	Sensor(std::pair<float, float> posicion, int alto, int ancho, bool esHitBox, std::string unestadoStr);
+	Sensor(std::pair<int, int> posicion, int alto, int ancho, bool esHitBox, std::string unestadoStr);
 	
 	void setPosicion(std::pair<float, float> posicion);
 	void setAlto(int alto);
@@ -17,6 +17,9 @@ public:
 
 	void moverProyectil(float unaDistancia);
 	void resetearPosicionInicial();
+	void activarSensor();
+	void desactivarSensor();
+	bool estaActivo();
 
 	~Sensor();
 private:
@@ -25,6 +28,7 @@ private:
 	int ancho;
 	int alto;
 	bool esHitBox;
+	bool activo;
 	std::string estadoStr;
 };
 

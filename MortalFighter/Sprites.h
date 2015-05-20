@@ -53,6 +53,7 @@ private:
 public:
 	Sprite(std::string);
 	std::vector<SDL_Rect*>* listaDeCuadros(ESTADO unEstado);
+	std::vector<SDL_Rect*>* listaDeCuadros(std::string otrosSprites);
 	Json::Value	ParsearSprites(std::string);
 	std::vector<std::vector<Sensor*>*> getSensores() const;
 	std::vector<Sensor*> getSensoresDisparo() const;

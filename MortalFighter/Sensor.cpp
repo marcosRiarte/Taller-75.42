@@ -2,7 +2,7 @@
 #include "Sensor.h"
 
 
-Sensor::Sensor(std::pair<float, float> unaposicion, int unancho, int unalto, bool valorHitBox, std::string unestadoStr)
+Sensor::Sensor(std::pair<int, int> unaposicion, int unancho, int unalto, bool valorHitBox, std::string unestadoStr)
 {
 	ancho = unancho;
 	alto = unalto;
@@ -10,6 +10,7 @@ Sensor::Sensor(std::pair<float, float> unaposicion, int unancho, int unalto, boo
 	posicionInicial = unaposicion;
 	esHitBox = valorHitBox;
 	estadoStr = unestadoStr;
+	activo = false;
 }
 
 void Sensor::setPosicion(std::pair<float, float> unaposicion){
@@ -55,6 +56,18 @@ std::string Sensor::getEstadoStr() const
 void Sensor::moverProyectil(float unaDistancia)
 {
 	posicion.first += unaDistancia;
+}
+
+void Sensor::activarSensor(){
+	activo = true;
+}
+
+void Sensor::desactivarSensor(){
+	activo = false;
+}
+
+bool Sensor::estaActivo(){
+	return activo;
 }
 
 Sensor::~Sensor()
