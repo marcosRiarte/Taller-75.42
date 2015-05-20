@@ -8,7 +8,7 @@
 #define SALTO_X 130.0f
 #define GRAVEDAD_Y -8.0f
 #define DISTANCIA 2.0f
-#define DISTANCIAPROYECTIL 1000.0f
+#define DISTANCIAPROYECTIL 10.0f
 #define FACTOR_DIST_REVERSA 0.6f
 #define DEFAULT_ESTA_GOLPEADO false// sacarla, esta para testear rapido
 class Cuerpo;
@@ -39,7 +39,7 @@ private:
 
 	void ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido);
 	void ResolverArma(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proyectil, bool invertido);
-	void resolverChoque(Sensor* proyectilUno, Sensor* proyectilDos);
+	void resolverChoque(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proyectilUno, Sensor* proyectilDos, bool invertido);
 
 	void moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido);
 

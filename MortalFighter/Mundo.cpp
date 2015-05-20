@@ -381,10 +381,35 @@ void Mundo::ResolverArma(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proyect
 			}	
 }
 
-//Establecimiento de sensor contenedor del actual y el siguiente.
-void Mundo::resolverChoque(Sensor* proyectilUno, Sensor* proyectilDos){
+//Solución del choque entre proyectiles.
+void Mundo::resolverChoque(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proyectilUno, Sensor* proyectilDos, bool invertido){
 
+	ManejadorULogicas manejadorUnidades;
+
+	std::pair<float, float> posAbsSensorProyectil1;
+	std::pair<float, float> posAbsSensorProyectil2;
+
+	std::pair<float, float> posProyectilEngloba1;
+	std::pair<float, float> posProyectilEngloba2;
+
+	posProyectilEngloba1.first = unCuerpo->getposProyectilAnterior();
+	posProyectilEngloba1.second = proyectilUno->getPosicion().second;
+
+	posProyectilEngloba2.first = elOtroCuerpo->getposProyectilAnterior();
+	posProyectilEngloba2.second = proyectilDos->getPosicion().second;
+
+	float anchoEngloba1 = proyectilUno->getPosicion().first - unCuerpo->getposProyectilAnterior() + proyectilUno->getAncho();
+	float anchoEngloba2 = proyectilDos->getPosicion().first - elOtroCuerpo->getposProyectilAnterior() + proyectilDos->getAncho();
+
+	posAbsSensorProyectil1 = getPosicionAbsSensor(posProyectilEngloba1, unCuerpo, anchoEngloba1, proyectilUno->getAlto(), invertido);
+	posAbsSensorProyectil2 = getPosicionAbsSensor(posProyectilEngloba2, elOtroCuerpo, anchoEngloba2, proyectilDos->getAlto(), !invertido);
+
+	if (hayInterseccion(posAbsSensorProyectil1, manejadorUnidades.darLongUnidades(anchoEngloba1), manejadorUnidades.darLongUnidades(proyectilUno->getAlto()), posAbsSensorProyectil2, manejadorUnidades.darLongUnidades(anchoEngloba2), manejadorUnidades.darLongUnidades(proyectilDos->getAlto()))){
+		unCuerpo->getSensoresProyectil().at(0)->desactivarSensor();
+		elOtroCuerpo->getSensoresProyectil().at(0)->desactivarSensor();
+		}
 }
+
 
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
@@ -441,8 +466,9 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		unCuerpo->getSensoresProyectil().at(0)->moverProyectil(DISTANCIAPROYECTIL);
 	}
 
+	
 	if ((proyectilUno->estaActivo()) && (proyectilDos->estaActivo())){
-		//resolverChoque(proyectilUno, proyectilDos);
+		resolverChoque(unCuerpo, elOtroCuerpo, proyectilUno, proyectilDos,invertido);
 	}
 	else {
 		if (proyectilUno->estaActivo()){
