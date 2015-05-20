@@ -270,6 +270,8 @@ public:
 
 	Personaje* Cuerpo::getRefPersonaje();
 	Sprite* getSprite() const;
+	void setposProyectilAnterior(float posAnteriorProyectil);
+	float getposProyectilAnterior();
 
 private:
 	std::vector<Sensor*>* getSensoresActivos() const;
@@ -283,6 +285,7 @@ private:
 	bool estaSuperpuesto;
 	int demora;
 	ESTADO estadoAnterior;
+	float posAnteriorProyectil;
 	std::vector<std::vector<Sensor*>*> sensores;
 	std::vector<Sensor*> sensoresDisparo;
 	std::string sensorActivoStr;

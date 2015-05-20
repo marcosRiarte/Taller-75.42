@@ -8,7 +8,7 @@
 #define SALTO_X 130.0f
 #define GRAVEDAD_Y -8.0f
 #define DISTANCIA 2.0f
-#define DISTANCIAPROYECTIL 6.0f
+#define DISTANCIAPROYECTIL 1000.0f
 #define FACTOR_DIST_REVERSA 0.6f
 #define DEFAULT_ESTA_GOLPEADO false// sacarla, esta para testear rapido
 class Cuerpo;
@@ -26,13 +26,13 @@ public:
 	void LiberarCuerpos();
 	Cuerpo* getCuerpo(size_t pos);
 	Sensor* getProyectil(size_t pos);
+	Sensor* sensorEngloba(Sensor* sensorUno, Sensor* sensorDos);
 
 private:
 	vector2D gravedad;	
 	ESTADO estadoAnteriorPj1;
 	ESTADO estadoAnteriorPj2;
 	float yPiso;
-	Sensor* proyectilAnterior;
 	std::vector<Cuerpo*> Cuerpos;
 	bool hayInterseccion(std::pair<float, float> unaPosicion, float unAncho, float unAlto, std::pair<float, float> otraPos, float otroAncho, float otroAlto);
 	bool haySuperposicion(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido);

@@ -11,7 +11,7 @@ Mundo::Mundo(const vector2D& valorGravedad)
 {
 	yPiso = Parser::getInstancia().getEscenario().getYPiso();
 	gravedad = valorGravedad;
-	Cuerpos = std::vector<Cuerpo*>();	
+	Cuerpos = std::vector<Cuerpo*>();
 }
 
 void Mundo::agregarCuerpo(Cuerpo *unCuerpo)
@@ -359,14 +359,20 @@ void Mundo::ResolverArma(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proyect
 
 	std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
 	std::pair<float, float> posAbsSensorProyectil;
-	Personaje* personaje;
-
 	std::pair<float, float> posAbsSensoresOtroCuerpo;
 
-	posAbsSensorProyectil = getPosicionAbsSensor(proyectil->getPosicion(), unCuerpo, proyectil->getAncho(), proyectil->getAlto(), invertido);
+	std::pair<float, float> posProyectilEngloba;
+
+	posProyectilEngloba.first = unCuerpo->getposProyectilAnterior();
+	posProyectilEngloba.second = proyectil->getPosicion().second;
+
+	float anchoEngloba = proyectil->getPosicion().first - unCuerpo->getposProyectilAnterior() + proyectil->getAncho();
+
+	posAbsSensorProyectil = getPosicionAbsSensor(posProyectilEngloba, unCuerpo, anchoEngloba, proyectil->getAlto(), invertido);
+	
 		for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
 				posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), sensoresOtroCuerpo->at(j)->getAlto(), invertido);
-				if (hayInterseccion(posAbsSensorProyectil, manejadorUnidades.darLongUnidades(proyectil->getAncho()), manejadorUnidades.darLongUnidades(proyectil->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
+				if (hayInterseccion(posAbsSensorProyectil, manejadorUnidades.darLongUnidades(anchoEngloba), manejadorUnidades.darLongUnidades(proyectil->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
 					ESTADO unEstado = elOtroCuerpo->getEstado();
 					unEstado.golpeado = GOLPEADO;
 					elOtroCuerpo->notificarObservadores(unEstado);
@@ -375,10 +381,10 @@ void Mundo::ResolverArma(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proyect
 			}	
 }
 
+//Establecimiento de sensor contenedor del actual y el siguiente.
 void Mundo::resolverChoque(Sensor* proyectilUno, Sensor* proyectilDos){
 
 }
-
 
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
@@ -398,7 +404,9 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 	Sensor* proyectilUno = unCuerpo->getSensoresProyectil().at(0);
 	Sensor* proyectilDos = elOtroCuerpo->getSensoresProyectil().at(0);
-	
+
+	unCuerpo->setposProyectilAnterior(unCuerpo->getSensoresProyectil().at(0)->getPosicion().first);
+
 	bool invertido;
 
 	if (elOtroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
@@ -429,14 +437,20 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	if ((unCuerpo->getEstado().accion != SIN_ACCION) || (elOtroCuerpo->getEstado().accion != SIN_ACCION))
 		ResolverGolpiza(unCuerpo, elOtroCuerpo, invertido);
 
+	if ((nuevoEstado.accion == ARMA_ARROJABLE) && (unCuerpo->getSensoresProyectil().at(0)->estaActivo())){
+		unCuerpo->getSensoresProyectil().at(0)->moverProyectil(DISTANCIAPROYECTIL);
+	}
+
 	if ((proyectilUno->estaActivo()) && (proyectilDos->estaActivo())){
 		//resolverChoque(proyectilUno, proyectilDos);
 	}
 	else {
-		if (proyectilUno->estaActivo())
+		if (proyectilUno->estaActivo()){
 			ResolverArma(unCuerpo, elOtroCuerpo, proyectilUno, invertido);
-		if (proyectilDos->estaActivo())
+		}
+		if (proyectilDos->estaActivo()){
 			ResolverArma(elOtroCuerpo, unCuerpo, proyectilDos, invertido);
+		}
 	}
 
 	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION) && (elOtroCuerpo->getEstado().accion == SIN_ACCION)){
@@ -446,9 +460,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		unCuerpo->Separados();
 	}
 
-	if ((nuevoEstado.accion == ARMA_ARROJABLE) && (unCuerpo->getSensoresProyectil().at(0)->estaActivo()))
-			unCuerpo->getSensoresProyectil().at(0)->moverProyectil(DISTANCIAPROYECTIL);
-		
+
 	if (!(nuevoEstado.accion == ARMA_ARROJABLE)){
 		unCuerpo->getSensoresProyectil().at(0)->resetearPosicionInicial();
 		unCuerpo->getSensoresProyectil().at(0)->desactivarSensor();

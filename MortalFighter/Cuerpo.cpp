@@ -29,6 +29,13 @@ std::vector<Sensor*>* Cuerpo::getSensoresActivos() const
 	return sensores[0];
 }
 
+void Cuerpo::setposProyectilAnterior(float unaposAnteriorProyectil){
+	posAnteriorProyectil = unaposAnteriorProyectil;
+}
+
+float Cuerpo::getposProyectilAnterior(){
+	return posAnteriorProyectil;
+}
 
 bool Cuerpo::estaEnPiso()
 {

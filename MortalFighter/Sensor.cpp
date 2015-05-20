@@ -2,7 +2,7 @@
 #include "Sensor.h"
 
 
-Sensor::Sensor(std::pair<float, float> unaposicion, int unancho, int unalto, bool valorHitBox, std::string unestadoStr)
+Sensor::Sensor(std::pair<int, int> unaposicion, int unancho, int unalto, bool valorHitBox, std::string unestadoStr)
 {
 	ancho = unancho;
 	alto = unalto;
