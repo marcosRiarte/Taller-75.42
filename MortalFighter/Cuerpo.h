@@ -68,10 +68,21 @@ public:
 		if (estadoActual.golpeado == GOLPEADO){
 			if (estadoActual.movimiento == SALTO || estadoActual.movimiento == SALTODIAGDER || estadoActual.movimiento == SALTODIAGIZQ)
 				sensorActivoStr = "SaltoGolpeado";
+			if (estadoActual.movimiento == AGACHADO)
+				sensorActivoStr = "AgachadoGolpeado";
+			else
 				sensorActivoStr = "Golpeado";
+			return;
 		}
 		if (estadoActual.accion != SIN_ACCION){
 		if (estadoActual.accion == PATADA_BAJA){
+			if (estadoActual.movimiento == SALTO)
+				sensorActivoStr = "SaltoPatada";
+			if (estadoActual.movimiento == SALTODIAGDER || estadoActual.movimiento == SALTODIAGIZQ)
+				sensorActivoStr = "SaltoDiagonalPatada";
+			if (estadoActual.movimiento == AGACHADO)
+				sensorActivoStr = "AgachadoPatadaBaja";
+			else
 			sensorActivoStr = "PatadaBaja";
 		}
 		if (estadoActual.accion == PATADA_ALTA){

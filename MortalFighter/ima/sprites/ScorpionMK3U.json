@@ -119,10 +119,10 @@
             "AgachadoGolpeado": {
                 "sensores": [
                     {
-                        "x": 62,
-                        "y": 103,
-                        "ancho": 55,
-                        "alto": 77,
+                        "x": 105,
+                        "y": 210,
+                        "ancho": 100,
+                        "alto": 140,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -598,6 +598,14 @@
                         "y": 170,
                         "ancho": 30,
                         "alto": 30,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 200,
+                        "y": 180,
+                        "ancho": 60,
+                        "alto": 100,
                         "nSprite": 0,
                         "esHitBox": false
                     },
