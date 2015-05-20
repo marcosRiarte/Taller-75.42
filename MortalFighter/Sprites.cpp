@@ -237,6 +237,14 @@ Json::Value	Sprite::ParsearSprites(std::string jsonSprites)
 	return raiz;	
 }
 
+std::vector<SDL_Rect*>* Sprite::listaDeCuadros(std::string otrosSprites)
+{
+	if (otrosSprites == DISPARO_DEFAULT)
+		return Disparo;
+
+	return nullptr;
+}
+
 std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 	if (unEstado.golpeado == GOLPEADO){
 		if (unEstado.movimiento == SALTO || unEstado.movimiento == SALTODIAGIZQ || unEstado.movimiento == SALTODIAGDER)

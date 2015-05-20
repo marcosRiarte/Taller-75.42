@@ -89,6 +89,7 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define GOLPEADO_DEFAULT "Golpeado"
 #define AGACHARSE_DEFAULT "Agacharse"
 #define PATADAALTA_DEFAULT "PatadaAlta"
+#define DISPARO_DEFAULT "Disparo"
 
 #define LIU_KANG "LiuKang"
 
