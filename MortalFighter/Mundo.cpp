@@ -245,8 +245,10 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 	if ((movimientos->back() == DER) && unCuerpo->estaEnPiso()){
 			nuevoEstado.movimiento = CAMINARDER;
 			if (!(invertido)){
-				if (!(unCuerpo->EstaSuperpuesto())){
-					 unCuerpo->mover(DISTANCIA); }
+				unCuerpo->mover(DISTANCIA);
+			//	if (!(unCuerpo->EstaSuperpuesto())){
+			//		 unCuerpo->mover(DISTANCIA); }
+
 			}
 			else
 				if (!unCuerpo->EstaFrenado()){
@@ -436,6 +438,24 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	//
 	if (unCuerpo->EstaSuperpuesto()){
 		moverCuerpos(unCuerpo, elOtroCuerpo, invertido);
+
+		//mejorar esto
+		if (invertido){
+			if (unCuerpo->getEstado().movimiento != CAMINARIZQ){
+				nuevoEstado = unCuerpo->getEstadoAnterior();
+			}
+		//	nuevoEstado.movimiento = CAMINARIZQ;
+			
+		}
+		
+		else{
+			if (unCuerpo->getEstado().movimiento != CAMINARDER){
+			nuevoEstado = unCuerpo->getEstadoAnterior();
+			}
+		
+		//nuevoEstado.movimiento = CAMINARDER;
+		}
+
 	}
 	else{
 		// NO HAY SUPERPOSICION, LO SIGUIENTE A RESOLVER ES LA COLISION
