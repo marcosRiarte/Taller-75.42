@@ -735,7 +735,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 
 	//Si estan superpuestos y los 2 sin ninguna accion
-	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION) && (elOtroCuerpo->getEstado().accion == SIN_ACCION)){
+	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION || unCuerpo->getEstado().accion == GUARDIA) && (elOtroCuerpo->getEstado().accion == SIN_ACCION || elOtroCuerpo->getEstado().accion == GUARDIA)){
 		unCuerpo->Superponer();
 	}
 	else{
