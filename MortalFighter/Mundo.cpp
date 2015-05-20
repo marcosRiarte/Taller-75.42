@@ -303,7 +303,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 	if ((movimientos->back() == ARMA) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
 		nuevoEstado.accion = ARMA_ARROJABLE;
 		unCuerpo->getSensoresProyectil().at(0)->activarSensor();
-		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size())/3);
 	}
 
 	if ((movimientos->back() == DEFENSA)){
@@ -321,7 +321,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 	if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (estadoAnterior.golpeado != GOLPEADO)){
 		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
-		nuevoEstado.golpeado = GOLPEADO;
+			nuevoEstado.golpeado = GOLPEADO;
 		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), otroCuerpo->getEstado())) == REINICIAR){
 			nuevoEstado.golpeado = FALLECIDO;
 			std::string mensaje = "Gano personaje " + otroCuerpo->getRefPersonaje()->getNombre();
@@ -381,7 +381,6 @@ void Mundo::ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool inverti
 					ESTADO unEstado = elOtroCuerpo->getEstado();
 					unEstado.golpeado = GOLPEADO;
 					elOtroCuerpo->notificarObservadores(unEstado);
-					
 				}
 			}	
 		}
@@ -498,7 +497,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		ResolverGolpiza(unCuerpo, elOtroCuerpo, invertido);
 
 	if ((nuevoEstado.accion == ARMA_ARROJABLE) && (unCuerpo->getSensoresProyectil().at(0)->estaActivo())){
-		unCuerpo->getSensoresProyectil().at(0)->moverProyectil(DISTANCIAPROYECTIL);
+		unCuerpo->getSensoresProyectil().at(0)->moverProyectil(VELOCIDADPROYECTIL);
 	}
 
 	

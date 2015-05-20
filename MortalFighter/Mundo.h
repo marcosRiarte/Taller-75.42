@@ -8,7 +8,7 @@
 #define SALTO_X 130.0f
 #define GRAVEDAD_Y -8.0f
 #define DISTANCIA 2.0f
-#define DISTANCIAPROYECTIL 5000.0f
+#define VELOCIDADPROYECTIL 20.0f
 #define FACTOR_DIST_REVERSA 0.6f
 #define DEFAULT_ESTA_GOLPEADO false// sacarla, esta para testear rapido
 class Cuerpo;

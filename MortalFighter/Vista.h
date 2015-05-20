@@ -72,8 +72,7 @@ private:
 	int anchoRojoBarra2;
 	int anchoRojoImagenBarra1;
 	int anchoRojoImagenBarra2;
-
-
+	
 	std::vector<Capa*> capasVista;
 	int numeroDeCuadroUno;
 	std::vector<SDL_Rect*>* listaDeCuadrosUno;
