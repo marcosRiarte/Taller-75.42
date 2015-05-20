@@ -166,7 +166,8 @@ ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCu
 	
 	// si no esta en piso, mantenele el movimiento anterior
 	if (!unCuerpo->estaEnPiso()){
-		nuevoEstado.movimiento = estadoAnterior.movimiento;
+		nuevoEstado.movimiento = estadoAnterior.movimiento;  //si el flaco metio una accion en el aire, esta tiene una demora mas chica aplicada que es la que lo mantiene
+		                                                     //si fue golpeado en el aire antes deberia mantenerlo una demora y si fue recien nose....
 		if (unCuerpo->EstaFrenado()){
 			//aca tiene que setear velocidad 0 solo si intenta irse para el lado del fin..... para el otro deberia dejarte
 			unCuerpo->SetVelocidadX(0.0f);
@@ -189,16 +190,7 @@ ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCu
 	
 
 		
-		/*
-		//quizas esto deberia ir en
-		if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION) && (elOtroCuerpo->getEstado().accion == SIN_ACCION)){
-			unCuerpo->Superponer();
-		}
-		else{
-			unCuerpo->Separados();
-		}
-
-		*/
+	
 		
 		
 	return nuevoEstado;
@@ -477,7 +469,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			/*if (!(nuevoEstado.golpeado == GOLPEADO && unCuerpo->getEstadoAnterior().golpeado !=GOLPEADO)){
 				unCuerpo->DisminuirDemora();
 				nuevoEstado = unCuerpo->getEstadoAnterior();
-				} */
+				} en el caso de que se cumpla, el tipo sale de aca con el estado actual que es golpeado!*/
 			//si estadoactual=golpeado y estado anterior no lo es no disminuir
 			unCuerpo->DisminuirDemora();
 			nuevoEstado = unCuerpo->getEstadoAnterior();
@@ -487,14 +479,16 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		
 		else
 		{
-			//if (unCuerpo->estaEnPiso())
+			
 			nuevoEstado = Mundo::ResolverAcciones(difTiempo, unCuerpo, elOtroCuerpo, nuevoEstado, invertido, &movimientos);
 			
 			
 		}
 	}
 
-	//quizas esto deberia ir en
+
+
+	//Si estan superpuestos y los 2 sin ninguna accion
 	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION) && (elOtroCuerpo->getEstado().accion == SIN_ACCION)){
 		unCuerpo->Superponer();
 	}
