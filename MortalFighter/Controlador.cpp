@@ -1,11 +1,23 @@
 #include "stdafx.h"
 #include "Controlador.h"
+#include "ConversorAString.h"
 
 Controlador::Controlador()
 {
 	cantidadDeEventosAnterior = 0;
+	otraCantidadDeEventosAnterior = 0;
+	j = 0;
+
+	movimientosParaFatality = std::vector<MOV_TIPO>();
+	movimientosParaFatality.push_back(IZQ);
+	movimientosParaFatality.push_back(DER);
+	movimientosParaFatality.push_back(ABAJO);
+	movimientosParaFatality.push_back(DER);
+	movimientosParaFatality.push_back(G_BAJO);
+
 	movimientos = std::vector<MOV_TIPO>();
 	movimientos.push_back(QUIETO);
+
 	conversorDeEventos = nullptr;
 	if (SDL_NumJoysticks() > 0){
 		unJoystick = SDL_JoystickOpen(0);
@@ -40,38 +52,41 @@ void Controlador::mantenerMovimientos(){
 }
 
 
-std::string Controlador::getUltimoMovimientoActivo(){
+bool Controlador::tieneCombinacionDeFatalityParaLaOrientacion(){
+	MOV_TIPO unMovimiento = getUltimoMovimientoActivo();
+	if (otraCantidadDeEventosAnterior != movimientos.size()){
+		otraCantidadDeEventosAnterior = movimientos.size();
+		if (unMovimiento != QUIETO){
+			if (j == 4){
+				j = 0;
+				return true;
+			}
+			if (unMovimiento != movimientosParaFatality.at(j)){
+				if (unMovimiento == movimientosParaFatality.at(0)){
+					j = 1;
+					return false;
+				}
+				j = 0;
+				return false;
+			}
+			j++;
+		}
+	}
+	return false;
+}
+
+
+MOV_TIPO Controlador::getUltimoMovimientoActivo(){
 	
 	MOV_TIPO unMovimiento;
-	std::string movimiento;
 	if (!movimientos.empty()){
 		unMovimiento = movimientos.back();
 		if (cantidadDeEventosAnterior != movimientos.size()){
 			cantidadDeEventosAnterior = movimientos.size();
-			if (unMovimiento != QUIETO){
-				if (unMovimiento == SALTODER){
-					return (conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::UP) + "+" + conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::RIGHT));
-				}
-				if (unMovimiento == SALTOIZQ){
-					return (conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::UP) + "+" + conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::LEFT));
-				}
-				if (unMovimiento == G_ABAJO){
-					return conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::LOW_PUNCH);
-				}
-				if (unMovimiento == G_GANCHO){
-					return conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::HIGH_PUNCH);
-				}
-				if (unMovimiento == P_BAJA_ABAJO){
-					return conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::LOW_KICK);
-				}
-				if (unMovimiento == P_ALTA_ABAJO){
-					return conversorDeEventos->getSimboloDeLaAccion(ConversorDeEventos::HIGH_KICK);
-				}
-				return conversorDeEventos->getSimboloDeLaAccion((ConversorDeEventos::Acciones)unMovimiento);
-			}
+			if (unMovimiento != QUIETO) return unMovimiento;
 		}
 	}
-	return "";
+	return QUIETO;
 }
 
 
@@ -85,10 +100,12 @@ int Controlador::cambiar(){
 
 	//ACTUALIZO EL VECTOR
 	mantenerMovimientos();
+	ConversorAString* unConversorAString = new ConversorAString();
 
 	if (MOSTRAR_MOVIMIENTOS){
-		std::string mensaje = getUltimoMovimientoActivo();
+		std::string mensaje = unConversorAString->getTeclaComoStringDelMovimientoParaElConversorDeEventos(getUltimoMovimientoActivo(), conversorDeEventos);
 		if (mensaje != "") std::cout << mensaje << "\n";
+		delete unConversorAString;
 	}
 
 	//TECLADO--------------------------------------------------------------------------
@@ -1112,6 +1129,10 @@ int Controlador::cambiar(){
 	
 }
 
+
+ConversorDeEventos* Controlador::getConversorDeEventos(){
+	return conversorDeEventos;
+}
 
 
 Controlador::~Controlador()

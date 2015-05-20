@@ -94,7 +94,7 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define LIU_KANG "LiuKang"
 
 //CONTROLADOR
-#define MOSTRAR_MOVIMIENTOS true
+#define MOSTRAR_MOVIMIENTOS false
 #define CANTIDAD_MAXIMA_EVENTOS 30
 #define ARRIBA_DEFAULT_1 "up"
 #define ABAJO_DEFAULT_1 "down"

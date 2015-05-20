@@ -348,7 +348,7 @@ void Mundo::ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool inverti
 					unEstado.golpeado = GOLPEADO;
 					elOtroCuerpo->notificarObservadores(unEstado);
 				}
-			}
+			}	
 		}
 	}
 }
@@ -370,6 +370,7 @@ void Mundo::ResolverArma(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proyect
 					ESTADO unEstado = elOtroCuerpo->getEstado();
 					unEstado.golpeado = GOLPEADO;
 					elOtroCuerpo->notificarObservadores(unEstado);
+					unCuerpo->getSensoresProyectil().at(0)->desactivarSensor();
 				}
 			}	
 }
@@ -445,7 +446,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		unCuerpo->Separados();
 	}
 
-	if (nuevoEstado.accion==ARMA_ARROJABLE)
+	if ((nuevoEstado.accion == ARMA_ARROJABLE) && (unCuerpo->getSensoresProyectil().at(0)->estaActivo()))
 			unCuerpo->getSensoresProyectil().at(0)->moverProyectil(DISTANCIAPROYECTIL);
 		
 	if (!(nuevoEstado.accion == ARMA_ARROJABLE)){
