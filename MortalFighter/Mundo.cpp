@@ -113,7 +113,7 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 	//xerror hay que arreglar esto por que se cambio la logica.
 	// aca uncuerpo es el golpeado entonces se le tiene que descontar a uncuerpo
 	if ((nuevoEstado.golpeado == GOLPEADO) && (estadoAnterior.golpeado == NOGOLPEADO)){
-		unCuerpo->setDemora(125);
+		unCuerpo->setDemora(40);
 		//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado())) == REINICIAR){
 			nuevoEstado.golpeado = FALLECIDO;
@@ -674,7 +674,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	}
 	else{
 		// NO HAY SUPERPOSICION, LO SIGUIENTE A RESOLVER ES LA COLISION
-		//ResolverGolpiza(unCuerpo, elOtroCuerpo, invertido);
+		
 
 		if (estadoanterior.golpeado == NOGOLPEADO){
 			nuevoEstado = Mundo::ResolverColisiones(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
