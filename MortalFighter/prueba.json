@@ -37,14 +37,14 @@
             "alto": 90,
             "zindex": 1,
             "orientacion": "DER",
-            "sprites": "ima/sprites/LiuKangMK3U.png",
+            "sprites": "ima/sprites/ScorpionMK3U.png",
             "CaminarParaAdelante": "CaminarParaAdelante",
             "CaminarParaAtras": "CaminarParaAtras",
             "Quieto": "Quieto",
             "Salto": "Salto",
             "SaltoDiagonal": "SaltoDiagonal",
             "Caida": "Caida",
-            "nombre": "Liu Kang"
+            "nombre": "Scorpion"
         },
         {
             "ancho": 80,
@@ -64,7 +64,7 @@
     ],
     "pelea": 
         { 
-           "fighters": "liukang VS scorpion"
+           "fighters": "scorpion VS scorpion"
         },
     
 
@@ -72,7 +72,7 @@
         {
             "h_inicial": 40,            //hue scopion 44 su rgb promedio es 173,130,12
             "h_final": 70,
-            "desplazamiento": 54   //x360 original, 54 verde, 100 verdeazulado, 144 celeste, 162 azul,
+            "desplazamiento": 1   //x360 original, 54 verde, 100 verdeazulado, 144 celeste, 162 azul,
                                     // 304 rojo, 330 naranja
 
         },

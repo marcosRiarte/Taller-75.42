@@ -247,6 +247,8 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(std::string otrosSprites)
 
 std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 	if (unEstado.golpeado == GOLPEADO){
+		if (unEstado.accion == GUARDIA)
+			return Defensa;
 		if (unEstado.movimiento == SALTO || unEstado.movimiento == SALTODIAGIZQ || unEstado.movimiento == SALTODIAGDER)
 			return SaltoGolpeado;
 		if (unEstado.movimiento == AGACHADO)
@@ -326,23 +328,24 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 	if (estadoDelPersonaje.golpeado == GOLPEADO){
 		if (estadoDelPersonaje.movimiento == SALTO || estadoDelPersonaje.movimiento == SALTODIAGIZQ || estadoDelPersonaje.movimiento == SALTODIAGDER)
-			return (tiempoSaltoGolpeado / (this->SaltoGolpeado->size()) / MSxCUADRO);
+			return ((tiempoSaltoGolpeado / (this->SaltoGolpeado->size())) / MSxCUADRO);
 		if (estadoDelPersonaje.movimiento == AGACHADO)
-			return (tiempoAgachadoGolpeado / (this->AgachadoGolpeado->size()) / MSxCUADRO);
+			return ((tiempoAgachadoGolpeado / (this->AgachadoGolpeado->size())) / MSxCUADRO);
 		if (estadoDelPersonaje.accion == GUARDIA)
-			return (tiempoDefensa / (this->Defensa->size()) / MSxCUADRO);
-		return (tiempoGolpeado / (this->Golpeado->size()) / MSxCUADRO);
+			return ((tiempoDefensa / (this->Defensa->size())) / MSxCUADRO);
+		return ((tiempoGolpeado / (this->Golpeado->size())) / MSxCUADRO);
 	}
 	if (estadoDelPersonaje.accion == GANCHO)
 		return (tiempoGancho / (this->Gancho->size()) / MSxCUADRO);
 
 	if (estadoDelPersonaje.accion == PATADA_BAJA){
 		if (estadoDelPersonaje.movimiento == AGACHADO)
-			return (tiempoAgachadoPatadaBaja / (this->AgachadoPatadaBaja->size()) / MSxCUADRO);
+			return ((tiempoAgachadoPatadaBaja / (this->AgachadoPatadaBaja->size())) / MSxCUADRO);
 		if (estadoDelPersonaje.movimiento == SALTO)
-			return (tiempoSaltoPatada / (this->SaltoPatada->size()) / MSxCUADRO);
+			return ((tiempoSaltoPatada / (this->SaltoPatada->size())) / MSxCUADRO);
 		if (estadoDelPersonaje.movimiento == SALTODIAGIZQ || estadoDelPersonaje.movimiento == SALTODIAGDER)
 			return (tiempoSaltoDiagonalPatada / (this->SaltoDiagonalPatada->size()) / MSxCUADRO);
+		
 		return (tiempoPatadaBaja / (this->PatadaBaja->size()) / MSxCUADRO);
 	}
 	if (estadoDelPersonaje.accion == GOLPE_ALTO){
