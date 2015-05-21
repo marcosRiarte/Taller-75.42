@@ -6,12 +6,12 @@ MatizColor::MatizColor(SDL_Surface* superficieNueva)
 }
 
 
-SDL_Surface* MatizColor::desplazarMatiz(float hInicial, float hFinal, float desplazamiento)
+SDL_Surface* MatizColor::desplazarMatiz(double hInicial, double hFinal, double desplazamiento)
 {	
 	int ancho = superficie->w;
 	int alto = superficie->h;
 	Uint8 rojo, verde, azul, alfa;
-	float croma = 0;
+	double croma = 0;
 	int minRGBRef;
 	Uint8* punteroPixel;
 
@@ -30,7 +30,7 @@ SDL_Surface* MatizColor::desplazarMatiz(float hInicial, float hFinal, float desp
 
 			if (alfa > ALFA_MIN) {
 				// calculo el matiz
-				float hOriginal = obtenerMatiz(pixelXY, rojo, verde, azul, &croma, &minRGBRef);
+				double hOriginal = obtenerMatiz(pixelXY, rojo, verde, azul, &croma, &minRGBRef);
 
 				// cambiar el matiz, dependiendo de las condiciones iniciales y finales
 				setMatizSelectivo(&pixelXY, desplazamiento, hOriginal, hInicial, hFinal, rojo, verde, azul, croma, &minRGBRef);
@@ -47,11 +47,11 @@ SDL_Surface* MatizColor::desplazarMatiz(float hInicial, float hFinal, float desp
 
 }
 
-float MatizColor::obtenerMatiz(Uint32 pixel, Uint8 rojo, Uint8 verde, Uint8 azul, float* croma, int* minRGBRef)
+double MatizColor::obtenerMatiz(Uint32 pixel, Uint8 rojo, Uint8 verde, Uint8 azul, double* croma, int* minRGBRef)
 {
 	int maxRGB = maximo(rojo, verde, azul);
 	int minRGB = minimo(rojo, verde, azul);
-	*croma = (float)(maxRGB - minRGB);
+	*croma = (double)(maxRGB - minRGB);
 	*minRGBRef = minRGB;
 
 	if (*croma == 0) return -1;
@@ -99,7 +99,7 @@ Uint32 MatizColor::obtenerPixel(int x, int y, Uint8** punteroPixel)
 	}
 }
 
-void MatizColor::setMatizSelectivo(Uint32* pixel, float desplazamiento, float hOriginal, float hInicial, float hFinal, Uint8 rojo, Uint8 verde, Uint8 azul, float croma, int *minRGBRef)
+void MatizColor::setMatizSelectivo(Uint32* pixel, double desplazamiento, double hOriginal, double hInicial, double hFinal, Uint8 rojo, Uint8 verde, Uint8 azul, double croma, int *minRGBRef)
 {
 	// salteo los casos fuera del rango dado
 	if ((hOriginal < hInicial) || (hOriginal > hFinal))
@@ -109,9 +109,9 @@ void MatizColor::setMatizSelectivo(Uint32* pixel, float desplazamiento, float hO
 }
 
 
-void MatizColor::setMatiz(Uint32* pixel, float desplazamiento, float hOriginal, Uint8 rojo, Uint8 verde, Uint8 azul, float croma, int *minRGBRef)
+void MatizColor::setMatiz(Uint32* pixel, double desplazamiento, double hOriginal, Uint8 rojo, Uint8 verde, Uint8 azul, double croma, int *minRGBRef)
 {
-	float hDec = (restoReal(hOriginal + desplazamiento, 360)) / 60.0f;
+	double hDec = (restoReal(hOriginal + desplazamiento, 360)) / 60.0f;
 
 	int intermedio = (int)round(croma * (1 - abs(restoReal(hDec, 2) - 1)));
 	int cromaInt = (int)round(croma);

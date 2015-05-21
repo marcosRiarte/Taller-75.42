@@ -37,7 +37,7 @@
             "alto": 90,
             "zindex": 1,
             "orientacion": "DER",
-            "sprites": "ima/bkg/default_bkg.png",
+            "sprites": "ima/sprites/player_default.png",
             "CaminarParaAdelante": "CaminarParaAdelante",
             "CaminarParaAtras": "CaminarParaAtras",
             "Quieto": "Quieto",
@@ -51,7 +51,7 @@
             "alto": 90,
             "zindex": 1,
             "orientacion": "DER",
-            "sprites": "ima/bkg/default_bkg.png",
+            "sprites": "ima/sprites/player_default.png",
             "CaminarParaAdelante": "CaminarParaAdelante",
             "CaminarParaAtras": "CaminarParaAtras",
             "Quieto": "Quieto",
@@ -71,7 +71,7 @@
     "color_alternativo": 
         {
           "h_inicial": 40,
-          "h_final": 45,
+          "h_final": 70,
           "desplazamiento": 30
 
         },

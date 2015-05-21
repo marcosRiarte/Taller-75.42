@@ -26,7 +26,7 @@ public:
 	Controlador* getControlador2();
 	std::vector<Personaje*> getPersonajes() const;
 	std::vector<Capa*> getCapas() const;
-	std::vector<int> getColorAlternativo();
+	std::vector<double> getColorAlternativo();
 	std::string Parser::getPelea() const;
 	static void FreeInstancia();
 

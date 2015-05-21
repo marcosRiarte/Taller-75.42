@@ -100,13 +100,10 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 
 		//Seteo del color		
 		std::string pelea = Parser::getInstancia().getPelea();
-		int h_inicio = Parser::getInstancia().getColorAlternativo().at(0);
-		int h_final = Parser::getInstancia().getColorAlternativo().at(1);;
-		int deplazamiento = Parser::getInstancia().getColorAlternativo().at(2);
-
-		//Tamaño de la imagen
-		int ancho = ancho = SuperficieDos->w;
-		int alto = ancho = SuperficieDos->h;
+		double h_inicio = Parser::getInstancia().getColorAlternativo().at(0);
+		double h_final = Parser::getInstancia().getColorAlternativo().at(1);;
+		double deplazamiento = Parser::getInstancia().getColorAlternativo().at(2);
+		
 		AlfaVida = 200;
 
 		if (MODO_COLOR){

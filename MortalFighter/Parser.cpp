@@ -149,7 +149,7 @@ std::vector<Capa*> Parser::getCapas() const
 	return *(validadorDeCapas->getCapas());
 
 }
-std::vector<int> Parser::getColorAlternativo()
+std::vector<double> Parser::getColorAlternativo()
 {
 	return validadorDelColor->getColorAlternativo();
 }

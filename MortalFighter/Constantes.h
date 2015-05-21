@@ -82,9 +82,9 @@ const float MSxCUADRO = 1000.0f / FPS;
 
 #define PELEA_INICIAL "scorpion VS scorpion"
 
-#define H_INICIAL 40
-#define H_FINAL 45
-#define DESPLAZAMIENTO 30
+#define H_INICIAL 40.0f
+#define H_FINAL 70.0f
+#define DESPLAZAMIENTO 162.0f
 
 #define GOLPEADO_DEFAULT "Golpeado"
 #define AGACHARSE_DEFAULT "Agacharse"
