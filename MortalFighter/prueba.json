@@ -37,14 +37,14 @@
             "alto": 90,
             "zindex": 1,
             "orientacion": "DER",
-            "sprites": "ima/sprites/ScorpionMK3U.png",
+            "sprites": "ima/sprites/LiuKangMK3U.png",
             "CaminarParaAdelante": "CaminarParaAdelante",
             "CaminarParaAtras": "CaminarParaAtras",
             "Quieto": "Quieto",
             "Salto": "Salto",
             "SaltoDiagonal": "SaltoDiagonal",
             "Caida": "Caida",
-            "nombre": "Scorpion"
+            "nombre": "Liu Kang"
         },
         {
             "ancho": 80,
@@ -64,7 +64,7 @@
     ],
     "pelea": 
         { 
-           "fighters": "scorpion VS scorpion"
+           "fighters": "liukang VS scorpion"
         },
     
 
@@ -72,36 +72,36 @@
         {
             "h_inicial": 40,            //hue scopion 44 su rgb promedio es 173,130,12
             "h_final": 70,
-            "desplazamiento": 1   //x360 original, 54 verde, 100 verdeazulado, 144 celeste, 162 azul,
+            "desplazamiento": 54   //x360 original, 54 verde, 100 verdeazulado, 144 celeste, 162 azul,
                                     // 304 rojo, 330 naranja
 
         },
     "control_1": {
-        "arriba": "j1_up",
-        "abajo": "j1_down",
-        "izquierda": "j1_left",
-        "derecha": "j1_right",
-        "defensa": "j1_0",
-        "golpe_bajo": "j1_1",
-        "golpe_alto": "j1_2",
-        "patada_baja": "j1_3",
-        "patada_alta": "j1_4",
-        "arma": "j1_5",
+        "arriba": "up",
+        "abajo": "down",
+        "izquierda": "left",
+        "derecha": "right",
+        "defensa": "z",
+        "golpe_bajo": "x",
+        "golpe_alto": "c",
+        "patada_baja": "v",
+        "patada_alta": "b",
+        "arma": "n",
         "salir": "esc",
         "reiniciar": "r"
     },
 
     "control_2": {
-        "arriba": "j2_up",
-        "abajo": "j2_down",
-        "izquierda": "j2_left",
-        "derecha": "j2_right",
-        "defensa": "j2_0",
-        "golpe_bajo": "j2_1",
-        "golpe_alto": "j2_2",
-        "patada_baja": "j2_3",
-        "patada_alta": "j2_4",
-        "arma": "j2_5",
+        "arriba": "w",
+        "abajo": "s",
+        "izquierda": "a",
+        "derecha": "d",
+        "defensa": "j",
+        "golpe_bajo": "k",
+        "golpe_alto": "l",
+        "patada_baja": "i",
+        "patada_alta": "o",
+        "arma": "u",
         "salir": "esc",
         "reiniciar": "r"
     }
