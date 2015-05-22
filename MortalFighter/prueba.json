@@ -37,18 +37,18 @@
             "alto": 90,
             "zindex": 1,
             "orientacion": "DER",
-            "sprites": "ima/sprites/ScorpionMK3U.png",
+            "sprites": "ima/sprites/LiuKangMK3U.png",
             "CaminarParaAdelante": "CaminarParaAdelante",
             "CaminarParaAtras": "CaminarParaAtras",
             "Quieto": "Quieto",
             "Salto": "Salto",
             "SaltoDiagonal": "SaltoDiagonal",
             "Caida": "Caida",
-            "nombre": "Scorpion"
+            "nombre": "Liu Kang"
         },
         {
-            "ancho": 80,
-            "alto": 90,
+            "ancho": 20,
+            "alto": 130,
             "zindex": 1,
             "orientacion": "DER",
             "sprites": "ima/sprites/ScorpionMK3U.png",
@@ -64,7 +64,7 @@
     ],
     "pelea": 
         { 
-           "fighters": "scorpion VS scorpion"
+           "fighters": "liukang VS scorpion"
         },
     
 

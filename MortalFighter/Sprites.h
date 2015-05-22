@@ -48,7 +48,7 @@ private:
 	SDL_Rect* crearCuadro(Json::Value cuadro);	
 	void cargarSensores(std::string unEstadoStr, Json::Value spritesRaiz);
 	void cargarSprites(std::vector<SDL_Rect*>* estadoCuadros, std::string unEstadoStr, Json::Value spritesRaiz);	
-
+		
 
 public:
 	Sprite(std::string);
@@ -58,5 +58,7 @@ public:
 	std::vector<std::vector<Sensor*>*> getSensores() const;
 	std::vector<Sensor*> getSensoresDisparo() const;
 	int getConstantes(ESTADO estadoDelPersonaje);
+	void redimensionarSensores(float anchoPjPx, float altoPjPx);
+	
 	~Sprite();
 };

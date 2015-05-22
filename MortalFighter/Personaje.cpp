@@ -12,7 +12,7 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 	orientacion = unaorientacion;
 	vida = 100;
 	spritesDir = spritesDirPersonaje;
-	sprites = new Sprite(spritesDir);
+	sprites = new Sprite(spritesDir);	
 	caminaradelante = CaminarParaAdelante;
 	caminaratras = CaminarParaAtras;
 	quieto = QuietoPersonaje;
@@ -244,9 +244,16 @@ void Personaje::setOrientacion(std::string unaOrientacion){
 }
 
 void Personaje::setSprites(std::string unosSprites){
+	// borra sprites anteriores
 	delete sprites;
+	// carga y asigna los sprites nuevos
 	spritesDir = unosSprites;
 	sprites = new Sprite(spritesDir);
+	// nacho: los sprites nuevos cargas sis sensores, así que los redimensiona
+	ManejadorULogicas manejador;
+	int anchoPx = manejador.darLongPixels(ancho);
+	int altoPx = manejador.darLongPixels(alto, Parser::getInstancia().getVentana().getAltoPx(), Parser::getInstancia().getEscenario().getAlto());
+	sprites->redimensionarSensores(anchoPx, altoPx);
 }
 
 void Personaje::setCaminarParaAdelante(std::string unCaminarParaAdelante){

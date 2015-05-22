@@ -61,122 +61,122 @@ Sprite::Sprite(std::string jsonSprites){
 	Json::Value sprites = raiz["sprites"]["coordenadas"];
 		
 	// Sprites Quieto
-	cargarSprites(this->Quieto, "Quieto", sprites);
+	cargarSprites(Quieto, "Quieto", sprites);
 	// Sensores Quieto
 	cargarSensores("Quieto", sprites);
 	
 	// Sprites Caminar
-	cargarSprites(this->CaminandoParaAdelante, "Caminar", sprites);
+	cargarSprites(CaminandoParaAdelante, "Caminar", sprites);
 	// Sensores Caminar
 	cargarSensores("Caminar", sprites);
 
 	// Sprites Salto
-	cargarSprites(this->Salto, "Salto", sprites);
+	cargarSprites(Salto, "Salto", sprites);
 	// Sensores Salto
 	cargarSensores("Salto", sprites);
 
 	// Sprites SaltoDiagonal
-	cargarSprites(this->SaltoDiagonal, "SaltoDiagonal", sprites);
+	cargarSprites(SaltoDiagonal, "SaltoDiagonal", sprites);
 	// Sensores SaltoDiagonal
 	cargarSensores("SaltoDiagonal", sprites);
 	
 	// Sprites CaminarAtras
-	cargarSprites(this->CaminandoParaAtras, "CaminarAtras", sprites);
+	cargarSprites(CaminandoParaAtras, "CaminarAtras", sprites);
 	// Sensores CaminarAtras
 	cargarSensores("CaminarAtras", sprites);
 
 	// Sprites Agacharse
-	cargarSprites(this->Agacharse, "Agacharse", sprites);
+	cargarSprites(Agacharse, "Agacharse", sprites);
 	// Sensores Agacharse
 	cargarSensores("Agacharse", sprites);
 
 	// Sprites Defensa
-	cargarSprites(this->Defensa, "Defensa", sprites);
+	cargarSprites(Defensa, "Defensa", sprites);
 	// Sensores Defensa
 	cargarSensores("Defensa", sprites);
 
 	// Sprites PatadaAlta
-	cargarSprites(this->PatadaAlta, "PatadaAlta", sprites);
+	cargarSprites(PatadaAlta, "PatadaAlta", sprites);
 	// Sensores PatadaAlta
 	cargarSensores("PatadaAlta", sprites);
 
 	// Sprites Golpeado
-	cargarSprites(this->Golpeado, "Golpeado", sprites);
+	cargarSprites(Golpeado, "Golpeado", sprites);
 	// Sensores Golpeado
 	cargarSensores("Golpeado", sprites);
 		
 	// Sprites AgachadoGolpeado
-	cargarSprites(this->AgachadoGolpeado, "AgachadoGolpeado", sprites);
+	cargarSprites(AgachadoGolpeado, "AgachadoGolpeado", sprites);
 	// Sensores AgachadoGolpeado
 	cargarSensores("AgachadoGolpeado", sprites);
 
 	// Sprites SaltoGolpeado
-	cargarSprites(this->SaltoGolpeado, "SaltoGolpeado", sprites);
+	cargarSprites(SaltoGolpeado, "SaltoGolpeado", sprites);
 	// Sensores SaltoGolpeado
 	cargarSensores("SaltoGolpeado", sprites);
 
 	// Sprites AgachadoDefensa
-	cargarSprites(this->AgachadoDefensa, "AgachadoDefensa", sprites);
+	cargarSprites(AgachadoDefensa, "AgachadoDefensa", sprites);
 	// Sensores AgachadoDefensa
 	cargarSensores("AgachadoDefensa", sprites);
 
 	// Sprites PatadaBaja
-	cargarSprites(this->PatadaBaja, "PatadaBaja", sprites);
+	cargarSprites(PatadaBaja, "PatadaBaja", sprites);
 	// Sensores PatadaBaja
 	cargarSensores("PatadaBaja", sprites);
 
 	// Sprites GolpeBajo
-	cargarSprites(this->GolpeBajo, "GolpeBajo", sprites);
+	cargarSprites(GolpeBajo, "GolpeBajo", sprites);
 	// Sensores GolpeBajo
 	cargarSensores("GolpeBajo", sprites);
 
 	// Sprites GolpeAlto
-	cargarSprites(this->GolpeAlto, "GolpeAlto", sprites);
+	cargarSprites(GolpeAlto, "GolpeAlto", sprites);
 	// Sensores GolpeAlto
 	cargarSensores("GolpeAlto", sprites);
 
 	// Sprites Arma
-	cargarSprites(this->Arma, "Arma", sprites);
+	cargarSprites(Arma, "Arma", sprites);
 	// Sensores Arma
 	cargarSensores("Arma", sprites);
 	
 	// Sprites Gancho
-	cargarSprites(this->Gancho, "Gancho", sprites);
+	cargarSprites(Gancho, "Gancho", sprites);
 	// Sensores Gancho
 	cargarSensores("Gancho", sprites);
 
 	// Sprites AgachadoGolpeBajo
-	cargarSprites(this->AgachadoGolpeBajo, "AgachadoGolpeBajo", sprites);
+	cargarSprites(AgachadoGolpeBajo, "AgachadoGolpeBajo", sprites);
 	// Sensores AgachadoGolpeBajo
 	cargarSensores("AgachadoGolpeBajo", sprites);
 
 	// Sprites SaltoGolpe
-	cargarSprites(this->SaltoGolpe, "SaltoGolpe", sprites);
+	cargarSprites(SaltoGolpe, "SaltoGolpe", sprites);
 	// Sensores SaltoGolpe
 	cargarSensores("SaltoGolpe", sprites);
 
 	// Sprites SaltoPatada
-	cargarSprites(this->SaltoPatada, "SaltoPatada", sprites);
+	cargarSprites(SaltoPatada, "SaltoPatada", sprites);
 	// Sensores SaltoPatada
 	cargarSensores("SaltoPatada", sprites);
 
 	// Sprites SaltoDiagonalPatada
-	cargarSprites(this->SaltoDiagonalPatada, "SaltoDiagonalPatada", sprites);
+	cargarSprites(SaltoDiagonalPatada, "SaltoDiagonalPatada", sprites);
 	// Sensores SaltoDiagonalPatada
 	cargarSensores("SaltoDiagonalPatada", sprites);
 
 	// Sprites AgachadoPatadaBaja
-	cargarSprites(this->AgachadoPatadaBaja, "AgachadoPatadaBaja", sprites);
+	cargarSprites(AgachadoPatadaBaja, "AgachadoPatadaBaja", sprites);
 	// Sensores AgachadoPatadaBaja
 	cargarSensores("AgachadoPatadaBaja", sprites);
 
 	// Sprites AgachadoPatadaAlta
-	cargarSprites(this->AgachadoPatadaAlta, "AgachadoPatadaAlta", sprites);
+	cargarSprites(AgachadoPatadaAlta, "AgachadoPatadaAlta", sprites);
 	// Sensores AgachadoPatadaAlta
 	cargarSensores("AgachadoPatadaAlta", sprites);
 
 	// Sprites Disparo
-	cargarSprites(this->Disparo, "Disparo", sprites);
+	cargarSprites(Disparo, "Disparo", sprites);
 	// Sensores Disparo
 	cargarSensores("Disparo", sprites);
 
@@ -212,6 +212,24 @@ void Sprite::cargarSprites(std::vector<SDL_Rect*>* estadoCuadros, std::string un
 	Json::Value estadoSprites = spritesRaiz[unEstadoStr]["secuenciaSprites"];
 	for (size_t i = 0; i < estadoSprites.size(); i++)
 		estadoCuadros->push_back(crearCuadro(estadoSprites[i]));
+}
+
+
+
+void Sprite::redimensionarSensores(float anchoPjPx, float altoPjPx)
+{
+	ESTADO estadoAux;
+	estadoAux.movimiento = PARADO;
+	SDL_Rect* cuadroBase = listaDeCuadros(estadoAux)->at(0);
+	float relacionAncho = (float)anchoPjPx / (float)cuadroBase->w;
+	float relacionAlto = (float)altoPjPx / (float)cuadroBase->h;
+
+	for (size_t i = 0; i < Sensores.size(); i++) 
+		for (size_t j = 0; j < Sensores[i]->size(); j++){
+			Sensores[i]->at(j)->setAlto(relacionAlto * Sensores[i]->at(j)->getAlto());
+			Sensores[i]->at(j)->setPosicion(std::make_pair(relacionAncho * Sensores[i]->at(j)->getPosicion().first, relacionAlto * Sensores[i]->at(j)->getPosicion().second));
+			Sensores[i]->at(j)->setAncho(relacionAncho * Sensores[i]->at(j)->getAncho());
+		}	
 }
 
 std::vector<std::vector<Sensor*>*> Sprite::getSensores() const

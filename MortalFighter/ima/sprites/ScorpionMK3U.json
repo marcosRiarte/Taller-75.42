@@ -5,10 +5,10 @@
             "SaltoGolpeado": {
                 "sensores": [
                     {
-                        "x": 60,
-                        "y": 49,
-                        "ancho": 59,
-                        "alto": 131,
+                        "x": 34,
+                        "y": 24,
+                        "ancho": 33,
+                        "alto": 66,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -98,10 +98,10 @@
             "AgachadoDefensa": {
                 "sensores": [
                     {
-                        "x": 59,
-                        "y": 99,
-                        "ancho": 62,
-                        "alto": 81,
+                        "x": 34,
+                        "y": 56,
+                        "ancho": 35,
+                        "alto": 41,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -119,10 +119,10 @@
             "AgachadoGolpeado": {
                 "sensores": [
                     {
-                        "x": 105,
-                        "y": 210,
-                        "ancho": 100,
-                        "alto": 140,
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -151,10 +151,10 @@
             "Defensa": {
                 "sensores": [
                     {
-                        "x": 61,
-                        "y": 129,
-                        "ancho": 57,
-                        "alto": 121,
+                        "x": 34,
+                        "y": 65,
+                        "ancho": 32,
+                        "alto": 61,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -177,18 +177,18 @@
             "Caminar": {
                 "sensores": [
                     {
-                        "x": 118,
-                        "y": 142,
-                        "ancho": 80,
-                        "alto": 210,
+                        "x": 66,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
                         "nSprite": 0,
                         "esHitBox": true
                     },
                     {
-                        "x": 137,
-                        "y": 102,
-                        "ancho": 50,
-                        "alto": 40,
+                        "x": 77,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -253,18 +253,18 @@
             "CaminarAtras": {
                 "sensores": [
                     {
-                        "x": 118,
-                        "y": 142,
-                        "ancho": 80,
-                        "alto": 210,
+                        "x": 66,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
                         "nSprite": 0,
                         "esHitBox": true
                     },
                     {
-                        "x": 137,
-                        "y": 102,
-                        "ancho": 50,
-                        "alto": 40,
+                        "x": 77,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -330,18 +330,18 @@
             "Golpeado": {
                 "sensores": [
                     {
-                        "x": 100,
-                        "y": 142,
-                        "ancho": 100,
-                        "alto": 210,
+                        "x": 56,
+                        "y": 71,
+                        "ancho": 56,
+                        "alto": 105,
                         "nSprite": 0,
                         "esHitBox": true
                     },
                     {
-                        "x": 108,
-                        "y": 102,
-                        "ancho": 60,
-                        "alto": 40,
+                        "x": 61,
+                        "y": 51,
+                        "ancho": 34,
+                        "alto": 20,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -370,34 +370,34 @@
             "PatadaAlta": {
                 "sensores": [
                     {
-                        "x": 243,
-                        "y": 100,
-                        "ancho": 30,
-                        "alto": 25,
+                        "x": 137,
+                        "y": 50,
+                        "ancho": 17,
+                        "alto": 13,
                         "nSprite": 0,
                         "esHitBox": false
                     },
                     {
-                        "x": 200,
-                        "y": 130,
-                        "ancho": 30,
-                        "alto": 35,
+                        "x": 112,
+                        "y": 65,
+                        "ancho": 17,
+                        "alto": 18,
                         "nSprite": 0,
                         "esHitBox": false
                     },
                     {
-                        "x": 100,
-                        "y": 142,
-                        "ancho": 100,
-                        "alto": 210,
+                        "x": 56,
+                        "y": 71,
+                        "ancho": 56,
+                        "alto": 105,
                         "nSprite": 0,
                         "esHitBox": true
                     },
                     {
-                        "x": 108,
-                        "y": 102,
-                        "ancho": 60,
-                        "alto": 40,
+                        "x": 61,
+                        "y": 51,
+                        "ancho": 34,
+                        "alto": 20,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -462,34 +462,34 @@
             "GolpeAlto": {
                 "sensores": [
                     {
-                        "x": 170,
-                        "y": 110,
-                        "ancho": 40,
-                        "alto": 60,
-                        "nSprite": 0,
-                        "esHitBox": false
-                    },
-                    {
-                        "x": 220,
-                        "y": 90,
-                        "ancho": 40,
+                        "x": 62,
+                        "y": 55,
+                        "ancho": 23,
                         "alto": 30,
                         "nSprite": 0,
                         "esHitBox": false
                     },
                     {
-                        "x": 110,
-                        "y": 142,
-                        "ancho": 80,
-                        "alto": 210,
+                        "x": 124,
+                        "y": 45,
+                        "ancho": 23,
+                        "alto": 15,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 62,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
                         "nSprite": 0,
                         "esHitBox": true
                     },
                     {
-                        "x": 145,
-                        "y": 102,
-                        "ancho": 50,
-                        "alto": 40,
+                        "x": 82,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -536,10 +536,10 @@
             "Arma": {
                 "sensores": [
                     {
-                        "x": 110,
-                        "y": 100,
-                        "ancho": 106,
-                        "alto": 260,
+                        "x": 62,
+                        "y": 50,
+                        "ancho": 60,
+                        "alto": 130,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -594,42 +594,42 @@
             "PatadaBaja": {
                 "sensores": [
                     {
-                        "x": 247,
-                        "y": 170,
-                        "ancho": 25,
-                        "alto": 25,
+                        "x": 139,
+                        "y": 85,
+                        "ancho": 14,
+                        "alto": 13,
                         "nSprite": 0,
                         "esHitBox": false
                     },
                     {
-                        "x": 200,
-                        "y": 170,
-                        "ancho": 30,
-                        "alto": 30,
+                        "x": 112,
+                        "y": 85,
+                        "ancho": 17,
+                        "alto": 15,
                         "nSprite": 0,
                         "esHitBox": false
                     },
                     {
-                        "x": 200,
-                        "y": 180,
-                        "ancho": 60,
-                        "alto": 100,
+                        "x": 116,
+                        "y": 90,
+                        "ancho": 34,
+                        "alto": 50,
                         "nSprite": 0,
                         "esHitBox": false
                     },
                     {
-                        "x": 100,
-                        "y": 142,
-                        "ancho": 100,
-                        "alto": 210,
+                        "x": 56,
+                        "y": 71,
+                        "ancho": 56,
+                        "alto": 105,
                         "nSprite": 0,
                         "esHitBox": true
                     },
                     {
-                        "x": 115,
-                        "y": 102,
-                        "ancho": 60,
-                        "alto": 40,
+                        "x": 65,
+                        "y": 51,
+                        "ancho": 34,
+                        "alto": 20,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -706,26 +706,26 @@
             "GolpeBajo": {
                 "sensores": [
                     {
-                        "x": 150,
-                        "y": 145,
-                        "ancho": 120,
-                        "alto": 35,
+                        "x": 84,
+                        "y": 72,
+                        "ancho": 68,
+                        "alto": 18,
                         "nSprite": 0,
                         "esHitBox": false
                     },
                     {
-                        "x": 110,
-                        "y": 142,
-                        "ancho": 80,
-                        "alto": 210,
+                        "x": 62,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
                         "nSprite": 0,
                         "esHitBox": true
                     },
                     {
-                        "x": 145,
-                        "y": 102,
-                        "ancho": 50,
-                        "alto": 40,
+                        "x": 82,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -766,18 +766,18 @@
             "Quieto": {
                 "sensores": [
                     {
-                        "x": 118,
-                        "y": 142,
-                        "ancho": 80,
-                        "alto": 210,
+                        "x": 66,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
                         "nSprite": 0,
                         "esHitBox": true
                     },
                     {
-                        "x": 137,
-                        "y": 102,
-                        "ancho": 50,
-                        "alto": 40,
+                        "x": 77,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -896,10 +896,10 @@
             "Salto": {
                 "sensores": [
                     {
-                        "x": 100,
-                        "y": 175,
-                        "ancho": 110,
-                        "alto": 177,
+                        "x": 56,
+                        "y": 87,
+                        "ancho": 62,
+                        "alto": 89,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -917,10 +917,10 @@
             "SaltoDiagonal": {
                 "sensores": [
                     {
-                        "x": 110,
-                        "y": 225,
-                        "ancho": 120,
-                        "alto": 130,
+                        "x": 62,
+                        "y": 112,
+                        "ancho": 68,
+                        "alto": 65,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -979,10 +979,10 @@
             "Agacharse": {
                 "sensores": [
                     {
-                        "x": 105,
-                        "y": 210,
-                        "ancho": 100,
-                        "alto": 140,
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -999,18 +999,18 @@
             "Gancho": {
                 "sensores": [
                     {
-                        "x": 160,
-                        "y": 90,
-                        "ancho": 90,
-                        "alto": 160,
+                        "x": 90,
+                        "y": 45,
+                        "ancho": 51,
+                        "alto": 80,
                         "nSprite": 0,
                         "esHitBox": false
                     },
                     {
-                        "x": 105,
-                        "y": 210,
-                        "ancho": 100,
-                        "alto": 140,
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -1075,18 +1075,18 @@
             "AgachadoGolpeBajo": {
                 "sensores": [
                     {
-                        "x": 190,
-                        "y": 180,
-                        "ancho": 70,
-                        "alto": 50,
+                        "x": 107,
+                        "y": 90,
+                        "ancho": 40,
+                        "alto": 25,
                         "nSprite": 0,
                         "esHitBox": false
                     },
                     {
-                        "x": 105,
-                        "y": 210,
-                        "ancho": 100,
-                        "alto": 140,
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -1127,10 +1127,10 @@
             "SaltoGolpe": {
                 "sensores": [
                     {
-                        "x": 160,
-                        "y": 90,
-                        "ancho": 60,
-                        "alto": 160,
+                        "x": 90,
+                        "y": 45,
+                        "ancho": 34,
+                        "alto": 80,
                         "nSprite": 0,
                         "esHitBox": false
                     }
@@ -1159,10 +1159,10 @@
             "SaltoPatada": {
                 "sensores": [
                     {
-                        "x": 160,
-                        "y": 90,
-                        "ancho": 60,
-                        "alto": 160,
+                        "x": 90,
+                        "y": 45,
+                        "ancho": 34,
+                        "alto": 80,
                         "nSprite": 0,
                         "esHitBox": false
                     }
@@ -1191,10 +1191,10 @@
             "SaltoDiagonalPatada": {
                 "sensores": [
                     {
-                        "x": 160,
-                        "y": 90,
-                        "ancho": 60,
-                        "alto": 160,
+                        "x": 90,
+                        "y": 45,
+                        "ancho": 34,
+                        "alto": 80,
                         "nSprite": 0,
                         "esHitBox": false
                     }
@@ -1223,18 +1223,18 @@
             "AgachadoPatadaBaja": {
                 "sensores": [
                     {
-                        "x": 180,
-                        "y": 290,
-                        "ancho": 90,
-                        "alto": 50,
+                        "x": 101,
+                        "y": 145,
+                        "ancho": 51,
+                        "alto": 25,
                         "nSprite": 0,
                         "esHitBox": false
                     },
                     {
-                        "x": 105,
-                        "y": 210,
-                        "ancho": 100,
-                        "alto": 140,
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -1275,18 +1275,18 @@
             "AgachadoPatadaAlta": {
                 "sensores": [
                     {
-                        "x": 200,
-                        "y": 180,
-                        "ancho": 70,
-                        "alto": 50,
+                        "x": 112,
+                        "y": 90,
+                        "ancho": 40,
+                        "alto": 25,
                         "nSprite": 0,
                         "esHitBox": false
                     },
                     {
-                        "x": 105,
-                        "y": 210,
-                        "ancho": 100,
-                        "alto": 140,
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
                         "nSprite": 0,
                         "esHitBox": true
                     }
