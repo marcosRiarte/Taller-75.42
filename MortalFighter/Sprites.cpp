@@ -128,12 +128,12 @@ Sprite::Sprite(std::string jsonSprites){
 	cargarSensores("PatadaBaja", sprites);
 
 	// Sprites GolpeBajo
-	cargarSprites(GolpeBajo2, "GolpeBajo", sprites);
+	cargarSprites(GolpeBajo, "GolpeBajo", sprites);
 	// Sensores GolpeBajo
 	cargarSensores("GolpeBajo", sprites);
 
 	// Sprites GolpeBajo2, de zurda
-	cargarSprites(GolpeBajo, "GolpeBajo2", sprites);
+	cargarSprites(GolpeBajo2, "GolpeBajo2", sprites);
 	// Sensores GolpeBajo2
 	cargarSensores("GolpeBajo2", sprites);
 
