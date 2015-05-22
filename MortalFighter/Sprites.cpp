@@ -34,7 +34,9 @@ Sprite::Sprite(std::string jsonSprites){
 
 	this->PatadaBaja = new std::vector<SDL_Rect*>();
 	this->GolpeAlto = new std::vector<SDL_Rect*>();
+	this->GolpeAlto2 = new std::vector<SDL_Rect*>();
 	this->GolpeBajo = new std::vector<SDL_Rect*>();
+	this->GolpeBajo2 = new std::vector<SDL_Rect*>();
 	this->Arma = new std::vector<SDL_Rect*>();
 
 	this->Golpeado = new std::vector<SDL_Rect*>();
@@ -126,14 +128,24 @@ Sprite::Sprite(std::string jsonSprites){
 	cargarSensores("PatadaBaja", sprites);
 
 	// Sprites GolpeBajo
-	cargarSprites(GolpeBajo, "GolpeBajo", sprites);
+	cargarSprites(GolpeBajo2, "GolpeBajo", sprites);
 	// Sensores GolpeBajo
 	cargarSensores("GolpeBajo", sprites);
+
+	// Sprites GolpeBajo2, de zurda
+	cargarSprites(GolpeBajo, "GolpeBajo2", sprites);
+	// Sensores GolpeBajo2
+	cargarSensores("GolpeBajo2", sprites);
 
 	// Sprites GolpeAlto
 	cargarSprites(GolpeAlto, "GolpeAlto", sprites);
 	// Sensores GolpeAlto
 	cargarSensores("GolpeAlto", sprites);
+
+	// Sprites GolpeAlto2, de zurda
+	cargarSprites(GolpeAlto2, "GolpeAlto2", sprites);
+	// Sensores GolpeAlto2
+	cargarSensores("GolpeAlto2", sprites);
 
 	// Sprites Arma
 	cargarSprites(Arma, "Arma", sprites);
@@ -469,10 +481,20 @@ Sprite::~Sprite()
 	GolpeBajo->clear();
 	delete GolpeBajo;
 
+	for (size_t i = 0; i < GolpeBajo2->size(); i++)
+		delete GolpeBajo2->at(i);
+	GolpeBajo2->clear();
+	delete GolpeBajo2;
+
 	for (size_t i = 0; i < GolpeAlto->size(); i++)
 		delete GolpeAlto->at(i);
 	GolpeAlto->clear();
 	delete GolpeAlto;
+
+	for (size_t i = 0; i < GolpeAlto2->size(); i++)
+		delete GolpeAlto2->at(i);
+	GolpeAlto2->clear();
+	delete GolpeAlto2;
 
 	for (size_t i = 0; i < PatadaBaja->size(); i++)
 		delete PatadaBaja->at(i);

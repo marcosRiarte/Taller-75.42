@@ -47,8 +47,8 @@
             "nombre": "Liu Kang"
         },
         {
-            "ancho": 20,
-            "alto": 130,
+            "ancho": 80,
+            "alto": 90,
             "zindex": 1,
             "orientacion": "DER",
             "sprites": "ima/sprites/ScorpionMK3U.png",

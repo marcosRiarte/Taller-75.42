@@ -526,6 +526,74 @@
                     }
                 ]
             },
+             "GolpeAlto2": {
+                "sensores": [
+                    {
+                        "x": 110,
+                        "y": 60,
+                        "ancho": 23,
+                        "alto": 30,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 140,
+                        "y": 52,
+                        "ancho": 17,
+                        "alto": 18,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 62,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 76,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 900,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },                    
+                    {
+                        "x": 900,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
             "Arma": {
                 "sensores": [
                     {
@@ -728,6 +796,66 @@
                     },
                     {
                         "x": 360,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "GolpeBajo2": {
+                "sensores": [
+                    {
+                        "x": 96,
+                        "y": 72,
+                        "ancho": 65,
+                        "alto": 18,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 62,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 90,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 900,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
                         "y": 1980,
                         "ancho": 180,
                         "alto": 180

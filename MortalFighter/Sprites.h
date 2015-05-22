@@ -24,7 +24,9 @@ private:
 	std::vector<SDL_Rect*>*Golpeado;
 	std::vector<SDL_Rect*>*PatadaBaja;
 	std::vector<SDL_Rect*>*GolpeAlto;
+	std::vector<SDL_Rect*>*GolpeAlto2;
 	std::vector<SDL_Rect*>*GolpeBajo;
+	std::vector<SDL_Rect*>*GolpeBajo2;
 	std::vector<SDL_Rect*>*Arma;
 
 	std::vector<SDL_Rect*>*AgachadoGolpeado;
