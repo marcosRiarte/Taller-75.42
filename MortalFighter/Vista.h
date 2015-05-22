@@ -36,6 +36,7 @@ private:
 	SDL_Texture *texturaBarraDeVidaRoja;
 	SDL_Texture *texturaFight;
 	SDL_Texture *texturaRound;
+	SDL_Texture *texturaMenu;
 
 	Uint8 AlfaVida;
 	Uint8 AlfaAnterior;
@@ -55,6 +56,7 @@ private:
 	SDL_Rect barraRojaDeVidaImagen2;
 
 	Timer efectosTimer;
+	Timer menuTimer;
 	TTF_Font * fuente;
 	int posBarraDeVida1;
 	int anchoImagenBarraDeVida;
@@ -94,5 +96,6 @@ private:
 	void DibujarCapasPosteriores(std::vector<Personaje*> personajes, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
 	void DibujarPersonajes(std::vector<Personaje*> personajes);
 	void DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
+	void dibujarMenu(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
 };
 
