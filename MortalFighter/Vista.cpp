@@ -88,6 +88,10 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		//y la lista de cuadros puntero a null
 		listaDeCuadrosDos = nullptr;
 
+		//Se carga la textura del menu Princpial
+		SDL_Surface* menu = cargarSuperficieOptimizada("ima/bkg/mainmenu.gif");
+		this->texturaMenu = SDL_CreateTextureFromSurface(renderer, menu);
+
 		//Se cargan los sprites:		
 		
 		//Dirección de la imagen de Sprites
@@ -202,6 +206,8 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 
 		//Tiempo de permanecia en pantalla de efectos
 		this->efectosTimer.start();
+		//Menu timer
+		this->menuTimer.start();
 
 }
 
@@ -364,16 +370,40 @@ void Vista::actualizar(){
 
 	if (!PjUnoEstaEnBorde && !PjDosEstaEnBorde)
 		refMundo->LiberarCuerpos();
-	
-	// Dibuja las capas y el personaje
-	Dibujar(personajesVista);
 
-	//Dibuja las barras de vida
-	DibujarBarrasDeVida(personajesVista);
+	//Dibujar menu 
 
-	//Se actualiza la pantalla
-	SDL_RenderPresent(renderer);
+	int anchoVentanaPx = ventanaVista.getAnchoPx();
+
+	if ((this->menuTimer.getTicks() >= 50) && (this->menuTimer.getTicks() <= 1000))
+	{
+		this->dibujarMenu(anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
+		SDL_RenderPresent(renderer);
+	}
+	else
+	{
+		if (this->menuTimer.getTicks() > 1000)
+		{
+
+			SDL_DestroyTexture(this->texturaMenu);
+			this->menuTimer.stop();
+		}
+		else
+		{
+
+			// Dibuja las capas y el personaje
+			Dibujar(personajesVista);
+
+			//Dibuja las barras de vida
+			DibujarBarrasDeVida(personajesVista);
+
+			//Se actualiza la pantalla
+			SDL_RenderPresent(renderer);
+		}
+	}
+
 }
+	
 
 SDL_Surface* Vista::cargarSuperficieOptimizada(std::string dirImagen)
 {	
@@ -414,6 +444,14 @@ void Vista::OrdenarCapas()
 	capasVista.clear();
 	capasVista = capasOrdenadas;
 }
+
+void Vista::dibujarMenu(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
+{
+	SDL_Rect camaraMenu;
+	camaraMenu = { 0, 0, anchoVentanaPx, altoVentanaPx };
+	SDL_RenderCopy(renderer, this->texturaMenu, NULL, &camaraMenu);
+}
+
 
 void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 {
@@ -525,13 +563,13 @@ void Vista::DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVenta
 	//Si el cronometro de efectos es > 1 segundo y menor a 2 muestra Round.
 	//Si es mayor a 2 segundos muestra fight
 	//Si es mayor a 4 segundos detiene el cronometro y limpia pantalla
-	if ((this->efectosTimer.getTicks() >= 1000) && (this->efectosTimer.getTicks() <= 2000))
+	if ((this->efectosTimer.getTicks() >= 1100) && (this->efectosTimer.getTicks() <= 2100))
 	{
 		SDL_RenderCopy(renderer, this->texturaRound, NULL, &camaraFight);
 	}
 	else
 	{
-		if ((this->efectosTimer.getTicks() > 2000) && (this->efectosTimer.getTicks() <= 4000))
+		if ((this->efectosTimer.getTicks() > 2100) && (this->efectosTimer.getTicks() <= 4000))
 		{
 			SDL_DestroyTexture(this->texturaRound);
 			SDL_RenderCopy(renderer, this->texturaFight, NULL, &camaraFight);
