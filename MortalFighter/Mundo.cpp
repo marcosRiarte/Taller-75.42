@@ -258,7 +258,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 		nuevoEstado.accion = PATADA_ALTA;
 		unCuerpo->setEstadoAnterior(nuevoEstado);
 		unCuerpo->setDemora(35);
-		//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 	}
 
 	if ((movimientos->back() == G_GANCHO) && !(unCuerpo->getEstado().accion == GANCHO)){
@@ -323,11 +323,11 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 		nuevoEstado.movimiento = AGACHADO;
 		nuevoEstado.accion = GUARDIA;
 		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 	}
 
 	if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (estadoAnterior.golpeado != GOLPEADO)){
-		unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 			nuevoEstado.golpeado = GOLPEADO;
 		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), otroCuerpo->getEstado())) == REINICIAR){
 			nuevoEstado.golpeado = FALLECIDO;

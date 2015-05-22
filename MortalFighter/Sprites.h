@@ -18,6 +18,7 @@ private:
 	std::vector<SDL_Rect*>* SaltoDiagonalIzq;
 	std::vector<SDL_Rect*>* Quieto;
 	std::vector<SDL_Rect*>* Defensa;
+	std::vector<SDL_Rect*>* DefensaGolpeado;
 
 	std::vector<SDL_Rect*>*Agacharse;
 	std::vector<SDL_Rect*>*PatadaAlta;
@@ -32,6 +33,7 @@ private:
 	std::vector<SDL_Rect*>*AgachadoGolpeado;
 	std::vector<SDL_Rect*>*SaltoGolpeado;
 	std::vector<SDL_Rect*>*AgachadoDefensa;
+	std::vector<SDL_Rect*>*AgachadoDefensaGolpeado;
 
 	std::vector<SDL_Rect*>* Gancho;
 	std::vector<SDL_Rect*>* AgachadoGolpeBajo;

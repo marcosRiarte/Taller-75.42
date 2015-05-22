@@ -113,7 +113,38 @@
                         "ancho": 180,
                         "alto": 180
                     }
-                    
+                ]
+            },
+            "AgachadoDefensaGolpeado": {
+                "sensores": [
+                    {
+                        "x": 34,
+                        "y": 56,
+                        "ancho": 35,
+                        "alto": 41,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 180,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    }                
                 ]
             },
             "AgachadoGolpeado": {
@@ -168,6 +199,38 @@
                     },
                     {
                         "x": 0,
+                        "y": 720,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "DefensaGolpeado": {
+                "sensores": [
+                    {
+                        "x": 34,
+                        "y": 65,
+                        "ancho": 32,
+                        "alto": 61,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 180,
+                        "y": 720,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 720,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
                         "y": 720,
                         "ancho": 180,
                         "alto": 180
