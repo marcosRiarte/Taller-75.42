@@ -238,8 +238,6 @@ void Sprite::cargarSprites(std::vector<SDL_Rect*>* estadoCuadros, std::string un
 		estadoCuadros->push_back(crearCuadro(estadoSprites[i]));
 }
 
-
-
 void Sprite::redimensionarSensores(float anchoPjPx, float altoPjPx)
 {
 	ESTADO estadoAux;

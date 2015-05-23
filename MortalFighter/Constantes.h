@@ -37,7 +37,7 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define tiempoPatadaAlta 500.0f
 #define tiempoPatadaBaja 500.0f
 #define tiempoGolpeado 500.0f
-#define tiempoDefensa 500.0f
+#define tiempoDefensa 100.0f
 #define tiempoGolpeAlto 500.0f
 #define tiempoGolpeBajo 500.0f
 #define tiempoArmaArrojable 500.0f
