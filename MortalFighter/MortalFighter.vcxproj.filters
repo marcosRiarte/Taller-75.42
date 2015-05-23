@@ -445,6 +445,12 @@
     <Image Include="ima\bkg\netherealm.gif">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
+    <Image Include="ima\bkg\piramide.gif">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ima\bkg\subzero.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="ima\ttf\Vera.ttf">
