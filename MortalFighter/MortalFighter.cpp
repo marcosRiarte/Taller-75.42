@@ -63,7 +63,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		personaje1.posicion = vector2D((Parser::getInstancia().getEscenario().getAncho() / 2.3), (Parser::getInstancia().getEscenario().getYPiso()));
 
 		Cuerpo *unCuerpo = new Cuerpo(personaje1, controladorUno);
-		unCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(0));
+		unCuerpo->recibeObservador(Parser::getInstancia().getPelea()->getPersonaje1());
 		unCuerpo->setSensores(unCuerpo->getSprite()->getSensores());
 		unCuerpo->setSensoresProyectil(unCuerpo->getSprite()->getSensoresDisparo());
 
@@ -73,7 +73,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		personaje2.posicion = vector2D((float)(Parser::getInstancia().getEscenario().getAncho() / 1.8), (Parser::getInstancia().getEscenario().getYPiso()));
 
 		Cuerpo *otroCuerpo = new Cuerpo(personaje2, controladorDos);
-		otroCuerpo->recibeObservador(Parser::getInstancia().getPersonajes().at(1));
+		Personaje* unPersonaje = Parser::getInstancia().getPelea()->getPersonaje2();
+		otroCuerpo->recibeObservador(Parser::getInstancia().getPelea()->getPersonaje2());
 		otroCuerpo->setSensores(otroCuerpo->getSprite()->getSensores());
 		otroCuerpo->setSensoresProyectil(otroCuerpo->getSprite()->getSensoresDisparo());
 

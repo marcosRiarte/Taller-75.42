@@ -4,6 +4,36 @@
 #include "ManejadorULogicas.h"
 #include "Sprites.h"
 
+Personaje::Personaje(){
+
+}
+
+
+void Personaje::copiarAtributosDe(Personaje* unPersonaje){
+	ancho = unPersonaje->getAncho();
+	alto = unPersonaje->getAlto();
+	zIndex = unPersonaje->zIndex;
+	vida = unPersonaje->getVida();
+	orientacion = unPersonaje->getOrientacion();
+	spritesDir = unPersonaje->getSpriteDir();
+	caminaradelante = unPersonaje->getCaminarParaAdelante();
+	caminaratras = unPersonaje->getCaminarParaAtras();
+	quieto = unPersonaje->getQuieto();
+	salto = unPersonaje->getSalto();
+	saltodiagonal = unPersonaje->getSaltoDiagonal();
+	caida = unPersonaje->getCaida();
+	nombreP = unPersonaje->getNombre();
+	patadaalta = unPersonaje->getPatadaAlta();
+	agachado = unPersonaje->getAgacharse();
+	golpeado = unPersonaje->getGolpeado();
+	sprites = unPersonaje->getSprite();
+	posicionUn = unPersonaje->getPosicionUn();
+	deltaX = unPersonaje->getDeltaX();
+	estadoActual = unPersonaje->getEstado();
+}
+
+
+
 Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesDirPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje, std::string CaidaPersonaje, std::string PatadaAltaPersonaje, std::string GolpeadoPersonaje, std::string AgachadoPersonaje, std::string nombrePersonaje)
 {
 	ancho = anchoPersonaje;

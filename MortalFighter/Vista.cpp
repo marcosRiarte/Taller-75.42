@@ -95,15 +95,15 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		//Se cargan los sprites:		
 		
 		//Dirección de la imagen de Sprites
-		std::string dirImgPersonajeUno = Parser::getInstancia().getPersonajes().at(0)->getSpriteDir();
-		std::string dirImgPersonajeDos = Parser::getInstancia().getPersonajes().at(1)->getSpriteDir();
+		std::string dirImgPersonajeUno = Parser::getInstancia().getPelea()->getPersonaje1()->getSpriteDir();
+		std::string dirImgPersonajeDos = Parser::getInstancia().getPelea()->getPersonaje2()->getSpriteDir();
 
 		//Carga la imagen desde la ruta especificada
 		SDL_Surface* SuperficieUno = cargarSuperficieOptimizada(dirImgPersonajeUno);
 		SDL_Surface* SuperficieDos = cargarSuperficieOptimizada(dirImgPersonajeDos);
 
 		//Seteo del color		
-		std::string pelea = Parser::getInstancia().getPelea();
+		std::string pelea = Parser::getInstancia().getPeleaComoString();
 		double h_inicio = Parser::getInstancia().getColorAlternativo().at(0);
 		double h_final = Parser::getInstancia().getColorAlternativo().at(1);;
 		double deplazamiento = Parser::getInstancia().getColorAlternativo().at(2);
@@ -112,7 +112,7 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 
 		if (MODO_COLOR){
 		//Si ambos personajes son iguales,modifico la superficie
-		if ((pelea == "scorpion VS scorpion") || (pelea == "liuKang VS liuKang"))
+			if (Parser::getInstancia().getPelea()->getPersonaje1()->getNombre() == Parser::getInstancia().getPelea()->getPersonaje2()->getNombre())
 		{
 			MatizColor matiz(SuperficieDos);
 			matiz.desplazarMatiz(h_inicio, h_final, deplazamiento);
@@ -215,7 +215,10 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 void Vista::actualizar(){
 
 	// referencias más utilizadas al actualizar la vista
-	std::vector<Personaje*> personajesVista = Parser::getInstancia().getPersonajes();
+	std::vector<Personaje*> personajesVista = std::vector<Personaje*>();
+	if (!personajesVista.empty()) personajesVista.clear();
+	personajesVista.push_back(Parser::getInstancia().getPelea()->getPersonaje1());
+	personajesVista.push_back(Parser::getInstancia().getPelea()->getPersonaje2());
 	Ventana ventanaVista = Parser::getInstancia().getVentana();
 
 	//Parametros de la ventana
@@ -327,13 +330,13 @@ void Vista::actualizar(){
 		}*/
 		//Este es el codigo que deberia ir en realidad pero todavia no hay gancho
 		if (personajesVista.at(0)->getEstado().golpeado == GOLPEADO){
-			if (personajesVista.at(1)->getEstado().accion == PATADA_ALTA){
+			if (personajesVista.at(1)->getEstado().accion == GANCHO){
 				golpeado = true;
 			}
 		}
 		else{
 			if (personajesVista.at(1)->getEstado().golpeado == GOLPEADO){
-				if (personajesVista.at(0)->getEstado().accion == PATADA_ALTA){
+				if (personajesVista.at(0)->getEstado().accion == GANCHO){
 				golpeado = true;
 				}
 			}

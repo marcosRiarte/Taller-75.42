@@ -27,7 +27,8 @@ public:
 	std::vector<Personaje*> getPersonajes() const;
 	std::vector<Capa*> getCapas() const;
 	std::vector<double> getColorAlternativo();
-	std::string Parser::getPelea() const;
+	Pelea* Parser::getPelea() const;
+	std::string Parser::getPeleaComoString() const;
 	static void FreeInstancia();
 
 private:	
