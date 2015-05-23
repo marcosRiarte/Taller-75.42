@@ -320,7 +320,7 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 	}
 	if (unEstado.accion == GOLPE_ALTO){
 		if (unEstado.movimiento == SALTO)
-			return SaltoGolpe;
+			return SaltoGolpe; 
 		return GolpeAlto;
 	}
 	if (unEstado.accion == GOLPE_BAJO){
