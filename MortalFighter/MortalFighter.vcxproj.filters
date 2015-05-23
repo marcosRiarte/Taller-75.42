@@ -451,6 +451,9 @@
     <Image Include="ima\bkg\subzero.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="ima\bkg\toasty.gif">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="ima\ttf\Vera.ttf">

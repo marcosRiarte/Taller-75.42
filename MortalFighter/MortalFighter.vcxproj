@@ -220,6 +220,7 @@
     <Image Include="ima\bkg\scorpion.jpg" />
     <Image Include="ima\bkg\subzero.jpg" />
     <Image Include="ima\bkg\texturaVerde.png" />
+    <Image Include="ima\bkg\toasty.gif" />
     <Image Include="ima\bkg\t_1.png" />
     <Image Include="ima\bkg\t_2.png" />
     <Image Include="ima\bkg\t_3.png" />
