@@ -4,8 +4,8 @@
 #include "Escenario.h"
 #include "Sprites.h"
 
-#define SALTO_Y 510.0f
-#define SALTO_X 130.0f
+#define SALTO_Y 580.0f
+#define SALTO_X 180.0f
 #define GRAVEDAD_Y -8.0f
 #define DISTANCIA 2.0f
 #define VELOCIDADPROYECTIL 20.0f

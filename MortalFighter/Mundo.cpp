@@ -243,7 +243,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			unCuerpo->setEstadoAnterior(nuevoEstado);
 			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
 		}
-
+	}
 	if ((movimientos->back() == ABAJO)){
 		nuevoEstado.movimiento = AGACHADO;
 		unCuerpo->setEstadoAnterior(nuevoEstado);
@@ -339,8 +339,8 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 	if ((movimientos->back() == QUIETO)){
 		nuevoEstado.movimiento = PARADO;
 		unCuerpo->setEstadoAnterior(nuevoEstado);
-		}
 	}
+	
 
 	return nuevoEstado;
 }

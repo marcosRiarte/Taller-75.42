@@ -374,7 +374,7 @@ void Vista::actualizar(){
 	//Dibujar menu 
 
 	int anchoVentanaPx = ventanaVista.getAnchoPx();
-
+	/*
 	if ((this->menuTimer.getTicks() >= 50) && (this->menuTimer.getTicks() <= 1000))
 	{
 		this->dibujarMenu(anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
@@ -390,7 +390,7 @@ void Vista::actualizar(){
 		}
 		else
 		{
-
+			*/
 			// Dibuja las capas y el personaje
 			Dibujar(personajesVista);
 
@@ -399,10 +399,10 @@ void Vista::actualizar(){
 
 			//Se actualiza la pantalla
 			SDL_RenderPresent(renderer);
-		}
+		
 	}
 
-}
+
 	
 
 SDL_Surface* Vista::cargarSuperficieOptimizada(std::string dirImagen)
