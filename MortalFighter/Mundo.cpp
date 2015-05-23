@@ -101,8 +101,6 @@ ESTADO Mundo::ResolverColisiones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevo
 	//si llego aca es por que hay una colision.
 	// 4 cconsideraciones, me golpearon??,  con que fue?, que estado tengo? por que en base a eso determino que golpeado soy
 	// estoy en modo defensa???
-
-
 	return nuevoEstado;
 
 }
@@ -327,8 +325,8 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 	}
 
 	if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (estadoAnterior.golpeado != GOLPEADO)){
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 			nuevoEstado.golpeado = GOLPEADO;
+			unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), otroCuerpo->getEstado())) == REINICIAR){
 			nuevoEstado.golpeado = FALLECIDO;
 			std::string mensaje = "Gano personaje " + otroCuerpo->getRefPersonaje()->getNombre();
@@ -379,7 +377,8 @@ void Mundo::ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool inverti
 				posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), sensoresOtroCuerpo->at(j)->getAlto(), !invertido);
 				posAbsSensoresCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion(), unCuerpo, sensoresCuerpo->at(i)->getAncho(), sensoresCuerpo->at(i)->getAlto(), invertido);
 				if (!(sensoresCuerpo->at(i)->getHitbox()) && (sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
-					if ((unCuerpo->getEstado().accion == GANCHO) && (elOtroCuerpo->getEstadoAnterior().golpeado != GOLPEADO)){
+					if (elOtroCuerpo->getEstadoAnterior().golpeado != GOLPEADO){
+					if ((unCuerpo->getEstado().accion == GANCHO)){
 						if (!(invertido))
 							elOtroCuerpo->aplicarImpulso(vector2D((0.5)*SALTO_X, (0.5)*SALTO_Y));
 						else
@@ -388,6 +387,7 @@ void Mundo::ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool inverti
 					ESTADO unEstado = elOtroCuerpo->getEstado();
 					unEstado.golpeado = GOLPEADO;
 					elOtroCuerpo->notificarObservadores(unEstado);
+					}
 				}
 			}	
 		}

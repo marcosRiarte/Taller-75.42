@@ -34,14 +34,14 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define tiempoSaltoDiagonalIzq 1500.0f
 #define tiempoAgacharse 200.0f
 #define tiempoAgachadoDefensa 200.0f
-#define tiempoPatadaAlta 600.0f
-#define tiempoPatadaBaja 800.0f
-#define tiempoGolpeado 1400.0f
-#define tiempoDefensa 1400.0f
+#define tiempoPatadaAlta 500.0f
+#define tiempoPatadaBaja 500.0f
+#define tiempoGolpeado 500.0f
+#define tiempoDefensa 500.0f
 #define tiempoGolpeAlto 500.0f
 #define tiempoGolpeBajo 500.0f
 #define tiempoArmaArrojable 500.0f
-#define tiempoSaltoGolpeado 500.0f
+#define tiempoSaltoGolpeado 1400.0f
 #define tiempoGancho 500.0f
 #define tiempoAgachadoPatadaBaja 500.0f
 #define tiempoSaltoPatada 500.0f
@@ -49,7 +49,7 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define tiempoSaltoGolpe 500.0f
 #define tiempoAgachadoGolpeBajo 500.0f
 #define tiempoAgachadoPatadaAlta 500.0f
-#define tiempoAgachadoGolpeado 1000.0f
+#define tiempoAgachadoGolpeado 500.0f
 
 
 //ESCENARIO
