@@ -25,6 +25,8 @@ class Personaje
 {
 public:
 	std::string nombre;
+	Personaje();
+	void copiarAtributosDe(Personaje* unPersonaje);
 	Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPersonaje, std::string unaorientacion, std::string spritesDirPersonaje, std::string CaminarParaAdelante, std::string CaminarParaAtras, std::string QuietoPersonaje, std::string SaltoPersonaje, std::string SaltoDiagonalPersonaje, std::string CaidaPersonaje, std::string PatadaAltaPersonaje, std::string GolpeadoPersonaje, std::string AgachadoPersonaje, std::string nombrePersonaje);
 	float getAncho() const;
 	float getAlto() const;

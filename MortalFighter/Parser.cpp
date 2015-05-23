@@ -134,9 +134,13 @@ Controlador* Parser::getControlador2(){
 	return validadorDelControlador->getControlador2();
 }
 
-std::string Parser::getPelea()const
+Pelea* Parser::getPelea()const
 {
 	return validadorDePelea->getPelea();
+}
+
+std::string Parser::getPeleaComoString()const{
+	return validadorDePelea->getPeleaComoString();
 }
 
 std::vector<Personaje*> Parser::getPersonajes() const

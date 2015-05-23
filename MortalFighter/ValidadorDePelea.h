@@ -1,13 +1,17 @@
 #pragma once
+#include "Pelea.h"
+
 class ValidadorDePelea
 {
 private:
 	std::string pelea;
+	Pelea* laPelea;
 
 public:
 	ValidadorDePelea();
 	void validarPeleaDesdeParaLosPeronajes(Json::Value unaPelea, std::vector<Personaje*>* personajes);
-	std::string getPelea();
+	Pelea* getPelea();
+	std::string ValidadorDePelea::getPeleaComoString();
 	~ValidadorDePelea();
 };
 

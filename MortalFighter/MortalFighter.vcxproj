@@ -110,6 +110,7 @@
     <ClInclude Include="MortalFigther.h" />
     <ClInclude Include="Mundo.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="Pelea.h" />
     <ClInclude Include="Personaje.h" />
     <ClInclude Include="Sensor.h" />
     <ClInclude Include="Sprites.h" />
@@ -141,6 +142,7 @@
     <ClCompile Include="MortalFighter.cpp" />
     <ClCompile Include="Mundo.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="Pelea.cpp" />
     <ClCompile Include="Personaje.cpp" />
     <ClCompile Include="Sensor.cpp" />
     <ClCompile Include="Sprites.cpp" />
