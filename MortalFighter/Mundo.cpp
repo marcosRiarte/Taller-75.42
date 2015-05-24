@@ -440,67 +440,8 @@ ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCu
 /*
 ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<MOV_TIPO>* movimientos)
 {
-	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
-	Sprite* elSprite = unCuerpo->getSprite();
 
 	
-	
-	
-
-	
-
-	if ((movimientos->back() == P_ALTA_ABAJO) && !(unCuerpo->getEstado().accion == PATADA_ALTA)){
-		nuevoEstado.accion = PATADA_ALTA;
-		nuevoEstado.movimiento = AGACHADO;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
-	}
-
-	if ((movimientos->back() == P_SALTO) && !(unCuerpo->getEstado().accion == PATADA_ALTA)){
-		nuevoEstado.accion = PATADA_ALTA;
-		nuevoEstado.movimiento = SALTO;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
-	}
-
-	if ((movimientos->back() == P_BAJA) && !(unCuerpo->getEstado().accion == PATADA_BAJA)){
-		nuevoEstado.accion = PATADA_BAJA;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		std::cout << (elSprite->listaDeCuadros(nuevoEstado)->size()) << std::endl;
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
-	}
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	if ((movimientos->back() == ARMA) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
-		nuevoEstado.accion = ARMA_ARROJABLE;
-		unCuerpo->getSensoresProyectil().at(0)->activarSensor();
-
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
-	}
-
-	if ((movimientos->back() == DEFENSA)){
-		nuevoEstado.movimiento = PARADO;
-		nuevoEstado.accion = GUARDIA;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-	}
-
-	if ((movimientos->back() == DEFENSA_AGACHADO)){
-		nuevoEstado.movimiento = AGACHADO;
-		nuevoEstado.accion = GUARDIA;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
-	}
 
 	if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (estadoAnterior.golpeado != GOLPEADO)){
 			nuevoEstado.golpeado = GOLPEADO;
@@ -795,10 +736,17 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 			// aca no deberia ir (! arma arrojable) por que deberia tener una demora que le impide entrar a este resolver
 			// pero como no sabemos que demora va a tener el arma por que le van a aumentar la velocidad.... dejemos la redundancia por las dudas
+
+
 			if ((movimientos->back() == ARMA) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
 				nuevoEstado.accion = ARMA_ARROJABLE;
+				unCuerpo->getSensoresProyectil().at(0)->activarSensor();
 				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 			}
+
+
+
+
 
 			if (movimientos->back() == DEFENSA) {
 				//nuevoEstado.movimiento = PARADO;
