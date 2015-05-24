@@ -44,7 +44,6 @@ public:
 
 		int yRelPx = manejador.darLongPixels(yRel, Parser::getInstancia().getVentana().getAltoPx(), Parser::getInstancia().getEscenario().getAlto());
 		int xRelPx = manejador.darLongPixels(posicion.x);
-
 		return std::make_pair(xRelPx, yRelPx);
 	}
 
@@ -119,7 +118,7 @@ public:
 				else
 					sensorActivoStr = "GolpeBajo";
 			}
-			if (estadoActual.accion == GOLPE_ALTO){
+			if (estadoActual.accion == GOLPE_ALTO1){
 				if (estadoActual.movimiento == SALTO)
 					sensorActivoStr = "SaltoGolpe";
 				if ((estadoActual.movimiento == SALTODIAGDER) || (estadoActual.movimiento == SALTODIAGIZQ))
@@ -129,6 +128,17 @@ public:
 				else
 					sensorActivoStr = "GolpeAlto";
 			}
+			if (estadoActual.accion == GOLPE_ALTO2){
+				if (estadoActual.movimiento == SALTO)
+					sensorActivoStr = "SaltoGolpe";
+				if ((estadoActual.movimiento == SALTODIAGDER) || (estadoActual.movimiento == SALTODIAGIZQ))
+					sensorActivoStr = "SaltoGolpe";
+				if (estadoActual.movimiento == AGACHADO)
+					sensorActivoStr = "Gancho";
+				else
+					sensorActivoStr = "GolpeAlto2";
+			}
+
 			if (estadoActual.accion == ARMA_ARROJABLE){
 				sensorActivoStr = "Arma";
 			}

@@ -630,10 +630,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	float xLogPjUnoEnCamara = xPjUno + camaraXLog;
 	SDL_Rect personajeUno;
 
-
-
 	// Posicion x del personaje dentro de la camara
-	float xLogPjDosEnCamara = xPjDos + camaraXLog;
+	float xLogPjDosEnCamara = xPjDos + camaraXLog ;
 	SDL_Rect personajeDos;
 
 	ESTADO estadoAux;
@@ -643,14 +641,10 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	float relacionAltoUno = (float)altoPjUnoPx / (float)cuadroBase->h;
 	personajeUno.x = manejadorULog.darLongPixels(xLogPjUnoEnCamara);
 	personajeUno.y = yPjUnoPx;
-
-
-
-
+	
 	// ancho y alto lo calcula cuadro a cuadro
 	ESTADO estadoDelPersonajeUno = personajesVista[0]->getEstado();
 
-	
 	float relacionAnchoDos = (float)anchoPjDosPx / (float)cuadroBase->w;
 	float relacionAltoDos = (float)altoPjDosPx / (float)cuadroBase->h;
 	personajeDos.x = manejadorULog.darLongPixels(xLogPjDosEnCamara);

@@ -3,7 +3,7 @@
 #define REINICIAR	1
 #define FIN   		2
 
-#define MODO_DEBUG_SDL true
+#define MODO_DEBUG_SDL false
 #define MODO_COLOR true
 
 //JSON
@@ -29,16 +29,16 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define tiempoCaminarParaAdelante 1000.0f
 #define tiempoCaminarParaAtras 1000.0f
 #define tiempoQuieto 1700.0f
-#define tiempoSalto 1500.0f
-#define tiempoSaltoDiagonal 1500.0f
-#define tiempoSaltoDiagonalIzq 1500.0f
+#define tiempoSalto 500.0f
+#define tiempoSaltoDiagonal 500.0f
+#define tiempoSaltoDiagonalIzq 500.0f
 #define tiempoAgacharse 200.0f
-#define tiempoAgachadoDefensa 200.0f
+#define tiempoAgachadoDefensa 500.0f
 #define tiempoPatadaAlta 500.0f
-#define tiempoPatadaBaja 500.0f
+#define tiempoPatadaBaja 900.0f
 #define tiempoGolpeado 500.0f
-#define tiempoDefensa 100.0f
-#define tiempoGolpeAlto 500.0f
+#define tiempoDefensa 500.0f
+#define tiempoGolpeAlto 400.0f
 #define tiempoGolpeBajo 500.0f
 #define tiempoArmaArrojable 500.0f
 #define tiempoSaltoGolpeado 1400.0f

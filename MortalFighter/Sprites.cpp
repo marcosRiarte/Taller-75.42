@@ -316,10 +316,15 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 			return SaltoDiagonalPatada;
 		return PatadaBaja;
 	}
-	if (unEstado.accion == GOLPE_ALTO){
+	if (unEstado.accion == GOLPE_ALTO1){
 		if (unEstado.movimiento == SALTO)
 			return SaltoGolpe; 
 		return GolpeAlto;
+	}
+	if (unEstado.accion == GOLPE_ALTO2){
+		if (unEstado.movimiento == SALTO)
+			return SaltoGolpe;
+		return GolpeAlto2;
 	}
 	if (unEstado.accion == GOLPE_BAJO){
 		if (unEstado.movimiento == AGACHADO)
@@ -391,7 +396,7 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 		
 		return (tiempoPatadaBaja / (this->PatadaBaja->size()) / MSxCUADRO);
 	}
-	if (estadoDelPersonaje.accion == GOLPE_ALTO){
+	if ((estadoDelPersonaje.accion == GOLPE_ALTO1) || (estadoDelPersonaje.accion == GOLPE_ALTO2)){
 		if (estadoDelPersonaje.movimiento == SALTO)
 			return (tiempoSaltoGolpe / (this->SaltoGolpe->size()) / MSxCUADRO);
 		return (tiempoGolpeAlto / (this->GolpeAlto->size()) / MSxCUADRO);
