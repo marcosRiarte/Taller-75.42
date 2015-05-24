@@ -443,118 +443,11 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 	Sprite* elSprite = unCuerpo->getSprite();
 
-	if (unCuerpo->EstaFrenado()){
-		if ((movimientos->back() == ARRIBA)){
-			nuevoEstado.movimiento = SALTO;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
-		}
-		if (movimientos->back() == ABAJO){
-			if (unCuerpo->getEstado().accion == GUARDIA)
-				nuevoEstado.movimiento = AGACHADO;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-		}
-		if ((movimientos->back() == SALTODER)){
-			nuevoEstado.movimiento = SALTODIAGDER;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
-		}
-		if ((movimientos->back() == SALTOIZQ)){
-			nuevoEstado.movimiento = SALTODIAGIZQ;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
-		}
-		if ((movimientos->back() == DER)){
-			nuevoEstado.movimiento = CAMINARDER;
-		}
-		if ((movimientos->back() == IZQ)){
-			nuevoEstado.movimiento = CAMINARIZQ;
-		}
-		if (movimientos->back() == ABAJO){
-			nuevoEstado.movimiento = AGACHADO;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-		}
-	}
-	else{
-		//esto hace que no pueda saltar en el aire
-		if (estadoAnterior.movimiento == SALTO || estadoAnterior.movimiento == SALTODIAGDER || estadoAnterior.movimiento == SALTODIAGIZQ)
-		{
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-			//aca frutie dividiendo por 20 por que necesitaba una demora chiquitita
-
-			unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size())/10);
-		}
-
-		if ((movimientos->back() == DER)){
-			nuevoEstado.movimiento = CAMINARDER;
-			if (!(invertido)){
-				if (!(unCuerpo->EstaSuperpuesto()))
-					unCuerpo->mover(DISTANCIA);
-			}
-			else
-				unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
-		}
-
-		if ((movimientos->back() == IZQ)){
-			nuevoEstado.movimiento = CAMINARIZQ;
-			if (otroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
-				unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
-			else
-				unCuerpo->mover(-DISTANCIA);
-		}
-		if ((movimientos->back() == ARRIBA)){
-			nuevoEstado.movimiento = SALTO;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
-		}
-
-		if ((movimientos->back() == SALTODER)){
-			nuevoEstado.movimiento = SALTODIAGDER;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-				unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
-		}
-
-		if ((movimientos->back() == SALTOIZQ)){
-			nuevoEstado.movimiento = SALTODIAGIZQ;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
-		}
-	}
-	if ((movimientos->back() == ABAJO)){
-		nuevoEstado.movimiento = AGACHADO;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-	}
 	
-	if ((movimientos->back() == G_BAJO) && !(unCuerpo->getEstado().accion == GOLPE_BAJO)){
-		nuevoEstado.accion = GOLPE_BAJO;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
-	}
-	if ((movimientos->back() == P_ALTA) && !(unCuerpo->getEstado().accion == PATADA_ALTA)){
-		nuevoEstado.accion = PATADA_ALTA;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
-	}
+	
+	
 
-	if ((movimientos->back() == G_GANCHO) && !(unCuerpo->getEstado().accion == GANCHO)){
-		nuevoEstado.accion = GANCHO;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
-	}
-
-	if ((movimientos->back() == G_ABAJO) && !(unCuerpo->getEstado().accion == GOLPE_BAJO)){
-		nuevoEstado.accion = GOLPE_BAJO;
-		nuevoEstado.movimiento = AGACHADO;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
-	}
-
-	if ((movimientos->back() == P_BAJA_ABAJO) && !(unCuerpo->getEstado().accion == PATADA_BAJA)){
-		nuevoEstado.accion = PATADA_BAJA;
-		nuevoEstado.movimiento = AGACHADO;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
-	}
+	
 
 	if ((movimientos->back() == P_ALTA_ABAJO) && !(unCuerpo->getEstado().accion == PATADA_ALTA)){
 		nuevoEstado.accion = PATADA_ALTA;
@@ -590,6 +483,16 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 		unCuerpo->setEstadoAnterior(nuevoEstado);
 		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 	}
+
+
+
+
+
+
+
+
+
+
 
 	if ((movimientos->back() == ARMA) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
 		nuevoEstado.accion = ARMA_ARROJABLE;
@@ -652,25 +555,22 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 		if (movimientos->back() == G_BAJO){
 			nuevoEstado.accion = GOLPE_BAJO;
-			unCuerpo->setDemora(25);
-			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
+			
 		}
 		if (movimientos->back() == P_ALTA) {
 			nuevoEstado.accion = PATADA_ALTA;
-
-			unCuerpo->setDemora(25);
-			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 		}
 
 		if (movimientos->back() == P_BAJA) {
 			nuevoEstado.accion = PATADA_BAJA;
-			unCuerpo->setDemora(25);
-			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 		}
+
 		if (movimientos->back() == G_ALTO){
 			nuevoEstado.accion = GOLPE_ALTO1;
-			unCuerpo->setDemora(25);
-			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 		}
 
 
@@ -712,8 +612,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 				if (estadoAnterior.accion != GOLPE_BAJO){
 					nuevoEstado.movimiento = AGACHADO;
 					nuevoEstado.accion = GOLPE_BAJO;
-					unCuerpo->setDemora(35);
-					//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 				}
 			}
 			if (movimientos->back() == P_ALTA_ABAJO) {
@@ -722,9 +621,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 					nuevoEstado.movimiento = AGACHADO;
 					nuevoEstado.accion = PATADA_ALTA;
-
-					unCuerpo->setDemora(35);
-					//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 				}
 			}
 
@@ -733,17 +630,16 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 				if (estadoAnterior.accion != PATADA_BAJA){
 					nuevoEstado.movimiento = AGACHADO;
 					nuevoEstado.accion = PATADA_BAJA;
-					unCuerpo->setDemora(35);
-					//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 				}
 			}
+
 			if (movimientos->back() == G_GANCHO){
 
 				if (estadoAnterior.accion != GANCHO){
 					nuevoEstado.movimiento = AGACHADO;
 					nuevoEstado.accion = GANCHO;
-					unCuerpo->setDemora(35);
-					//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 				}
 			}
 
@@ -913,7 +809,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			// pero como no sabemos que demora va a tener el arma por que le van a aumentar la velocidad.... dejemos la redundancia por las dudas
 			if ((movimientos->back() == ARMA) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
 				nuevoEstado.accion = ARMA_ARROJABLE;
-				unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 			}
 
 			if (movimientos->back() == DEFENSA) {
@@ -925,25 +821,20 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 			if (movimientos->back() == G_BAJO){
 				nuevoEstado.accion = GOLPE_BAJO;
-				unCuerpo->setDemora(35);
-				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 			}
 			if (movimientos->back() == P_ALTA) {
 				nuevoEstado.accion = PATADA_ALTA;
-
-				unCuerpo->setDemora(35);
-				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 			}
 
 			if (movimientos->back() == P_BAJA) {
 				nuevoEstado.accion = PATADA_BAJA;
-				unCuerpo->setDemora(15);
-				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 			}
 			if (movimientos->back() == G_ALTO){
 				nuevoEstado.accion = GOLPE_ALTO1;
-				unCuerpo->setDemora(35);
-				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 			}
 
 		}
@@ -1168,10 +1059,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		//**********************************************************
 		// resuelve proyeciles
 
-		if ((nuevoEstado.accion == ARMA_ARROJABLE) && (unCuerpo->getSensoresProyectil().at(0)->estaActivo())){
-			unCuerpo->getSensoresProyectil().at(0)->moverProyectil(VELOCIDADPROYECTIL);
-		}
-
+		
 
 		if ((proyectilUno->estaActivo()) && (proyectilDos->estaActivo())){
 			resolverChoque(unCuerpo, elOtroCuerpo, proyectilUno, proyectilDos, invertido);
@@ -1250,6 +1138,13 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		unCuerpo->getSensoresProyectil().at(0)->resetearPosicionInicial();
 		unCuerpo->getSensoresProyectil().at(0)->desactivarSensor();
 	}
+
+	//TODO aca tiene que ser estado anterior********
+	if ((nuevoEstado.accion == ARMA_ARROJABLE) && (unCuerpo->getSensoresProyectil().at(0)->estaActivo())){
+		unCuerpo->getSensoresProyectil().at(0)->moverProyectil(VELOCIDADPROYECTIL);
+	}
+
+
 
 	unCuerpo->SetSensorActivoStr(nuevoEstado);
 	unCuerpo->setEstadoAnterior(nuevoEstado);
