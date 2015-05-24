@@ -97,26 +97,234 @@ bool Mundo::hayInterseccion(std::pair<float, float> unaPosicion, float unAncho, 
 
 
 
-// //esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada 
-ESTADO Mundo::ResolverColisiones(float difTiempo, Cuerpo *unCuerpo, ESTADO nuevoEstado){
+ESTADO Mundo::ResolverColisiones(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido, ESTADO nuevoEstado){
 	//si llego aca es por que hay una colision.
-	// 4 cconsideraciones, me golpearon??,  con que fue?, que estado tengo? por que en base a eso determino que golpeado soy
-	// estoy en modo defensa???
-	return nuevoEstado;
 
-}
+	ESTADO estadoanterior = unCuerpo->getEstadoAnterior();
 
-void Mundo::moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido){
-	if (invertido){
-		if (unCuerpo->getEstado().movimiento != CAMINARIZQ)
-		unCuerpo->mover(DISTANCIA);
-		elOtroCuerpo->mover(-DISTANCIA);
+	std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
+	std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
+
+	std::pair<float, float> posAbsSensoresOtroCuerpo;
+	std::pair<float, float> posAbsSensoresCuerpo;
+
+	//si otrocuerpo esta haciendo algo y yo no estoy golpeado, evaluo
+	if ((elOtroCuerpo->getEstado().accion != SIN_ACCION) && estadoanterior.golpeado == NOGOLPEADO){
+		for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
+			for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
+				ManejadorULogicas manejadorUnidades;
+				posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), sensoresOtroCuerpo->at(j)->getAlto(), !invertido);
+				posAbsSensoresCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(i)->getPosicion(), unCuerpo, sensoresCuerpo->at(i)->getAncho(), sensoresCuerpo->at(i)->getAlto(), invertido);
+
+
+				if ((sensoresCuerpo->at(i)->getHitbox()) && !(sensoresOtroCuerpo->at(j)->getHitbox()) && hayInterseccion(posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(i)->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
+					//ERROR ESTAS ENTRANDO MILES DE VECES
+
+					if (nuevoEstado.golpeado == NOGOLPEADO){
+						nuevoEstado = ResolverGolpes(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
+						break;
+					}
+					//unCuerpo->notificarObservadores(nuevoEstado);
+				}
+			}
+		}
 	}
-	if (unCuerpo->getEstado().movimiento != CAMINARDER)
-	unCuerpo->mover(-DISTANCIA);
-	elOtroCuerpo->mover(DISTANCIA);
+
+	return nuevoEstado;
 }
 
+
+//determina si mi personaje es golpeado o no
+// ya hubo colision, en caso de ser golpeado tambien calculo la vitalidad
+// 4 cconsideraciones,   con que me golpearon?, que estado tengo? por que en base a eso determino que golpeado soy
+// estoy en modo defensa???
+ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido, ESTADO nuevoEstado){
+
+	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
+	ESTADO estadoEnemigo = elOtroCuerpo->getEstado();
+
+	if (!unCuerpo->estaEnPiso()){ //si esta en el aire no tiene defensa,
+
+		if (estadoEnemigo.accion == GANCHO || (estadoEnemigo.accion == PATADA_ALTA && !(elOtroCuerpo->estaEnPiso()))){
+
+			nuevoEstado.golpeado = GOLPEADO;
+			//aca hay que aplicar un impulso
+			if (!unCuerpo->EstaFrenado()){
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
+
+			}
+			else{
+				unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
+
+			}
+			unCuerpo->setDemora(300);
+		}
+		else if (estadoEnemigo.accion != GUARDIA){ // aca como no lo arroja el impulso tiene que ser un toque
+			nuevoEstado.golpeado = GOLPEADO;
+
+
+			if (!unCuerpo->EstaFrenado()){
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X / 10, SALTO_Y / 10));
+
+			}
+			else{
+				unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y / 10));
+
+			}
+
+
+
+
+			unCuerpo->setDemora(300);
+		}
+
+	}
+	else{ // esta en piso o agachado
+
+		if (estadoAnterior.movimiento == AGACHADO){ //no estoy teniendo en cuenta si son golpes fuertes o ganchos......
+
+			if (estadoAnterior.accion == GUARDIA){ //poca demora, poco desplazamiento
+				nuevoEstado.accion = GUARDIA;
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X / 10, 0));
+				unCuerpo->setDemora(200);
+			}
+			else{
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, 0));
+				unCuerpo->setDemora(300);
+
+			}
+			nuevoEstado.movimiento = AGACHADO;
+			nuevoEstado.golpeado = GOLPEADO;
+
+		}
+
+		else // caso el tipo en el piso
+		{
+
+
+
+			if (estadoAnterior.accion == GUARDIA){ //poca demora, poco desplazamiento
+				nuevoEstado.accion = GUARDIA;
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X / 10, 0));
+				unCuerpo->setDemora(10);
+			}
+			else{// no esta en guardia analizar golpes
+
+				if (estadoEnemigo.accion == GANCHO || (estadoEnemigo.accion == PATADA_ALTA && (!(elOtroCuerpo->estaEnPiso())))){
+
+					nuevoEstado.golpeado = GOLPEADO;
+					//aca hay que aplicar un impulso
+					if (!unCuerpo->EstaFrenado()){
+						unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
+
+					}
+					else{
+						unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
+
+					}
+					unCuerpo->setDemora(300);
+				}
+				else if (estadoEnemigo.accion != GUARDIA){ // aca como no lo arroja el impulso tiene que ser un toque
+					nuevoEstado.golpeado = GOLPEADO;
+					if (!unCuerpo->EstaFrenado()){
+						unCuerpo->aplicarImpulso(vector2D(10, 10));
+
+					}
+					else{
+						unCuerpo->aplicarImpulso(vector2D(0, 10));
+
+					}
+
+					unCuerpo->setDemora(300);
+				}
+
+			}
+
+		}
+
+
+
+
+	}
+
+
+
+
+
+
+	//****************************************************************
+	// evaluo la vitalidad
+	//************************************************************************
+	//xerror hay que arreglar esto por que se cambio la logica.
+	// aca uncuerpo es el golpeado entonces se le tiene que descontar a uncuerpo
+	if ((nuevoEstado.golpeado == GOLPEADO) && (estadoAnterior.golpeado == NOGOLPEADO)){
+
+		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado())) == REINICIAR){
+			nuevoEstado.golpeado = FALLECIDO;
+			std::string mensaje = "Gano personaje " + elOtroCuerpo->getRefPersonaje()->getNombre();
+			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_DEBUG);
+		}
+	}
+
+
+	return nuevoEstado;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ESTADO Mundo::moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido, std::vector<MOV_TIPO>* movimientos, ESTADO nuevoEstado) {
+
+
+	if (invertido){
+		if (unCuerpo->getEstado().movimiento != CAMINARIZQ){
+			nuevoEstado.movimiento = CAMINARDER;
+
+			if ((movimientos->back() == DEFENSA) || (movimientos->back() == DEFENSA_AGACHADO)){
+				unCuerpo->mover(-0.1f);
+				elOtroCuerpo->mover(0.1f);
+			}
+
+			else{
+				unCuerpo->mover(DISTANCIA);
+				elOtroCuerpo->mover(-DISTANCIA);
+			}
+		}
+	}
+	else{
+		if (unCuerpo->getEstado().movimiento != CAMINARDER){
+			nuevoEstado.movimiento = CAMINARIZQ;
+
+			if ((movimientos->back() == DEFENSA) || (movimientos->back() == DEFENSA_AGACHADO)){
+				unCuerpo->mover(0.1f);
+				elOtroCuerpo->mover(-0.1f);
+			}
+			else{
+				unCuerpo->mover(-DISTANCIA);
+				elOtroCuerpo->mover(DISTANCIA);
+			}
+
+		}
+	}
+
+
+	return nuevoEstado;
+}
+
+
+/*
 //logica de saltos
 //el tipo en el aire -----> mantenerle el estado de salto, sacarle velocidad si se esta por chocar y la logica de bordes
 //el tipo tocando piso recien -->chequear superposicion
@@ -161,6 +369,75 @@ ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCu
 	return nuevoEstado;
 }
 
+*/
+
+
+//logica de saltos
+//el tipo en el aire -----> mantenerle el estado de salto, sacarle velocidad si se esta por chocar y la logica de bordes
+//el tipo tocando piso recien -->chequear superposicion
+ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<MOV_TIPO>* movimientos){
+
+	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
+
+
+	// si no está en el piso siente la gravedad
+
+	//if (!elOtroCuerpo->estaEnPiso()){
+	//if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido)){
+	//if ((unCuerpo->getEstado().accion == SIN_ACCION) && (elOtroCuerpo->getEstado().accion != SIN_ACCION) && (elOtroCuerpo->getEstado().accion != GUARDIA))
+	//ResolverGolpiza(elOtroCuerpo, unCuerpo, invertido);
+	//}
+	//}
+
+
+
+	// si no esta en piso, mantenele el movimiento anterior
+	if (!unCuerpo->estaEnPiso()){
+		nuevoEstado.movimiento = estadoAnterior.movimiento;  //si el flaco metio una accion en el aire, esta tiene una demora mas chica aplicada que es la que lo mantiene
+		//si fue golpeado en el aire antes deberia mantenerlo una demora y si fue recien nose....
+		if (unCuerpo->EstaFrenado()){
+			//aca tiene que setear velocidad 0 solo si intenta irse para el lado del fin..... para el otro deberia dejarte
+			unCuerpo->SetVelocidadX(0.0f);
+		}
+	}
+
+	// si el flaco acaba de llegar al piso y estaba haciendo algo en el aire pero no esta golpeado entonces suspendele la accion cuando llega al piso (evito patada voladora en piso)
+	if (unCuerpo->estaEnPiso() && (estadoAnterior.movimiento == SALTO || estadoAnterior.movimiento == SALTODIAGDER || estadoAnterior.movimiento == SALTODIAGIZQ)){
+
+		if ((estadoAnterior.accion != SIN_ACCION) && nuevoEstado.golpeado == NOGOLPEADO){
+			unCuerpo->setDemora(0);
+		}
+
+	}
+	/*
+	if ((unCuerpo->getVelocidad().x == 0)){
+	nuevoEstado = estadoAnterior;
+	if (estadoAnterior.movimiento == SALTO)
+	nuevoEstado.movimiento = SALTO;
+	}
+	else if (unCuerpo->getVelocidad().x > 0)
+	nuevoEstado.movimiento = SALTODIAGDER;
+	else
+	nuevoEstado.movimiento = SALTODIAGIZQ;
+	unCuerpo->sumarVelocidad(gravedad * difTiempo);
+	if (unCuerpo->EstaFrenado()){
+	unCuerpo->SetVelocidadX(0.0f);
+	}*/
+
+
+
+
+
+
+	return nuevoEstado;
+}
+
+
+
+
+
+
+/*
 ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<MOV_TIPO>* movimientos)
 {
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
@@ -352,6 +629,354 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 	return nuevoEstado;
 }
 
+
+*/
+
+
+ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<MOV_TIPO>* movimientos)
+{
+	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
+	Sprite* elSprite = unCuerpo->getSprite();
+
+
+
+	//
+	//*************************************************************************************************//
+	//                                EL EL AIRE SOLO SE PUEDEN REALIZAR 4 GOLPES
+	//
+	// SEBA, EVALUA QUE SPRITE APLICAR dependiendo de si estado.movimiento es (SALTO) o  (SALTODIAGDER SALTODIAGIZQ)
+	//************************************************************************************************//
+	if (!unCuerpo->estaEnPiso())
+	{
+
+
+		if (movimientos->back() == G_BAJO){
+			nuevoEstado.accion = GOLPE_BAJO;
+			unCuerpo->setDemora(25);
+			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
+		if (movimientos->back() == P_ALTA) {
+			nuevoEstado.accion = PATADA_ALTA;
+
+			unCuerpo->setDemora(25);
+			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
+
+		if (movimientos->back() == P_BAJA) {
+			nuevoEstado.accion = PATADA_BAJA;
+			unCuerpo->setDemora(25);
+			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
+		if (movimientos->back() == G_ALTO){
+			nuevoEstado.accion = GOLPE_ALTO1;
+			unCuerpo->setDemora(25);
+			//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+		}
+
+
+	}
+
+
+
+
+
+	//*************************************************************************************************//
+	//                               ESTA EN EL PISO, EVALUO AGACHADO Y PARADO
+	//
+	//************************************************************************************************//
+	else{
+
+		//*************************************************************************************************//
+		//                            CASO TIPO AGACHADO
+		//
+		//************************************************************************************************//
+		if (estadoAnterior.movimiento == AGACHADO)
+		{
+
+			if (movimientos->back() == ABAJO) {
+				nuevoEstado.movimiento = AGACHADO;
+			}
+
+			if (movimientos->back() == DEFENSA_AGACHADO){
+				nuevoEstado.movimiento = AGACHADO;
+				nuevoEstado.accion = GUARDIA;
+				unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+
+			//*************************************************************************************************//
+			//                                GOLPES AGACHADO
+			//************************************************************************************************//
+
+			if (movimientos->back() == G_ABAJO){
+
+				if (estadoAnterior.accion != GOLPE_BAJO){
+					nuevoEstado.movimiento = AGACHADO;
+					nuevoEstado.accion = GOLPE_BAJO;
+					unCuerpo->setDemora(35);
+					//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				}
+			}
+			if (movimientos->back() == P_ALTA_ABAJO) {
+
+				if (estadoAnterior.accion != PATADA_ALTA){
+
+					nuevoEstado.movimiento = AGACHADO;
+					nuevoEstado.accion = PATADA_ALTA;
+
+					unCuerpo->setDemora(35);
+					//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				}
+			}
+
+			if (movimientos->back() == P_BAJA_ABAJO) {
+
+				if (estadoAnterior.accion != PATADA_BAJA){
+					nuevoEstado.movimiento = AGACHADO;
+					nuevoEstado.accion = PATADA_BAJA;
+					unCuerpo->setDemora(35);
+					//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				}
+			}
+			if (movimientos->back() == G_GANCHO){
+
+				if (estadoAnterior.accion != GANCHO){
+					nuevoEstado.movimiento = AGACHADO;
+					nuevoEstado.accion = GANCHO;
+					unCuerpo->setDemora(35);
+					//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				}
+			}
+
+
+
+
+
+
+		}
+
+		//*************************************************************************************************//
+		//                            CASO TIPO PARADO
+		//
+		//************************************************************************************************//
+		else
+		{
+
+			//DESPLAZAMIENTOS HORIZONTALES
+			if (unCuerpo->EstaFrenado()){
+				if ((movimientos->back() == DER)){
+					nuevoEstado.movimiento = CAMINARDER;
+				}
+				if ((movimientos->back() == IZQ)){
+					nuevoEstado.movimiento = CAMINARIZQ;
+				}
+			}
+			else{
+				//ESTO es la peor animalada escrita desde que empece la facultad.....
+
+				if ((movimientos->back() == DER)){
+					nuevoEstado.movimiento = CAMINARDER;
+					if (!(invertido)){
+						if (!unCuerpo->EstaSuperpuesto()){
+							unCuerpo->mover(DISTANCIA);
+						}
+						else{
+							if (!otroCuerpo->EstaFrenado()){
+								if (!otroCuerpo->getEstado().accion == GUARDIA){
+									unCuerpo->mover(DISTANCIA);
+									otroCuerpo->mover(DISTANCIA);
+								}
+								else{
+									unCuerpo->mover(DISTANCIA / 10);
+									otroCuerpo->mover(DISTANCIA / 10);
+
+								}
+							}
+						}
+					}
+					else
+						unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
+				}
+
+
+
+
+				if ((movimientos->back() == IZQ)){
+					nuevoEstado.movimiento = CAMINARIZQ;
+					if (otroCuerpo->getPosicion().x > unCuerpo->getPosicion().x){
+						if (!unCuerpo->EstaSuperpuesto()){
+							unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
+						}
+						else{
+							if (!otroCuerpo->EstaFrenado()){
+								if (!otroCuerpo->getEstado().accion == GUARDIA){
+									unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
+									otroCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
+								}
+								else{
+									unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA / 10);
+									otroCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA / 10);
+
+								}
+							}
+						}
+					}
+					else
+						if (!unCuerpo->EstaSuperpuesto()){
+							unCuerpo->mover(-DISTANCIA);
+						}
+						else{
+							if (!otroCuerpo->EstaFrenado()){
+								if (!otroCuerpo->getEstado().accion == GUARDIA){
+									unCuerpo->mover(-DISTANCIA);
+									otroCuerpo->mover(-DISTANCIA);
+								}
+								else{
+									unCuerpo->mover(-DISTANCIA / 10);
+									otroCuerpo->mover(-DISTANCIA / 10);
+
+								}
+							}
+						}
+
+				}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			}
+
+
+			//else
+			//	unCuerpo->mover(-DISTANCIA);
+			//}
+
+
+
+
+
+
+
+
+			//SALTOS
+
+			if (movimientos->back() == ARRIBA) {
+				nuevoEstado.movimiento = SALTO;
+				unCuerpo->aplicarImpulso(vector2D(0.0f, SALTO_Y));
+			}
+
+
+			if (movimientos->back() == SALTODER){
+				nuevoEstado.movimiento = SALTODIAGDER;
+				unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y));
+			}
+
+			if (movimientos->back() == SALTOIZQ){
+				nuevoEstado.movimiento = SALTODIAGIZQ;
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
+			}
+
+			//AGACHARSE
+
+			if (movimientos->back() == ABAJO){
+				nuevoEstado.movimiento = AGACHADO;
+			}
+
+			if (movimientos->back() == DEFENSA_AGACHADO) { //ESTO ESTA ASI A PROPOSITO
+				nuevoEstado.movimiento = AGACHADO;
+			}
+
+			// GOLPES
+
+
+			// aca no deberia ir (! arma arrojable) por que deberia tener una demora que le impide entrar a este resolver
+			// pero como no sabemos que demora va a tener el arma por que le van a aumentar la velocidad.... dejemos la redundancia por las dudas
+			if ((movimientos->back() == ARMA) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
+				nuevoEstado.accion = ARMA_ARROJABLE;
+				unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+
+			if (movimientos->back() == DEFENSA) {
+				//nuevoEstado.movimiento = PARADO;
+				nuevoEstado.accion = GUARDIA;
+			}
+
+
+
+			if (movimientos->back() == G_BAJO){
+				nuevoEstado.accion = GOLPE_BAJO;
+				unCuerpo->setDemora(35);
+				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+			if (movimientos->back() == P_ALTA) {
+				nuevoEstado.accion = PATADA_ALTA;
+
+				unCuerpo->setDemora(35);
+				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+
+			if (movimientos->back() == P_BAJA) {
+				nuevoEstado.accion = PATADA_BAJA;
+				unCuerpo->setDemora(15);
+				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+			if (movimientos->back() == G_ALTO){
+				nuevoEstado.accion = GOLPE_ALTO1;
+				unCuerpo->setDemora(35);
+				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+			}
+
+		}
+
+
+	}
+
+
+
+	/*
+
+	}
+	else{*/
+	//esto hace que no pueda saltar en el aire
+	/*if (estadoAnterior.movimiento == SALTO || estadoAnterior.movimiento == SALTODIAGDER || estadoAnterior.movimiento == SALTODIAGIZQ)
+	{
+	unCuerpo->setEstadoAnterior(nuevoEstado);
+	//aca frutie dividiendo por 20 por que necesitaba una demora chiquitita
+	unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()) / 10);
+	}*/
+
+
+
+	/*
+
+	}*/
+
+
+	//}
+
+	return nuevoEstado;
+}
+
 bool Mundo::haySuperposicion(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido)
 {
 	std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
@@ -463,6 +1088,7 @@ void Mundo::resolverChoque(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proye
 
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
+	ESTADO estadoanterior = unCuerpo->getEstadoAnterior();
 	ESTADO nuevoEstado;  //defino estado por defecto Si no es golpeado, si no vas a hacer nada y si no estas en el aire, devuelve esto
 	nuevoEstado.movimiento = PARADO;
 	nuevoEstado.accion = SIN_ACCION;
@@ -477,65 +1103,149 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		elOtroCuerpo = Cuerpos.at(0);
 	}
 
+
 	Sensor* proyectilUno = unCuerpo->getSensoresProyectil().at(0);
 	Sensor* proyectilDos = elOtroCuerpo->getSensoresProyectil().at(0);
 
 	unCuerpo->setposProyectilAnterior(unCuerpo->getSensoresProyectil().at(0)->getPosicion().first);
 
+
+	/////////////////////////////////////////////////////////////////////////////
 	bool invertido;
 
 	if (elOtroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
 		invertido = false;
 	else
 		invertido = true;
+	//////////////////////////////////////////////////////////////////////////////
 
 	std::vector<MOV_TIPO> movimientos = unCuerpo->getControlador()->getMovimientos();
+	std::vector<MOV_TIPO> movimientosOtro = elOtroCuerpo->getControlador()->getMovimientos();
 
-	if (unCuerpo->EstaSuperpuesto()){
-		moverCuerpos(unCuerpo, elOtroCuerpo, invertido);
+
+	//la superposicion se da:
+	// al final de un salto , al final de la caida de un golpe y la activa el metodo resolver saltos
+	// o cuando estan los 2 en el aire saltando, en este caso deberia setearse velocidad.x ==0 para que no se toquen
+	//
+	if (unCuerpo->EstaSuperpuesto() && !(unCuerpo->estaEnPiso() && elOtroCuerpo->estaEnPiso())){
+
+
+		nuevoEstado = Mundo::moverCuerpos(unCuerpo, elOtroCuerpo, invertido, &movimientosOtro, nuevoEstado);
+
+		//mejorar esto
+		if (invertido){
+			if (unCuerpo->getEstado().movimiento != CAMINARIZQ){
+				nuevoEstado = unCuerpo->getEstadoAnterior();
+
+			}
+			//nuevoEstado.movimiento = CAMINARIZQ;
+
+		}
+
+		else{
+			if (unCuerpo->getEstado().movimiento != CAMINARDER){
+				nuevoEstado = unCuerpo->getEstadoAnterior();
+			}
+
+			//nuevoEstado.movimiento = CAMINARDER;
+		}
+
 	}
 	else{
+		// NO HAY SUPERPOSICION, LO SIGUIENTE A RESOLVER ES LA COLISION
+
+		//si el tipo ya esta golpeado o el otro no vuelvo a evaluar
+		// es sucio pero es una optimizacion, sino aca va a entrar siempre para el otro cuerpo no golpeado
+		if (estadoanterior.golpeado != GOLPEADO && elOtroCuerpo->getEstado().golpeado != GOLPEADO){
+			nuevoEstado = Mundo::ResolverColisiones(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
+		}
+
+		/*
+		if ((unCuerpo->getEstado().accion != SIN_ACCION) || (elOtroCuerpo->getEstado().accion != SIN_ACCION))
+		ResolverGolpiza(unCuerpo, elOtroCuerpo, invertido);
+		*/
+
+		//**********************************************************
+		// resuelve proyeciles
+
+		if ((nuevoEstado.accion == ARMA_ARROJABLE) && (unCuerpo->getSensoresProyectil().at(0)->estaActivo())){
+			unCuerpo->getSensoresProyectil().at(0)->moverProyectil(VELOCIDADPROYECTIL);
+		}
+
+
+		if ((proyectilUno->estaActivo()) && (proyectilDos->estaActivo())){
+			resolverChoque(unCuerpo, elOtroCuerpo, proyectilUno, proyectilDos, invertido);
+		}
+		else {
+			if (proyectilUno->estaActivo()){
+				ResolverArma(unCuerpo, elOtroCuerpo, proyectilUno, invertido);
+			}
+			if (proyectilDos->estaActivo()){
+				ResolverArma(elOtroCuerpo, unCuerpo, proyectilDos, invertido);
+			}
+		}
+
+		//*************************************************************
+
+
+
+
+
+
+		//esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada
+
+		// PASO 3 RESOLVEMOS LA LOGICA DE SALTOS
+
+		//ahora hay que resolver la logica de altura
+		//el tipo puede estar saltando, pudo haber sido golpeado, pude estar superponiendose en el aire
+		//tanto golpeado como golpeando no nos importa por que analizamos en principio la parte de .movimiento
+		// al llegar al piso primero suspender accion de golpe por si esta con una patada boladora
+		// y chequear superposicion
+
+		nuevoEstado = Mundo::ResolverSaltos(difTiempo, unCuerpo, elOtroCuerpo, nuevoEstado, invertido, &movimientos);
+
+
+		//AHORA HAY QUE ANALIZAR SI HAY DEMORA, LA DEMORA PUEDE SER POR UN UN ESTADO ANTERIOR O POR QUE SE APLICO EN EL ESTADO ACTUAL UN GOLPEADO
+		//casos:
+		//llevando a cabo una accion
+		// estoy golpeado
+		// me acaban de golpear
+
+		//si hay demora
 		if (unCuerpo->HayDemora())
 		{
-			unCuerpo->DisminuirDemora();
-			nuevoEstado = unCuerpo->getEstadoAnterior();
+
+
+			if ((!(nuevoEstado.golpeado == GOLPEADO && unCuerpo->getEstadoAnterior().golpeado == NOGOLPEADO)) && nuevoEstado.golpeado != FALLECIDO){
+				unCuerpo->DisminuirDemora();
+				nuevoEstado = unCuerpo->getEstadoAnterior();
+			} //en el caso de que se cumpla, el tipo sale de aca con el estado actual que es golpeado!
+			//si estadoactual=golpeado y estado anterior no lo es no disminuir
+
 		}
+
+
+
 		else
-		{
-			if(unCuerpo->estaEnPiso())
+		{//no hay demora,// si llega aca, no esta golpeado y no esta haciendo nada (y voy a evaluar si ahora si va a hacer algo (puede estar en el aire o en piso)
+
 			nuevoEstado = Mundo::ResolverAcciones(difTiempo, unCuerpo, elOtroCuerpo, nuevoEstado, invertido, &movimientos);
-			else
-			nuevoEstado = Mundo::ResolverSaltos(difTiempo, unCuerpo, elOtroCuerpo, nuevoEstado, invertido, &movimientos);
+
+
 		}
-	}
 
-	if ((unCuerpo->getEstado().accion != SIN_ACCION) || (elOtroCuerpo->getEstado().accion != SIN_ACCION))
-		ResolverGolpiza(unCuerpo, elOtroCuerpo, invertido);
 
-	if ((nuevoEstado.accion == ARMA_ARROJABLE) && (unCuerpo->getSensoresProyectil().at(0)->estaActivo())){
-		unCuerpo->getSensoresProyectil().at(0)->moverProyectil(VELOCIDADPROYECTIL);
-	}
+	} //cierra el else
 
-	
-	if ((proyectilUno->estaActivo()) && (proyectilDos->estaActivo())){
-		resolverChoque(unCuerpo, elOtroCuerpo, proyectilUno, proyectilDos,invertido);
-	}
-	else {
-		if (proyectilUno->estaActivo()){
-			ResolverArma(unCuerpo, elOtroCuerpo, proyectilUno, invertido);
-		}
-		if (proyectilDos->estaActivo()){
-			ResolverArma(elOtroCuerpo, unCuerpo, proyectilDos, invertido);
-		}
-	}
-
-	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION) && (elOtroCuerpo->getEstado().accion == SIN_ACCION)){
+	//Si estan superpuestos y los 2 sin ninguna accion, salvo guardia y caminando
+	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION || unCuerpo->getEstado().accion == GUARDIA || unCuerpo->getEstado().movimiento == CAMINARDER || unCuerpo->getEstado().movimiento == CAMINARIZQ) && (elOtroCuerpo->getEstado().accion == SIN_ACCION || elOtroCuerpo->getEstado().accion == GUARDIA || elOtroCuerpo->getEstado().movimiento == CAMINARIZQ || elOtroCuerpo->getEstado().movimiento == CAMINARDER)){
 		unCuerpo->Superponer();
 	}
 	else{
 		unCuerpo->Separados();
 	}
-	
+
+
 	if (!(nuevoEstado.accion == ARMA_ARROJABLE)){
 		unCuerpo->getSensoresProyectil().at(0)->resetearPosicionInicial();
 		unCuerpo->getSensoresProyectil().at(0)->desactivarSensor();
@@ -543,9 +1253,13 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 	unCuerpo->SetSensorActivoStr(nuevoEstado);
 	unCuerpo->setEstadoAnterior(nuevoEstado);
-	vector2D unaVelocidad = unCuerpo->getVelocidad();
-	unCuerpo->sumarPosicion(unaVelocidad * difTiempo);
-	unCuerpo->sumarVelocidad(gravedad * difTiempo);
+
+
+	// velocidades
+	vector2D unaVelocidad = unCuerpo->getVelocidad();  //obtengo la velocidad actual
+	unCuerpo->sumarPosicion(unaVelocidad * difTiempo); //cambio la posicion
+	unCuerpo->sumarVelocidad(gravedad * difTiempo); // aplico gravedad
+
 	return nuevoEstado;
 }
 
