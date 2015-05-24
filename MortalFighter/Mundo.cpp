@@ -518,7 +518,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 						else{
 							if (!otroCuerpo->EstaFrenado()){
 								if (!otroCuerpo->getEstado().accion == GUARDIA){
-									unCuerpo->mover(DISTANCIA);
+								unCuerpo->mover(DISTANCIA);
 									otroCuerpo->mover(DISTANCIA);
 								}
 								else{
@@ -538,10 +538,42 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 				if ((movimientos->back() == IZQ)){
 					nuevoEstado.movimiento = CAMINARIZQ;
-					if (otroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
-						unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
+					if (otroCuerpo->getPosicion().x > unCuerpo->getPosicion().x){
+						if (!unCuerpo->EstaSuperpuesto()){
+							unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
+						}
+						else{
+							if (!otroCuerpo->EstaFrenado()){
+								if (!otroCuerpo->getEstado().accion == GUARDIA){
+									unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
+									otroCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
+								}
+								else{
+									unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA / 10);
+									otroCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA / 10);
+
+								}
+							}
+						}
+					}
 					else
-						unCuerpo->mover(-DISTANCIA);
+						if (!unCuerpo->EstaSuperpuesto()){
+							unCuerpo->mover(-DISTANCIA);
+						}
+						else{
+							if (!otroCuerpo->EstaFrenado()){
+								if (!otroCuerpo->getEstado().accion == GUARDIA){
+									unCuerpo->mover(-DISTANCIA);
+									otroCuerpo->mover(-DISTANCIA);
+								}
+								else{
+									unCuerpo->mover(-DISTANCIA/ 10);
+									otroCuerpo->mover(-DISTANCIA / 10);
+
+								}
+							}
+						}
+
 				}
 
 
@@ -864,8 +896,8 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 
 
-	//Si estan superpuestos y los 2 sin ninguna accion
-	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION || unCuerpo->getEstado().accion == GUARDIA) && (elOtroCuerpo->getEstado().accion == SIN_ACCION || elOtroCuerpo->getEstado().accion == GUARDIA)){
+	//Si estan superpuestos y los 2 sin ninguna accion, salvo guardia y caminando
+	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION || unCuerpo->getEstado().accion == GUARDIA || unCuerpo->getEstado().movimiento == CAMINARDER || unCuerpo->getEstado().movimiento == CAMINARIZQ) && (elOtroCuerpo->getEstado().accion == SIN_ACCION || elOtroCuerpo->getEstado().accion == GUARDIA || elOtroCuerpo->getEstado().movimiento == CAMINARIZQ || elOtroCuerpo->getEstado().movimiento == CAMINARDER)){
 		unCuerpo->Superponer();
 	}
 	else{
