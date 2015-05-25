@@ -237,13 +237,6 @@ void Vista::actualizar(){
 
 	float anchoEscenario = Parser::getInstancia().getEscenario().getAncho();
 
-	// Correcion al desplazamiento del personaje que no sobrepase el
-	// escenario con su ancho.
-	xPjUno *= anchoEscenario / (anchoEscenario + anchoPjUno + 4);
-
-	// Correcion al desplazamiento del personaje que no sobrepase el
-	// escenario con su ancho.
-	xPjDos *= anchoEscenario / (anchoEscenario + anchoPjDos + 4);
 
 	//Se limpia la pantalla
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);

@@ -85,7 +85,9 @@ bool Cuerpo::HayDemora()
 
 bool Cuerpo::estaEnBorde()
 {
-	if (posicion.x < Parser::getInstancia().getEscenario().getAncho())
+	// nacho: chequea el borde considerando ancho del personaje
+	// el +2 es para que no se vea una linea en el limite
+	if (posicion.x + getRefPersonaje()->getAncho()+2 < Parser::getInstancia().getEscenario().getAncho())
 		return false;
 
 	return true;
@@ -108,7 +110,9 @@ void Cuerpo::sumarPosicion(const vector2D& unaPosicion)
 
 	// que no se mueva más allá del borde
 	if (estaEnBorde())
-		posicion.x = Parser::getInstancia().getEscenario().getAncho();
+		// nacho: ubica en el borde considerando su ancho
+		// el -2 es para que no se vea una linea en el limite
+		posicion.x = Parser::getInstancia().getEscenario().getAncho() - getRefPersonaje()->getAncho() -2;
 	// que no se mueva menos del cero
 	if (posicion.x <= 0)
 		posicion.x = 0;
