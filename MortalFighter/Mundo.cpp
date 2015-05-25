@@ -545,12 +545,13 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 				if ((movimientos->back() == DER)){
 					nuevoEstado.movimiento = CAMINARDER;
+
 					if (!(invertido)){
 						if (!unCuerpo->EstaSuperpuesto()){
 							unCuerpo->mover(DISTANCIA);
 						}
-						else{
-							if (!otroCuerpo->EstaFrenado()){
+						else{//esta superpueso
+							if (!otroCuerpo->estaEnBorde()){
 								if (!otroCuerpo->getEstado().accion == GUARDIA){
 									unCuerpo->mover(DISTANCIA);
 									otroCuerpo->mover(DISTANCIA);
@@ -562,12 +563,10 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 								}
 							}
 						}
-					}
+					}//no esta invertido
 					else
 						unCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
 				}
-
-
 
 
 				if ((movimientos->back() == IZQ)){
@@ -577,7 +576,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 							unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
 						}
 						else{
-							if (!otroCuerpo->EstaFrenado()){
+							if (!otroCuerpo->estaEnBorde()){
 								if (!otroCuerpo->getEstado().accion == GUARDIA){
 									unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
 									otroCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
@@ -590,12 +589,12 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 							}
 						}
 					}
-					else
+					else{
 						if (!unCuerpo->EstaSuperpuesto()){
 							unCuerpo->mover(-DISTANCIA);
 						}
 						else{
-							if (!otroCuerpo->EstaFrenado()){
+							if (!otroCuerpo->estaEnBorde()){
 								if (!otroCuerpo->getEstado().accion == GUARDIA){
 									unCuerpo->mover(-DISTANCIA);
 									otroCuerpo->mover(-DISTANCIA);
@@ -606,14 +605,11 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 								}
 							}
-						}
+						}//cierra else
 
+					}
 				}
-
-
-
 			}
-
 
 
 			//SALTOS
