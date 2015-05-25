@@ -60,7 +60,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 
 		defCuerpo personaje1 = defCuerpo();
-		personaje1.posicion = vector2D((Parser::getInstancia().getEscenario().getAncho() / 2.3), (Parser::getInstancia().getEscenario().getYPiso()));
+		// nacho: constantes truchas (-90) para que no se explote cuando les pones ancho 80 a los dos personajes
+		personaje1.posicion = vector2D((-90 + Parser::getInstancia().getEscenario().getAncho() / 2), (Parser::getInstancia().getEscenario().getYPiso()));
 
 		Cuerpo *unCuerpo = new Cuerpo(personaje1, controladorUno);
 		unCuerpo->recibeObservador(Parser::getInstancia().getPelea()->getPersonaje1());
@@ -70,7 +71,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		unMundo->agregarCuerpo(unCuerpo);
 
 		defCuerpo personaje2 = defCuerpo();
-		personaje2.posicion = vector2D((float)(Parser::getInstancia().getEscenario().getAncho() / 1.8), (Parser::getInstancia().getEscenario().getYPiso()));
+		// nacho: constantes truchas (10) para que no se explote cuando les pones ancho 80 a los dos personajes
+		personaje2.posicion = vector2D((float)(10 + Parser::getInstancia().getEscenario().getAncho() / 2), (Parser::getInstancia().getEscenario().getYPiso()));
 
 		Cuerpo *otroCuerpo = new Cuerpo(personaje2, controladorDos);
 		Personaje* unPersonaje = Parser::getInstancia().getPelea()->getPersonaje2();
