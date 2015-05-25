@@ -205,25 +205,25 @@ int Personaje::descontarVida(ESTADO estadoPj, ESTADO estadoPj2)
 	if (estadoPj.accion == GUARDIA){
 		switch (estadoPj2.accion){
 		case PATADA_ALTA:
-			vida = vida - 5;
+			vida = vida - 2;
 			break;
 		case PATADA_BAJA:
-			vida = vida - 5;
+			vida = vida - 2;
 			break;
 		case GOLPE_BAJO:
-			vida = vida - 3;
+			vida = vida - 2;
 			break;
 		case GOLPE_ALTO1:
-			vida = vida - 3;
+			vida = vida - 2;
 			break;
 		case GANCHO:
-			vida = vida - 10;
+			vida = vida - 4;
 			break;
 		case ARMA_ARROJABLE:
-			vida = vida - 10;
+			vida = vida - 2;
 			break;
 		default:
-			vida = vida - 5;
+			vida = vida - 2;
 			break;
 		}
 	}
@@ -239,6 +239,9 @@ int Personaje::descontarVida(ESTADO estadoPj, ESTADO estadoPj2)
 			vida = vida - 6;
 			break;
 		case GOLPE_ALTO1:
+			vida = vida - 6;
+			break;
+		case GOLPE_ALTO2:
 			vida = vida - 6;
 			break;
 		case GANCHO:

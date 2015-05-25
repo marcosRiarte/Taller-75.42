@@ -139,9 +139,11 @@ ESTADO Mundo::ResolverColisiones(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool in
 // 4 cconsideraciones,   con que me golpearon?, que estado tengo? por que en base a eso determino que golpeado soy
 // estoy en modo defensa???
 ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido, ESTADO nuevoEstado){
-
+	
 	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
 	ESTADO estadoEnemigo = elOtroCuerpo->getEstado();
+	Sprite* elSprite = unCuerpo->getSprite();
+
 
 	if (!unCuerpo->estaEnPiso()){ //si esta en el aire no tiene defensa,
 
@@ -157,7 +159,8 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 				unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
 
 			}
-			unCuerpo->setDemora(300);
+			unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+			//unCuerpo->setDemora(300);
 		}
 		else if (estadoEnemigo.accion != GUARDIA){ // aca como no lo arroja el impulso tiene que ser un toque
 			nuevoEstado.golpeado = GOLPEADO;
@@ -174,8 +177,8 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 
 
 
-
-			unCuerpo->setDemora(300);
+			unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+			//unCuerpo->setDemora(300);
 		}
 
 	}
@@ -186,11 +189,13 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 			if (estadoAnterior.accion == GUARDIA){ //poca demora, poco desplazamiento
 				nuevoEstado.accion = GUARDIA;
 				unCuerpo->aplicarImpulso(vector2D(-SALTO_X / 10, 0));
-				unCuerpo->setDemora(200);
+				//unCuerpo->setDemora(200);
+				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 			}
 			else{
 				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, 0));
-				unCuerpo->setDemora(300);
+				//unCuerpo->setDemora(300);
+				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 
 			}
 			nuevoEstado.movimiento = AGACHADO;
@@ -206,7 +211,8 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 			if (estadoAnterior.accion == GUARDIA){ //poca demora, poco desplazamiento
 				nuevoEstado.accion = GUARDIA;
 				unCuerpo->aplicarImpulso(vector2D(-SALTO_X / 10, 0));
-				unCuerpo->setDemora(10);
+				//unCuerpo->setDemora(10);
+				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 			}
 			else{// no esta en guardia analizar golpes
 
@@ -222,7 +228,8 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 						unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
 
 					}
-					unCuerpo->setDemora(300);
+				//	unCuerpo->setDemora(300);
+					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 				}
 				else if (estadoEnemigo.accion != GUARDIA){ // aca como no lo arroja el impulso tiene que ser un toque
 					nuevoEstado.golpeado = GOLPEADO;
@@ -235,7 +242,8 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 
 					}
 
-					unCuerpo->setDemora(300);
+					//unCuerpo->setDemora(300);
+					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 				}
 
 			}
@@ -247,10 +255,18 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 
 	}
 
+	/* logica anterior
+	if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (estadoAnterior.golpeado != GOLPEADO)){
+		nuevoEstado.golpeado = GOLPEADO;
+		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), otroCuerpo->getEstado())) == REINICIAR){
+			nuevoEstado.golpeado = FALLECIDO;
+			std::string mensaje = "Gano personaje " + otroCuerpo->getRefPersonaje()->getNombre();
+			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_DEBUG);
+		}
+	}
 
-
-
-
+	*/
 
 	//****************************************************************
 	// evaluo la vitalidad
@@ -443,23 +459,8 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 	
 
-	if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (estadoAnterior.golpeado != GOLPEADO)){
-			nuevoEstado.golpeado = GOLPEADO;
-			unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
-		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), otroCuerpo->getEstado())) == REINICIAR){
-			nuevoEstado.golpeado = FALLECIDO;
-			std::string mensaje = "Gano personaje " + otroCuerpo->getRefPersonaje()->getNombre();
-			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_DEBUG);
-		}
-	}
-
-	if ((movimientos->back() == QUIETO)){
-		nuevoEstado.movimiento = PARADO;
-		unCuerpo->setEstadoAnterior(nuevoEstado);
-	}
 	
-	return nuevoEstado;
-}
+
 
 
 */
