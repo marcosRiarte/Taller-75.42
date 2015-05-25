@@ -900,39 +900,29 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		// NO HAY SUPERPOSICION, LO SIGUIENTE A RESOLVER ES LA COLISION
 
 		//si el tipo ya esta golpeado o el otro no vuelvo a evaluar
+		// ademas, alguno tiene que estar haciendo algo.. habria que desconsiderar las guardias......
 		// es sucio pero es una optimizacion, sino aca va a entrar siempre para el otro cuerpo no golpeado
-		if (estadoanterior.golpeado != GOLPEADO && elOtroCuerpo->getEstado().golpeado != GOLPEADO){
+		if (estadoanterior.golpeado != GOLPEADO && elOtroCuerpo->getEstado().golpeado != GOLPEADO && ((unCuerpo->getEstado().accion != SIN_ACCION) || (elOtroCuerpo->getEstado().accion != SIN_ACCION))){
+			
+			//**********************************************************
+			// resuelve proyeciles
+
+			if ((proyectilUno->estaActivo()) && (proyectilDos->estaActivo())){
+				resolverChoque(unCuerpo, elOtroCuerpo, proyectilUno, proyectilDos, invertido);
+			}
+			else {
+				if (proyectilUno->estaActivo()){
+					ResolverArma(unCuerpo, elOtroCuerpo, proyectilUno, invertido);
+				}
+				if (proyectilDos->estaActivo()){
+					ResolverArma(elOtroCuerpo, unCuerpo, proyectilDos, invertido);
+				}
+			}
+			
+			//********************************
+			//resuelve golpes
 			nuevoEstado = Mundo::ResolverColisiones(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
 		}
-
-		/*
-		if ((unCuerpo->getEstado().accion != SIN_ACCION) || (elOtroCuerpo->getEstado().accion != SIN_ACCION))
-		ResolverGolpiza(unCuerpo, elOtroCuerpo, invertido);
-		*/
-
-		//**********************************************************
-		// resuelve proyeciles
-
-		
-
-		if ((proyectilUno->estaActivo()) && (proyectilDos->estaActivo())){
-			resolverChoque(unCuerpo, elOtroCuerpo, proyectilUno, proyectilDos, invertido);
-		}
-		else {
-			if (proyectilUno->estaActivo()){
-				ResolverArma(unCuerpo, elOtroCuerpo, proyectilUno, invertido);
-			}
-			if (proyectilDos->estaActivo()){
-				ResolverArma(elOtroCuerpo, unCuerpo, proyectilDos, invertido);
-			}
-		}
-
-		//*************************************************************
-
-
-
-
-
 
 		//esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada
 
