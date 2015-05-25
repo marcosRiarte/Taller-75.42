@@ -228,7 +228,8 @@ public:
 	// borde izquierdo se toma cero siempre
 	bool estaEnBorde();
 
-
+	// es lo mismo que la de arriba
+	bool Cuerpo::estaEnBorde2();
 	
 
 	// Aplica un impulso lineal al cuerpo. Modifica inmediatamente la velocidad

@@ -87,11 +87,25 @@ bool Cuerpo::estaEnBorde()
 {
 	// nacho: chequea el borde considerando ancho del personaje
 	// el +2 es para que no se vea una linea en el limite
-	if (posicion.x + getRefPersonaje()->getAncho()+2 < Parser::getInstancia().getEscenario().getAncho())
+	if (posicion.x + getRefPersonaje()->getAncho() + 2 < Parser::getInstancia().getEscenario().getAncho())
 		return false;
 
 	return true;
 }
+
+// XERROR Nacho: invento esta funcion por que la modificacion que le agrego posicion.x>0 hace que pinche el programa
+bool Cuerpo::estaEnBorde2()
+{
+	// nacho: chequea el borde considerando ancho del personaje
+	// el +2 es para que no se vea una linea en el limite
+	if (posicion.x + getRefPersonaje()->getAncho() + 2 < Parser::getInstancia().getEscenario().getAncho()&& (posicion.x>0))
+		return false;
+
+	return true;
+}
+
+
+
 
 Personaje* Cuerpo::getRefPersonaje(){
 	return observador;

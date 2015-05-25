@@ -551,7 +551,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 							unCuerpo->mover(DISTANCIA);
 						}
 						else{//esta superpueso
-							if (!otroCuerpo->estaEnBorde()){
+							if (!otroCuerpo->estaEnBorde2()){
 								if (!otroCuerpo->getEstado().accion == GUARDIA){
 									unCuerpo->mover(DISTANCIA);
 									otroCuerpo->mover(DISTANCIA);
@@ -562,6 +562,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 								}
 							}
+							
 						}
 					}//no esta invertido
 					else
@@ -576,7 +577,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 							unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
 						}
 						else{
-							if (!otroCuerpo->estaEnBorde()){
+							if (!otroCuerpo->estaEnBorde2()){
 								if (!otroCuerpo->getEstado().accion == GUARDIA){
 									unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
 									otroCuerpo->mover(DISTANCIA*FACTOR_DIST_REVERSA);
@@ -587,14 +588,19 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 								}
 							}
+							else{
+								unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
+							}
 						}
-					}
+					}// el tipo no esta adelante mio
 					else{
-						if (!unCuerpo->EstaSuperpuesto()){
+						if (!unCuerpo->EstaSuperpuesto() ){
+							
 							unCuerpo->mover(-DISTANCIA);
 						}
 						else{
-							if (!otroCuerpo->estaEnBorde()){
+							
+							if (!otroCuerpo->estaEnBorde2()){
 								if (!otroCuerpo->getEstado().accion == GUARDIA){
 									unCuerpo->mover(-DISTANCIA);
 									otroCuerpo->mover(-DISTANCIA);
@@ -604,6 +610,9 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 									otroCuerpo->mover(-DISTANCIA / 10);
 
 								}
+							}
+							else{
+								if (!otroCuerpo->estaEnBorde2()) unCuerpo->mover(DISTANCIA);
 							}
 						}//cierra else
 
