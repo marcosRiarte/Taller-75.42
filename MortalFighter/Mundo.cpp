@@ -835,6 +835,37 @@ void Mundo::resolverChoque(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proye
 }
 
 
+//resuelve todo
+ESTADO Mundo::ResolverAtaques(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nuevoEstado, Sensor* proyectilUno, Sensor* proyectilDos, bool invertido){
+
+	//**********************************************************
+	// resuelve proyeciles
+
+	if ((proyectilUno->estaActivo()) && (proyectilDos->estaActivo())){
+		resolverChoque(unCuerpo, elOtroCuerpo, proyectilUno, proyectilDos, invertido);
+	}
+	else {
+		if (proyectilUno->estaActivo()){
+			ResolverArma(unCuerpo, elOtroCuerpo, proyectilUno, invertido);
+		}
+		if (proyectilDos->estaActivo()){
+			ResolverArma(elOtroCuerpo, unCuerpo, proyectilDos, invertido);
+		}
+	}
+
+	//********************************
+	//resuelve golpes
+	nuevoEstado = Mundo::ResolverColisiones(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
+
+	return nuevoEstado;
+}
+
+
+
+
+
+
+
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
 	ESTADO estadoanterior = unCuerpo->getEstadoAnterior();
@@ -909,24 +940,9 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		// es sucio pero es una optimizacion, sino aca va a entrar siempre para el otro cuerpo no golpeado
 		if (estadoanterior.golpeado != GOLPEADO && elOtroCuerpo->getEstado().golpeado != GOLPEADO && ((unCuerpo->getEstado().accion != SIN_ACCION) || (elOtroCuerpo->getEstado().accion != SIN_ACCION))){
 			
-			//**********************************************************
-			// resuelve proyeciles
 
-			if ((proyectilUno->estaActivo()) && (proyectilDos->estaActivo())){
-				resolverChoque(unCuerpo, elOtroCuerpo, proyectilUno, proyectilDos, invertido);
-			}
-			else {
-				if (proyectilUno->estaActivo()){
-					ResolverArma(unCuerpo, elOtroCuerpo, proyectilUno, invertido);
-				}
-				if (proyectilDos->estaActivo()){
-					ResolverArma(elOtroCuerpo, unCuerpo, proyectilDos, invertido);
-				}
-			}
-			
-			//********************************
-			//resuelve golpes
-			nuevoEstado = Mundo::ResolverColisiones(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
+			nuevoEstado= Mundo::ResolverAtaques(unCuerpo, elOtroCuerpo,nuevoEstado,proyectilUno, proyectilDos, invertido);
+						
 		}
 
 		//esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada
