@@ -845,6 +845,7 @@ ESTADO Mundo::ResolverAtaques(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 		resolverChoque(unCuerpo, elOtroCuerpo, proyectilUno, proyectilDos, invertido);
 	}
 	else {
+		//Xerror hay que cambiar la logica de resolver arma.... tiene que ser para uncuerpo no para setearle el cuerpo a otro
 		if (proyectilUno->estaActivo()){
 			ResolverArma(unCuerpo, elOtroCuerpo, proyectilUno, invertido);
 		}
@@ -856,6 +857,12 @@ ESTADO Mundo::ResolverAtaques(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 	//********************************
 	//resuelve golpes
 	nuevoEstado = Mundo::ResolverColisiones(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
+
+
+
+
+
+
 
 	return nuevoEstado;
 }
