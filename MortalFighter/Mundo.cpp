@@ -747,11 +747,13 @@ ESTADO Mundo::ResolverArma(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proye
 
 	posAbsSensorProyectil = getPosicionAbsSensor(posProyectilEngloba, elOtroCuerpo, anchoEngloba, proyectil->getAlto(), invertido);
 	
+		//aca iba un while
 		for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
 			posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), unCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), sensoresOtroCuerpo->at(j)->getAlto(), invertido);
 				if (hayInterseccion(posAbsSensorProyectil, manejadorUnidades.darLongUnidades(anchoEngloba), manejadorUnidades.darLongUnidades(proyectil->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
 					nuevoEstado.golpeado = GOLPEADO;
 					unCuerpo->getSensoresProyectil().at(0)->desactivarSensor();
+					break;
 				}
 		}
 		return nuevoEstado;
@@ -788,6 +790,7 @@ void Mundo::resolverChoque(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proye
 
 
 //resuelve todo
+//para entrar aca ninguno de los 2 puede estar golpeado y al menos uno tiene que estar hacieno algo
 ESTADO Mundo::ResolverAtaques(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nuevoEstado, Sensor* proyectilUno, Sensor* proyectilDos, bool invertido){
 
 	//**********************************************************
