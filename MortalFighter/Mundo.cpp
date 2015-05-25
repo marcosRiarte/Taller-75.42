@@ -76,14 +76,12 @@ std::pair<float, float> getPosicionAbsSensor(std::pair<float, float> posSensor, 
 	float posX, posY, posFinPj;
 	
 	ManejadorULogicas manejadorUnidades;
-
-	int anchoPjUnoPx = manejadorUnidades.darLongPixels(unCuerpo->getRefPersonaje()->getAncho());
-
+	
 	if (!(invertido)){
 		posX = manejadorUnidades.darLongUnidades(posSensor.first) + unCuerpo->getPosicion().x;
 	}
 	else{
-		posFinPj = unCuerpo->getPosicion().x + manejadorUnidades.darLongUnidades(anchoPjUnoPx);
+		posFinPj = unCuerpo->getPosicion().x + unCuerpo->getRefPersonaje()->getAncho();
 		posX = posFinPj - manejadorUnidades.darLongUnidades(posSensor.first) - manejadorUnidades.darLongUnidades(anchoDelSensor);
 	}
 
@@ -522,7 +520,6 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 								else{
 									unCuerpo->mover(DISTANCIA / 10);
 									otroCuerpo->mover(DISTANCIA / 10);
-
 								}
 							}
 							
@@ -535,7 +532,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 				if ((movimientos->back() == IZQ)){
 					nuevoEstado.movimiento = CAMINARIZQ;
-					if (otroCuerpo->getPosicion().x > unCuerpo->getPosicion().x){
+					if (!invertido){
 						if (!unCuerpo->EstaSuperpuesto()){
 							unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
 						}
@@ -871,7 +868,6 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	//
 	if (unCuerpo->EstaSuperpuesto() && !(unCuerpo->estaEnPiso() && elOtroCuerpo->estaEnPiso())){
 
-
 		nuevoEstado = Mundo::moverCuerpos(unCuerpo, elOtroCuerpo, invertido, &movimientosOtro, nuevoEstado);
 
 		//mejorar esto
@@ -883,7 +879,6 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			//nuevoEstado.movimiento = CAMINARIZQ;
 
 		}
-
 		else{
 			if (unCuerpo->getEstado().movimiento != CAMINARDER){
 				nuevoEstado = unCuerpo->getEstadoAnterior();
