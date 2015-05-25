@@ -221,11 +221,17 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 					nuevoEstado.golpeado = GOLPEADO;
 					//aca hay que aplicar un impulso
 					if (!unCuerpo->EstaFrenado()){
-						unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
-
+						if (!(invertido))
+							unCuerpo->aplicarImpulso(vector2D((0.5)*-SALTO_X, (0.5)*SALTO_Y));
+						else
+							unCuerpo->aplicarImpulso(vector2D((0.5)*SALTO_X, (0.5)*SALTO_Y));
+																	
 					}
 					else{
-						unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
+						if (!(invertido))
+							unCuerpo->aplicarImpulso(vector2D(0, (0.5)*SALTO_Y));
+						else
+							unCuerpo->aplicarImpulso(vector2D(0, (0.5)*SALTO_Y));
 
 					}
 				//	unCuerpo->setDemora(300);
@@ -449,21 +455,6 @@ ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCu
 }
 
 
-
-
-
-
-/*
-ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<MOV_TIPO>* movimientos)
-{
-
-	
-
-	
-
-
-
-*/
 
 
 ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<MOV_TIPO>* movimientos)
@@ -835,6 +826,7 @@ bool Mundo::haySuperposicion(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invert
 	return false;
 }
 
+/*
 void Mundo::ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido){
 	std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
 	std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
@@ -865,7 +857,7 @@ void Mundo::ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool inverti
 		}
 	}
 }
-
+*/
 void Mundo::ResolverArma(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proyectil, bool invertido){
 	
 	ManejadorULogicas manejadorUnidades;
