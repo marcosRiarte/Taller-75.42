@@ -26,7 +26,7 @@ bool ValidadorDePersonajes::validarPersonajesDesdeConEscenarioYventana(Json::Val
 	std::string nombre;
 	bool errorPersonaje = false;
 	float anchoMaximoDelPersonaje = unaVentana->getAncho();
-	float altoMaximoDelPersonaje = (unEscenario->getAlto() + unEscenario->getYPiso()); //este el alto maximo
+	float altoMaximoDelPersonaje = (unEscenario->getAlto() - unEscenario->getYPiso()); //este el alto maximo
 	const char * archivoPersonaje;
 	FILE * pFile;
 
@@ -53,9 +53,9 @@ bool ValidadorDePersonajes::validarPersonajesDesdeConEscenarioYventana(Json::Val
 			else Log::getInstancia().logearMensajeEnModo("Se carga nombre del personaje por defecto", Log::MODO_WARNING);
 
 			//ANCHO
-			if (personajesParseados[i].isMember("ancho") && personajesParseados[i].get("ancho", ANCHO_PERSONAJE).isNumeric() && ((personajesParseados[i].get("ancho", ANCHO_PERSONAJE) < anchoMaximoDelPersonaje) && (anchoMaximoDelPersonaje <= unEscenario->getAncho()))){
+			if (personajesParseados[i].isMember("ancho") && personajesParseados[i].get("ancho", ANCHO_PERSONAJE).isNumeric() ){
 				ancho = (personajesParseados[i].get("ancho", ANCHO_PERSONAJE).asFloat());
-				if (!(ancho > 0) || ancho > MAX_ANCHO_PERSONAJE) {
+				if (ancho <= 0 || ancho >= anchoMaximoDelPersonaje) {
 					std::string mensaje = "ancho del Personaje fuera de rango, se toma ancho por defecto";
 					Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 				}
@@ -66,9 +66,9 @@ bool ValidadorDePersonajes::validarPersonajesDesdeConEscenarioYventana(Json::Val
 			}
 
 			//ALTO
-			if (personajesParseados[i].isMember("alto") && personajesParseados[i].get("alto", ALTO_PERSONAJE).isNumeric() && personajesParseados[i].get("alto", ALTO_PERSONAJE) < altoMaximoDelPersonaje){
+			if (personajesParseados[i].isMember("alto") && personajesParseados[i].get("alto", ALTO_PERSONAJE).isNumeric() ){
 				alto = (personajesParseados[i].get("alto", ALTO_PERSONAJE).asFloat());
-				if (!(alto > 0) || alto > MAX_ALTO_PERSONAJE) {
+				if (alto <= 0 || alto >= altoMaximoDelPersonaje) {
 					std::string mensaje = "alto del Personaje fuera de rango, se toma alto por defecto";
 					Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 				}
