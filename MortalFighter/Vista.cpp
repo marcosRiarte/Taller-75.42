@@ -322,13 +322,13 @@ void Vista::actualizar(){
 			}
 		}*/
 		//Este es el codigo que deberia ir en realidad pero todavia no hay gancho
-		if (personajesVista.at(0)->getEstado().golpeado == GOLPEADO){
+		if (personajesVista.at(0)->getEstado().golpeado == GOLPEADO && personajesVista.at(0)->getEstado().accion != GUARDIA){
 			if (personajesVista.at(1)->getEstado().accion == GANCHO){
 				golpeado = true;
 			}
 		}
 		else{
-			if (personajesVista.at(1)->getEstado().golpeado == GOLPEADO){
+			if (personajesVista.at(1)->getEstado().golpeado == GOLPEADO && personajesVista.at(1)->getEstado().accion != GUARDIA){
 				if (personajesVista.at(0)->getEstado().accion == GANCHO){
 				golpeado = true;
 				}
