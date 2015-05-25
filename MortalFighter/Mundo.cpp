@@ -346,53 +346,6 @@ ESTADO Mundo::moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertid
 }
 
 
-/*
-//logica de saltos
-//el tipo en el aire -----> mantenerle el estado de salto, sacarle velocidad si se esta por chocar y la logica de bordes
-//el tipo tocando piso recien -->chequear superposicion
-ESTADO Mundo::ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<MOV_TIPO>* movimientos){
-
-	ESTADO estadoAnterior = unCuerpo->getEstadoAnterior();
-
-	/// integra velocidad, para salto, 
-	// si no está en el piso siente la gravedad
-
-		if (!elOtroCuerpo->estaEnPiso()){
-			if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido)){
-				if ((unCuerpo->getEstado().accion == SIN_ACCION) && (elOtroCuerpo->getEstado().accion != SIN_ACCION) && (elOtroCuerpo->getEstado().accion != GUARDIA))
-					ResolverGolpiza(elOtroCuerpo, unCuerpo, invertido);
-			}
-		}
-
-		if ((unCuerpo->getVelocidad().x == 0)){
-			nuevoEstado = estadoAnterior;
-		}
-		else if (unCuerpo->getVelocidad().x > 0)
-			nuevoEstado.movimiento = SALTODIAGDER;
-		else
-			nuevoEstado.movimiento = SALTODIAGIZQ;
-
-		if (unCuerpo->EstaFrenado()){
-			unCuerpo->SetVelocidadX(0.0f);
-		}
-
-		if (unCuerpo->EstaFrenado()){
-		unCuerpo->SetVelocidadX(0.0f);
-		
-		if ((movimientos->back() == SALTODER)){
-			nuevoEstado.movimiento = SALTODIAGDER;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-		}
-		if ((movimientos->back() == SALTOIZQ)){
-			nuevoEstado.movimiento = SALTODIAGIZQ;
-			unCuerpo->setEstadoAnterior(nuevoEstado);
-		}
-	}
-	return nuevoEstado;
-}
-
-*/
-
 
 //logica de saltos
 //el tipo en el aire -----> mantenerle el estado de salto, sacarle velocidad si se esta por chocar y la logica de bordes
@@ -521,7 +474,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			if (movimientos->back() == DEFENSA_AGACHADO){
 				nuevoEstado.movimiento = AGACHADO;
 				nuevoEstado.accion = GUARDIA;
-				unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
+				//unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()));
 			}
 
 			//*************************************************************************************************//
@@ -659,39 +612,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			}
-
-
-			//else
-			//	unCuerpo->mover(-DISTANCIA);
-			//}
-
-
-
-
-
 
 
 
@@ -719,8 +640,9 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 				nuevoEstado.movimiento = AGACHADO;
 			}
 
-			if (movimientos->back() == DEFENSA_AGACHADO) { //ESTO ESTA ASI A PROPOSITO
+			if (movimientos->back() == DEFENSA_AGACHADO) { //ESTO ESTA ASI A PROPOSITO. en el mk si esta bloqueado y se agacha, tarda en bloquearse agachado
 				nuevoEstado.movimiento = AGACHADO;
+				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 			}
 
 			// GOLPES
@@ -741,12 +663,10 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 
 			if (movimientos->back() == DEFENSA) {
-				//nuevoEstado.movimiento = PARADO;
 				nuevoEstado.accion = GUARDIA;
 			}
 
-
-
+			
 			if (movimientos->back() == G_BAJO){
 				nuevoEstado.accion = GOLPE_BAJO;
 				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
@@ -793,18 +713,12 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 	//aca frutie dividiendo por 20 por que necesitaba una demora chiquitita
 	unCuerpo->setDemora((elSprite->getConstantes(unCuerpo->getEstado()))*(elSprite->listaDeCuadros(unCuerpo->getEstado())->size()) / 10);
 	}*/
+	
+	
 
-
-
-	/*
-
-	}*/
-
-
-	//}
-
-	return nuevoEstado;
+		return nuevoEstado;
 }
+
 
 bool Mundo::haySuperposicion(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido)
 {
@@ -923,6 +837,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	nuevoEstado.movimiento = PARADO;
 	nuevoEstado.accion = SIN_ACCION;
 	nuevoEstado.golpeado = NOGOLPEADO;
+	
 	//Se setea de que cuerpo se esta tratando.
 	Cuerpo* elOtroCuerpo;
 
