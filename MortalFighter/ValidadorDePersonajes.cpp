@@ -26,7 +26,7 @@ bool ValidadorDePersonajes::validarPersonajesDesdeConEscenarioYventana(Json::Val
 	std::string nombre;
 	bool errorPersonaje = false;
 	float anchoMaximoDelPersonaje = unaVentana->getAncho();
-	float altoMaximoDelPersonaje = (unEscenario->getAlto() - unEscenario->getYPiso()); //este el alto maximo
+	float altoMaximoDelPersonaje = (unEscenario->getAlto() + unEscenario->getYPiso()); //este el alto maximo
 	const char * archivoPersonaje;
 	FILE * pFile;
 
