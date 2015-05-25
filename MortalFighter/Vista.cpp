@@ -602,8 +602,14 @@ void Vista::DibujarCapasPosteriores(std::vector<Personaje*> personajesVista, flo
 
 void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 {
+	Sensor* sensoresCuerpo1 = refMundo->getCuerpo(0)->getSensores()->at(0);
+	Sensor* sensoresCuerpo2 = refMundo->getCuerpo(1)->getSensores()->at(0);
+
+	float posMediaPj1 = personajesVista.at(0)->getPosicionUn().first + personajesVista.at(0)->getAncho()/2;
+	float posMediaPj2 = personajesVista.at(1)->getPosicionUn().first + personajesVista.at(1)->getAncho() / 2;
+
 	//Parámetro para ver si el jugador esta a izquierda o derecha.
-	bool invertido = (personajesVista.at(0)->getPosicionPx().first > personajesVista.at(1)->getPosicionPx().first);
+	bool invertido = (posMediaPj1 > posMediaPj2);
 
 	//Parametros del personaje 1
 	int anchoPjUnoPx = manejadorULog.darLongPixels(personajesVista[0]->getAncho());

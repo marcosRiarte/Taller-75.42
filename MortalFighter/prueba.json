@@ -47,7 +47,7 @@
             "nombre": "Liu Kang"
         },
         {
-            "ancho": 80,
+            "ancho": 20,
             "alto": 90,
             "zindex": 1,
             "orientacion": "DER",

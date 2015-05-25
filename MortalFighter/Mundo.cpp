@@ -70,14 +70,20 @@ void Mundo::LiberarCuerpos()
 
 
 std::pair<float, float> getPosicionAbsSensor(std::pair<float, float> posSensor, Cuerpo* unCuerpo, float anchoDelSensor, float altoDelSensor, bool invertido){
+	Sprite* elSprite = unCuerpo->getSprite();
+
 	std::pair<float, float> posicionOtroCuerpo;
 	float posX, posY, posFinPj;
+	
 	ManejadorULogicas manejadorUnidades;
+
+	int anchoPjUnoPx = manejadorUnidades.darLongPixels(unCuerpo->getRefPersonaje()->getAncho());
+
 	if (!(invertido)){
 		posX = manejadorUnidades.darLongUnidades(posSensor.first) + unCuerpo->getPosicion().x;
 	}
 	else{
-		posFinPj = unCuerpo->getPosicion().x + unCuerpo->getRefPersonaje()->getAncho();
+		posFinPj = unCuerpo->getPosicion().x + manejadorUnidades.darLongUnidades(anchoPjUnoPx);
 		posX = posFinPj - manejadorUnidades.darLongUnidades(posSensor.first) - manejadorUnidades.darLongUnidades(anchoDelSensor);
 	}
 
@@ -843,7 +849,10 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	/////////////////////////////////////////////////////////////////////////////
 	bool invertido;
 
-	if (elOtroCuerpo->getPosicion().x > unCuerpo->getPosicion().x)
+	float posMedia1 = unCuerpo->getPosicion().x + unCuerpo->getRefPersonaje()->getAncho()/2;
+	float posMedia2 = elOtroCuerpo->getPosicion().x + elOtroCuerpo->getRefPersonaje()->getAncho() / 2;
+
+	if (posMedia2 > posMedia1)
 		invertido = false;
 	else
 		invertido = true;
