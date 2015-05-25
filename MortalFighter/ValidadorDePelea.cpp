@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ValidadorDePelea.h"
+#include <ctype.h>
 
 
 ValidadorDePelea::ValidadorDePelea()
@@ -34,18 +35,26 @@ void ValidadorDePelea::validarPeleaDesdeParaLosPeronajes(Json::Value unaPelea, s
 	else{
 		if (unaPelea.isMember("fighters") && (unaPelea.get("fighters", PELEA_INICIAL).isString())){
 			fighters = unaPelea.get("fighters", PELEA_INICIAL).asString();
+			
+			for (int k = 0; k < fighters.size(); k++){
+				fighters.replace(k, 1, 1, (char)tolower(fighters.at(k)));
+			}
 
 			posicion = fighters.find(" vs");
-			if (posicion == std::string::npos) posicion = fighters.find(" VS");
 			if (posicion != std::string::npos){
 
+				std::string peleador;
 				//PELEADOR 1
 				peleaAux = fighters;
 				peleaAux = peleaAux.substr(0, posicion);
 				i = 0;
 				corte = false;
 				while (!corte && (i < personajes->size())){
-					if (peleaAux == personajes->at(i)->getNombre()){
+					peleador = personajes->at(i)->getNombre();
+					for (int j = 0; j < peleador.size(); j++){
+						peleador.replace(j, 1, 1, (char)tolower(peleador.at(j)));
+					}
+					if (peleaAux == peleador){
 						peleador1 = true;
 						corte = true;
 						laPelea->setPersonaje1(personajes->at(i));
@@ -63,7 +72,11 @@ void ValidadorDePelea::validarPeleaDesdeParaLosPeronajes(Json::Value unaPelea, s
 					i = 0;
 					corte = false;
 					while (!corte && (i < personajes->size())){
-						if (fighters == personajes->at(i)->getNombre()){
+						peleador = personajes->at(i)->getNombre();
+						for (int l = 0; l < peleador.size(); l++){
+							peleador.replace(l, 1, 1, (char)tolower(peleador.at(l)));
+						}
+						if (fighters == peleador){
 							peleador2 = true;
 							corte = true;
 							laPelea->setPersonaje2(personajes->at(i));
