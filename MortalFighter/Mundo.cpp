@@ -146,10 +146,10 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 
 
 	if (!unCuerpo->estaEnPiso()){ //si esta en el aire no tiene defensa,
+		nuevoEstado.golpeado = GOLPEADO;
 
 		if (estadoEnemigo.accion == GANCHO || (estadoEnemigo.accion == PATADA_ALTA && !(elOtroCuerpo->estaEnPiso()))){
 
-			nuevoEstado.golpeado = GOLPEADO;
 			//aca hay que aplicar un impulso
 			if (!unCuerpo->EstaFrenado()){
 				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
@@ -159,13 +159,9 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 				unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y));
 
 			}
-			unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
-			//unCuerpo->setDemora(300);
 		}
 		else if (estadoEnemigo.accion != GUARDIA){ // aca como no lo arroja el impulso tiene que ser un toque
-			nuevoEstado.golpeado = GOLPEADO;
-
-
+			
 			if (!unCuerpo->EstaFrenado()){
 				unCuerpo->aplicarImpulso(vector2D(-SALTO_X / 10, SALTO_Y / 10));
 
@@ -174,11 +170,6 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 				unCuerpo->aplicarImpulso(vector2D(0, SALTO_Y / 10));
 
 			}
-
-
-
-			unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
-			//unCuerpo->setDemora(300);
 		}
 
 	}
@@ -234,8 +225,6 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 							unCuerpo->aplicarImpulso(vector2D(0, (0.5)*SALTO_Y));
 
 					}
-				//	unCuerpo->setDemora(300);
-					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 				}
 				else if (estadoEnemigo.accion != GUARDIA){ // aca como no lo arroja el impulso tiene que ser un toque
 					nuevoEstado.golpeado = GOLPEADO;
@@ -248,8 +237,6 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 
 					}
 
-					//unCuerpo->setDemora(300);
-					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 				}
 
 			}
@@ -274,38 +261,8 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 
 	*/
 
-	//****************************************************************
-	// evaluo la vitalidad
-	//************************************************************************
-	//xerror hay que arreglar esto por que se cambio la logica.
-	// aca uncuerpo es el golpeado entonces se le tiene que descontar a uncuerpo
-	if ((nuevoEstado.golpeado == GOLPEADO) && (estadoAnterior.golpeado == NOGOLPEADO)){
-
-		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado())) == REINICIAR){
-			nuevoEstado.golpeado = FALLECIDO;
-			std::string mensaje = "Gano personaje " + elOtroCuerpo->getRefPersonaje()->getNombre();
-			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_DEBUG);
-		}
-	}
-
-
 	return nuevoEstado;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ESTADO Mundo::moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido, std::vector<MOV_TIPO>* movimientos, ESTADO nuevoEstado) {
 
@@ -662,11 +619,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 				unCuerpo->getSensoresProyectil().at(0)->activarSensor();
 				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 			}
-
-
-
-
-
+			
 			if (movimientos->back() == DEFENSA) {
 				nuevoEstado.accion = GUARDIA;
 			}
@@ -777,32 +730,31 @@ void Mundo::ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool inverti
 	}
 }
 */
-void Mundo::ResolverArma(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proyectil, bool invertido){
+ESTADO Mundo::ResolverArma(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proyectil, bool invertido, ESTADO nuevoEstado){
 	
 	ManejadorULogicas manejadorUnidades;
 
-	std::vector<Sensor*>* sensoresOtroCuerpo = elOtroCuerpo->getSensores();
+	std::vector<Sensor*>* sensoresOtroCuerpo = unCuerpo->getSensores();
 	std::pair<float, float> posAbsSensorProyectil;
 	std::pair<float, float> posAbsSensoresOtroCuerpo;
-
+	
 	std::pair<float, float> posProyectilEngloba;
 
-	posProyectilEngloba.first = unCuerpo->getposProyectilAnterior();
+	posProyectilEngloba.first = elOtroCuerpo->getposProyectilAnterior();
 	posProyectilEngloba.second = proyectil->getPosicion().second;
 
-	float anchoEngloba = proyectil->getPosicion().first - unCuerpo->getposProyectilAnterior() + proyectil->getAncho();
+	float anchoEngloba = proyectil->getPosicion().first - elOtroCuerpo->getposProyectilAnterior() + proyectil->getAncho();
 
-	posAbsSensorProyectil = getPosicionAbsSensor(posProyectilEngloba, unCuerpo, anchoEngloba, proyectil->getAlto(), invertido);
+	posAbsSensorProyectil = getPosicionAbsSensor(posProyectilEngloba, elOtroCuerpo, anchoEngloba, proyectil->getAlto(), invertido);
 	
 		for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
-				posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), elOtroCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), sensoresOtroCuerpo->at(j)->getAlto(), invertido);
+			posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), unCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), sensoresOtroCuerpo->at(j)->getAlto(), invertido);
 				if (hayInterseccion(posAbsSensorProyectil, manejadorUnidades.darLongUnidades(anchoEngloba), manejadorUnidades.darLongUnidades(proyectil->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
-					ESTADO unEstado = elOtroCuerpo->getEstado();
-					unEstado.golpeado = GOLPEADO;
-					elOtroCuerpo->notificarObservadores(unEstado);
+					nuevoEstado.golpeado = GOLPEADO;
 					unCuerpo->getSensoresProyectil().at(0)->desactivarSensor();
 				}
-			}	
+		}
+		return nuevoEstado;
 }
 
 //Solución del choque entre proyectiles.
@@ -831,7 +783,7 @@ void Mundo::resolverChoque(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proye
 	if (hayInterseccion(posAbsSensorProyectil1, manejadorUnidades.darLongUnidades(anchoEngloba1), manejadorUnidades.darLongUnidades(proyectilUno->getAlto()), posAbsSensorProyectil2, manejadorUnidades.darLongUnidades(anchoEngloba2), manejadorUnidades.darLongUnidades(proyectilDos->getAlto()))){
 		unCuerpo->getSensoresProyectil().at(0)->desactivarSensor();
 		elOtroCuerpo->getSensoresProyectil().at(0)->desactivarSensor();
-		}
+	}
 }
 
 
@@ -845,12 +797,11 @@ ESTADO Mundo::ResolverAtaques(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 		resolverChoque(unCuerpo, elOtroCuerpo, proyectilUno, proyectilDos, invertido);
 	}
 	else {
-		//Xerror hay que cambiar la logica de resolver arma.... tiene que ser para uncuerpo no para setearle el cuerpo a otro
 		if (proyectilUno->estaActivo()){
-			ResolverArma(unCuerpo, elOtroCuerpo, proyectilUno, invertido);
+			nuevoEstado = ResolverArma(elOtroCuerpo, unCuerpo, proyectilUno, invertido, nuevoEstado);
 		}
 		if (proyectilDos->estaActivo()){
-			ResolverArma(elOtroCuerpo, unCuerpo, proyectilDos, invertido);
+			nuevoEstado = ResolverArma(elOtroCuerpo, unCuerpo, proyectilDos, invertido, nuevoEstado);
 		}
 	}
 
@@ -858,19 +809,8 @@ ESTADO Mundo::ResolverAtaques(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 	//resuelve golpes
 	nuevoEstado = Mundo::ResolverColisiones(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
 
-
-
-
-
-
-
 	return nuevoEstado;
 }
-
-
-
-
-
 
 
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
@@ -881,6 +821,8 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	nuevoEstado.accion = SIN_ACCION;
 	nuevoEstado.golpeado = NOGOLPEADO;
 	
+	Sprite* elSprite = unCuerpo->getSprite();
+
 	//Se setea de que cuerpo se esta tratando.
 	Cuerpo* elOtroCuerpo;
 
@@ -1018,9 +960,24 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 
 
+
+
+	//****************************************************************
+	// Se evalua vitalidad y demora de golpeado
+	//************************************************************************
+	//xerror hay que arreglar esto por que se cambio la logica.
+	// aca uncuerpo es el golpeado entonces se le tiene que descontar a uncuerpo
+	if ((nuevoEstado.golpeado == GOLPEADO) && (estadoanterior.golpeado != GOLPEADO)){
+		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado())) == REINICIAR){
+			nuevoEstado.golpeado = FALLECIDO;
+			std::string mensaje = "Gano personaje " + elOtroCuerpo->getRefPersonaje()->getNombre();
+			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_DEBUG);
+		}
+	}
+
 	unCuerpo->SetSensorActivoStr(nuevoEstado);
 	unCuerpo->setEstadoAnterior(nuevoEstado);
-
 
 	// velocidades
 	vector2D unaVelocidad = unCuerpo->getVelocidad();  //obtengo la velocidad actual
