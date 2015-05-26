@@ -744,7 +744,7 @@ ESTADO Mundo::ResolverArma(Cuerpo* elOtroCuerpo, Cuerpo* unCuerpo, Sensor* proye
 	std::pair<float, float> posProyectilEngloba;
 
 	posProyectilEngloba.first = elOtroCuerpo->getXProyectilAnterior();
-	posProyectilEngloba.second = proyectil->getPosicion().second;
+	posProyectilEngloba.second = manejadorUnidades.darLongPixels(elOtroCuerpo->getPosicion().y + (3 / 4)*elOtroCuerpo->getRefPersonaje()->getAlto());
 
 	float anchoEngloba = proyectil->getPosicion().first - elOtroCuerpo->getXProyectilAnterior() + proyectil->getAncho();
 

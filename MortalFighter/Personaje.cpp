@@ -59,7 +59,6 @@ Personaje::Personaje(float anchoPersonaje, float altoPersonaje, int zIndexPerson
 float Personaje::getAncho() const
 {
 	return ancho;
-	std::cout << "ancho Personaje  " << ancho << std::endl;
 }
 
 float Personaje::getAlto() const

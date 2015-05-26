@@ -1532,8 +1532,8 @@
             "Disparo": {
                 "sensores": [
                     {
-                        "x": 220,
-                        "y": 125,
+                        "x": 190,
+                        "y": 135,
                         "ancho": 60,
                         "alto": 50,
                         "nSprite": 0,
