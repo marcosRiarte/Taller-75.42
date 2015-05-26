@@ -270,16 +270,16 @@ void Vista::actualizar(){
 	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer)) {
 		refMundo->FrenarCuerpos();
 
-		if (PjUnoEstaEnBordeIzq && (mov1 == DER))
+		if (PjUnoEstaEnBordeIzq && (mov1 == DER) && (mov2 != DER))
 			refMundo->LiberarCuerpos();
 
-		if (PjUnoEstaEnBordeDer && (mov1 == IZQ))
+		if (PjUnoEstaEnBordeDer && (mov1 == IZQ) && (mov2 != IZQ))
 			refMundo->LiberarCuerpos();
 
-		if (PjDosEstaEnBordeIzq && (mov2 == DER))
+		if (PjDosEstaEnBordeIzq && (mov2 == DER) && (mov1 != DER))
 			refMundo->LiberarCuerpos();
 
-		if (PjDosEstaEnBordeDer && (mov2 == IZQ))
+		if (PjDosEstaEnBordeDer && (mov2 == IZQ) && (mov1 != IZQ))
 			refMundo->LiberarCuerpos();
 	}
 
