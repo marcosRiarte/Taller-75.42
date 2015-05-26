@@ -733,31 +733,30 @@ void Mundo::ResolverGolpiza(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool inverti
 	}
 }
 */
-ESTADO Mundo::ResolverArma(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proyectil, bool invertido, ESTADO nuevoEstado){
-	
+ESTADO Mundo::ResolverArma(Cuerpo* elOtroCuerpo, Cuerpo* unCuerpo, Sensor* proyectil, bool invertido, ESTADO nuevoEstado){
+		
 	ManejadorULogicas manejadorUnidades;
 
-	std::vector<Sensor*>* sensoresOtroCuerpo = unCuerpo->getSensores();
+	std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
 	std::pair<float, float> posAbsSensorProyectil;
-	std::pair<float, float> posAbsSensoresOtroCuerpo;
+	std::pair<float, float> posAbsSensoresCuerpo;
 	
 	std::pair<float, float> posProyectilEngloba;
 
-	posProyectilEngloba.first = elOtroCuerpo->getposProyectilAnterior();
+	posProyectilEngloba.first = elOtroCuerpo->getXProyectilAnterior();
 	posProyectilEngloba.second = proyectil->getPosicion().second;
 
-	float anchoEngloba = proyectil->getPosicion().first - elOtroCuerpo->getposProyectilAnterior() + proyectil->getAncho();
+	float anchoEngloba = proyectil->getPosicion().first - elOtroCuerpo->getXProyectilAnterior() + proyectil->getAncho();
 
-	posAbsSensorProyectil = getPosicionAbsSensor(posProyectilEngloba, elOtroCuerpo, anchoEngloba, proyectil->getAlto(), invertido);
+	posAbsSensorProyectil = getPosicionAbsSensor(posProyectilEngloba, elOtroCuerpo, anchoEngloba, proyectil->getAlto(), !invertido);
 	
-		//aca iba un while
-		for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
-			posAbsSensoresOtroCuerpo = getPosicionAbsSensor(sensoresOtroCuerpo->at(j)->getPosicion(), unCuerpo, sensoresOtroCuerpo->at(j)->getAncho(), sensoresOtroCuerpo->at(j)->getAlto(), invertido);
-				if (hayInterseccion(posAbsSensorProyectil, manejadorUnidades.darLongUnidades(anchoEngloba), manejadorUnidades.darLongUnidades(proyectil->getAlto()), posAbsSensoresOtroCuerpo, manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresOtroCuerpo->at(j)->getAlto()))){
+	for (unsigned j = 0; j < sensoresCuerpo->size(); j++){
+		posAbsSensoresCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(j)->getPosicion(), unCuerpo, sensoresCuerpo->at(j)->getAncho(), sensoresCuerpo->at(j)->getAlto(), invertido);
+		if (hayInterseccion(posAbsSensorProyectil, manejadorUnidades.darLongUnidades(anchoEngloba), manejadorUnidades.darLongUnidades(proyectil->getAlto()), posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(j)->getAlto()))){
 					nuevoEstado.golpeado = GOLPEADO;
-					unCuerpo->getSensoresProyectil().at(0)->desactivarSensor();
+					proyectil->desactivarSensor();
 					break;
-				}
+			}
 		}
 		return nuevoEstado;
 }
@@ -773,14 +772,14 @@ void Mundo::resolverChoque(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, Sensor* proye
 	std::pair<float, float> posProyectilEngloba1;
 	std::pair<float, float> posProyectilEngloba2;
 
-	posProyectilEngloba1.first = unCuerpo->getposProyectilAnterior();
+	posProyectilEngloba1.first = unCuerpo->getXProyectilAnterior();
 	posProyectilEngloba1.second = proyectilUno->getPosicion().second;
 
-	posProyectilEngloba2.first = elOtroCuerpo->getposProyectilAnterior();
+	posProyectilEngloba2.first = elOtroCuerpo->getXProyectilAnterior();
 	posProyectilEngloba2.second = proyectilDos->getPosicion().second;
 
-	float anchoEngloba1 = proyectilUno->getPosicion().first - unCuerpo->getposProyectilAnterior() + proyectilUno->getAncho();
-	float anchoEngloba2 = proyectilDos->getPosicion().first - elOtroCuerpo->getposProyectilAnterior() + proyectilDos->getAncho();
+	float anchoEngloba1 = proyectilUno->getPosicion().first - unCuerpo->getXProyectilAnterior() + proyectilUno->getAncho();
+	float anchoEngloba2 = proyectilDos->getPosicion().first - elOtroCuerpo->getXProyectilAnterior() + proyectilDos->getAncho();
 
 	posAbsSensorProyectil1 = getPosicionAbsSensor(posProyectilEngloba1, unCuerpo, anchoEngloba1, proyectilUno->getAlto(), invertido);
 	posAbsSensorProyectil2 = getPosicionAbsSensor(posProyectilEngloba2, elOtroCuerpo, anchoEngloba2, proyectilDos->getAlto(), !invertido);
@@ -843,9 +842,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	Sensor* proyectilUno = unCuerpo->getSensoresProyectil().at(0);
 	Sensor* proyectilDos = elOtroCuerpo->getSensoresProyectil().at(0);
 
-	unCuerpo->setposProyectilAnterior(unCuerpo->getSensoresProyectil().at(0)->getPosicion().first);
-
-
+	
 	/////////////////////////////////////////////////////////////////////////////
 	bool invertido;
 
@@ -962,6 +959,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 	//TODO aca tiene que ser estado anterior********
 	if ((nuevoEstado.accion == ARMA_ARROJABLE) && (unCuerpo->getSensoresProyectil().at(0)->estaActivo())){
+		unCuerpo->setposProyectilAnterior(unCuerpo->getSensoresProyectil().at(0)->getPosicion().first);
 		unCuerpo->getSensoresProyectil().at(0)->moverProyectil(VELOCIDADPROYECTIL);
 	}
 
