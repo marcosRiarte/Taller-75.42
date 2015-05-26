@@ -242,21 +242,24 @@ void Vista::actualizar(){
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(renderer);
 
+	Sensor* sensorPj1 = refMundo->getCuerpo(0)->getSensores()->at(0);
+	Sensor* sensorPj2 = refMundo->getCuerpo(1)->getSensores()->at(0);
+
 	// condicion de borde Personaje Uno
 	bool PjUnoEstaEnBordeIzq = false;
 	bool PjUnoEstaEnBordeDer = false;
-	if (xPjUno + anchoPjUno > anchoVentana - camaraXLog)
+	if (xPjUno + sensorPj1->getPosicion().first + (sensorPj1->getAncho()/2) > anchoVentana - camaraXLog)
 		PjUnoEstaEnBordeDer = true;
-	if (xPjUno < -camaraXLog)
+	if (xPjUno + sensorPj1->getPosicion().first < -camaraXLog)
 		PjUnoEstaEnBordeIzq = true;
 	bool PjUnoEstaEnBorde = PjUnoEstaEnBordeIzq || PjUnoEstaEnBordeDer;
 
 	// condicion de borde Personaje Dos
 	bool PjDosEstaEnBordeIzq = false;
 	bool PjDosEstaEnBordeDer = false;
-	if (xPjDos + anchoPjDos > anchoVentana - camaraXLog)
+	if (xPjDos + sensorPj2->getPosicion().first + (sensorPj2->getAncho() / 2) > anchoVentana - camaraXLog)
 		PjDosEstaEnBordeDer = true;
-	if (xPjDos < -camaraXLog)
+	if (xPjDos + sensorPj2->getPosicion().first< -camaraXLog)
 		PjDosEstaEnBordeIzq = true;
 	bool PjDosEstaEnBorde = PjDosEstaEnBordeIzq || PjDosEstaEnBordeDer;
 
