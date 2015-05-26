@@ -262,6 +262,10 @@ void Vista::actualizar(){
 
 	MOV_TIPO mov1 = refMundo->getCuerpo(0)->getControlador()->getMovimientos().back();
 	MOV_TIPO mov2 = refMundo->getCuerpo(1)->getControlador()->getMovimientos().back();
+	ESTADO estadoPj1 = refMundo->getCuerpo(0)->getEstado();
+	ESTADO estadoPj2 = refMundo->getCuerpo(1)->getEstado();
+
+
 
 	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer)) {
 		refMundo->FrenarCuerpos();
@@ -302,6 +306,10 @@ void Vista::actualizar(){
 			camaraXLog += personajesVista[1]->getDeltaX();
 		else if (mov1 == DER)
 			camaraXLog += personajesVista[0]->getDeltaX();
+		else if (estadoPj1.movimiento == SALTODIAGDER)
+			camaraXLog += personajesVista[0]->getDeltaX();
+		else if (estadoPj2.movimiento == SALTODIAGDER)
+			camaraXLog += personajesVista[1]->getDeltaX();
 	}
 
 	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer){
