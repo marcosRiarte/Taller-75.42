@@ -248,7 +248,7 @@ void Vista::actualizar(){
 	// condicion de borde Personaje Uno
 	bool PjUnoEstaEnBordeIzq = false;
 	bool PjUnoEstaEnBordeDer = false;
-	if (xPjUno + manejadorULog.darLongUnidades(sensorPj1->getPosicion().first + (sensorPj1->getAncho()/2)) > anchoVentana - camaraXLog)
+	if (xPjUno + manejadorULog.darLongUnidades(sensorPj1->getPosicion().first + (sensorPj1->getAncho())) > anchoVentana - camaraXLog)
 		PjUnoEstaEnBordeDer = true;
 	if (xPjUno + manejadorULog.darLongUnidades(sensorPj1->getPosicion().first) < -camaraXLog)
 		PjUnoEstaEnBordeIzq = true;
@@ -257,7 +257,7 @@ void Vista::actualizar(){
 	// condicion de borde Personaje Dos
 	bool PjDosEstaEnBordeIzq = false;
 	bool PjDosEstaEnBordeDer = false;
-	if (xPjDos + manejadorULog.darLongUnidades(sensorPj2->getPosicion().first + (sensorPj2->getAncho() / 2)) > anchoVentana - camaraXLog)
+	if (xPjDos + manejadorULog.darLongUnidades(sensorPj2->getPosicion().first + (sensorPj2->getAncho())) > anchoVentana - camaraXLog)
 		PjDosEstaEnBordeDer = true;
 	if (xPjDos+ manejadorULog.darLongUnidades(sensorPj2->getPosicion().first)< -camaraXLog)
 		PjDosEstaEnBordeIzq = true;
