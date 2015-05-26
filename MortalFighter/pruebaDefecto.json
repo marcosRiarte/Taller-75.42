@@ -7,7 +7,7 @@
     "escenario": {
         "ancho": 1000.5,
         "alto": 150,
-        "ypiso": 20
+        "ypiso": 15
     },
     "capas": [
         {
@@ -16,22 +16,22 @@
         },
         {
             "imagen_fondo": "ima/bkg/default_p4.png",
-            "ancho": 700.5
+            "ancho": 260
         },
         {
             "imagen_fondo": "ima/bkg/default_p3.png",
-            "ancho": 600.5
+            "ancho": 395
         },
         {
             "imagen_fondo": "ima/bkg/default_p2.png",
-            "ancho": 500.5
+            "ancho": 500
         },
         {
             "imagen_fondo": "ima/bkg/default_p1.png",
-            "ancho": 800.5
+            "ancho": 1212
         }
     ],
-   "personajes": [
+    "personajes": [
         {
             "ancho": 80,
             "alto": 90,
@@ -44,7 +44,7 @@
             "Salto": "Salto",
             "SaltoDiagonal": "SaltoDiagonal",
             "Caida": "Caida",
-            "nombre": "Vacio"
+            "nombre": "Scorpion"
         },
         {
             "ancho": 80,
@@ -58,13 +58,13 @@
             "Salto": "Salto",
             "SaltoDiagonal": "SaltoDiagonal",
             "Caida": "Caida",
-            "nombre": "Vacio"
+            "nombre": "Scorpion"
 
         }
     ],
     "pelea": 
         { 
-           "fighters": "Vacio VS Vacio"
+           "fighters": "Scorpion VS Scorpion"
         },
     
 

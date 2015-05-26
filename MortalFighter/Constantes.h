@@ -14,10 +14,10 @@
 
 //Constantes para la vista
 //VENTANA
-#define ANCHO_MIN 640
-#define ALTO_MIN 480
-#define ANCHO_PX_VENTANA 80
-#define ALTO_PX_VENTANA 60
+#define ANCHO_MIN 50
+#define ALTO_MIN 50
+#define ANCHO_PX_VENTANA 800
+#define ALTO_PX_VENTANA 600
 #define ANCHO_VENTANA 200.0f
 #define TITULO_VENTANA "Bickbox"
 #define ICONO "ima/Bbx_icono.png"
@@ -57,16 +57,16 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define MAX_ANCHO_ESCENARIO 4000.0f
 #define ALTO_ESCENARIO 150.0f
 #define MAX_ALTO_ESCENARIO 2000.0f
-#define Y_PISO_ESCENARIO 20.0f
+#define Y_PISO_ESCENARIO 15.0f
 
 //CAPA
 #define ANCHO_CAPA 500.0f
 #define ZINDEX_CAPA 0
 
 //PERSONAJE
-#define ANCHO_PERSONAJE 50.0f
+#define ANCHO_PERSONAJE 80.0f
 #define MAX_ANCHO_PERSONAJE 1000.0f
-#define ALTO_PERSONAJE 70.0f
+#define ALTO_PERSONAJE 90.0f
 #define MAX_ALTO_PERSONAJE 1000.0f
 
 #define ZINDEX 1
