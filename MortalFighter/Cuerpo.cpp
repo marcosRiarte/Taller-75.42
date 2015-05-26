@@ -104,7 +104,42 @@ bool Cuerpo::estaEnBorde2()
 	return true;
 }
 
+// nacho: devuelve el max x del sensor
+int Cuerpo::getSensorLargo()
+{
+	// valor default
+	int xSensor = 0;
+	int maximo = 0;
+	std::vector<Sensor*>* sensoresAct = getSensores();
+	for (size_t i = 0; i < sensoresAct->size(); i++)
+	{
+		int xSensor = sensoresAct->at(i)->getPosicion().first;
+		if (xSensor > maximo) 			
+			maximo = xSensor;		
+	}
 
+	return maximo;
+}
+
+void Cuerpo::limitarAEscenario()
+{
+	ManejadorULogicas manejadorUnidades;
+	float xSensorLog = manejadorUnidades.darLongUnidades(getSensorLargo());
+
+	// limita inicio del escenario
+	if (posicion.x + xSensorLog < 0)
+		// la posicion tiene que ser negativa por el espacio 
+		// transparente del sprite, se toma el x sensor, como inicio
+		posicion.x = -xSensorLog;
+	
+
+	float largoPersonaje = getRefPersonaje()->getAncho() - xSensorLog;
+
+	// limita fin de escenario
+	if (posicion.x + largoPersonaje > Parser::getInstancia().getEscenario().getAncho())
+		// se toma el ancho del sensor, como parametro
+		posicion.x = Parser::getInstancia().getEscenario().getAncho() - largoPersonaje;
+}
 
 
 Personaje* Cuerpo::getRefPersonaje(){
@@ -122,14 +157,9 @@ void Cuerpo::sumarPosicion(const vector2D& unaPosicion)
 		velocidad.y = 0.0f;
 	}
 
-	// que no se mueva más allá del borde
-	if (estaEnBorde())
-		// nacho: ubica en el borde considerando su ancho
-		// el -2 es para que no se vea una linea en el limite
-		posicion.x = Parser::getInstancia().getEscenario().getAncho() - getRefPersonaje()->getAncho() -2;
-	// que no se mueva menos del cero
-	if (posicion.x <= 0)
-		posicion.x = 0;
+	// que no se mueva más allá de los límites del escenario
+	limitarAEscenario();
+
 }
 
 void Cuerpo::mover(float unaDistancia)
