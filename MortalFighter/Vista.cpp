@@ -286,39 +286,22 @@ void Vista::actualizar(){
 			refMundo->LiberarCuerpos();
 	}
 
-	if (PjUnoEstaEnBorde && !PjDosEstaEnBorde) {
-		camaraXLog += personajesVista[0]->getDeltaX();
-	}
-	if (!PjUnoEstaEnBorde && PjDosEstaEnBorde) {
-		camaraXLog += personajesVista[1]->getDeltaX();
-	}
+	
 
-	if (PjUnoEstaEnBordeIzq && PjDosEstaEnBordeIzq){
-		if ((mov1 == IZQ) && (mov2 == IZQ))
+	if (PjUnoEstaEnBordeIzq)
+		if ((mov1 == IZQ) || (estadoPj1.movimiento == SALTODIAGIZQ))
 			camaraXLog += personajesVista[0]->getDeltaX();
-		else if (mov2 == IZQ)
+	if (PjDosEstaEnBordeIzq)
+		if ((mov2 == IZQ) || (estadoPj1.movimiento == SALTODIAGIZQ))
 			camaraXLog += personajesVista[1]->getDeltaX();
-		else if (mov1 == IZQ)
+	if (PjUnoEstaEnBordeDer)
+		if ((mov1 == DER) || (estadoPj1.movimiento == SALTODIAGDER))
 			camaraXLog += personajesVista[0]->getDeltaX();
-	}
+	if (PjDosEstaEnBordeDer)
+		if ((mov2 == DER) || (estadoPj2.movimiento == SALTODIAGDER))
+			camaraXLog += personajesVista[1]->getDeltaX();
 
-	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer){
-		if ((mov1 == DER) && (mov2 == DER))
-			camaraXLog += personajesVista[0]->getDeltaX();
-		else if (mov2 == DER)
-			camaraXLog += personajesVista[1]->getDeltaX();
-		else if (mov1 == DER)
-			camaraXLog += personajesVista[0]->getDeltaX();
-		else if (estadoPj1.movimiento == SALTODIAGDER)
-			camaraXLog += personajesVista[0]->getDeltaX();
-		else if (estadoPj2.movimiento == SALTODIAGDER)
-			camaraXLog += personajesVista[1]->getDeltaX();
-	}
 
-	if (PjUnoEstaEnBordeDer && PjDosEstaEnBordeDer){
-		if (mov1 == IZQ)
-			camaraXLog += personajesVista[1]->getDeltaX();
-	}
 
 	// nacho: la camara queda contenida dentro del escenario
 	if (camaraXLog > 0) camaraXLog = 0;
