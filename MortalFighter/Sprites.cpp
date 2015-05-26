@@ -246,6 +246,9 @@ void Sprite::redimensionarSensores(float anchoPjPx, float altoPjPx)
 	float relacionAncho = (float)anchoPjPx / (float)cuadroBase->w;
 	float relacionAlto = (float)altoPjPx / (float)cuadroBase->h;
 
+	sensoresDisparo.at(0)->setPosicion(std::make_pair(anchoPjPx / 2, altoPjPx / 3));
+	sensoresDisparo.at(0)->setPosicionInicial(std::make_pair(anchoPjPx / 2, altoPjPx / 3));
+
 	for (size_t i = 0; i < Sensores.size(); i++) 
 		for (size_t j = 0; j < Sensores[i]->size(); j++){
 			Sensores[i]->at(j)->setAlto(relacionAlto * Sensores[i]->at(j)->getAlto());

@@ -11,29 +11,29 @@
     },
     "capas": [
         {
-            "imagen_fondo": "ima/bkg/r_bkg.png",
+            "imagen_fondo": "ima/bkg/p_bkg.png",
             "ancho": 200
         },
         {
-            "imagen_fondo": "ima/bkg/r_4.png",
+            "imagen_fondo": "ima/bkg/p_4.png",
             "ancho": 260
         },
         {
-            "imagen_fondo": "ima/bkg/r_3.png",
+            "imagen_fondo": "ima/bkg/p_3.png",
             "ancho": 395
         },
         {
-            "imagen_fondo": "ima/bkg/r_2.png",
+            "imagen_fondo": "ima/bkg/p_2.png",
             "ancho": 500
         },
         {
-            "imagen_fondo": "ima/bkg/r_1.png",
+            "imagen_fondo": "ima/bkg/p_1.png",
             "ancho": 1212
         }
     ],
     "personajes": [
         {
-            "ancho": 80,
+            "ancho": 20,
             "alto": 90,
             "zindex": 1,
             "orientacion": "DER",

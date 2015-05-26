@@ -16,6 +16,12 @@ Sensor::Sensor(std::pair<int, int> unaposicion, int unancho, int unalto, bool va
 void Sensor::setPosicion(std::pair<float, float> unaposicion){
 	posicion = unaposicion;
 }
+
+void Sensor::setPosicionInicial(std::pair<float, float> unaposicionInicial){
+	posicionInicial = unaposicionInicial;
+}
+
+
 void Sensor::resetearPosicionInicial(){
 	posicion = posicionInicial;
 }
