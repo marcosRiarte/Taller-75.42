@@ -320,6 +320,9 @@ void Vista::actualizar(){
 			camaraXLog += personajesVista[1]->getDeltaX();
 	}
 
+	// nacho: la camara queda contenida dentro del escenario
+	if (camaraXLog > 0) camaraXLog = 0;
+	if (camaraXLog < -anchoEscenario + anchoVentana) camaraXLog = -anchoEscenario + anchoVentana;
 	//camaraXLog += personajesVista[0]->getDeltaX();
 
 	//Vibracion de la camara

@@ -317,6 +317,7 @@ public:
 	Sprite* getSprite() const;
 	void setposProyectilAnterior(float posAnteriorProyectil);
 	float getXProyectilAnterior();
+	void limitarAEscenario();
 
 private:
 	std::vector<Sensor*>* getSensoresActivos() const;
@@ -334,4 +335,6 @@ private:
 	std::vector<std::vector<Sensor*>*> sensores;
 	std::vector<Sensor*> sensoresDisparo;
 	std::string sensorActivoStr;
+	// nacho: devuelve el max x del sensor
+	int getSensorLargo();	
 };
