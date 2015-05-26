@@ -33,7 +33,7 @@ void Cuerpo::setposProyectilAnterior(float unaposAnteriorProyectil){
 	posAnteriorProyectil = unaposAnteriorProyectil;
 }
 
-float Cuerpo::getposProyectilAnterior(){
+float Cuerpo::getXProyectilAnterior(){
 	return posAnteriorProyectil;
 }
 

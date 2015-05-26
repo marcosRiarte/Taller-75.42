@@ -316,7 +316,7 @@ public:
 	Personaje* Cuerpo::getRefPersonaje();
 	Sprite* getSprite() const;
 	void setposProyectilAnterior(float posAnteriorProyectil);
-	float getposProyectilAnterior();
+	float getXProyectilAnterior();
 
 private:
 	std::vector<Sensor*>* getSensoresActivos() const;
