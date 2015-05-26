@@ -803,9 +803,6 @@ ESTADO Mundo::ResolverAtaques(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 		resolverChoque(unCuerpo, elOtroCuerpo, proyectilUno, proyectilDos, invertido);
 	}
 	else {
-		if (proyectilUno->estaActivo()){
-			nuevoEstado = ResolverArma(elOtroCuerpo, unCuerpo, proyectilUno, invertido, nuevoEstado);
-		}
 		if (proyectilDos->estaActivo()){
 			nuevoEstado = ResolverArma(elOtroCuerpo, unCuerpo, proyectilDos, invertido, nuevoEstado);
 		}
