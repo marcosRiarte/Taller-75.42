@@ -5,6 +5,7 @@ public:
 	Sensor(std::pair<int, int> posicion, int alto, int ancho, bool esHitBox, std::string unestadoStr);
 	
 	void setPosicion(std::pair<float, float> posicion);
+	void setPosicionInicial(std::pair<float, float> unaposicionInicial);
 	void setAlto(int alto);
 	void setAncho(int ancho);
 	void setHitbox(bool valorHitBox);
