@@ -287,16 +287,16 @@ void Vista::actualizar(){
 	}
 
 	if (PjUnoEstaEnBordeIzq)
-		if ((mov1 == IZQ) || (estadoPj1.movimiento == SALTODIAGIZQ))
+		if (personajesVista[0]->getDeltaX() > 0)
 			camaraXLog += personajesVista[0]->getDeltaX();
 	if (PjDosEstaEnBordeIzq)
-		if ((mov2 == IZQ) || (estadoPj1.movimiento == SALTODIAGIZQ))
+		if (personajesVista[1]->getDeltaX() > 0)
 			camaraXLog += personajesVista[1]->getDeltaX();
 	if (PjUnoEstaEnBordeDer)
-		if ((mov1 == DER) || (estadoPj1.movimiento == SALTODIAGDER))
+		if (personajesVista[0]->getDeltaX() < 0)
 			camaraXLog += personajesVista[0]->getDeltaX();
 	if (PjDosEstaEnBordeDer)
-		if ((mov2 == DER) || (estadoPj2.movimiento == SALTODIAGDER))
+		if (personajesVista[1]->getDeltaX() < 0)
 			camaraXLog += personajesVista[1]->getDeltaX();
 
 
