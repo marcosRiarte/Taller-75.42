@@ -286,8 +286,6 @@ void Vista::actualizar(){
 			refMundo->LiberarCuerpos();
 	}
 
-	
-
 	if (PjUnoEstaEnBordeIzq)
 		if ((mov1 == IZQ) || (estadoPj1.movimiento == SALTODIAGIZQ))
 			camaraXLog += personajesVista[0]->getDeltaX();
