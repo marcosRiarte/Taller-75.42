@@ -116,36 +116,42 @@ void MatizColor::setMatiz(Uint32* pixel, double desplazamiento, double hOriginal
 	int intermedio = (int)round(croma * (1 - abs(restoReal(hDec, 2) - 1)));
 	int cromaInt = (int)round(croma);
 
+	Uint8 color1 = Uint8(cromaInt + *minRGBRef);	
+	Uint8 color2 = Uint8(intermedio + *minRGBRef);
+	Uint8 color3 = Uint8(*minRGBRef);
+
+
+
 	if ((hOriginal == -1) || (hDec < 0)) return;
 
 	if (hDec < 1)
 	{
-		*pixel = SDL_MapRGB(superficie->format, cromaInt + *minRGBRef, intermedio + *minRGBRef, *minRGBRef);
+		*pixel = SDL_MapRGB(superficie->format, color1, color2, color3);
 		return;
 	}
 	if (hDec < 2)
 	{
-		*pixel = SDL_MapRGB(superficie->format, intermedio + *minRGBRef, cromaInt + *minRGBRef, *minRGBRef);
+		*pixel = SDL_MapRGB(superficie->format, color2, color1, color3);
 		return;
 	}
 	if (hDec < 3)
 	{
-		*pixel = SDL_MapRGB(superficie->format, *minRGBRef, cromaInt + *minRGBRef, intermedio + *minRGBRef);
+		*pixel = SDL_MapRGB(superficie->format, color3, color1, color2);
 		return;
 	}
 	if (hDec < 4)
 	{
-		*pixel = SDL_MapRGB(superficie->format, *minRGBRef, intermedio + *minRGBRef, cromaInt + *minRGBRef);
+		*pixel = SDL_MapRGB(superficie->format, color3, color2, color1);
 		return;
 	}
 	if (hDec < 5)
 	{
-		*pixel = SDL_MapRGB(superficie->format, intermedio + *minRGBRef, *minRGBRef, cromaInt + *minRGBRef);
+		*pixel = SDL_MapRGB(superficie->format, color2, color3, color1);
 		return;
 	}
 	if (hDec < 6)
 	{
-		*pixel = SDL_MapRGB(superficie->format, cromaInt + *minRGBRef, *minRGBRef, intermedio + *minRGBRef);
+		*pixel = SDL_MapRGB(superficie->format, color1, color3, color2);
 		return;
 	}
 
