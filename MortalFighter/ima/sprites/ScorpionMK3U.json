@@ -1118,13 +1118,7 @@
                         "esHitBox": true
                     }
                 ],
-                "secuenciaSprites": [
-                    {
-                        "x": 1260,
-                        "y": 2520,
-                        "ancho": 180,
-                        "alto": 180
-                    },
+                "secuenciaSprites": [                    
                     {
                         "x": 1080,
                         "y": 2520,
@@ -1330,13 +1324,19 @@
                 ],
                 "secuenciaSprites": [
                     {
-                        "x": 900,
+                        "x": 540,
                         "y": 180,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
-                        "x": 720,
+                        "x": 540,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
                         "y": 180,
                         "ancho": 180,
                         "alto": 180
@@ -1394,13 +1394,13 @@
                 ],
                 "secuenciaSprites": [
                     {
-                        "x": 1980,
+                        "x": 1620,
                         "y": 180,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
-                        "x": 1800,
+                        "x": 1620,
                         "y": 180,
                         "ancho": 180,
                         "alto": 180
