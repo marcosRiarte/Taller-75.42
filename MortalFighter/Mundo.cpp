@@ -695,23 +695,19 @@ ESTADO Mundo::ResolverAtaques(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 		resolverChoque(unCuerpo, elOtroCuerpo, proyectilUno, proyectilDos, invertido);
 	}
 	else {
-		
+
 		if (proyectilDos->estaActivo()){
 			nuevoEstado = ResolverArma(elOtroCuerpo, unCuerpo, proyectilDos, invertido, nuevoEstado);
 		}
-		else{
-			
-			//********************************
-			//resuelve golpes
-			nuevoEstado = Mundo::ResolverColisiones(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
-
-		}
 	}
 
-	
+	//********************************
+	//resuelve golpes
+	nuevoEstado = Mundo::ResolverColisiones(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
 
 	return nuevoEstado;
-}
+	}
+
 
 
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
