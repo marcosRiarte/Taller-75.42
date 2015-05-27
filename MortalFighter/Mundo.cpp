@@ -282,19 +282,7 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 
 	}
 
-	/* logica anterior
-	if ((unCuerpo->getEstado().golpeado == GOLPEADO) && (estadoAnterior.golpeado != GOLPEADO)){
-	nuevoEstado.golpeado = GOLPEADO;
-	unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
-	if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), otroCuerpo->getEstado())) == REINICIAR){
-	nuevoEstado.golpeado = FALLECIDO;
-	std::string mensaje = "Gano personaje " + otroCuerpo->getRefPersonaje()->getNombre();
-	Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_DEBUG);
-	}
-	}
-
-	*/
-
+	
 	return nuevoEstado;
 }
 
@@ -898,7 +886,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	} //cierra el else
 
 	//Si estan superpuestos y los 2 sin ninguna accion, salvo guardia y caminando
-	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION || unCuerpo->getEstado().accion == GUARDIA || unCuerpo->getEstado().movimiento == CAMINARDER || unCuerpo->getEstado().movimiento == CAMINARIZQ) && (elOtroCuerpo->getEstado().accion == SIN_ACCION || elOtroCuerpo->getEstado().accion == GUARDIA || elOtroCuerpo->getEstado().movimiento == CAMINARIZQ || elOtroCuerpo->getEstado().movimiento == CAMINARDER)){
+	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION || unCuerpo->getEstado().accion == GUARDIA || unCuerpo->getEstado().golpeado == GOLPEADO || unCuerpo->getEstado().movimiento == CAMINARDER || unCuerpo->getEstado().movimiento == CAMINARIZQ) && (elOtroCuerpo->getEstado().accion == SIN_ACCION || elOtroCuerpo->getEstado().accion == GUARDIA || elOtroCuerpo->getEstado().movimiento == CAMINARIZQ || elOtroCuerpo->getEstado().movimiento == CAMINARDER)){
 		unCuerpo->Superponer();
 	}
 	else{
