@@ -164,6 +164,7 @@ void Cuerpo::sumarPosicion(const vector2D& unaPosicion)
 
 void Cuerpo::mover(float unaDistancia)
 {
+	if (!(this->EstaFrenado()))
 		posicion.x += unaDistancia;
 }
 
