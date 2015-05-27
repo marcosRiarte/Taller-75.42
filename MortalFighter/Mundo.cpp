@@ -155,14 +155,30 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 		if (estadoEnemigo.accion == GANCHO || (estadoEnemigo.accion == PATADA_ALTA && !(elOtroCuerpo->estaEnPiso()))){
 
 			//aca hay que aplicar un impulso
-
-				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
+			if (!(invertido)){
+				unCuerpo->aplicarImpulso(vector2D(2*-SALTO_X, (0.2)*SALTO_Y));
+				elOtroCuerpo->aplicarImpulso(vector2D(SALTO_X/2,0));
+			}
+			else{
+				unCuerpo->aplicarImpulso(vector2D(2*SALTO_X, (0.2)*SALTO_Y));
+				elOtroCuerpo->aplicarImpulso(vector2D(-SALTO_X / 2, 0));
+			}
 
 		}
 		else if (estadoEnemigo.accion != GUARDIA){ // aca como no lo arroja el impulso tiene que ser un toque
 
 
-				unCuerpo->aplicarImpulso(vector2D(-SALTO_X / 10, SALTO_Y / 10));
+			if (!(invertido)){
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y / 10));
+				elOtroCuerpo->aplicarImpulso(vector2D(SALTO_X / 2, 0));
+			}
+			else{
+				unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y / 10));
+				elOtroCuerpo->aplicarImpulso(vector2D(-SALTO_X / 2, 0));
+			}
+
+
+				
 		}
 
 	}
@@ -695,7 +711,7 @@ ESTADO Mundo::ResolverAtaques(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 		resolverChoque(unCuerpo, elOtroCuerpo, proyectilUno, proyectilDos, invertido);
 	}
 	else {
-		
+
 		if (proyectilDos->estaActivo()){
 			nuevoEstado = ResolverArma(elOtroCuerpo, unCuerpo, proyectilDos, invertido, nuevoEstado);
 		}
@@ -706,7 +722,8 @@ ESTADO Mundo::ResolverAtaques(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 	nuevoEstado = Mundo::ResolverColisiones(unCuerpo, elOtroCuerpo, invertido, nuevoEstado);
 
 	return nuevoEstado;
-}
+	}
+
 
 
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
