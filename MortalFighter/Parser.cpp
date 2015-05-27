@@ -96,7 +96,6 @@ bool Parser::parsear(std::string nombreDelArchivo)
 
 	validadorDelColor = new ValidadorDelColor();
 	validadorDelColor->validarColorDesde(color_alternativo);
-
 		
 	//PARSEO DE LOS CONTROLES
 	validadorDelControlador = new ValidadorDelControlador();
@@ -112,7 +111,15 @@ bool Parser::parsear(std::string nombreDelArchivo)
 	control_2 = raiz["control_2"];
 
 	validadorDelControlador->validarControladorDesde(control_2);
-	
+
+	//TOMAS
+	Json::Value tomas;
+	tomas = raiz["tomas"];
+
+	validadorDeTomas = new ValidadorDeTomas();
+	validadorDeTomas->validarTomasDeseParaControladorDeTomas(tomas, validadorDelControlador->getControlador1()->getControladorDeTomas());
+	validadorDeTomas->validarTomasDeseParaControladorDeTomas(tomas, validadorDelControlador->getControlador2()->getControladorDeTomas());
+
 	return true;
 }
 
@@ -167,6 +174,7 @@ void Parser::FreeInstancia()
 	delete getInstancia().validadorDeCapas;
 	delete getInstancia().validadorDelColor;
 	delete getInstancia().validadorDePelea;
+	delete getInstancia().validadorDeTomas;
 }
 
 Parser::~Parser()

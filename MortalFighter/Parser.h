@@ -13,6 +13,7 @@
 #include "ValidadorDelControlador.h"
 #include "ValidadorDePelea.h"
 #include "ValidadorDelColor.h"
+#include "ValidadorDeTomas.h"
 
 class Parser
 {
@@ -42,6 +43,7 @@ private:
 	ValidadorDelControlador* validadorDelControlador;
 	ValidadorDePelea* validadorDePelea;
 	ValidadorDelColor* validadorDelColor;
+	ValidadorDeTomas* validadorDeTomas;
 	virtual ~Parser();
 
 	Parser(Parser const&) = delete;

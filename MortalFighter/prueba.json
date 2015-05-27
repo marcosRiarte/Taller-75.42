@@ -62,20 +62,18 @@
 
         }
     ],
-    "pelea": 
-        { 
-           "fighters": "liukang VS liukang"
-        },
-    
+    "pelea": {
+        "fighters": "liukang VS liukang"
+    },
 
-    "color_alternativo": 
-        {
-            "h_inicial": -20,            // scopion 40 a 70 , liu kang -20 a 5
-            "h_final": 5,
-            "desplazamiento": 220   //x360 original, 54 verde, 100 verdeazulado, 144 celeste, 162 azul,
-                                    // 304 rojo, 330 naranja
 
-        },
+    "color_alternativo": {
+        "h_inicial": -20, // scopion 40 a 70 , liu kang -20 a 5
+        "h_final": 5,
+        "desplazamiento": 220 //x360 original, 54 verde, 100 verdeazulado, 144 celeste, 162 azul,
+        // 304 rojo, 330 naranja
+
+    },
     "control_1": {
         "arriba": "up",
         "abajo": "down",
@@ -104,6 +102,28 @@
         "arma": "u",
         "salir": "esc",
         "reiniciar": "r"
-    }
+    },
+
+    "tomas": [
+        {
+            "nombre": "Poder",
+            "error": 1,
+            "tiempo": 3000,
+            "movimientos": [
+                {
+                    "movimiento": "izquierda"
+                },
+                {
+                    "movimiento": "izquierda"
+                },
+                {
+                    "movimiento": "izquierda"
+                },
+                {
+                    "movimiento": "GB"
+                }
+            ]
+        }
+    ]
 
 }

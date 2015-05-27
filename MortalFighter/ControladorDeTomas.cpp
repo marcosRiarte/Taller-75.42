@@ -23,9 +23,12 @@ bool ControladorDeTomas::hayToma(Toma* unaToma, bool estaInvertido){
 	int aciertos = 0;
 	int j = unaToma->getMovimientos()->size() - 1;
 	MOV_TIPO otroMovimiento, unMovimiento;
-	if (movimientosActivos->size() >= (unaToma->getMovimientos()->size() + 1)){
+	if (movimientosActivos->size() >= (unaToma->getMovimientos()->size())){
 		for (int i = movimientosActivos->size() - 1; i >= 0; i--){
-			if (aciertos == unaToma->getMovimientos()->size()) return true;
+			if (aciertos == unaToma->getMovimientos()->size()){
+				movimientosActivos->clear();
+				return true;
+			}
 			if (error > unaToma->getError()) return false;
 
 			otroMovimiento = movimientosActivos->at(i);
@@ -47,6 +50,7 @@ bool ControladorDeTomas::hayToma(Toma* unaToma, bool estaInvertido){
 				aciertos++;
 			}
 		}
+		movimientosActivos->clear();
 		return true;
 	}
 	return false;
@@ -58,6 +62,11 @@ Toma* ControladorDeTomas::getTomaSegunOrientacion(bool estaInvertido){
 		if (hayToma(tomas.at(i), estaInvertido)) return tomas.at(i);
 	}
 	return nullptr;
+}
+
+
+std::vector<Toma*>* ControladorDeTomas::getTomas(){
+	return &tomas;
 }
 
 

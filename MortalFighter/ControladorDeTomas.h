@@ -10,6 +10,7 @@ public:
 	Toma* getTomaSegunOrientacion(bool estaInvertido);
 	void setToma(Toma* unaToma);
 	void setMovimientos(std::vector<MOV_TIPO>* unosMovimientosActivos);
+	std::vector<Toma*>* getTomas();
 	~ControladorDeTomas();
 
 private:

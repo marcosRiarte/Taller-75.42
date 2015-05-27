@@ -6,7 +6,18 @@ Toma::Toma()
 {
 	movimientos = std::vector<MOV_TIPO>();
 	error = 0;
+	tiempo = 2000;
 	nombre = "";
+}
+
+
+void Toma::setTiempo(int unTiempo){
+	tiempo = unTiempo;
+}
+
+
+int Toma::getTiempo(){
+	return tiempo;
 }
 
 
@@ -45,4 +56,5 @@ Toma::~Toma()
 	movimientos.clear();
 	nombre.clear();
 	error = 0;
+	tiempo = 0;
 }
