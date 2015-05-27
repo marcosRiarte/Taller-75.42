@@ -144,7 +144,7 @@
                         "y": 360,
                         "ancho": 180,
                         "alto": 180
-                    }                
+                    }
                 ]
             },
             "AgachadoGolpeado": {
@@ -575,7 +575,7 @@
                         "y": 1440,
                         "ancho": 180,
                         "alto": 180
-                    },                    
+                    },
                     {
                         "x": 180,
                         "y": 1440,
@@ -615,7 +615,7 @@
                         "alto": 105,
                         "nSprite": 0,
                         "esHitBox": true
-                    },                    
+                    },
                     {
                         "x": 95,
                         "y": 40,
@@ -624,7 +624,7 @@
                         "nSprite": 0,
                         "esHitBox": true
                     }
-                    
+
                 ],
                 "secuenciaSprites": [
                     {
@@ -889,7 +889,7 @@
                     }
                 ]
             },
-             "GolpeBajo2": {
+            "GolpeBajo2": {
                 "sensores": [
                     {
                         "x": 88,
@@ -1035,7 +1035,7 @@
                         "ancho": 180,
                         "alto": 180
                     },
-                     {
+                    {
                         "x": 1260,
                         "y": 2160,
                         "ancho": 180,
@@ -1118,7 +1118,7 @@
                         "esHitBox": true
                     }
                 ],
-                "secuenciaSprites": [                    
+                "secuenciaSprites": [
                     {
                         "x": 1080,
                         "y": 2520,
@@ -1409,12 +1409,13 @@
                     },
                     {
                         "x": 50,
-                        "y": 80,
+                        "y": 90,
                         "ancho": 80,
                         "alto": 90,
                         "nSprite": 0,
                         "esHitBox": true
                     }
+
                 ],
                 "secuenciaSprites": [
                     {
