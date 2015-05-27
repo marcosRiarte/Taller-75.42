@@ -26,7 +26,8 @@ void Personaje::copiarAtributosDe(Personaje* unPersonaje){
 	patadaalta = unPersonaje->getPatadaAlta();
 	agachado = unPersonaje->getAgacharse();
 	golpeado = unPersonaje->getGolpeado();
-	sprites = unPersonaje->getSprite();
+	sprites = new Sprite(unPersonaje->getSpriteDir());
+	setSprites(unPersonaje->getSpriteDir());
 	posicionUn = unPersonaje->getPosicionUn();
 	deltaX = unPersonaje->getDeltaX();
 	estadoActual = unPersonaje->getEstado();
