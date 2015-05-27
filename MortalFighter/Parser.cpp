@@ -112,14 +112,14 @@ bool Parser::parsear(std::string nombreDelArchivo)
 
 	validadorDelControlador->validarControladorDesde(control_2);
 
-	/*//TOMAS
+	//TOMAS
 	Json::Value tomas;
 	tomas = raiz["tomas"];
 
 	validadorDeTomas = new ValidadorDeTomas();
 	validadorDeTomas->validarTomasDeseParaControladorDeTomas(tomas, validadorDelControlador->getControlador1()->getControladorDeTomas());
 	validadorDeTomas->validarTomasDeseParaControladorDeTomas(tomas, validadorDelControlador->getControlador2()->getControladorDeTomas());
-	*/
+	
 
 	return true;
 }

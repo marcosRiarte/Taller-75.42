@@ -1,7 +1,7 @@
 #pragma once
 #include "Constantes.h"
 #include "ConversorDeEventos.h"
-//#include "ControladorDeTomas.h"
+#include "ControladorDeTomas.h"
 
 class Controlador
 {
@@ -14,7 +14,7 @@ public:
 	ConversorDeEventos* getConversorDeEventos();
 	void setConversorDeEventos(ConversorDeEventos* unConversorDeEventos);
 	MOV_TIPO getUltimoMovimientoActivo();
-	//ControladorDeTomas* getControladorDeTomas();
+	ControladorDeTomas* getControladorDeTomas();
 
 private:
 	int j;
@@ -31,7 +31,7 @@ private:
 	Sint16 valorDelEje;
 	int cantidadDeEventosAnterior;
 	int otraCantidadDeEventosAnterior;
-	//ControladorDeTomas* controladorDeTomas;
+	ControladorDeTomas* controladorDeTomas;
 	bool golpeBajoTecladoHabilitado;
 	bool golpeAltoTecladoHabilitado;
 	bool patadaBajaTecladoHabilitada;

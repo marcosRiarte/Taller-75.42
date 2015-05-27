@@ -18,8 +18,8 @@ Controlador::Controlador()
 	movimientosActivos = std::vector<MOV_TIPO>();
 	movimientosActivos.push_back(QUIETO);
 
-	//controladorDeTomas = new ControladorDeTomas();
-	//controladorDeTomas->setMovimientos(&movimientosActivos);
+	controladorDeTomas = new ControladorDeTomas();
+	controladorDeTomas->setMovimientos(&movimientosActivos);
 
 	conversorDeEventos = nullptr;
 	if (SDL_NumJoysticks() > 0){
@@ -68,9 +68,9 @@ void Controlador::mantenerMovimientos(){
 }
 
 
-/*ControladorDeTomas* Controlador::getControladorDeTomas(){
+ControladorDeTomas* Controlador::getControladorDeTomas(){
 	return controladorDeTomas;
-}*/
+}
 
 
 MOV_TIPO Controlador::getUltimoMovimientoActivo(){
@@ -1157,5 +1157,5 @@ ConversorDeEventos* Controlador::getConversorDeEventos(){
 Controlador::~Controlador()
 {
 	movimientos.clear();
-	//delete controladorDeTomas;
+	delete controladorDeTomas;
 }

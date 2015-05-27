@@ -176,6 +176,9 @@
     <ClInclude Include="Toma.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ValidadorDeTomas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -266,6 +269,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Toma.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ValidadorDeTomas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
