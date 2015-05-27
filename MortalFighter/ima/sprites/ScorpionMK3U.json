@@ -1314,12 +1314,20 @@
             "SaltoGolpe": {
                 "sensores": [
                     {
-                        "x": 90,
-                        "y": 45,
-                        "ancho": 34,
-                        "alto": 80,
+                        "x": 110,
+                        "y": 85,
+                        "ancho": 50,
+                        "alto": 70,
                         "nSprite": 0,
                         "esHitBox": false
+                    },
+                    {
+                        "x": 50,
+                        "y": 80,
+                        "ancho": 80,
+                        "alto": 90,
+                        "nSprite": 0,
+                        "esHitBox": true
                     }
                 ],
                 "secuenciaSprites": [
@@ -1352,12 +1360,20 @@
             "SaltoPatada": {
                 "sensores": [
                     {
-                        "x": 90,
-                        "y": 45,
-                        "ancho": 34,
-                        "alto": 80,
+                        "x": 80,
+                        "y": 85,
+                        "ancho": 50,
+                        "alto": 70,
                         "nSprite": 0,
                         "esHitBox": false
+                    },
+                    {
+                        "x": 50,
+                        "y": 80,
+                        "ancho": 80,
+                        "alto": 90,
+                        "nSprite": 0,
+                        "esHitBox": true
                     }
                 ],
                 "secuenciaSprites": [
@@ -1384,12 +1400,20 @@
             "SaltoDiagonalPatada": {
                 "sensores": [
                     {
-                        "x": 90,
-                        "y": 45,
-                        "ancho": 34,
-                        "alto": 80,
+                        "x": 95,
+                        "y": 105,
+                        "ancho": 60,
+                        "alto": 60,
                         "nSprite": 0,
                         "esHitBox": false
+                    },
+                    {
+                        "x": 50,
+                        "y": 80,
+                        "ancho": 80,
+                        "alto": 90,
+                        "nSprite": 0,
+                        "esHitBox": true
                     }
                 ],
                 "secuenciaSprites": [
