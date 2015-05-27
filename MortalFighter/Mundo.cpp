@@ -157,11 +157,11 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 			//aca hay que aplicar un impulso
 			if (!(invertido)){
 				unCuerpo->aplicarImpulso(vector2D(2*-SALTO_X, (0.2)*SALTO_Y));
-				elOtroCuerpo->aplicarImpulso(vector2D(SALTO_X/2,0));
+				elOtroCuerpo->mover(3*DISTANCIA);
 			}
 			else{
 				unCuerpo->aplicarImpulso(vector2D(2*SALTO_X, (0.2)*SALTO_Y));
-				elOtroCuerpo->aplicarImpulso(vector2D(-SALTO_X / 2, 0));
+				elOtroCuerpo->mover(3*-DISTANCIA);
 			}
 
 		}
@@ -170,11 +170,13 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 
 			if (!(invertido)){
 				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y / 10));
-				elOtroCuerpo->aplicarImpulso(vector2D(SALTO_X / 2, 0));
+				elOtroCuerpo->mover(2*DISTANCIA);
+				
 			}
 			else{
 				unCuerpo->aplicarImpulso(vector2D(SALTO_X, SALTO_Y / 10));
-				elOtroCuerpo->aplicarImpulso(vector2D(-SALTO_X / 2, 0));
+				elOtroCuerpo->mover(2*-DISTANCIA);
+				
 			}
 
 
@@ -188,20 +190,48 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 
 			if (estadoAnterior.accion == GUARDIA){ //poca demora, poco desplazamiento
 				nuevoEstado.accion = GUARDIA;
-				if (!(invertido))
-				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, 0));
-				else
-				unCuerpo->aplicarImpulso(vector2D(SALTO_X, 0));
-				//unCuerpo->setDemora(200);
-				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+				if (!(invertido)){
+					unCuerpo->mover(2 * -DISTANCIA);
+					elOtroCuerpo->mover(2 * DISTANCIA);
+				}
+				else{
+					unCuerpo->mover(2 * DISTANCIA);
+					elOtroCuerpo->mover(2 * -DISTANCIA);
+					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+				}
 			}
 			else{
-				if (!(invertido))
-				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, 0));
-				else
-					unCuerpo->aplicarImpulso(vector2D(SALTO_X, 0));
-				//unCuerpo->setDemora(300);
-				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+
+				if (estadoEnemigo.accion == GANCHO){
+
+					//aca hay que aplicar un impulso
+					if (!(invertido)){
+						unCuerpo->aplicarImpulso(vector2D(2 * -SALTO_X, (0.2)*SALTO_Y));
+						elOtroCuerpo->mover(3 * DISTANCIA);
+					}
+					else{
+						unCuerpo->aplicarImpulso(vector2D(2 * SALTO_X, (0.2)*SALTO_Y));
+						elOtroCuerpo->mover(3 * -DISTANCIA);
+					}
+
+				}
+
+
+				else{
+
+
+
+					if (!(invertido)){
+						unCuerpo->mover(3 * -DISTANCIA);
+						elOtroCuerpo->mover(2 * DISTANCIA);
+					}
+					else{
+						unCuerpo->mover(3 * DISTANCIA);
+						elOtroCuerpo->mover(2 * -DISTANCIA);
+						unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+					}
+
+				}
 
 			}
 			nuevoEstado.movimiento = AGACHADO;
@@ -215,10 +245,10 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 			if (estadoAnterior.accion == GUARDIA){ //poca demora, poco desplazamiento
 				nuevoEstado.accion = GUARDIA;
 				if (!(invertido))
-				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, 0));
+					unCuerpo->mover(-DISTANCIA);
+				
 				else
-				unCuerpo->aplicarImpulso(vector2D(SALTO_X, 0));
-				//unCuerpo->setDemora(10);
+					unCuerpo->mover(DISTANCIA);
 				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 			}
 			else{// no esta en guardia analizar golpes
@@ -234,7 +264,12 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 				}
 				else if (estadoEnemigo.accion != GUARDIA){ // aca como no lo arroja el impulso tiene que ser un toque
 
-						unCuerpo->aplicarImpulso(vector2D(10, 10));
+					if (!(invertido))
+						unCuerpo->mover(3*-DISTANCIA);
+
+					else
+						unCuerpo->mover(3*DISTANCIA);
+					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 
 				}
 
