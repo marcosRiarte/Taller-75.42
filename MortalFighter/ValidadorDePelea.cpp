@@ -36,7 +36,7 @@ void ValidadorDePelea::validarPeleaDesdeParaLosPeronajes(Json::Value unaPelea, s
 		if (unaPelea.isMember("fighters") && (unaPelea.get("fighters", PELEA_INICIAL).isString())){
 			fighters = unaPelea.get("fighters", PELEA_INICIAL).asString();
 			
-			for (int k = 0; k < fighters.size(); k++){
+			for (size_t k = 0; k < fighters.size(); k++){
 				fighters.replace(k, 1, 1, (char)tolower(fighters.at(k)));
 			}
 
@@ -51,7 +51,7 @@ void ValidadorDePelea::validarPeleaDesdeParaLosPeronajes(Json::Value unaPelea, s
 				corte = false;
 				while (!corte && (i < personajes->size())){
 					peleador = personajes->at(i)->getNombre();
-					for (int j = 0; j < peleador.size(); j++){
+					for (size_t j = 0; j < peleador.size(); j++){
 						peleador.replace(j, 1, 1, (char)tolower(peleador.at(j)));
 					}
 					if (peleaAux == peleador){
@@ -73,7 +73,7 @@ void ValidadorDePelea::validarPeleaDesdeParaLosPeronajes(Json::Value unaPelea, s
 					corte = false;
 					while (!corte && (i < personajes->size())){
 						peleador = personajes->at(i)->getNombre();
-						for (int l = 0; l < peleador.size(); l++){
+						for (size_t l = 0; l < peleador.size(); l++){
 							peleador.replace(l, 1, 1, (char)tolower(peleador.at(l)));
 						}
 						if (fighters == peleador){

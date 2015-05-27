@@ -7,6 +7,10 @@ Controlador::Controlador()
 	cantidadDeEventosAnterior = 0;
 	otraCantidadDeEventosAnterior = 0;
 	j = 0;
+	golpeBajoTecladoHabilitado = true;
+	golpeAltoTecladoHabilitado = true;
+	patadaBajaTecladoHabilitada = true;
+	patadaAltaTecladoHabilitada = true;
 
 	movimientos = std::vector<MOV_TIPO>();
 	movimientos.push_back(QUIETO);
@@ -15,7 +19,7 @@ Controlador::Controlador()
 	movimientosActivos.push_back(QUIETO);
 
 	controladorDeTomas = new ControladorDeTomas();
-	//controladorDeTomas->setMovimientos(&movimientosActivos);
+	controladorDeTomas->setMovimientos(&movimientosActivos);
 
 	conversorDeEventos = nullptr;
 	if (SDL_NumJoysticks() > 0){
@@ -107,6 +111,11 @@ int Controlador::cambiar(){
 	}
 
 	//TECLADO--------------------------------------------------------------------------
+	if (!state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LOW_PUNCH)]) golpeBajoTecladoHabilitado = true;
+	if (!state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HIGH_PUNCH)]) golpeAltoTecladoHabilitado = true;
+	if (!state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LOW_KICK)]) patadaBajaTecladoHabilitada = true;
+	if (!state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HIGH_KICK)]) patadaAltaTecladoHabilitada = true;
+
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::QUIT)]) {
 		return FIN;
 	}
@@ -116,47 +125,59 @@ int Controlador::cambiar(){
 	}
 
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LOW_PUNCH)]){
-		if (movimientos.back() == ABAJO){
-			movimientos.push_back(G_ABAJO);
+		if (golpeBajoTecladoHabilitado){
+			golpeBajoTecladoHabilitado = false;
+			if (movimientos.back() == ABAJO){
+				movimientos.push_back(G_ABAJO);
+				return CONTINUAR;
+			}
+			if (movimientos.back() == G_ABAJO) return CONTINUAR;
+
+			if (movimientos.back() != G_BAJO) movimientos.push_back(G_BAJO);
 			return CONTINUAR;
 		}
-		if (movimientos.back() == G_ABAJO) return CONTINUAR;
-
-		if(movimientos.back() != G_BAJO) movimientos.push_back(G_BAJO);
-		return CONTINUAR;
 	}
 
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HIGH_PUNCH)]){
-		if (movimientos.back() == ABAJO){
-			movimientos.push_back(G_GANCHO);
+		if (golpeAltoTecladoHabilitado){
+			golpeAltoTecladoHabilitado = false;
+			if (movimientos.back() == ABAJO){
+				movimientos.push_back(G_GANCHO);
+				return CONTINUAR;
+			}
+			if (movimientos.back() == G_GANCHO) return CONTINUAR;
+
+			if (movimientos.back() != G_ALTO) movimientos.push_back(G_ALTO);
 			return CONTINUAR;
 		}
-		if (movimientos.back() == G_GANCHO) return CONTINUAR;
-
-		if (movimientos.back() != G_ALTO) movimientos.push_back(G_ALTO);
-		return CONTINUAR;
 	}
 
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LOW_KICK)]){
-		if (movimientos.back() == ABAJO){
-			movimientos.push_back(P_BAJA_ABAJO);
+		if (patadaBajaTecladoHabilitada){
+			patadaBajaTecladoHabilitada = false;
+			if (movimientos.back() == ABAJO){
+				movimientos.push_back(P_BAJA_ABAJO);
+				return CONTINUAR;
+			}
+			if (movimientos.back() == P_BAJA_ABAJO) return CONTINUAR;
+
+			if (movimientos.back() != P_BAJA) movimientos.push_back(P_BAJA);
 			return CONTINUAR;
 		}
-		if (movimientos.back() == P_BAJA_ABAJO) return CONTINUAR;
-
-		if (movimientos.back() != P_BAJA) movimientos.push_back(P_BAJA);
-		return CONTINUAR;
 	}
 
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HIGH_KICK)]){
-		if (movimientos.back() == ABAJO){
-			movimientos.push_back(P_ALTA_ABAJO);
+		if (patadaAltaTecladoHabilitada){
+			patadaAltaTecladoHabilitada = false;
+			if (movimientos.back() == ABAJO){
+				movimientos.push_back(P_ALTA_ABAJO);
+				return CONTINUAR;
+			}
+			if (movimientos.back() == P_ALTA_ABAJO) return CONTINUAR;
+
+			if (movimientos.back() != P_ALTA) movimientos.push_back(P_ALTA);
 			return CONTINUAR;
 		}
-		if (movimientos.back() == P_ALTA_ABAJO) return CONTINUAR;
-
-		if (movimientos.back() != P_ALTA) movimientos.push_back(P_ALTA);
-		return CONTINUAR;
 	}
 	
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::WEAPON)]){

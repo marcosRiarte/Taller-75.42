@@ -173,6 +173,9 @@
     <ClInclude Include="ControladorDeTomas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Toma.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -260,6 +263,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ControladorDeTomas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Toma.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -95,7 +95,6 @@
     <ClInclude Include="Capa.h" />
     <ClInclude Include="Constantes.h" />
     <ClInclude Include="Controlador.h" />
-    <ClInclude Include="ControladorDeTomas.h" />
     <ClInclude Include="ConversorAString.h" />
     <ClInclude Include="ConversorDeEventos.h" />
     <ClInclude Include="Cuerpo.h" />
@@ -110,6 +109,7 @@
     <ClInclude Include="MortalFighter.h" />
     <ClInclude Include="MortalFigther.h" />
     <ClInclude Include="Mundo.h" />
+    <ClInclude Include="ControladorDeTomas.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Pelea.h" />
     <ClInclude Include="Personaje.h" />
@@ -118,6 +118,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Toma.h" />
     <ClInclude Include="Validador.h" />
     <ClInclude Include="ValidadorDeCapas.h" />
     <ClInclude Include="ValidadorDeEscenario.h" />
@@ -133,7 +134,6 @@
   <ItemGroup>
     <ClCompile Include="Capa.cpp" />
     <ClCompile Include="Controlador.cpp" />
-    <ClCompile Include="ControladorDeTomas.cpp" />
     <ClCompile Include="ConversorAString.cpp" />
     <ClCompile Include="ConversorDeEventos.cpp" />
     <ClCompile Include="Cuerpo.cpp" />
@@ -143,6 +143,7 @@
     <ClCompile Include="MatizColor.cpp" />
     <ClCompile Include="MortalFighter.cpp" />
     <ClCompile Include="Mundo.cpp" />
+    <ClCompile Include="ControladorDeTomas.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Pelea.cpp" />
     <ClCompile Include="Personaje.cpp" />
@@ -153,6 +154,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Toma.cpp" />
     <ClCompile Include="Validador.cpp" />
     <ClCompile Include="ValidadorDeCapas.cpp" />
     <ClCompile Include="ValidadorDeEscenario.cpp" />

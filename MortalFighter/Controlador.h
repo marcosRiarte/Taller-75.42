@@ -3,9 +3,6 @@
 #include "ConversorDeEventos.h"
 #include "ControladorDeTomas.h"
 
-enum MOV_TIPO { ARRIBA, ABAJO, DER, IZQ, DEFENSA, G_BAJO, G_ALTO, P_BAJA, P_ALTA, ARMA, CERRAR, RECARGAR, SALTOIZQ, SALTODER, DEFENSA_AGACHADO, G_ABAJO, G_GANCHO, G_SALTO, G_SALTOIZQ, G_SALTODER, P_BAJA_ABAJO, P_ALTA_ABAJO, P_SALTO, P_SALTOIZQ, P_SALTODER, QUIETO, FATALITY };
-
-
 class Controlador
 {
 public:
@@ -35,6 +32,10 @@ private:
 	int cantidadDeEventosAnterior;
 	int otraCantidadDeEventosAnterior;
 	ControladorDeTomas* controladorDeTomas;
+	bool golpeBajoTecladoHabilitado;
+	bool golpeAltoTecladoHabilitado;
+	bool patadaBajaTecladoHabilitada;
+	bool patadaAltaTecladoHabilitada;
 
 	void mantenerMovimientos();
 	void mantenerMovimientosActivos();

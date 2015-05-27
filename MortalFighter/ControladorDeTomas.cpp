@@ -4,32 +4,29 @@
 
 ControladorDeTomas::ControladorDeTomas()
 {
-	/*movimientosDeTomas = std::vector<std::vector<MOV_TIPO>>();
-	movimientosDeTomas.push_back(std::vector<MOV_TIPO>());
-	movimientosDeTomas.push_back(std::vector<MOV_TIPO>());
-	movimientosDeTomas.push_back(std::vector<MOV_TIPO>());*/
+	tomas = std::vector<Toma*>();
 }
 
 
-/*void ControladorDeTomas::setMovimientoParaToma(MOV_TIPO unMovimiento, TOMA unaToma){
-	movimientosDeTomas.at(unaToma).push_back(unMovimiento);
+void ControladorDeTomas::setToma(Toma* unaToma){
+	tomas.push_back(unaToma);
 }
 
 
 void ControladorDeTomas::setMovimientos(std::vector<MOV_TIPO>* unosMovimientosActivos){
 	movimientosActivos = unosMovimientosActivos;
 }
-*/
 
-bool ControladorDeTomas::hayToma(TOMA unaToma, bool estaInvertido){
-	/*int error = 0;
+
+bool ControladorDeTomas::hayToma(Toma* unaToma, bool estaInvertido){
+	int error = 0;
 	int aciertos = 0;
-	int j = movimientosDeTomas.at(unaToma).size() - 1;
+	int j = unaToma->getMovimientos()->size() - 1;
 	MOV_TIPO otroMovimiento, unMovimiento;
-	if (movimientosActivos->size() == (movimientosDeTomas.at(unaToma).size() + 1)){
+	if (movimientosActivos->size() >= (unaToma->getMovimientos()->size() + 1)){
 		for (int i = movimientosActivos->size() - 1; i >= 0; i--){
-			if (aciertos == 5) return true;
-			if (error > 1) return false;
+			if (aciertos == unaToma->getMovimientos()->size()) return true;
+			if (error > unaToma->getError()) return false;
 
 			otroMovimiento = movimientosActivos->at(i);
 			unMovimiento = movimientosActivos->at(i);
@@ -41,7 +38,7 @@ bool ControladorDeTomas::hayToma(TOMA unaToma, bool estaInvertido){
 				if (otroMovimiento == SALTOIZQ) unMovimiento = SALTODER;
 			}
 
-			if (unMovimiento != movimientosDeTomas.at(unaToma).at(j)){
+			if (unMovimiento != unaToma->getMovimientos()->at(j)){
 				if (i == (movimientosActivos->size() - 1)) return false;
 				error++;
 			}
@@ -51,23 +48,23 @@ bool ControladorDeTomas::hayToma(TOMA unaToma, bool estaInvertido){
 			}
 		}
 		return true;
-	}*/
+	}
 	return false;
 }
 
 
-ControladorDeTomas::TOMA ControladorDeTomas::getTomaSegunOrientacion(bool estaInvertido){
-	for (int unaToma = TOMA1; unaToma < (sizeof(TOMA) - 1); unaToma++){
-		if (hayToma((TOMA)unaToma, estaInvertido)) return (TOMA)unaToma;
+Toma* ControladorDeTomas::getTomaSegunOrientacion(bool estaInvertido){
+	for (size_t i = 0; i < tomas.size(); i++){
+		if (hayToma(tomas.at(i), estaInvertido)) return tomas.at(i);
 	}
-	return NINGUNA;
+	return nullptr;
 }
 
 
 ControladorDeTomas::~ControladorDeTomas()
 {
-	/*for (int i = 0; i < movimientosDeTomas.size(); i++){
-		movimientosDeTomas.at(i).clear();
+	for (size_t i = 0; i < tomas.size(); i++){
+		delete tomas.at(i);
 	}
-	movimientosDeTomas.clear();*/
+	tomas.clear();
 }
