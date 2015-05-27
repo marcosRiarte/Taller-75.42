@@ -613,6 +613,8 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 					cambioGolpeAlto = true;
 					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 				}
+				// AGUSTIN: setdemoragolpe (demora de golpe + medio segundo)
+
 
 			}
 
@@ -739,6 +741,17 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	nuevoEstado.movimiento = PARADO;
 	nuevoEstado.accion = SIN_ACCION;
 	nuevoEstado.golpeado = NOGOLPEADO;
+
+
+	//**************************************
+	//AGUSTIN:
+	//if (unCuerpo>HayDemoraGolpe())
+		//unCuerpo->DisminuirDemoragolpe();
+		// if uncuerpo>Haydemoragolpe<= 0{intercambiogolpe=false}	
+	//**********************************
+
+
+
 
 	Sprite* elSprite = unCuerpo->getSprite();
 
