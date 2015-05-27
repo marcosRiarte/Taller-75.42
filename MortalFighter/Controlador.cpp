@@ -8,15 +8,14 @@ Controlador::Controlador()
 	otraCantidadDeEventosAnterior = 0;
 	j = 0;
 
-	movimientosParaFatality = std::vector<MOV_TIPO>();
-	movimientosParaFatality.push_back(IZQ);
-	movimientosParaFatality.push_back(DER);
-	movimientosParaFatality.push_back(ABAJO);
-	movimientosParaFatality.push_back(DER);
-	movimientosParaFatality.push_back(G_BAJO);
-
 	movimientos = std::vector<MOV_TIPO>();
 	movimientos.push_back(QUIETO);
+
+	movimientosActivos = std::vector<MOV_TIPO>();
+	movimientosActivos.push_back(QUIETO);
+
+	controladorDeTomas = new ControladorDeTomas();
+	//controladorDeTomas->setMovimientos(&movimientosActivos);
 
 	conversorDeEventos = nullptr;
 	if (SDL_NumJoysticks() > 0){
@@ -38,6 +37,19 @@ std::vector<MOV_TIPO> Controlador::getMovimientos(){
 }
 
 
+void Controlador::mantenerMovimientosActivos(){
+	std::vector<MOV_TIPO> movimientosAuxilares;
+
+	if (movimientosActivos.size() == 6){
+		movimientosAuxilares = std::vector<MOV_TIPO>();
+		for (size_t i = 1; i < movimientosActivos.size(); i++){
+			movimientosAuxilares.push_back(movimientosActivos.at(i));
+		}
+		movimientosActivos = movimientosAuxilares;
+	}
+}
+
+
 void Controlador::mantenerMovimientos(){
 	std::vector<MOV_TIPO> movimientosAuxilares;
 
@@ -52,27 +64,8 @@ void Controlador::mantenerMovimientos(){
 }
 
 
-bool Controlador::tieneCombinacionDeFatalityParaLaOrientacion(){
-	MOV_TIPO unMovimiento = getUltimoMovimientoActivo();
-	if (otraCantidadDeEventosAnterior != movimientos.size()){
-		otraCantidadDeEventosAnterior = movimientos.size();
-		if (unMovimiento != QUIETO){
-			if (j == 4){
-				j = 0;
-				return true;
-			}
-			if (unMovimiento != movimientosParaFatality.at(j)){
-				if (unMovimiento == movimientosParaFatality.at(0)){
-					j = 1;
-					return false;
-				}
-				j = 0;
-				return false;
-			}
-			j++;
-		}
-	}
-	return false;
+ControladorDeTomas* Controlador::getControladorDeTomas(){
+	return controladorDeTomas;
 }
 
 
@@ -100,10 +93,15 @@ int Controlador::cambiar(){
 
 	//ACTUALIZO EL VECTOR
 	mantenerMovimientos();
+	mantenerMovimientosActivos();
 	ConversorAString* unConversorAString = new ConversorAString();
 
+	MOV_TIPO unMovimiento;
+	unMovimiento = getUltimoMovimientoActivo();
+	if (unMovimiento != QUIETO) movimientosActivos.push_back(unMovimiento);
+
 	if (MOSTRAR_MOVIMIENTOS){
-		std::string mensaje = unConversorAString->getTeclaComoStringDelMovimientoParaElConversorDeEventos(getUltimoMovimientoActivo(), conversorDeEventos);
+		std::string mensaje = unConversorAString->getTeclaComoStringDelMovimientoParaElConversorDeEventos(unMovimiento, conversorDeEventos);
 		if (mensaje != "") std::cout << mensaje << "\n";
 		delete unConversorAString;
 	}
@@ -1138,4 +1136,5 @@ ConversorDeEventos* Controlador::getConversorDeEventos(){
 Controlador::~Controlador()
 {
 	movimientos.clear();
+	delete controladorDeTomas;
 }
