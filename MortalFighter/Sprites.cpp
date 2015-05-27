@@ -320,19 +320,17 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 		return PatadaBaja;
 	}
 	if (unEstado.accion == GOLPE_ALTO1){
-		if (unEstado.movimiento == SALTO)
-			return SaltoGolpe; 
+		if (unEstado.movimiento == SALTO || unEstado.movimiento == SALTODIAGIZQ || unEstado.movimiento == SALTODIAGDER)return SaltoGolpe;
 		return GolpeAlto;
 	}
 	if (unEstado.accion == GOLPE_ALTO2){
-		if (unEstado.movimiento == SALTO)
-			return SaltoGolpe;
+		if (unEstado.movimiento == SALTO || unEstado.movimiento == SALTODIAGIZQ || unEstado.movimiento == SALTODIAGDER)return SaltoGolpe;
 		return GolpeAlto2;
 	}
 	if (unEstado.accion == GOLPE_BAJO){
 		if (unEstado.movimiento == AGACHADO)
 			return AgachadoGolpeBajo;
-		if (unEstado.movimiento == SALTO)
+		if (unEstado.movimiento == SALTO || unEstado.movimiento == SALTODIAGIZQ || unEstado.movimiento == SALTODIAGDER)
 			return SaltoGolpe;
 		return GolpeBajo;
 	}
