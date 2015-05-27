@@ -112,7 +112,7 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 
 		if (MODO_COLOR){
 		//Si ambos personajes son iguales,modifico la superficie
-			if (Parser::getInstancia().getPelea()->getPersonaje1()->getNombre() == Parser::getInstancia().getPelea()->getPersonaje2()->getNombre())
+			if (Parser::getInstancia().getPelea()->getPersonaje1()->getSpriteDir() == Parser::getInstancia().getPelea()->getPersonaje2()->getSpriteDir())
 		{
 			MatizColor matiz(SuperficieDos);
 			matiz.desplazarMatiz(h_inicio, h_final, deplazamiento);
