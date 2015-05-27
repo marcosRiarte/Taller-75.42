@@ -6,8 +6,8 @@
                 "sensores": [
                     {
                         "x": 34,
-                        "y": 24,
-                        "ancho": 34,
+                        "y": 84,
+                        "ancho": 100,
                         "alto": 66,
                         "nSprite": 0,
                         "esHitBox": true
@@ -1272,23 +1272,31 @@
             "SaltoGolpe": {
                 "sensores": [
                     {
-                        "x": 90,
-                        "y": 45,
-                        "ancho": 34,
-                        "alto": 80,
+                        "x": 110,
+                        "y": 85,
+                        "ancho": 50,
+                        "alto": 70,
                         "nSprite": 0,
                         "esHitBox": false
+                    },
+                    {
+                        "x": 50,
+                        "y": 80,
+                        "ancho": 80,
+                        "alto": 90,
+                        "nSprite": 0,
+                        "esHitBox": true
                     }
                 ],
                 "secuenciaSprites": [
                     {
-                        "x": 900,
+                        "x": 540,
                         "y": 180,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
-                        "x": 720,
+                        "x": 540,
                         "y": 180,
                         "ancho": 180,
                         "alto": 180
@@ -1304,23 +1312,32 @@
             "SaltoPatada": {
                 "sensores": [
                     {
-                        "x": 90,
-                        "y": 45,
-                        "ancho": 34,
-                        "alto": 80,
+                        "x": 80,
+                        "y": 85,
+                        "ancho": 50,
+                        "alto": 70,
                         "nSprite": 0,
                         "esHitBox": false
+                    },
+                    {
+                        "x": 50,
+                        "y": 80,
+                        "ancho": 80,
+                        "alto": 90,
+                        "nSprite": 0,
+                        "esHitBox": true
                     }
                 ],
                 "secuenciaSprites": [
+
                     {
-                        "x": 1440,
+                        "x": 1080,
                         "y": 180,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
-                        "x": 1260,
+                        "x": 1080,
                         "y": 180,
                         "ancho": 180,
                         "alto": 180
@@ -1336,23 +1353,32 @@
             "SaltoDiagonalPatada": {
                 "sensores": [
                     {
-                        "x": 90,
-                        "y": 45,
-                        "ancho": 34,
-                        "alto": 80,
+                        "x": 95,
+                        "y": 105,
+                        "ancho": 60,
+                        "alto": 60,
                         "nSprite": 0,
                         "esHitBox": false
+                    },
+                    {
+                        "x": 50,
+                        "y": 90,
+                        "ancho": 80,
+                        "alto": 90,
+                        "nSprite": 0,
+                        "esHitBox": true
                     }
                 ],
                 "secuenciaSprites": [
+
                     {
-                        "x": 1980,
+                        "x": 1620,
                         "y": 180,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
-                        "x": 1800,
+                        "x": 1620,
                         "y": 180,
                         "ancho": 180,
                         "alto": 180

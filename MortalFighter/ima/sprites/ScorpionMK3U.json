@@ -6,8 +6,8 @@
                 "sensores": [
                     {
                         "x": 34,
-                        "y": 24,
-                        "ancho": 33,
+                        "y": 84,
+                        "ancho": 100,
                         "alto": 66,
                         "nSprite": 0,
                         "esHitBox": true
