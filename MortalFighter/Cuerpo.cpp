@@ -83,17 +83,8 @@ bool Cuerpo::HayDemora()
 
 }
 
-bool Cuerpo::estaEnBorde()
-{
-	// nacho: chequea el borde considerando ancho del personaje
-	// el +2 es para que no se vea una linea en el limite
-	if (posicion.x + getRefPersonaje()->getAncho() + 2 < Parser::getInstancia().getEscenario().getAncho())
-		return false;
 
-	return true;
-}
-
-// XERROR Nacho: invento esta funcion por que la modificacion que le agrego posicion.x>0 hace que pinche el programa
+/*// XERROR Nacho: invento esta funcion por que la modificacion que le agrego posicion.x>0 hace que pinche el programa
 bool Cuerpo::estaEnBorde2()
 {
 	// nacho: chequea el borde considerando ancho del personaje
@@ -102,7 +93,7 @@ bool Cuerpo::estaEnBorde2()
 		return false;
 
 	return true;
-}
+}*/
 
 // nacho: devuelve el max x del sensor
 int Cuerpo::getSensorLargo()
@@ -120,6 +111,20 @@ int Cuerpo::getSensorLargo()
 
 	return maximo;
 }
+
+bool Cuerpo::estaEnBorde()
+{
+	ManejadorULogicas manejadorUnidades;
+	float xSensorLog = manejadorUnidades.darLongUnidades(getSensorLargo());
+	bool esBorde = false;
+	float largoPersonaje = getRefPersonaje()->getAncho() - xSensorLog;
+
+	esBorde = (posicion.x + xSensorLog <= 0) || (posicion.x + largoPersonaje >= Parser::getInstancia().getEscenario().getAncho());
+	
+	return esBorde;
+	
+}
+
 
 void Cuerpo::limitarAEscenario()
 {

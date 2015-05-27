@@ -51,25 +51,25 @@
             "alto": 90,
             "zindex": 1,
             "orientacion": "DER",
-            "sprites": "ima/sprites/LiuKangMK3U.png",
+            "sprites": "ima/sprites/ScorpionMK3U.png",
             "CaminarParaAdelante": "CaminarParaAdelante",
             "CaminarParaAtras": "CaminarParaAtras",
             "Quieto": "Quieto",
             "Salto": "Salto",
             "SaltoDiagonal": "SaltoDiagonal",
             "Caida": "Caida",
-            "nombre": "Liu Kang"
+            "nombre": "Scorpion"
 
         }
     ],
     "pelea": {
-        "fighters": "liukang VS liukang"
+        "fighters": "scorpion VS scorpion"
     },
 
 
     "color_alternativo": {
-        "h_inicial": -20, // scopion 40 a 70 , liu kang -20 a 5
-        "h_final": 5,
+        "h_inicial": 40, // scopion 40 a 70 , liu kang -20 a 5
+        "h_final": 70,
         "desplazamiento": 220 //x360 original, 54 verde, 100 verdeazulado, 144 celeste, 162 azul,
         // 304 rojo, 330 naranja
 

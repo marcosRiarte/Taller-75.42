@@ -456,7 +456,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 								unCuerpo->mover(DISTANCIA);
 						}
 						else{//esta superpueso
-							if (!otroCuerpo->estaEnBorde2()){
+							if (!otroCuerpo->estaEnBorde()){
 								if (!otroCuerpo->getEstado().accion == GUARDIA){
 									if (!(unCuerpo->EstaFrenado()))
 										unCuerpo->mover(DISTANCIA);
@@ -487,7 +487,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 								unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
 						}
 						else{
-							if (!otroCuerpo->estaEnBorde2()){
+							if (!otroCuerpo->estaEnBorde()){
 								if (!otroCuerpo->getEstado().accion == GUARDIA){
 									if (!(unCuerpo->EstaFrenado()))
 										unCuerpo->mover(-DISTANCIA*FACTOR_DIST_REVERSA);
@@ -515,7 +515,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 						}
 						else{
 
-							if (!otroCuerpo->estaEnBorde2()){
+							if (!otroCuerpo->estaEnBorde()){
 								if (!otroCuerpo->getEstado().accion == GUARDIA){
 									if (!(unCuerpo->EstaFrenado()))
 										unCuerpo->mover(-DISTANCIA);
@@ -531,7 +531,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 								}
 							}
 							else{
-								if (!otroCuerpo->estaEnBorde2() && (!(unCuerpo->EstaFrenado()))) unCuerpo->mover(DISTANCIA);
+								if (!otroCuerpo->estaEnBorde() && (!(unCuerpo->EstaFrenado()))) unCuerpo->mover(DISTANCIA);
 							}
 						}//cierra else
 
