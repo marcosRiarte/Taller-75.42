@@ -63,13 +63,13 @@
         }
     ],
     "pelea": {
-        "fighters": "liu kang VS scorpion"
+        "fighters": "scorpion VS scorpion"
     },
 
 
     "color_alternativo": {
-        "h_inicial": -20, // scopion 40 a 70 , liu kang -20 a 5
-        "h_final": 5,
+        "h_inicial": 40, // scopion 40 a 70 , liu kang -20 a 5
+        "h_final": 70,
         "desplazamiento": 220 //x360 original, 54 verde, 100 verdeazulado, 144 celeste, 162 azul,
         // 304 rojo, 330 naranja
 

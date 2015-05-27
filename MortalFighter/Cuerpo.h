@@ -227,10 +227,7 @@ public:
 	// Devuelve true si está en borde derecho o false en caso contrario
 	// borde izquierdo se toma cero siempre
 	bool estaEnBorde();
-
-	// es lo mismo que la de arriba
-	bool Cuerpo::estaEnBorde2();
-	
+		
 
 	// Aplica un impulso lineal al cuerpo. Modifica inmediatamente la velocidad
 	// El impulso sería en unidades de N.s o Kg.m/s
