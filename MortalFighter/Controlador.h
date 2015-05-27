@@ -37,6 +37,22 @@ private:
 	bool patadaBajaTecladoHabilitada;
 	bool patadaAltaTecladoHabilitada;
 
+	bool golpeBajoJoystickBotonHabilitado;
+	bool golpeBajoJoystickFlechaHabilitado;
+	bool golpeBajoJoystickEjeHabilitado;
+
+	bool golpeAltoJoystickBotonHabilitado;
+	bool golpeAltoJoystickFlechaHabilitado;
+	bool golpeAltoJoystickEjeHabilitado;
+
+	bool patadaBajaJoystickBotonHabilitada;
+	bool patadaBajaJoystickFlechaHabilitada;
+	bool patadaBajaJoystickEjeHabilitada;
+
+	bool patadaAltaJoystickBotonHabilitada;
+	bool patadaAltaJoystickFlechaHabilitada;
+	bool patadaAltaJoystickEjeHabilitada;
+
 	void mantenerMovimientos();
 	void mantenerMovimientosActivos();
 	
