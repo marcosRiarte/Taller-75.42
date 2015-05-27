@@ -167,42 +167,48 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 
 	}
 	else{ // esta en piso o agachado
-
+		nuevoEstado.golpeado = GOLPEADO;
 		if (estadoAnterior.movimiento == AGACHADO){ //no estoy teniendo en cuenta si son golpes fuertes o ganchos......
 
 			if (estadoAnterior.accion == GUARDIA){ //poca demora, poco desplazamiento
 				nuevoEstado.accion = GUARDIA;
-				unCuerpo->aplicarImpulso(vector2D(-SALTO_X / 10, 0));
+				if (!(invertido))
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, 0));
+				else
+				unCuerpo->aplicarImpulso(vector2D(SALTO_X, 0));
 				//unCuerpo->setDemora(200);
 				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 			}
 			else{
+				if (!(invertido))
 				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, 0));
+				else
+					unCuerpo->aplicarImpulso(vector2D(SALTO_X, 0));
 				//unCuerpo->setDemora(300);
 				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 
 			}
 			nuevoEstado.movimiento = AGACHADO;
-			nuevoEstado.golpeado = GOLPEADO;
-
 		}
 
 		else // caso el tipo en el piso
 		{
 
-
+			nuevoEstado.golpeado = GOLPEADO;
 
 			if (estadoAnterior.accion == GUARDIA){ //poca demora, poco desplazamiento
 				nuevoEstado.accion = GUARDIA;
-				unCuerpo->aplicarImpulso(vector2D(-SALTO_X / 10, 0));
+				if (!(invertido))
+				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, 0));
+				else
+				unCuerpo->aplicarImpulso(vector2D(SALTO_X, 0));
 				//unCuerpo->setDemora(10);
 				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 			}
 			else{// no esta en guardia analizar golpes
-
+				
 				if (estadoEnemigo.accion == GANCHO || (estadoEnemigo.accion == PATADA_ALTA && (!(elOtroCuerpo->estaEnPiso())))){
 
-					nuevoEstado.golpeado = GOLPEADO;
 					//aca hay que aplicar un impulso
 						if (!(invertido))
 							unCuerpo->aplicarImpulso(vector2D((0.5)*-SALTO_X, (0.5)*SALTO_Y));
@@ -211,7 +217,6 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 
 				}
 				else if (estadoEnemigo.accion != GUARDIA){ // aca como no lo arroja el impulso tiene que ser un toque
-					nuevoEstado.golpeado = GOLPEADO;
 
 						unCuerpo->aplicarImpulso(vector2D(10, 10));
 
