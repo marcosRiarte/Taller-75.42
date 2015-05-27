@@ -95,6 +95,7 @@
     <ClInclude Include="Capa.h" />
     <ClInclude Include="Constantes.h" />
     <ClInclude Include="Controlador.h" />
+    <ClInclude Include="ControladorDeTomas.h" />
     <ClInclude Include="ConversorAString.h" />
     <ClInclude Include="ConversorDeEventos.h" />
     <ClInclude Include="Cuerpo.h" />
@@ -132,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="Capa.cpp" />
     <ClCompile Include="Controlador.cpp" />
+    <ClCompile Include="ControladorDeTomas.cpp" />
     <ClCompile Include="ConversorAString.cpp" />
     <ClCompile Include="ConversorDeEventos.cpp" />
     <ClCompile Include="Cuerpo.cpp" />
