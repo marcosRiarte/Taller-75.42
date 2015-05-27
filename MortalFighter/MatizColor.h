@@ -1,6 +1,7 @@
 #pragma once
 
 #define ALFA_MIN 50
+#define H_INDEF 20000
 
 class MatizColor {
 public:
@@ -16,7 +17,7 @@ private:
 
 	Uint32 obtenerPixel(int x, int y, Uint8** punteroPixel);
 	double obtenerMatiz(Uint32 pixel, Uint8 rojo, Uint8 verde, Uint8 azul, double* croma, int* minRGBRef);
-	void setMatizSelectivo(Uint32* pixel, double desplazamiento, double hOriginal, double hInicial, double hFinal, Uint8 rojo, Uint8 verde, Uint8 azul, double croma, int *minRGBRef);
+	void setMatizSelectivo(Uint32* pixel, double desplazamiento, double hOriginal, double hInicial, double hFinal, Uint8 rojo, Uint8 verde, Uint8 azul, double croma, int *minRGBRef);	
 	void setMatiz(Uint32* pixel, double desplazamiento, double hOriginal, Uint8 rojo, Uint8 verde, Uint8 azul, double croma, int *minRGBRef);
 
 public:

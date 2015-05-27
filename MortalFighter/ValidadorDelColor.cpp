@@ -79,7 +79,9 @@ void ValidadorDelColor::validarColorDesde(Json::Value color_alternativo){
 			std::string mensaje = "desplazamiento negativo, se corrige al rango [0, 360)";
 			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 		}
+
 		
+
 		if (h_final == h_inicial)
 		{
 			Log::getInstancia().logearMensajeEnModo("Intervalo nulo de hue nulo, se toman valores por defecto", Log::MODO_WARNING);

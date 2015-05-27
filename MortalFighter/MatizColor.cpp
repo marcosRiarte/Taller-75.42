@@ -6,6 +6,7 @@ MatizColor::MatizColor(SDL_Surface* superficieNueva)
 }
 
 
+
 SDL_Surface* MatizColor::desplazarMatiz(double hInicial, double hFinal, double desplazamiento)
 {	
 	int ancho = superficie->w;
@@ -53,20 +54,28 @@ double MatizColor::obtenerMatiz(Uint32 pixel, Uint8 rojo, Uint8 verde, Uint8 azu
 	int minRGB = minimo(rojo, verde, azul);
 	*croma = (double)(maxRGB - minRGB);
 	*minRGBRef = minRGB;
+	double HObtenido = H_INDEF;
 
-	if (*croma == 0) return -1;
+	if (*croma == 0) 
+		return HObtenido;
 
 	if (maxRGB == rojo)
-		return 60.0f * (restoReal(((verde - azul) / *croma),  6));
+		HObtenido = 60.0f * (restoReal(((verde - azul) / *croma), 6));
 
-	if (maxRGB == verde)
-		return 60.0f * (((azul - rojo) / *croma) + 2);		
+	else if (maxRGB == verde)
+		HObtenido = 60.0f * (((azul - rojo) / *croma) + 2);
 
-	if (maxRGB == azul)
-		return 60.0f * (((rojo - verde) / *croma) + 4);
+	else if (maxRGB == azul)
+		HObtenido = 60.0f * (((rojo - verde) / *croma) + 4);
 
+	if (HObtenido > 360)		
+		HObtenido = restoReal(HObtenido, 360);
+	else if (HObtenido < 0)
+		//lo ubica dentro del rango[0, -360), negativo , y le suma 360 para que quede
+		// en el rango [0, 360), positivo
+		HObtenido = 360 + restoReal(HObtenido, 360);
 	
-	return 0;
+	return HObtenido;
 }
 
 Uint32 MatizColor::obtenerPixel(int x, int y, Uint8** punteroPixel)
@@ -102,11 +111,17 @@ Uint32 MatizColor::obtenerPixel(int x, int y, Uint8** punteroPixel)
 void MatizColor::setMatizSelectivo(Uint32* pixel, double desplazamiento, double hOriginal, double hInicial, double hFinal, Uint8 rojo, Uint8 verde, Uint8 azul, double croma, int *minRGBRef)
 {
 	// salteo los casos fuera del rango dado
-	if ((hOriginal < hInicial) || (hOriginal > hFinal))
-		return;
+	if (hFinal < hInicial){
+		if ((hOriginal < hInicial) && (hOriginal > hFinal))
+			return;
+	}
+	else
+		if ((hOriginal < hInicial) || (hOriginal > hFinal))
+			return;
 
 	setMatiz(pixel, desplazamiento, hOriginal, rojo, verde, azul, croma, minRGBRef);
 }
+
 
 
 void MatizColor::setMatiz(Uint32* pixel, double desplazamiento, double hOriginal, Uint8 rojo, Uint8 verde, Uint8 azul, double croma, int *minRGBRef)
@@ -122,7 +137,7 @@ void MatizColor::setMatiz(Uint32* pixel, double desplazamiento, double hOriginal
 
 
 
-	if ((hOriginal == -1) || (hDec < 0)) return;
+	if ((hOriginal == H_INDEF) || (hDec < 0)) return;
 
 	if (hDec < 1)
 	{
