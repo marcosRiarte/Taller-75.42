@@ -12,7 +12,7 @@ Personaje::Personaje(){
 void Personaje::copiarAtributosDe(Personaje* unPersonaje){
 	ancho = unPersonaje->getAncho();
 	alto = unPersonaje->getAlto();
-	zIndex = unPersonaje->zIndex;
+	zIndex = unPersonaje->getZIndex();
 	vida = unPersonaje->getVida();
 	orientacion = unPersonaje->getOrientacion();
 	spritesDir = unPersonaje->getSpriteDir();
@@ -315,6 +315,10 @@ float Personaje::getDeltaX() const
 ESTADO Personaje::getEstado() const
 {
 	return estadoActual;
+}
+
+int Personaje::getZIndex() const{
+	return zIndex;
 }
 
 void Personaje::setEstado(ESTADO nuevoEstado)

@@ -55,6 +55,7 @@ public:
 	float getDeltaX() const;	
 	virtual void actualizar(float xNuevo, float yNuevo, ESTADO estadoJugador);	
 	std::pair<float, float> getPosicionUn() const;	
+	int getZIndex() const;
 
 	//SETTERS
 	void setDeltaX(float unDeltaX);
