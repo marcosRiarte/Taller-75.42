@@ -248,7 +248,7 @@ void Vista::actualizar(){
 	// condicion de borde Personaje Uno
 	bool PjUnoEstaEnBordeIzq = false;
 	bool PjUnoEstaEnBordeDer = false;
-	if (xPjUno + manejadorULog.darLongUnidades(sensorPj1->getPosicion().first + (sensorPj1->getAncho())) > anchoVentana - camaraXLog)
+	if (xPjUno + manejadorULog.darLongUnidades(sensorPj1->getPosicion().first + (sensorPj1->getAncho())) >= anchoVentana - camaraXLog)
 		PjUnoEstaEnBordeDer = true;
 	if (xPjUno + manejadorULog.darLongUnidades(sensorPj1->getPosicion().first) < -camaraXLog)
 		PjUnoEstaEnBordeIzq = true;
@@ -257,7 +257,7 @@ void Vista::actualizar(){
 	// condicion de borde Personaje Dos
 	bool PjDosEstaEnBordeIzq = false;
 	bool PjDosEstaEnBordeDer = false;
-	if (xPjDos + manejadorULog.darLongUnidades(sensorPj2->getPosicion().first + (sensorPj2->getAncho())) > anchoVentana - camaraXLog)
+	if (xPjDos + manejadorULog.darLongUnidades(sensorPj2->getPosicion().first + (sensorPj2->getAncho())) >= anchoVentana - camaraXLog)
 		PjDosEstaEnBordeDer = true;
 	if (xPjDos+ manejadorULog.darLongUnidades(sensorPj2->getPosicion().first)< -camaraXLog)
 		PjDosEstaEnBordeIzq = true;
@@ -272,19 +272,19 @@ void Vista::actualizar(){
 
 	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer)) {
 		refMundo->FrenarCuerpos();
-
-		if (PjUnoEstaEnBordeIzq && (mov1 == DER) && (mov2 != DER))
-			refMundo->LiberarCuerpos();
-
-		if (PjUnoEstaEnBordeDer && (mov1 == IZQ) && (mov2 != IZQ))
-			refMundo->LiberarCuerpos();
-
-		if (PjDosEstaEnBordeIzq && (mov2 == DER) && (mov1 != DER))
-			refMundo->LiberarCuerpos();
-
-		if (PjDosEstaEnBordeDer && (mov2 == IZQ) && (mov1 != IZQ))
-			refMundo->LiberarCuerpos();
 	}
+
+	if (PjUnoEstaEnBordeIzq && (mov1 == DER))
+		refMundo->LiberarCuerpos();
+
+	if (PjUnoEstaEnBordeDer && (mov1 == IZQ))
+		refMundo->LiberarCuerpos();
+
+	if (PjDosEstaEnBordeIzq && (mov2 == DER))
+		refMundo->LiberarCuerpos();
+
+	if (PjDosEstaEnBordeDer && (mov2 == IZQ))
+		refMundo->LiberarCuerpos();
 
 	if (PjUnoEstaEnBordeIzq)
 		if (personajesVista[0]->getDeltaX() > 0)
