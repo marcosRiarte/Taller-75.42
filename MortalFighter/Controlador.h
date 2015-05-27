@@ -36,6 +36,7 @@ private:
 	bool golpeAltoTecladoHabilitado;
 	bool patadaBajaTecladoHabilitada;
 	bool patadaAltaTecladoHabilitada;
+	bool armaTecladoHabilitada;
 
 	bool golpeBajoJoystickBotonHabilitado;
 	bool golpeBajoJoystickFlechaHabilitado;

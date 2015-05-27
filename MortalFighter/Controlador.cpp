@@ -11,6 +11,8 @@ Controlador::Controlador()
 	golpeAltoTecladoHabilitado = true;
 	patadaBajaTecladoHabilitada = true;
 	patadaAltaTecladoHabilitada = true;
+	armaTecladoHabilitada = true;
+
 	golpeBajoJoystickBotonHabilitado = true;
 	golpeBajoJoystickFlechaHabilitado = true;
 	golpeBajoJoystickEjeHabilitado = true;
@@ -130,6 +132,7 @@ int Controlador::cambiar(){
 	if (!state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HIGH_PUNCH)]) golpeAltoTecladoHabilitado = true;
 	if (!state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LOW_KICK)]) patadaBajaTecladoHabilitada = true;
 	if (!state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HIGH_KICK)]) patadaAltaTecladoHabilitada = true;
+	if (!state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::WEAPON)]) armaTecladoHabilitada = true;
 
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::QUIT)]) {
 		return FIN;
@@ -196,8 +199,11 @@ int Controlador::cambiar(){
 	}
 	
 	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::WEAPON)]){
-		if (movimientos.back() != ARMA) movimientos.push_back(ARMA);
-		return CONTINUAR;
+		if (armaTecladoHabilitada){
+			armaTecladoHabilitada = false;
+			if (movimientos.back() != ARMA) movimientos.push_back(ARMA);
+			return CONTINUAR;
+		}
 	}
 
 
