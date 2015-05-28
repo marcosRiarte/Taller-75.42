@@ -91,6 +91,10 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		//Se carga la textura del menu Princpial
 		SDL_Surface* menu = cargarSuperficieOptimizada("ima/bkg/mainmenu.gif");
 		this->texturaMenu = SDL_CreateTextureFromSurface(renderer, menu);
+		//Textura del primer boton 
+		SDL_Surface* botonPlayMode = cargarSuperficieOptimizada("ima/bkg/arcadeMode.png");
+		this->texturaPlayMode = SDL_CreateTextureFromSurface(renderer, botonPlayMode);
+
 
 		//Se cargan los sprites:		
 		
@@ -454,6 +458,24 @@ void Vista::dibujarMenu(float anchoVentana, int anchoVentanaPx, int altoVentanaP
 	SDL_Rect camaraMenu;
 	camaraMenu = { 0, 0, anchoVentanaPx, altoVentanaPx };
 	SDL_RenderCopy(renderer, this->texturaMenu, NULL, &camaraMenu);
+
+	//Dibujo el boton de la opcion PLAY MODE
+	SDL_Rect playMode = { 150, 100, 500, 250 };
+	SDL_RenderCopy(renderer, this->texturaPlayMode, NULL, &playMode);
+	
+	/*
+	int w, h;
+	SDL_Color fg =255 ;
+	TTF_SizeUTF8(fuente, "PLAY MODE", &w, &h);
+	SDL_Surface * texto= TTF_RenderText_Solid(this->fuente, "PLAY MODE", fg);
+
+
+	SDL_Texture * texturaP = SDL_CreateTextureFromSurface(renderer, texto);
+	SDL_FreeSurface(texto);
+	SDL_RenderCopy(renderer, texturaP, NULL, &playMode);
+
+	*/
+
 }
 
 
@@ -593,6 +615,8 @@ void Vista::DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVenta
 
 	}
 }
+
+
 
 void Vista::dibujarImagenesBarraVida(int anchoVentanaPx, int altoVentanaPx)
 {

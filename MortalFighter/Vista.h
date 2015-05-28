@@ -39,6 +39,7 @@ private:
 	SDL_Texture *texturaMenu;
 	SDL_Texture *texturaLiuKang;
 	SDL_Texture *texturaScorpion;
+	SDL_Texture *texturaPlayMode;
 
 	Uint8 AlfaVida;
 	Uint8 AlfaAnterior;
