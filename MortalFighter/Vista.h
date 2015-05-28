@@ -37,6 +37,8 @@ private:
 	SDL_Texture *texturaFight;
 	SDL_Texture *texturaRound;
 	SDL_Texture *texturaMenu;
+	SDL_Texture *texturaLiuKang;
+	SDL_Texture *texturaScorpion;
 
 	Uint8 AlfaVida;
 	Uint8 AlfaAnterior;
@@ -54,6 +56,7 @@ private:
 	SDL_Rect barraRojaDeVida2;
 	SDL_Rect barraRojaDeVidaImagen1;
 	SDL_Rect barraRojaDeVidaImagen2;
+
 
 	Timer efectosTimer;
 	Timer menuTimer;
@@ -97,5 +100,6 @@ private:
 	void DibujarPersonajes(std::vector<Personaje*> personajes);
 	void DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
 	void dibujarMenu(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
+	void dibujarImagenesBarraVida(int anchoVentanaPx, int altoVentanaPx);
 };
 

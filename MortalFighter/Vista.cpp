@@ -237,6 +237,18 @@ void Vista::actualizar(){
 
 	float anchoEscenario = Parser::getInstancia().getEscenario().getAncho();
 
+	//Carga  imagenes de los personajes en barra de vida
+	SDL_Surface* liuKangBarra = cargarSuperficieOptimizada("ima/bkg/liukang.png");
+	//SDL_SetColorKey(round, SDL_TRUE, SDL_MapRGB(round->format, 255, 255, 255));
+	this->texturaLiuKang = SDL_CreateTextureFromSurface(renderer, liuKangBarra);
+	SDL_FreeSurface(liuKangBarra);
+
+	//SDL_Surface* scorpionBarra = cargarSuperficieOptimizada("ima/bkg/scorpion.png");
+	SDL_Surface* scorpionBarra = cargarSuperficieOptimizada("ima/bkg/liukang.png");
+	//SDL_SetColorKey(round, SDL_TRUE, SDL_MapRGB(round->format, 255, 255, 255));
+	this->texturaScorpion = SDL_CreateTextureFromSurface(renderer, scorpionBarra);
+	SDL_FreeSurface(scorpionBarra);
+
 
 	//Se limpia la pantalla
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
@@ -459,8 +471,11 @@ void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 	DibujarPersonajes(personajesVista);
 
 	DibujarCapasPosteriores(personajesVista, anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
+
+	//Dibuja imagenes de los personajes
+	this->dibujarImagenesBarraVida(anchoVentanaPx, altoVentanaPx);
    
-	DibujarEfectos(anchoVentana, anchoVentanaPx, altoVentanaPx,anchoEscenario); //Ver si esta en ellugar correcto
+	this->DibujarEfectos(anchoVentana, anchoVentanaPx, altoVentanaPx,anchoEscenario);
 	
 }
 
@@ -577,6 +592,18 @@ void Vista::DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVenta
 		}
 
 	}
+}
+
+void Vista::dibujarImagenesBarraVida(int anchoVentanaPx, int altoVentanaPx)
+{
+	SDL_Rect camaraPersonaje1;
+	camaraPersonaje1 = { 2, 15, anchoVentanaPx / 16, altoVentanaPx / 16 };//2,4,50,37.5   48x33,5
+	SDL_RenderCopy(renderer, this->texturaScorpion, NULL, &camaraPersonaje1);
+
+	SDL_Rect camaraPersonaje2;
+	camaraPersonaje2 = { 750, 15, 50, 40 };
+	//SDL_RenderCopy(renderer, this->texturaLiuKang, NULL, &camaraPersonaje2);
+	SDL_RenderCopyEx(renderer, this->texturaLiuKang, NULL, &camaraPersonaje2, 0, NULL, SDL_FLIP_HORIZONTAL);
 }
 
 void Vista::DibujarCapasPosteriores(std::vector<Personaje*> personajesVista, float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
