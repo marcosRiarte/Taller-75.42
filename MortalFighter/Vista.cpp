@@ -17,8 +17,8 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 	estaVibrando = false;
 
 	//Se inicializa SDLttf
-	//int TTF_Init(void);
-	//this->fuente = TTF_OpenFont("ima/ttf/Vera.ttf",20);
+	int TTF_Init(void);
+	this->fuente = TTF_OpenFont("ima/ttf/Vera.ttf",20);
 	// Usa filtro anisotropico
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 	// Se inicia SDL_image
@@ -852,7 +852,7 @@ void Vista::deshabilitarVibracion(){
 
 Vista::~Vista()
 {
-	//TTF_CloseFont(this->fuente);
+	TTF_CloseFont(this->fuente);
 	SDL_DestroyTexture(texturaSpriteUno);
 	SDL_DestroyTexture(texturaSpriteDos);
 	SDL_DestroyTexture(texturaVerde);
@@ -860,7 +860,7 @@ Vista::~Vista()
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(ventana);	
     
-	//TTF_Quit();
+	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }

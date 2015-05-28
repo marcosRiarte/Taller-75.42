@@ -327,6 +327,7 @@
     <None Include="ima\sprites\reloj.json">
       <Filter>Resource Files\ima\sprites</Filter>
     </None>
+    <None Include="libfreetype-6.dll" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\SDL2_image.lib">
