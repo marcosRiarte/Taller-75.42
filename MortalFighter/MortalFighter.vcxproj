@@ -195,6 +195,7 @@
     <Library Include="lib\SDL2_image.lib" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="ima\bkg\arcadeMode.png" />
     <Image Include="ima\bkg\barraDeVida.png" />
     <Image Include="ima\bkg\barraDeVidaRoja.png" />
     <Image Include="ima\bkg\default_bkg.png" />
@@ -206,6 +207,7 @@
     <Image Include="ima\bkg\fight Hd.png" />
     <Image Include="ima\bkg\flaweesVictory.png" />
     <Image Include="ima\bkg\liukang.jpg" />
+    <Image Include="ima\bkg\liukang.png" />
     <Image Include="ima\bkg\LiuKangDamage.png" />
     <Image Include="ima\bkg\logo.png" />
     <Image Include="ima\bkg\mainmenu.gif" />
@@ -225,7 +227,7 @@
     <Image Include="ima\bkg\r_3.png" />
     <Image Include="ima\bkg\r_4.png" />
     <Image Include="ima\bkg\r_bkg.png" />
-    <Image Include="ima\bkg\scorpion.jpg" />
+    <Image Include="ima\bkg\scorpion.png" />
     <Image Include="ima\bkg\subzero.jpg" />
     <Image Include="ima\bkg\texturaVerde.png" />
     <Image Include="ima\bkg\toasty.gif" />

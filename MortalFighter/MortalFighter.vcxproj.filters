@@ -460,9 +460,6 @@
     <Image Include="ima\bkg\round1.png">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
-    <Image Include="ima\bkg\scorpion.jpg">
-      <Filter>Resource Files\ima\bkg</Filter>
-    </Image>
     <Image Include="ima\bkg\logo.png">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
@@ -477,6 +474,15 @@
     </Image>
     <Image Include="ima\bkg\toasty.gif">
       <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ima\bkg\arcadeMode.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\liukang.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\scorpion.png">
+      <Filter>Resource Files\ima\bkg</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

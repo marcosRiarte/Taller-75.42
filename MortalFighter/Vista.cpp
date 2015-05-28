@@ -259,7 +259,7 @@ void Vista::actualizar(){
 	bool PjDosEstaEnBordeDer = false;
 	if (xPjDos + manejadorULog.darLongUnidades(sensorPj2->getPosicion().first + (sensorPj2->getAncho())) >= anchoVentana - camaraXLog)
 		PjDosEstaEnBordeDer = true;
-	if (xPjDos+ manejadorULog.darLongUnidades(sensorPj2->getPosicion().first)< -camaraXLog)
+	if (xPjDos + manejadorULog.darLongUnidades(sensorPj2->getPosicion().first) < -camaraXLog)
 		PjDosEstaEnBordeIzq = true;
 	bool PjDosEstaEnBorde = PjDosEstaEnBordeIzq || PjDosEstaEnBordeDer;
 
@@ -311,10 +311,10 @@ void Vista::actualizar(){
 		bool golpeado = false;
 		/*for (int i = 0; i < personajesVista.size(); i++){
 			if ((personajesVista.at(i)->getEstado().accion == PATADA_ALTA) && ){
-				golpeado = true;
-				break;
+			golpeado = true;
+			break;
 			}
-		}*/
+			}*/
 		//Este es el codigo que deberia ir en realidad pero todavia no hay gancho
 		if (personajesVista.at(0)->getEstado().golpeado == GOLPEADO && personajesVista.at(0)->getEstado().accion != GUARDIA){
 			if (personajesVista.at(1)->getEstado().accion == GANCHO){
@@ -324,11 +324,11 @@ void Vista::actualizar(){
 		else{
 			if (personajesVista.at(1)->getEstado().golpeado == GOLPEADO && personajesVista.at(1)->getEstado().accion != GUARDIA){
 				if (personajesVista.at(0)->getEstado().accion == GANCHO){
-				golpeado = true;
+					golpeado = true;
 				}
 			}
 		}
-		
+
 		if ((personajesVista.at(0)->getEstado().golpeado == GOLPEADO) || (personajesVista.at(1)->getEstado().golpeado == GOLPEADO)){
 			AlfaInicial = AlfaInicial - AlfaAnterior;
 			if (AlfaInicial < 128){
@@ -338,8 +338,8 @@ void Vista::actualizar(){
 		}
 		else
 			alfa(128);
-/*		if (golpeado) vibraciones++;
-		else vibraciones = 0;*/
+		/*		if (golpeado) vibraciones++;
+				else vibraciones = 0;*/
 
 		if (golpeado){
 			retraso--;
@@ -356,7 +356,7 @@ void Vista::actualizar(){
 			}
 		}
 	}
-	
+
 
 	if (!PjUnoEstaEnBorde && !PjDosEstaEnBorde)
 		refMundo->LiberarCuerpos();
@@ -364,7 +364,7 @@ void Vista::actualizar(){
 	//Dibujar menu 
 
 	int anchoVentanaPx = ventanaVista.getAnchoPx();
-	/*
+
 	if ((this->menuTimer.getTicks() >= 50) && (this->menuTimer.getTicks() <= 1000))
 	{
 		this->dibujarMenu(anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
@@ -380,7 +380,7 @@ void Vista::actualizar(){
 		}
 		else
 		{
-			*/
+
 			// Dibuja las capas y el personaje
 			Dibujar(personajesVista);
 
@@ -389,8 +389,10 @@ void Vista::actualizar(){
 
 			//Se actualiza la pantalla
 			SDL_RenderPresent(renderer);
-		
+		}
+
 	}
+}
 
 
 	
