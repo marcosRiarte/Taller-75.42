@@ -512,7 +512,7 @@ void Vista::dibujarMenu(float anchoVentana, int anchoVentanaPx, int altoVentanaP
 	SDL_Rect cpuMode = { 150, 250, 500, 200 };//y=100+200
 	SDL_RenderCopy(renderer, this->texturaUnjugador, NULL, &cpuMode);
 	SDL_Surface * ttext2 = TTF_RenderText_Shaded(this->fuente, "1 jugador", fgcolor, bgcolor);
-	SDL_SetColorKey(ttext2, SDL_TRUE, SDL_MapRGB(ttext->format, 255, 0, 0));
+	SDL_SetColorKey(ttext2, SDL_TRUE, SDL_MapRGB(ttext2->format, 255, 0, 0));
 
 	SDL_Texture * texturaSingle = SDL_CreateTextureFromSurface(renderer, ttext2);
 	SDL_FreeSurface(ttext2);
@@ -525,7 +525,7 @@ void Vista::dibujarMenu(float anchoVentana, int anchoVentanaPx, int altoVentanaP
 	SDL_RenderCopy(renderer, this->texturaTrainig, NULL, &TrainigMode);
 
 	SDL_Surface * ttext3 = TTF_RenderText_Shaded(this->fuente, "entrenamiento", fgcolor, bgcolor);
-	SDL_SetColorKey(ttext3, SDL_TRUE, SDL_MapRGB(ttext->format, 255, 0, 0));
+	SDL_SetColorKey(ttext3, SDL_TRUE, SDL_MapRGB(ttext3->format, 255, 0, 0));
 
 	SDL_Texture * texturaEntrenamiento = SDL_CreateTextureFromSurface(renderer, ttext3);
 	SDL_FreeSurface(ttext3);
