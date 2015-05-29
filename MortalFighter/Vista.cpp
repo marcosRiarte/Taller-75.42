@@ -18,7 +18,13 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 
 	//Se inicializa SDLttf
 	int TTF_Init(void);
-	this->fuente = TTF_OpenFont("ima/ttf/Vera.ttf",20);
+	if (TTF_Init() == 0) {
+
+		atexit(TTF_Quit);
+		std::cout << "TTF inicializada" << std::endl;
+	}
+	this->fuente = TTF_OpenFont("./ima/ttf/mkx.ttf", 40);
+
 	// Usa filtro anisotropico
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 	// Se inicia SDL_image
