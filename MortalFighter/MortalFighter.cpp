@@ -94,7 +94,31 @@ int _tmain(int argc, _TCHAR* argv[])
 		//Contador de cuadros
 		int conteoDeCuadros = 0;
 		fpsTimer.start();
-		
+		/*********************************************************************/
+		/*       Sonido - SDL_mixer                                          */
+		/*********************************************************************/
+		// Se inicializa la librería SDL_Mixer
+		// iniciamos el audio a la frecuencia 22hz, 16 bits, 2 canales y un buffer de 4096 
+		//(segun el sonido poner mas o menos cantidad de buffer)
+		if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, \
+			MIX_DEFAULT_CHANNELS, 4096) < 0) {
+			cerr << "Error iniciando SDL_mixer: " << endl;
+			exit(1);
+		}
+		//Se carga musica de fondo.
+		Mix_Music *musica;
+
+		musica = Mix_LoadMUS("./son/mortal64.mid");
+		if (musica == NULL) {
+
+			cerr << "Falla al cargar la musica de fondo" << endl;
+			exit(1);
+		}
+
+		int volumenMusica = 80;
+
+		Mix_VolumeMusic(volumenMusica);
+		Mix_PlayMusic(musica, -1);//loops  0 normal  -1 infinito
 
 
 		/***************************************************************************/

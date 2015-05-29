@@ -103,6 +103,7 @@
     <ClInclude Include="include\json\json.h" />
     <ClInclude Include="include\SDL\SDL.h" />
     <ClInclude Include="include\SDL_image.h" />
+    <ClInclude Include="include\SDL_mixer.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="ManejadorULogicas.h" />
     <ClInclude Include="MatizColor.h" />
@@ -194,6 +195,7 @@
     <Library Include="lib\SDL2main.lib" />
     <Library Include="lib\SDL2test.lib" />
     <Library Include="lib\SDL2_image.lib" />
+    <Library Include="lib\SDL_mixer\SDL2_mixer.lib" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ima\bkg\arcadeMode.png" />

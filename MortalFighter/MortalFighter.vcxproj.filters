@@ -179,6 +179,9 @@
     <ClInclude Include="ValidadorDeTomas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\SDL_mixer.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -337,6 +340,9 @@
       <Filter>lib</Filter>
     </Library>
     <Library Include="lib\SDL2test.lib">
+      <Filter>lib</Filter>
+    </Library>
+    <Library Include="lib\SDL_mixer\SDL2_mixer.lib">
       <Filter>lib</Filter>
     </Library>
   </ItemGroup>

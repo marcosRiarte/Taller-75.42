@@ -20,6 +20,7 @@
 #include <vector>
 #include "Vector2D.h"
 #include "ManejadorULogicas.h"
+#include <SDL_mixer.h>
 
 
 
