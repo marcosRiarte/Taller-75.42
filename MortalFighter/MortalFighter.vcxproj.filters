@@ -452,9 +452,6 @@
     <Image Include="ima\bkg\roundWin.png">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
-    <Image Include="ima\bkg\liukang.jpg">
-      <Filter>Resource Files\ima\bkg</Filter>
-    </Image>
     <Image Include="ima\bkg\mainmenu.gif">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
@@ -462,9 +459,6 @@
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
     <Image Include="ima\bkg\logo.png">
-      <Filter>Resource Files\ima\bkg</Filter>
-    </Image>
-    <Image Include="ima\bkg\netherealm.gif">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
     <Image Include="ima\bkg\piramide.gif">
@@ -483,6 +477,12 @@
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
     <Image Include="ima\bkg\scorpion.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\trainingMode.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\modoCpu.png">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
   </ItemGroup>

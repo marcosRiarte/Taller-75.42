@@ -207,13 +207,12 @@
     <Image Include="ima\bkg\default_p4.png" />
     <Image Include="ima\bkg\fight Hd.png" />
     <Image Include="ima\bkg\flaweesVictory.png" />
-    <Image Include="ima\bkg\liukang.jpg" />
     <Image Include="ima\bkg\liukang.png" />
     <Image Include="ima\bkg\LiuKangDamage.png" />
     <Image Include="ima\bkg\logo.png" />
     <Image Include="ima\bkg\mainmenu.gif" />
+    <Image Include="ima\bkg\modoCpu.png" />
     <Image Include="ima\bkg\multiRound.png" />
-    <Image Include="ima\bkg\netherealm.gif" />
     <Image Include="ima\bkg\piramide.gif" />
     <Image Include="ima\bkg\p_1.png" />
     <Image Include="ima\bkg\p_2.png" />
@@ -232,6 +231,7 @@
     <Image Include="ima\bkg\subzero.jpg" />
     <Image Include="ima\bkg\texturaVerde.png" />
     <Image Include="ima\bkg\toasty.gif" />
+    <Image Include="ima\bkg\trainingMode.png" />
     <Image Include="ima\bkg\t_1.png" />
     <Image Include="ima\bkg\t_2.png" />
     <Image Include="ima\bkg\t_3.png" />

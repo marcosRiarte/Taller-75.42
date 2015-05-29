@@ -97,10 +97,16 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		//Se carga la textura del menu Princpial
 		SDL_Surface* menu = cargarSuperficieOptimizada("ima/bkg/mainmenu.gif");
 		this->texturaMenu = SDL_CreateTextureFromSurface(renderer, menu);
-		//Textura del primer boton 
+		  //dos jugadores 
 		SDL_Surface* botonPlayMode = cargarSuperficieOptimizada("ima/bkg/arcadeMode.png");
 		this->texturaPlayMode = SDL_CreateTextureFromSurface(renderer, botonPlayMode);
 
+		   //Un jugador
+		SDL_Surface* botonUnJugador = cargarSuperficieOptimizada("ima/bkg/modoCpu.png");
+		this->texturaUnjugador = SDL_CreateTextureFromSurface(renderer, botonUnJugador);
+		  //Modo practica
+		SDL_Surface* botonPractica = cargarSuperficieOptimizada("ima/bkg/trainingMode.png");
+		this->texturaTrainig = SDL_CreateTextureFromSurface(renderer, botonPractica);
 
 		//Se cargan los sprites:		
 		
@@ -387,14 +393,14 @@ void Vista::actualizar(){
 
 	int anchoVentanaPx = ventanaVista.getAnchoPx();
 
-	if ((this->menuTimer.getTicks() >= 50) && (this->menuTimer.getTicks() <= 1000))
+	if ((this->menuTimer.getTicks() >= 50) && (this->menuTimer.getTicks() <= 3000))
 	{
 		this->dibujarMenu(anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
 		SDL_RenderPresent(renderer);
 	}
 	else
 	{
-		if (this->menuTimer.getTicks() > 1000)
+		if (this->menuTimer.getTicks() > 3000)
 		{
 
 			SDL_DestroyTexture(this->texturaMenu);
@@ -458,32 +464,76 @@ void Vista::OrdenarCapas()
 	capasVista.clear();
 	capasVista = capasOrdenadas;
 }
-
 void Vista::dibujarMenu(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
 {
-	SDL_Rect camaraMenu;
-	camaraMenu = { 0, 0, anchoVentanaPx, altoVentanaPx };
+	SDL_Rect camaraMenu = { 0, 0, anchoVentanaPx, altoVentanaPx };
 	SDL_RenderCopy(renderer, this->texturaMenu, NULL, &camaraMenu);
 
-	//Dibujo el boton de la opcion PLAY MODE
-	SDL_Rect playMode = { 150, 100, 500, 250 };
+	//Dibujo el boton de la opcion 2 JUGADORES
+	SDL_Rect playMode = { 150, 50, 500, 200 };
 	SDL_RenderCopy(renderer, this->texturaPlayMode, NULL, &playMode);
-	
-	/*
-	int w, h;
-	SDL_Color fg =255 ;
-	TTF_SizeUTF8(fuente, "PLAY MODE", &w, &h);
-	SDL_Surface * texto= TTF_RenderText_Solid(this->fuente, "PLAY MODE", fg);
+	//Creo la superficie para escribir 
+	SDL_Color bgcolor, fgcolor;
+	SDL_Rect dosJugadores = { 200, 70, 400, 150 };
 
+	//Tipo de letra
+	TTF_SetFontStyle(this->fuente, TTF_STYLE_BOLD);
+	// inicializa colores para la letra
+	fgcolor.r = 200;
+	fgcolor.g = 200;
+	fgcolor.b = 10;
+	// inicializa colores para el fondo(rojo)
+	bgcolor.r = 255;
+	bgcolor.g = 0;
+	bgcolor.b = 0;
+	//std::cout << "El tamaño de la fuente es " << TTF_FontHeight(this->fuente) << std::endl;
+	//std::cout << "El ascendente de la fuente es " << TTF_FontAscent(this->fuente) << std::endl;
+	//std::cout << "El descendente de la fuente es " << TTF_FontDescent(this->fuente) << std::endl;
+	//std::cout << "La separación entre líneas es " << TTF_FontLineSkip(this->fuente) << std::endl;
 
-	SDL_Texture * texturaP = SDL_CreateTextureFromSurface(renderer, texto);
-	SDL_FreeSurface(texto);
-	SDL_RenderCopy(renderer, texturaP, NULL, &playMode);
+	SDL_Surface * ttext = TTF_RenderText_Shaded(this->fuente, "2 jugadores", fgcolor, bgcolor);
+	if (ttext == NULL)
+	{
+		std::cout << "Error en la carga de las letras";
+	}
 
-	*/
+	// Usamos color rojo para la transparencia del fondo
+	SDL_SetColorKey(ttext, SDL_TRUE, SDL_MapRGB(ttext->format, 255, 0, 0));
+
+	//TTF_SizeUTF8(fuente, "PLAY MODE", &w, &h);
+	//SDL_Surface * texto= TTF_RenderText_Solid(this->fuente, "PLAY MODE", fg);
+
+	//Se escriben las letras
+	SDL_Texture * texturaP = SDL_CreateTextureFromSurface(renderer, ttext);
+	SDL_FreeSurface(ttext);
+	SDL_RenderCopy(renderer, texturaP, NULL, &dosJugadores);
+
+	//Dibujo el boton de la opcion 1 JUGADOR
+	SDL_Rect cpuMode = { 150, 250, 500, 200 };//y=100+200
+	SDL_RenderCopy(renderer, this->texturaUnjugador, NULL, &cpuMode);
+	SDL_Surface * ttext2 = TTF_RenderText_Shaded(this->fuente, "1 jugador", fgcolor, bgcolor);
+	SDL_SetColorKey(ttext2, SDL_TRUE, SDL_MapRGB(ttext->format, 255, 0, 0));
+
+	SDL_Texture * texturaSingle = SDL_CreateTextureFromSurface(renderer, ttext2);
+	SDL_FreeSurface(ttext2);
+	//Camara de la letra 
+	SDL_Rect unJugador = { 200, 270, 400, 150 }; //Relacion camara externa_interna =(+50,+20,-100,-50)
+	SDL_RenderCopy(renderer, texturaSingle, NULL, &unJugador);
+
+	//Dibujo el boton de la opcion training
+	SDL_Rect TrainigMode = { 150, 450, 500, 200 };//y=100+200
+	SDL_RenderCopy(renderer, this->texturaTrainig, NULL, &TrainigMode);
+
+	SDL_Surface * ttext3 = TTF_RenderText_Shaded(this->fuente, "entrenamiento", fgcolor, bgcolor);
+	SDL_SetColorKey(ttext3, SDL_TRUE, SDL_MapRGB(ttext->format, 255, 0, 0));
+
+	SDL_Texture * texturaEntrenamiento = SDL_CreateTextureFromSurface(renderer, ttext3);
+	SDL_FreeSurface(ttext3);
+	//Camara de la letra 
+	SDL_Rect entrenamiento = { 200, 470, 400, 150 }; //Relacion camara externa_interna =(+50,+20,-100,-50)
+	SDL_RenderCopy(renderer, texturaEntrenamiento, NULL, &entrenamiento);
 
 }
-
 
 void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 {
@@ -598,13 +648,13 @@ void Vista::DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVenta
 	//Si el cronometro de efectos es > 1 segundo y menor a 2 muestra Round.
 	//Si es mayor a 2 segundos muestra fight
 	//Si es mayor a 4 segundos detiene el cronometro y limpia pantalla
-	if ((this->efectosTimer.getTicks() >= 1100) && (this->efectosTimer.getTicks() <= 2100))
+	if ((this->efectosTimer.getTicks() >= 3100) && (this->efectosTimer.getTicks() <= 4100))
 	{
 		SDL_RenderCopy(renderer, this->texturaRound, NULL, &camaraFight);
 	}
 	else
 	{
-		if ((this->efectosTimer.getTicks() > 2100) && (this->efectosTimer.getTicks() <= 4000))
+		if ((this->efectosTimer.getTicks() > 4000) && (this->efectosTimer.getTicks() <= 6000))
 		{
 			SDL_DestroyTexture(this->texturaRound);
 			SDL_RenderCopy(renderer, this->texturaFight, NULL, &camaraFight);
@@ -612,7 +662,7 @@ void Vista::DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVenta
 		}
 		else
 		{
-			if (this->efectosTimer.getTicks() > 4000)
+			if (this->efectosTimer.getTicks() > 6000)
 			{
 				SDL_DestroyTexture(this->texturaFight);
 				this->efectosTimer.stop();
