@@ -246,6 +246,7 @@
     <Image Include="ima\sprites\ScorpionMK3U.png" />
   </ItemGroup>
   <ItemGroup>
+    <Font Include="ima\ttf\mkx.ttf" />
     <Font Include="ima\ttf\Vera.ttf" />
     <Font Include="ima\ttf\VeraBd.ttf" />
     <Font Include="ima\ttf\VeraBI.ttf" />

@@ -517,5 +517,8 @@
     <Font Include="ima\ttf\VeraSeBd.ttf">
       <Filter>Resource Files\ima\ttf</Filter>
     </Font>
+    <Font Include="ima\ttf\mkx.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
   </ItemGroup>
 </Project>
