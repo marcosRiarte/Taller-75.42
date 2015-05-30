@@ -592,6 +592,11 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 			if ((movimientos->back() == ARMA) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
 				nuevoEstado.accion = ARMA_ARROJABLE;
+				//Sonido mezclado(refactorizar con vs.
+				Mix_Chunk *sonido = Mix_LoadWAV("./son/Liuwada.wav");
+				Mix_PlayChannel(1, sonido, 0);
+				Mix_Chunk * sonido2 = Mix_LoadWAV("./son/LiuFire.wav");
+				Mix_PlayChannel(2, sonido2, 0);
 				unCuerpo->getSensoresProyectil().at(0)->activarSensor();
 				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 			}
