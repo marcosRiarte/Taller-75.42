@@ -186,7 +186,15 @@ int _tmain(int argc, _TCHAR* argv[])
 		delete controladorUno;
 		delete controladorDos;
 		Parser::FreeInstancia();
+		// Eliminar el sonido y liberar memoria
 
+		Mix_HaltMusic(); //paramos la musica
+		//Mix_FreeChunk(sonido); //liberamos sonido lista de sonidos
+		Mix_FreeMusic(musica); //liberamos la musica
+
+
+		// Cerrar SDL_mixer
+		Mix_CloseAudio();
 		SDL_Quit();
 
 	}
