@@ -60,6 +60,9 @@
     <Text Include="implementar.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="VectorDeSonidos.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

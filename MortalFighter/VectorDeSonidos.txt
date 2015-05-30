@@ -1,0 +1,15 @@
+Liu kang 
+0  grito poder
+1  efcto bola de fuego
+2  golpeado
+3  wins
+4  gancho
+5  patada alta
+
+Scorpion
+
+Round
+Ronud
+ one
+ twos
+ flawess 

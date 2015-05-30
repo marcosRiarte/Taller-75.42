@@ -90,6 +90,7 @@
     <Text Include="lib\LICENSE.zlib.txt" />
     <Text Include="PosiblesTEST.txt" />
     <Text Include="ReadMe.txt" />
+    <Text Include="VectorDeSonidos.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Capa.h" />
