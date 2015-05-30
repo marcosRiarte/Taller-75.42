@@ -120,6 +120,16 @@ int _tmain(int argc, _TCHAR* argv[])
 		Mix_VolumeMusic(volumenMusica);
 		Mix_PlayMusic(musica, -1);//loops  0 normal  -1 infinito
 
+		// volumen de reproducción
+		int volumenSonido = 100;
+
+		// Se establece 3 canales, 0 musica,1 sonido,2 efecto arma o poder
+		Mix_AllocateChannels(3);
+
+		// Se reproduce el sonido en el canal 1
+		// 0 para reproducir una sola vez 
+		// o -1 para reproducir loop infinito
+		//Mix_PlayChannel(1, sonido, 0);
 
 		/***************************************************************************/
 		/*     GAMELOOP															   */
