@@ -494,6 +494,15 @@
     <Image Include="ima\bkg\modoCpu.png">
       <Filter>Resource Files\ima\bkg</Filter>
     </Image>
+    <Image Include="ima\bkg\blood1.gif">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\blood2.gif">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\blood3.gif">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="ima\ttf\Vera.ttf">
