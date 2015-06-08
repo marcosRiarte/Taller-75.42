@@ -11,6 +11,7 @@
 #include "Sprites.h"
 
 
+
 //int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -45,6 +46,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		//Parte de creación inicial.		
 		Mundo* unMundo = new Mundo(vecGravedad);
 		Vista* unaVista = new Vista(unMundo, &error, true);
+		
 
 		if (error){
 			Log::getInstancia().logearMensajeEnModo("Error iniciando SDL con aceleracion de hardware, se iniciara en modo software...", Log::MODO_WARNING);
@@ -105,32 +107,38 @@ int _tmain(int argc, _TCHAR* argv[])
 			cerr << "Error iniciando SDL_mixer: " << endl;
 			exit(1);
 		}
-		//Se carga musica de fondo.
-		Mix_Music *musica;
-
-		musica = Mix_LoadMUS("./son/mortal64.mid");
-		if (musica == NULL) {
-
-			cerr << "Falla al cargar la musica de fondo" << endl;
-			exit(1);
-		}
+		//Se cargan musicas de fondo.
+		Mix_Music *musicaCombate = Mix_LoadMUS("./son/mortal64.mid");
+		/*Mix_Music *musicaMenu = Mix_LoadMUS("./son/musicaMenu.wma");
+		if ((musicaCombate == NULL) || (musicaMenu == NULL))
+		{
+		cerr << "Falla al cargar la musica de fondo" << endl;
+		   exit(1);
+		}*/
 
 		int volumenMusica = 80;
-
+		
 		Mix_VolumeMusic(volumenMusica);
-		Mix_PlayMusic(musica, -1);//loops  0 normal  -1 infinito
-
+		//Mix_PlayMusic(musicaCombate,0);//loops  0 normal  -1 infinito
+		//Mix_PlayMusic(musicaMenu, 0);
 		// volumen de reproducción
 		int volumenSonido = 100;
-
+		Sonidos voces = Sonidos();
+		voces.cargaSonidoEfectos();
+		voces.cargaSonidoLiuKang();
+		voces.cargaSonidoScorpion();
+		Mix_PlayChannel(1, voces.getSonidoEfectos(0), 0);
+		Mix_PlayChannel(2, voces.getSonidoEfectos(1), 0);
+		Mix_Chunk *chunk = Mix_LoadWAV("./son/musicaMenu.wav");
+		
 		// Se establece 3 canales, 0 musica,1 sonido,2 efecto arma o poder
 		Mix_AllocateChannels(3);
-
-		// Se reproduce el sonido en el canal 1
-		// 0 para reproducir una sola vez 
+		// Mix_PlayChannelTimed(1, chunk,0,15000);//8000
+		//int Mix_FadeInMusciPos(Mix_Music *music, int loops, int ms, double position);
+		// Se reproduce el sonido en el canal 1		// 0 para reproducir una sola vez 
 		// o -1 para reproducir loop infinito
 		//Mix_PlayChannel(1, sonido, 0);
-
+		
 		/***************************************************************************/
 		/*     GAMELOOP															   */
 		/***************************************************************************/
@@ -145,6 +153,7 @@ int _tmain(int argc, _TCHAR* argv[])
 				accion = FIN;
 				break;
 			};
+
 
 			//Se inicializa el Timer de corte
 			capTimer.start();
@@ -187,12 +196,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		delete controladorDos;
 		Parser::FreeInstancia();
 		// Eliminar el sonido y liberar memoria
-
-		Mix_HaltMusic(); //paramos la musica
-		//Mix_FreeChunk(sonido); //liberamos sonido lista de sonidos
-		Mix_FreeMusic(musica); //liberamos la musica
-
-
+		//paramos la musica de fondo
+		Mix_HaltMusic(); 
+		//liberamos la musica
+		//Mix_FreeMusic(musicaMenu); 
+		Mix_FreeMusic(musicaCombate);
 		// Cerrar SDL_mixer
 		Mix_CloseAudio();
 		SDL_Quit();

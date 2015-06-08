@@ -5,10 +5,11 @@
 #include "Log.h"
 #include "MatizColor.h"
 #include "Timer.h"
+#include "Sonidos.h"
 
 
 Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
-{	
+{
 	*error = false;
 	//VIBRACION
 	vibraciones = 0;
@@ -30,201 +31,225 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 	// Se inicia SDL_image
 	IMG_Init(IMG_INIT_PNG);
 	ventana = SDL_CreateWindow(TITULO_VENTANA, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Parser::getInstancia().getVentana().getAnchoPx(), Parser::getInstancia().getVentana().getAltoPx(), SDL_WINDOW_SHOWN);
-		if (ventana == nullptr){
-			std::string mensaje = "SDL_CreateWindow Error: ";
+	if (ventana == nullptr){
+		std::string mensaje = "SDL_CreateWindow Error: ";
+		const char* elError = SDL_GetError();
+		mensaje += elError;
+		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
+		SDL_Quit();
+		*error = true;
+		return;
+	}
+
+	std::string icono(ICONO);
+	SDL_Surface* iconoSurf = IMG_Load(icono.c_str());
+	SDL_SetWindowIcon(ventana, iconoSurf);
+
+	if (habilitarAceleracionDeHardware)
+		renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
+	else
+		renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_SOFTWARE | SDL_RENDERER_TARGETTEXTURE);
+
+	if (renderer == nullptr){
+		SDL_DestroyWindow(ventana);
+		std::string mensaje = "SDL_CreateRenderer Error: ";
+		const char* elError = SDL_GetError();
+		mensaje += elError;
+		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
+		SDL_Quit();
+		*error = true;
+		return;
+	}
+
+	for (size_t i = 0; i < Parser::getInstancia().getCapas().size(); i++)
+	{
+		std::string imgFondo(Parser::getInstancia().getCapas().at(i)->getImagenFondo());
+		SDL_Surface* superficieCapa = cargarSuperficieOptimizada(imgFondo);
+		SDL_Texture *tex = SDL_CreateTextureFromSurface(renderer, superficieCapa);
+		// se queda con la textura libero la superficie
+		SDL_FreeSurface(superficieCapa);
+
+		if (tex == nullptr){
+			std::string mensaje = "SDL_CreateTextureFromSurface Error: ";
 			const char* elError = SDL_GetError();
 			mensaje += elError;
 			Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
-			SDL_Quit();
 			*error = true;
 			return;
 		}
 
-		std::string icono(ICONO);
-		SDL_Surface* iconoSurf = IMG_Load(icono.c_str());
-		SDL_SetWindowIcon(ventana, iconoSurf);
+		Parser::getInstancia().getCapas().at(i)->setTexturaSDL(tex);
+	}
 
-		if (habilitarAceleracionDeHardware)
-			renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
-		else
-			renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_SOFTWARE | SDL_RENDERER_TARGETTEXTURE);
+	// inicializo la camara en el centro del escenario
+	camaraXLog = -Parser::getInstancia().getEscenario().getAncho() / 2
+		+ Parser::getInstancia().getVentana().getAncho() / 2;
 
-			if (renderer == nullptr){
-				SDL_DestroyWindow(ventana);
-				std::string mensaje = "SDL_CreateRenderer Error: ";
-				const char* elError = SDL_GetError();
-				mensaje += elError;
-				Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
-				SDL_Quit();
-				*error = true;
-				return;
-			}			
+	//Creo el número de cuadros en 0,
+	numeroDeCuadroUno = 0;
+	//y la lista de cuadros puntero a null
+	listaDeCuadrosUno = nullptr;
 
-		for (size_t i = 0; i < Parser::getInstancia().getCapas().size(); i++) 
-		{
-			std::string imgFondo(Parser::getInstancia().getCapas().at(i)->getImagenFondo());
-			SDL_Surface* superficieCapa = cargarSuperficieOptimizada(imgFondo);
-			SDL_Texture *tex = SDL_CreateTextureFromSurface(renderer, superficieCapa);
-			// se queda con la textura libero la superficie
-			SDL_FreeSurface(superficieCapa);
+	//Creo el número de cuadros en 0,
+	numeroDeCuadroDos = 0;
+	//y la lista de cuadros puntero a null
+	listaDeCuadrosDos = nullptr;
 
-			if (tex == nullptr){				
-				std::string mensaje = "SDL_CreateTextureFromSurface Error: ";
-				const char* elError = SDL_GetError();
-				mensaje += elError;
-				Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_ERROR);
-				*error = true;
-				return;
-			}
+	//****************************************************************
+	// Texturas de Pantalla
+	//****************************************************************
 
-			Parser::getInstancia().getCapas().at(i)->setTexturaSDL(tex);			
-		}
+	//Se carga la textura del menu Princpial
+	SDL_Surface* menu = cargarSuperficieOptimizada("ima/bkg/mainmenu.gif");
+	this->texturaMenu = SDL_CreateTextureFromSurface(renderer, menu);
+	//dos jugadores 
+	SDL_Surface* botonPlayMode = cargarSuperficieOptimizada("ima/bkg/arcadeMode.png");
+	this->texturaPlayMode = SDL_CreateTextureFromSurface(renderer, botonPlayMode);
 
-		// inicializo la camara en el centro del escenario
-		camaraXLog = -Parser::getInstancia().getEscenario().getAncho()/2
-			+ Parser::getInstancia().getVentana().getAncho()/2;
+	//Un jugador
+	SDL_Surface* botonUnJugador = cargarSuperficieOptimizada("ima/bkg/modoCpu.png");
+	this->texturaUnjugador = SDL_CreateTextureFromSurface(renderer, botonUnJugador);
+	//Modo practica
+	SDL_Surface* botonPractica = cargarSuperficieOptimizada("ima/bkg/trainingMode.png");
+	this->texturaTrainig = SDL_CreateTextureFromSurface(renderer, botonPractica);
 
-		//Creo el número de cuadros en 0,
-		numeroDeCuadroUno = 0;
-		//y la lista de cuadros puntero a null
-		listaDeCuadrosUno = nullptr;
+	//Recuadro de seleccion
+	SDL_Surface* seleccion = cargarSuperficieOptimizada("ima/bkg/RecuadroMenu.bmp");
+	SDL_SetColorKey(seleccion, SDL_TRUE, SDL_MapRGB(seleccion->format, 240, 239, 241));
+	this->texturaRecuadro = SDL_CreateTextureFromSurface(renderer, seleccion);
 
-		//Creo el número de cuadros en 0,
-		numeroDeCuadroDos = 0;
-		//y la lista de cuadros puntero a null
-		listaDeCuadrosDos = nullptr;
+	//Se cargan las texturas para el menu de seleccion de personajes
+	//Fondo
+	SDL_Surface* seleccionPersonajes = cargarSuperficieOptimizada("ima/bkg/the_Portal.png");
+	this->texturaSeleccionPersonajes = SDL_CreateTextureFromSurface(renderer, seleccionPersonajes);
+	//Grilla de personajes
+	SDL_Surface* grillaPersonajes = cargarSuperficieOptimizada("ima/bkg/personajesEleccion.png");
+	this->texturaGrillaPersonajes = SDL_CreateTextureFromSurface(renderer, grillaPersonajes);
+	
+	//Se cargan los sprites:		
 
-		//Se carga la textura del menu Princpial
-		SDL_Surface* menu = cargarSuperficieOptimizada("ima/bkg/mainmenu.gif");
-		this->texturaMenu = SDL_CreateTextureFromSurface(renderer, menu);
-		  //dos jugadores 
-		SDL_Surface* botonPlayMode = cargarSuperficieOptimizada("ima/bkg/arcadeMode.png");
-		this->texturaPlayMode = SDL_CreateTextureFromSurface(renderer, botonPlayMode);
+	//Dirección de la imagen de Sprites
+	std::string dirImgPersonajeUno = Parser::getInstancia().getPelea()->getPersonaje1()->getSpriteDir();
+	std::string dirImgPersonajeDos = Parser::getInstancia().getPelea()->getPersonaje2()->getSpriteDir();
 
-		   //Un jugador
-		SDL_Surface* botonUnJugador = cargarSuperficieOptimizada("ima/bkg/modoCpu.png");
-		this->texturaUnjugador = SDL_CreateTextureFromSurface(renderer, botonUnJugador);
-		  //Modo practica
-		SDL_Surface* botonPractica = cargarSuperficieOptimizada("ima/bkg/trainingMode.png");
-		this->texturaTrainig = SDL_CreateTextureFromSurface(renderer, botonPractica);
+	//Carga la imagen desde la ruta especificada
+	SDL_Surface* SuperficieUno = cargarSuperficieOptimizada(dirImgPersonajeUno);
+	SDL_Surface* SuperficieDos = cargarSuperficieOptimizada(dirImgPersonajeDos);
 
-		//Se cargan los sprites:		
-		
-		//Dirección de la imagen de Sprites
-		std::string dirImgPersonajeUno = Parser::getInstancia().getPelea()->getPersonaje1()->getSpriteDir();
-		std::string dirImgPersonajeDos = Parser::getInstancia().getPelea()->getPersonaje2()->getSpriteDir();
+	//Seteo del color		
+	std::string pelea = Parser::getInstancia().getPeleaComoString();
+	double h_inicio = Parser::getInstancia().getColorAlternativo().at(0);
+	double h_final = Parser::getInstancia().getColorAlternativo().at(1);;
+	double deplazamiento = Parser::getInstancia().getColorAlternativo().at(2);
 
-		//Carga la imagen desde la ruta especificada
-		SDL_Surface* SuperficieUno = cargarSuperficieOptimizada(dirImgPersonajeUno);
-		SDL_Surface* SuperficieDos = cargarSuperficieOptimizada(dirImgPersonajeDos);
+	AlfaVida = 200;
 
-		//Seteo del color		
-		std::string pelea = Parser::getInstancia().getPeleaComoString();
-		double h_inicio = Parser::getInstancia().getColorAlternativo().at(0);
-		double h_final = Parser::getInstancia().getColorAlternativo().at(1);;
-		double deplazamiento = Parser::getInstancia().getColorAlternativo().at(2);
-		
-		AlfaVida = 200;
-
-		if (MODO_COLOR){
+	if (MODO_COLOR){
 		//Si ambos personajes son iguales,modifico la superficie
-			if (Parser::getInstancia().getPelea()->getPersonaje1()->getSpriteDir() == Parser::getInstancia().getPelea()->getPersonaje2()->getSpriteDir())
+		if (Parser::getInstancia().getPelea()->getPersonaje1()->getSpriteDir() == Parser::getInstancia().getPelea()->getPersonaje2()->getSpriteDir())
 		{
 			MatizColor matiz(SuperficieDos);
 			matiz.desplazarMatiz(h_inicio, h_final, deplazamiento);
 		}
-		}
+	}
 
-		//Creación de la textura sobre la superficie
-		texturaSpriteUno = SDL_CreateTextureFromSurface(renderer, SuperficieUno);
-		texturaSpriteDos = SDL_CreateTextureFromSurface(renderer, SuperficieDos);
-		SDL_FreeSurface(SuperficieUno);
-		SDL_FreeSurface(SuperficieDos);
+	//Creación de la textura sobre la superficie
+	texturaSpriteUno = SDL_CreateTextureFromSurface(renderer, SuperficieUno);
+	texturaSpriteDos = SDL_CreateTextureFromSurface(renderer, SuperficieDos);
+	SDL_FreeSurface(SuperficieUno);
+	SDL_FreeSurface(SuperficieDos);
 
-		capasVista = Parser::getInstancia().getCapas();
-		//Ordeno las capas por su zindex para ser dibujadas
-		OrdenarCapas();
+	capasVista = Parser::getInstancia().getCapas();
+	//Ordeno las capas por su zindex para ser dibujadas
+	OrdenarCapas();
 
-		// Se crea textura para dibujar sensores
-		SDL_Surface* sup = cargarSuperficieOptimizada("ima/bkg/texturaVerde.png");
-		texturaVerde = SDL_CreateTextureFromSurface(renderer, sup);
-		SDL_FreeSurface(sup);
+	// Se crea textura para dibujar sensores
+	SDL_Surface* sup = cargarSuperficieOptimizada("ima/bkg/texturaVerde.png");
+	texturaVerde = SDL_CreateTextureFromSurface(renderer, sup);
+	SDL_FreeSurface(sup);
 
-		//Textura para la barra de vida
-		superficieBarraDeVida = cargarSuperficieOptimizada("ima/bkg/barraDeVida.png");
-		texturaBarraDeVida = SDL_CreateTextureFromSurface(renderer, superficieBarraDeVida);
-		
-		//Textura para la barra de vida roja
-		superficieBarraDeVidaRoja = cargarSuperficieOptimizada("ima/bkg/barraDeVidaRoja.png");
-		texturaBarraDeVidaRoja = SDL_CreateTextureFromSurface(renderer, superficieBarraDeVidaRoja);
+	//Textura para la barra de vida
+	superficieBarraDeVida = cargarSuperficieOptimizada("ima/bkg/barraDeVida.png");
+	texturaBarraDeVida = SDL_CreateTextureFromSurface(renderer, superficieBarraDeVida);
 
-		int anchoBarraDeVida = Parser::getInstancia().getVentana().getAnchoPx() / 2.2;
-		int altoBarraDeVida = 12;
+	//Textura para la barra de vida roja
+	superficieBarraDeVidaRoja = cargarSuperficieOptimizada("ima/bkg/barraDeVidaRoja.png");
+	texturaBarraDeVidaRoja = SDL_CreateTextureFromSurface(renderer, superficieBarraDeVidaRoja);
 
-		int posXBarraDeVida1 = (Parser::getInstancia().getVentana().getAnchoPx() / 2) - anchoBarraDeVida - 10;
-		int posXBarraDeVida2 = Parser::getInstancia().getVentana().getAnchoPx() / 2 + 10;
-		
-		int posYBarraDeVida = 10;
-		int posYBarraDeVidaRoja = 40;
+	int anchoBarraDeVida = Parser::getInstancia().getVentana().getAnchoPx() / 2.2;
+	int altoBarraDeVida = 12;
 
-		barraDeVidaImagen1.x = 0;
-		barraDeVidaImagen1.y = 0;
-		barraDeVidaImagen1.w = superficieBarraDeVida->w;
-		barraDeVidaImagen1.h = superficieBarraDeVida->h;
-		
-		barraRojaDeVidaImagen1.x = 0;
-		barraRojaDeVidaImagen1.y = 0;
-		barraRojaDeVidaImagen1.w = superficieBarraDeVidaRoja->w;
-		barraRojaDeVidaImagen1.h = superficieBarraDeVidaRoja->h;
+	int posXBarraDeVida1 = (Parser::getInstancia().getVentana().getAnchoPx() / 2) - anchoBarraDeVida - 10;
+	int posXBarraDeVida2 = Parser::getInstancia().getVentana().getAnchoPx() / 2 + 10;
 
-		SDL_FreeSurface(superficieBarraDeVida);
-		SDL_FreeSurface(superficieBarraDeVidaRoja);
+	int posYBarraDeVida = 10;
+	int posYBarraDeVidaRoja = 40;
 
-		barraDeVidaImagen2 = barraDeVidaImagen1;
-		barraRojaDeVidaImagen2 = barraRojaDeVidaImagen1;
+	barraDeVidaImagen1.x = 0;
+	barraDeVidaImagen1.y = 0;
+	barraDeVidaImagen1.w = superficieBarraDeVida->w;
+	barraDeVidaImagen1.h = superficieBarraDeVida->h;
 
-		anchoBarraDeVida1 = anchoBarraDeVida;
-		anchoBarraDeVida2 = anchoBarraDeVida;
+	barraRojaDeVidaImagen1.x = 0;
+	barraRojaDeVidaImagen1.y = 0;
+	barraRojaDeVidaImagen1.w = superficieBarraDeVidaRoja->w;
+	barraRojaDeVidaImagen1.h = superficieBarraDeVidaRoja->h;
 
-		anchoImagenBarraDeVida = barraDeVidaImagen1.w;
+	SDL_FreeSurface(superficieBarraDeVida);
+	SDL_FreeSurface(superficieBarraDeVidaRoja);
 
-		anchoAnteriorBarra1 = anchoBarraDeVida;
-		anchoAnteriorBarra2 = anchoBarraDeVida;
+	barraDeVidaImagen2 = barraDeVidaImagen1;
+	barraRojaDeVidaImagen2 = barraRojaDeVidaImagen1;
 
-		anchoAnteriorBarraImagen1 = anchoImagenBarraDeVida;
-		anchoAnteriorBarraImagen2 = anchoImagenBarraDeVida;
+	anchoBarraDeVida1 = anchoBarraDeVida;
+	anchoBarraDeVida2 = anchoBarraDeVida;
 
-		posBarraDeVida1 = posXBarraDeVida1;
-		//Carga de barras de vida
-		barraDeVida1 = { posXBarraDeVida1, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
-		barraDeVida2 = { posXBarraDeVida2, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
+	anchoImagenBarraDeVida = barraDeVidaImagen1.w;
 
-		barraRojaDeVida1 = { posXBarraDeVida1, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
-		barraRojaDeVida2 = { posXBarraDeVida2, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
+	anchoAnteriorBarra1 = anchoBarraDeVida;
+	anchoAnteriorBarra2 = anchoBarraDeVida;
 
-		AlfaInicial = 200;
-		AlfaAnterior = 1;
-		estadoAnteriorPj1.movimiento = PARADO;
-		estadoAnteriorPj2.movimiento = PARADO;
-		refMundo = unMundo;
+	anchoAnteriorBarraImagen1 = anchoImagenBarraDeVida;
+	anchoAnteriorBarraImagen2 = anchoImagenBarraDeVida;
 
-		//Carga efectos de fight (luego reloj)
-		SDL_Surface* fight = cargarSuperficieOptimizada("ima/bkg/fight Hd.png");
-		this->texturaFight = SDL_CreateTextureFromSurface(renderer, fight);
-		SDL_FreeSurface(fight);
+	posBarraDeVida1 = posXBarraDeVida1;
+	//Carga de barras de vida
+	barraDeVida1 = { posXBarraDeVida1, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
+	barraDeVida2 = { posXBarraDeVida2, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
 
-		//Carga  textura de round
-		SDL_Surface* round = cargarSuperficieOptimizada("ima/bkg/round1.png");
-		SDL_SetColorKey(round, SDL_TRUE, SDL_MapRGB(round->format, 255,255,255));
-		this->texturaRound = SDL_CreateTextureFromSurface(renderer, round);
-		SDL_FreeSurface(round);
+	barraRojaDeVida1 = { posXBarraDeVida1, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
+	barraRojaDeVida2 = { posXBarraDeVida2, posYBarraDeVida, anchoBarraDeVida, altoBarraDeVida };
+
+	AlfaInicial = 200;
+	AlfaAnterior = 1;
+	estadoAnteriorPj1.movimiento = PARADO;
+	estadoAnteriorPj2.movimiento = PARADO;
+	refMundo = unMundo;
+
+	//Carga efectos de fight (luego reloj)
+	SDL_Surface* fight = cargarSuperficieOptimizada("ima/bkg/fight Hd.png");
+	this->texturaFight = SDL_CreateTextureFromSurface(renderer, fight);
+	SDL_FreeSurface(fight);
+
+	//Carga  textura de round
+	SDL_Surface* round = cargarSuperficieOptimizada("ima/bkg/round1.png");
+	SDL_SetColorKey(round, SDL_TRUE, SDL_MapRGB(round->format, 255, 255, 255));
+	this->texturaRound = SDL_CreateTextureFromSurface(renderer, round);
+	SDL_FreeSurface(round);
 
 
-		//Tiempo de permanecia en pantalla de efectos
-		this->efectosTimer.start();
-		//Menu timer
-		this->menuTimer.start();
-
+	//Tiempo de permanecia en pantalla de efectos
+	this->efectosTimer.start();
+	//Menu timer
+	this->menuTimer.start();
+	//Variables booleanas
+	this->enterMenu = 0;
+	this->enterSeleccionPersonaje = 0;
+	this->y = 30;
+	
+	this->roundYaReproducido = false;
+	this->fightYaReproducido = false;
+	this->oneYaReproducido = false;
 }
 
 
@@ -391,37 +416,48 @@ void Vista::actualizar(){
 
 	//Dibujar menu 
 
-	int anchoVentanaPx = ventanaVista.getAnchoPx();
-
-	if ((this->menuTimer.getTicks() >= 50) && (this->menuTimer.getTicks() <= 3000))
+	int  anchoVentanaPx = ventanaVista.getAnchoPx();
+	if ((this->menuTimer.getTicks() >= 50) && (this->menuTimer.getTicks() <= 8100) && (this->enterMenu == 0))
 	{
+
 		this->dibujarMenu(anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
 		SDL_RenderPresent(renderer);
+
+		//Se limpia la pantalla
+
+		//SDL_DestroyTexture(this->texturaMenu);
 	}
 	else
 	{
-		if (this->menuTimer.getTicks() > 3000)
+		if ((this->menuTimer.getTicks() > 8100) && (this->menuTimer.getTicks() <= 11100))
+			enterMenu = 1;
+	}
+	
+	if ((this->enterSeleccionPersonaje == 0) &&(this->enterMenu == 1))
 		{
-
-			SDL_DestroyTexture(this->texturaMenu);
-			this->menuTimer.stop();
+			this->dibujarSeleccionPersonaje(anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
+			SDL_RenderPresent(renderer);
 		}
 		else
 		{
+			if (this->enterSeleccionPersonaje == 1)
+			{
+				SDL_RenderClear(renderer);
+				this->menuTimer.stop();
+				// Dibuja las capas y el personaje
+				Dibujar(personajesVista);
 
-			// Dibuja las capas y el personaje
-			Dibujar(personajesVista);
+				//Dibuja las barras de vida
+				DibujarBarrasDeVida(personajesVista);
 
-			//Dibuja las barras de vida
-			DibujarBarrasDeVida(personajesVista);
-
-			//Se actualiza la pantalla
-			SDL_RenderPresent(renderer);
+				//Se actualiza la pantalla
+				SDL_RenderPresent(renderer);
+			}
+			
 		}
+	
 
-	}
 }
-
 
 	
 
@@ -500,9 +536,6 @@ void Vista::dibujarMenu(float anchoVentana, int anchoVentanaPx, int altoVentanaP
 	// Usamos color rojo para la transparencia del fondo
 	SDL_SetColorKey(ttext, SDL_TRUE, SDL_MapRGB(ttext->format, 255, 0, 0));
 
-	//TTF_SizeUTF8(fuente, "PLAY MODE", &w, &h);
-	//SDL_Surface * texto= TTF_RenderText_Solid(this->fuente, "PLAY MODE", fg);
-
 	//Se escriben las letras
 	SDL_Texture * texturaP = SDL_CreateTextureFromSurface(renderer, ttext);
 	SDL_FreeSurface(ttext);
@@ -529,11 +562,274 @@ void Vista::dibujarMenu(float anchoVentana, int anchoVentanaPx, int altoVentanaP
 
 	SDL_Texture * texturaEntrenamiento = SDL_CreateTextureFromSurface(renderer, ttext3);
 	SDL_FreeSurface(ttext3);
+
 	//Camara de la letra 
 	SDL_Rect entrenamiento = { 200, 470, 400, 150 }; //Relacion camara externa_interna =(+50,+20,-100,-50)
 	SDL_RenderCopy(renderer, texturaEntrenamiento, NULL, &entrenamiento);
 
+	//Dibuja recuadro coordenadas:2 jugadores :150, 50, 500, 200 1 jugador: 150, 250, 500, 200 training:150, 450, 500, 200
+	int x, w, v;
+	x = 130;
+	//y=30;//50
+	w = 540;
+	v = 240;
+
+	SDL_Rect recuadroSeleccion = { x, this->y, w, v };
+	SDL_RenderCopy(renderer, this->texturaRecuadro, NULL, &recuadroSeleccion);
+
+	SDL_Event evento;
+	// Esperamos a que ocurra un evento
+	SDL_WaitEvent(&evento);
+	//Si es tecla
+	if (evento.type == SDL_KEYDOWN)
+	{
+		switch (evento.key.keysym.sym) {
+
+		case SDLK_DOWN:
+			if (this->y == 450)   //Si esta en el Ultimo boton vuelve al primero
+			{
+				this->y = 30;
+			}
+			else
+			{
+				this->y = this->y + 200; //Baja un boton
+			}
+			std::cout << "abajo";
+			break;
+
+		case SDLK_UP:
+			if (this->y == 30)   //Si esta en el primer boton baja al ultimo
+			{
+				this->y = 450;
+			}
+			else
+			{
+				this->y = this->y - 200; //Sube un boton
+			}
+
+			std::cout << "arriba";
+			break;
+
+		case  SDLK_RETURN:
+
+			//En base a la altura de la pantalla nos setea el modo de juego elegido
+			//Se presiono enter
+			this->enterMenu = 1;
+			//Modo de juego elegido
+			this->controladorDeModoDeJuego();
+			
+			break;
+		default:
+			;
+
+		}
+	}
+
+	//Si es mouse
+	else
+	{    //movimiento de raton(coordenadas)
+		if (evento.type == SDL_MOUSEMOTION)
+		{
+			std::cout << "X: " << evento.motion.x;
+			std::cout << " - Y: " << evento.motion.y << std::endl;
+		}
+		else
+		{
+			if (evento.type == SDL_MOUSEBUTTONDOWN) {
+
+				if (evento.button.type == SDL_MOUSEBUTTONDOWN) {
+					std::cout << "X: " << evento.button.x   //Posicion x del boton
+						<< " - Y: " << evento.button.y
+						<< " Botón pulsado " << (int)evento.button.button << std::endl;//Posicion y del boton	
+
+					if ((int)evento.button.button == 1)//Boton izquierdo
+					{
+						if ((evento.button.x >= 130) && (evento.button.x <= 650))  //Coordenadas del ancho de los botones
+						{
+							if ((evento.button.y >= 30) && (evento.button.y <= 250))//Primer boton
+							{
+								this->y = 30;
+								this->enterMenu = 1;
+								this->controladorDeModoDeJuego();
+								Mix_HaltMusic();
+							}
+							else
+							{
+								if ((evento.button.y >= 250) && (evento.button.y <= 450))//segundo boton
+								{
+									this->y = 230;
+									this->enterMenu = 1;
+									this->controladorDeModoDeJuego();
+									Mix_HaltMusic();
+								}
+								else
+								{
+									if ((evento.button.y >= 450) && (evento.button.y <= 650))//tercer boton
+									{
+										this->y = 430;
+										this->enterMenu = 1;
+										this->controladorDeModoDeJuego();
+										Mix_HaltMusic();
+
+									}
+								}
+							}
+
+						}
+
+					}
+
+				}
+			}
+		}
+	}
+	if (this->enterMenu == 1){
+	Mix_Chunk *sonido4 = Mix_LoadWAV("./son/Hahahaaa.wav");
+	Mix_PlayChannel(1, sonido4, 0);
+	//paramos la musica de fondo
+	Mix_HaltMusic();
+     }
+	//Nuevo recuadro	
+	SDL_Rect recuadroSeleccion2 = { 130, this->y, 540, 240 };
+	SDL_RenderCopy(renderer, this->texturaRecuadro, NULL, &recuadroSeleccion2);
+	
 }
+void Vista::dibujarSeleccionPersonaje(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
+{
+	SDL_Rect camaraSeleccion = { 0, 0, anchoVentanaPx, altoVentanaPx };
+	SDL_RenderCopy(renderer, this->texturaSeleccionPersonajes, NULL, &camaraSeleccion);
+
+	//Dibujo todos los personajes 
+	SDL_Rect grillaPersonajes = { 150, 20, 500, 550 };
+	SDL_RenderCopy(renderer, this->texturaGrillaPersonajes, NULL, &grillaPersonajes);
+
+	//Dibuja recuadro coordenadas:2 jugadores :150, 50, 500, 200 1 jugador: 150, 250, 500, 200 training:150, 450, 500, 200
+	int x, w, v;
+	x = 130;
+	//y=30;//50
+	w = 540;
+	v = 240;
+
+	SDL_Rect recuadroSeleccion = { x, this->y, w, v };
+	SDL_RenderCopy(renderer, this->texturaRecuadro, NULL, &recuadroSeleccion);
+	SDL_Event evento;
+	// Esperamos a que ocurra un evento
+	SDL_WaitEvent(&evento);
+	//Si es tecla
+	if (evento.type == SDL_KEYDOWN)
+	{
+		switch (evento.key.keysym.sym) {
+
+		case SDLK_DOWN:
+			if (this->y == 450)   //Si esta en el Ultimo boton vuelve al primero
+			{
+				this->y = 30;
+			}
+			else
+			{
+				this->y = this->y + 200; //Baja un boton
+			}
+			std::cout << "abajo";
+			break;
+
+		case SDLK_UP:
+			if (this->y == 30)   //Si esta en el primer boton baja al ultimo
+			{
+				this->y = 450;
+			}
+			else
+			{
+				this->y = this->y - 200; //Sube un boton
+			}
+
+			std::cout << "arriba";
+			break;
+
+		case  SDLK_RETURN:
+
+			//En base a la altura de la pantalla nos setea el modo de juego elegido
+			//Se presiono enter
+			this->enterMenu = 1;
+			//Modo de juego elegido
+			this->controladorDeModoDeJuego();
+
+			break;
+		default:
+			;
+
+		}
+	}
+
+	//Si es mouse
+	else
+	{    //movimiento de raton(coordenadas)
+		if (evento.type == SDL_MOUSEMOTION)
+		{
+			std::cout << "X: " << evento.motion.x;
+			std::cout << " - Y: " << evento.motion.y << std::endl;
+		}
+		else
+		{
+			if (evento.type == SDL_MOUSEBUTTONDOWN) {
+
+				if (evento.button.type == SDL_MOUSEBUTTONDOWN) {
+					std::cout << "X: " << evento.button.x   //Posicion x del boton
+						<< " - Y: " << evento.button.y
+						<< " Botón pulsado " << (int)evento.button.button << std::endl;//Posicion y del boton	
+
+					if ((int)evento.button.button == 1)//Boton izquierdo
+					{
+						if ((evento.button.x >= 130) && (evento.button.x <= 650))  //Coordenadas del ancho de los botones
+						{
+							if ((evento.button.y >= 30) && (evento.button.y <= 250))//Primer boton
+							{
+								this->y = 30;
+								enterSeleccionPersonaje = 1;
+								this->controladorDeModoDeJuego();
+								Mix_HaltMusic();
+							}
+							else
+							{
+								if ((evento.button.y >= 250) && (evento.button.y <= 450))//segundo boton
+								{
+									this->y = 230;
+									enterSeleccionPersonaje = 1;
+									this->controladorDeModoDeJuego();
+									Mix_HaltMusic();
+								}
+								else
+								{
+									if ((evento.button.y >= 450) && (evento.button.y <= 650))//tercer boton
+									{
+										this->y = 430;
+										enterSeleccionPersonaje = 1;
+										this->controladorDeModoDeJuego();
+										Mix_HaltMusic();
+
+									}
+								}
+							}
+
+						}
+
+					}
+
+				}
+			}
+		}
+	}
+	if (enterSeleccionPersonaje == 1){
+		Mix_Chunk *sonidoE = Mix_LoadWAV("./son/Excellent2.wav");
+		Mix_PlayChannel(1, sonidoE, 0);
+		//paramos la musica de fondo
+		Mix_HaltMusic();
+	}
+	//Nuevo recuadro	
+	SDL_Rect recuadroSeleccion2 = { 130, this->y, 540, 240 };
+	SDL_RenderCopy(renderer, this->texturaRecuadro, NULL, &recuadroSeleccion2);
+}
+
+
 
 void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 {
@@ -648,21 +944,33 @@ void Vista::DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVenta
 	//Si el cronometro de efectos es > 1 segundo y menor a 2 muestra Round.
 	//Si es mayor a 2 segundos muestra fight
 	//Si es mayor a 4 segundos detiene el cronometro y limpia pantalla
-	if ((this->efectosTimer.getTicks() >= 3100) && (this->efectosTimer.getTicks() <= 4100))
+	if ((this->efectosTimer.getTicks() >= 10100) && (this->efectosTimer.getTicks() <=11100 ))
 	{
+		if (!this->roundYaReproducido)
+		{
+			Mix_Chunk *sonido = Mix_LoadWAV("./son/Round.wav");
+			Mix_PlayChannel(2, sonido, 0);
+			this->roundYaReproducido = true;
+			
+		}
 		SDL_RenderCopy(renderer, this->texturaRound, NULL, &camaraFight);
 	}
 	else
 	{
-		if ((this->efectosTimer.getTicks() > 4000) && (this->efectosTimer.getTicks() <= 6000))
+		if ((this->efectosTimer.getTicks() > 11000) && (this->efectosTimer.getTicks() <= 13000))
 		{
+			if (!this->fightYaReproducido){
+			Mix_Chunk *sonido2 = Mix_LoadWAV("./son/Fight2.wav");
+			Mix_PlayChannel(2, sonido2, 0);
+			this->fightYaReproducido = true;
+		    }
 			SDL_DestroyTexture(this->texturaRound);
 			SDL_RenderCopy(renderer, this->texturaFight, NULL, &camaraFight);
 
 		}
 		else
 		{
-			if (this->efectosTimer.getTicks() > 6000)
+			if (this->efectosTimer.getTicks() > 13000)
 			{
 				SDL_DestroyTexture(this->texturaFight);
 				this->efectosTimer.stop();
@@ -919,6 +1227,37 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 }
 
+void Vista::controladorDeModoDeJuego()
+{
+	// coordenadas de "y": 2 jugadores 30, 1 jugador 230 ,training:430
+	if (this->y == 30)
+	{
+		this->modoActual = ONEPLAYER;
+	}
+	else
+	{
+		if (this->y == 230)
+		{
+			this->modoActual = TWOPLAYER;
+		}
+		else
+		{
+			if (this->y == 430)
+			{
+				this->modoActual = PRACTICA;
+			}
+		}
+	}
+}
+void Vista::setModoJuegoActual(modoJuego nuevoModo)
+{
+	this->modoActual = nuevoModo;
+}
+
+Vista:: modoJuego Vista::getModoJuegoActual()
+{
+	return this->modoActual;
+}
 
 void Vista::habilitarVibracion(){
 	vibracion = true;

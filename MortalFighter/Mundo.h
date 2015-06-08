@@ -3,6 +3,7 @@
 #include "Cuerpo.h"
 #include "Escenario.h"
 #include "Sprites.h"
+#include "Sonidos.h"
 
 #define SALTO_Y 580.0f
 #define SALTO_X 180.0f
@@ -29,7 +30,8 @@ public:
 	Sensor* sensorEngloba(Sensor* sensorUno, Sensor* sensorDos);
 
 private:
-	vector2D gravedad;	
+	Sonidos voces;
+    vector2D gravedad;	
 	ESTADO estadoAnteriorPj1;
 	ESTADO estadoAnteriorPj2;
 	float yPiso;

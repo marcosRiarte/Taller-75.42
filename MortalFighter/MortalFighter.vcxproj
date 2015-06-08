@@ -116,6 +116,7 @@
     <ClInclude Include="Pelea.h" />
     <ClInclude Include="Personaje.h" />
     <ClInclude Include="Sensor.h" />
+    <ClInclude Include="Sonidos.h" />
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -151,6 +152,7 @@
     <ClCompile Include="Pelea.cpp" />
     <ClCompile Include="Personaje.cpp" />
     <ClCompile Include="Sensor.cpp" />
+    <ClCompile Include="Sonidos.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -263,6 +265,9 @@
     <Font Include="ima\ttf\VeraMono.ttf" />
     <Font Include="ima\ttf\VeraSe.ttf" />
     <Font Include="ima\ttf\VeraSeBd.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="son\eerie2.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

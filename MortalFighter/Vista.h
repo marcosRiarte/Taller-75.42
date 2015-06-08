@@ -5,9 +5,11 @@
 #include <list>
 #include "Sprites.h"
 #include "Timer.h"
+#include "Sonidos.h"
 
 class Vista
 {
+	enum modoJuego {ONEPLAYER,TWOPLAYER,PRACTICA};
 public:	
 	Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware);
 	void actualizar();
@@ -42,6 +44,10 @@ private:
 	SDL_Texture *texturaPlayMode;
 	SDL_Texture *texturaUnjugador;
 	SDL_Texture *texturaTrainig;
+	SDL_Texture *texturaRecuadro;
+	SDL_Texture *texturaSeleccionPersonajes;
+	SDL_Texture *texturaGrillaPersonajes;
+	
 
 	Uint8 AlfaVida;
 	Uint8 AlfaAnterior;
@@ -60,10 +66,23 @@ private:
 	SDL_Rect barraRojaDeVidaImagen1;
 	SDL_Rect barraRojaDeVidaImagen2;
 
+	//Modos de juego
+	modoJuego modoActual;
+	//Repreentara un click o un enter en la pantalla de menu
+	int enterMenu;
+	int enterSeleccionPersonaje;
+	int y;//Alturaboton
+
+	//Sonido ya reproducido
+	bool roundYaReproducido;
+	bool oneYaReproducido;
+	bool fightYaReproducido;
 
 	Timer efectosTimer;
 	Timer menuTimer;
 	TTF_Font * fuente;
+
+	
 	int posBarraDeVida1;
 	int anchoImagenBarraDeVida;
 	int anchoBarraDeVida1;
@@ -103,6 +122,11 @@ private:
 	void DibujarPersonajes(std::vector<Personaje*> personajes);
 	void DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
 	void dibujarMenu(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
+	void dibujarSeleccionPersonaje(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario);
+	void actualizarMenu(int nuevaAltura);
+	void setModoJuegoActual(modoJuego nuevoModo);
+	modoJuego getModoJuegoActual();
+	void controladorDeModoDeJuego();
 	void dibujarImagenesBarraVida(int anchoVentanaPx, int altoVentanaPx);
 };
 

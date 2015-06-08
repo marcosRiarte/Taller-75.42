@@ -31,6 +31,9 @@
     <Filter Include="Resource Files\ima\ttf">
       <UniqueIdentifier>{ae31a605-23f3-48c5-ac91-a39c2994b1bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\son">
+      <UniqueIdentifier>{73431a39-b94b-4793-a32f-827bc86da568}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="lib\LICENSE.jpeg.txt">
@@ -185,6 +188,9 @@
     <ClInclude Include="include\SDL_mixer.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="Sonidos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -278,6 +284,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ValidadorDeTomas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sonidos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -538,5 +547,10 @@
     <Font Include="ima\ttf\mkx.ttf">
       <Filter>Resource Files\ima\ttf</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="son\eerie2.wav">
+      <Filter>Resource Files\son</Filter>
+    </Media>
   </ItemGroup>
 </Project>

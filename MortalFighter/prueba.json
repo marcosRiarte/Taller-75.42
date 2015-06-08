@@ -63,7 +63,7 @@
         }
     ],
     "pelea": {
-        "fighters": "liu kang VS liu kang"
+        "fighters": "scorpion VS liu kang"//"scorpion VS scorpion" //"liu kang VS liu kang"
     },
 
 
@@ -75,31 +75,31 @@
 
     },
     "control_1": {
-        "arriba": "j1_up",
-        "abajo": "j1_down",
-        "izquierda": "j1_left",
-        "derecha": "j1_right",
-        "defensa": "j1_6",
-        "golpe_bajo": "j1_2",
-        "golpe_alto": "j1_1",
-        "patada_baja": "j1_3",
-        "patada_alta": "j1_0",
-        "arma": "j1_7",
+        "arriba":"up",// "j1_up",
+        "abajo": "down",//"j1_down",
+        "izquierda": "left",//"j1_left",
+        "derecha":"right", //"j1_right",
+        "defensa": "z",//"j1_6",
+        "golpe_bajo":"x",// "j1_2",
+        "golpe_alto": "c", //"j1_1",
+        "patada_baja": "v",//"j1_3",
+        "patada_alta": "b",//"j1_0",
+        "arma": "n",//"j1_7",
         "salir": "esc",
         "reiniciar": "r"
     },
 
     "control_2": {
-        "arriba": "j2_up",
-        "abajo": "j2_down",
-        "izquierda": "j2_left",
-        "derecha": "j2_right",
-        "defensa": "j2_6",
-        "golpe_bajo": "j2_2",
-        "golpe_alto": "j2_1",
-        "patada_baja": "j2_3",
-        "patada_alta": "j2_0",
-        "arma": "j2_7",
+        "arriba":"w",// "j2_up",
+        "abajo": "s",//"j2_down",
+        "izquierda":"a",// "j2_left",
+        "derecha": "d",//"j2_right",
+        "defensa": "j",//"j2_6",
+        "golpe_bajo":"k",// "j2_2",
+        "golpe_alto":"l", //"j2_1",
+        "patada_baja":"i", //"j2_3",
+        "patada_alta": "o",//"j2_0",
+        "arma": "u",//"j2_7",
         "salir": "esc",
         "reiniciar": "r"
     },
