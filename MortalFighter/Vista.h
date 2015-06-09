@@ -47,6 +47,7 @@ private:
 	SDL_Texture *texturaRecuadro;
 	SDL_Texture *texturaSeleccionPersonajes;
 	SDL_Texture *texturaGrillaPersonajes;
+	SDL_Texture *texturaRecuadroPersonajes;
 	
 
 	Uint8 AlfaVida;
@@ -72,6 +73,7 @@ private:
 	int enterMenu;
 	int enterSeleccionPersonaje;
 	int y;//Alturaboton
+	int x;//Columnas
 
 	//Sonido ya reproducido
 	bool roundYaReproducido;

@@ -1,7 +1,7 @@
 {
     "ventana": {
-        "anchopx": 800,
-        "altopx": 600,
+        "anchopx":800,
+        "altopx":600,
         "ancho": 200
     },
     "escenario": {

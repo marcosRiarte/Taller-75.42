@@ -125,6 +125,11 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 	//Grilla de personajes
 	SDL_Surface* grillaPersonajes = cargarSuperficieOptimizada("ima/bkg/personajesEleccion.png");
 	this->texturaGrillaPersonajes = SDL_CreateTextureFromSurface(renderer, grillaPersonajes);
+
+	//Recuadro de seleccion de personajes
+	SDL_Surface* recuadroPersonajes = cargarSuperficieOptimizada("ima/bkg/rectangulo.png");
+	SDL_SetColorKey(recuadroPersonajes, SDL_TRUE, SDL_MapRGB(recuadroPersonajes->format, 255, 255,255));
+	this->texturaRecuadroPersonajes = SDL_CreateTextureFromSurface(renderer, recuadroPersonajes);
 	
 	//Se cargan los sprites:		
 
@@ -246,6 +251,7 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 	this->enterMenu = 0;
 	this->enterSeleccionPersonaje = 0;
 	this->y = 30;
+	this->x = 150;
 	
 	this->roundYaReproducido = false;
 	this->fightYaReproducido = false;
@@ -434,7 +440,8 @@ void Vista::actualizar(){
 	}
 	
 	if ((this->enterSeleccionPersonaje == 0) &&(this->enterMenu == 1))
-		{
+	{
+		   
 			this->dibujarSeleccionPersonaje(anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
 			SDL_RenderPresent(renderer);
 		}
@@ -617,7 +624,8 @@ void Vista::dibujarMenu(float anchoVentana, int anchoVentanaPx, int altoVentanaP
 			this->enterMenu = 1;
 			//Modo de juego elegido
 			this->controladorDeModoDeJuego();
-			
+			//Seteo la varialbe para el proximo modo
+			this->y = 20;
 			break;
 		default:
 			;
@@ -688,6 +696,7 @@ void Vista::dibujarMenu(float anchoVentana, int anchoVentanaPx, int altoVentanaP
 	Mix_PlayChannel(1, sonido4, 0);
 	//paramos la musica de fondo
 	Mix_HaltMusic();
+	
      }
 	//Nuevo recuadro	
 	SDL_Rect recuadroSeleccion2 = { 130, this->y, 540, 240 };
@@ -695,7 +704,7 @@ void Vista::dibujarMenu(float anchoVentana, int anchoVentanaPx, int altoVentanaP
 	
 }
 void Vista::dibujarSeleccionPersonaje(float anchoVentana, int anchoVentanaPx, int altoVentanaPx, float anchoEscenario)
-{
+{  //Dibujo imagen de fondo
 	SDL_Rect camaraSeleccion = { 0, 0, anchoVentanaPx, altoVentanaPx };
 	SDL_RenderCopy(renderer, this->texturaSeleccionPersonajes, NULL, &camaraSeleccion);
 
@@ -703,15 +712,18 @@ void Vista::dibujarSeleccionPersonaje(float anchoVentana, int anchoVentanaPx, in
 	SDL_Rect grillaPersonajes = { 150, 20, 500, 550 };
 	SDL_RenderCopy(renderer, this->texturaGrillaPersonajes, NULL, &grillaPersonajes);
 
-	//Dibuja recuadro coordenadas:2 jugadores :150, 50, 500, 200 1 jugador: 150, 250, 500, 200 training:150, 450, 500, 200
-	int x, w, v;
-	x = 130;
-	//y=30;//50
-	w = 540;
-	v = 240;
+	//Dibuja recuadro coordenadas:(150,20 =baraka ,(275,20) =jax  (400,20)jonnhy cage ,
+	// x=+125,y=180
+	int w, v;	
+	w = 125;
+	v = 180;
 
-	SDL_Rect recuadroSeleccion = { x, this->y, w, v };
-	SDL_RenderCopy(renderer, this->texturaRecuadro, NULL, &recuadroSeleccion);
+	SDL_Rect recuadroSeleccionPersonaje = { x, this->y, w, v };
+	SDL_RenderCopy(renderer, this->texturaRecuadroPersonajes, NULL, &recuadroSeleccionPersonaje);
+
+	//Captura de eventos 
+	//primera fila 20 a 200 segunda fila 200 a 380 3era fila 560
+	//primera columna 150 a 275 segunda columna 275 a 400 3ra fila 400 a 525, cuarta a 650
 	SDL_Event evento;
 	// Esperamos a que ocurra un evento
 	SDL_WaitEvent(&evento);
@@ -721,37 +733,64 @@ void Vista::dibujarSeleccionPersonaje(float anchoVentana, int anchoVentanaPx, in
 		switch (evento.key.keysym.sym) {
 
 		case SDLK_DOWN:
-			if (this->y == 450)   //Si esta en el Ultimo boton vuelve al primero
+			if (this->y == 380)   //Si esta en la ultima fila vuelve a la primer fila
 			{
-				this->y = 30;
+				this->y = 20;
 			}
 			else
 			{
-				this->y = this->y + 200; //Baja un boton
+				this->y = this->y + 180; //Baja una fila
 			}
 			std::cout << "abajo";
 			break;
 
 		case SDLK_UP:
-			if (this->y == 30)   //Si esta en el primer boton baja al ultimo
+			if (this->y == 20)   //Si esta en la primer fila baja a la ultima fila
 			{
-				this->y = 450;
+				this->y = 380;
 			}
 			else
 			{
-				this->y = this->y - 200; //Sube un boton
+				this->y = this->y - 180; //Sube una fila
 			}
 
 			std::cout << "arriba";
 			break;
+		case SDLK_RIGHT:
+			if (this->x == 525)   //Si esta en la ultima columna pasa a la primera
+			{
+				this->x = 150;
+			}
+			else
+			{
+				this->x = this->x + 125;//Corre una columna
+			}
+			 std::cout << "derecha";
+			 break;
+			
+		 case SDLK_LEFT:
 
+			 if (this->x == 150)   //Si esta en la primer columna pasa a la ultima
+			 {
+				 this->x = 525;
+			 }
+			 else
+			 {
+				 this->x = this->x - 125;//Corre una columna
+			 }
+			
+				 std::cout << "izquierda";
+				 break;
+			 case SDLK_ESCAPE:
+					 //Se presiono escape,vuelvo al pantalla de modo de juegos
+					 this->enterMenu = 0;
 		case  SDLK_RETURN:
 
 			//En base a la altura de la pantalla nos setea el modo de juego elegido
 			//Se presiono enter
 			this->enterMenu = 1;
 			//Modo de juego elegido
-			this->controladorDeModoDeJuego();
+			//this->controladorDePersonajes);
 
 			break;
 		default:
@@ -825,8 +864,8 @@ void Vista::dibujarSeleccionPersonaje(float anchoVentana, int anchoVentanaPx, in
 		Mix_HaltMusic();
 	}
 	//Nuevo recuadro	
-	SDL_Rect recuadroSeleccion2 = { 130, this->y, 540, 240 };
-	SDL_RenderCopy(renderer, this->texturaRecuadro, NULL, &recuadroSeleccion2);
+	SDL_Rect recuadroSeleccion2 = { this->x, this->y,125, 180 };
+	SDL_RenderCopy(renderer, this->texturaRecuadroPersonajes, NULL, &recuadroSeleccion2);
 }
 
 
