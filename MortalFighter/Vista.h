@@ -48,7 +48,7 @@ private:
 	SDL_Texture *texturaSeleccionPersonajes;
 	SDL_Texture *texturaGrillaPersonajes;
 	SDL_Texture *texturaRecuadroPersonajes;
-	
+	SDL_Texture *texturaSeleccionPersonajes2;
 
 	Uint8 AlfaVida;
 	Uint8 AlfaAnterior;
@@ -73,12 +73,20 @@ private:
 	int enterMenu;
 	int enterSeleccionPersonaje;
 	int y;//Alturaboton
+	int yPersonaje;
 	int x;//Columnas
+	int yPersonaje2;
+	int xPersonaje2;
 
 	//Sonido ya reproducido
 	bool roundYaReproducido;
 	bool oneYaReproducido;
 	bool fightYaReproducido;
+	bool seleccionYaReproducida;
+	
+	//Seteados en el menu de eleccion
+	Personaje* jugador1;
+	Personaje* jugador2;
 
 	Timer efectosTimer;
 	Timer menuTimer;
@@ -129,6 +137,7 @@ private:
 	void setModoJuegoActual(modoJuego nuevoModo);
 	modoJuego getModoJuegoActual();
 	void controladorDeModoDeJuego();
+	Personaje* controladorDePersonajes();
 	void dibujarImagenesBarraVida(int anchoVentanaPx, int altoVentanaPx);
 };
 

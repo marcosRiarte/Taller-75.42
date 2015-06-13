@@ -201,6 +201,7 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 					elOtroCuerpo->mover(2 * DISTANCIA);
 				}
 				else{
+					   
 					unCuerpo->mover(2 * DISTANCIA);
 					elOtroCuerpo->mover(2 * -DISTANCIA);
 					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
@@ -260,6 +261,21 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 			else{// no esta en guardia analizar golpes
 				
 				if (estadoEnemigo.accion == GANCHO || (estadoEnemigo.accion == PATADA_ALTA && (!(elOtroCuerpo->estaEnPiso())))){
+
+					if (unCuerpo->getNombre() == "Scorpion")
+					{
+						Mix_Chunk *sonidoFA = Mix_LoadWAV("./son/Special.wav");
+						Mix_PlayChannel(4, sonidoFA, 0);
+					}
+					else
+					{
+						if ((unCuerpo->getNombre() == "Liu Kang"))
+						{
+							Mix_Chunk *sonidoFB = Mix_LoadWAV("./son/LiuDie2.wav");
+							Mix_PlayChannel(4, sonidoFB, 0);
+
+						}
+					}
 
 					//aca hay que aplicar un impulso
 						if (!(invertido))
@@ -385,9 +401,21 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 		}
 		if (movimientos->back() == P_ALTA) {
-			Mix_Chunk *sonido5 = Mix_LoadWAV("./son/LiuhuaHighKick.wav");
-			Mix_PlayChannel(1, sonido5, 0);
-			
+			if (unCuerpo->getNombre() == "Scorpion")
+			{
+				Mix_Chunk *sonido9 = Mix_LoadWAV("./son/Scorpion-GolpeAereo-SaltoVertical.wav");
+				Mix_PlayChannel(1, sonido9, 0);
+			}
+			else
+			{
+				if ((unCuerpo->getNombre() == "Liu Kang"))
+				{
+					Mix_Chunk *sonido5 = Mix_LoadWAV("./son/LiuhuaHighKick.wav");
+					Mix_PlayChannel(1, sonido5, 0);
+					
+				}
+			}
+						
 			nuevoEstado.accion = PATADA_ALTA;
 			unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 		}
@@ -439,6 +467,21 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			if (movimientos->back() == G_ABAJO){
 
 				if (estadoAnterior.accion != GOLPE_BAJO){
+					if (unCuerpo->getNombre() == "Scorpion")
+					{
+						Mix_Chunk *sonidoF2 = Mix_LoadWAV("./son/Scorpion-GolpeAereo-SaltoVertical.wav");
+						Mix_PlayChannel(1, sonidoF2, 0);
+					}
+					else
+					{
+						if ((unCuerpo->getNombre() == "Liu Kang"))
+						{
+
+							Mix_Chunk * sonidoF3 = Mix_LoadWAV("./son/LiuPunch.wav");
+							Mix_PlayChannel(1, sonidoF3, 0);
+						}
+					}
+
 					nuevoEstado.movimiento = AGACHADO;
 					nuevoEstado.accion = GOLPE_BAJO;
 					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
@@ -447,8 +490,21 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			if (movimientos->back() == P_ALTA_ABAJO) {
 
 				if (estadoAnterior.accion != PATADA_ALTA){
-					Mix_Chunk *sonido6 = Mix_LoadWAV("./son/LiuhuaHighKick.wav");
-					Mix_PlayChannel(1, sonido6, 0);
+					if (unCuerpo->getNombre() == "Scorpion")
+					{
+						Mix_Chunk *sonidoF4 = Mix_LoadWAV("./son/hk-Scorpion.wav");
+						Mix_PlayChannel(1, sonidoF4, 0);
+					}
+					else
+					{
+						if ((unCuerpo->getNombre() == "Liu Kang"))
+						{
+
+							Mix_Chunk * sonidoF5 = Mix_LoadWAV("./son/LiuhuaHighKick.wav");
+							Mix_PlayChannel(1, sonidoF5, 0);
+						}
+					}
+
 					nuevoEstado.movimiento = AGACHADO;
 					nuevoEstado.accion = PATADA_ALTA;
 					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
@@ -467,14 +523,25 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			if (movimientos->back() == G_GANCHO){
 
 				if (estadoAnterior.accion != GANCHO){
+					if (unCuerpo->getNombre() == "Scorpion")
+					{
+						Mix_Chunk *sonidoF = Mix_LoadWAV("./son/ScorpGet4.wav");
+						Mix_PlayChannel(1, sonidoF, 0);
+					}
+					else
+					{
+						if ((unCuerpo->getNombre() == "Liu Kang"))
+						{
+
+							Mix_Chunk * sonidoF0 = Mix_LoadWAV("./son/Liuwada.wav");
+							Mix_PlayChannel(1, sonidoF0, 0);
+						}
+					}
 					nuevoEstado.movimiento = AGACHADO;
 					nuevoEstado.accion = GANCHO;
 					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 				}
 			}
-
-
-
 
 
 
@@ -607,8 +674,20 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			}
 
 			if (movimientos->back() == SALTOIZQ){
-				Mix_Chunk *sonido = Mix_LoadWAV("./son/Liuwada.wav");
-				Mix_PlayChannel(1, sonido, 0);
+				if (unCuerpo->getNombre() == "Scorpion")
+				{
+					Mix_Chunk *sonido9 = Mix_LoadWAV("./son/Scorpion-GolpeAereo-SaltoVertical.wav");
+					Mix_PlayChannel(1, sonido9, 0);
+				}
+				else
+				{
+					if ((unCuerpo->getNombre() == "Liu Kang"))
+					{
+
+						Mix_Chunk * sonido6 = Mix_LoadWAV("./son/Liuwada.wav");
+						Mix_PlayChannel(1, sonido6, 0);
+					}
+				}
 				nuevoEstado.movimiento = SALTODIAGIZQ;
 				unCuerpo->aplicarImpulso(vector2D(-SALTO_X, SALTO_Y));
 			}
@@ -635,7 +714,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 				
 				if (unCuerpo->getNombre() == "Scorpion")
 				{
-					Mix_Chunk *sonidoA = Mix_LoadWAV("./son/ScorpionComeHer.wav"); 
+					Mix_Chunk *sonidoA = Mix_LoadWAV("./son/ScorpionComeHer.wav");
 					Mix_PlayChannel(1, sonidoA, 0);
 					Mix_Chunk * sonidoB = Mix_LoadWAV("./son/ScoTele1.wav");
 					Mix_PlayChannel(2, sonidoB, 0);
@@ -644,7 +723,6 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 				{
 					if ((unCuerpo->getNombre() == "Liu Kang"))
 					{
-
 						Mix_Chunk *sonido = Mix_LoadWAV("./son/Liuwada.wav");
 						Mix_PlayChannel(1, sonido, 0);
 						Mix_Chunk * sonido2 = Mix_LoadWAV("./son/LiuFire.wav");
@@ -662,6 +740,21 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 
 			if (movimientos->back() == G_BAJO){
+				if (unCuerpo->getNombre() == "Scorpion")
+				{
+					Mix_Chunk *sonidoF4 = Mix_LoadWAV("./son/Scorpion-GolpeAereo-SaltoVertical.wav");
+					Mix_PlayChannel(1, sonidoF4, 0);
+				}
+				else
+				{
+					if ((unCuerpo->getNombre() == "Liu Kang"))
+					{
+
+						Mix_Chunk * sonidoF5 = Mix_LoadWAV("./son/LiuPunch.wav");
+						Mix_PlayChannel(1, sonidoF5, 0);
+					}
+				}
+
 				nuevoEstado.accion = GOLPE_BAJO;
 				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 			}
@@ -696,6 +789,21 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			if (movimientos->back() == G_ALTO) {
 
 				if (cambioGolpeAlto){
+
+					if (unCuerpo->getNombre() == "Scorpion")
+					{
+						Mix_Chunk *sonidoF2 = Mix_LoadWAV("./son/Scorpion-GolpeAereo-SaltoVertical.wav");
+						Mix_PlayChannel(1, sonidoF2, 0);
+					}
+					else
+					{
+						if ((unCuerpo->getNombre() == "Liu Kang"))
+						{
+
+							Mix_Chunk * sonidoF3 = Mix_LoadWAV("./son/Liuwada.wav");
+							Mix_PlayChannel(1, sonidoF3, 0);
+						}
+					}
 
 					nuevoEstado.accion = GOLPE_ALTO1;
 					cambioGolpeAlto = false;

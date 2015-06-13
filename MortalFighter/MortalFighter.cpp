@@ -115,7 +115,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		cerr << "Falla al cargar la musica de fondo" << endl;
 		   exit(1);
 		}*/
-
+		//void Mix_RewindMusic();
 		int volumenMusica = 80;
 		
 		Mix_VolumeMusic(volumenMusica);
@@ -131,13 +131,13 @@ int _tmain(int argc, _TCHAR* argv[])
 		Mix_PlayChannel(2, voces.getSonidoEfectos(1), 0);
 		Mix_Chunk *chunk = Mix_LoadWAV("./son/musicaMenu.wav");
 		
-		// Se establece 3 canales, 0 musica,1 sonido,2 efecto arma o poder
-		Mix_AllocateChannels(3);
+		// Se establece 3 canales, 0 musica,1 sonido,2 efecto arma o poder,3 efectos de intro,4 daño
+		Mix_AllocateChannels(5);
 		// Mix_PlayChannelTimed(1, chunk,0,15000);//8000
 		//int Mix_FadeInMusciPos(Mix_Music *music, int loops, int ms, double position);
 		// Se reproduce el sonido en el canal 1		// 0 para reproducir una sola vez 
 		// o -1 para reproducir loop infinito
-		//Mix_PlayChannel(1, sonido, 0);
+		Mix_PlayChannel(0,chunk, 0);
 		
 		/***************************************************************************/
 		/*     GAMELOOP															   */
