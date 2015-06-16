@@ -246,6 +246,17 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 	this->texturaRound = SDL_CreateTextureFromSurface(renderer, round);
 	SDL_FreeSurface(round);
 
+	//Carga textura para efecto toasty
+	SDL_Surface* toasty = cargarSuperficieOptimizada("ima/bkg/toasty.gif");
+	SDL_SetColorKey(toasty, SDL_TRUE, SDL_MapRGB(toasty->format, 255, 255, 255));
+	this->texturaToasty1 = SDL_CreateTextureFromSurface(renderer, toasty);
+	SDL_FreeSurface(toasty);
+
+	//Carga textura para efecto toasty2
+	SDL_Surface* toasty2 = cargarSuperficieOptimizada("ima/bkg/toasty2.gif");
+	SDL_SetColorKey(toasty2, SDL_TRUE, SDL_MapRGB(toasty2->format, 255, 255, 255));
+	this->texturaToasty2 = SDL_CreateTextureFromSurface(renderer, toasty2);
+	SDL_FreeSurface(toasty2);
 
 	//Tiempo de permanecia en pantalla de efectos
 	this->efectosTimer.start();
@@ -923,7 +934,7 @@ void Vista::dibujarSeleccionPersonaje(float anchoVentana, int anchoVentanaPx, in
 		
 		SDL_RenderCopy(renderer, this->texturaSeleccionPersonajes2, NULL, &camaraSeleccion);
 		SDL_RenderPresent(renderer);
-		Mix_Chunk *sonidoFE = Mix_LoadWAV("./son/thunder.wav");
+		Mix_Chunk *sonidoFE = Mix_LoadWAV("./son/Burn.wav");
 		Mix_PlayChannel(3, sonidoFE, 0); 
 		SDL_Delay(1000);
 		//paramos la musica de fondo
@@ -1084,6 +1095,7 @@ void Vista::DibujarEfectos(float anchoVentana, int anchoVentanaPx, int altoVenta
 		}
 
 	}
+	
 }
 
 
@@ -1331,6 +1343,60 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		SDL_SetRenderTarget(renderer, NULL);
 	}
 
+	if (this->refMundo->getToasty() == true)
+	{
+		if (!timerToasty.isStarted())
+		{
+			this->timerToasty.start();
+		}
+		else
+		{
+			if (this->timerToasty.getTicks() <= 800)
+			{
+				this->dibujarEfectoToasty();
+			}
+			else
+			{
+				timerToasty.stop();
+				this->refMundo->setToasty(false);//Seteo la variable como false otra vez
+			}
+		}
+	}
+}
+
+void Vista::dibujarEfectoToasty()
+{
+	//Se produce cuando liu kang le da un gancho a scorpion
+	
+	Personaje * personaje1 = Parser::getInstancia().getPelea()->getPersonaje1();
+	Personaje * personaje2 = Parser::getInstancia().getPelea()->getPersonaje2();
+
+	//float uno = Parser::getInstancia().getVentana().getAncho();
+
+	/*float posMediaPj1 = personaje1->getPosicionUn().first + personaje1->getAncho() / 2;//scorpion
+	float posMediaPj2 = personaje2->getPosicionUn().first + personaje2->getAncho() / 2;//liu
+
+	//Parámetro para ver si liu kang esta a izquierdo o derecho.
+	bool invertido = (posMediaPj1 > posMediaPj2);*/
+	bool salidaPorElLado;
+	
+	float lugarDeSalida = personaje1->getPosicionPx().first;
+	
+	if (lugarDeSalida > 1500 )
+
+	{
+		SDL_Rect camaraToasty2 = { 0, 450, 150, 150 };//75,74
+		SDL_RenderCopyEx(renderer, this->texturaToasty2, NULL, &camaraToasty2, 0, NULL, SDL_FLIP_HORIZONTAL);
+		//SDL_RenderPresent(renderer);
+	
+	}
+	else 
+	{
+		SDL_Rect camaraToasty = { 680, 450, 150, 150 };
+		SDL_RenderCopy(renderer, this->texturaToasty1, NULL, &camaraToasty);
+		//SDL_RenderPresent(renderer);
+	}
+	
 }
 
 void Vista::controladorDeModoDeJuego()

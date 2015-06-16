@@ -50,6 +50,9 @@ private:
 	SDL_Texture *texturaRecuadroPersonajes;
 	SDL_Texture *texturaSeleccionPersonajes2;
 
+	SDL_Texture *texturaToasty1;
+	SDL_Texture *texturaToasty2;
+
 	Uint8 AlfaVida;
 	Uint8 AlfaAnterior;
 	Uint8 AlfaInicial;
@@ -90,6 +93,7 @@ private:
 
 	Timer efectosTimer;
 	Timer menuTimer;
+	Timer timerToasty;
 	TTF_Font * fuente;
 
 	
@@ -139,5 +143,6 @@ private:
 	void controladorDeModoDeJuego();
 	Personaje* controladorDePersonajes();
 	void dibujarImagenesBarraVida(int anchoVentanaPx, int altoVentanaPx);
+	void dibujarEfectoToasty();
 };
 

@@ -13,6 +13,7 @@ Mundo::Mundo(const vector2D& valorGravedad)
 	this->voces = Sonidos();//no lo toma
 	this->voces.cargaSonidoLiuKang();
 	this->voces.cargaSonidoScorpion();
+	this->toasty = false;
 	
 	
 	yPiso = Parser::getInstancia().getEscenario().getYPiso();
@@ -266,6 +267,10 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 					{
 						Mix_Chunk *sonidoFA = Mix_LoadWAV("./son/Special.wav");
 						Mix_PlayChannel(4, sonidoFA, 0);
+						//Toasty
+						Mix_Chunk *sonidoFC = Mix_LoadWAV("./son/toasty.wav");
+						Mix_PlayChannel(3, sonidoFC, 0);
+						this->toasty = true;
 					}
 					else
 					{
@@ -1129,4 +1134,15 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 float Mundo::getYPiso() const
 {
 	return yPiso;
+}
+
+bool Mundo::getToasty()
+{
+	return this->toasty;
+}
+
+void Mundo::setToasty(bool nuevoToasty)
+{
+	this->toasty = nuevoToasty;
+
 }

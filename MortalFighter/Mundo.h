@@ -28,9 +28,12 @@ public:
 	Cuerpo* getCuerpo(size_t pos);
 	Sensor* getProyectil(size_t pos);
 	Sensor* sensorEngloba(Sensor* sensorUno, Sensor* sensorDos);
+	bool getToasty();
+	void setToasty(bool nuevoToasty);
 
 private:
 	Sonidos voces;
+	bool toasty;
     vector2D gravedad;	
 	ESTADO estadoAnteriorPj1;
 	ESTADO estadoAnteriorPj2;
