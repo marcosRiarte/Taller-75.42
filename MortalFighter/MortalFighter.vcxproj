@@ -100,6 +100,7 @@
     <ClInclude Include="ConversorDeEventos.h" />
     <ClInclude Include="Cuerpo.h" />
     <ClInclude Include="Escenario.h" />
+    <ClInclude Include="Fatality.h" />
     <ClInclude Include="FechayHora.h" />
     <ClInclude Include="include\json\json.h" />
     <ClInclude Include="include\SDL\SDL.h" />
@@ -142,6 +143,7 @@
     <ClCompile Include="ConversorDeEventos.cpp" />
     <ClCompile Include="Cuerpo.cpp" />
     <ClCompile Include="Escenario.cpp" />
+    <ClCompile Include="Fatality.cpp" />
     <ClCompile Include="FechayHora.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="MatizColor.cpp" />
@@ -173,6 +175,7 @@
     <ClCompile Include="Vista.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ima\sprites\friendship.json" />
     <None Include="ima\sprites\KenSF.json" />
     <None Include="ima\sprites\LiuKangMK3U.json" />
     <None Include="ima\sprites\player1.json" />
@@ -245,6 +248,7 @@
     <Image Include="ima\bkg\t_3.png" />
     <Image Include="ima\bkg\t_4.png" />
     <Image Include="ima\bkg\t_bkg.png" />
+    <Image Include="ima\sprites\friendship.png" />
     <Image Include="ima\sprites\KenSF.png" />
     <Image Include="ima\sprites\LiuKangMK3U.png" />
     <Image Include="ima\sprites\player1.png" />

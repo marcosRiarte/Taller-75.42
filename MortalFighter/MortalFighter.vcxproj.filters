@@ -191,6 +191,9 @@
     <ClInclude Include="Sonidos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Fatality.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -289,6 +292,9 @@
     <ClCompile Include="Sonidos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Fatality.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="jsoncpp.dll">
@@ -343,6 +349,9 @@
       <Filter>Resource Files\ima\sprites</Filter>
     </None>
     <None Include="libfreetype-6.dll" />
+    <None Include="ima\sprites\friendship.json">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\SDL2_image.lib">
@@ -511,6 +520,9 @@
     </Image>
     <Image Include="ima\bkg\blood3.gif">
       <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\sprites\friendship.png">
+      <Filter>Resource Files\ima\sprites</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

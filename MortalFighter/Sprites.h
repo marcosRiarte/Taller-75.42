@@ -43,6 +43,8 @@ private:
 	std::vector<SDL_Rect*>* AgachadoPatadaBaja;
 	std::vector<SDL_Rect*>* AgachadoPatadaAlta;
 	std::vector<SDL_Rect*>* Disparo;
+	
+
 
 	std::vector<float>* cuadrosRep;
 

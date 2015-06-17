@@ -6,6 +6,7 @@
 #include "MatizColor.h"
 #include "Timer.h"
 #include "Sonidos.h"
+#include "Fatality.h"
 
 
 Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
@@ -128,13 +129,13 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 
 	//Recuadro de seleccion de personajes
 	SDL_Surface* recuadroPersonajes = cargarSuperficieOptimizada("ima/bkg/rectangulo.png");
-	SDL_SetColorKey(recuadroPersonajes, SDL_TRUE, SDL_MapRGB(recuadroPersonajes->format, 255, 255,255));
+	SDL_SetColorKey(recuadroPersonajes, SDL_TRUE, SDL_MapRGB(recuadroPersonajes->format, 255, 255, 255));
 	this->texturaRecuadroPersonajes = SDL_CreateTextureFromSurface(renderer, recuadroPersonajes);
 
 	//Fondo luego de eleccion
 	SDL_Surface* seleccionPersonajes2 = cargarSuperficieOptimizada("ima/bkg/the_Portal2.png");
 	this->texturaSeleccionPersonajes2 = SDL_CreateTextureFromSurface(renderer, seleccionPersonajes2);
-	
+
 	//Se cargan los sprites:		
 
 	//Dirección de la imagen de Sprites
@@ -271,7 +272,7 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 
 	this->xPersonaje2 = 525;
 	this->yPersonaje2 = 20;
-	
+
 	this->roundYaReproducido = false;
 	this->fightYaReproducido = false;
 	this->oneYaReproducido = false;
@@ -281,10 +282,13 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 	this->jugador1 = Parser::getInstancia().getPelea()->getPersonaje1(); //Scorpion
 	this->jugador2 = Parser::getInstancia().getPelea()->getPersonaje2(); //Liu kang
 
+	//Carga sprites de las fatalitys
+	this->finish = new Fatality("ima/sprites/friendship.json");
 }
 
 
-void Vista::actualizar(){
+void Vista::actualizar()
+{
 
 	// referencias más utilizadas al actualizar la vista
 	std::vector<Personaje*> personajesVista = std::vector<Personaje*>();
@@ -1179,12 +1183,13 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	personajeDos.y = yPjDosPx;
 
 	ESTADO estadoDelPersonajeDos = personajesVista[1]->getEstado();
-
+	
 	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
 	listaDeCuadrosUno = personajesVista[0]->getSprite()->listaDeCuadros(estadoDelPersonajeUno);
 	tiempoSecuenciaSpritesUno = personajesVista[0]->getSprite()->getConstantes(estadoDelPersonajeUno);
-
-
+	
+	
+	//Si el estado del personaje1 actual es distinto  del estado anterior
 	if ((estadoAnteriorPj1.movimiento != estadoDelPersonajeUno.movimiento) || (estadoAnteriorPj1.accion != estadoDelPersonajeUno.accion) || (estadoAnteriorPj1.golpeado != estadoDelPersonajeUno.golpeado)){
 		numeroDeCuadroUno = 0;
 		estadoAnteriorPj1 = estadoDelPersonajeUno;
@@ -1215,7 +1220,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	personajeUno.w = (int)round(relacionAnchoUno*cuadroActualUno->w);
 	personajeUno.h = (int)round(relacionAltoUno*cuadroActualUno->h);
 
-	//Se carga la lista de cuadros que corresponde acorde al estado del personaje.
+	//Se carga la lista de cuadros que corresponde acorde al estado del personaje dos
 	listaDeCuadrosDos = personajesVista[1]->getSprite()->listaDeCuadros(estadoDelPersonajeDos);
 	tiempoSecuenciaSpritesDos = personajesVista[1]->getSprite()->getConstantes(estadoDelPersonajeDos);
 
@@ -1342,7 +1347,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 		SDL_SetRenderTarget(renderer, NULL);
 	}
-
+	//Dibuja efecto toasty
 	if (this->refMundo->getToasty() == true)
 	{
 		if (!timerToasty.isStarted())

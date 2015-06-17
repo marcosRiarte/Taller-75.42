@@ -1,0 +1,123 @@
+{
+    "sprites": {
+        "imagen": "ima/sprites/frinedship.png",
+        "coordenadas": {
+            "friendShip": {
+                "sensores": [
+                    {
+                        "x": 34,
+                        "y": 84,
+                        "ancho": 100,
+                        "alto": 66,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 62,
+                        "y": 0,
+                        "ancho": 62,
+                        "alto": 175
+                    },
+                    {
+                        "x": 124,
+                        "y": 0,
+                        "ancho": 62,
+                        "alto": 175
+                    },
+                    {
+                        "x": 186,
+                        "y": 0,
+                        "ancho": 62,
+                        "alto": 175
+                    },
+                    {
+                        "x": 148,
+                        "y": 0,
+                        "ancho": 62,
+                        "alto": 175
+                    },
+                    {
+                        "x": 210,
+                        "y": 0,
+                        "ancho": 62,
+                        "alto": 175
+                    },
+                    {
+                        "x": 272,
+                        "y": 0,
+                        "ancho": 62,
+                        "alto": 175
+                    },
+                    {
+                        "x": 334,
+                        "y": 0,
+                        "ancho": 62,
+                        "alto": 175
+                    },
+                    {
+                        "x": 396,
+                        "y": 0,
+                        "ancho": 62,
+                        "alto": 175
+                    },
+                    {
+                        "x": 358,
+                        "y": 0,
+                        "ancho": 62,
+                        "alto": 175
+                    },
+                    {
+                        "x": 420,
+                        "y": 0,
+                        "ancho": 62,
+                        "alto": 175
+                    },
+                    {
+                        "x": 482,
+                        "y": 0,
+                        "ancho": 62,
+                        "alto": 175
+                    }, //-------------------segunda tira
+                    {
+                        "x": 1,
+                        "y": 176,
+                        "ancho": 80,
+                        "alto": 175
+                    },
+                    {
+                        "x": 81,
+                        "y": 176,
+                        "ancho": 87,
+                        "alto": 175
+                    },
+                    {
+                        "x": 168,
+                        "y": 176,
+                        "ancho": 98,
+                        "alto": 175
+                    },
+
+                    {
+                        "x": 266,
+                        "y": 176,
+                        "ancho": 98,
+                        "alto": 175
+                    },
+                    {
+                        "x": 364,
+                        "y": 176,
+                        "ancho": 98,
+                        "alto": 175
+                    }
+                ]
+
+            } //,
+        }
+    }
+}
+    
+            
+               
+                

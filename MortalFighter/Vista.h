@@ -6,6 +6,7 @@
 #include "Sprites.h"
 #include "Timer.h"
 #include "Sonidos.h"
+#include "Fatality.h"
 
 class Vista
 {
@@ -94,6 +95,7 @@ private:
 	Timer efectosTimer;
 	Timer menuTimer;
 	Timer timerToasty;
+	Fatality* finish;
 	TTF_Font * fuente;
 
 	

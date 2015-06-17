@@ -274,7 +274,7 @@ Json::Value	Sprite::ParsearSprites(std::string jsonSprites)
 	Json::Reader lector(Json::Features::strictMode());
 	std::ifstream archivo(jsonSprites.c_str(), std::ifstream::binary);
 
-	lector.parse(archivo, raiz, true);
+    lector.parse(archivo, raiz, true);
 	archivo.close();
 
 	return raiz;	
